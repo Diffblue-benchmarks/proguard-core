@@ -37,7 +37,7 @@ dependencies {
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.3' // for junit framework
 	testImplementation "org.junit.jupiter:junit-jupiter-engine:5.11.4"
 	testImplementation "org.junit.vintage:junit-vintage-engine:5.11.3" // for junit framework
-	testImplementation "org.mockito:mockito-core:5.15.2" // for junit framework
+	testImplementation "org.mockito:mockito-core:4.11.0" // for junit framework
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.3' // for junit framework
 
 	testFixturesImplementation("com.guardsquare:proguard-assembler:1.0.0")
