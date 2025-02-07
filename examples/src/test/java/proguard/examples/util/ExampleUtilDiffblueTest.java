@@ -1,0 +1,102 @@
+package proguard.examples.util;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
+import com.diffblue.cover.annotations.MethodsUnderTest;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import proguard.classfile.ClassPool;
+
+public class ExampleUtilDiffblueTest {
+  /**
+   * Test {@link ExampleUtil#createClassPool(Class[])}.
+   *
+   * <ul>
+   *   <li>When {@code Object}.
+   *   <li>Then return size is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link ExampleUtil#createClassPool(Class[])}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "proguard.classfile.ClassPool proguard.examples.util.ExampleUtil.createClassPool(java.lang.Class[])"
+  })
+  public void testCreateClassPool_whenJavaLangObject_thenReturnSizeIsOne() {
+    // Arrange
+    Class<Object> forNameResult = Object.class;
+
+    // Act and Assert
+    assertEquals(1, ExampleUtil.createClassPool(forNameResult).size());
+  }
+
+  /**
+   * Test {@link ExampleUtil#addClass(ClassPool, Class[])}.
+   *
+   * <ul>
+   *   <li>When {@code Object}.
+   *   <li>Then {@link ClassPool#ClassPool()} size is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link ExampleUtil#addClass(ClassPool, Class[])}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "void proguard.examples.util.ExampleUtil.addClass(proguard.classfile.ClassPool, java.lang.Class[])"
+  })
+  public void testAddClass_whenJavaLangObject_thenClassPoolSizeIsOne() {
+    // Arrange
+    ClassPool classPool = new ClassPool();
+    Class<Object> forNameResult = Object.class;
+
+    // Act
+    ExampleUtil.addClass(classPool, forNameResult);
+
+    // Assert
+    assertEquals(1, classPool.size());
+  }
+
+  /**
+   * Test {@link ExampleUtil#executeMainMethod(ClassPool, String, String[])} with {@code classPool},
+   * {@code internalClassName}, {@code arguments}.
+   *
+   * <p>Method under test: {@link ExampleUtil#executeMainMethod(ClassPool, String, String[])}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "java.lang.Object proguard.examples.util.ExampleUtil.executeMainMethod(proguard.classfile.ClassPool, java.lang.String, java.lang.String[])"
+  })
+  public void testExecuteMainMethodWithClassPoolInternalClassNameArguments() {
+    // Arrange, Act and Assert
+    assertThrows(
+        RuntimeException.class,
+        () -> ExampleUtil.executeMainMethod(new ClassPool(), "Internal Class Name", "Arguments"));
+  }
+
+  /**
+   * Test {@link ExampleUtil#executeMainMethod(ClassPool, String)} with {@code classPool}, {@code
+   * internalClassName}.
+   *
+   * <ul>
+   *   <li>Then throw {@link RuntimeException}.
+   * </ul>
+   *
+   * <p>Method under test: {@link ExampleUtil#executeMainMethod(ClassPool, String)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "java.lang.Object proguard.examples.util.ExampleUtil.executeMainMethod(proguard.classfile.ClassPool, java.lang.String)"
+  })
+  public void testExecuteMainMethodWithClassPoolInternalClassName_thenThrowRuntimeException() {
+    // Arrange, Act and Assert
+    assertThrows(
+        RuntimeException.class,
+        () -> ExampleUtil.executeMainMethod(new ClassPool(), "Internal Class Name"));
+  }
+}

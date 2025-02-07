@@ -1,0 +1,336 @@
+package proguard.dexfile.reader;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import com.diffblue.cover.annotations.MethodsUnderTest;
+import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import proguard.dexfile.ir.expr.Constant;
+import proguard.dexfile.reader.DexFileReader.BadOpException;
+
+class DexFileReaderDiffblueTest {
+  /**
+   * Test BadOpException {@link BadOpException#BadOpException(String, Object[])}.
+   *
+   * <p>Method under test: {@link BadOpException#BadOpException(String, Object[])}
+   */
+  @Test
+  @DisplayName("Test BadOpException new BadOpException(String, Object[])")
+  @Tag("MaintainedByDiffblue")
+  @MethodsUnderTest({
+    "void proguard.dexfile.reader.DexFileReader$BadOpException.<init>(java.lang.String, java.lang.Object[])"
+  })
+  void testBadOpExceptionNewBadOpException() {
+    // Arrange and Act
+    BadOpException actualBadOpException = new BadOpException("Fmt", Constant.Null);
+
+    // Assert
+    assertEquals("Fmt", actualBadOpException.getLocalizedMessage());
+    assertEquals("Fmt", actualBadOpException.getMessage());
+    assertNull(actualBadOpException.getCause());
+    assertEquals(0, actualBadOpException.getSuppressed().length);
+  }
+
+  /**
+   * Test {@link DexFileReader#DexFileReader(byte[])}.
+   *
+   * <p>Method under test: {@link DexFileReader#DexFileReader(byte[])}
+   */
+  @Test
+  @DisplayName("Test new DexFileReader(byte[])")
+  @Tag("MaintainedByDiffblue")
+  @MethodsUnderTest({"void proguard.dexfile.reader.DexFileReader.<init>(byte[])"})
+  void testNewDexFileReader() throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
+    assertThrows(DexException.class, () -> new DexFileReader("AXAXAXAX".getBytes("UTF-8")));
+  }
+
+  /**
+   * Test {@link DexFileReader#DexFileReader(ByteBuffer)}.
+   *
+   * <ul>
+   *   <li>When wrap {@code AXAXAXAX} Bytes is {@code UTF-8}.
+   *   <li>Then throw {@link DexException}.
+   * </ul>
+   *
+   * <p>Method under test: {@link DexFileReader#DexFileReader(ByteBuffer)}
+   */
+  @Test
+  @DisplayName(
+      "Test new DexFileReader(ByteBuffer); when wrap 'AXAXAXAX' Bytes is 'UTF-8'; then throw DexException")
+  @Tag("MaintainedByDiffblue")
+  @MethodsUnderTest({"void proguard.dexfile.reader.DexFileReader.<init>(java.nio.ByteBuffer)"})
+  void testNewDexFileReader_whenWrapAxaxaxaxBytesIsUtf8_thenThrowDexException()
+      throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
+    assertThrows(
+        DexException.class, () -> new DexFileReader(ByteBuffer.wrap("AXAXAXAX".getBytes("UTF-8"))));
+  }
+
+  /**
+   * Test {@link DexFileReader#DexFileReader(ByteBuffer, int)}.
+   *
+   * <ul>
+   *   <li>When wrap {@code AXAXAXAX} Bytes is {@code UTF-8}.
+   *   <li>Then throw {@link DexException}.
+   * </ul>
+   *
+   * <p>Method under test: {@link DexFileReader#DexFileReader(ByteBuffer, int)}
+   */
+  @Test
+  @DisplayName(
+      "Test new DexFileReader(ByteBuffer, int); when wrap 'AXAXAXAX' Bytes is 'UTF-8'; then throw DexException")
+  @Tag("MaintainedByDiffblue")
+  @MethodsUnderTest({"void proguard.dexfile.reader.DexFileReader.<init>(java.nio.ByteBuffer, int)"})
+  void testNewDexFileReader_whenWrapAxaxaxaxBytesIsUtf8_thenThrowDexException2()
+      throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
+    assertThrows(
+        DexException.class,
+        () -> new DexFileReader(ByteBuffer.wrap("AXAXAXAX".getBytes("UTF-8")), 1));
+  }
+
+  /**
+   * Test {@link DexFileReader#sshort(byte[], int)}.
+   *
+   * <ul>
+   *   <li>When {@code AXAXAXAX} Bytes is {@code UTF-8}.
+   *   <li>Then return {@code 22593}.
+   * </ul>
+   *
+   * <p>Method under test: {@link DexFileReader#sshort(byte[], int)}
+   */
+  @Test
+  @DisplayName("Test sshort(byte[], int); when 'AXAXAXAX' Bytes is 'UTF-8'; then return '22593'")
+  @Tag("MaintainedByDiffblue")
+  @MethodsUnderTest({"int proguard.dexfile.reader.DexFileReader.sshort(byte[], int)"})
+  void testSshort_whenAxaxaxaxBytesIsUtf8_thenReturn22593() throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
+    assertEquals(22593, DexFileReader.sshort("AXAXAXAX".getBytes("UTF-8"), 2));
+  }
+
+  /**
+   * Test {@link DexFileReader#ushort(byte[], int)}.
+   *
+   * <ul>
+   *   <li>When {@code AXAXAXAX} Bytes is {@code UTF-8}.
+   *   <li>Then return {@code 22593}.
+   * </ul>
+   *
+   * <p>Method under test: {@link DexFileReader#ushort(byte[], int)}
+   */
+  @Test
+  @DisplayName("Test ushort(byte[], int); when 'AXAXAXAX' Bytes is 'UTF-8'; then return '22593'")
+  @Tag("MaintainedByDiffblue")
+  @MethodsUnderTest({"int proguard.dexfile.reader.DexFileReader.ushort(byte[], int)"})
+  void testUshort_whenAxaxaxaxBytesIsUtf8_thenReturn22593() throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
+    assertEquals(22593, DexFileReader.ushort("AXAXAXAX".getBytes("UTF-8"), 2));
+  }
+
+  /**
+   * Test {@link DexFileReader#sint(byte[], int)}.
+   *
+   * <ul>
+   *   <li>When {@code AXAXAXAX} Bytes is {@code UTF-8}.
+   *   <li>Then return {@code 1480677441}.
+   * </ul>
+   *
+   * <p>Method under test: {@link DexFileReader#sint(byte[], int)}
+   */
+  @Test
+  @DisplayName("Test sint(byte[], int); when 'AXAXAXAX' Bytes is 'UTF-8'; then return '1480677441'")
+  @Tag("MaintainedByDiffblue")
+  @MethodsUnderTest({"int proguard.dexfile.reader.DexFileReader.sint(byte[], int)"})
+  void testSint_whenAxaxaxaxBytesIsUtf8_thenReturn1480677441() throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
+    assertEquals(1480677441, DexFileReader.sint("AXAXAXAX".getBytes("UTF-8"), 2));
+  }
+
+  /**
+   * Test {@link DexFileReader#uint(byte[], int)}.
+   *
+   * <ul>
+   *   <li>When {@code AXAXAXAX} Bytes is {@code UTF-8}.
+   *   <li>Then return {@code 1480677441}.
+   * </ul>
+   *
+   * <p>Method under test: {@link DexFileReader#uint(byte[], int)}
+   */
+  @Test
+  @DisplayName("Test uint(byte[], int); when 'AXAXAXAX' Bytes is 'UTF-8'; then return '1480677441'")
+  @Tag("MaintainedByDiffblue")
+  @MethodsUnderTest({"int proguard.dexfile.reader.DexFileReader.uint(byte[], int)"})
+  void testUint_whenAxaxaxaxBytesIsUtf8_thenReturn1480677441() throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
+    assertEquals(1480677441, DexFileReader.uint("AXAXAXAX".getBytes("UTF-8"), 2));
+  }
+
+  /**
+   * Test {@link DexFileReader#ubyte(byte[], int)}.
+   *
+   * <ul>
+   *   <li>When {@code AXAXAXAX} Bytes is {@code UTF-8}.
+   *   <li>Then return sixty-five.
+   * </ul>
+   *
+   * <p>Method under test: {@link DexFileReader#ubyte(byte[], int)}
+   */
+  @Test
+  @DisplayName("Test ubyte(byte[], int); when 'AXAXAXAX' Bytes is 'UTF-8'; then return sixty-five")
+  @Tag("MaintainedByDiffblue")
+  @MethodsUnderTest({"int proguard.dexfile.reader.DexFileReader.ubyte(byte[], int)"})
+  void testUbyte_whenAxaxaxaxBytesIsUtf8_thenReturnSixtyFive() throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
+    assertEquals(65, DexFileReader.ubyte("AXAXAXAX".getBytes("UTF-8"), 2));
+  }
+
+  /**
+   * Test {@link DexFileReader#sbyte(byte[], int)}.
+   *
+   * <ul>
+   *   <li>When {@code AXAXAXAX} Bytes is {@code UTF-8}.
+   *   <li>Then return sixty-five.
+   * </ul>
+   *
+   * <p>Method under test: {@link DexFileReader#sbyte(byte[], int)}
+   */
+  @Test
+  @DisplayName("Test sbyte(byte[], int); when 'AXAXAXAX' Bytes is 'UTF-8'; then return sixty-five")
+  @Tag("MaintainedByDiffblue")
+  @MethodsUnderTest({"int proguard.dexfile.reader.DexFileReader.sbyte(byte[], int)"})
+  void testSbyte_whenAxaxaxaxBytesIsUtf8_thenReturnSixtyFive() throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
+    assertEquals(65, DexFileReader.sbyte("AXAXAXAX".getBytes("UTF-8"), 2));
+  }
+
+  /**
+   * Test {@link DexFileReader#readULeb128i(ByteBuffer)}.
+   *
+   * <ul>
+   *   <li>Then wrap {@code AXAXAXAX} Bytes is {@code UTF-8} position is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link DexFileReader#readULeb128i(ByteBuffer)}
+   */
+  @Test
+  @DisplayName(
+      "Test readULeb128i(ByteBuffer); then wrap 'AXAXAXAX' Bytes is 'UTF-8' position is one")
+  @Tag("MaintainedByDiffblue")
+  @MethodsUnderTest({"int proguard.dexfile.reader.DexFileReader.readULeb128i(java.nio.ByteBuffer)"})
+  void testReadULeb128i_thenWrapAxaxaxaxBytesIsUtf8PositionIsOne()
+      throws UnsupportedEncodingException {
+    // Arrange
+    ByteBuffer in = ByteBuffer.wrap("AXAXAXAX".getBytes("UTF-8"));
+
+    // Act
+    int actualReadULeb128iResult = DexFileReader.readULeb128i(in);
+
+    // Assert
+    assertEquals(1, in.position());
+    assertEquals(65, actualReadULeb128iResult);
+  }
+
+  /**
+   * Test {@link DexFileReader#readULeb128i(ByteBuffer)}.
+   *
+   * <ul>
+   *   <li>When {@code A}.
+   *   <li>Then return {@code 11264}.
+   * </ul>
+   *
+   * <p>Method under test: {@link DexFileReader#readULeb128i(ByteBuffer)}
+   */
+  @Test
+  @DisplayName("Test readULeb128i(ByteBuffer); when 'A'; then return '11264'")
+  @Tag("MaintainedByDiffblue")
+  @MethodsUnderTest({"int proguard.dexfile.reader.DexFileReader.readULeb128i(java.nio.ByteBuffer)"})
+  void testReadULeb128i_whenA_thenReturn11264() {
+    // Arrange
+    ByteBuffer in = ByteBuffer.wrap(new byte[] {Byte.MIN_VALUE, 'X', 'A', 'X', 'A', 'X', 'A', 'X'});
+
+    // Act and Assert
+    assertEquals(11264, DexFileReader.readULeb128i(in));
+    assertEquals(2, in.position());
+  }
+
+  /**
+   * Test {@link DexFileReader#readLeb128i(ByteBuffer)}.
+   *
+   * <ul>
+   *   <li>Then wrap array of {@code byte} with one and {@code X} position is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link DexFileReader#readLeb128i(ByteBuffer)}
+   */
+  @Test
+  @DisplayName(
+      "Test readLeb128i(ByteBuffer); then wrap array of byte with one and 'X' position is one")
+  @Tag("MaintainedByDiffblue")
+  @MethodsUnderTest({"int proguard.dexfile.reader.DexFileReader.readLeb128i(java.nio.ByteBuffer)"})
+  void testReadLeb128i_thenWrapArrayOfByteWithOneAndXPositionIsOne() {
+    // Arrange
+    ByteBuffer in = ByteBuffer.wrap(new byte[] {1, 'X', 'A', 'X', 'A', 'X', 'A', 'X'});
+
+    // Act
+    int actualReadLeb128iResult = DexFileReader.readLeb128i(in);
+
+    // Assert
+    assertEquals(1, in.position());
+    assertEquals(1, actualReadLeb128iResult);
+  }
+
+  /**
+   * Test {@link DexFileReader#readLeb128i(ByteBuffer)}.
+   *
+   * <ul>
+   *   <li>When wrap array of {@code byte} with {@link Byte#MIN_VALUE} and {@code X}.
+   *   <li>Then return {@code -5120}.
+   * </ul>
+   *
+   * <p>Method under test: {@link DexFileReader#readLeb128i(ByteBuffer)}
+   */
+  @Test
+  @DisplayName(
+      "Test readLeb128i(ByteBuffer); when wrap array of byte with MIN_VALUE and 'X'; then return '-5120'")
+  @Tag("MaintainedByDiffblue")
+  @MethodsUnderTest({"int proguard.dexfile.reader.DexFileReader.readLeb128i(java.nio.ByteBuffer)"})
+  void testReadLeb128i_whenWrapArrayOfByteWithMin_valueAndX_thenReturn5120() {
+    // Arrange
+    ByteBuffer in = ByteBuffer.wrap(new byte[] {Byte.MIN_VALUE, 'X', 'A', 'X', 'A', 'X', 'A', 'X'});
+
+    // Act and Assert
+    assertEquals(-5120, DexFileReader.readLeb128i(in));
+    assertEquals(2, in.position());
+  }
+
+  /**
+   * Test {@link DexFileReader#readLeb128i(ByteBuffer)}.
+   *
+   * <ul>
+   *   <li>When wrap {@code AXAXAXAX} Bytes is {@code UTF-8}.
+   *   <li>Then return minus sixty-three.
+   * </ul>
+   *
+   * <p>Method under test: {@link DexFileReader#readLeb128i(ByteBuffer)}
+   */
+  @Test
+  @DisplayName(
+      "Test readLeb128i(ByteBuffer); when wrap 'AXAXAXAX' Bytes is 'UTF-8'; then return minus sixty-three")
+  @Tag("MaintainedByDiffblue")
+  @MethodsUnderTest({"int proguard.dexfile.reader.DexFileReader.readLeb128i(java.nio.ByteBuffer)"})
+  void testReadLeb128i_whenWrapAxaxaxaxBytesIsUtf8_thenReturnMinusSixtyThree()
+      throws UnsupportedEncodingException {
+    // Arrange
+    ByteBuffer in = ByteBuffer.wrap("AXAXAXAX".getBytes("UTF-8"));
+
+    // Act and Assert
+    assertEquals(-63, DexFileReader.readLeb128i(in));
+    assertEquals(1, in.position());
+  }
+}
