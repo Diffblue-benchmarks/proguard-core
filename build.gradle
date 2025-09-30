@@ -11,11 +11,7 @@ plugins {
 	id "org.sonarqube" version "6.0.1.5171"
 	id "io.freefair.aggregate-javadoc" version "8.11"
 	id "com.diffplug.spotless" version "6.18.0" apply false
-	id 'info.solidsoft.pitest' version '1.15.0' apply false
 }
-
-apply plugin: 'info.solidsoft.pitest.aggregator' // to 'pitestReportAggregate' appear
-
 
 allprojects {
 	group = 'com.guardsquare'
@@ -44,34 +40,6 @@ allprojects {
 				importOrder()
 				googleJavaFormat()
 				endWithNewline()
-			}
-		}
-
-		apply plugin: 'info.solidsoft.pitest'
-
-		pitest {
-			//adds dependency to org.pitest:pitest-junit5-plugin and sets "testPlugin" to "junit5"
-			junit5PluginVersion = '1.2.1'
-			pitestVersion = '1.15.2'
-			// ...
-			targetClasses = [
-				'proguard.*']  //by default "${project.group}.*"
-			// targetTests = ['proguard.*DiffblueTest']
-			pitestVersion = '1.15.0' //not needed when a default PIT version should be used
-			threads = 1
-			outputFormats = ['XML', 'HTML']
-
-			exportLineCoverage = true
-			timestampedReports = false
-
-			reportAggregator {
-				//since 1.9.11 - extra results validation, if needed
-				//testStrengthThreshold.set(50)
-				//mutationThreshold.set(40)
-				//maxSurviving.set(3)
-			}
-			if (project.name in ['proguard-core-tools']) {
-				failWhenNoMutations = false
 			}
 		}
 	}
