@@ -6,9 +6,17 @@ plugins {
 }
 
 dependencies {
+	compileOnly "com.diffblue.cover:cover-annotations:1.6.0"
+
 	implementation(project(":proguard-core-android"))
 	implementation("org.jetbrains.kotlinx:kotlinx-cli:0.3.6")
 	implementation 'org.smali:smali:2.5.2'
+
+	testImplementation "com.diffblue.cover:cover-annotations:1.6.0"
+	testImplementation "org.junit.jupiter:junit-jupiter-engine:5.13.4"
+	testImplementation "org.junit.vintage:junit-vintage-engine:5.11.3"
+	testImplementation "org.mockito:mockito-core:5.19.0"
+	testImplementation "org.mockito:mockito-junit-jupiter:5.19.0"
 }
 
 application {
