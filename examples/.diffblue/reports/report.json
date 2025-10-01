@@ -1,0 +1,1938 @@
+{
+  "meta" : {
+    "reportVersion" : "2.7"
+  },
+  "run" : {
+    "version" : "2025.09.01-44e352d-licensed",
+    "creationTimestamp" : "2025-09-30T20:10:30.71243Z",
+    "command" : "dcover create --coverage-reports --upload http://localhost:8080 --project-name proguard-core --name with-diffblue-tests",
+    "totalTime" : 192.046,
+    "environmentDetectionTime" : 0.065,
+    "indexingTime" : 0.325,
+    "entryPointsTime" : 0.052,
+    "generationTime" : 2429.61,
+    "timeToFirstTest" : 285.171,
+    "timeToLastTest" : 2738.552,
+    "indexQueryTime" : 4.366,
+    "verificationTime" : 182.45,
+    "validationTime" : 30.104
+  },
+  "codes" : {
+    "R000" : "Success",
+    "R002" : "Missing observers",
+    "R004" : "No meaningful assertions found",
+    "R013" : "No inputs found that don't throw a trivial exception",
+    "T000" : "Method eligible for test creation",
+    "T003" : "Private method",
+    "T005" : "Trivial constructor",
+    "T006" : "Main method",
+    "T012" : "Synthetic method",
+    "T021" : "Empty method body",
+    "V000" : "Validated successfully"
+  },
+  "summary" : {
+    "classesCount" : 31,
+    "methodsCount" : 97,
+    "cumulativeDiffblueTestCount" : 22,
+    "cumulativeManualTestCount" : 0,
+    "completeTestCount" : 22,
+    "incompleteTestCount" : 0,
+    "skeletonTestCount" : 0,
+    "totalPhysicalLineCount" : 1448,
+    "perMethodTestability" : {
+      "T000" : 16,
+      "T003" : 34,
+      "T005" : 24,
+      "T006" : 17,
+      "T012" : 4,
+      "T021" : 2
+    },
+    "perMethodOutcome" : {
+      "R000" : 13,
+      "R002" : 2,
+      "R004" : 1,
+      "R013" : 2,
+      "T003" : 34,
+      "T005" : 24,
+      "T006" : 17,
+      "T012" : 4
+    },
+    "perTestOutcome" : {
+      "R000" : 22
+    },
+    "perTestValidation" : {
+      "V000" : 22
+    }
+  },
+  "classes" : {
+    "com.example.SampleClassWithArray" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 1,
+        "T005" : 1
+      },
+      "perMethodOutcome" : {
+        "R000" : 1,
+        "T005" : 1
+      },
+      "perTestOutcome" : {
+        "R000" : 1
+      }
+    },
+    "com.example.SampleClassWithConstantComputation" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 1,
+        "T005" : 1
+      },
+      "perMethodOutcome" : {
+        "R000" : 1,
+        "T005" : 1
+      },
+      "perTestOutcome" : {
+        "R000" : 1
+      }
+    },
+    "com.example.SampleClassWithObjects" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 2,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 1,
+        "T005" : 1
+      },
+      "perMethodOutcome" : {
+        "R000" : 1,
+        "T005" : 1
+      },
+      "perTestOutcome" : {
+        "R000" : 2
+      }
+    },
+    "com.example.SampleClassWithRangeComputation" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 1,
+        "T005" : 1
+      },
+      "perMethodOutcome" : {
+        "R004" : 1,
+        "T005" : 1
+      }
+    },
+    "com.example.SampleClassWithVariableComputation" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 4,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 1,
+        "T005" : 1
+      },
+      "perMethodOutcome" : {
+        "R000" : 1,
+        "T005" : 1
+      },
+      "perTestOutcome" : {
+        "R000" : 4
+      }
+    },
+    "proguard.examples.AnalyzeTaints" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T005" : 1,
+        "T006" : 1
+      },
+      "perMethodOutcome" : {
+        "T005" : 1,
+        "T006" : 1
+      }
+    },
+    "proguard.examples.ApplyPeepholeOptimizations" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T005" : 1,
+        "T006" : 1
+      },
+      "perMethodOutcome" : {
+        "T005" : 1,
+        "T006" : 1
+      }
+    },
+    "proguard.examples.CreateHelloWorldClass" : {
+      "methodsCount" : 4,
+      "completeTestCount" : 2,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 1,
+        "T005" : 1,
+        "T006" : 1,
+        "T012" : 1
+      },
+      "perMethodOutcome" : {
+        "R000" : 1,
+        "T005" : 1,
+        "T006" : 1,
+        "T012" : 1
+      },
+      "perTestOutcome" : {
+        "R000" : 2
+      }
+    },
+    "proguard.examples.CyclomaticComplexity" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T005" : 1,
+        "T006" : 1
+      },
+      "perMethodOutcome" : {
+        "T005" : 1,
+        "T006" : 1
+      }
+    },
+    "proguard.examples.CyclomaticComplexity$ControlFlowAnalyzer" : {
+      "methodsCount" : 7,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T003" : 7
+      },
+      "perMethodOutcome" : {
+        "T003" : 7
+      }
+    },
+    "proguard.examples.EvaluateCode" : {
+      "methodsCount" : 4,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T003" : 2,
+        "T005" : 1,
+        "T006" : 1
+      },
+      "perMethodOutcome" : {
+        "T003" : 2,
+        "T005" : 1,
+        "T006" : 1
+      }
+    },
+    "proguard.examples.EvaluateCode$MyEvaluationResultPrinter" : {
+      "methodsCount" : 5,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T003" : 5
+      },
+      "perMethodOutcome" : {
+        "T003" : 5
+      }
+    },
+    "proguard.examples.FindBranches" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T005" : 1,
+        "T006" : 1
+      },
+      "perMethodOutcome" : {
+        "T005" : 1,
+        "T006" : 1
+      }
+    },
+    "proguard.examples.FindBranches$MyMethodAnalyzer" : {
+      "methodsCount" : 4,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T003" : 4
+      },
+      "perMethodOutcome" : {
+        "T003" : 4
+      }
+    },
+    "proguard.examples.JarUtil" : {
+      "methodsCount" : 4,
+      "completeTestCount" : 7,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 3,
+        "T005" : 1
+      },
+      "perMethodOutcome" : {
+        "R000" : 3,
+        "T005" : 1
+      },
+      "perTestOutcome" : {
+        "R000" : 7
+      }
+    },
+    "proguard.examples.Preverify" : {
+      "methodsCount" : 3,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T003" : 1,
+        "T005" : 1,
+        "T006" : 1
+      },
+      "perMethodOutcome" : {
+        "T003" : 1,
+        "T005" : 1,
+        "T006" : 1
+      }
+    },
+    "proguard.examples.PrintClasses" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T005" : 1,
+        "T006" : 1
+      },
+      "perMethodOutcome" : {
+        "T005" : 1,
+        "T006" : 1
+      }
+    },
+    "proguard.examples.RemoveLogging" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T005" : 1,
+        "T006" : 1
+      },
+      "perMethodOutcome" : {
+        "T005" : 1,
+        "T006" : 1
+      }
+    },
+    "proguard.examples.TransformExample" : {
+      "methodsCount" : 4,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T005" : 1,
+        "T006" : 1,
+        "T012" : 2
+      },
+      "perMethodOutcome" : {
+        "T005" : 1,
+        "T006" : 1,
+        "T012" : 2
+      }
+    },
+    "proguard.examples.TransformExample$MyTransformer" : {
+      "methodsCount" : 3,
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 1,
+        "T005" : 1,
+        "T021" : 1
+      },
+      "perMethodOutcome" : {
+        "R000" : 1,
+        "R002" : 2
+      },
+      "perTestOutcome" : {
+        "R000" : 1
+      }
+    },
+    "proguard.examples.VisualizeCfa" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T005" : 1,
+        "T006" : 1
+      },
+      "perMethodOutcome" : {
+        "T005" : 1,
+        "T006" : 1
+      }
+    },
+    "proguard.examples.VisualizeControlFlow" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T005" : 1,
+        "T006" : 1
+      },
+      "perMethodOutcome" : {
+        "T005" : 1,
+        "T006" : 1
+      }
+    },
+    "proguard.examples.VisualizeControlFlow$MyMethodAnalyzer" : {
+      "methodsCount" : 7,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T003" : 7
+      },
+      "perMethodOutcome" : {
+        "T003" : 7
+      }
+    },
+    "proguard.examples.instrument.AddMethodInvocationLogging" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T005" : 1,
+        "T006" : 1
+      },
+      "perMethodOutcome" : {
+        "T005" : 1,
+        "T006" : 1
+      }
+    },
+    "proguard.examples.instrument.AddMethodInvocationLogging$MyLoggingAdder" : {
+      "methodsCount" : 3,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T003" : 3
+      },
+      "perMethodOutcome" : {
+        "T003" : 3
+      }
+    },
+    "proguard.examples.instrument.DebugStackTop" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T005" : 1,
+        "T006" : 1
+      },
+      "perMethodOutcome" : {
+        "T005" : 1,
+        "T006" : 1
+      }
+    },
+    "proguard.examples.instrument.DebugStackTopExample" : {
+      "methodsCount" : 3,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T005" : 1,
+        "T006" : 1,
+        "T021" : 1
+      },
+      "perMethodOutcome" : {
+        "T005" : 2,
+        "T006" : 1
+      }
+    },
+    "proguard.examples.modify.EditClass" : {
+      "methodsCount" : 3,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T005" : 1,
+        "T006" : 1,
+        "T012" : 1
+      },
+      "perMethodOutcome" : {
+        "T005" : 1,
+        "T006" : 1,
+        "T012" : 1
+      }
+    },
+    "proguard.examples.modify.EditClass$MyInstructionVisitor" : {
+      "methodsCount" : 4,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T003" : 4
+      },
+      "perMethodOutcome" : {
+        "T003" : 4
+      }
+    },
+    "proguard.examples.modify.ReplaceSimpleConstantInstruction" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T005" : 1,
+        "T006" : 1
+      },
+      "perMethodOutcome" : {
+        "T005" : 1,
+        "T006" : 1
+      }
+    },
+    "proguard.examples.util.ExampleUtil" : {
+      "methodsCount" : 7,
+      "completeTestCount" : 4,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 6,
+        "T003" : 1
+      },
+      "perMethodOutcome" : {
+        "R000" : 4,
+        "R013" : 2,
+        "T003" : 1
+      },
+      "perTestOutcome" : {
+        "R000" : 4
+      }
+    }
+  },
+  "methods" : {
+    "com.example.SampleClassWithArray.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        4
+      ]
+    },
+    "com.example.SampleClassWithArray.getAnswer:()I" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        6,
+        8
+      ]
+    },
+    "com.example.SampleClassWithConstantComputation.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        4
+      ]
+    },
+    "com.example.SampleClassWithConstantComputation.getAnswer:()I" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        6,
+        7,
+        9
+      ]
+    },
+    "com.example.SampleClassWithObjects.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        4
+      ]
+    },
+    "com.example.SampleClassWithObjects.getAnswer:(Ljava/lang/Number;)Ljava/lang/Number;" : {
+      "completeTestCount" : 2,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 2
+      },
+      "lineNumbers" : [
+        6,
+        7,
+        10
+      ]
+    },
+    "com.example.SampleClassWithRangeComputation.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        4
+      ]
+    },
+    "com.example.SampleClassWithRangeComputation.getAnswer:()I" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R004",
+      "lineNumbers" : [
+        6,
+        7,
+        8,
+        7,
+        11
+      ]
+    },
+    "com.example.SampleClassWithVariableComputation.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        4
+      ]
+    },
+    "com.example.SampleClassWithVariableComputation.getAnswer:(II)I" : {
+      "completeTestCount" : 4,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 4
+      },
+      "lineNumbers" : [
+        6
+      ]
+    },
+    "proguard.examples.AnalyzeTaints.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        25
+      ]
+    },
+    "proguard.examples.AnalyzeTaints.main:([Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T006",
+      "perMethodOutcome" : "T006",
+      "lineNumbers" : [
+        27,
+        31,
+        34,
+        37,
+        43,
+        44,
+        47,
+        52,
+        53,
+        55,
+        58,
+        59,
+        60,
+        63,
+        70,
+        71,
+        74,
+        75,
+        76,
+        77,
+        74,
+        78,
+        81,
+        79,
+        80,
+        82
+      ]
+    },
+    "proguard.examples.ApplyPeepholeOptimizations.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        19
+      ]
+    },
+    "proguard.examples.ApplyPeepholeOptimizations.main:([Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T006",
+      "perMethodOutcome" : "T006",
+      "lineNumbers" : [
+        34,
+        35,
+        43,
+        45,
+        47,
+        50,
+        53,
+        56,
+        57,
+        58,
+        59,
+        60,
+        64,
+        68,
+        72,
+        74,
+        75,
+        77,
+        110,
+        113,
+        111,
+        112,
+        114
+      ]
+    },
+    "proguard.examples.CreateHelloWorldClass.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        19
+      ]
+    },
+    "proguard.examples.CreateHelloWorldClass.createMessagePrintingClass:(Ljava/lang/String;Ljava/lang/String;)Lproguard/classfile/ProgramClass;" : {
+      "completeTestCount" : 2,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 2
+      },
+      "lineNumbers" : [
+        38,
+        47,
+        66,
+        38
+      ]
+    },
+    "proguard.examples.CreateHelloWorldClass.lambda$createMessagePrintingClass$0:(Ljava/lang/String;Lproguard/classfile/editor/CompactCodeAttributeComposer;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T012",
+      "perMethodOutcome" : "T012",
+      "lineNumbers" : [
+        56,
+        57,
+        58,
+        59,
+        56
+      ]
+    },
+    "proguard.examples.CreateHelloWorldClass.main:([Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T006",
+      "perMethodOutcome" : "T006",
+      "lineNumbers" : [
+        25,
+        28,
+        30,
+        31,
+        32,
+        33,
+        30,
+        34
+      ]
+    },
+    "proguard.examples.CyclomaticComplexity$ControlFlowAnalyzer.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        55
+      ]
+    },
+    "proguard.examples.CyclomaticComplexity$ControlFlowAnalyzer.visitAnyAttribute:(Lproguard/classfile/Clazz;Lproguard/classfile/attribute/Attribute;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        63
+      ]
+    },
+    "proguard.examples.CyclomaticComplexity$ControlFlowAnalyzer.visitAnyInstruction:(Lproguard/classfile/Clazz;Lproguard/classfile/Method;Lproguard/classfile/attribute/CodeAttribute;ILproguard/classfile/instruction/Instruction;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        96,
+        106,
+        107,
+        114
+      ]
+    },
+    "proguard.examples.CyclomaticComplexity$ControlFlowAnalyzer.visitAnySwitchInstruction:(Lproguard/classfile/Clazz;Lproguard/classfile/Method;Lproguard/classfile/attribute/CodeAttribute;ILproguard/classfile/instruction/SwitchInstruction;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        149,
+        150,
+        155,
+        150,
+        157
+      ]
+    },
+    "proguard.examples.CyclomaticComplexity$ControlFlowAnalyzer.visitBranchInstruction:(Lproguard/classfile/Clazz;Lproguard/classfile/Method;Lproguard/classfile/attribute/CodeAttribute;ILproguard/classfile/instruction/BranchInstruction;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        130,
+        131,
+        132,
+        141
+      ]
+    },
+    "proguard.examples.CyclomaticComplexity$ControlFlowAnalyzer.visitCodeAttribute:(Lproguard/classfile/Clazz;Lproguard/classfile/Method;Lproguard/classfile/attribute/CodeAttribute;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        68,
+        71,
+        74,
+        76,
+        77,
+        80,
+        81,
+        82,
+        83,
+        79,
+        76,
+        86
+      ]
+    },
+    "proguard.examples.CyclomaticComplexity$ControlFlowAnalyzer.visitExceptionInfo:(Lproguard/classfile/Clazz;Lproguard/classfile/Method;Lproguard/classfile/attribute/CodeAttribute;Lproguard/classfile/attribute/ExceptionInfo;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        164,
+        165
+      ]
+    },
+    "proguard.examples.CyclomaticComplexity.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        24
+      ]
+    },
+    "proguard.examples.CyclomaticComplexity.main:([Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T006",
+      "perMethodOutcome" : "T006",
+      "lineNumbers" : [
+        26,
+        31,
+        33,
+        48,
+        46,
+        47,
+        49
+      ]
+    },
+    "proguard.examples.EvaluateCode$MyEvaluationResultPrinter.<init>:(Lproguard/evaluation/PartialEvaluator;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        177,
+        178,
+        179
+      ]
+    },
+    "proguard.examples.EvaluateCode$MyEvaluationResultPrinter.string:(Lproguard/evaluation/value/Value;Lproguard/evaluation/value/Value;Lproguard/evaluation/value/Value;)Ljava/lang/String;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        251,
+        253,
+        254,
+        257,
+        258,
+        261,
+        263
+      ]
+    },
+    "proguard.examples.EvaluateCode$MyEvaluationResultPrinter.visitAnyAttribute:(Lproguard/classfile/Clazz;Lproguard/classfile/attribute/Attribute;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        183
+      ]
+    },
+    "proguard.examples.EvaluateCode$MyEvaluationResultPrinter.visitAnyInstruction:(Lproguard/classfile/Clazz;Lproguard/classfile/Method;Lproguard/classfile/attribute/CodeAttribute;ILproguard/classfile/instruction/Instruction;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        216,
+        218,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        222,
+        230,
+        231,
+        232,
+        233,
+        234,
+        231,
+        237,
+        239
+      ]
+    },
+    "proguard.examples.EvaluateCode$MyEvaluationResultPrinter.visitCodeAttribute:(Lproguard/classfile/Clazz;Lproguard/classfile/Method;Lproguard/classfile/attribute/CodeAttribute;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        187,
+        190,
+        191,
+        192,
+        191,
+        194,
+        196,
+        197,
+        198,
+        197,
+        200,
+        204,
+        205
+      ]
+    },
+    "proguard.examples.EvaluateCode.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        58
+      ]
+    },
+    "proguard.examples.EvaluateCode.createPartialEvaluator:(Ljava/lang/String;)Lproguard/evaluation/PartialEvaluator;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        124,
+        125,
+        126,
+        127,
+        129,
+        130,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        143,
+        148,
+        149,
+        150,
+        154,
+        155,
+        157,
+        154
+      ]
+    },
+    "proguard.examples.EvaluateCode.main:([Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T006",
+      "perMethodOutcome" : "T006",
+      "lineNumbers" : [
+        70,
+        71,
+        72,
+        74,
+        75,
+        83,
+        85,
+        86,
+        91,
+        92,
+        95,
+        98,
+        101,
+        104,
+        113,
+        111,
+        112,
+        114
+      ]
+    },
+    "proguard.examples.EvaluateCode.unknownPrecision:(Ljava/lang/String;)Lproguard/evaluation/value/ValueFactory;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        161
+      ]
+    },
+    "proguard.examples.FindBranches$MyMethodAnalyzer.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        54,
+        55
+      ]
+    },
+    "proguard.examples.FindBranches$MyMethodAnalyzer.visitAnyAttribute:(Lproguard/classfile/Clazz;Lproguard/classfile/attribute/Attribute;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        59
+      ]
+    },
+    "proguard.examples.FindBranches$MyMethodAnalyzer.visitAnyInstruction:(Lproguard/classfile/Clazz;Lproguard/classfile/Method;Lproguard/classfile/attribute/CodeAttribute;ILproguard/classfile/instruction/Instruction;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        79,
+        80,
+        81,
+        84,
+        85,
+        86,
+        87,
+        83,
+        89,
+        80,
+        93,
+        94,
+        95,
+        98,
+        99,
+        100,
+        101,
+        97,
+        103,
+        94,
+        107,
+        108,
+        109,
+        112,
+        113,
+        114,
+        115,
+        111,
+        117,
+        108,
+        119
+      ]
+    },
+    "proguard.examples.FindBranches$MyMethodAnalyzer.visitCodeAttribute:(Lproguard/classfile/Clazz;Lproguard/classfile/Method;Lproguard/classfile/attribute/CodeAttribute;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        63,
+        67,
+        68
+      ]
+    },
+    "proguard.examples.FindBranches.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        23
+      ]
+    },
+    "proguard.examples.FindBranches.main:([Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T006",
+      "perMethodOutcome" : "T006",
+      "lineNumbers" : [
+        25,
+        30,
+        32,
+        47,
+        45,
+        46,
+        48
+      ]
+    },
+    "proguard.examples.JarUtil.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        13
+      ]
+    },
+    "proguard.examples.JarUtil.readJar:(Ljava/lang/String;Ljava/lang/String;Z)Lproguard/classfile/ClassPool;" : {
+      "completeTestCount" : 3,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 3
+      },
+      "lineNumbers" : [
+        36,
+        40,
+        42,
+        43,
+        55,
+        60,
+        74,
+        76
+      ]
+    },
+    "proguard.examples.JarUtil.readJar:(Ljava/lang/String;Z)Lproguard/classfile/ClassPool;" : {
+      "completeTestCount" : 2,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 2
+      },
+      "lineNumbers" : [
+        23
+      ]
+    },
+    "proguard.examples.JarUtil.writeJar:(Lproguard/classfile/ClassPool;Ljava/lang/String;)V" : {
+      "completeTestCount" : 2,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 2
+      },
+      "lineNumbers" : [
+        87,
+        90,
+        92,
+        93
+      ]
+    },
+    "proguard.examples.Preverify.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        19
+      ]
+    },
+    "proguard.examples.Preverify.main:([Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T006",
+      "perMethodOutcome" : "T006",
+      "lineNumbers" : [
+        21,
+        22,
+        30,
+        32,
+        33,
+        38,
+        39,
+        42,
+        45,
+        48,
+        51,
+        54,
+        52,
+        53,
+        55
+      ]
+    },
+    "proguard.examples.Preverify.preverify:(Lproguard/classfile/ClassPool;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        64,
+        68
+      ]
+    },
+    "proguard.examples.PrintClasses.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        18
+      ]
+    },
+    "proguard.examples.PrintClasses.main:([Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T006",
+      "perMethodOutcome" : "T006",
+      "lineNumbers" : [
+        20,
+        25,
+        27,
+        35,
+        33,
+        34,
+        36
+      ]
+    },
+    "proguard.examples.RemoveLogging.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        20
+      ]
+    },
+    "proguard.examples.RemoveLogging.main:([Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T006",
+      "perMethodOutcome" : "T006",
+      "lineNumbers" : [
+        22,
+        23,
+        27,
+        29,
+        31,
+        32,
+        33,
+        34,
+        37,
+        41,
+        42,
+        43,
+        46,
+        47,
+        48,
+        49,
+        52,
+        56,
+        57,
+        58,
+        62,
+        66,
+        70,
+        72,
+        73,
+        75,
+        108,
+        111,
+        109,
+        110,
+        112
+      ]
+    },
+    "proguard.examples.TransformExample$MyTransformer.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "R002",
+      "lineNumbers" : [
+        182
+      ]
+    },
+    "proguard.examples.TransformExample$MyTransformer.visitAnyClass:(Lproguard/classfile/Clazz;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T021",
+      "perMethodOutcome" : "R002",
+      "lineNumbers" : [
+        184
+      ]
+    },
+    "proguard.examples.TransformExample$MyTransformer.visitProgramClass:(Lproguard/classfile/ProgramClass;)V" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        188,
+        190,
+        191,
+        194,
+        196,
+        197,
+        199,
+        211
+      ]
+    },
+    "proguard.examples.TransformExample.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        43
+      ]
+    },
+    "proguard.examples.TransformExample.lambda$main$0:(Lproguard/io/DataEntryReader;Lproguard/classfile/visitor/ClassVisitor;)Lproguard/io/DataEntryReader;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T012",
+      "perMethodOutcome" : "T012",
+      "lineNumbers" : [
+        66
+      ]
+    },
+    "proguard.examples.TransformExample.lambda$main$1:(Lproguard/io/DataEntryReader;Lproguard/io/DataEntry;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T012",
+      "perMethodOutcome" : "T012",
+      "lineNumbers" : [
+        159,
+        160,
+        161,
+        162,
+        163,
+        162,
+        164,
+        165
+      ]
+    },
+    "proguard.examples.TransformExample.main:([Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T006",
+      "perMethodOutcome" : "T006",
+      "lineNumbers" : [
+        48,
+        50,
+        52,
+        54,
+        55,
+        58,
+        59,
+        60,
+        61,
+        62,
+        64,
+        69,
+        70,
+        80,
+        81,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        100,
+        103,
+        110,
+        111,
+        112,
+        115,
+        119,
+        120,
+        128,
+        131,
+        140,
+        142,
+        143,
+        146,
+        149,
+        151,
+        154,
+        155,
+        169,
+        170,
+        173,
+        176,
+        179,
+        180
+      ]
+    },
+    "proguard.examples.VisualizeCfa.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        21
+      ]
+    },
+    "proguard.examples.VisualizeCfa.main:([Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T006",
+      "perMethodOutcome" : "T006",
+      "lineNumbers" : [
+        23,
+        24,
+        25,
+        26
+      ]
+    },
+    "proguard.examples.VisualizeControlFlow$MyMethodAnalyzer.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        59,
+        64,
+        65,
+        66,
+        69,
+        70
+      ]
+    },
+    "proguard.examples.VisualizeControlFlow$MyMethodAnalyzer.activateLine:(II)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        165,
+        168,
+        170,
+        171,
+        172,
+        174,
+        165,
+        177
+      ]
+    },
+    "proguard.examples.VisualizeControlFlow$MyMethodAnalyzer.activateLines:(ILproguard/evaluation/value/InstructionOffsetValue;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        149,
+        150,
+        153,
+        154,
+        155,
+        156,
+        157,
+        150,
+        161
+      ]
+    },
+    "proguard.examples.VisualizeControlFlow$MyMethodAnalyzer.deactivateLine:(I)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        181,
+        182,
+        183,
+        184,
+        181,
+        187
+      ]
+    },
+    "proguard.examples.VisualizeControlFlow$MyMethodAnalyzer.visitAnyAttribute:(Lproguard/classfile/Clazz;Lproguard/classfile/attribute/Attribute;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        74
+      ]
+    },
+    "proguard.examples.VisualizeControlFlow$MyMethodAnalyzer.visitAnyInstruction:(Lproguard/classfile/Clazz;Lproguard/classfile/Method;Lproguard/classfile/attribute/CodeAttribute;ILproguard/classfile/instruction/Instruction;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        107,
+        108,
+        112,
+        113,
+        116,
+        119,
+        120,
+        121,
+        123,
+        125,
+        127,
+        129,
+        130,
+        119,
+        135,
+        136,
+        139,
+        142,
+        144,
+        145
+      ]
+    },
+    "proguard.examples.VisualizeControlFlow$MyMethodAnalyzer.visitCodeAttribute:(Lproguard/classfile/Clazz;Lproguard/classfile/Method;Lproguard/classfile/attribute/CodeAttribute;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        78,
+        79,
+        82,
+        83,
+        84,
+        85,
+        81,
+        78,
+        88,
+        91,
+        92,
+        95,
+        96
+      ]
+    },
+    "proguard.examples.VisualizeControlFlow.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        28
+      ]
+    },
+    "proguard.examples.VisualizeControlFlow.main:([Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T006",
+      "perMethodOutcome" : "T006",
+      "lineNumbers" : [
+        30,
+        35,
+        37,
+        52,
+        50,
+        51,
+        53
+      ]
+    },
+    "proguard.examples.instrument.AddMethodInvocationLogging$MyLoggingAdder.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        73,
+        74
+      ]
+    },
+    "proguard.examples.instrument.AddMethodInvocationLogging$MyLoggingAdder.visitAnyAttribute:(Lproguard/classfile/Clazz;Lproguard/classfile/attribute/Attribute;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        78
+      ]
+    },
+    "proguard.examples.instrument.AddMethodInvocationLogging$MyLoggingAdder.visitCodeAttribute:(Lproguard/classfile/Clazz;Lproguard/classfile/Method;Lproguard/classfile/attribute/CodeAttribute;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        82,
+        83,
+        86,
+        87,
+        88,
+        89,
+        85,
+        92,
+        94,
+        95,
+        96,
+        97,
+        100,
+        101,
+        102,
+        103
+      ]
+    },
+    "proguard.examples.instrument.AddMethodInvocationLogging.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        34
+      ]
+    },
+    "proguard.examples.instrument.AddMethodInvocationLogging.main:([Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T006",
+      "perMethodOutcome" : "T006",
+      "lineNumbers" : [
+        36,
+        37,
+        40,
+        44,
+        46,
+        66,
+        67
+      ]
+    },
+    "proguard.examples.instrument.DebugStackTop.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        24
+      ]
+    },
+    "proguard.examples.instrument.DebugStackTop.main:([Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T006",
+      "perMethodOutcome" : "T006",
+      "lineNumbers" : [
+        34,
+        39,
+        40,
+        45,
+        48,
+        50,
+        52,
+        55,
+        57,
+        58,
+        59,
+        62,
+        64,
+        68,
+        69,
+        72,
+        74,
+        76,
+        80,
+        85,
+        97,
+        104,
+        105
+      ]
+    },
+    "proguard.examples.instrument.DebugStackTopExample.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        4
+      ]
+    },
+    "proguard.examples.instrument.DebugStackTopExample.foo:(Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T021",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        10
+      ]
+    },
+    "proguard.examples.instrument.DebugStackTopExample.main:([Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T006",
+      "perMethodOutcome" : "T006",
+      "lineNumbers" : [
+        6,
+        7,
+        8
+      ]
+    },
+    "proguard.examples.modify.EditClass$MyInstructionVisitor.<init>:(Lproguard/classfile/util/BranchTargetFinder;Lproguard/classfile/editor/CodeAttributeEditor;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        116,
+        117,
+        118,
+        119
+      ]
+    },
+    "proguard.examples.modify.EditClass$MyInstructionVisitor.isGotoInstruction:(I)Z" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        174,
+        177,
+        179
+      ]
+    },
+    "proguard.examples.modify.EditClass$MyInstructionVisitor.isReturnInstruction:(I)Z" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        159,
+        167,
+        169
+      ]
+    },
+    "proguard.examples.modify.EditClass$MyInstructionVisitor.visitAnyInstruction:(Lproguard/classfile/Clazz;Lproguard/classfile/Method;Lproguard/classfile/attribute/CodeAttribute;ILproguard/classfile/instruction/Instruction;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        130,
+        131,
+        134,
+        135,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        145,
+        147,
+        148,
+        149,
+        150,
+        151,
+        154
+      ]
+    },
+    "proguard.examples.modify.EditClass.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        28
+      ]
+    },
+    "proguard.examples.modify.EditClass.lambda$main$0:(Ljava/lang/String;Lproguard/classfile/editor/CompactCodeAttributeComposer;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T012",
+      "perMethodOutcome" : "T012",
+      "lineNumbers" : [
+        68,
+        69,
+        70,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        80,
+        81,
+        68
+      ]
+    },
+    "proguard.examples.modify.EditClass.main:([Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T006",
+      "perMethodOutcome" : "T006",
+      "lineNumbers" : [
+        47,
+        48,
+        49,
+        50,
+        51,
+        54,
+        58,
+        85,
+        88,
+        91,
+        108,
+        109
+      ]
+    },
+    "proguard.examples.modify.ReplaceSimpleConstantInstruction.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "T005",
+      "lineNumbers" : [
+        22
+      ]
+    },
+    "proguard.examples.modify.ReplaceSimpleConstantInstruction.main:([Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T006",
+      "perMethodOutcome" : "T006",
+      "lineNumbers" : [
+        34,
+        35,
+        40,
+        43,
+        45,
+        46,
+        47,
+        50,
+        52,
+        53,
+        54,
+        59,
+        63,
+        68,
+        80,
+        85,
+        89,
+        90
+      ]
+    },
+    "proguard.examples.util.ExampleUtil.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        16
+      ]
+    },
+    "proguard.examples.util.ExampleUtil.addClass:(Lproguard/classfile/ClassPool;[Ljava/lang/Class;)V" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        27,
+        28,
+        30,
+        31,
+        32,
+        33,
+        35,
+        36,
+        37,
+        38,
+        27,
+        40
+      ]
+    },
+    "proguard.examples.util.ExampleUtil.createClassPool:([Ljava/lang/Class;)Lproguard/classfile/ClassPool;" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        20,
+        21,
+        22
+      ]
+    },
+    "proguard.examples.util.ExampleUtil.executeMainMethod:(Lproguard/classfile/ClassPool;Ljava/lang/String;)Ljava/lang/Object;" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        52
+      ]
+    },
+    "proguard.examples.util.ExampleUtil.executeMainMethod:(Lproguard/classfile/ClassPool;Ljava/lang/String;[Ljava/lang/String;)Ljava/lang/Object;" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        62,
+        64,
+        68
+      ]
+    },
+    "proguard.examples.util.ExampleUtil.executeMainMethod:(Lproguard/classfile/ProgramClass;)Ljava/lang/Object;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R013",
+      "lineNumbers" : [
+        44
+      ]
+    },
+    "proguard.examples.util.ExampleUtil.executeMethod:(Lproguard/classfile/ClassPool;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R013",
+      "lineNumbers" : [
+        86,
+        87,
+        88,
+        89
+      ]
+    }
+  },
+  "validationMetrics" : { }
+}

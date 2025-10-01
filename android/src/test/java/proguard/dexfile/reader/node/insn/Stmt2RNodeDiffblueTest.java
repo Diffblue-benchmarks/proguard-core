@@ -1,0 +1,72 @@
+package proguard.dexfile.reader.node.insn;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MethodsUnderTest;
+import java.util.List;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import proguard.dexfile.reader.Op;
+import proguard.dexfile.reader.node.DexCodeNode;
+import proguard.dexfile.reader.visitors.DexCodeVisitor;
+
+class Stmt2RNodeDiffblueTest {
+  /**
+   * Test {@link Stmt2RNode#Stmt2RNode(Op, int, int)}.
+   *
+   * <p>Method under test: {@link Stmt2RNode#Stmt2RNode(Op, int, int)}
+   */
+  @Test
+  @DisplayName("Test new Stmt2RNode(Op, int, int)")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"void Stmt2RNode.<init>(Op, int, int)"})
+  void testNewStmt2RNode() {
+    // Arrange and Act
+    Stmt2RNode actualStmt2RNode = new Stmt2RNode(Op.NOP, 1, 1);
+
+    // Assert
+    assertEquals(0, actualStmt2RNode.__index);
+    assertEquals(1, actualStmt2RNode.a);
+    assertEquals(1, actualStmt2RNode.b);
+    assertEquals(Op.NOP, actualStmt2RNode.op);
+  }
+
+  /**
+   * Test {@link Stmt2RNode#accept(DexCodeVisitor)}.
+   *
+   * <ul>
+   *   <li>When {@link DexCodeNode#DexCodeNode()}.
+   *   <li>Then {@link DexCodeNode#DexCodeNode()} {@link DexCodeNode#stmts} size is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link Stmt2RNode#accept(DexCodeVisitor)}
+   */
+  @Test
+  @DisplayName(
+      "Test accept(DexCodeVisitor); when DexCodeNode(); then DexCodeNode() stmts size is one")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"void Stmt2RNode.accept(DexCodeVisitor)"})
+  void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
+    // Arrange
+    Stmt2RNode stmt2RNode = new Stmt2RNode(Op.NOP, 1, 1);
+    DexCodeNode cv = new DexCodeNode();
+
+    // Act
+    stmt2RNode.accept(cv);
+
+    // Assert
+    List<DexStmtNode> dexStmtNodeList = cv.stmts;
+    assertEquals(1, dexStmtNodeList.size());
+    DexStmtNode getResult = dexStmtNodeList.get(0);
+    assertTrue(getResult instanceof Stmt2RNode);
+    assertEquals(0, ((Stmt2RNode) getResult).__index);
+    assertEquals(1, ((Stmt2RNode) getResult).a);
+    assertEquals(1, ((Stmt2RNode) getResult).b);
+    assertEquals(Op.NOP, ((Stmt2RNode) getResult).op);
+  }
+}

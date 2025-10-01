@@ -1,0 +1,1853 @@
+{
+  "meta" : {
+    "reportVersion" : "2.7"
+  },
+  "run" : {
+    "version" : "2025.09.01-44e352d-licensed",
+    "creationTimestamp" : "2025-09-30T20:10:30.71243Z",
+    "command" : "dcover create --coverage-reports --upload http://localhost:8080 --project-name proguard-core --name with-diffblue-tests",
+    "totalTime" : 396.269,
+    "environmentDetectionTime" : 0.1,
+    "indexingTime" : 0.333,
+    "entryPointsTime" : 0.092,
+    "generationTime" : 69816.006,
+    "timeToFirstTest" : 79036.763,
+    "timeToLastTest" : 71734.062,
+    "indexQueryTime" : 5.328,
+    "verificationTime" : 1629.862,
+    "validationTime" : 53.362
+  },
+  "codes" : {
+    "R000" : "Success",
+    "R002" : "Missing observers",
+    "R013" : "No inputs found that don't throw a trivial exception",
+    "T000" : "Method eligible for test creation",
+    "T003" : "Private method",
+    "T004" : "In anonymous inner class",
+    "T005" : "Trivial constructor",
+    "T006" : "Main method",
+    "T012" : "Synthetic method",
+    "T023" : "Testability unknown",
+    "V000" : "Validated successfully",
+    "V003" : "Tests discarded during validation",
+    "W001" : "Test did not compile"
+  },
+  "summary" : {
+    "classesCount" : 27,
+    "methodsCount" : 113,
+    "cumulativeDiffblueTestCount" : 14,
+    "cumulativeManualTestCount" : 0,
+    "completeTestCount" : 22,
+    "incompleteTestCount" : 0,
+    "skeletonTestCount" : 0,
+    "totalPhysicalLineCount" : 0,
+    "perMethodTestability" : {
+      "T000" : 40,
+      "T003" : 6,
+      "T004" : 48,
+      "T005" : 2,
+      "T006" : 1,
+      "T012" : 7,
+      "T023" : 9
+    },
+    "perMethodOutcome" : {
+      "R000" : 16,
+      "R002" : 3,
+      "R013" : 10,
+      "T003" : 6,
+      "T004" : 48,
+      "T006" : 1,
+      "T012" : 7,
+      "T023" : 9,
+      "W001" : 13
+    },
+    "perTestOutcome" : {
+      "R000" : 22
+    },
+    "perTestValidation" : {
+      "V000" : 22,
+      "V003" : 21
+    },
+    "warnings" : {
+      "W001" : 24
+    }
+  },
+  "classes" : {
+    "com.guardsquare.proguard.tools.MainKt" : {
+      "methodsCount" : 3,
+      "completeTestCount" : 2,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 1,
+        "T003" : 1,
+        "T006" : 1
+      },
+      "perMethodOutcome" : {
+        "R000" : 1,
+        "T003" : 1,
+        "T006" : 1
+      },
+      "perTestOutcome" : {
+        "R000" : 2
+      }
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$Dex2JarCmd" : {
+      "methodsCount" : 11,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T004" : 10,
+        "T023" : 1
+      },
+      "perMethodOutcome" : {
+        "T004" : 10,
+        "T023" : 1
+      }
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$Jar2DexCmd" : {
+      "methodsCount" : 7,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T004" : 6,
+        "T023" : 1
+      },
+      "perMethodOutcome" : {
+        "T004" : 6,
+        "T023" : 1
+      }
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd" : {
+      "methodsCount" : 8,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T004" : 7,
+        "T023" : 1
+      },
+      "perMethodOutcome" : {
+        "T004" : 7,
+        "T023" : 1
+      }
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$ClassNamePrinterCmd" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 2
+      },
+      "perMethodOutcome" : {
+        "W001" : 2
+      },
+      "warnings" : {
+        "W001" : 3
+      }
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$ClassNamePrinterCmd$ClassNamePrinter" : {
+      "methodsCount" : 3,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 2,
+        "T005" : 1
+      },
+      "perMethodOutcome" : {
+        "R002" : 1,
+        "R013" : 1,
+        "W001" : 1
+      },
+      "warnings" : {
+        "W001" : 1
+      }
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$FieldNamePrinterCmd" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 2
+      },
+      "perMethodOutcome" : {
+        "W001" : 2
+      },
+      "warnings" : {
+        "W001" : 3
+      }
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$MemberPrinter" : {
+      "methodsCount" : 4,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 3,
+        "T005" : 1
+      },
+      "perMethodOutcome" : {
+        "R002" : 1,
+        "R013" : 3
+      }
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$MemberPrinterCmd" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 2
+      },
+      "perMethodOutcome" : {
+        "W001" : 2
+      },
+      "warnings" : {
+        "W001" : 3
+      }
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$MethodNamePrinterCmd" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 2
+      },
+      "perMethodOutcome" : {
+        "W001" : 2
+      },
+      "warnings" : {
+        "W001" : 3
+      }
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$StringPrinterCmd" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 2
+      },
+      "perMethodOutcome" : {
+        "W001" : 2
+      },
+      "warnings" : {
+        "W001" : 4
+      }
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$programClassPool$2" : {
+      "methodsCount" : 1,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T004" : 1
+      },
+      "perMethodOutcome" : {
+        "T004" : 1
+      }
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$PrintCmd" : {
+      "methodsCount" : 8,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T004" : 7,
+        "T023" : 1
+      },
+      "perMethodOutcome" : {
+        "T004" : 7,
+        "T023" : 1
+      }
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$PrintCmd$ClassPrinterCmd" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 2
+      },
+      "perMethodOutcome" : {
+        "W001" : 2
+      },
+      "warnings" : {
+        "W001" : 7
+      }
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$PrintCmd$programClassPool$2" : {
+      "methodsCount" : 1,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T004" : 1
+      },
+      "perMethodOutcome" : {
+        "T004" : 1
+      }
+    },
+    "com.guardsquare.proguard.tools.Smali2DexReader" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 2
+      },
+      "perMethodOutcome" : {
+        "R013" : 2
+      }
+    },
+    "com.guardsquare.proguard.tools.StringPrinter" : {
+      "methodsCount" : 8,
+      "completeTestCount" : 6,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 8
+      },
+      "perMethodOutcome" : {
+        "R000" : 4,
+        "R002" : 1,
+        "R013" : 3
+      },
+      "perTestOutcome" : {
+        "R000" : 6
+      }
+    },
+    "com.guardsquare.proguard.tools.TransformCmd" : {
+      "methodsCount" : 19,
+      "completeTestCount" : 14,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 12,
+        "T003" : 5,
+        "T012" : 1,
+        "T023" : 1
+      },
+      "perMethodOutcome" : {
+        "R000" : 11,
+        "R013" : 1,
+        "T003" : 5,
+        "T012" : 1,
+        "T023" : 1
+      },
+      "perTestOutcome" : {
+        "R000" : 14
+      }
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$1" : {
+      "methodsCount" : 4,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T004" : 2,
+        "T012" : 1,
+        "T023" : 1
+      },
+      "perMethodOutcome" : {
+        "T004" : 2,
+        "T012" : 1,
+        "T023" : 1
+      }
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$2" : {
+      "methodsCount" : 4,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T004" : 2,
+        "T012" : 1,
+        "T023" : 1
+      },
+      "perMethodOutcome" : {
+        "T004" : 2,
+        "T012" : 1,
+        "T023" : 1
+      }
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$3" : {
+      "methodsCount" : 3,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T004" : 2,
+        "T012" : 1
+      },
+      "perMethodOutcome" : {
+        "T004" : 2,
+        "T012" : 1
+      }
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$4" : {
+      "methodsCount" : 4,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T004" : 2,
+        "T012" : 1,
+        "T023" : 1
+      },
+      "perMethodOutcome" : {
+        "T004" : 2,
+        "T012" : 1,
+        "T023" : 1
+      }
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$5" : {
+      "methodsCount" : 3,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T004" : 2,
+        "T012" : 1
+      },
+      "perMethodOutcome" : {
+        "T004" : 2,
+        "T012" : 1
+      }
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$6" : {
+      "methodsCount" : 4,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T004" : 2,
+        "T012" : 1,
+        "T023" : 1
+      },
+      "perMethodOutcome" : {
+        "T004" : 2,
+        "T012" : 1,
+        "T023" : 1
+      }
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$initialize$printWriter$1" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T004" : 2
+      },
+      "perMethodOutcome" : {
+        "T004" : 2
+      }
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$programClassPool$2" : {
+      "methodsCount" : 1,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T004" : 1
+      },
+      "perMethodOutcome" : {
+        "T004" : 1
+      }
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$transformersPool$2" : {
+      "methodsCount" : 1,
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T004" : 1
+      },
+      "perMethodOutcome" : {
+        "T004" : 1
+      }
+    }
+  },
+  "methods" : {
+    "com.guardsquare.proguard.tools.MainKt$main$Dex2JarCmd.<clinit>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T023",
+      "perMethodOutcome" : "T023"
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$Dex2JarCmd.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        147,
+        149,
+        1,
+        149,
+        150,
+        151,
+        150,
+        151,
+        154,
+        153,
+        152,
+        150,
+        155,
+        1,
+        150,
+        156,
+        157,
+        156,
+        157,
+        160,
+        159,
+        158,
+        156,
+        161,
+        1,
+        156,
+        162,
+        163,
+        162,
+        163,
+        166,
+        165,
+        164,
+        162,
+        167,
+        1,
+        162,
+        147
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$Dex2JarCmd.execute:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        170,
+        171,
+        172,
+        173,
+        174,
+        176,
+        177
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$Dex2JarCmd.getClassNameFilter:()Ljava/lang/String;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        156,
+        1,
+        156
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$Dex2JarCmd.getForceOverwrite:()Z" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        162,
+        1,
+        162
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$Dex2JarCmd.getInput:()Ljava/lang/String;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        149,
+        1,
+        149
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$Dex2JarCmd.getOutput:()Ljava/lang/String;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        150,
+        1,
+        150
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$Dex2JarCmd.setClassNameFilter:(Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        156,
+        1,
+        156
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$Dex2JarCmd.setForceOverwrite:(Z)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        162,
+        1,
+        162
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$Dex2JarCmd.setInput:(Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        149,
+        1,
+        149
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$Dex2JarCmd.setOutput:(Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        150,
+        1,
+        150
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$Jar2DexCmd.<clinit>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T023",
+      "perMethodOutcome" : "T023"
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$Jar2DexCmd.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        180,
+        182,
+        1,
+        182,
+        183,
+        1,
+        183,
+        180
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$Jar2DexCmd.execute:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        185
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$Jar2DexCmd.getInput:()Ljava/lang/String;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        182,
+        1,
+        182
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$Jar2DexCmd.getOutput:()Ljava/lang/String;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        183,
+        1,
+        183
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$Jar2DexCmd.setInput:(Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        182,
+        1,
+        182
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$Jar2DexCmd.setOutput:(Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        183,
+        1,
+        183
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$ClassNamePrinterCmd$ClassNamePrinter.<init>:(Lcom/guardsquare/proguard/tools/MainKt$main$ListCmd$ClassNamePrinterCmd;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "R002",
+      "lineNumbers" : [
+        63
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$ClassNamePrinterCmd$ClassNamePrinter.visitAnyClass:(Lproguard/classfile/Clazz;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R013",
+      "lineNumbers" : [
+        64
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$ClassNamePrinterCmd$ClassNamePrinter.visitProgramClass:(Lproguard/classfile/ProgramClass;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "W001",
+      "warnings" : {
+        "W001" : 1
+      },
+      "lineNumbers" : [
+        66,
+        67
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$ClassNamePrinterCmd.<init>:(Lcom/guardsquare/proguard/tools/MainKt$main$ListCmd;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "W001",
+      "warnings" : {
+        "W001" : 1
+      },
+      "lineNumbers" : [
+        58
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$ClassNamePrinterCmd.execute:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "W001",
+      "warnings" : {
+        "W001" : 2
+      },
+      "lineNumbers" : [
+        60,
+        61
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$FieldNamePrinterCmd.<init>:(Lcom/guardsquare/proguard/tools/MainKt$main$ListCmd;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "W001",
+      "warnings" : {
+        "W001" : 1
+      },
+      "lineNumbers" : [
+        77
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$FieldNamePrinterCmd.execute:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "W001",
+      "warnings" : {
+        "W001" : 2
+      },
+      "lineNumbers" : [
+        79,
+        80
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$MemberPrinter.<init>:(Lcom/guardsquare/proguard/tools/MainKt$main$ListCmd;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "R002",
+      "lineNumbers" : [
+        95
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$MemberPrinter.visitAnyMember:(Lproguard/classfile/Clazz;Lproguard/classfile/Member;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R013",
+      "lineNumbers" : [
+        97
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$MemberPrinter.visitProgramField:(Lproguard/classfile/ProgramClass;Lproguard/classfile/ProgramField;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R013",
+      "lineNumbers" : [
+        101,
+        103,
+        104,
+        105,
+        102,
+        101,
+        100,
+        108
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$MemberPrinter.visitProgramMethod:(Lproguard/classfile/ProgramClass;Lproguard/classfile/ProgramMethod;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R013",
+      "lineNumbers" : [
+        113,
+        114,
+        115,
+        116,
+        112,
+        111,
+        119
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$MemberPrinterCmd.<init>:(Lcom/guardsquare/proguard/tools/MainKt$main$ListCmd;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "W001",
+      "warnings" : {
+        "W001" : 1
+      },
+      "lineNumbers" : [
+        83
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$MemberPrinterCmd.execute:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "W001",
+      "warnings" : {
+        "W001" : 2
+      },
+      "lineNumbers" : [
+        85,
+        86
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$MethodNamePrinterCmd.<init>:(Lcom/guardsquare/proguard/tools/MainKt$main$ListCmd;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "W001",
+      "warnings" : {
+        "W001" : 1
+      },
+      "lineNumbers" : [
+        71
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$MethodNamePrinterCmd.execute:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "W001",
+      "warnings" : {
+        "W001" : 2
+      },
+      "lineNumbers" : [
+        73,
+        74
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$StringPrinterCmd.<init>:(Lcom/guardsquare/proguard/tools/MainKt$main$ListCmd;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "W001",
+      "warnings" : {
+        "W001" : 1
+      },
+      "lineNumbers" : [
+        89
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$StringPrinterCmd.execute:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "W001",
+      "warnings" : {
+        "W001" : 3
+      },
+      "lineNumbers" : [
+        91,
+        92
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd$programClassPool$2.<init>:(Lcom/guardsquare/proguard/tools/MainKt$main$ListCmd;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004"
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd.<clinit>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T023",
+      "perMethodOutcome" : "T023"
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        41,
+        43,
+        1,
+        43,
+        44,
+        45,
+        44,
+        45,
+        48,
+        47,
+        46,
+        44,
+        49,
+        1,
+        44,
+        50,
+        52,
+        53,
+        54,
+        41
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd.execute:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        56
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd.getClassNameFilter:()Ljava/lang/String;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        44,
+        1,
+        44
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd.getInput:()Ljava/lang/String;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        43,
+        1,
+        43
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd.getProgramClassPool:()Lproguard/classfile/ClassPool;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        50,
+        50
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd.setClassNameFilter:(Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        44,
+        1,
+        44
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$ListCmd.setInput:(Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        43,
+        1,
+        43
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$PrintCmd$ClassPrinterCmd.<init>:(Lcom/guardsquare/proguard/tools/MainKt$main$PrintCmd;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "W001",
+      "warnings" : {
+        "W001" : 1
+      },
+      "lineNumbers" : [
+        140
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$PrintCmd$ClassPrinterCmd.execute:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "W001",
+      "warnings" : {
+        "W001" : 6
+      },
+      "lineNumbers" : [
+        142,
+        143
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$PrintCmd$programClassPool$2.<init>:(Lcom/guardsquare/proguard/tools/MainKt$main$PrintCmd;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004"
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$PrintCmd.<clinit>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T023",
+      "perMethodOutcome" : "T023"
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$PrintCmd.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        123,
+        125,
+        1,
+        125,
+        126,
+        127,
+        126,
+        127,
+        130,
+        129,
+        128,
+        126,
+        131,
+        1,
+        126,
+        132,
+        134,
+        135,
+        136,
+        123
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$PrintCmd.execute:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        138
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$PrintCmd.getClassNameFilter:()Ljava/lang/String;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        126,
+        1,
+        126
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$PrintCmd.getInput:()Ljava/lang/String;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        125,
+        1,
+        125
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$PrintCmd.getProgramClassPool:()Lproguard/classfile/ClassPool;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        132,
+        132
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$PrintCmd.setClassNameFilter:(Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        126,
+        1,
+        126
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt$main$PrintCmd.setInput:(Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        125,
+        1,
+        125
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt.main:([Ljava/lang/String;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T006",
+      "perMethodOutcome" : "T006",
+      "lineNumbers" : [
+        39,
+        189,
+        190,
+        191
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt.read$lambda$0:(Lproguard/io/DataEntryReader;Lproguard/classfile/visitor/ClassVisitor;)Lproguard/io/DataEntryReader;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        206,
+        207,
+        208,
+        209,
+        210,
+        208,
+        212,
+        206,
+        214,
+        215,
+        216,
+        217,
+        216,
+        219,
+        214,
+        220
+      ]
+    },
+    "com.guardsquare.proguard.tools.MainKt.read:(Ljava/lang/String;Ljava/lang/String;Z)Lproguard/classfile/ClassPool;" : {
+      "completeTestCount" : 2,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 2
+      },
+      "lineNumbers" : [
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        197,
+        221
+      ]
+    },
+    "com.guardsquare.proguard.tools.Smali2DexReader.<init>:(Lproguard/io/DataEntryReader;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R013",
+      "lineNumbers" : [
+        223
+      ]
+    },
+    "com.guardsquare.proguard.tools.Smali2DexReader.read:(Lproguard/io/DataEntry;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R013",
+      "lineNumbers" : [
+        225,
+        226,
+        227,
+        228,
+        230,
+        231,
+        232,
+        233
+      ]
+    },
+    "com.guardsquare.proguard.tools.StringPrinter.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R002",
+      "lineNumbers" : [
+        19,
+        23,
+        19
+      ]
+    },
+    "com.guardsquare.proguard.tools.StringPrinter.visitAnyClass:(Lproguard/classfile/Clazz;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R013",
+      "lineNumbers" : [
+        24
+      ]
+    },
+    "com.guardsquare.proguard.tools.StringPrinter.visitAnyConstant:(Lproguard/classfile/Clazz;Lproguard/classfile/constant/Constant;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R013",
+      "lineNumbers" : [
+        66
+      ]
+    },
+    "com.guardsquare.proguard.tools.StringPrinter.visitAnyMember:(Lproguard/classfile/Clazz;Lproguard/classfile/Member;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R013",
+      "lineNumbers" : [
+        29
+      ]
+    },
+    "com.guardsquare.proguard.tools.StringPrinter.visitProgramClass:(Lproguard/classfile/ProgramClass;)V" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        26,
+        27
+      ]
+    },
+    "com.guardsquare.proguard.tools.StringPrinter.visitProgramField:(Lproguard/classfile/ProgramClass;Lproguard/classfile/ProgramField;)V" : {
+      "completeTestCount" : 2,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 2
+      },
+      "lineNumbers" : [
+        31,
+        32,
+        33,
+        33,
+        34,
+        36,
+        37,
+        38,
+        35,
+        34,
+        40,
+        41,
+        43
+      ]
+    },
+    "com.guardsquare.proguard.tools.StringPrinter.visitProgramMethod:(Lproguard/classfile/ProgramClass;Lproguard/classfile/ProgramMethod;)V" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        46,
+        47,
+        48,
+        49,
+        50,
+        49,
+        47,
+        53,
+        53,
+        54,
+        56,
+        57,
+        58,
+        59,
+        55,
+        54,
+        61,
+        62,
+        64
+      ]
+    },
+    "com.guardsquare.proguard.tools.StringPrinter.visitStringConstant:(Lproguard/classfile/Clazz;Lproguard/classfile/constant/StringConstant;)V" : {
+      "completeTestCount" : 2,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 2
+      },
+      "lineNumbers" : [
+        68,
+        69
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$1.<clinit>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T023",
+      "perMethodOutcome" : "T023"
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$1.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004"
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$1.invoke:(Ljava/lang/Object;)Ljava/lang/Object;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T012",
+      "perMethodOutcome" : "T012",
+      "lineNumbers" : [
+        55
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$1.invoke:(Lproguard/classfile/Clazz;)Ljava/lang/Boolean;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        55
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$2.<clinit>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T023",
+      "perMethodOutcome" : "T023"
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$2.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004"
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$2.invoke:(Ljava/lang/Object;)Ljava/lang/Object;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T012",
+      "perMethodOutcome" : "T012",
+      "lineNumbers" : [
+        56
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$2.invoke:(Lproguard/classfile/Clazz;)Ljava/lang/Boolean;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        56
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$3.<init>:(Lproguard/classfile/util/ClassPoolClassLoader;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004"
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$3.invoke:(Ljava/lang/Object;)Ljava/lang/Object;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T012",
+      "perMethodOutcome" : "T012",
+      "lineNumbers" : [
+        57
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$3.invoke:(Lproguard/classfile/Clazz;)Ljava/lang/Class;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        57
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$4.<clinit>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T023",
+      "perMethodOutcome" : "T023"
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$4.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004"
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$4.invoke:(Ljava/lang/Class;)Lproguard/classfile/visitor/ClassVisitor;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        58
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$4.invoke:(Ljava/lang/Object;)Ljava/lang/Object;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T012",
+      "perMethodOutcome" : "T012",
+      "lineNumbers" : [
+        58
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$5.<init>:(Lcom/guardsquare/proguard/tools/TransformCmd;Lproguard/classfile/ClassPool;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004"
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$5.invoke:(Ljava/lang/Object;)Ljava/lang/Object;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T012",
+      "perMethodOutcome" : "T012",
+      "lineNumbers" : [
+        59
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$5.invoke:(Lproguard/classfile/visitor/ClassVisitor;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        61,
+        62,
+        155,
+        156,
+        62,
+        156,
+        157,
+        62,
+        63,
+        65,
+        67,
+        158,
+        159,
+        67,
+        159,
+        160,
+        67,
+        68,
+        70,
+        72,
+        61,
+        73
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$6.<clinit>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T023",
+      "perMethodOutcome" : "T023"
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$6.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004"
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$6.invoke:(Ljava/lang/Object;)Ljava/lang/Object;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T012",
+      "perMethodOutcome" : "T012",
+      "lineNumbers" : [
+        74
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$execute$classVisitors$6.invoke:(Lproguard/classfile/visitor/ClassVisitor;)Lproguard/classfile/visitor/MultiClassVisitor;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        75,
+        77,
+        75,
+        78
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$initialize$printWriter$1.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        93
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$initialize$printWriter$1.write:(I)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004",
+      "lineNumbers" : [
+        95
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$programClassPool$2.<init>:(Lcom/guardsquare/proguard/tools/TransformCmd;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004"
+    },
+    "com.guardsquare.proguard.tools.TransformCmd$transformersPool$2.<init>:(Lcom/guardsquare/proguard/tools/TransformCmd;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T004",
+      "perMethodOutcome" : "T004"
+    },
+    "com.guardsquare.proguard.tools.TransformCmd.<clinit>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T023",
+      "perMethodOutcome" : "T023"
+    },
+    "com.guardsquare.proguard.tools.TransformCmd.<init>:()V" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        30,
+        31,
+        1,
+        31,
+        32,
+        1,
+        32,
+        33,
+        1,
+        33,
+        34,
+        1,
+        34,
+        35,
+        1,
+        35,
+        37,
+        38,
+        30
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd.access$getProgramClassPool:(Lcom/guardsquare/proguard/tools/TransformCmd;)Lproguard/classfile/ClassPool;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T012",
+      "perMethodOutcome" : "T012",
+      "lineNumbers" : [
+        29
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd.addClass:(Lproguard/classfile/ClassPool;[Ljava/lang/Class;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        135,
+        142
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd.addLibraryClass:(Lproguard/classfile/ClassPool;[Ljava/lang/Class;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        145,
+        152
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd.execute:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R013",
+      "lineNumbers" : [
+        41,
+        43,
+        45,
+        46,
+        47,
+        49,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        74,
+        80,
+        81,
+        155,
+        156,
+        81,
+        52,
+        83,
+        85,
+        87,
+        157,
+        87,
+        87,
+        87,
+        88
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd.getClassNameFilter:()Ljava/lang/String;" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        35,
+        1,
+        35
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd.getInput:()Ljava/lang/String;" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        31,
+        1,
+        31
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd.getOutput:()Ljava/lang/String;" : {
+      "completeTestCount" : 2,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 2
+      },
+      "lineNumbers" : [
+        32,
+        1,
+        32
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd.getPrintClasses:()Z" : {
+      "completeTestCount" : 2,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 2
+      },
+      "lineNumbers" : [
+        34,
+        1,
+        34
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd.getProgramClassPool:()Lproguard/classfile/ClassPool;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        37,
+        37
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd.getTransformer:()Ljava/lang/String;" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        33,
+        1,
+        33
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd.getTransformersPool:()Lproguard/classfile/ClassPool;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        38,
+        38
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd.initialize:(Lproguard/classfile/ClassPool;Lproguard/classfile/ClassPool;)V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T003",
+      "perMethodOutcome" : "T003",
+      "lineNumbers" : [
+        93,
+        97,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        101,
+        100,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        109,
+        108,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        119,
+        118,
+        130,
+        131
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd.setClassNameFilter:(Ljava/lang/String;)V" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        35,
+        1,
+        35
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd.setInput:(Ljava/lang/String;)V" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        31,
+        1,
+        31
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd.setOutput:(Ljava/lang/String;)V" : {
+      "completeTestCount" : 2,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 2
+      },
+      "lineNumbers" : [
+        32,
+        1,
+        32
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd.setPrintClasses:(Z)V" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        34,
+        1,
+        34
+      ]
+    },
+    "com.guardsquare.proguard.tools.TransformCmd.setTransformer:(Ljava/lang/String;)V" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        33,
+        1,
+        33
+      ]
+    }
+  },
+  "validationMetrics" : { }
+}
