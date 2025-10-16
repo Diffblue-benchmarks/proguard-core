@@ -21,6 +21,9 @@ import proguard.classfile.constant.FieldrefConstant;
 import proguard.classfile.constant.FloatConstant;
 import proguard.classfile.constant.IntegerConstant;
 import proguard.classfile.constant.InterfaceMethodrefConstant;
+import proguard.classfile.constant.InvokeDynamicConstant;
+import proguard.classfile.constant.MethodHandleConstant;
+import proguard.classfile.constant.MethodTypeConstant;
 
 class ClassElementSorterDiffblueTest {
   /**
@@ -179,22 +182,30 @@ class ClassElementSorterDiffblueTest {
   void testVisitProgramClass_thenSecondElementFloatConstant() {
     // Arrange
     ClassElementSorter classElementSorter = new ClassElementSorter();
+
+    FloatConstant floatConstant = new FloatConstant();
+    floatConstant.addProcessingFlags(2, 1, 2, 1);
     ClassConstant classConstant = new ClassConstant();
-    FloatConstant floatConstant = new FloatConstant(10.0f);
+    ClassConstant classConstant2 = new ClassConstant();
     ProgramClass programClass =
-        new ProgramClass(1, 2, new Constant[] {classConstant, floatConstant}, 1, 1, 1);
+        new ProgramClass(
+            1, 3, new Constant[] {classConstant, floatConstant, classConstant2}, 1, 1, 1);
 
     // Act
     classElementSorter.visitProgramClass(programClass);
 
     // Assert that nothing has changed
     Constant[] constantArray = programClass.constantPool;
-    Constant constant = constantArray[1];
-    assertTrue(constant instanceof FloatConstant);
+    Constant constant = constantArray[2];
+    assertTrue(constant instanceof ClassConstant);
+    Constant constant2 = constantArray[1];
+    assertTrue(constant2 instanceof FloatConstant);
     assertEquals(1, programClass.u2superClass);
     assertEquals(1, programClass.u2thisClass);
-    assertEquals(2, constantArray.length);
-    assertSame(floatConstant, constant);
+    assertEquals(3, constantArray.length);
+    assertEquals(classConstant, constant);
+    assertSame(classConstant2, constant);
+    assertSame(floatConstant, constant2);
   }
 
   /**
@@ -214,58 +225,30 @@ class ClassElementSorterDiffblueTest {
   void testVisitProgramClass_thenSecondElementIntegerConstant() {
     // Arrange
     ClassElementSorter classElementSorter = new ClassElementSorter();
+
+    IntegerConstant integerConstant = new IntegerConstant();
+    integerConstant.addProcessingFlags(2, 1, 2, 1);
     ClassConstant classConstant = new ClassConstant();
-    IntegerConstant integerConstant = new IntegerConstant(42);
+    ClassConstant classConstant2 = new ClassConstant();
     ProgramClass programClass =
-        new ProgramClass(1, 2, new Constant[] {classConstant, integerConstant}, 1, 1, 1);
+        new ProgramClass(
+            1, 3, new Constant[] {classConstant, integerConstant, classConstant2}, 1, 1, 1);
 
     // Act
     classElementSorter.visitProgramClass(programClass);
 
     // Assert that nothing has changed
     Constant[] constantArray = programClass.constantPool;
-    Constant constant = constantArray[1];
-    assertTrue(constant instanceof IntegerConstant);
+    Constant constant = constantArray[2];
+    assertTrue(constant instanceof ClassConstant);
+    Constant constant2 = constantArray[1];
+    assertTrue(constant2 instanceof IntegerConstant);
     assertEquals(1, programClass.u2superClass);
     assertEquals(1, programClass.u2thisClass);
-    assertEquals(2, constantArray.length);
-    assertSame(integerConstant, constant);
-  }
-
-  /**
-   * Test {@link ClassElementSorter#visitProgramClass(ProgramClass)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link InterfaceMethodrefConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassElementSorter#visitProgramClass(ProgramClass)}
-   */
-  @Test
-  @DisplayName(
-      "Test visitProgramClass(ProgramClass); then second element InterfaceMethodrefConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void ClassElementSorter.visitProgramClass(ProgramClass)"})
-  void testVisitProgramClass_thenSecondElementInterfaceMethodrefConstant() {
-    // Arrange
-    ClassElementSorter classElementSorter = new ClassElementSorter();
-    ClassConstant classConstant = new ClassConstant();
-    InterfaceMethodrefConstant interfaceMethodrefConstant = new InterfaceMethodrefConstant();
-    ProgramClass programClass =
-        new ProgramClass(1, 2, new Constant[] {classConstant, interfaceMethodrefConstant}, 1, 1, 1);
-
-    // Act
-    classElementSorter.visitProgramClass(programClass);
-
-    // Assert that nothing has changed
-    Constant[] constantArray = programClass.constantPool;
-    Constant constant = constantArray[1];
-    assertTrue(constant instanceof InterfaceMethodrefConstant);
-    assertEquals(1, programClass.u2superClass);
-    assertEquals(1, programClass.u2thisClass);
-    assertEquals(2, constantArray.length);
-    assertSame(interfaceMethodrefConstant, constant);
+    assertEquals(3, constantArray.length);
+    assertEquals(classConstant, constant);
+    assertSame(classConstant2, constant);
+    assertSame(integerConstant, constant2);
   }
 
   /**
@@ -364,9 +347,7 @@ class ClassElementSorterDiffblueTest {
     Constant constant = constantArray[1];
     assertTrue(constant instanceof ClassConstant);
     assertNull(constant.getProcessingInfo());
-    assertNull(((ClassConstant) constant).referencedClass);
     assertNull(constantArray[2]);
-    assertEquals(0, constant.getProcessingFlags());
     assertEquals(2, programClass.u2constantPoolCount);
     assertEquals(3, constantArray.length);
   }
@@ -429,8 +410,10 @@ class ClassElementSorterDiffblueTest {
   void testVisitProgramClass_thenThirdElementIsFieldrefConstant() {
     // Arrange
     ClassElementSorter classElementSorter = new ClassElementSorter();
-    ClassConstant classConstant = new ClassConstant();
+
     FieldrefConstant fieldrefConstant = new FieldrefConstant();
+    fieldrefConstant.addProcessingFlags(2, 1, 2, 1);
+    ClassConstant classConstant = new ClassConstant();
     ProgramClass programClass =
         new ProgramClass(
             1, 3, new Constant[] {classConstant, fieldrefConstant, new ClassConstant()}, 1, 1, 1);
@@ -442,5 +425,158 @@ class ClassElementSorterDiffblueTest {
     Constant[] constantArray = programClass.constantPool;
     assertEquals(3, constantArray.length);
     assertSame(fieldrefConstant, constantArray[2]);
+  }
+
+  /**
+   * Test {@link ClassElementSorter#visitProgramClass(ProgramClass)}.
+   *
+   * <ul>
+   *   <li>Then third element is {@link InterfaceMethodrefConstant#InterfaceMethodrefConstant()}.
+   * </ul>
+   *
+   * <p>Method under test: {@link ClassElementSorter#visitProgramClass(ProgramClass)}
+   */
+  @Test
+  @DisplayName(
+      "Test visitProgramClass(ProgramClass); then third element is InterfaceMethodrefConstant()")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"void ClassElementSorter.visitProgramClass(ProgramClass)"})
+  void testVisitProgramClass_thenThirdElementIsInterfaceMethodrefConstant() {
+    // Arrange
+    ClassElementSorter classElementSorter = new ClassElementSorter();
+
+    InterfaceMethodrefConstant interfaceMethodrefConstant = new InterfaceMethodrefConstant();
+    interfaceMethodrefConstant.addProcessingFlags(2, 1, 2, 1);
+    ClassConstant classConstant = new ClassConstant();
+    ProgramClass programClass =
+        new ProgramClass(
+            1,
+            3,
+            new Constant[] {classConstant, interfaceMethodrefConstant, new ClassConstant()},
+            1,
+            1,
+            1);
+
+    // Act
+    classElementSorter.visitProgramClass(programClass);
+
+    // Assert
+    Constant[] constantArray = programClass.constantPool;
+    assertEquals(3, constantArray.length);
+    assertSame(interfaceMethodrefConstant, constantArray[2]);
+  }
+
+  /**
+   * Test {@link ClassElementSorter#visitProgramClass(ProgramClass)}.
+   *
+   * <ul>
+   *   <li>Then third element is {@link InvokeDynamicConstant#InvokeDynamicConstant()}.
+   * </ul>
+   *
+   * <p>Method under test: {@link ClassElementSorter#visitProgramClass(ProgramClass)}
+   */
+  @Test
+  @DisplayName(
+      "Test visitProgramClass(ProgramClass); then third element is InvokeDynamicConstant()")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"void ClassElementSorter.visitProgramClass(ProgramClass)"})
+  void testVisitProgramClass_thenThirdElementIsInvokeDynamicConstant() {
+    // Arrange
+    ClassElementSorter classElementSorter = new ClassElementSorter();
+
+    InvokeDynamicConstant invokeDynamicConstant = new InvokeDynamicConstant();
+    invokeDynamicConstant.addProcessingFlags(2, 1, 2, 1);
+    ClassConstant classConstant = new ClassConstant();
+    ProgramClass programClass =
+        new ProgramClass(
+            1,
+            3,
+            new Constant[] {classConstant, invokeDynamicConstant, new ClassConstant()},
+            1,
+            1,
+            1);
+
+    // Act
+    classElementSorter.visitProgramClass(programClass);
+
+    // Assert
+    Constant[] constantArray = programClass.constantPool;
+    assertEquals(3, constantArray.length);
+    assertSame(invokeDynamicConstant, constantArray[2]);
+  }
+
+  /**
+   * Test {@link ClassElementSorter#visitProgramClass(ProgramClass)}.
+   *
+   * <ul>
+   *   <li>Then third element is {@link MethodHandleConstant#MethodHandleConstant()}.
+   * </ul>
+   *
+   * <p>Method under test: {@link ClassElementSorter#visitProgramClass(ProgramClass)}
+   */
+  @Test
+  @DisplayName("Test visitProgramClass(ProgramClass); then third element is MethodHandleConstant()")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"void ClassElementSorter.visitProgramClass(ProgramClass)"})
+  void testVisitProgramClass_thenThirdElementIsMethodHandleConstant() {
+    // Arrange
+    ClassElementSorter classElementSorter = new ClassElementSorter();
+
+    MethodHandleConstant methodHandleConstant = new MethodHandleConstant();
+    methodHandleConstant.addProcessingFlags(2, 1, 2, 1);
+    ClassConstant classConstant = new ClassConstant();
+    ProgramClass programClass =
+        new ProgramClass(
+            1,
+            3,
+            new Constant[] {classConstant, methodHandleConstant, new ClassConstant()},
+            1,
+            1,
+            1);
+
+    // Act
+    classElementSorter.visitProgramClass(programClass);
+
+    // Assert
+    Constant[] constantArray = programClass.constantPool;
+    assertEquals(3, constantArray.length);
+    assertSame(methodHandleConstant, constantArray[2]);
+  }
+
+  /**
+   * Test {@link ClassElementSorter#visitProgramClass(ProgramClass)}.
+   *
+   * <ul>
+   *   <li>Then third element is {@link MethodTypeConstant#MethodTypeConstant()}.
+   * </ul>
+   *
+   * <p>Method under test: {@link ClassElementSorter#visitProgramClass(ProgramClass)}
+   */
+  @Test
+  @DisplayName("Test visitProgramClass(ProgramClass); then third element is MethodTypeConstant()")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"void ClassElementSorter.visitProgramClass(ProgramClass)"})
+  void testVisitProgramClass_thenThirdElementIsMethodTypeConstant() {
+    // Arrange
+    ClassElementSorter classElementSorter = new ClassElementSorter();
+
+    MethodTypeConstant methodTypeConstant = new MethodTypeConstant();
+    methodTypeConstant.addProcessingFlags(2, 1, 2, 1);
+    ClassConstant classConstant = new ClassConstant();
+    ProgramClass programClass =
+        new ProgramClass(
+            1, 3, new Constant[] {classConstant, methodTypeConstant, new ClassConstant()}, 1, 1, 1);
+
+    // Act
+    classElementSorter.visitProgramClass(programClass);
+
+    // Assert
+    Constant[] constantArray = programClass.constantPool;
+    assertEquals(3, constantArray.length);
+    assertSame(methodTypeConstant, constantArray[2]);
   }
 }

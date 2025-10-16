@@ -4,18 +4,18 @@
   },
   "run" : {
     "version" : "2025.09.01-44e352d-licensed",
-    "creationTimestamp" : "2025-09-30T20:10:30.71243Z",
+    "creationTimestamp" : "2025-10-15T15:47:43.328254Z",
     "command" : "dcover create --coverage-reports --upload http://localhost:8080 --project-name proguard-core --name with-diffblue-tests",
-    "totalTime" : 78333.546,
-    "environmentDetectionTime" : 20.221,
-    "indexingTime" : 0.33,
-    "entryPointsTime" : 20.209,
-    "generationTime" : 69572.727,
-    "timeToFirstTest" : 78620.099,
-    "timeToLastTest" : 71426.528,
-    "indexQueryTime" : 33.386,
-    "verificationTime" : 1619.116,
-    "validationTime" : 9192.823
+    "totalTime" : 77330.708,
+    "environmentDetectionTime" : 19.525,
+    "indexingTime" : 0.323,
+    "entryPointsTime" : 19.513,
+    "generationTime" : 68758.435,
+    "timeToFirstTest" : 77638.451,
+    "timeToLastTest" : 70651.003,
+    "indexQueryTime" : 32.826,
+    "verificationTime" : 1617.443,
+    "validationTime" : 8945.571
   },
   "codes" : {
     "F009" : "Internal error",
@@ -52,9 +52,9 @@
   "summary" : {
     "classesCount" : 1189,
     "methodsCount" : 10759,
-    "cumulativeDiffblueTestCount" : 6480,
+    "cumulativeDiffblueTestCount" : 6482,
     "cumulativeManualTestCount" : 869,
-    "completeTestCount" : 13736,
+    "completeTestCount" : 13682,
     "incompleteTestCount" : 0,
     "skeletonTestCount" : 0,
     "totalPhysicalLineCount" : 84034,
@@ -100,16 +100,16 @@
       "W002" : 49
     },
     "perTestOutcome" : {
-      "R000" : 13736
+      "R000" : 13682
     },
     "perTestValidation" : {
-      "V000" : 13715,
+      "V000" : 13661,
       "V003" : 21
     },
     "warnings" : {
       "F009" : 6,
-      "W001" : 82,
-      "W002" : 127
+      "W001" : 81,
+      "W002" : 134
     }
   },
   "classes" : {
@@ -5796,7 +5796,7 @@
     },
     "proguard.classfile.editor.BootstrapMethodInfoAdder" : {
       "methodsCount" : 3,
-      "completeTestCount" : 7,
+      "completeTestCount" : 6,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 2,
@@ -5806,7 +5806,7 @@
         "R000" : 3
       },
       "perTestOutcome" : {
-        "R000" : 7
+        "R000" : 6
       }
     },
     "proguard.classfile.editor.BootstrapMethodRemapper" : {
@@ -5961,7 +5961,7 @@
     },
     "proguard.classfile.editor.ClassElementSorter" : {
       "methodsCount" : 4,
-      "completeTestCount" : 13,
+      "completeTestCount" : 16,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 3,
@@ -5972,7 +5972,7 @@
         "R002" : 3
       },
       "perTestOutcome" : {
-        "R000" : 13
+        "R000" : 16
       }
     },
     "proguard.classfile.editor.ClassEstimates" : {
@@ -6289,7 +6289,7 @@
     },
     "proguard.classfile.editor.ConstantPoolShrinker" : {
       "methodsCount" : 71,
-      "completeTestCount" : 220,
+      "completeTestCount" : 199,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 61,
@@ -6303,7 +6303,7 @@
         "T003" : 6
       },
       "perTestOutcome" : {
-        "R000" : 220
+        "R000" : 199
       }
     },
     "proguard.classfile.editor.ConstantPoolSorter" : {
@@ -7608,7 +7608,7 @@
     },
     "proguard.classfile.io.ProgramClassReader" : {
       "methodsCount" : 99,
-      "completeTestCount" : 110,
+      "completeTestCount" : 100,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 86,
@@ -7622,7 +7622,7 @@
         "T003" : 7
       },
       "perTestOutcome" : {
-        "R000" : 110
+        "R000" : 100
       }
     },
     "proguard.classfile.io.ProgramClassWriter" : {
@@ -7713,7 +7713,7 @@
     },
     "proguard.classfile.io.kotlin.KotlinMetadataWriter" : {
       "methodsCount" : 30,
-      "completeTestCount" : 9,
+      "completeTestCount" : 10,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 8,
@@ -7731,7 +7731,7 @@
         "T023" : 1
       },
       "perTestOutcome" : {
-        "R000" : 9
+        "R000" : 10
       }
     },
     "proguard.classfile.io.kotlin.KotlinMetadataWriter$1" : {
@@ -9322,7 +9322,7 @@
     },
     "proguard.classfile.kotlin.visitor.AllTypeVisitor" : {
       "methodsCount" : 42,
-      "completeTestCount" : 24,
+      "completeTestCount" : 23,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 39,
@@ -9335,7 +9335,7 @@
         "R013" : 22
       },
       "perTestOutcome" : {
-        "R000" : 24
+        "R000" : 23
       }
     },
     "proguard.classfile.kotlin.visitor.AllValueParameterVisitor" : {
@@ -11003,7 +11003,7 @@
         "R000" : 7
       },
       "warnings" : {
-        "W002" : 2
+        "W002" : 3
       }
     },
     "proguard.classfile.util.WarningPrinter" : {
@@ -14344,7 +14344,7 @@
     },
     "proguard.evaluation.value.ArrayReferenceValue" : {
       "methodsCount" : 9,
-      "completeTestCount" : 65,
+      "completeTestCount" : 68,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 7,
@@ -14355,10 +14355,10 @@
         "R000" : 9
       },
       "perTestOutcome" : {
-        "R000" : 65
+        "R000" : 68
       },
       "warnings" : {
-        "W001" : 2
+        "W001" : 1
       }
     },
     "proguard.evaluation.value.ArrayReferenceValueFactory" : {
@@ -14719,7 +14719,7 @@
     },
     "proguard.evaluation.value.IdentifiedArrayReferenceValue" : {
       "methodsCount" : 9,
-      "completeTestCount" : 54,
+      "completeTestCount" : 53,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 6,
@@ -14731,7 +14731,7 @@
         "R000" : 9
       },
       "perTestOutcome" : {
-        "R000" : 54
+        "R000" : 53
       },
       "warnings" : {
         "W001" : 1
@@ -14908,7 +14908,7 @@
     },
     "proguard.evaluation.value.MultiTypedReferenceValue" : {
       "methodsCount" : 31,
-      "completeTestCount" : 158,
+      "completeTestCount" : 139,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 19,
@@ -14924,7 +14924,7 @@
         "T012" : 7
       },
       "perTestOutcome" : {
-        "R000" : 158
+        "R000" : 139
       }
     },
     "proguard.evaluation.value.MultiTypedReferenceValueFactory" : {
@@ -15169,7 +15169,7 @@
     },
     "proguard.evaluation.value.ReferenceValue" : {
       "methodsCount" : 45,
-      "completeTestCount" : 84,
+      "completeTestCount" : 83,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 35,
@@ -15183,7 +15183,7 @@
         "T023" : 1
       },
       "perTestOutcome" : {
-        "R000" : 84
+        "R000" : 83
       }
     },
     "proguard.evaluation.value.ReflectiveMethodCallUtil" : {
@@ -15285,7 +15285,7 @@
     },
     "proguard.evaluation.value.TracedReferenceValue" : {
       "methodsCount" : 38,
-      "completeTestCount" : 226,
+      "completeTestCount" : 225,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 34,
@@ -15298,7 +15298,7 @@
         "R013" : 2
       },
       "perTestOutcome" : {
-        "R000" : 226
+        "R000" : 225
       },
       "warnings" : {
         "W001" : 7,
@@ -15966,7 +15966,7 @@
     },
     "proguard.io.ClassReader" : {
       "methodsCount" : 5,
-      "completeTestCount" : 19,
+      "completeTestCount" : 13,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 3,
@@ -15979,10 +15979,11 @@
         "T012" : 1
       },
       "perTestOutcome" : {
-        "R000" : 19
+        "R000" : 13
       },
       "warnings" : {
-        "F009" : 4
+        "F009" : 4,
+        "W002" : 6
       }
     },
     "proguard.io.DEROutputStream" : {
@@ -55438,12 +55439,12 @@
       ]
     },
     "proguard.classfile.editor.BootstrapMethodInfoAdder.visitBootstrapMethodInfo:(Lproguard/classfile/Clazz;Lproguard/classfile/attribute/BootstrapMethodInfo;)V" : {
-      "completeTestCount" : 4,
+      "completeTestCount" : 3,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 4
+        "R000" : 3
       },
       "lineNumbers" : [
         54,
@@ -56431,12 +56432,12 @@
       ]
     },
     "proguard.classfile.editor.ClassElementSorter.visitProgramClass:(Lproguard/classfile/ProgramClass;)V" : {
-      "completeTestCount" : 13,
+      "completeTestCount" : 16,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 13
+        "R000" : 16
       },
       "lineNumbers" : [
         60,
@@ -66756,12 +66757,12 @@
       ]
     },
     "proguard.classfile.editor.ConstantPoolShrinker.visitAnnotation:(Lproguard/classfile/Clazz;Lproguard/classfile/attribute/annotation/Annotation;)V" : {
-      "completeTestCount" : 5,
+      "completeTestCount" : 8,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 5
+        "R000" : 8
       },
       "lineNumbers" : [
         542,
@@ -67317,12 +67318,12 @@
       ]
     },
     "proguard.classfile.editor.ConstantPoolShrinker.visitModulePackagesAttribute:(Lproguard/classfile/Clazz;Lproguard/classfile/attribute/module/ModulePackagesAttribute;)V" : {
-      "completeTestCount" : 8,
+      "completeTestCount" : 4,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 8
+        "R000" : 4
       },
       "lineNumbers" : [
         287,
@@ -67370,12 +67371,12 @@
       ]
     },
     "proguard.classfile.editor.ConstantPoolShrinker.visitNestMembersAttribute:(Lproguard/classfile/Clazz;Lproguard/classfile/attribute/NestMembersAttribute;)V" : {
-      "completeTestCount" : 8,
+      "completeTestCount" : 4,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 8
+        "R000" : 4
       },
       "lineNumbers" : [
         249,
@@ -67438,12 +67439,12 @@
       ]
     },
     "proguard.classfile.editor.ConstantPoolShrinker.visitPermittedSubclassesAttribute:(Lproguard/classfile/Clazz;Lproguard/classfile/attribute/PermittedSubclassesAttribute;)V" : {
-      "completeTestCount" : 8,
+      "completeTestCount" : 4,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 8
+        "R000" : 4
       },
       "lineNumbers" : [
         257,
@@ -67506,12 +67507,12 @@
       ]
     },
     "proguard.classfile.editor.ConstantPoolShrinker.visitRecordAttribute:(Lproguard/classfile/Clazz;Lproguard/classfile/attribute/RecordAttribute;)V" : {
-      "completeTestCount" : 9,
+      "completeTestCount" : 5,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 9
+        "R000" : 5
       },
       "lineNumbers" : [
         223,
@@ -67520,12 +67521,12 @@
       ]
     },
     "proguard.classfile.editor.ConstantPoolShrinker.visitRecordComponentInfo:(Lproguard/classfile/Clazz;Lproguard/classfile/attribute/RecordComponentInfo;)V" : {
-      "completeTestCount" : 9,
+      "completeTestCount" : 5,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 9
+        "R000" : 5
       },
       "lineNumbers" : [
         409,
@@ -67632,12 +67633,12 @@
       ]
     },
     "proguard.classfile.editor.ConstantPoolShrinker.visitStringConstant:(Lproguard/classfile/Clazz;Lproguard/classfile/constant/StringConstant;)V" : {
-      "completeTestCount" : 6,
+      "completeTestCount" : 2,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 6
+        "R000" : 2
       },
       "lineNumbers" : [
         131,
@@ -81209,12 +81210,12 @@
       ]
     },
     "proguard.classfile.io.ProgramClassReader.visitAnnotationDefaultAttribute:(Lproguard/classfile/Clazz;Lproguard/classfile/Method;Lproguard/classfile/attribute/annotation/AnnotationDefaultAttribute;)V" : {
-      "completeTestCount" : 1,
+      "completeTestCount" : 2,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 1
+        "R000" : 2
       },
       "lineNumbers" : [
         734,
@@ -81224,12 +81225,12 @@
       ]
     },
     "proguard.classfile.io.ProgramClassReader.visitAnnotationElementValue:(Lproguard/classfile/Clazz;Lproguard/classfile/attribute/annotation/Annotation;Lproguard/classfile/attribute/annotation/AnnotationElementValue;)V" : {
-      "completeTestCount" : 1,
+      "completeTestCount" : 2,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 1
+        "R000" : 2
       },
       "lineNumbers" : [
         1144,
@@ -81336,12 +81337,12 @@
       ]
     },
     "proguard.classfile.io.ProgramClassReader.visitArrayElementValue:(Lproguard/classfile/Clazz;Lproguard/classfile/attribute/annotation/Annotation;Lproguard/classfile/attribute/annotation/ArrayElementValue;)V" : {
-      "completeTestCount" : 2,
+      "completeTestCount" : 1,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 2
+        "R000" : 1
       },
       "lineNumbers" : [
         1152,
@@ -82399,12 +82400,12 @@
       ]
     },
     "proguard.classfile.io.ProgramClassReader.visitSameOneFrame:(Lproguard/classfile/Clazz;Lproguard/classfile/Method;Lproguard/classfile/attribute/CodeAttribute;ILproguard/classfile/attribute/preverification/SameOneFrame;)V" : {
-      "completeTestCount" : 7,
+      "completeTestCount" : 2,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 7
+        "R000" : 2
       },
       "lineNumbers" : [
         805,
@@ -82503,12 +82504,12 @@
       ]
     },
     "proguard.classfile.io.ProgramClassReader.visitStackMapTableAttribute:(Lproguard/classfile/Clazz;Lproguard/classfile/Method;Lproguard/classfile/attribute/CodeAttribute;Lproguard/classfile/attribute/preverification/StackMapTableAttribute;)V" : {
-      "completeTestCount" : 9,
+      "completeTestCount" : 3,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 9
+        "R000" : 3
       },
       "lineNumbers" : [
         612,
@@ -85844,12 +85845,12 @@
       ]
     },
     "proguard.classfile.io.kotlin.KotlinMetadataWriter.visitAnyKotlinMetadata:(Lproguard/classfile/Clazz;Lproguard/classfile/kotlin/KotlinMetadata;)V" : {
-      "completeTestCount" : 9,
+      "completeTestCount" : 10,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 9
+        "R000" : 10
       },
       "lineNumbers" : [
         202,
@@ -90747,12 +90748,12 @@
       ]
     },
     "proguard.classfile.kotlin.visitor.AllTypeVisitor.visitAbbreviation:(Lproguard/classfile/Clazz;Lproguard/classfile/kotlin/KotlinTypeMetadata;Lproguard/classfile/kotlin/KotlinTypeMetadata;)V" : {
-      "completeTestCount" : 8,
+      "completeTestCount" : 7,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 8
+        "R000" : 7
       },
       "lineNumbers" : [
         218,
@@ -103689,7 +103690,7 @@
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "W002",
       "warnings" : {
-        "W002" : 2
+        "W002" : 3
       },
       "lineNumbers" : [
         34,
@@ -125226,12 +125227,12 @@
       ]
     },
     "proguard.evaluation.value.ArrayReferenceValue.equal:(Lproguard/evaluation/value/ReferenceValue;)I" : {
-      "completeTestCount" : 8,
+      "completeTestCount" : 15,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 8
+        "R000" : 15
       },
       "lineNumbers" : [
         52
@@ -125271,15 +125272,15 @@
       ]
     },
     "proguard.evaluation.value.ArrayReferenceValue.generalize:(Lproguard/evaluation/value/ReferenceValue;)Lproguard/evaluation/value/ReferenceValue;" : {
-      "completeTestCount" : 23,
+      "completeTestCount" : 19,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 23
+        "R000" : 19
       },
       "warnings" : {
-        "W001" : 2
+        "W001" : 1
       },
       "lineNumbers" : [
         48
@@ -127840,12 +127841,12 @@
       ]
     },
     "proguard.evaluation.value.IdentifiedArrayReferenceValue.generalize:(Lproguard/evaluation/value/ReferenceValue;)Lproguard/evaluation/value/ReferenceValue;" : {
-      "completeTestCount" : 20,
+      "completeTestCount" : 19,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 20
+        "R000" : 19
       },
       "warnings" : {
         "W001" : 1
@@ -131142,12 +131143,12 @@
       ]
     },
     "proguard.evaluation.value.MultiTypedReferenceValue.<init>:(Ljava/util/Set;Z)V" : {
-      "completeTestCount" : 23,
+      "completeTestCount" : 14,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 23
+        "R000" : 14
       },
       "lineNumbers" : [
         47,
@@ -131178,12 +131179,12 @@
       ]
     },
     "proguard.evaluation.value.MultiTypedReferenceValue.cast:(Ljava/lang/String;Lproguard/classfile/Clazz;Lproguard/evaluation/value/ValueFactory;Z)Lproguard/evaluation/value/ReferenceValue;" : {
-      "completeTestCount" : 11,
+      "completeTestCount" : 12,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 11
+        "R000" : 12
       },
       "lineNumbers" : [
         151,
@@ -131265,12 +131266,12 @@
       ]
     },
     "proguard.evaluation.value.MultiTypedReferenceValue.generalize:(Ljava/util/Set;)Lproguard/evaluation/value/TypedReferenceValue;" : {
-      "completeTestCount" : 11,
+      "completeTestCount" : 8,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 11
+        "R000" : 8
       },
       "lineNumbers" : [
         72,
@@ -131294,12 +131295,12 @@
       ]
     },
     "proguard.evaluation.value.MultiTypedReferenceValue.generalize:(Lproguard/evaluation/value/MultiTypedReferenceValue;)Lproguard/evaluation/value/ReferenceValue;" : {
-      "completeTestCount" : 12,
+      "completeTestCount" : 11,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 12
+        "R000" : 11
       },
       "lineNumbers" : [
         195,
@@ -131333,24 +131334,24 @@
       ]
     },
     "proguard.evaluation.value.MultiTypedReferenceValue.generalize:(Lproguard/evaluation/value/TypedReferenceValue;)Lproguard/evaluation/value/ReferenceValue;" : {
-      "completeTestCount" : 23,
+      "completeTestCount" : 14,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 23
+        "R000" : 14
       },
       "lineNumbers" : [
         185
       ]
     },
     "proguard.evaluation.value.MultiTypedReferenceValue.generalize:(Lproguard/evaluation/value/UnknownReferenceValue;)Lproguard/evaluation/value/ReferenceValue;" : {
-      "completeTestCount" : 10,
+      "completeTestCount" : 12,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 10
+        "R000" : 12
       },
       "lineNumbers" : [
         190
@@ -135988,12 +135989,12 @@
       ]
     },
     "proguard.evaluation.value.ReferenceValue.generalize:(Lproguard/evaluation/value/DetailedArrayReferenceValue;)Lproguard/evaluation/value/ReferenceValue;" : {
-      "completeTestCount" : 6,
+      "completeTestCount" : 5,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 6
+        "R000" : 5
       },
       "lineNumbers" : [
         262
@@ -138805,12 +138806,15 @@
       ]
     },
     "proguard.evaluation.value.TracedReferenceValue.generalize:(Lproguard/evaluation/value/DetailedArrayReferenceValue;)Lproguard/evaluation/value/ReferenceValue;" : {
-      "completeTestCount" : 8,
+      "completeTestCount" : 7,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 8
+        "R000" : 7
+      },
+      "warnings" : {
+        "W002" : 1
       },
       "lineNumbers" : [
         181
@@ -138862,9 +138866,6 @@
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
         "R000" : 26
-      },
-      "warnings" : {
-        "W002" : 1
       },
       "lineNumbers" : [
         192,
@@ -145003,15 +145004,16 @@
       ]
     },
     "proguard.io.ClassReader.<init>:(ZZZZLproguard/classfile/util/WarningPrinter;Lproguard/classfile/visitor/ClassVisitor;)V" : {
-      "completeTestCount" : 7,
+      "completeTestCount" : 4,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 7
+        "R000" : 4
       },
       "warnings" : {
-        "F009" : 2
+        "F009" : 2,
+        "W002" : 3
       },
       "lineNumbers" : [
         60,
@@ -145019,15 +145021,16 @@
       ]
     },
     "proguard.io.ClassReader.<init>:(ZZZZZLproguard/classfile/util/WarningPrinter;Lproguard/classfile/visitor/ClassVisitor;)V" : {
-      "completeTestCount" : 11,
+      "completeTestCount" : 8,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 11
+        "R000" : 8
       },
       "warnings" : {
-        "F009" : 2
+        "F009" : 2,
+        "W002" : 3
       },
       "lineNumbers" : [
         78,

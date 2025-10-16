@@ -4,18 +4,18 @@
   },
   "run" : {
     "version" : "2025.09.01-44e352d-licensed",
-    "creationTimestamp" : "2025-09-30T20:10:30.71243Z",
+    "creationTimestamp" : "2025-10-15T15:47:43.328254Z",
     "command" : "dcover create --coverage-reports --upload http://localhost:8080 --project-name proguard-core --name with-diffblue-tests",
-    "totalTime" : 3174.062,
-    "environmentDetectionTime" : 1.5,
-    "indexingTime" : 0.321,
-    "entryPointsTime" : 1.471,
-    "generationTime" : 2355.114,
-    "timeToFirstTest" : 93.102,
-    "timeToLastTest" : 2609.572,
-    "indexQueryTime" : 14.357000000000001,
-    "verificationTime" : 177.673,
-    "validationTime" : 479.524
+    "totalTime" : 3143.79,
+    "environmentDetectionTime" : 1.489,
+    "indexingTime" : 0.314,
+    "entryPointsTime" : 1.463,
+    "generationTime" : 2305.808,
+    "timeToFirstTest" : 111.611,
+    "timeToLastTest" : 2577.512,
+    "indexQueryTime" : 14.443,
+    "verificationTime" : 177.105,
+    "validationTime" : 490.322
   },
   "codes" : {
     "F009" : "Internal error",
@@ -47,7 +47,7 @@
     "methodsCount" : 1246,
     "cumulativeDiffblueTestCount" : 813,
     "cumulativeManualTestCount" : 55,
-    "completeTestCount" : 1289,
+    "completeTestCount" : 1291,
     "incompleteTestCount" : 0,
     "skeletonTestCount" : 0,
     "totalPhysicalLineCount" : 15029,
@@ -85,10 +85,10 @@
       "W001" : 5
     },
     "perTestOutcome" : {
-      "R000" : 1289
+      "R000" : 1291
     },
     "perTestValidation" : {
-      "V000" : 1289
+      "V000" : 1291
     },
     "warnings" : {
       "W001" : 7,
@@ -3212,7 +3212,7 @@
     },
     "proguard.io.D8ClassConverter$D8DexFile" : {
       "methodsCount" : 4,
-      "completeTestCount" : 17,
+      "completeTestCount" : 19,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 4
@@ -3222,7 +3222,7 @@
         "R002" : 1
       },
       "perTestOutcome" : {
-        "R000" : 17
+        "R000" : 19
       }
     },
     "proguard.io.D8ClassConverter$InMemoryDexConsumer" : {
@@ -22551,12 +22551,12 @@
       ]
     },
     "proguard.io.D8ClassConverter$D8DexFile.writeTo:(Ljava/io/OutputStream;)V" : {
-      "completeTestCount" : 4,
+      "completeTestCount" : 6,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 4
+        "R000" : 6
       },
       "lineNumbers" : [
         119,

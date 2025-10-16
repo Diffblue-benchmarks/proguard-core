@@ -15,7 +15,6 @@ import proguard.classfile.attribute.BootstrapMethodsAttribute;
 import proguard.classfile.constant.ClassConstant;
 import proguard.classfile.constant.Constant;
 import proguard.classfile.constant.DoubleConstant;
-import proguard.classfile.constant.FloatConstant;
 
 class BootstrapMethodInfoAdderDiffblueTest {
   /**
@@ -177,37 +176,6 @@ class BootstrapMethodInfoAdderDiffblueTest {
         new BootstrapMethodInfoAdder(
             targetClass, new BootstrapMethodsAttribute(1, 3, bootstrapMethods));
     Constant[] constantPool2 = new Constant[] {new DoubleConstant()};
-    ProgramClass clazz = new ProgramClass(1, 3, constantPool2, 1, 1, 1);
-
-    // Act
-    bootstrapMethodInfoAdder.visitBootstrapMethodInfo(clazz, new BootstrapMethodInfo());
-
-    // Assert
-    assertEquals(3, bootstrapMethodInfoAdder.getBootstrapMethodIndex());
-  }
-
-  /**
-   * Test {@link BootstrapMethodInfoAdder#visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)}.
-   *
-   * <p>Method under test: {@link BootstrapMethodInfoAdder#visitBootstrapMethodInfo(Clazz,
-   * BootstrapMethodInfo)}
-   */
-  @Test
-  @DisplayName("Test visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "void BootstrapMethodInfoAdder.visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)"
-  })
-  void testVisitBootstrapMethodInfo4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ProgramClass targetClass = new ProgramClass(4, 1, constantPool, 4, 4, 4);
-    BootstrapMethodInfo[] bootstrapMethods = new BootstrapMethodInfo[] {new BootstrapMethodInfo()};
-    BootstrapMethodInfoAdder bootstrapMethodInfoAdder =
-        new BootstrapMethodInfoAdder(
-            targetClass, new BootstrapMethodsAttribute(1, 3, bootstrapMethods));
-    Constant[] constantPool2 = new Constant[] {new FloatConstant()};
     ProgramClass clazz = new ProgramClass(1, 3, constantPool2, 1, 1, 1);
 
     // Act
