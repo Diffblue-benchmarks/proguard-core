@@ -1,31 +1,28 @@
 package proguard.classfile.attribute;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ExceptionInfoDiffblueTest {
+public class ExceptionInfoDiffblueTest {
   /**
    * Test {@link ExceptionInfo#ExceptionInfo()}.
    *
    * <p>Method under test: {@link ExceptionInfo#ExceptionInfo()}
    */
   @Test
-  @DisplayName("Test new ExceptionInfo()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ExceptionInfo.<init>()",
     "void ExceptionInfo.<init>(int, int, int, int)"
   })
-  void testNewExceptionInfo() {
+  public void testNewExceptionInfo() {
     // Arrange and Act
     ExceptionInfo actualExceptionInfo = new ExceptionInfo();
 
@@ -44,14 +41,12 @@ class ExceptionInfoDiffblueTest {
    * <p>Method under test: {@link ExceptionInfo#ExceptionInfo(int, int, int, int)}
    */
   @Test
-  @DisplayName("Test new ExceptionInfo(int, int, int, int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ExceptionInfo.<init>()",
     "void ExceptionInfo.<init>(int, int, int, int)"
   })
-  void testNewExceptionInfo_whenOne() {
+  public void testNewExceptionInfo_whenOne() {
     // Arrange and Act
     ExceptionInfo actualExceptionInfo = new ExceptionInfo(1, 3, 1, 1);
 
@@ -66,16 +61,11 @@ class ExceptionInfoDiffblueTest {
    * <p>Method under test: {@link ExceptionInfo#isApplicable(int)}
    */
   @Test
-  @DisplayName("Test isApplicable(int) with 'instructionOffset'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ExceptionInfo.isApplicable(int)"})
-  void testIsApplicableWithInstructionOffset() {
-    // Arrange
-    ExceptionInfo exceptionInfo = new ExceptionInfo(3, 3, 1, 1);
-
-    // Act and Assert
-    assertFalse(exceptionInfo.isApplicable(1));
+  public void testIsApplicableWithInstructionOffset() {
+    // Arrange, Act and Assert
+    assertFalse((new ExceptionInfo(3, 3, 1, 1)).isApplicable(1));
   }
 
   /**
@@ -84,16 +74,11 @@ class ExceptionInfoDiffblueTest {
    * <p>Method under test: {@link ExceptionInfo#isApplicable(int)}
    */
   @Test
-  @DisplayName("Test isApplicable(int) with 'instructionOffset'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ExceptionInfo.isApplicable(int)"})
-  void testIsApplicableWithInstructionOffset2() {
-    // Arrange
-    ExceptionInfo exceptionInfo = new ExceptionInfo(1, 1, 1, 1);
-
-    // Act and Assert
-    assertFalse(exceptionInfo.isApplicable(1));
+  public void testIsApplicableWithInstructionOffset2() {
+    // Arrange, Act and Assert
+    assertFalse((new ExceptionInfo(1, 1, 1, 1)).isApplicable(1));
   }
 
   /**
@@ -106,16 +91,11 @@ class ExceptionInfoDiffblueTest {
    * <p>Method under test: {@link ExceptionInfo#isApplicable(int)}
    */
   @Test
-  @DisplayName("Test isApplicable(int) with 'instructionOffset'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ExceptionInfo.isApplicable(int)"})
-  void testIsApplicableWithInstructionOffset_thenReturnTrue() {
-    // Arrange
-    ExceptionInfo exceptionInfo = new ExceptionInfo(1, 3, 1, 1);
-
-    // Act and Assert
-    assertTrue(exceptionInfo.isApplicable(1));
+  public void testIsApplicableWithInstructionOffset_thenReturnTrue() {
+    // Arrange, Act and Assert
+    assertTrue((new ExceptionInfo(1, 3, 1, 1)).isApplicable(1));
   }
 
   /**
@@ -124,16 +104,11 @@ class ExceptionInfoDiffblueTest {
    * <p>Method under test: {@link ExceptionInfo#isApplicable(int, int)}
    */
   @Test
-  @DisplayName("Test isApplicable(int, int) with 'startOffset', 'endOffset'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ExceptionInfo.isApplicable(int, int)"})
-  void testIsApplicableWithStartOffsetEndOffset() {
-    // Arrange
-    ExceptionInfo exceptionInfo = new ExceptionInfo(3, 3, 1, 1);
-
-    // Act and Assert
-    assertFalse(exceptionInfo.isApplicable(1, 3));
+  public void testIsApplicableWithStartOffsetEndOffset() {
+    // Arrange, Act and Assert
+    assertFalse((new ExceptionInfo(3, 3, 1, 1)).isApplicable(1, 3));
   }
 
   /**
@@ -142,16 +117,11 @@ class ExceptionInfoDiffblueTest {
    * <p>Method under test: {@link ExceptionInfo#isApplicable(int, int)}
    */
   @Test
-  @DisplayName("Test isApplicable(int, int) with 'startOffset', 'endOffset'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ExceptionInfo.isApplicable(int, int)"})
-  void testIsApplicableWithStartOffsetEndOffset2() {
-    // Arrange
-    ExceptionInfo exceptionInfo = new ExceptionInfo(1, 1, 1, 1);
-
-    // Act and Assert
-    assertFalse(exceptionInfo.isApplicable(1, 3));
+  public void testIsApplicableWithStartOffsetEndOffset2() {
+    // Arrange, Act and Assert
+    assertFalse((new ExceptionInfo(1, 1, 1, 1)).isApplicable(1, 3));
   }
 
   /**
@@ -164,15 +134,10 @@ class ExceptionInfoDiffblueTest {
    * <p>Method under test: {@link ExceptionInfo#isApplicable(int, int)}
    */
   @Test
-  @DisplayName("Test isApplicable(int, int) with 'startOffset', 'endOffset'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ExceptionInfo.isApplicable(int, int)"})
-  void testIsApplicableWithStartOffsetEndOffset_thenReturnTrue() {
-    // Arrange
-    ExceptionInfo exceptionInfo = new ExceptionInfo(1, 3, 1, 1);
-
-    // Act and Assert
-    assertTrue(exceptionInfo.isApplicable(1, 3));
+  public void testIsApplicableWithStartOffsetEndOffset_thenReturnTrue() {
+    // Arrange, Act and Assert
+    assertTrue((new ExceptionInfo(1, 3, 1, 1)).isApplicable(1, 3));
   }
 }

@@ -1,15 +1,14 @@
 package proguard.evaluation.exception;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.LibraryClass;
 import proguard.evaluation.value.BasicValueFactory;
 import proguard.evaluation.value.DoubleValue;
@@ -17,7 +16,7 @@ import proguard.evaluation.value.TypedReferenceValue;
 import proguard.evaluation.value.UnknownDoubleValue;
 import proguard.evaluation.value.Value;
 
-class ArrayStoreTypeExceptionDiffblueTest {
+public class ArrayStoreTypeExceptionDiffblueTest {
   /**
    * Test {@link ArrayStoreTypeException#ArrayStoreTypeException(TypedReferenceValue, Value)}.
    *
@@ -25,13 +24,12 @@ class ArrayStoreTypeExceptionDiffblueTest {
    * ArrayStoreTypeException#ArrayStoreTypeException(TypedReferenceValue, Value)}
    */
   @Test
-  @DisplayName("Test new ArrayStoreTypeException(TypedReferenceValue, Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ArrayStoreTypeException.<init>(TypedReferenceValue, Value)"})
-  void testNewArrayStoreTypeException() {
+  public void testNewArrayStoreTypeException() {
     // Arrange
     TypedReferenceValue array = new TypedReferenceValue("Type", new LibraryClass(), true, true);
+
     DoubleValue value = BasicValueFactory.DOUBLE_VALUE;
 
     // Act
@@ -63,16 +61,15 @@ class ArrayStoreTypeExceptionDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "TypedReferenceValue ArrayStoreTypeException.getArray()",
     "Value ArrayStoreTypeException.getValue()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     TypedReferenceValue array = new TypedReferenceValue("Type", new LibraryClass(), true, true);
+
     ArrayStoreTypeException arrayStoreTypeException =
         new ArrayStoreTypeException(array, BasicValueFactory.DOUBLE_VALUE);
 

@@ -1,20 +1,19 @@
 package proguard.evaluation.value.object;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.evaluation.value.object.model.ClassLoaderModel;
 import proguard.evaluation.value.object.model.Model;
 
-class ModeledObjectDiffblueTest {
+public class ModeledObjectDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -30,9 +29,7 @@ class ModeledObjectDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ModeledObject.<init>(Model)",
     "Model ModeledObject.getModeledValue()",
@@ -41,7 +38,7 @@ class ModeledObjectDiffblueTest {
     "boolean ModeledObject.isPrecise()",
     "java.lang.String ModeledObject.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     ClassLoaderModel value = new ClassLoaderModel();
 
@@ -69,13 +66,11 @@ class ModeledObjectDiffblueTest {
    * <p>Method under test: {@link ModeledObject#getType()}
    */
   @Test
-  @DisplayName("Test getType(); then return 'Ljava/lang/ClassLoader;'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String ModeledObject.getType()"})
-  void testGetType_thenReturnLjavaLangClassLoader() {
+  public void testGetType_thenReturnLjavaLangClassLoader() {
     // Arrange, Act and Assert
-    assertEquals("Ljava/lang/ClassLoader;", new ModeledObject(new ClassLoaderModel()).getType());
+    assertEquals("Ljava/lang/ClassLoader;", (new ModeledObject(new ClassLoaderModel())).getType());
   }
 
   /**
@@ -94,18 +89,17 @@ class ModeledObjectDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ModeledObject.equals(Object)", "int ModeledObject.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     ModeledObject modeledObject = new ModeledObject(null);
     ModeledObject modeledObject2 = new ModeledObject(null);
 
     // Act and Assert
     assertEquals(modeledObject, modeledObject2);
-    assertEquals(modeledObject.hashCode(), modeledObject2.hashCode());
+    int expectedHashCodeResult = modeledObject.hashCode();
+    assertEquals(expectedHashCodeResult, modeledObject2.hashCode());
   }
 
   /**
@@ -124,11 +118,9 @@ class ModeledObjectDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ModeledObject.equals(Object)", "int ModeledObject.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     ModeledObject modeledObject = new ModeledObject(new ClassLoaderModel());
 
@@ -149,11 +141,9 @@ class ModeledObjectDiffblueTest {
    * <p>Method under test: {@link ModeledObject#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ModeledObject.equals(Object)", "int ModeledObject.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     ModeledObject modeledObject = new ModeledObject(new ClassLoaderModel());
 
@@ -172,11 +162,9 @@ class ModeledObjectDiffblueTest {
    * <p>Method under test: {@link ModeledObject#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ModeledObject.equals(Object)", "int ModeledObject.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new ModeledObject(new ClassLoaderModel()), null);
   }
@@ -192,11 +180,9 @@ class ModeledObjectDiffblueTest {
    * <p>Method under test: {@link ModeledObject#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ModeledObject.equals(Object)", "int ModeledObject.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new ModeledObject(new ClassLoaderModel()), "Different type to ModeledObject");
   }

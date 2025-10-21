@@ -1,20 +1,19 @@
 package proguard.analysis.cpa.bam;
 
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.Set;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.analysis.cpa.defaults.BreadthFirstWaitlist;
 import proguard.analysis.cpa.defaults.DefaultReachedSet;
 import proguard.analysis.cpa.interfaces.ReachedSet;
 import proguard.analysis.cpa.interfaces.Waitlist;
 
-class BlockAbstractionDiffblueTest {
+public class BlockAbstractionDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -27,15 +26,13 @@ class BlockAbstractionDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void BlockAbstraction.<init>(ReachedSet, Waitlist)",
     "ReachedSet BlockAbstraction.getReachedSet()",
     "Waitlist BlockAbstraction.getWaitlist()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     DefaultReachedSet reachedSet = new DefaultReachedSet();
     BreadthFirstWaitlist waitlist = new BreadthFirstWaitlist();

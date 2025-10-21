@@ -1,14 +1,13 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.LibraryClass;
 import proguard.evaluation.PartialEvaluator;
 import proguard.evaluation.ParticularReferenceValueFactory;
@@ -18,7 +17,7 @@ import proguard.evaluation.value.IdentifiedArrayReferenceValue;
 import proguard.evaluation.value.IdentifiedReferenceValue;
 import proguard.evaluation.value.ReferenceValue;
 
-class PartialEvaluatorUtilsDiffblueTest {
+public class PartialEvaluatorUtilsDiffblueTest {
   /**
    * Test {@link PartialEvaluatorUtils#getStackValue(Stack, int)}.
    *
@@ -30,13 +29,11 @@ class PartialEvaluatorUtilsDiffblueTest {
    * <p>Method under test: {@link PartialEvaluatorUtils#getStackValue(Stack, int)}
    */
   @Test
-  @DisplayName("Test getStackValue(Stack, int); when minus one; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "proguard.evaluation.value.Value PartialEvaluatorUtils.getStackValue(Stack, int)"
   })
-  void testGetStackValue_whenMinusOne_thenReturnNull() {
+  public void testGetStackValue_whenMinusOne_thenReturnNull() {
     // Arrange, Act and Assert
     assertNull(PartialEvaluatorUtils.getStackValue(new Stack(3), -1));
   }
@@ -52,13 +49,11 @@ class PartialEvaluatorUtilsDiffblueTest {
    * <p>Method under test: {@link PartialEvaluatorUtils#getStackValue(Stack, int)}
    */
   @Test
-  @DisplayName("Test getStackValue(Stack, int); when 'null'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "proguard.evaluation.value.Value PartialEvaluatorUtils.getStackValue(Stack, int)"
   })
-  void testGetStackValue_whenNull_thenReturnNull() {
+  public void testGetStackValue_whenNull_thenReturnNull() {
     // Arrange, Act and Assert
     assertNull(PartialEvaluatorUtils.getStackValue(null, 1));
   }
@@ -74,13 +69,11 @@ class PartialEvaluatorUtilsDiffblueTest {
    * <p>Method under test: {@link PartialEvaluatorUtils#getStackValue(Stack, int)}
    */
   @Test
-  @DisplayName("Test getStackValue(Stack, int); when one; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "proguard.evaluation.value.Value PartialEvaluatorUtils.getStackValue(Stack, int)"
   })
-  void testGetStackValue_whenOne_thenReturnNull() {
+  public void testGetStackValue_whenOne_thenReturnNull() {
     // Arrange, Act and Assert
     assertNull(PartialEvaluatorUtils.getStackValue(new Stack(3), 1));
   }
@@ -96,14 +89,11 @@ class PartialEvaluatorUtilsDiffblueTest {
    * <p>Method under test: {@link PartialEvaluatorUtils#getStackBefore(PartialEvaluator, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test getStackBefore(PartialEvaluator, int, int); when PartialEvaluator(); then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "proguard.evaluation.value.Value PartialEvaluatorUtils.getStackBefore(PartialEvaluator, int, int)"
   })
-  void testGetStackBefore_whenPartialEvaluator_thenReturnNull() {
+  public void testGetStackBefore_whenPartialEvaluator_thenReturnNull() {
     // Arrange, Act and Assert
     assertNull(PartialEvaluatorUtils.getStackBefore(new PartialEvaluator(), 2, 1));
   }
@@ -119,21 +109,20 @@ class PartialEvaluatorUtilsDiffblueTest {
    * PartialEvaluatorUtils#getIdFromSpecificReferenceValue(ReferenceValue)}
    */
   @Test
-  @DisplayName("Test getIdFromSpecificReferenceValue(ReferenceValue); then return 'Id'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "java.lang.Object PartialEvaluatorUtils.getIdFromSpecificReferenceValue(ReferenceValue)"
   })
-  void testGetIdFromSpecificReferenceValue_thenReturnId() {
+  public void testGetIdFromSpecificReferenceValue_thenReturnId() {
     // Arrange
     LibraryClass referencedClass = new LibraryClass();
-    IdentifiedReferenceValue value =
-        new IdentifiedReferenceValue(
-            "Type", referencedClass, true, true, new ParticularReferenceValueFactory(), "Id");
 
     // Act and Assert
-    assertEquals("Id", PartialEvaluatorUtils.getIdFromSpecificReferenceValue(value));
+    assertEquals(
+        "Id",
+        PartialEvaluatorUtils.getIdFromSpecificReferenceValue(
+            new IdentifiedReferenceValue(
+                "Type", referencedClass, true, true, new ParticularReferenceValueFactory(), "Id")));
   }
 
   /**
@@ -147,27 +136,27 @@ class PartialEvaluatorUtilsDiffblueTest {
    * PartialEvaluatorUtils#getIdFromSpecificReferenceValue(ReferenceValue)}
    */
   @Test
-  @DisplayName("Test getIdFromSpecificReferenceValue(ReferenceValue); then return intValue is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "java.lang.Object PartialEvaluatorUtils.getIdFromSpecificReferenceValue(ReferenceValue)"
   })
-  void testGetIdFromSpecificReferenceValue_thenReturnIntValueIsOne() {
+  public void testGetIdFromSpecificReferenceValue_thenReturnIntValueIsOne() {
     // Arrange
     LibraryClass referencedClass = new LibraryClass();
-    IdentifiedArrayReferenceValue value =
-        new IdentifiedArrayReferenceValue(
-            "Type",
-            referencedClass,
-            true,
-            BasicValueFactory.INTEGER_VALUE,
-            new ParticularReferenceValueFactory(),
-            1);
 
     // Act and Assert
     assertEquals(
-        1, ((Integer) PartialEvaluatorUtils.getIdFromSpecificReferenceValue(value)).intValue());
+        1,
+        ((Integer)
+                PartialEvaluatorUtils.getIdFromSpecificReferenceValue(
+                    new IdentifiedArrayReferenceValue(
+                        "Type",
+                        referencedClass,
+                        true,
+                        BasicValueFactory.INTEGER_VALUE,
+                        new ParticularReferenceValueFactory(),
+                        1)))
+            .intValue());
   }
 
   /**
@@ -181,14 +170,11 @@ class PartialEvaluatorUtilsDiffblueTest {
    * PartialEvaluatorUtils#getIdFromSpecificReferenceValue(ReferenceValue)}
    */
   @Test
-  @DisplayName(
-      "Test getIdFromSpecificReferenceValue(ReferenceValue); then throw IllegalStateException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "java.lang.Object PartialEvaluatorUtils.getIdFromSpecificReferenceValue(ReferenceValue)"
   })
-  void testGetIdFromSpecificReferenceValue_thenThrowIllegalStateException() {
+  public void testGetIdFromSpecificReferenceValue_thenThrowIllegalStateException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalStateException.class,

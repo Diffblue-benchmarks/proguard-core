@@ -1,17 +1,16 @@
 package proguard.util.kotlin.asserter.constraint;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.kotlin.KotlinFileFacadeKindMetadata;
 
-class FileFacadeIntegrityDiffblueTest {
+public class FileFacadeIntegrityDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -24,20 +23,17 @@ class FileFacadeIntegrityDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void FileFacadeIntegrity.<init>()",
     "void FileFacadeIntegrity.visitKotlinFileFacadeMetadata(Clazz, KotlinFileFacadeKindMetadata)"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     FileFacadeIntegrity actualFileFacadeIntegrity = new FileFacadeIntegrity();
     LibraryClass clazz = new LibraryClass();
-    KotlinFileFacadeKindMetadata kotlinFileFacadeKindMetadata =
-        new KotlinFileFacadeKindMetadata(new int[] {1, 2, 1, 2}, 1, "Xs", "Pn");
-    actualFileFacadeIntegrity.visitKotlinFileFacadeMetadata(clazz, kotlinFileFacadeKindMetadata);
+    actualFileFacadeIntegrity.visitKotlinFileFacadeMetadata(
+        clazz, new KotlinFileFacadeKindMetadata(new int[] {1, 2, 1, 2}, 1, "Xs", "Pn"));
 
     // Assert
     assertNull(actualFileFacadeIntegrity.libraryClassPool);

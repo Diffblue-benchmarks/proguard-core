@@ -1,17 +1,16 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ConstantMatcherDiffblueTest {
+public class ConstantMatcherDiffblueTest {
   /**
    * Test {@link ConstantMatcher#prefix()}.
    *
@@ -23,14 +22,11 @@ class ConstantMatcherDiffblueTest {
    * <p>Method under test: {@link ConstantMatcher#prefix()}
    */
   @Test
-  @DisplayName(
-      "Test prefix(); given ConstantMatcher(boolean) with matches is 'false'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ConstantMatcher.prefix()"})
-  void testPrefix_givenConstantMatcherWithMatchesIsFalse_thenReturnNull() {
+  public void testPrefix_givenConstantMatcherWithMatchesIsFalse_thenReturnNull() {
     // Arrange, Act and Assert
-    assertNull(new ConstantMatcher(false).prefix());
+    assertNull((new ConstantMatcher(false)).prefix());
   }
 
   /**
@@ -44,14 +40,11 @@ class ConstantMatcherDiffblueTest {
    * <p>Method under test: {@link ConstantMatcher#prefix()}
    */
   @Test
-  @DisplayName(
-      "Test prefix(); given ConstantMatcher(boolean) with matches is 'true'; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ConstantMatcher.prefix()"})
-  void testPrefix_givenConstantMatcherWithMatchesIsTrue_thenReturnEmptyString() {
+  public void testPrefix_givenConstantMatcherWithMatchesIsTrue_thenReturnEmptyString() {
     // Arrange, Act and Assert
-    assertEquals("", new ConstantMatcher(true).prefix());
+    assertEquals("", (new ConstantMatcher(true)).prefix());
   }
 
   /**
@@ -65,14 +58,11 @@ class ConstantMatcherDiffblueTest {
    * <p>Method under test: {@link ConstantMatcher#matches(String, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test matches(String, int, int) with 'string', 'beginOffset', 'endOffset'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ConstantMatcher.matches(String, int, int)"})
-  void testMatchesWithStringBeginOffsetEndOffset_thenReturnFalse() {
+  public void testMatchesWithStringBeginOffsetEndOffset_thenReturnFalse() {
     // Arrange, Act and Assert
-    assertFalse(new ConstantMatcher(false).matches("String", 1, 3));
+    assertFalse((new ConstantMatcher(false)).matches("String", 1, 3));
   }
 
   /**
@@ -86,13 +76,10 @@ class ConstantMatcherDiffblueTest {
    * <p>Method under test: {@link ConstantMatcher#matches(String, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test matches(String, int, int) with 'string', 'beginOffset', 'endOffset'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ConstantMatcher.matches(String, int, int)"})
-  void testMatchesWithStringBeginOffsetEndOffset_thenReturnTrue() {
+  public void testMatchesWithStringBeginOffsetEndOffset_thenReturnTrue() {
     // Arrange, Act and Assert
-    assertTrue(new ConstantMatcher(true).matches("String", 1, 3));
+    assertTrue((new ConstantMatcher(true)).matches("String", 1, 3));
   }
 }

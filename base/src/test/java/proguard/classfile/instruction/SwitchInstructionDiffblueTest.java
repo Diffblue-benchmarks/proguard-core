@@ -1,16 +1,15 @@
 package proguard.classfile.instruction;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertSame;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class SwitchInstructionDiffblueTest {
+public class SwitchInstructionDiffblueTest {
   /**
    * Test {@link SwitchInstruction#copy(SwitchInstruction)}.
    *
@@ -22,21 +21,16 @@ class SwitchInstructionDiffblueTest {
    * <p>Method under test: {@link SwitchInstruction#copy(SwitchInstruction)}
    */
   @Test
-  @DisplayName(
-      "Test copy(SwitchInstruction); when LookUpSwitchInstruction(); then return LookUpSwitchInstruction()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"SwitchInstruction SwitchInstruction.copy(SwitchInstruction)"})
-  void testCopy_whenLookUpSwitchInstruction_thenReturnLookUpSwitchInstruction() {
+  public void testCopy_whenLookUpSwitchInstruction_thenReturnLookUpSwitchInstruction() {
     // Arrange
     LookUpSwitchInstruction lookUpSwitchInstruction = new LookUpSwitchInstruction();
 
-    // Act
-    SwitchInstruction actualCopyResult =
-        lookUpSwitchInstruction.copy((SwitchInstruction) new LookUpSwitchInstruction());
-
-    // Assert
-    assertSame(lookUpSwitchInstruction, actualCopyResult);
+    // Act and Assert
+    assertSame(
+        lookUpSwitchInstruction,
+        lookUpSwitchInstruction.copy((SwitchInstruction) new LookUpSwitchInstruction()));
   }
 
   /**
@@ -49,17 +43,14 @@ class SwitchInstructionDiffblueTest {
    * <p>Method under test: {@link SwitchInstruction#toString(int)}
    */
   @Test
-  @DisplayName(
-      "Test toString(int) with 'offset'; then return '[2] lstore_2 (4 offsets, default=255) (target=257)'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String SwitchInstruction.toString(int)"})
-  void testToStringWithOffset_thenReturn2Lstore24OffsetsDefault255Target257() {
+  public void testToStringWithOffset_thenReturn2Lstore24OffsetsDefault255Target257() {
     // Arrange, Act and Assert
     assertEquals(
         "[2] lstore_2 (4 offsets, default=255) (target=257)",
-        new LookUpSwitchInstruction(
-                (byte) 'A', 255, new int[] {255, 1, 255, 1}, new int[] {255, 1, 255, 1})
+        (new LookUpSwitchInstruction(
+                (byte) 'A', 255, new int[] {255, 1, 255, 1}, new int[] {255, 1, 255, 1}))
             .toString(2));
   }
 
@@ -73,16 +64,14 @@ class SwitchInstructionDiffblueTest {
    * <p>Method under test: {@link SwitchInstruction#toString()}
    */
   @Test
-  @DisplayName("Test toString(); then return 'lstore_2 (4 offsets, default=255)'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String SwitchInstruction.toString()"})
-  void testToString_thenReturnLstore24OffsetsDefault255() {
+  public void testToString_thenReturnLstore24OffsetsDefault255() {
     // Arrange, Act and Assert
     assertEquals(
         "lstore_2 (4 offsets, default=255)",
-        new LookUpSwitchInstruction(
-                (byte) 'A', 255, new int[] {255, 1, 255, 1}, new int[] {255, 1, 255, 1})
+        (new LookUpSwitchInstruction(
+                (byte) 'A', 255, new int[] {255, 1, 255, 1}, new int[] {255, 1, 255, 1}))
             .toString());
   }
 
@@ -97,21 +86,20 @@ class SwitchInstructionDiffblueTest {
    * <p>Method under test: {@link SwitchInstruction#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SwitchInstruction.equals(Object)",
     "int SwitchInstruction.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     LookUpSwitchInstruction lookUpSwitchInstruction = new LookUpSwitchInstruction();
     LookUpSwitchInstruction lookUpSwitchInstruction2 = new LookUpSwitchInstruction();
 
     // Act and Assert
     assertEquals(lookUpSwitchInstruction, lookUpSwitchInstruction2);
-    assertEquals(lookUpSwitchInstruction.hashCode(), lookUpSwitchInstruction2.hashCode());
+    int expectedHashCodeResult = lookUpSwitchInstruction.hashCode();
+    assertEquals(expectedHashCodeResult, lookUpSwitchInstruction2.hashCode());
   }
 
   /**
@@ -125,14 +113,12 @@ class SwitchInstructionDiffblueTest {
    * <p>Method under test: {@link SwitchInstruction#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SwitchInstruction.equals(Object)",
     "int SwitchInstruction.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     LookUpSwitchInstruction lookUpSwitchInstruction = new LookUpSwitchInstruction();
 
@@ -153,14 +139,12 @@ class SwitchInstructionDiffblueTest {
    * <p>Method under test: {@link SwitchInstruction#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SwitchInstruction.equals(Object)",
     "int SwitchInstruction.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     LookUpSwitchInstruction lookUpSwitchInstruction =
         new LookUpSwitchInstruction((byte) 'A', 1, new int[] {1, 0, 1, 0}, new int[] {1, 0, 1, 0});
@@ -180,14 +164,12 @@ class SwitchInstructionDiffblueTest {
    * <p>Method under test: {@link SwitchInstruction#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SwitchInstruction.equals(Object)",
     "int SwitchInstruction.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
     LookUpSwitchInstruction lookUpSwitchInstruction =
         new LookUpSwitchInstruction(
@@ -208,14 +190,12 @@ class SwitchInstructionDiffblueTest {
    * <p>Method under test: {@link SwitchInstruction#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SwitchInstruction.equals(Object)",
     "int SwitchInstruction.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
     // Arrange
     LookUpSwitchInstruction lookUpSwitchInstruction =
         new LookUpSwitchInstruction(
@@ -236,14 +216,12 @@ class SwitchInstructionDiffblueTest {
    * <p>Method under test: {@link SwitchInstruction#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SwitchInstruction.equals(Object)",
     "int SwitchInstruction.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new LookUpSwitchInstruction(), null);
   }
@@ -259,14 +237,12 @@ class SwitchInstructionDiffblueTest {
    * <p>Method under test: {@link SwitchInstruction#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SwitchInstruction.equals(Object)",
     "int SwitchInstruction.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new LookUpSwitchInstruction(), "Different type to SwitchInstruction");
   }

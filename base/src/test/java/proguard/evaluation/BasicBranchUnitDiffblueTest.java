@@ -1,31 +1,28 @@
 package proguard.evaluation;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.attribute.CodeAttribute;
 import proguard.evaluation.value.InstructionOffsetValue;
 
-class BasicBranchUnitDiffblueTest {
+public class BasicBranchUnitDiffblueTest {
   /**
    * Test {@link BasicBranchUnit#reset()}.
    *
    * <p>Method under test: {@link BasicBranchUnit#reset()}
    */
   @Test
-  @DisplayName("Test reset()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void BasicBranchUnit.reset()"})
-  void testReset() {
+  public void testReset() {
     // Arrange
     BasicBranchUnit basicBranchUnit = new BasicBranchUnit();
 
@@ -49,12 +46,9 @@ class BasicBranchUnitDiffblueTest {
    * <p>Method under test: {@link BasicBranchUnit#branch(Clazz, CodeAttribute, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test branch(Clazz, CodeAttribute, int, int); then not BasicBranchUnit (default constructor) TraceBranchTargets Category2")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void BasicBranchUnit.branch(Clazz, CodeAttribute, int, int)"})
-  void testBranch_thenNotBasicBranchUnitTraceBranchTargetsCategory2() {
+  public void testBranch_thenNotBasicBranchUnitTraceBranchTargetsCategory2() {
     // Arrange
     BasicBranchUnit basicBranchUnit = new BasicBranchUnit();
     LibraryClass clazz = new LibraryClass();
@@ -81,12 +75,9 @@ class BasicBranchUnitDiffblueTest {
    * <p>Method under test: {@link BasicBranchUnit#branch(Clazz, CodeAttribute, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test branch(Clazz, CodeAttribute, int, int); then not TracedBranchUnit (default constructor) TraceBranchTargets Category2")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void BasicBranchUnit.branch(Clazz, CodeAttribute, int, int)"})
-  void testBranch_thenNotTracedBranchUnitTraceBranchTargetsCategory2() {
+  public void testBranch_thenNotTracedBranchUnitTraceBranchTargetsCategory2() {
     // Arrange
     TracedBranchUnit tracedBranchUnit = new TracedBranchUnit();
     LibraryClass clazz = new LibraryClass();
@@ -114,14 +105,11 @@ class BasicBranchUnitDiffblueTest {
    * int, int)}
    */
   @Test
-  @DisplayName(
-      "Test branchConditionally(Clazz, CodeAttribute, int, int, int); then not TracedBranchUnit (default constructor) TraceBranchTargets Category2")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void BasicBranchUnit.branchConditionally(Clazz, CodeAttribute, int, int, int)"
   })
-  void testBranchConditionally_thenNotTracedBranchUnitTraceBranchTargetsCategory2() {
+  public void testBranchConditionally_thenNotTracedBranchUnitTraceBranchTargetsCategory2() {
     // Arrange
     TracedBranchUnit tracedBranchUnit = new TracedBranchUnit();
     LibraryClass clazz = new LibraryClass();
@@ -144,11 +132,9 @@ class BasicBranchUnitDiffblueTest {
    * <p>Method under test: {@link BasicBranchUnit#returnFromMethod()}
    */
   @Test
-  @DisplayName("Test returnFromMethod()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void BasicBranchUnit.returnFromMethod()"})
-  void testReturnFromMethod() {
+  public void testReturnFromMethod() {
     // Arrange
     BasicBranchUnit basicBranchUnit = new BasicBranchUnit();
 
@@ -170,11 +156,9 @@ class BasicBranchUnitDiffblueTest {
    * <p>Method under test: {@link BasicBranchUnit#throwException()}
    */
   @Test
-  @DisplayName("Test throwException()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void BasicBranchUnit.throwException()"})
-  void testThrowException() {
+  public void testThrowException() {
     // Arrange
     BasicBranchUnit basicBranchUnit = new BasicBranchUnit();
 
@@ -202,15 +186,13 @@ class BasicBranchUnitDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void BasicBranchUnit.<init>()",
     "InstructionOffsetValue BasicBranchUnit.getTraceBranchTargets()",
     "boolean BasicBranchUnit.wasCalled()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     BasicBranchUnit actualBasicBranchUnit = new BasicBranchUnit();
     InstructionOffsetValue actualTraceBranchTargets = actualBasicBranchUnit.getTraceBranchTargets();

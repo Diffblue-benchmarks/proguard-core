@@ -1,15 +1,14 @@
 package proguard.evaluation.util.jsonprinter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ExceptionHandlerRecordDiffblueTest {
+public class ExceptionHandlerRecordDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -24,9 +23,7 @@ class ExceptionHandlerRecordDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ExceptionHandlerRecord.<init>(int, int, int, String)",
     "int ExceptionHandlerRecord.getCatchEndOffset()",
@@ -34,7 +31,7 @@ class ExceptionHandlerRecordDiffblueTest {
     "String ExceptionHandlerRecord.getCatchType()",
     "int ExceptionHandlerRecord.getHandlerStartOffset()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     ExceptionHandlerRecord actualExceptionHandlerRecord =
         new ExceptionHandlerRecord(1, 1, 1, "Catch Type");
@@ -55,11 +52,9 @@ class ExceptionHandlerRecordDiffblueTest {
    * <p>Method under test: {@link ExceptionHandlerRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder ExceptionHandlerRecord.toJson(StringBuilder)"})
-  void testToJson() {
+  public void testToJson() {
     // Arrange
     ExceptionHandlerRecord exceptionHandlerRecord =
         new ExceptionHandlerRecord(1, 1, 1, "Catch Type");

@@ -1,35 +1,32 @@
 package proguard.dexfile.ir.stmt;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.expr.ArrayExpr;
 import proguard.dexfile.ir.expr.Value;
 import proguard.dexfile.ir.stmt.Stmt.E1Stmt;
 import proguard.dexfile.ir.stmt.Stmt.E2Stmt;
 import proguard.dexfile.ir.stmt.Stmt.ST;
 
-class StmtDiffblueTest {
+public class StmtDiffblueTest {
   /**
    * Test E1Stmt {@link E1Stmt#getOp()}.
    *
    * <p>Method under test: {@link E1Stmt#getOp()}
    */
   @Test
-  @DisplayName("Test E1Stmt getOp()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value E1Stmt.getOp()"})
-  void testE1StmtGetOp() {
+  public void testE1StmtGetOp() {
     // Arrange, Act and Assert
-    assertNull(new TableSwitchStmt().getOp());
+    assertNull((new TableSwitchStmt()).getOp());
   }
 
   /**
@@ -38,11 +35,9 @@ class StmtDiffblueTest {
    * <p>Method under test: {@link E1Stmt#setOp(Value)}
    */
   @Test
-  @DisplayName("Test E1Stmt setOp(Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void E1Stmt.setOp(Value)"})
-  void testE1StmtSetOp() {
+  public void testE1StmtSetOp() {
     // Arrange
     TableSwitchStmt tableSwitchStmt = new TableSwitchStmt();
     ArrayExpr op = new ArrayExpr();
@@ -60,20 +55,15 @@ class StmtDiffblueTest {
    * <p>Method under test: {@link E2Stmt#getOp1()}
    */
   @Test
-  @DisplayName("Test E2Stmt getOp1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value E2Stmt.getOp1()"})
-  void testE2StmtGetOp1() {
+  public void testE2StmtGetOp1() {
     // Arrange
     ArrayExpr left = new ArrayExpr();
     AssignStmt nAssignResult = Stmts.nAssign(left, new ArrayExpr());
 
-    // Act
-    Value actualOp1 = nAssignResult.getOp1();
-
-    // Assert
-    assertSame(nAssignResult.op1, actualOp1);
+    // Act and Assert
+    assertSame(nAssignResult.op1, nAssignResult.getOp1());
   }
 
   /**
@@ -82,20 +72,15 @@ class StmtDiffblueTest {
    * <p>Method under test: {@link E2Stmt#getOp2()}
    */
   @Test
-  @DisplayName("Test E2Stmt getOp2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value E2Stmt.getOp2()"})
-  void testE2StmtGetOp2() {
+  public void testE2StmtGetOp2() {
     // Arrange
     ArrayExpr left = new ArrayExpr();
     AssignStmt nAssignResult = Stmts.nAssign(left, new ArrayExpr());
 
-    // Act
-    Value actualOp2 = nAssignResult.getOp2();
-
-    // Assert
-    assertSame(nAssignResult.op2, actualOp2);
+    // Act and Assert
+    assertSame(nAssignResult.op2, nAssignResult.getOp2());
   }
 
   /**
@@ -104,11 +89,9 @@ class StmtDiffblueTest {
    * <p>Method under test: {@link Stmt#getNext()}
    */
   @Test
-  @DisplayName("Test getNext()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Stmt Stmt.getNext()"})
-  void testGetNext() {
+  public void testGetNext() {
     // Arrange, Act and Assert
     assertNull(Stmts.nLabel().getNext());
   }
@@ -119,11 +102,9 @@ class StmtDiffblueTest {
    * <p>Method under test: {@link Stmt#getOp()}
    */
   @Test
-  @DisplayName("Test getOp()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value Stmt.getOp()"})
-  void testGetOp() {
+  public void testGetOp() {
     // Arrange, Act and Assert
     assertNull(Stmts.nLabel().getOp());
   }
@@ -134,11 +115,9 @@ class StmtDiffblueTest {
    * <p>Method under test: {@link Stmt#getOp1()}
    */
   @Test
-  @DisplayName("Test getOp1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value Stmt.getOp1()"})
-  void testGetOp1() {
+  public void testGetOp1() {
     // Arrange, Act and Assert
     assertNull(Stmts.nLabel().getOp1());
   }
@@ -149,11 +128,9 @@ class StmtDiffblueTest {
    * <p>Method under test: {@link Stmt#getOp2()}
    */
   @Test
-  @DisplayName("Test getOp2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value Stmt.getOp2()"})
-  void testGetOp2() {
+  public void testGetOp2() {
     // Arrange, Act and Assert
     assertNull(Stmts.nLabel().getOp2());
   }
@@ -164,11 +141,9 @@ class StmtDiffblueTest {
    * <p>Method under test: {@link Stmt#getOps()}
    */
   @Test
-  @DisplayName("Test getOps()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value[] Stmt.getOps()"})
-  void testGetOps() {
+  public void testGetOps() {
     // Arrange, Act and Assert
     assertNull(Stmts.nLabel().getOps());
   }
@@ -179,11 +154,9 @@ class StmtDiffblueTest {
    * <p>Method under test: {@link Stmt#getPre()}
    */
   @Test
-  @DisplayName("Test getPre()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Stmt Stmt.getPre()"})
-  void testGetPre() {
+  public void testGetPre() {
     // Arrange, Act and Assert
     assertNull(Stmts.nLabel().getPre());
   }
@@ -199,11 +172,9 @@ class StmtDiffblueTest {
    * <p>Method under test: {@link ST#canBranch()}
    */
   @Test
-  @DisplayName("Test ST canBranch(); given 'GOTO'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ST.canBranch()"})
-  void testSTCanBranch_givenGoto_thenReturnTrue() {
+  public void testSTCanBranch_givenGoto_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ST.GOTO.canBranch());
   }
@@ -219,11 +190,9 @@ class StmtDiffblueTest {
    * <p>Method under test: {@link ST#canBranch()}
    */
   @Test
-  @DisplayName("Test ST canBranch(); given 'LOCAL_START'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ST.canBranch()"})
-  void testSTCanBranch_givenLocalStart_thenReturnFalse() {
+  public void testSTCanBranch_givenLocalStart_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(ST.LOCAL_START.canBranch());
   }
@@ -239,11 +208,9 @@ class StmtDiffblueTest {
    * <p>Method under test: {@link ST#canContinue()}
    */
   @Test
-  @DisplayName("Test ST canContinue(); given 'LOCAL_START'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ST.canContinue()"})
-  void testSTCanContinue_givenLocalStart_thenReturnTrue() {
+  public void testSTCanContinue_givenLocalStart_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ST.LOCAL_START.canContinue());
   }
@@ -259,11 +226,9 @@ class StmtDiffblueTest {
    * <p>Method under test: {@link ST#canContinue()}
    */
   @Test
-  @DisplayName("Test ST canContinue(); given 'RETURN'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ST.canContinue()"})
-  void testSTCanContinue_givenReturn_thenReturnFalse() {
+  public void testSTCanContinue_givenReturn_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(ST.RETURN.canContinue());
   }
@@ -279,11 +244,9 @@ class StmtDiffblueTest {
    * <p>Method under test: {@link ST#canSwitch()}
    */
   @Test
-  @DisplayName("Test ST canSwitch(); given 'LOCAL_START'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ST.canSwitch()"})
-  void testSTCanSwitch_givenLocalStart_thenReturnFalse() {
+  public void testSTCanSwitch_givenLocalStart_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(ST.LOCAL_START.canSwitch());
   }
@@ -299,11 +262,9 @@ class StmtDiffblueTest {
    * <p>Method under test: {@link ST#canSwitch()}
    */
   @Test
-  @DisplayName("Test ST canSwitch(); given 'LOOKUP_SWITCH'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ST.canSwitch()"})
-  void testSTCanSwitch_givenLookupSwitch_thenReturnTrue() {
+  public void testSTCanSwitch_givenLookupSwitch_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ST.LOOKUP_SWITCH.canSwitch());
   }
@@ -319,11 +280,9 @@ class StmtDiffblueTest {
    * <p>Method under test: {@link ST#canThrow()}
    */
   @Test
-  @DisplayName("Test ST canThrow(); given 'LOCAL_START'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ST.canThrow()"})
-  void testSTCanThrow_givenLocalStart_thenReturnFalse() {
+  public void testSTCanThrow_givenLocalStart_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(ST.LOCAL_START.canThrow());
   }
@@ -339,11 +298,9 @@ class StmtDiffblueTest {
    * <p>Method under test: {@link ST#canThrow()}
    */
   @Test
-  @DisplayName("Test ST canThrow(); given 'LOCK'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ST.canThrow()"})
-  void testSTCanThrow_givenLock_thenReturnTrue() {
+  public void testSTCanThrow_givenLock_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ST.LOCK.canThrow());
   }
@@ -359,11 +316,9 @@ class StmtDiffblueTest {
    * <p>Method under test: {@link ST#mayThrow()}
    */
   @Test
-  @DisplayName("Test ST mayThrow(); given 'ASSIGN'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ST.mayThrow()"})
-  void testSTMayThrow_givenAssign_thenReturnTrue() {
+  public void testSTMayThrow_givenAssign_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ST.ASSIGN.mayThrow());
   }
@@ -379,11 +334,9 @@ class StmtDiffblueTest {
    * <p>Method under test: {@link ST#mayThrow()}
    */
   @Test
-  @DisplayName("Test ST mayThrow(); given 'LOCAL_START'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ST.mayThrow()"})
-  void testSTMayThrow_givenLocalStart_thenReturnFalse() {
+  public void testSTMayThrow_givenLocalStart_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(ST.LOCAL_START.mayThrow());
   }

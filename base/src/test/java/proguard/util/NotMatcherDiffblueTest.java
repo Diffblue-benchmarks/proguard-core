@@ -1,15 +1,14 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class NotMatcherDiffblueTest {
+public class NotMatcherDiffblueTest {
   /**
    * Test {@link NotMatcher#matches(String, int, int)} with {@code string}, {@code beginOffset},
    * {@code endOffset}.
@@ -21,14 +20,11 @@ class NotMatcherDiffblueTest {
    * <p>Method under test: {@link NotMatcher#matches(String, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test matches(String, int, int) with 'string', 'beginOffset', 'endOffset'; given ConstantMatcher(boolean) with matches is 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean NotMatcher.matches(String, int, int)"})
-  void testMatchesWithStringBeginOffsetEndOffset_givenConstantMatcherWithMatchesIsTrue() {
+  public void testMatchesWithStringBeginOffsetEndOffset_givenConstantMatcherWithMatchesIsTrue() {
     // Arrange, Act and Assert
-    assertFalse(new NotMatcher(new ConstantMatcher(true)).matches("String", 1, 3));
+    assertFalse((new NotMatcher(new ConstantMatcher(true))).matches("String", 1, 3));
   }
 
   /**
@@ -43,14 +39,11 @@ class NotMatcherDiffblueTest {
    * <p>Method under test: {@link NotMatcher#matches(String, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test matches(String, int, int) with 'string', 'beginOffset', 'endOffset'; given NotMatcher(StringMatcher) with matcher is NotMatcher(StringMatcher)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean NotMatcher.matches(String, int, int)"})
-  void testMatchesWithStringBeginOffsetEndOffset_givenNotMatcherWithMatcherIsNotMatcher() {
+  public void testMatchesWithStringBeginOffsetEndOffset_givenNotMatcherWithMatcherIsNotMatcher() {
     // Arrange, Act and Assert
-    assertFalse(new NotMatcher(new NotMatcher(new EmptyStringMatcher())).matches("String", 1, 3));
+    assertFalse((new NotMatcher(new NotMatcher(new EmptyStringMatcher()))).matches("String", 1, 3));
   }
 
   /**
@@ -64,13 +57,10 @@ class NotMatcherDiffblueTest {
    * <p>Method under test: {@link NotMatcher#matches(String, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test matches(String, int, int) with 'string', 'beginOffset', 'endOffset'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean NotMatcher.matches(String, int, int)"})
-  void testMatchesWithStringBeginOffsetEndOffset_thenReturnTrue() {
+  public void testMatchesWithStringBeginOffsetEndOffset_thenReturnTrue() {
     // Arrange, Act and Assert
-    assertTrue(new NotMatcher(new EmptyStringMatcher()).matches("String", 1, 3));
+    assertTrue((new NotMatcher(new EmptyStringMatcher())).matches("String", 1, 3));
   }
 }

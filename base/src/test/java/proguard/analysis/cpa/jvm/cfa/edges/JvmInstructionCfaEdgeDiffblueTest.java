@@ -1,17 +1,16 @@
 package proguard.analysis.cpa.jvm.cfa.edges;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.UnsupportedEncodingException;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.analysis.cpa.jvm.cfa.nodes.JvmCfaNode;
 import proguard.analysis.cpa.jvm.cfa.nodes.JvmUnknownCfaNode;
 import proguard.classfile.attribute.CodeAttribute;
@@ -19,7 +18,7 @@ import proguard.classfile.instruction.Instruction;
 import proguard.classfile.instruction.SimpleInstruction;
 import proguard.classfile.instruction.VariableInstruction;
 
-class JvmInstructionCfaEdgeDiffblueTest {
+public class JvmInstructionCfaEdgeDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -31,14 +30,12 @@ class JvmInstructionCfaEdgeDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void JvmInstructionCfaEdge.<init>(CodeAttribute, int)",
     "CodeAttribute JvmInstructionCfaEdge.getMethodCode()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     CodeAttribute methodCode = new CodeAttribute(1);
 
@@ -64,27 +61,24 @@ class JvmInstructionCfaEdgeDiffblueTest {
    * JvmCfaNode, CodeAttribute, int)}
    */
   @Test
-  @DisplayName(
-      "Test new JvmInstructionCfaEdge(JvmCfaNode, JvmCfaNode, CodeAttribute, int); then Source return JvmUnknownCfaNode")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void JvmInstructionCfaEdge.<init>(JvmCfaNode, JvmCfaNode, CodeAttribute, int)"
   })
-  void testNewJvmInstructionCfaEdge_thenSourceReturnJvmUnknownCfaNode() {
+  public void testNewJvmInstructionCfaEdge_thenSourceReturnJvmUnknownCfaNode() {
     // Arrange
+    JvmUnknownCfaNode target = JvmUnknownCfaNode.INSTANCE;
     CodeAttribute methodCode = new CodeAttribute(1);
 
     // Act
     JvmInstructionCfaEdge actualJvmInstructionCfaEdge =
-        new JvmInstructionCfaEdge(
-            JvmUnknownCfaNode.INSTANCE, JvmUnknownCfaNode.INSTANCE, methodCode, 2);
+        new JvmInstructionCfaEdge(JvmUnknownCfaNode.INSTANCE, target, methodCode, 2);
 
     // Assert
     JvmCfaNode source = actualJvmInstructionCfaEdge.getSource();
     assertTrue(source instanceof JvmUnknownCfaNode);
     assertSame(methodCode, actualJvmInstructionCfaEdge.getMethodCode());
-    JvmUnknownCfaNode jvmUnknownCfaNode = JvmUnknownCfaNode.INSTANCE;
+    JvmUnknownCfaNode jvmUnknownCfaNode = target.INSTANCE;
     assertSame(jvmUnknownCfaNode, source);
     assertSame(jvmUnknownCfaNode, actualJvmInstructionCfaEdge.getTarget());
   }
@@ -99,16 +93,13 @@ class JvmInstructionCfaEdgeDiffblueTest {
    * <p>Method under test: {@link JvmInstructionCfaEdge#getInstruction()}
    */
   @Test
-  @DisplayName("Test getInstruction(); then return SimpleInstruction")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction JvmInstructionCfaEdge.getInstruction()"})
-  void testGetInstruction_thenReturnSimpleInstruction() throws UnsupportedEncodingException {
-    // Arrange
-    CodeAttribute methodCode = new CodeAttribute(1, 3, 3, 3, "AXAXAXAX".getBytes("UTF-8"));
-
-    // Act
-    Instruction actualInstruction = new JvmInstructionCfaEdge(methodCode, 1).getInstruction();
+  public void testGetInstruction_thenReturnSimpleInstruction() throws UnsupportedEncodingException {
+    // Arrange and Act
+    Instruction actualInstruction =
+        (new JvmInstructionCfaEdge(new CodeAttribute(1, 3, 3, 3, "AXXXAXAX".getBytes("UTF-8")), 2))
+            .getInstruction();
 
     // Assert
     assertTrue(actualInstruction instanceof SimpleInstruction);
@@ -128,16 +119,14 @@ class JvmInstructionCfaEdgeDiffblueTest {
    * <p>Method under test: {@link JvmInstructionCfaEdge#getInstruction()}
    */
   @Test
-  @DisplayName("Test getInstruction(); then return VariableInstruction")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction JvmInstructionCfaEdge.getInstruction()"})
-  void testGetInstruction_thenReturnVariableInstruction() throws UnsupportedEncodingException {
-    // Arrange
-    CodeAttribute methodCode = new CodeAttribute(1, 3, 3, 3, "AXAXAXAX".getBytes("UTF-8"));
-
-    // Act
-    Instruction actualInstruction = new JvmInstructionCfaEdge(methodCode, 2).getInstruction();
+  public void testGetInstruction_thenReturnVariableInstruction()
+      throws UnsupportedEncodingException {
+    // Arrange and Act
+    Instruction actualInstruction =
+        (new JvmInstructionCfaEdge(new CodeAttribute(1, 3, 3, 3, "AXAXAXAX".getBytes("UTF-8")), 2))
+            .getInstruction();
 
     // Assert
     assertTrue(actualInstruction instanceof VariableInstruction);

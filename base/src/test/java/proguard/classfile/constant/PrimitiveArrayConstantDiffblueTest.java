@@ -1,30 +1,27 @@
 package proguard.classfile.constant;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class PrimitiveArrayConstantDiffblueTest {
+public class PrimitiveArrayConstantDiffblueTest {
   /**
    * Test {@link PrimitiveArrayConstant#getPrimitiveType()}.
    *
    * <p>Method under test: {@link PrimitiveArrayConstant#getPrimitiveType()}
    */
   @Test
-  @DisplayName("Test getPrimitiveType()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char PrimitiveArrayConstant.getPrimitiveType()"})
-  void testGetPrimitiveType() {
+  public void testGetPrimitiveType() {
     // Arrange, Act and Assert
-    assertEquals('\u0000', new PrimitiveArrayConstant().getPrimitiveType());
+    assertEquals('\u0000', (new PrimitiveArrayConstant()).getPrimitiveType());
   }
 
   /**
@@ -33,13 +30,11 @@ class PrimitiveArrayConstantDiffblueTest {
    * <p>Method under test: {@link PrimitiveArrayConstant#getLength()}
    */
   @Test
-  @DisplayName("Test getLength()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int PrimitiveArrayConstant.getLength()"})
-  void testGetLength() {
+  public void testGetLength() {
     // Arrange, Act and Assert
-    assertEquals(0, new PrimitiveArrayConstant().getLength());
+    assertEquals(0, (new PrimitiveArrayConstant()).getLength());
   }
 
   /**
@@ -53,12 +48,9 @@ class PrimitiveArrayConstantDiffblueTest {
    * <p>Method under test: {@link PrimitiveArrayConstant#contentEquals(PrimitiveArrayConstant)}
    */
   @Test
-  @DisplayName(
-      "Test contentEquals(PrimitiveArrayConstant); given PrimitiveArrayConstant(Object) with 'Values'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean PrimitiveArrayConstant.contentEquals(PrimitiveArrayConstant)"})
-  void testContentEquals_givenPrimitiveArrayConstantWithValues_thenReturnFalse() {
+  public void testContentEquals_givenPrimitiveArrayConstantWithValues_thenReturnFalse() {
     // Arrange
     PrimitiveArrayConstant primitiveArrayConstant = new PrimitiveArrayConstant("Values");
 
@@ -77,12 +69,9 @@ class PrimitiveArrayConstantDiffblueTest {
    * <p>Method under test: {@link PrimitiveArrayConstant#contentEquals(PrimitiveArrayConstant)}
    */
   @Test
-  @DisplayName(
-      "Test contentEquals(PrimitiveArrayConstant); given PrimitiveArrayConstant(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean PrimitiveArrayConstant.contentEquals(PrimitiveArrayConstant)"})
-  void testContentEquals_givenPrimitiveArrayConstant_thenReturnTrue() {
+  public void testContentEquals_givenPrimitiveArrayConstant_thenReturnTrue() {
     // Arrange
     PrimitiveArrayConstant primitiveArrayConstant = new PrimitiveArrayConstant();
 
@@ -102,14 +91,11 @@ class PrimitiveArrayConstantDiffblueTest {
    * <p>Method under test: {@link PrimitiveArrayConstant#contentEquals(PrimitiveArrayConstant)}
    */
   @Test
-  @DisplayName(
-      "Test contentEquals(PrimitiveArrayConstant); given PrimitiveArrayConstant(); when 'null'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean PrimitiveArrayConstant.contentEquals(PrimitiveArrayConstant)"})
-  void testContentEquals_givenPrimitiveArrayConstant_whenNull_thenReturnFalse() {
+  public void testContentEquals_givenPrimitiveArrayConstant_whenNull_thenReturnFalse() {
     // Arrange, Act and Assert
-    assertFalse(new PrimitiveArrayConstant().contentEquals(null));
+    assertFalse((new PrimitiveArrayConstant()).contentEquals(null));
   }
 
   /**
@@ -118,13 +104,11 @@ class PrimitiveArrayConstantDiffblueTest {
    * <p>Method under test: {@link PrimitiveArrayConstant#getTag()}
    */
   @Test
-  @DisplayName("Test getTag()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int PrimitiveArrayConstant.getTag()"})
-  void testGetTag() {
+  public void testGetTag() {
     // Arrange, Act and Assert
-    assertEquals(Constant.PRIMITIVE_ARRAY, new PrimitiveArrayConstant().getTag());
+    assertEquals(Constant.PRIMITIVE_ARRAY, (new PrimitiveArrayConstant()).getTag());
   }
 
   /**
@@ -138,14 +122,12 @@ class PrimitiveArrayConstantDiffblueTest {
    * <p>Method under test: {@link PrimitiveArrayConstant#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean PrimitiveArrayConstant.equals(Object)",
     "int PrimitiveArrayConstant.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     PrimitiveArrayConstant primitiveArrayConstant = new PrimitiveArrayConstant("Values");
 
@@ -164,14 +146,12 @@ class PrimitiveArrayConstantDiffblueTest {
    * <p>Method under test: {@link PrimitiveArrayConstant#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean PrimitiveArrayConstant.equals(Object)",
     "int PrimitiveArrayConstant.hashCode()"
   })
-  void testEquals_whenOtherIsEqual_thenReturnEqual() {
+  public void testEquals_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     PrimitiveArrayConstant primitiveArrayConstant = new PrimitiveArrayConstant();
 
@@ -190,14 +170,12 @@ class PrimitiveArrayConstantDiffblueTest {
    * <p>Method under test: {@link PrimitiveArrayConstant#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean PrimitiveArrayConstant.equals(Object)",
     "int PrimitiveArrayConstant.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new PrimitiveArrayConstant(), null);
   }
@@ -213,14 +191,12 @@ class PrimitiveArrayConstantDiffblueTest {
    * <p>Method under test: {@link PrimitiveArrayConstant#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean PrimitiveArrayConstant.equals(Object)",
     "int PrimitiveArrayConstant.hashCode()"
   })
-  void testEquals_whenOtherIsSame_thenReturnEqual() {
+  public void testEquals_whenOtherIsSame_thenReturnEqual() {
     // Arrange, Act and Assert
     assertEquals(new PrimitiveArrayConstant(), new PrimitiveArrayConstant());
   }
@@ -236,14 +212,12 @@ class PrimitiveArrayConstantDiffblueTest {
    * <p>Method under test: {@link PrimitiveArrayConstant#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean PrimitiveArrayConstant.equals(Object)",
     "int PrimitiveArrayConstant.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new PrimitiveArrayConstant(), "Different type to PrimitiveArrayConstant");
   }

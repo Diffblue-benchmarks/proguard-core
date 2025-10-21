@@ -1,18 +1,17 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class SpecificLongValueDiffblueTest {
+public class SpecificLongValueDiffblueTest {
   /**
    * Test {@link SpecificLongValue#negate()}.
    *
@@ -23,14 +22,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#negate()}
    */
   @Test
-  @DisplayName("Test negate(); then return NegatedLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.negate()"})
-  void testNegate_thenReturnNegatedLongValue() {
+  public void testNegate_thenReturnNegatedLongValue() {
     // Arrange and Act
     LongValue actualNegateResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).negate();
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).negate();
 
     // Assert
     assertTrue(actualNegateResult instanceof NegatedLongValue);
@@ -49,13 +46,11 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#negate()}
    */
   @Test
-  @DisplayName("Test negate(); then return ParticularLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.negate()"})
-  void testNegate_thenReturnParticularLongValue() {
+  public void testNegate_thenReturnParticularLongValue() {
     // Arrange and Act
-    LongValue actualNegateResult = new ParticularLongValue(42L).negate();
+    LongValue actualNegateResult = (new ParticularLongValue(42L)).negate();
 
     // Assert
     assertTrue(actualNegateResult instanceof ParticularLongValue);
@@ -75,14 +70,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#convertToInteger()}
    */
   @Test
-  @DisplayName("Test convertToInteger(); then return ConvertedIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificLongValue.convertToInteger()"})
-  void testConvertToInteger_thenReturnConvertedIntegerValue() {
+  public void testConvertToInteger_thenReturnConvertedIntegerValue() {
     // Arrange and Act
     IntegerValue actualConvertToIntegerResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).convertToInteger();
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).convertToInteger();
 
     // Assert
     assertTrue(actualConvertToIntegerResult instanceof ConvertedIntegerValue);
@@ -101,13 +94,11 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#convertToInteger()}
    */
   @Test
-  @DisplayName("Test convertToInteger(); then return ParticularIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificLongValue.convertToInteger()"})
-  void testConvertToInteger_thenReturnParticularIntegerValue() {
+  public void testConvertToInteger_thenReturnParticularIntegerValue() {
     // Arrange and Act
-    IntegerValue actualConvertToIntegerResult = new ParticularLongValue(42L).convertToInteger();
+    IntegerValue actualConvertToIntegerResult = (new ParticularLongValue(42L)).convertToInteger();
 
     // Assert
     assertTrue(actualConvertToIntegerResult instanceof ParticularIntegerValue);
@@ -127,14 +118,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#convertToFloat()}
    */
   @Test
-  @DisplayName("Test convertToFloat(); then return ConvertedFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue SpecificLongValue.convertToFloat()"})
-  void testConvertToFloat_thenReturnConvertedFloatValue() {
+  public void testConvertToFloat_thenReturnConvertedFloatValue() {
     // Arrange and Act
     FloatValue actualConvertToFloatResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).convertToFloat();
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).convertToFloat();
 
     // Assert
     assertTrue(actualConvertToFloatResult instanceof ConvertedFloatValue);
@@ -153,17 +142,15 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#convertToFloat()}
    */
   @Test
-  @DisplayName("Test convertToFloat(); then return ParticularFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue SpecificLongValue.convertToFloat()"})
-  void testConvertToFloat_thenReturnParticularFloatValue() {
+  public void testConvertToFloat_thenReturnParticularFloatValue() {
     // Arrange and Act
-    FloatValue actualConvertToFloatResult = new ParticularLongValue(42L).convertToFloat();
+    FloatValue actualConvertToFloatResult = (new ParticularLongValue(42L)).convertToFloat();
 
     // Assert
     assertTrue(actualConvertToFloatResult instanceof ParticularFloatValue);
-    assertEquals(42.0f, actualConvertToFloatResult.value());
+    assertEquals(42.0f, actualConvertToFloatResult.value(), 0.0f);
     assertFalse(actualConvertToFloatResult.isCategory2());
     assertTrue(actualConvertToFloatResult.isParticular());
     assertTrue(actualConvertToFloatResult.isSpecific());
@@ -179,14 +166,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#convertToDouble()}
    */
   @Test
-  @DisplayName("Test convertToDouble(); then return ConvertedDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificLongValue.convertToDouble()"})
-  void testConvertToDouble_thenReturnConvertedDoubleValue() {
+  public void testConvertToDouble_thenReturnConvertedDoubleValue() {
     // Arrange and Act
     DoubleValue actualConvertToDoubleResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).convertToDouble();
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).convertToDouble();
 
     // Assert
     assertTrue(actualConvertToDoubleResult instanceof ConvertedDoubleValue);
@@ -205,94 +190,18 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#convertToDouble()}
    */
   @Test
-  @DisplayName("Test convertToDouble(); then return ParticularDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificLongValue.convertToDouble()"})
-  void testConvertToDouble_thenReturnParticularDoubleValue() {
+  public void testConvertToDouble_thenReturnParticularDoubleValue() {
     // Arrange and Act
-    DoubleValue actualConvertToDoubleResult = new ParticularLongValue(42L).convertToDouble();
+    DoubleValue actualConvertToDoubleResult = (new ParticularLongValue(42L)).convertToDouble();
 
     // Assert
     assertTrue(actualConvertToDoubleResult instanceof ParticularDoubleValue);
-    assertEquals(42.0d, actualConvertToDoubleResult.value());
+    assertEquals(42.0d, actualConvertToDoubleResult.value(), 0.0);
     assertTrue(actualConvertToDoubleResult.isCategory2());
     assertTrue(actualConvertToDoubleResult.isParticular());
     assertTrue(actualConvertToDoubleResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificLongValue#generalize(LongValue)} with {@code LongValue}.
-   *
-   * <ul>
-   *   <li>Given {@link ConvertedLongValue#ConvertedLongValue(Value)} with value is {@link
-   *       BasicRangeValueFactory#INTEGER_VALUE_CHAR}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificLongValue#generalize(LongValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test generalize(LongValue) with 'LongValue'; given ConvertedLongValue(Value) with value is INTEGER_VALUE_CHAR")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"LongValue SpecificLongValue.generalize(LongValue)"})
-  void testGeneralizeWithLongValue_givenConvertedLongValueWithValueIsInteger_value_char() {
-    // Arrange
-    ConvertedLongValue convertedLongValue =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_CHAR);
-
-    // Act
-    LongValue actualGeneralizeResult =
-        convertedLongValue.generalize(
-            (LongValue)
-                new ConvertedLongValue(
-                    new CompositeLongValue(
-                        BasicValueFactory.LONG_VALUE,
-                        (byte) 'A',
-                        BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-
-    // Assert
-    assertTrue(actualGeneralizeResult instanceof UnknownLongValue);
-    assertFalse(actualGeneralizeResult.isParticular());
-    assertFalse(actualGeneralizeResult.isSpecific());
-    assertTrue(actualGeneralizeResult.isCategory2());
-  }
-
-  /**
-   * Test {@link SpecificLongValue#generalize(LongValue)} with {@code LongValue}.
-   *
-   * <ul>
-   *   <li>Given {@link ConvertedLongValue#ConvertedLongValue(Value)} with value is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificLongValue#generalize(LongValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test generalize(LongValue) with 'LongValue'; given ConvertedLongValue(Value) with value is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"LongValue SpecificLongValue.generalize(LongValue)"})
-  void testGeneralizeWithLongValue_givenConvertedLongValueWithValueIsNull() {
-    // Arrange
-    ConvertedLongValue convertedLongValue = new ConvertedLongValue(null);
-
-    // Act
-    LongValue actualGeneralizeResult =
-        convertedLongValue.generalize(
-            (LongValue)
-                new ConvertedLongValue(
-                    new CompositeLongValue(
-                        BasicValueFactory.LONG_VALUE,
-                        (byte) 'A',
-                        BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-
-    // Assert
-    assertTrue(actualGeneralizeResult instanceof UnknownLongValue);
-    assertFalse(actualGeneralizeResult.isParticular());
-    assertFalse(actualGeneralizeResult.isSpecific());
-    assertTrue(actualGeneralizeResult.isCategory2());
   }
 
   /**
@@ -305,20 +214,14 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#generalize(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(LongValue) with 'LongValue'; given ParticularLongValue(long) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.generalize(LongValue)"})
-  void testGeneralizeWithLongValue_givenParticularLongValueWithValueIsFortyTwo() {
+  public void testGeneralizeWithLongValue_givenParticularLongValueWithValueIsFortyTwo() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualGeneralizeResult = new ParticularLongValue(42L).generalize(other);
-
-    // Assert
-    assertSame(other, actualGeneralizeResult);
+    // Act and Assert
+    assertSame(other, (new ParticularLongValue(42L)).generalize(other));
   }
 
   /**
@@ -331,11 +234,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#generalize(LongValue)}
    */
   @Test
-  @DisplayName("Test generalize(LongValue) with 'LongValue'; then return ConvertedLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.generalize(LongValue)"})
-  void testGeneralizeWithLongValue_thenReturnConvertedLongValue() {
+  public void testGeneralizeWithLongValue_thenReturnConvertedLongValue() {
     // Arrange
     ConvertedLongValue convertedLongValue =
         new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -361,15 +262,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#generalize(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(LongValue) with 'LongValue'; when LONG_VALUE_0; then return UnknownLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.generalize(LongValue)"})
-  void testGeneralizeWithLongValue_whenLong_value_0_thenReturnUnknownLongValue() {
+  public void testGeneralizeWithLongValue_whenLong_value_0_thenReturnUnknownLongValue() {
     // Arrange and Act
     LongValue actualGeneralizeResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .generalize(ParticularValueFactory.LONG_VALUE_0);
 
     // Assert
@@ -390,21 +288,16 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#generalize(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(LongValue) with 'LongValue'; when LONG_VALUE; then return LONG_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.generalize(LongValue)"})
-  void testGeneralizeWithLongValue_whenLong_value_thenReturnLong_value() {
+  public void testGeneralizeWithLongValue_whenLong_value_thenReturnLong_value() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualGeneralizeResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).generalize(other);
-
-    // Assert
-    assertSame(other, actualGeneralizeResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).generalize(other));
   }
 
   /**
@@ -413,20 +306,16 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#generalize(SpecificLongValue)}
    */
   @Test
-  @DisplayName("Test generalize(SpecificLongValue) with 'SpecificLongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.generalize(SpecificLongValue)"})
-  void testGeneralizeWithSpecificLongValue() {
+  public void testGeneralizeWithSpecificLongValue() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
-    // Act
-    LongValue actualGeneralizeResult =
-        particularLongValue.generalize((SpecificLongValue) new ParticularLongValue(42L));
-
-    // Assert
-    assertSame(particularLongValue, actualGeneralizeResult);
+    // Act and Assert
+    assertSame(
+        particularLongValue,
+        particularLongValue.generalize((SpecificLongValue) new ParticularLongValue(42L)));
   }
 
   /**
@@ -435,11 +324,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#generalize(SpecificLongValue)}
    */
   @Test
-  @DisplayName("Test generalize(SpecificLongValue) with 'SpecificLongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.generalize(SpecificLongValue)"})
-  void testGeneralizeWithSpecificLongValue2() {
+  public void testGeneralizeWithSpecificLongValue2() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -459,6 +346,33 @@ class SpecificLongValueDiffblueTest {
    * Test {@link SpecificLongValue#generalize(SpecificLongValue)} with {@code SpecificLongValue}.
    *
    * <ul>
+   *   <li>Given {@link ParticularLongValue#ParticularLongValue(long)} with value is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link SpecificLongValue#generalize(SpecificLongValue)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"LongValue SpecificLongValue.generalize(SpecificLongValue)"})
+  public void testGeneralizeWithSpecificLongValue_givenParticularLongValueWithValueIsOne() {
+    // Arrange
+    ParticularLongValue particularLongValue = new ParticularLongValue(1L);
+
+    // Act
+    LongValue actualGeneralizeResult =
+        particularLongValue.generalize((SpecificLongValue) new ParticularLongValue(42L));
+
+    // Assert
+    assertTrue(actualGeneralizeResult instanceof UnknownLongValue);
+    assertFalse(actualGeneralizeResult.isParticular());
+    assertFalse(actualGeneralizeResult.isSpecific());
+    assertTrue(actualGeneralizeResult.isCategory2());
+  }
+
+  /**
+   * Test {@link SpecificLongValue#generalize(SpecificLongValue)} with {@code SpecificLongValue}.
+   *
+   * <ul>
    *   <li>When {@code null}.
    *   <li>Then return {@link UnknownLongValue}.
    * </ul>
@@ -466,15 +380,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#generalize(SpecificLongValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(SpecificLongValue) with 'SpecificLongValue'; when 'null'; then return UnknownLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.generalize(SpecificLongValue)"})
-  void testGeneralizeWithSpecificLongValue_whenNull_thenReturnUnknownLongValue() {
+  public void testGeneralizeWithSpecificLongValue_whenNull_thenReturnUnknownLongValue() {
     // Arrange and Act
     LongValue actualGeneralizeResult =
-        new ParticularLongValue(42L).generalize((SpecificLongValue) null);
+        (new ParticularLongValue(42L)).generalize((SpecificLongValue) null);
 
     // Assert
     assertTrue(actualGeneralizeResult instanceof UnknownLongValue);
@@ -493,20 +404,14 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#add(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test add(LongValue) with 'LongValue'; given ParticularLongValue(long) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.add(LongValue)"})
-  void testAddWithLongValue_givenParticularLongValueWithValueIsFortyTwo() {
+  public void testAddWithLongValue_givenParticularLongValueWithValueIsFortyTwo() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualAddResult = new ParticularLongValue(42L).add(other);
-
-    // Assert
-    assertSame(other, actualAddResult);
+    // Act and Assert
+    assertSame(other, (new ParticularLongValue(42L)).add(other));
   }
 
   /**
@@ -520,15 +425,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#add(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test add(LongValue) with 'LongValue'; when LONG_VALUE_0; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.add(LongValue)"})
-  void testAddWithLongValue_whenLong_value_0_thenReturnCompositeLongValue() {
+  public void testAddWithLongValue_whenLong_value_0_thenReturnCompositeLongValue() {
     // Arrange and Act
     LongValue actualAddResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .add(ParticularValueFactory.LONG_VALUE_0);
 
     // Assert
@@ -549,20 +451,15 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#add(LongValue)}
    */
   @Test
-  @DisplayName("Test add(LongValue) with 'LongValue'; when LONG_VALUE; then return LONG_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.add(LongValue)"})
-  void testAddWithLongValue_whenLong_value_thenReturnLong_value() {
+  public void testAddWithLongValue_whenLong_value_thenReturnLong_value() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualAddResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).add(other);
-
-    // Assert
-    assertSame(other, actualAddResult);
+    // Act and Assert
+    assertSame(
+        other, (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).add(other));
   }
 
   /**
@@ -571,11 +468,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#add(SpecificLongValue)}
    */
   @Test
-  @DisplayName("Test add(SpecificLongValue) with 'SpecificLongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.add(SpecificLongValue)"})
-  void testAddWithSpecificLongValue() {
+  public void testAddWithSpecificLongValue() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -594,100 +489,20 @@ class SpecificLongValueDiffblueTest {
    * Test {@link SpecificLongValue#subtract(LongValue)} with {@code LongValue}.
    *
    * <ul>
-   *   <li>Given {@link ConvertedLongValue#ConvertedLongValue(Value)} with value is {@link
-   *       BasicRangeValueFactory#INTEGER_VALUE_CHAR}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificLongValue#subtract(LongValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test subtract(LongValue) with 'LongValue'; given ConvertedLongValue(Value) with value is INTEGER_VALUE_CHAR")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"LongValue SpecificLongValue.subtract(LongValue)"})
-  void testSubtractWithLongValue_givenConvertedLongValueWithValueIsInteger_value_char() {
-    // Arrange
-    ConvertedLongValue convertedLongValue =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_CHAR);
-
-    // Act
-    LongValue actualSubtractResult =
-        convertedLongValue.subtract(
-            (LongValue)
-                new ConvertedLongValue(
-                    new CompositeLongValue(
-                        BasicValueFactory.LONG_VALUE,
-                        (byte) 'A',
-                        BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-
-    // Assert
-    assertTrue(actualSubtractResult instanceof CompositeLongValue);
-    assertFalse(actualSubtractResult.isParticular());
-    assertTrue(actualSubtractResult.isCategory2());
-    assertTrue(actualSubtractResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificLongValue#subtract(LongValue)} with {@code LongValue}.
-   *
-   * <ul>
-   *   <li>Given {@link ConvertedLongValue#ConvertedLongValue(Value)} with value is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificLongValue#subtract(LongValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test subtract(LongValue) with 'LongValue'; given ConvertedLongValue(Value) with value is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"LongValue SpecificLongValue.subtract(LongValue)"})
-  void testSubtractWithLongValue_givenConvertedLongValueWithValueIsNull() {
-    // Arrange
-    ConvertedLongValue convertedLongValue = new ConvertedLongValue(null);
-
-    // Act
-    LongValue actualSubtractResult =
-        convertedLongValue.subtract(
-            (LongValue)
-                new ConvertedLongValue(
-                    new CompositeLongValue(
-                        BasicValueFactory.LONG_VALUE,
-                        (byte) 'A',
-                        BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-
-    // Assert
-    assertTrue(actualSubtractResult instanceof CompositeLongValue);
-    assertFalse(actualSubtractResult.isParticular());
-    assertTrue(actualSubtractResult.isCategory2());
-    assertTrue(actualSubtractResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificLongValue#subtract(LongValue)} with {@code LongValue}.
-   *
-   * <ul>
    *   <li>Given {@link ParticularLongValue#ParticularLongValue(long)} with value is forty-two.
    * </ul>
    *
    * <p>Method under test: {@link SpecificLongValue#subtract(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(LongValue) with 'LongValue'; given ParticularLongValue(long) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.subtract(LongValue)"})
-  void testSubtractWithLongValue_givenParticularLongValueWithValueIsFortyTwo() {
+  public void testSubtractWithLongValue_givenParticularLongValueWithValueIsFortyTwo() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualSubtractResult = new ParticularLongValue(42L).subtract(other);
-
-    // Assert
-    assertSame(other, actualSubtractResult);
+    // Act and Assert
+    assertSame(other, (new ParticularLongValue(42L)).subtract(other));
   }
 
   /**
@@ -700,11 +515,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#subtract(LongValue)}
    */
   @Test
-  @DisplayName("Test subtract(LongValue) with 'LongValue'; then return ParticularLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.subtract(LongValue)"})
-  void testSubtractWithLongValue_thenReturnParticularLongValue() {
+  public void testSubtractWithLongValue_thenReturnParticularLongValue() {
     // Arrange
     ConvertedLongValue convertedLongValue =
         new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -733,15 +546,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#subtract(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(LongValue) with 'LongValue'; when LONG_VALUE_0; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.subtract(LongValue)"})
-  void testSubtractWithLongValue_whenLong_value_0_thenReturnCompositeLongValue() {
+  public void testSubtractWithLongValue_whenLong_value_0_thenReturnCompositeLongValue() {
     // Arrange and Act
     LongValue actualSubtractResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .subtract(ParticularValueFactory.LONG_VALUE_0);
 
     // Assert
@@ -762,20 +572,15 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#subtract(LongValue)}
    */
   @Test
-  @DisplayName("Test subtract(LongValue) with 'LongValue'; when LONG_VALUE; then return LONG_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.subtract(LongValue)"})
-  void testSubtractWithLongValue_whenLong_value_thenReturnLong_value() {
+  public void testSubtractWithLongValue_whenLong_value_thenReturnLong_value() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualSubtractResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).subtract(other);
-
-    // Assert
-    assertSame(other, actualSubtractResult);
+    // Act and Assert
+    assertSame(
+        other, (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).subtract(other));
   }
 
   /**
@@ -784,11 +589,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#subtract(SpecificLongValue)}
    */
   @Test
-  @DisplayName("Test subtract(SpecificLongValue) with 'SpecificLongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.subtract(SpecificLongValue)"})
-  void testSubtractWithSpecificLongValue() {
+  public void testSubtractWithSpecificLongValue() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -808,18 +611,42 @@ class SpecificLongValueDiffblueTest {
    * Test {@link SpecificLongValue#subtract(SpecificLongValue)} with {@code SpecificLongValue}.
    *
    * <ul>
+   *   <li>Given {@link ParticularLongValue#ParticularLongValue(long)} with value is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link SpecificLongValue#subtract(SpecificLongValue)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"LongValue SpecificLongValue.subtract(SpecificLongValue)"})
+  public void testSubtractWithSpecificLongValue_givenParticularLongValueWithValueIsOne() {
+    // Arrange
+    ParticularLongValue particularLongValue = new ParticularLongValue(1L);
+
+    // Act
+    LongValue actualSubtractResult =
+        particularLongValue.subtract((SpecificLongValue) new ParticularLongValue(42L));
+
+    // Assert
+    assertTrue(actualSubtractResult instanceof CompositeLongValue);
+    assertFalse(actualSubtractResult.isParticular());
+    assertTrue(actualSubtractResult.isCategory2());
+    assertTrue(actualSubtractResult.isSpecific());
+  }
+
+  /**
+   * Test {@link SpecificLongValue#subtract(SpecificLongValue)} with {@code SpecificLongValue}.
+   *
+   * <ul>
    *   <li>Then return {@link ParticularLongValue}.
    * </ul>
    *
    * <p>Method under test: {@link SpecificLongValue#subtract(SpecificLongValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(SpecificLongValue) with 'SpecificLongValue'; then return ParticularLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.subtract(SpecificLongValue)"})
-  void testSubtractWithSpecificLongValue_thenReturnParticularLongValue() {
+  public void testSubtractWithSpecificLongValue_thenReturnParticularLongValue() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -846,89 +673,18 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#subtract(SpecificLongValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(SpecificLongValue) with 'SpecificLongValue'; when 'null'; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.subtract(SpecificLongValue)"})
-  void testSubtractWithSpecificLongValue_whenNull_thenReturnCompositeLongValue() {
+  public void testSubtractWithSpecificLongValue_whenNull_thenReturnCompositeLongValue() {
     // Arrange and Act
     LongValue actualSubtractResult =
-        new ParticularLongValue(42L).subtract((SpecificLongValue) null);
+        (new ParticularLongValue(42L)).subtract((SpecificLongValue) null);
 
     // Assert
     assertTrue(actualSubtractResult instanceof CompositeLongValue);
     assertFalse(actualSubtractResult.isParticular());
     assertTrue(actualSubtractResult.isCategory2());
     assertTrue(actualSubtractResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificLongValue#subtractFrom(LongValue)} with {@code LongValue}.
-   *
-   * <p>Method under test: {@link SpecificLongValue#subtractFrom(LongValue)}
-   */
-  @Test
-  @DisplayName("Test subtractFrom(LongValue) with 'LongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"LongValue SpecificLongValue.subtractFrom(LongValue)"})
-  void testSubtractFromWithLongValue() {
-    // Arrange
-    ConvertedLongValue convertedLongValue =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_CHAR);
-
-    // Act
-    LongValue actualSubtractFromResult =
-        convertedLongValue.subtractFrom(
-            (LongValue)
-                new ConvertedLongValue(
-                    new CompositeLongValue(
-                        BasicValueFactory.LONG_VALUE,
-                        (byte) 'A',
-                        BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-
-    // Assert
-    assertTrue(actualSubtractFromResult instanceof CompositeLongValue);
-    assertFalse(actualSubtractFromResult.isParticular());
-    assertTrue(actualSubtractFromResult.isCategory2());
-    assertTrue(actualSubtractFromResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificLongValue#subtractFrom(LongValue)} with {@code LongValue}.
-   *
-   * <ul>
-   *   <li>Given {@link ConvertedLongValue#ConvertedLongValue(Value)} with value is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificLongValue#subtractFrom(LongValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test subtractFrom(LongValue) with 'LongValue'; given ConvertedLongValue(Value) with value is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"LongValue SpecificLongValue.subtractFrom(LongValue)"})
-  void testSubtractFromWithLongValue_givenConvertedLongValueWithValueIsNull() {
-    // Arrange
-    ConvertedLongValue convertedLongValue = new ConvertedLongValue(null);
-
-    // Act
-    LongValue actualSubtractFromResult =
-        convertedLongValue.subtractFrom(
-            (LongValue)
-                new ConvertedLongValue(
-                    new CompositeLongValue(
-                        BasicValueFactory.LONG_VALUE,
-                        (byte) 'A',
-                        BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-
-    // Assert
-    assertTrue(actualSubtractFromResult instanceof CompositeLongValue);
-    assertFalse(actualSubtractFromResult.isParticular());
-    assertTrue(actualSubtractFromResult.isCategory2());
-    assertTrue(actualSubtractFromResult.isSpecific());
   }
 
   /**
@@ -941,20 +697,14 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#subtractFrom(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtractFrom(LongValue) with 'LongValue'; given ParticularLongValue(long) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.subtractFrom(LongValue)"})
-  void testSubtractFromWithLongValue_givenParticularLongValueWithValueIsFortyTwo() {
+  public void testSubtractFromWithLongValue_givenParticularLongValueWithValueIsFortyTwo() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualSubtractFromResult = new ParticularLongValue(42L).subtractFrom(other);
-
-    // Assert
-    assertSame(other, actualSubtractFromResult);
+    // Act and Assert
+    assertSame(other, (new ParticularLongValue(42L)).subtractFrom(other));
   }
 
   /**
@@ -967,11 +717,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#subtractFrom(LongValue)}
    */
   @Test
-  @DisplayName("Test subtractFrom(LongValue) with 'LongValue'; then return ParticularLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.subtractFrom(LongValue)"})
-  void testSubtractFromWithLongValue_thenReturnParticularLongValue() {
+  public void testSubtractFromWithLongValue_thenReturnParticularLongValue() {
     // Arrange
     ConvertedLongValue convertedLongValue =
         new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -1000,15 +748,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#subtractFrom(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtractFrom(LongValue) with 'LongValue'; when LONG_VALUE_0; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.subtractFrom(LongValue)"})
-  void testSubtractFromWithLongValue_whenLong_value_0_thenReturnCompositeLongValue() {
+  public void testSubtractFromWithLongValue_whenLong_value_0_thenReturnCompositeLongValue() {
     // Arrange and Act
     LongValue actualSubtractFromResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .subtractFrom(ParticularValueFactory.LONG_VALUE_0);
 
     // Assert
@@ -1029,21 +774,16 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#subtractFrom(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtractFrom(LongValue) with 'LongValue'; when LONG_VALUE; then return LONG_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.subtractFrom(LongValue)"})
-  void testSubtractFromWithLongValue_whenLong_value_thenReturnLong_value() {
+  public void testSubtractFromWithLongValue_whenLong_value_thenReturnLong_value() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualSubtractFromResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).subtractFrom(other);
-
-    // Assert
-    assertSame(other, actualSubtractFromResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).subtractFrom(other));
   }
 
   /**
@@ -1052,11 +792,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#subtractFrom(SpecificLongValue)}
    */
   @Test
-  @DisplayName("Test subtractFrom(SpecificLongValue) with 'SpecificLongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.subtractFrom(SpecificLongValue)"})
-  void testSubtractFromWithSpecificLongValue() {
+  public void testSubtractFromWithSpecificLongValue() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -1076,18 +814,42 @@ class SpecificLongValueDiffblueTest {
    * Test {@link SpecificLongValue#subtractFrom(SpecificLongValue)} with {@code SpecificLongValue}.
    *
    * <ul>
+   *   <li>Given {@link ParticularLongValue#ParticularLongValue(long)} with value is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link SpecificLongValue#subtractFrom(SpecificLongValue)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"LongValue SpecificLongValue.subtractFrom(SpecificLongValue)"})
+  public void testSubtractFromWithSpecificLongValue_givenParticularLongValueWithValueIsOne() {
+    // Arrange
+    ParticularLongValue particularLongValue = new ParticularLongValue(1L);
+
+    // Act
+    LongValue actualSubtractFromResult =
+        particularLongValue.subtractFrom((SpecificLongValue) new ParticularLongValue(42L));
+
+    // Assert
+    assertTrue(actualSubtractFromResult instanceof CompositeLongValue);
+    assertFalse(actualSubtractFromResult.isParticular());
+    assertTrue(actualSubtractFromResult.isCategory2());
+    assertTrue(actualSubtractFromResult.isSpecific());
+  }
+
+  /**
+   * Test {@link SpecificLongValue#subtractFrom(SpecificLongValue)} with {@code SpecificLongValue}.
+   *
+   * <ul>
    *   <li>Then return {@link ParticularLongValue}.
    * </ul>
    *
    * <p>Method under test: {@link SpecificLongValue#subtractFrom(SpecificLongValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtractFrom(SpecificLongValue) with 'SpecificLongValue'; then return ParticularLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.subtractFrom(SpecificLongValue)"})
-  void testSubtractFromWithSpecificLongValue_thenReturnParticularLongValue() {
+  public void testSubtractFromWithSpecificLongValue_thenReturnParticularLongValue() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -1114,15 +876,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#subtractFrom(SpecificLongValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtractFrom(SpecificLongValue) with 'SpecificLongValue'; when 'null'; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.subtractFrom(SpecificLongValue)"})
-  void testSubtractFromWithSpecificLongValue_whenNull_thenReturnCompositeLongValue() {
+  public void testSubtractFromWithSpecificLongValue_whenNull_thenReturnCompositeLongValue() {
     // Arrange and Act
     LongValue actualSubtractFromResult =
-        new ParticularLongValue(42L).subtractFrom((SpecificLongValue) null);
+        (new ParticularLongValue(42L)).subtractFrom((SpecificLongValue) null);
 
     // Assert
     assertTrue(actualSubtractFromResult instanceof CompositeLongValue);
@@ -1141,20 +900,14 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#multiply(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test multiply(LongValue) with 'LongValue'; given ParticularLongValue(long) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.multiply(LongValue)"})
-  void testMultiplyWithLongValue_givenParticularLongValueWithValueIsFortyTwo() {
+  public void testMultiplyWithLongValue_givenParticularLongValueWithValueIsFortyTwo() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualMultiplyResult = new ParticularLongValue(42L).multiply(other);
-
-    // Assert
-    assertSame(other, actualMultiplyResult);
+    // Act and Assert
+    assertSame(other, (new ParticularLongValue(42L)).multiply(other));
   }
 
   /**
@@ -1168,15 +921,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#multiply(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test multiply(LongValue) with 'LongValue'; when LONG_VALUE_0; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.multiply(LongValue)"})
-  void testMultiplyWithLongValue_whenLong_value_0_thenReturnCompositeLongValue() {
+  public void testMultiplyWithLongValue_whenLong_value_0_thenReturnCompositeLongValue() {
     // Arrange and Act
     LongValue actualMultiplyResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .multiply(ParticularValueFactory.LONG_VALUE_0);
 
     // Assert
@@ -1197,20 +947,15 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#multiply(LongValue)}
    */
   @Test
-  @DisplayName("Test multiply(LongValue) with 'LongValue'; when LONG_VALUE; then return LONG_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.multiply(LongValue)"})
-  void testMultiplyWithLongValue_whenLong_value_thenReturnLong_value() {
+  public void testMultiplyWithLongValue_whenLong_value_thenReturnLong_value() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualMultiplyResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).multiply(other);
-
-    // Assert
-    assertSame(other, actualMultiplyResult);
+    // Act and Assert
+    assertSame(
+        other, (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).multiply(other));
   }
 
   /**
@@ -1219,11 +964,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#multiply(SpecificLongValue)}
    */
   @Test
-  @DisplayName("Test multiply(SpecificLongValue) with 'SpecificLongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.multiply(SpecificLongValue)"})
-  void testMultiplyWithSpecificLongValue() {
+  public void testMultiplyWithSpecificLongValue() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -1248,21 +991,15 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#divide(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test divide(LongValue) with 'LongValue'; given ParticularLongValue(long) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.divide(LongValue)"})
-  void testDivideWithLongValue_givenParticularLongValueWithValueIsFortyTwo()
+  public void testDivideWithLongValue_givenParticularLongValueWithValueIsFortyTwo()
       throws ArithmeticException {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualDivideResult = new ParticularLongValue(42L).divide(other);
-
-    // Assert
-    assertSame(other, actualDivideResult);
+    // Act and Assert
+    assertSame(other, (new ParticularLongValue(42L)).divide(other));
   }
 
   /**
@@ -1276,16 +1013,13 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#divide(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test divide(LongValue) with 'LongValue'; when LONG_VALUE_0; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.divide(LongValue)"})
-  void testDivideWithLongValue_whenLong_value_0_thenReturnCompositeLongValue()
+  public void testDivideWithLongValue_whenLong_value_0_thenReturnCompositeLongValue()
       throws ArithmeticException {
     // Arrange and Act
     LongValue actualDivideResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .divide(ParticularValueFactory.LONG_VALUE_0);
 
     // Assert
@@ -1306,20 +1040,16 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#divide(LongValue)}
    */
   @Test
-  @DisplayName("Test divide(LongValue) with 'LongValue'; when LONG_VALUE; then return LONG_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.divide(LongValue)"})
-  void testDivideWithLongValue_whenLong_value_thenReturnLong_value() throws ArithmeticException {
+  public void testDivideWithLongValue_whenLong_value_thenReturnLong_value()
+      throws ArithmeticException {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualDivideResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).divide(other);
-
-    // Assert
-    assertSame(other, actualDivideResult);
+    // Act and Assert
+    assertSame(
+        other, (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).divide(other));
   }
 
   /**
@@ -1328,11 +1058,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#divide(SpecificLongValue)}
    */
   @Test
-  @DisplayName("Test divide(SpecificLongValue) with 'SpecificLongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.divide(SpecificLongValue)"})
-  void testDivideWithSpecificLongValue() throws ArithmeticException {
+  public void testDivideWithSpecificLongValue() throws ArithmeticException {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -1357,21 +1085,15 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#divideOf(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test divideOf(LongValue) with 'LongValue'; given ParticularLongValue(long) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.divideOf(LongValue)"})
-  void testDivideOfWithLongValue_givenParticularLongValueWithValueIsFortyTwo()
+  public void testDivideOfWithLongValue_givenParticularLongValueWithValueIsFortyTwo()
       throws ArithmeticException {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualDivideOfResult = new ParticularLongValue(42L).divideOf(other);
-
-    // Assert
-    assertSame(other, actualDivideOfResult);
+    // Act and Assert
+    assertSame(other, (new ParticularLongValue(42L)).divideOf(other));
   }
 
   /**
@@ -1385,16 +1107,13 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#divideOf(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test divideOf(LongValue) with 'LongValue'; when LONG_VALUE_0; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.divideOf(LongValue)"})
-  void testDivideOfWithLongValue_whenLong_value_0_thenReturnCompositeLongValue()
+  public void testDivideOfWithLongValue_whenLong_value_0_thenReturnCompositeLongValue()
       throws ArithmeticException {
     // Arrange and Act
     LongValue actualDivideOfResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .divideOf(ParticularValueFactory.LONG_VALUE_0);
 
     // Assert
@@ -1415,20 +1134,16 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#divideOf(LongValue)}
    */
   @Test
-  @DisplayName("Test divideOf(LongValue) with 'LongValue'; when LONG_VALUE; then return LONG_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.divideOf(LongValue)"})
-  void testDivideOfWithLongValue_whenLong_value_thenReturnLong_value() throws ArithmeticException {
+  public void testDivideOfWithLongValue_whenLong_value_thenReturnLong_value()
+      throws ArithmeticException {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualDivideOfResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).divideOf(other);
-
-    // Assert
-    assertSame(other, actualDivideOfResult);
+    // Act and Assert
+    assertSame(
+        other, (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).divideOf(other));
   }
 
   /**
@@ -1437,11 +1152,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#divideOf(SpecificLongValue)}
    */
   @Test
-  @DisplayName("Test divideOf(SpecificLongValue) with 'SpecificLongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.divideOf(SpecificLongValue)"})
-  void testDivideOfWithSpecificLongValue() throws ArithmeticException {
+  public void testDivideOfWithSpecificLongValue() throws ArithmeticException {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -1466,21 +1179,15 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#remainder(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainder(LongValue) with 'LongValue'; given ParticularLongValue(long) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.remainder(LongValue)"})
-  void testRemainderWithLongValue_givenParticularLongValueWithValueIsFortyTwo()
+  public void testRemainderWithLongValue_givenParticularLongValueWithValueIsFortyTwo()
       throws ArithmeticException {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualRemainderResult = new ParticularLongValue(42L).remainder(other);
-
-    // Assert
-    assertSame(other, actualRemainderResult);
+    // Act and Assert
+    assertSame(other, (new ParticularLongValue(42L)).remainder(other));
   }
 
   /**
@@ -1494,16 +1201,13 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#remainder(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainder(LongValue) with 'LongValue'; when LONG_VALUE_0; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.remainder(LongValue)"})
-  void testRemainderWithLongValue_whenLong_value_0_thenReturnCompositeLongValue()
+  public void testRemainderWithLongValue_whenLong_value_0_thenReturnCompositeLongValue()
       throws ArithmeticException {
     // Arrange and Act
     LongValue actualRemainderResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .remainder(ParticularValueFactory.LONG_VALUE_0);
 
     // Assert
@@ -1524,21 +1228,17 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#remainder(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainder(LongValue) with 'LongValue'; when LONG_VALUE; then return LONG_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.remainder(LongValue)"})
-  void testRemainderWithLongValue_whenLong_value_thenReturnLong_value() throws ArithmeticException {
+  public void testRemainderWithLongValue_whenLong_value_thenReturnLong_value()
+      throws ArithmeticException {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualRemainderResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).remainder(other);
-
-    // Assert
-    assertSame(other, actualRemainderResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).remainder(other));
   }
 
   /**
@@ -1547,11 +1247,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#remainder(SpecificLongValue)}
    */
   @Test
-  @DisplayName("Test remainder(SpecificLongValue) with 'SpecificLongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.remainder(SpecificLongValue)"})
-  void testRemainderWithSpecificLongValue() throws ArithmeticException {
+  public void testRemainderWithSpecificLongValue() throws ArithmeticException {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -1576,21 +1274,15 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#remainderOf(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainderOf(LongValue) with 'LongValue'; given ParticularLongValue(long) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.remainderOf(LongValue)"})
-  void testRemainderOfWithLongValue_givenParticularLongValueWithValueIsFortyTwo()
+  public void testRemainderOfWithLongValue_givenParticularLongValueWithValueIsFortyTwo()
       throws ArithmeticException {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualRemainderOfResult = new ParticularLongValue(42L).remainderOf(other);
-
-    // Assert
-    assertSame(other, actualRemainderOfResult);
+    // Act and Assert
+    assertSame(other, (new ParticularLongValue(42L)).remainderOf(other));
   }
 
   /**
@@ -1604,16 +1296,13 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#remainderOf(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainderOf(LongValue) with 'LongValue'; when LONG_VALUE_0; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.remainderOf(LongValue)"})
-  void testRemainderOfWithLongValue_whenLong_value_0_thenReturnCompositeLongValue()
+  public void testRemainderOfWithLongValue_whenLong_value_0_thenReturnCompositeLongValue()
       throws ArithmeticException {
     // Arrange and Act
     LongValue actualRemainderOfResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .remainderOf(ParticularValueFactory.LONG_VALUE_0);
 
     // Assert
@@ -1634,22 +1323,17 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#remainderOf(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainderOf(LongValue) with 'LongValue'; when LONG_VALUE; then return LONG_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.remainderOf(LongValue)"})
-  void testRemainderOfWithLongValue_whenLong_value_thenReturnLong_value()
+  public void testRemainderOfWithLongValue_whenLong_value_thenReturnLong_value()
       throws ArithmeticException {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualRemainderOfResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).remainderOf(other);
-
-    // Assert
-    assertSame(other, actualRemainderOfResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).remainderOf(other));
   }
 
   /**
@@ -1658,11 +1342,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#remainderOf(SpecificLongValue)}
    */
   @Test
-  @DisplayName("Test remainderOf(SpecificLongValue) with 'SpecificLongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.remainderOf(SpecificLongValue)"})
-  void testRemainderOfWithSpecificLongValue() throws ArithmeticException {
+  public void testRemainderOfWithSpecificLongValue() throws ArithmeticException {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -1688,15 +1370,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#shiftLeft(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftLeft(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.shiftLeft(IntegerValue)"})
-  void testShiftLeftWithIntegerValue_whenInteger_value_0_thenReturnCompositeLongValue() {
+  public void testShiftLeftWithIntegerValue_whenInteger_value_0_thenReturnCompositeLongValue() {
     // Arrange and Act
     LongValue actualShiftLeftResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .shiftLeft(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -1717,15 +1396,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#shiftLeft(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftLeft(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return UnknownLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.shiftLeft(IntegerValue)"})
-  void testShiftLeftWithIntegerValue_whenInteger_value_thenReturnUnknownLongValue() {
+  public void testShiftLeftWithIntegerValue_whenInteger_value_thenReturnUnknownLongValue() {
     // Arrange and Act
     LongValue actualShiftLeftResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .shiftLeft(BasicValueFactory.INTEGER_VALUE);
 
     // Assert
@@ -1741,11 +1417,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#shiftLeft(SpecificLongValue)}
    */
   @Test
-  @DisplayName("Test shiftLeft(SpecificLongValue) with 'SpecificLongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.shiftLeft(SpecificLongValue)"})
-  void testShiftLeftWithSpecificLongValue() {
+  public void testShiftLeftWithSpecificLongValue() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -1770,15 +1444,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#shiftRight(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftRight(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.shiftRight(IntegerValue)"})
-  void testShiftRightWithIntegerValue_whenInteger_value_0_thenReturnCompositeLongValue() {
+  public void testShiftRightWithIntegerValue_whenInteger_value_0_thenReturnCompositeLongValue() {
     // Arrange and Act
     LongValue actualShiftRightResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .shiftRight(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -1799,15 +1470,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#shiftRight(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftRight(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return UnknownLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.shiftRight(IntegerValue)"})
-  void testShiftRightWithIntegerValue_whenInteger_value_thenReturnUnknownLongValue() {
+  public void testShiftRightWithIntegerValue_whenInteger_value_thenReturnUnknownLongValue() {
     // Arrange and Act
     LongValue actualShiftRightResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .shiftRight(BasicValueFactory.INTEGER_VALUE);
 
     // Assert
@@ -1823,11 +1491,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#shiftRight(SpecificLongValue)}
    */
   @Test
-  @DisplayName("Test shiftRight(SpecificLongValue) with 'SpecificLongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.shiftRight(SpecificLongValue)"})
-  void testShiftRightWithSpecificLongValue() {
+  public void testShiftRightWithSpecificLongValue() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -1851,15 +1517,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#unsignedShiftRight(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test unsignedShiftRight(IntegerValue) with 'IntegerValue'; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.unsignedShiftRight(IntegerValue)"})
-  void testUnsignedShiftRightWithIntegerValue_thenReturnCompositeLongValue() {
+  public void testUnsignedShiftRightWithIntegerValue_thenReturnCompositeLongValue() {
     // Arrange and Act
     LongValue actualUnsignedShiftRightResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .unsignedShiftRight(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -1879,15 +1542,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#unsignedShiftRight(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test unsignedShiftRight(IntegerValue) with 'IntegerValue'; then return UnknownLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.unsignedShiftRight(IntegerValue)"})
-  void testUnsignedShiftRightWithIntegerValue_thenReturnUnknownLongValue() {
+  public void testUnsignedShiftRightWithIntegerValue_thenReturnUnknownLongValue() {
     // Arrange and Act
     LongValue actualUnsignedShiftRightResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .unsignedShiftRight(BasicValueFactory.INTEGER_VALUE);
 
     // Assert
@@ -1904,11 +1564,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#unsignedShiftRight(SpecificLongValue)}
    */
   @Test
-  @DisplayName("Test unsignedShiftRight(SpecificLongValue) with 'SpecificLongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.unsignedShiftRight(SpecificLongValue)"})
-  void testUnsignedShiftRightWithSpecificLongValue() {
+  public void testUnsignedShiftRightWithSpecificLongValue() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -1927,100 +1585,20 @@ class SpecificLongValueDiffblueTest {
    * Test {@link SpecificLongValue#and(LongValue)} with {@code LongValue}.
    *
    * <ul>
-   *   <li>Given {@link ConvertedLongValue#ConvertedLongValue(Value)} with value is {@link
-   *       BasicRangeValueFactory#INTEGER_VALUE_CHAR}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificLongValue#and(LongValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test and(LongValue) with 'LongValue'; given ConvertedLongValue(Value) with value is INTEGER_VALUE_CHAR")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"LongValue SpecificLongValue.and(LongValue)"})
-  void testAndWithLongValue_givenConvertedLongValueWithValueIsInteger_value_char() {
-    // Arrange
-    ConvertedLongValue convertedLongValue =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_CHAR);
-
-    // Act
-    LongValue actualAndResult =
-        convertedLongValue.and(
-            (LongValue)
-                new ConvertedLongValue(
-                    new CompositeLongValue(
-                        BasicValueFactory.LONG_VALUE,
-                        (byte) 'A',
-                        BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-
-    // Assert
-    assertTrue(actualAndResult instanceof CompositeLongValue);
-    assertFalse(actualAndResult.isParticular());
-    assertTrue(actualAndResult.isCategory2());
-    assertTrue(actualAndResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificLongValue#and(LongValue)} with {@code LongValue}.
-   *
-   * <ul>
-   *   <li>Given {@link ConvertedLongValue#ConvertedLongValue(Value)} with value is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificLongValue#and(LongValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test and(LongValue) with 'LongValue'; given ConvertedLongValue(Value) with value is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"LongValue SpecificLongValue.and(LongValue)"})
-  void testAndWithLongValue_givenConvertedLongValueWithValueIsNull() {
-    // Arrange
-    ConvertedLongValue convertedLongValue = new ConvertedLongValue(null);
-
-    // Act
-    LongValue actualAndResult =
-        convertedLongValue.and(
-            (LongValue)
-                new ConvertedLongValue(
-                    new CompositeLongValue(
-                        BasicValueFactory.LONG_VALUE,
-                        (byte) 'A',
-                        BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-
-    // Assert
-    assertTrue(actualAndResult instanceof CompositeLongValue);
-    assertFalse(actualAndResult.isParticular());
-    assertTrue(actualAndResult.isCategory2());
-    assertTrue(actualAndResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificLongValue#and(LongValue)} with {@code LongValue}.
-   *
-   * <ul>
    *   <li>Given {@link ParticularLongValue#ParticularLongValue(long)} with value is forty-two.
    * </ul>
    *
    * <p>Method under test: {@link SpecificLongValue#and(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test and(LongValue) with 'LongValue'; given ParticularLongValue(long) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.and(LongValue)"})
-  void testAndWithLongValue_givenParticularLongValueWithValueIsFortyTwo() {
+  public void testAndWithLongValue_givenParticularLongValueWithValueIsFortyTwo() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualAndResult = new ParticularLongValue(42L).and(other);
-
-    // Assert
-    assertSame(other, actualAndResult);
+    // Act and Assert
+    assertSame(other, (new ParticularLongValue(42L)).and(other));
   }
 
   /**
@@ -2033,11 +1611,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#and(LongValue)}
    */
   @Test
-  @DisplayName("Test and(LongValue) with 'LongValue'; then return ConvertedLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.and(LongValue)"})
-  void testAndWithLongValue_thenReturnConvertedLongValue() {
+  public void testAndWithLongValue_thenReturnConvertedLongValue() {
     // Arrange
     ConvertedLongValue convertedLongValue =
         new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -2063,15 +1639,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#and(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test and(LongValue) with 'LongValue'; when LONG_VALUE_0; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.and(LongValue)"})
-  void testAndWithLongValue_whenLong_value_0_thenReturnCompositeLongValue() {
+  public void testAndWithLongValue_whenLong_value_0_thenReturnCompositeLongValue() {
     // Arrange and Act
     LongValue actualAndResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .and(ParticularValueFactory.LONG_VALUE_0);
 
     // Assert
@@ -2092,20 +1665,42 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#and(LongValue)}
    */
   @Test
-  @DisplayName("Test and(LongValue) with 'LongValue'; when LONG_VALUE; then return LONG_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.and(LongValue)"})
-  void testAndWithLongValue_whenLong_value_thenReturnLong_value() {
+  public void testAndWithLongValue_whenLong_value_thenReturnLong_value() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
+    // Act and Assert
+    assertSame(
+        other, (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).and(other));
+  }
+
+  /**
+   * Test {@link SpecificLongValue#and(SpecificLongValue)} with {@code SpecificLongValue}.
+   *
+   * <ul>
+   *   <li>Given {@link ParticularLongValue#ParticularLongValue(long)} with value is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link SpecificLongValue#and(SpecificLongValue)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"LongValue SpecificLongValue.and(SpecificLongValue)"})
+  public void testAndWithSpecificLongValue_givenParticularLongValueWithValueIsOne() {
+    // Arrange
+    ParticularLongValue particularLongValue = new ParticularLongValue(1L);
+
     // Act
     LongValue actualAndResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).and(other);
+        particularLongValue.and((SpecificLongValue) new ParticularLongValue(42L));
 
     // Assert
-    assertSame(other, actualAndResult);
+    assertTrue(actualAndResult instanceof CompositeLongValue);
+    assertFalse(actualAndResult.isParticular());
+    assertTrue(actualAndResult.isCategory2());
+    assertTrue(actualAndResult.isSpecific());
   }
 
   /**
@@ -2119,21 +1714,16 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#and(SpecificLongValue)}
    */
   @Test
-  @DisplayName(
-      "Test and(SpecificLongValue) with 'SpecificLongValue'; then return ParticularLongValue(long) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.and(SpecificLongValue)"})
-  void testAndWithSpecificLongValue_thenReturnParticularLongValueWithValueIsFortyTwo() {
+  public void testAndWithSpecificLongValue_thenReturnParticularLongValueWithValueIsFortyTwo() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
-    // Act
-    LongValue actualAndResult =
-        particularLongValue.and((SpecificLongValue) new ParticularLongValue(42L));
-
-    // Assert
-    assertSame(particularLongValue, actualAndResult);
+    // Act and Assert
+    assertSame(
+        particularLongValue,
+        particularLongValue.and((SpecificLongValue) new ParticularLongValue(42L)));
   }
 
   /**
@@ -2147,12 +1737,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#and(SpecificLongValue)}
    */
   @Test
-  @DisplayName(
-      "Test and(SpecificLongValue) with 'SpecificLongValue'; when ConvertedLongValue(Value) with value is INTEGER_VALUE_BYTE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.and(SpecificLongValue)"})
-  void testAndWithSpecificLongValue_whenConvertedLongValueWithValueIsInteger_value_byte() {
+  public void testAndWithSpecificLongValue_whenConvertedLongValueWithValueIsInteger_value_byte() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -2178,14 +1765,11 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#and(SpecificLongValue)}
    */
   @Test
-  @DisplayName(
-      "Test and(SpecificLongValue) with 'SpecificLongValue'; when 'null'; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.and(SpecificLongValue)"})
-  void testAndWithSpecificLongValue_whenNull_thenReturnCompositeLongValue() {
+  public void testAndWithSpecificLongValue_whenNull_thenReturnCompositeLongValue() {
     // Arrange and Act
-    LongValue actualAndResult = new ParticularLongValue(42L).and((SpecificLongValue) null);
+    LongValue actualAndResult = (new ParticularLongValue(42L)).and((SpecificLongValue) null);
 
     // Assert
     assertTrue(actualAndResult instanceof CompositeLongValue);
@@ -2198,100 +1782,20 @@ class SpecificLongValueDiffblueTest {
    * Test {@link SpecificLongValue#or(LongValue)} with {@code LongValue}.
    *
    * <ul>
-   *   <li>Given {@link ConvertedLongValue#ConvertedLongValue(Value)} with value is {@link
-   *       BasicRangeValueFactory#INTEGER_VALUE_CHAR}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificLongValue#or(LongValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test or(LongValue) with 'LongValue'; given ConvertedLongValue(Value) with value is INTEGER_VALUE_CHAR")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"LongValue SpecificLongValue.or(LongValue)"})
-  void testOrWithLongValue_givenConvertedLongValueWithValueIsInteger_value_char() {
-    // Arrange
-    ConvertedLongValue convertedLongValue =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_CHAR);
-
-    // Act
-    LongValue actualOrResult =
-        convertedLongValue.or(
-            (LongValue)
-                new ConvertedLongValue(
-                    new CompositeLongValue(
-                        BasicValueFactory.LONG_VALUE,
-                        (byte) 'A',
-                        BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-
-    // Assert
-    assertTrue(actualOrResult instanceof CompositeLongValue);
-    assertFalse(actualOrResult.isParticular());
-    assertTrue(actualOrResult.isCategory2());
-    assertTrue(actualOrResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificLongValue#or(LongValue)} with {@code LongValue}.
-   *
-   * <ul>
-   *   <li>Given {@link ConvertedLongValue#ConvertedLongValue(Value)} with value is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificLongValue#or(LongValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test or(LongValue) with 'LongValue'; given ConvertedLongValue(Value) with value is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"LongValue SpecificLongValue.or(LongValue)"})
-  void testOrWithLongValue_givenConvertedLongValueWithValueIsNull() {
-    // Arrange
-    ConvertedLongValue convertedLongValue = new ConvertedLongValue(null);
-
-    // Act
-    LongValue actualOrResult =
-        convertedLongValue.or(
-            (LongValue)
-                new ConvertedLongValue(
-                    new CompositeLongValue(
-                        BasicValueFactory.LONG_VALUE,
-                        (byte) 'A',
-                        BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-
-    // Assert
-    assertTrue(actualOrResult instanceof CompositeLongValue);
-    assertFalse(actualOrResult.isParticular());
-    assertTrue(actualOrResult.isCategory2());
-    assertTrue(actualOrResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificLongValue#or(LongValue)} with {@code LongValue}.
-   *
-   * <ul>
    *   <li>Given {@link ParticularLongValue#ParticularLongValue(long)} with value is forty-two.
    * </ul>
    *
    * <p>Method under test: {@link SpecificLongValue#or(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test or(LongValue) with 'LongValue'; given ParticularLongValue(long) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.or(LongValue)"})
-  void testOrWithLongValue_givenParticularLongValueWithValueIsFortyTwo() {
+  public void testOrWithLongValue_givenParticularLongValueWithValueIsFortyTwo() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualOrResult = new ParticularLongValue(42L).or(other);
-
-    // Assert
-    assertSame(other, actualOrResult);
+    // Act and Assert
+    assertSame(other, (new ParticularLongValue(42L)).or(other));
   }
 
   /**
@@ -2304,11 +1808,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#or(LongValue)}
    */
   @Test
-  @DisplayName("Test or(LongValue) with 'LongValue'; then return ConvertedLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.or(LongValue)"})
-  void testOrWithLongValue_thenReturnConvertedLongValue() {
+  public void testOrWithLongValue_thenReturnConvertedLongValue() {
     // Arrange
     ConvertedLongValue convertedLongValue =
         new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -2334,15 +1836,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#or(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test or(LongValue) with 'LongValue'; when LONG_VALUE_0; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.or(LongValue)"})
-  void testOrWithLongValue_whenLong_value_0_thenReturnCompositeLongValue() {
+  public void testOrWithLongValue_whenLong_value_0_thenReturnCompositeLongValue() {
     // Arrange and Act
     LongValue actualOrResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .or(ParticularValueFactory.LONG_VALUE_0);
 
     // Assert
@@ -2363,20 +1862,42 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#or(LongValue)}
    */
   @Test
-  @DisplayName("Test or(LongValue) with 'LongValue'; when LONG_VALUE; then return LONG_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.or(LongValue)"})
-  void testOrWithLongValue_whenLong_value_thenReturnLong_value() {
+  public void testOrWithLongValue_whenLong_value_thenReturnLong_value() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
+    // Act and Assert
+    assertSame(
+        other, (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).or(other));
+  }
+
+  /**
+   * Test {@link SpecificLongValue#or(SpecificLongValue)} with {@code SpecificLongValue}.
+   *
+   * <ul>
+   *   <li>Given {@link ParticularLongValue#ParticularLongValue(long)} with value is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link SpecificLongValue#or(SpecificLongValue)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"LongValue SpecificLongValue.or(SpecificLongValue)"})
+  public void testOrWithSpecificLongValue_givenParticularLongValueWithValueIsOne() {
+    // Arrange
+    ParticularLongValue particularLongValue = new ParticularLongValue(1L);
+
     // Act
     LongValue actualOrResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).or(other);
+        particularLongValue.or((SpecificLongValue) new ParticularLongValue(42L));
 
     // Assert
-    assertSame(other, actualOrResult);
+    assertTrue(actualOrResult instanceof CompositeLongValue);
+    assertFalse(actualOrResult.isParticular());
+    assertTrue(actualOrResult.isCategory2());
+    assertTrue(actualOrResult.isSpecific());
   }
 
   /**
@@ -2390,21 +1911,16 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#or(SpecificLongValue)}
    */
   @Test
-  @DisplayName(
-      "Test or(SpecificLongValue) with 'SpecificLongValue'; then return ParticularLongValue(long) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.or(SpecificLongValue)"})
-  void testOrWithSpecificLongValue_thenReturnParticularLongValueWithValueIsFortyTwo() {
+  public void testOrWithSpecificLongValue_thenReturnParticularLongValueWithValueIsFortyTwo() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
-    // Act
-    LongValue actualOrResult =
-        particularLongValue.or((SpecificLongValue) new ParticularLongValue(42L));
-
-    // Assert
-    assertSame(particularLongValue, actualOrResult);
+    // Act and Assert
+    assertSame(
+        particularLongValue,
+        particularLongValue.or((SpecificLongValue) new ParticularLongValue(42L)));
   }
 
   /**
@@ -2418,12 +1934,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#or(SpecificLongValue)}
    */
   @Test
-  @DisplayName(
-      "Test or(SpecificLongValue) with 'SpecificLongValue'; when ConvertedLongValue(Value) with value is INTEGER_VALUE_BYTE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.or(SpecificLongValue)"})
-  void testOrWithSpecificLongValue_whenConvertedLongValueWithValueIsInteger_value_byte() {
+  public void testOrWithSpecificLongValue_whenConvertedLongValueWithValueIsInteger_value_byte() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -2449,14 +1962,11 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#or(SpecificLongValue)}
    */
   @Test
-  @DisplayName(
-      "Test or(SpecificLongValue) with 'SpecificLongValue'; when 'null'; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.or(SpecificLongValue)"})
-  void testOrWithSpecificLongValue_whenNull_thenReturnCompositeLongValue() {
+  public void testOrWithSpecificLongValue_whenNull_thenReturnCompositeLongValue() {
     // Arrange and Act
-    LongValue actualOrResult = new ParticularLongValue(42L).or((SpecificLongValue) null);
+    LongValue actualOrResult = (new ParticularLongValue(42L)).or((SpecificLongValue) null);
 
     // Assert
     assertTrue(actualOrResult instanceof CompositeLongValue);
@@ -2469,100 +1979,20 @@ class SpecificLongValueDiffblueTest {
    * Test {@link SpecificLongValue#xor(LongValue)} with {@code LongValue}.
    *
    * <ul>
-   *   <li>Given {@link ConvertedLongValue#ConvertedLongValue(Value)} with value is {@link
-   *       BasicRangeValueFactory#INTEGER_VALUE_CHAR}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificLongValue#xor(LongValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test xor(LongValue) with 'LongValue'; given ConvertedLongValue(Value) with value is INTEGER_VALUE_CHAR")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"LongValue SpecificLongValue.xor(LongValue)"})
-  void testXorWithLongValue_givenConvertedLongValueWithValueIsInteger_value_char() {
-    // Arrange
-    ConvertedLongValue convertedLongValue =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_CHAR);
-
-    // Act
-    LongValue actualXorResult =
-        convertedLongValue.xor(
-            (LongValue)
-                new ConvertedLongValue(
-                    new CompositeLongValue(
-                        BasicValueFactory.LONG_VALUE,
-                        (byte) 'A',
-                        BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-
-    // Assert
-    assertTrue(actualXorResult instanceof CompositeLongValue);
-    assertFalse(actualXorResult.isParticular());
-    assertTrue(actualXorResult.isCategory2());
-    assertTrue(actualXorResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificLongValue#xor(LongValue)} with {@code LongValue}.
-   *
-   * <ul>
-   *   <li>Given {@link ConvertedLongValue#ConvertedLongValue(Value)} with value is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificLongValue#xor(LongValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test xor(LongValue) with 'LongValue'; given ConvertedLongValue(Value) with value is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"LongValue SpecificLongValue.xor(LongValue)"})
-  void testXorWithLongValue_givenConvertedLongValueWithValueIsNull() {
-    // Arrange
-    ConvertedLongValue convertedLongValue = new ConvertedLongValue(null);
-
-    // Act
-    LongValue actualXorResult =
-        convertedLongValue.xor(
-            (LongValue)
-                new ConvertedLongValue(
-                    new CompositeLongValue(
-                        BasicValueFactory.LONG_VALUE,
-                        (byte) 'A',
-                        BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-
-    // Assert
-    assertTrue(actualXorResult instanceof CompositeLongValue);
-    assertFalse(actualXorResult.isParticular());
-    assertTrue(actualXorResult.isCategory2());
-    assertTrue(actualXorResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificLongValue#xor(LongValue)} with {@code LongValue}.
-   *
-   * <ul>
    *   <li>Given {@link ParticularLongValue#ParticularLongValue(long)} with value is forty-two.
    * </ul>
    *
    * <p>Method under test: {@link SpecificLongValue#xor(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test xor(LongValue) with 'LongValue'; given ParticularLongValue(long) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.xor(LongValue)"})
-  void testXorWithLongValue_givenParticularLongValueWithValueIsFortyTwo() {
+  public void testXorWithLongValue_givenParticularLongValueWithValueIsFortyTwo() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualXorResult = new ParticularLongValue(42L).xor(other);
-
-    // Assert
-    assertSame(other, actualXorResult);
+    // Act and Assert
+    assertSame(other, (new ParticularLongValue(42L)).xor(other));
   }
 
   /**
@@ -2575,11 +2005,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#xor(LongValue)}
    */
   @Test
-  @DisplayName("Test xor(LongValue) with 'LongValue'; then return ParticularLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.xor(LongValue)"})
-  void testXorWithLongValue_thenReturnParticularLongValue() {
+  public void testXorWithLongValue_thenReturnParticularLongValue() {
     // Arrange
     ConvertedLongValue convertedLongValue =
         new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -2608,15 +2036,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#xor(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test xor(LongValue) with 'LongValue'; when LONG_VALUE_0; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.xor(LongValue)"})
-  void testXorWithLongValue_whenLong_value_0_thenReturnCompositeLongValue() {
+  public void testXorWithLongValue_whenLong_value_0_thenReturnCompositeLongValue() {
     // Arrange and Act
     LongValue actualXorResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .xor(ParticularValueFactory.LONG_VALUE_0);
 
     // Assert
@@ -2637,20 +2062,42 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#xor(LongValue)}
    */
   @Test
-  @DisplayName("Test xor(LongValue) with 'LongValue'; when LONG_VALUE; then return LONG_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.xor(LongValue)"})
-  void testXorWithLongValue_whenLong_value_thenReturnLong_value() {
+  public void testXorWithLongValue_whenLong_value_thenReturnLong_value() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
+    // Act and Assert
+    assertSame(
+        other, (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).xor(other));
+  }
+
+  /**
+   * Test {@link SpecificLongValue#xor(SpecificLongValue)} with {@code SpecificLongValue}.
+   *
+   * <ul>
+   *   <li>Given {@link ParticularLongValue#ParticularLongValue(long)} with value is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link SpecificLongValue#xor(SpecificLongValue)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"LongValue SpecificLongValue.xor(SpecificLongValue)"})
+  public void testXorWithSpecificLongValue_givenParticularLongValueWithValueIsOne() {
+    // Arrange
+    ParticularLongValue particularLongValue = new ParticularLongValue(1L);
+
     // Act
     LongValue actualXorResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).xor(other);
+        particularLongValue.xor((SpecificLongValue) new ParticularLongValue(42L));
 
     // Assert
-    assertSame(other, actualXorResult);
+    assertTrue(actualXorResult instanceof CompositeLongValue);
+    assertFalse(actualXorResult.isParticular());
+    assertTrue(actualXorResult.isCategory2());
+    assertTrue(actualXorResult.isSpecific());
   }
 
   /**
@@ -2663,12 +2110,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#xor(SpecificLongValue)}
    */
   @Test
-  @DisplayName(
-      "Test xor(SpecificLongValue) with 'SpecificLongValue'; then return ParticularLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.xor(SpecificLongValue)"})
-  void testXorWithSpecificLongValue_thenReturnParticularLongValue() {
+  public void testXorWithSpecificLongValue_thenReturnParticularLongValue() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -2695,12 +2139,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#xor(SpecificLongValue)}
    */
   @Test
-  @DisplayName(
-      "Test xor(SpecificLongValue) with 'SpecificLongValue'; when ConvertedLongValue(Value) with value is INTEGER_VALUE_BYTE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.xor(SpecificLongValue)"})
-  void testXorWithSpecificLongValue_whenConvertedLongValueWithValueIsInteger_value_byte() {
+  public void testXorWithSpecificLongValue_whenConvertedLongValueWithValueIsInteger_value_byte() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -2726,14 +2167,11 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#xor(SpecificLongValue)}
    */
   @Test
-  @DisplayName(
-      "Test xor(SpecificLongValue) with 'SpecificLongValue'; when 'null'; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificLongValue.xor(SpecificLongValue)"})
-  void testXorWithSpecificLongValue_whenNull_thenReturnCompositeLongValue() {
+  public void testXorWithSpecificLongValue_whenNull_thenReturnCompositeLongValue() {
     // Arrange and Act
-    LongValue actualXorResult = new ParticularLongValue(42L).xor((SpecificLongValue) null);
+    LongValue actualXorResult = (new ParticularLongValue(42L)).xor((SpecificLongValue) null);
 
     // Assert
     assertTrue(actualXorResult instanceof CompositeLongValue);
@@ -2752,15 +2190,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#compare(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test compare(LongValue) with 'LongValue'; given ParticularLongValue(long) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificLongValue.compare(LongValue)"})
-  void testCompareWithLongValue_givenParticularLongValueWithValueIsFortyTwo() {
+  public void testCompareWithLongValue_givenParticularLongValueWithValueIsFortyTwo() {
     // Arrange and Act
     IntegerValue actualCompareResult =
-        new ParticularLongValue(42L).compare(BasicValueFactory.LONG_VALUE);
+        (new ParticularLongValue(42L)).compare(BasicValueFactory.LONG_VALUE);
 
     // Assert
     assertTrue(actualCompareResult instanceof NegatedIntegerValue);
@@ -2780,15 +2215,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#compare(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test compare(LongValue) with 'LongValue'; when LONG_VALUE_0; then return NegatedIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificLongValue.compare(LongValue)"})
-  void testCompareWithLongValue_whenLong_value_0_thenReturnNegatedIntegerValue() {
+  public void testCompareWithLongValue_whenLong_value_0_thenReturnNegatedIntegerValue() {
     // Arrange and Act
     IntegerValue actualCompareResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .compare(ParticularValueFactory.LONG_VALUE_0);
 
     // Assert
@@ -2809,15 +2241,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#compare(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test compare(LongValue) with 'LongValue'; when LONG_VALUE; then return NegatedIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificLongValue.compare(LongValue)"})
-  void testCompareWithLongValue_whenLong_value_thenReturnNegatedIntegerValue() {
+  public void testCompareWithLongValue_whenLong_value_thenReturnNegatedIntegerValue() {
     // Arrange and Act
     IntegerValue actualCompareResult =
-        new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedLongValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .compare(BasicValueFactory.LONG_VALUE);
 
     // Assert
@@ -2833,11 +2262,9 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#compare(SpecificLongValue)}
    */
   @Test
-  @DisplayName("Test compare(SpecificLongValue) with 'SpecificLongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificLongValue.compare(SpecificLongValue)"})
-  void testCompareWithSpecificLongValue() {
+  public void testCompareWithSpecificLongValue() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -2858,13 +2285,11 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#isSpecific()}
    */
   @Test
-  @DisplayName("Test isSpecific()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean SpecificLongValue.isSpecific()"})
-  void testIsSpecific() {
+  public void testIsSpecific() {
     // Arrange, Act and Assert
-    assertTrue(new ParticularLongValue(42L).isSpecific());
+    assertTrue((new ParticularLongValue(42L)).isSpecific());
   }
 
   /**
@@ -2878,21 +2303,20 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SpecificLongValue.equals(Object)",
     "int SpecificLongValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
     ParticularLongValue particularLongValue2 = new ParticularLongValue(42L);
 
     // Act and Assert
     assertEquals(particularLongValue, particularLongValue2);
-    assertEquals(particularLongValue.hashCode(), particularLongValue2.hashCode());
+    int expectedHashCodeResult = particularLongValue.hashCode();
+    assertEquals(expectedHashCodeResult, particularLongValue2.hashCode());
   }
 
   /**
@@ -2906,14 +2330,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SpecificLongValue.equals(Object)",
     "int SpecificLongValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(42L);
 
@@ -2934,14 +2356,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SpecificLongValue.equals(Object)",
     "int SpecificLongValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     ParticularLongValue particularLongValue = new ParticularLongValue(1L);
 
@@ -2960,14 +2380,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SpecificLongValue.equals(Object)",
     "int SpecificLongValue.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new ParticularLongValue(42L), null);
   }
@@ -2983,14 +2401,12 @@ class SpecificLongValueDiffblueTest {
    * <p>Method under test: {@link SpecificLongValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SpecificLongValue.equals(Object)",
     "int SpecificLongValue.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new ParticularLongValue(42L), "Different type to SpecificLongValue");
   }

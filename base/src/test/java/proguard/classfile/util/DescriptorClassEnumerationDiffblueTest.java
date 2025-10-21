@@ -1,16 +1,15 @@
 package proguard.classfile.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class DescriptorClassEnumerationDiffblueTest {
+public class DescriptorClassEnumerationDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -22,16 +21,14 @@ class DescriptorClassEnumerationDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void DescriptorClassEnumeration.<init>(String)",
     "boolean DescriptorClassEnumeration.isInnerClassName()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
-    assertFalse(new DescriptorClassEnumeration("Descriptor").isInnerClassName());
+    assertFalse((new DescriptorClassEnumeration("Descriptor")).isInnerClassName());
   }
 
   /**
@@ -46,14 +43,11 @@ class DescriptorClassEnumerationDiffblueTest {
    * <p>Method under test: {@link DescriptorClassEnumeration#classCount()}
    */
   @Test
-  @DisplayName(
-      "Test classCount(); given DescriptorClassEnumeration(String) with 'Descriptor'; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int DescriptorClassEnumeration.classCount()"})
-  void testClassCount_givenDescriptorClassEnumerationWithDescriptor_thenReturnZero() {
+  public void testClassCount_givenDescriptorClassEnumerationWithDescriptor_thenReturnZero() {
     // Arrange, Act and Assert
-    assertEquals(0, new DescriptorClassEnumeration("Descriptor").classCount());
+    assertEquals(0, (new DescriptorClassEnumeration("Descriptor")).classCount());
   }
 
   /**
@@ -66,13 +60,11 @@ class DescriptorClassEnumerationDiffblueTest {
    * <p>Method under test: {@link DescriptorClassEnumeration#hasMoreClassNames()}
    */
   @Test
-  @DisplayName("Test hasMoreClassNames(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DescriptorClassEnumeration.hasMoreClassNames()"})
-  void testHasMoreClassNames_thenReturnFalse() {
+  public void testHasMoreClassNames_thenReturnFalse() {
     // Arrange, Act and Assert
-    assertFalse(new DescriptorClassEnumeration("").hasMoreClassNames());
+    assertFalse((new DescriptorClassEnumeration("")).hasMoreClassNames());
   }
 
   /**
@@ -85,13 +77,11 @@ class DescriptorClassEnumerationDiffblueTest {
    * <p>Method under test: {@link DescriptorClassEnumeration#hasMoreClassNames()}
    */
   @Test
-  @DisplayName("Test hasMoreClassNames(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DescriptorClassEnumeration.hasMoreClassNames()"})
-  void testHasMoreClassNames_thenReturnTrue() {
+  public void testHasMoreClassNames_thenReturnTrue() {
     // Arrange, Act and Assert
-    assertTrue(new DescriptorClassEnumeration("Descriptor").hasMoreClassNames());
+    assertTrue((new DescriptorClassEnumeration("Descriptor")).hasMoreClassNames());
   }
 
   /**
@@ -106,12 +96,9 @@ class DescriptorClassEnumerationDiffblueTest {
    * <p>Method under test: {@link DescriptorClassEnumeration#nextFluff()}
    */
   @Test
-  @DisplayName(
-      "Test nextFluff(); given DescriptorClassEnumeration(String) with 'Descriptor'; then return 'Descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String DescriptorClassEnumeration.nextFluff()"})
-  void testNextFluff_givenDescriptorClassEnumerationWithDescriptor_thenReturnDescriptor() {
+  public void testNextFluff_givenDescriptorClassEnumerationWithDescriptor_thenReturnDescriptor() {
     // Arrange
     DescriptorClassEnumeration descriptorClassEnumeration =
         new DescriptorClassEnumeration("Descriptor");
@@ -132,11 +119,9 @@ class DescriptorClassEnumerationDiffblueTest {
    * <p>Method under test: {@link DescriptorClassEnumeration#nextFluff()}
    */
   @Test
-  @DisplayName("Test nextFluff(); then return 'java.'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String DescriptorClassEnumeration.nextFluff()"})
-  void testNextFluff_thenReturnJava() {
+  public void testNextFluff_thenReturnJava() {
     // Arrange
     DescriptorClassEnumeration descriptorClassEnumeration =
         new DescriptorClassEnumeration("java.lang.String");
@@ -157,12 +142,10 @@ class DescriptorClassEnumerationDiffblueTest {
    * <p>Method under test: {@link DescriptorClassEnumeration#nextClassName()}
    */
   @Test
-  @DisplayName("Test nextClassName(); then return 'java'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String DescriptorClassEnumeration.nextClassName()"})
-  void testNextClassName_thenReturnJava() {
+  public void testNextClassName_thenReturnJava() {
     // Arrange, Act and Assert
-    assertEquals("java", new DescriptorClassEnumeration("java.lang.String").nextClassName());
+    assertEquals("java", (new DescriptorClassEnumeration("java.lang.String")).nextClassName());
   }
 }

@@ -1,26 +1,23 @@
 package proguard.classfile.attribute.module;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class RequiresInfoDiffblueTest {
+public class RequiresInfoDiffblueTest {
   /**
    * Test {@link RequiresInfo#RequiresInfo()}.
    *
    * <p>Method under test: {@link RequiresInfo#RequiresInfo()}
    */
   @Test
-  @DisplayName("Test new RequiresInfo()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void RequiresInfo.<init>()", "void RequiresInfo.<init>(int, int, int)"})
-  void testNewRequiresInfo() {
+  public void testNewRequiresInfo() {
     // Arrange and Act
     RequiresInfo actualRequiresInfo = new RequiresInfo();
 
@@ -39,11 +36,9 @@ class RequiresInfoDiffblueTest {
    * <p>Method under test: {@link RequiresInfo#RequiresInfo(int, int, int)}
    */
   @Test
-  @DisplayName("Test new RequiresInfo(int, int, int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void RequiresInfo.<init>()", "void RequiresInfo.<init>(int, int, int)"})
-  void testNewRequiresInfo_whenOne() {
+  public void testNewRequiresInfo_whenOne() {
     // Arrange and Act
     RequiresInfo actualRequiresInfo = new RequiresInfo(1, 1, 1);
 

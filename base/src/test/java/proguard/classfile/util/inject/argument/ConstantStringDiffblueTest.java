@@ -1,14 +1,13 @@
 package proguard.classfile.util.inject.argument;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ConstantStringDiffblueTest {
+public class ConstantStringDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -23,9 +22,7 @@ class ConstantStringDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ConstantString.<init>(String)",
     "String ConstantString.getConstant()",
@@ -33,7 +30,7 @@ class ConstantStringDiffblueTest {
     "java.lang.Object ConstantString.getValue()",
     "String ConstantString.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     ConstantString actualConstantString = new ConstantString("Constant");
     String actualToStringResult = actualConstantString.toString();

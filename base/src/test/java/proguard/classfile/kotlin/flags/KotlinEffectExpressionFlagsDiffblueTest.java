@@ -1,14 +1,13 @@
 package proguard.classfile.kotlin.flags;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.Assert.assertFalse;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class KotlinEffectExpressionFlagsDiffblueTest {
+public class KotlinEffectExpressionFlagsDiffblueTest {
   /**
    * Test new {@link KotlinEffectExpressionFlags} (default constructor).
    *
@@ -16,11 +15,9 @@ class KotlinEffectExpressionFlagsDiffblueTest {
    * KotlinEffectExpressionFlags}
    */
   @Test
-  @DisplayName("Test new KotlinEffectExpressionFlags (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void KotlinEffectExpressionFlags.<init>()"})
-  void testNewKotlinEffectExpressionFlags() {
+  public void testNewKotlinEffectExpressionFlags() {
     // Arrange and Act
     KotlinEffectExpressionFlags actualKotlinEffectExpressionFlags =
         new KotlinEffectExpressionFlags();

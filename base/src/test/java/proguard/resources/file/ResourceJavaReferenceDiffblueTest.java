@@ -1,27 +1,24 @@
 package proguard.resources.file;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ResourceJavaReferenceDiffblueTest {
+public class ResourceJavaReferenceDiffblueTest {
   /**
    * Test {@link ResourceJavaReference#ResourceJavaReference(String)}.
    *
    * <p>Method under test: {@link ResourceJavaReference#ResourceJavaReference(String)}
    */
   @Test
-  @DisplayName("Test new ResourceJavaReference(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ResourceJavaReference.<init>(String)"})
-  void testNewResourceJavaReference() {
+  public void testNewResourceJavaReference() {
     // Arrange and Act
     ResourceJavaReference actualResourceJavaReference =
         new ResourceJavaReference("External Class Name");
@@ -48,21 +45,20 @@ class ResourceJavaReferenceDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean ResourceJavaReference.equals(Object)",
     "int ResourceJavaReference.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     ResourceJavaReference resourceJavaReference = new ResourceJavaReference("External Class Name");
     ResourceJavaReference resourceJavaReference2 = new ResourceJavaReference("External Class Name");
 
     // Act and Assert
     assertEquals(resourceJavaReference, resourceJavaReference2);
-    assertEquals(resourceJavaReference.hashCode(), resourceJavaReference2.hashCode());
+    int expectedHashCodeResult = resourceJavaReference.hashCode();
+    assertEquals(expectedHashCodeResult, resourceJavaReference2.hashCode());
   }
 
   /**
@@ -82,14 +78,12 @@ class ResourceJavaReferenceDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean ResourceJavaReference.equals(Object)",
     "int ResourceJavaReference.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     ResourceJavaReference resourceJavaReference = new ResourceJavaReference("External Class Name");
 
@@ -110,14 +104,12 @@ class ResourceJavaReferenceDiffblueTest {
    * <p>Method under test: {@link ResourceJavaReference#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean ResourceJavaReference.equals(Object)",
     "int ResourceJavaReference.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     ResourceJavaReference resourceJavaReference =
         new ResourceJavaReference("proguard.resources.file.ResourceJavaReference");
@@ -137,14 +129,12 @@ class ResourceJavaReferenceDiffblueTest {
    * <p>Method under test: {@link ResourceJavaReference#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean ResourceJavaReference.equals(Object)",
     "int ResourceJavaReference.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new ResourceJavaReference("External Class Name"), null);
   }
@@ -160,14 +150,12 @@ class ResourceJavaReferenceDiffblueTest {
    * <p>Method under test: {@link ResourceJavaReference#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean ResourceJavaReference.equals(Object)",
     "int ResourceJavaReference.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
         new ResourceJavaReference("External Class Name"),

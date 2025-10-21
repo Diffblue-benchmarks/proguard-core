@@ -1,18 +1,17 @@
 package proguard.evaluation.util.jsonprinter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class CodeAttributeRecordDiffblueTest {
+public class CodeAttributeRecordDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -30,9 +29,7 @@ class CodeAttributeRecordDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void CodeAttributeRecord.<init>(String, String, List, List)",
     "List CodeAttributeRecord.getBlockEvaluations()",
@@ -43,7 +40,7 @@ class CodeAttributeRecordDiffblueTest {
     "List CodeAttributeRecord.getParameters()",
     "void CodeAttributeRecord.setError(ErrorRecord)"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     ArrayList<String> parameters = new ArrayList<>();
     ArrayList<InstructionRecord> instructions = new ArrayList<>();
@@ -52,6 +49,7 @@ class CodeAttributeRecordDiffblueTest {
     CodeAttributeRecord actualCodeAttributeRecord =
         new CodeAttributeRecord("Clazz", "Method", parameters, instructions);
     ErrorRecord error = new ErrorRecord(1, "Not all who wander are lost");
+
     actualCodeAttributeRecord.setError(error);
     List<InstructionBlockEvaluationRecord> actualBlockEvaluations =
         actualCodeAttributeRecord.getBlockEvaluations();
@@ -78,11 +76,9 @@ class CodeAttributeRecordDiffblueTest {
    * <p>Method under test: {@link CodeAttributeRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder CodeAttributeRecord.toJson(StringBuilder)"})
-  void testToJson() {
+  public void testToJson() {
     // Arrange
     ArrayList<String> parameters = new ArrayList<>();
     CodeAttributeRecord codeAttributeRecord =
@@ -105,11 +101,9 @@ class CodeAttributeRecordDiffblueTest {
    * <p>Method under test: {@link CodeAttributeRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder CodeAttributeRecord.toJson(StringBuilder)"})
-  void testToJson2() {
+  public void testToJson2() {
     // Arrange
     ArrayList<String> parameters = new ArrayList<>();
     parameters.add("{");
@@ -133,11 +127,9 @@ class CodeAttributeRecordDiffblueTest {
    * <p>Method under test: {@link CodeAttributeRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder CodeAttributeRecord.toJson(StringBuilder)"})
-  void testToJson3() {
+  public void testToJson3() {
     // Arrange
     ArrayList<InstructionRecord> instructions = new ArrayList<>();
     instructions.add(new InstructionRecord(2, "{"));
@@ -162,11 +154,9 @@ class CodeAttributeRecordDiffblueTest {
    * <p>Method under test: {@link CodeAttributeRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder CodeAttributeRecord.toJson(StringBuilder)"})
-  void testToJson4() {
+  public void testToJson4() {
     // Arrange
     ArrayList<InstructionRecord> instructions = new ArrayList<>();
     instructions.add(new InstructionRecord(2, "{"));
@@ -189,100 +179,6 @@ class CodeAttributeRecordDiffblueTest {
   /**
    * Test {@link CodeAttributeRecord#toJson(StringBuilder)}.
    *
-   * <p>Method under test: {@link CodeAttributeRecord#toJson(StringBuilder)}
-   */
-  @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"StringBuilder CodeAttributeRecord.toJson(StringBuilder)"})
-  void testToJson5() {
-    // Arrange
-    ArrayList<String> parameters = new ArrayList<>();
-
-    CodeAttributeRecord codeAttributeRecord =
-        new CodeAttributeRecord("Clazz", "Method", parameters, new ArrayList<>());
-    codeAttributeRecord.setError(new ErrorRecord(1, "Not all who wander are lost"));
-    StringBuilder builder = new StringBuilder("foo");
-
-    // Act
-    StringBuilder actualToJsonResult = codeAttributeRecord.toJson(builder);
-
-    // Assert
-    assertEquals(
-        "foo{\"clazz\":\"Clazz\",\"method\":\"Method\",\"instructions\":[],\"parameters\":[],\"blockEvaluations\":[],\"error"
-            + "\":{\"instructionOffset\":1,\"message\":\"Not all who wander are lost\"}}",
-        builder.toString());
-    assertSame(builder, actualToJsonResult);
-  }
-
-  /**
-   * Test {@link CodeAttributeRecord#toJson(StringBuilder)}.
-   *
-   * <p>Method under test: {@link CodeAttributeRecord#toJson(StringBuilder)}
-   */
-  @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"StringBuilder CodeAttributeRecord.toJson(StringBuilder)"})
-  void testToJson6() {
-    // Arrange
-    InstructionRecord instructionRecord = new InstructionRecord(2, "{");
-    instructionRecord.setFinalStackBefore(new ArrayList<>());
-
-    ArrayList<InstructionRecord> instructions = new ArrayList<>();
-    instructions.add(instructionRecord);
-    CodeAttributeRecord codeAttributeRecord =
-        new CodeAttributeRecord("Clazz", "Method", new ArrayList<>(), instructions);
-    StringBuilder builder = new StringBuilder("foo");
-
-    // Act
-    StringBuilder actualToJsonResult = codeAttributeRecord.toJson(builder);
-
-    // Assert
-    assertEquals(
-        "foo{\"clazz\":\"Clazz\",\"method\":\"Method\",\"instructions\":[{\"offset\":2,\"instruction\":\"{\",\"finalStackBefore"
-            + "\":[]}],\"parameters\":[],\"blockEvaluations\":[]}",
-        builder.toString());
-    assertSame(builder, actualToJsonResult);
-  }
-
-  /**
-   * Test {@link CodeAttributeRecord#toJson(StringBuilder)}.
-   *
-   * <p>Method under test: {@link CodeAttributeRecord#toJson(StringBuilder)}
-   */
-  @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"StringBuilder CodeAttributeRecord.toJson(StringBuilder)"})
-  void testToJson7() {
-    // Arrange
-    InstructionRecord instructionRecord = new InstructionRecord(2, "{");
-    instructionRecord.setFinalTargetInstructions(new ArrayList<>());
-
-    ArrayList<InstructionRecord> instructions = new ArrayList<>();
-    instructions.add(instructionRecord);
-    CodeAttributeRecord codeAttributeRecord =
-        new CodeAttributeRecord("Clazz", "Method", new ArrayList<>(), instructions);
-    StringBuilder builder = new StringBuilder("foo");
-
-    // Act
-    StringBuilder actualToJsonResult = codeAttributeRecord.toJson(builder);
-
-    // Assert
-    assertEquals(
-        "foo{\"clazz\":\"Clazz\",\"method\":\"Method\",\"instructions\":[{\"offset\":2,\"instruction\":\"{\",\"finalTargetInstructions"
-            + "\":[]}],\"parameters\":[],\"blockEvaluations\":[]}",
-        builder.toString());
-    assertSame(builder, actualToJsonResult);
-  }
-
-  /**
-   * Test {@link CodeAttributeRecord#toJson(StringBuilder)}.
-   *
    * <ul>
    *   <li>Given {@link ArrayList#ArrayList()} add {@code clazz}.
    *   <li>Then {@link StringBuilder#StringBuilder(String)} with {@code foo} toString is a string.
@@ -291,12 +187,9 @@ class CodeAttributeRecordDiffblueTest {
    * <p>Method under test: {@link CodeAttributeRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName(
-      "Test toJson(StringBuilder); given ArrayList() add 'clazz'; then StringBuilder(String) with 'foo' toString is a string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder CodeAttributeRecord.toJson(StringBuilder)"})
-  void testToJson_givenArrayListAddClazz_thenStringBuilderWithFooToStringIsAString() {
+  public void testToJson_givenArrayListAddClazz_thenStringBuilderWithFooToStringIsAString() {
     // Arrange
     ArrayList<String> parameters = new ArrayList<>();
     parameters.add("clazz");
@@ -312,89 +205,6 @@ class CodeAttributeRecordDiffblueTest {
     assertEquals(
         "foo{\"clazz\":\"Clazz\",\"method\":\"Method\",\"instructions\":[],\"parameters\":[\"clazz\",\"{\"],\"blockEvaluations"
             + "\":[]}",
-        builder.toString());
-    assertSame(builder, actualToJsonResult);
-  }
-
-  /**
-   * Test {@link CodeAttributeRecord#toJson(StringBuilder)}.
-   *
-   * <ul>
-   *   <li>Given {@link ArrayList#ArrayList()} add one.
-   *   <li>Then {@link StringBuilder#StringBuilder(String)} with {@code foo} toString is a string.
-   * </ul>
-   *
-   * <p>Method under test: {@link CodeAttributeRecord#toJson(StringBuilder)}
-   */
-  @Test
-  @DisplayName(
-      "Test toJson(StringBuilder); given ArrayList() add one; then StringBuilder(String) with 'foo' toString is a string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"StringBuilder CodeAttributeRecord.toJson(StringBuilder)"})
-  void testToJson_givenArrayListAddOne_thenStringBuilderWithFooToStringIsAString() {
-    // Arrange
-    ArrayList<Integer> finalTargetInstructions = new ArrayList<>();
-    finalTargetInstructions.add(1);
-    finalTargetInstructions.add(2);
-
-    InstructionRecord instructionRecord = new InstructionRecord(2, "{");
-    instructionRecord.setFinalTargetInstructions(finalTargetInstructions);
-
-    ArrayList<InstructionRecord> instructions = new ArrayList<>();
-    instructions.add(instructionRecord);
-    CodeAttributeRecord codeAttributeRecord =
-        new CodeAttributeRecord("Clazz", "Method", new ArrayList<>(), instructions);
-    StringBuilder builder = new StringBuilder("foo");
-
-    // Act
-    StringBuilder actualToJsonResult = codeAttributeRecord.toJson(builder);
-
-    // Assert
-    assertEquals(
-        "foo{\"clazz\":\"Clazz\",\"method\":\"Method\",\"instructions\":[{\"offset\":2,\"instruction\":\"{\",\"finalTargetInstructions"
-            + "\":[1,2]}],\"parameters\":[],\"blockEvaluations\":[]}",
-        builder.toString());
-    assertSame(builder, actualToJsonResult);
-  }
-
-  /**
-   * Test {@link CodeAttributeRecord#toJson(StringBuilder)}.
-   *
-   * <ul>
-   *   <li>Given {@link ArrayList#ArrayList()} add two.
-   *   <li>Then {@link StringBuilder#StringBuilder(String)} with {@code foo} toString is a string.
-   * </ul>
-   *
-   * <p>Method under test: {@link CodeAttributeRecord#toJson(StringBuilder)}
-   */
-  @Test
-  @DisplayName(
-      "Test toJson(StringBuilder); given ArrayList() add two; then StringBuilder(String) with 'foo' toString is a string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"StringBuilder CodeAttributeRecord.toJson(StringBuilder)"})
-  void testToJson_givenArrayListAddTwo_thenStringBuilderWithFooToStringIsAString() {
-    // Arrange
-    ArrayList<Integer> finalTargetInstructions = new ArrayList<>();
-    finalTargetInstructions.add(2);
-
-    InstructionRecord instructionRecord = new InstructionRecord(2, "{");
-    instructionRecord.setFinalTargetInstructions(finalTargetInstructions);
-
-    ArrayList<InstructionRecord> instructions = new ArrayList<>();
-    instructions.add(instructionRecord);
-    CodeAttributeRecord codeAttributeRecord =
-        new CodeAttributeRecord("Clazz", "Method", new ArrayList<>(), instructions);
-    StringBuilder builder = new StringBuilder("foo");
-
-    // Act
-    StringBuilder actualToJsonResult = codeAttributeRecord.toJson(builder);
-
-    // Assert
-    assertEquals(
-        "foo{\"clazz\":\"Clazz\",\"method\":\"Method\",\"instructions\":[{\"offset\":2,\"instruction\":\"{\",\"finalTargetInstructions"
-            + "\":[2]}],\"parameters\":[],\"blockEvaluations\":[]}",
         builder.toString());
     assertSame(builder, actualToJsonResult);
   }

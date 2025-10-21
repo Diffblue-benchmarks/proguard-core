@@ -1,15 +1,14 @@
 package proguard.analysis.cpa.jvm.util;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class InstructionClassifierDiffblueTest {
+public class InstructionClassifierDiffblueTest {
   /**
    * Test {@link InstructionClassifier#isReturn(byte)}.
    *
@@ -21,11 +20,9 @@ class InstructionClassifierDiffblueTest {
    * <p>Method under test: {@link InstructionClassifier#isReturn(byte)}
    */
   @Test
-  @DisplayName("Test isReturn(byte); when 'A'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionClassifier.isReturn(byte)"})
-  void testIsReturn_whenA_thenReturnFalse() {
+  public void testIsReturn_whenA_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(InstructionClassifier.isReturn((byte) 'A'));
   }
@@ -41,11 +38,9 @@ class InstructionClassifierDiffblueTest {
    * <p>Method under test: {@link InstructionClassifier#isReturn(byte)}
    */
   @Test
-  @DisplayName("Test isReturn(byte); when minus seventy-nine; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionClassifier.isReturn(byte)"})
-  void testIsReturn_whenMinusSeventyNine_thenReturnTrue() {
+  public void testIsReturn_whenMinusSeventyNine_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(InstructionClassifier.isReturn((byte) -79));
   }
@@ -60,11 +55,9 @@ class InstructionClassifierDiffblueTest {
    * <p>Method under test: {@link InstructionClassifier#isTypedReturn(byte)}
    */
   @Test
-  @DisplayName("Test isTypedReturn(byte); when 'A'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionClassifier.isTypedReturn(byte)"})
-  void testIsTypedReturn_whenA() {
+  public void testIsTypedReturn_whenA() {
     // Arrange, Act and Assert
     assertFalse(InstructionClassifier.isTypedReturn((byte) 'A'));
   }
@@ -79,11 +72,9 @@ class InstructionClassifierDiffblueTest {
    * <p>Method under test: {@link InstructionClassifier#isTypedReturn(byte)}
    */
   @Test
-  @DisplayName("Test isTypedReturn(byte); when minus seventy-nine")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionClassifier.isTypedReturn(byte)"})
-  void testIsTypedReturn_whenMinusSeventyNine() {
+  public void testIsTypedReturn_whenMinusSeventyNine() {
     // Arrange, Act and Assert
     assertFalse(InstructionClassifier.isTypedReturn((byte) -79));
   }
@@ -94,11 +85,9 @@ class InstructionClassifierDiffblueTest {
    * <p>Method under test: {@link InstructionClassifier#isInvoke(byte)}
    */
   @Test
-  @DisplayName("Test isInvoke(byte)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionClassifier.isInvoke(byte)"})
-  void testIsInvoke() {
+  public void testIsInvoke() {
     // Arrange, Act and Assert
     assertFalse(InstructionClassifier.isInvoke((byte) 'A'));
   }
@@ -109,11 +98,9 @@ class InstructionClassifierDiffblueTest {
    * <p>Method under test: {@link InstructionClassifier#isLongShift(byte)}
    */
   @Test
-  @DisplayName("Test isLongShift(byte)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionClassifier.isLongShift(byte)"})
-  void testIsLongShift() {
+  public void testIsLongShift() {
     // Arrange, Act and Assert
     assertFalse(InstructionClassifier.isLongShift((byte) 'A'));
   }

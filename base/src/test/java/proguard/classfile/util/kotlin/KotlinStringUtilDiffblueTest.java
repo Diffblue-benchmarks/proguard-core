@@ -1,14 +1,13 @@
 package proguard.classfile.util.kotlin;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class KotlinStringUtilDiffblueTest {
+public class KotlinStringUtilDiffblueTest {
   /**
    * Test {@link KotlinStringUtil#capitializeFirstCharacterAsciiOnly(String)}.
    *
@@ -20,11 +19,9 @@ class KotlinStringUtilDiffblueTest {
    * <p>Method under test: {@link KotlinStringUtil#capitializeFirstCharacterAsciiOnly(String)}
    */
   @Test
-  @DisplayName("Test capitializeFirstCharacterAsciiOnly(String); when '42'; then return '42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String KotlinStringUtil.capitializeFirstCharacterAsciiOnly(String)"})
-  void testCapitializeFirstCharacterAsciiOnly_when42_thenReturn42() {
+  public void testCapitializeFirstCharacterAsciiOnly_when42_thenReturn42() {
     // Arrange, Act and Assert
     assertEquals("42", KotlinStringUtil.capitializeFirstCharacterAsciiOnly("42"));
   }
@@ -40,12 +37,9 @@ class KotlinStringUtilDiffblueTest {
    * <p>Method under test: {@link KotlinStringUtil#capitializeFirstCharacterAsciiOnly(String)}
    */
   @Test
-  @DisplayName(
-      "Test capitializeFirstCharacterAsciiOnly(String); when empty string; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String KotlinStringUtil.capitializeFirstCharacterAsciiOnly(String)"})
-  void testCapitializeFirstCharacterAsciiOnly_whenEmptyString_thenReturnEmptyString() {
+  public void testCapitializeFirstCharacterAsciiOnly_whenEmptyString_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", KotlinStringUtil.capitializeFirstCharacterAsciiOnly(""));
   }
@@ -61,11 +55,9 @@ class KotlinStringUtilDiffblueTest {
    * <p>Method under test: {@link KotlinStringUtil#capitializeFirstCharacterAsciiOnly(String)}
    */
   @Test
-  @DisplayName("Test capitializeFirstCharacterAsciiOnly(String); when 'foo'; then return 'Foo'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String KotlinStringUtil.capitializeFirstCharacterAsciiOnly(String)"})
-  void testCapitializeFirstCharacterAsciiOnly_whenFoo_thenReturnFoo() {
+  public void testCapitializeFirstCharacterAsciiOnly_whenFoo_thenReturnFoo() {
     // Arrange, Act and Assert
     assertEquals("Foo", KotlinStringUtil.capitializeFirstCharacterAsciiOnly("foo"));
   }
@@ -81,11 +73,9 @@ class KotlinStringUtilDiffblueTest {
    * <p>Method under test: {@link KotlinStringUtil#decapitializeFirstCharacterAsciiOnly(String)}
    */
   @Test
-  @DisplayName("Test decapitializeFirstCharacterAsciiOnly(String); when '42'; then return '42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String KotlinStringUtil.decapitializeFirstCharacterAsciiOnly(String)"})
-  void testDecapitializeFirstCharacterAsciiOnly_when42_thenReturn42() {
+  public void testDecapitializeFirstCharacterAsciiOnly_when42_thenReturn42() {
     // Arrange, Act and Assert
     assertEquals("42", KotlinStringUtil.decapitializeFirstCharacterAsciiOnly("42"));
   }
@@ -101,12 +91,9 @@ class KotlinStringUtilDiffblueTest {
    * <p>Method under test: {@link KotlinStringUtil#decapitializeFirstCharacterAsciiOnly(String)}
    */
   @Test
-  @DisplayName(
-      "Test decapitializeFirstCharacterAsciiOnly(String); when empty string; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String KotlinStringUtil.decapitializeFirstCharacterAsciiOnly(String)"})
-  void testDecapitializeFirstCharacterAsciiOnly_whenEmptyString_thenReturnEmptyString() {
+  public void testDecapitializeFirstCharacterAsciiOnly_whenEmptyString_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", KotlinStringUtil.decapitializeFirstCharacterAsciiOnly(""));
   }
@@ -122,11 +109,9 @@ class KotlinStringUtilDiffblueTest {
    * <p>Method under test: {@link KotlinStringUtil#decapitializeFirstCharacterAsciiOnly(String)}
    */
   @Test
-  @DisplayName("Test decapitializeFirstCharacterAsciiOnly(String); when 'foo'; then return 'foo'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String KotlinStringUtil.decapitializeFirstCharacterAsciiOnly(String)"})
-  void testDecapitializeFirstCharacterAsciiOnly_whenFoo_thenReturnFoo() {
+  public void testDecapitializeFirstCharacterAsciiOnly_whenFoo_thenReturnFoo() {
     // Arrange, Act and Assert
     assertEquals("foo", KotlinStringUtil.decapitializeFirstCharacterAsciiOnly("foo"));
   }
@@ -142,11 +127,9 @@ class KotlinStringUtilDiffblueTest {
    * <p>Method under test: {@link KotlinStringUtil#decapitializeForKotlinCompiler(String)}
    */
   @Test
-  @DisplayName("Test decapitializeForKotlinCompiler(String); when '42'; then return '42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String KotlinStringUtil.decapitializeForKotlinCompiler(String)"})
-  void testDecapitializeForKotlinCompiler_when42_thenReturn42() {
+  public void testDecapitializeForKotlinCompiler_when42_thenReturn42() {
     // Arrange, Act and Assert
     assertEquals("42", KotlinStringUtil.decapitializeForKotlinCompiler("42"));
   }
@@ -162,12 +145,9 @@ class KotlinStringUtilDiffblueTest {
    * <p>Method under test: {@link KotlinStringUtil#decapitializeForKotlinCompiler(String)}
    */
   @Test
-  @DisplayName(
-      "Test decapitializeForKotlinCompiler(String); when empty string; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String KotlinStringUtil.decapitializeForKotlinCompiler(String)"})
-  void testDecapitializeForKotlinCompiler_whenEmptyString_thenReturnEmptyString() {
+  public void testDecapitializeForKotlinCompiler_whenEmptyString_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", KotlinStringUtil.decapitializeForKotlinCompiler(""));
   }
@@ -183,11 +163,9 @@ class KotlinStringUtilDiffblueTest {
    * <p>Method under test: {@link KotlinStringUtil#decapitializeForKotlinCompiler(String)}
    */
   @Test
-  @DisplayName("Test decapitializeForKotlinCompiler(String); when 'foo'; then return 'foo'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String KotlinStringUtil.decapitializeForKotlinCompiler(String)"})
-  void testDecapitializeForKotlinCompiler_whenFoo_thenReturnFoo() {
+  public void testDecapitializeForKotlinCompiler_whenFoo_thenReturnFoo() {
     // Arrange, Act and Assert
     assertEquals("foo", KotlinStringUtil.decapitializeForKotlinCompiler("foo"));
   }

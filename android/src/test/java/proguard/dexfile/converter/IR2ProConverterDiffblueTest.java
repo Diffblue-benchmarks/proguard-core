@@ -1,15 +1,14 @@
 package proguard.dexfile.converter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.ProgramClass;
 import proguard.classfile.editor.CompactCodeAttributeComposer;
 import proguard.dexfile.ir.IrMethod;
@@ -17,7 +16,7 @@ import proguard.dexfile.ir.expr.ArrayExpr;
 import proguard.dexfile.ir.expr.Exprs;
 import proguard.dexfile.ir.expr.Value;
 
-class IR2ProConverterDiffblueTest {
+public class IR2ProConverterDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -32,9 +31,7 @@ class IR2ProConverterDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void IR2ProConverter.<init>()",
     "IR2ProConverter IR2ProConverter.code(CompactCodeAttributeComposer)",
@@ -42,7 +39,7 @@ class IR2ProConverterDiffblueTest {
     "IR2ProConverter IR2ProConverter.optimizeSynchronized(boolean)",
     "IR2ProConverter IR2ProConverter.usePrimitiveArrayConstants(boolean)"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     IR2ProConverter actualIr2ProConverter = new IR2ProConverter();
     ProgramClass targetClass = new ProgramClass();
@@ -80,11 +77,9 @@ class IR2ProConverterDiffblueTest {
    * <p>Method under test: {@link IR2ProConverter#toInternal(String)}
    */
   @Test
-  @DisplayName("Test toInternal(String); when '0'; then return '0'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String IR2ProConverter.toInternal(String)"})
-  void testToInternal_when0_thenReturn0() {
+  public void testToInternal_when0_thenReturn0() {
     // Arrange, Act and Assert
     assertEquals("0", IR2ProConverter.toInternal("0"));
   }
@@ -100,11 +95,9 @@ class IR2ProConverterDiffblueTest {
    * <p>Method under test: {@link IR2ProConverter#toInternal(String)}
    */
   @Test
-  @DisplayName("Test toInternal(String); when 'BLjava/lang/Byte;'; then return 'java/lang/Byte'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String IR2ProConverter.toInternal(String)"})
-  void testToInternal_whenBLjavaLangByte_thenReturnJavaLangByte() {
+  public void testToInternal_whenBLjavaLangByte_thenReturnJavaLangByte() {
     // Arrange, Act and Assert
     assertEquals("java/lang/Byte", IR2ProConverter.toInternal("BLjava/lang/Byte;"));
   }
@@ -120,11 +113,9 @@ class IR2ProConverterDiffblueTest {
    * <p>Method under test: {@link IR2ProConverter#toInternal(String)}
    */
   @Test
-  @DisplayName("Test toInternal(String); when 'foo'; then return 'foo'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String IR2ProConverter.toInternal(String)"})
-  void testToInternal_whenFoo_thenReturnFoo() {
+  public void testToInternal_whenFoo_thenReturnFoo() {
     // Arrange, Act and Assert
     assertEquals("foo", IR2ProConverter.toInternal("foo"));
   }
@@ -140,11 +131,9 @@ class IR2ProConverterDiffblueTest {
    * <p>Method under test: {@link IR2ProConverter#isZeroOrNull(Value)}
    */
   @Test
-  @DisplayName("Test isZeroOrNull(Value); when ArrayExpr(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean IR2ProConverter.isZeroOrNull(Value)"})
-  void testIsZeroOrNull_whenArrayExpr_thenReturnFalse() {
+  public void testIsZeroOrNull_whenArrayExpr_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(IR2ProConverter.isZeroOrNull(new ArrayExpr()));
   }
@@ -160,11 +149,9 @@ class IR2ProConverterDiffblueTest {
    * <p>Method under test: {@link IR2ProConverter#isZeroOrNull(Value)}
    */
   @Test
-  @DisplayName("Test isZeroOrNull(Value); when nByte 'A'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean IR2ProConverter.isZeroOrNull(Value)"})
-  void testIsZeroOrNull_whenNByteA_thenReturnFalse() {
+  public void testIsZeroOrNull_whenNByteA_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(IR2ProConverter.isZeroOrNull(Exprs.nByte((byte) 'A')));
   }
@@ -180,11 +167,9 @@ class IR2ProConverterDiffblueTest {
    * <p>Method under test: {@link IR2ProConverter#isZeroOrNull(Value)}
    */
   @Test
-  @DisplayName("Test isZeroOrNull(Value); when nNull; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean IR2ProConverter.isZeroOrNull(Value)"})
-  void testIsZeroOrNull_whenNNull_thenReturnTrue() {
+  public void testIsZeroOrNull_whenNNull_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(IR2ProConverter.isZeroOrNull(Exprs.nNull()));
   }

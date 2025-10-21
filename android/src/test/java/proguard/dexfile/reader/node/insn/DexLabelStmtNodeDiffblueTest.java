@@ -1,32 +1,29 @@
 package proguard.dexfile.reader.node.insn;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.reader.DexLabel;
 import proguard.dexfile.reader.node.DexCodeNode;
 import proguard.dexfile.reader.visitors.DexCodeVisitor;
 
-class DexLabelStmtNodeDiffblueTest {
+public class DexLabelStmtNodeDiffblueTest {
   /**
    * Test {@link DexLabelStmtNode#DexLabelStmtNode(DexLabel)}.
    *
    * <p>Method under test: {@link DexLabelStmtNode#DexLabelStmtNode(DexLabel)}
    */
   @Test
-  @DisplayName("Test new DexLabelStmtNode(DexLabel)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexLabelStmtNode.<init>(DexLabel)"})
-  void testNewDexLabelStmtNode() {
+  public void testNewDexLabelStmtNode() {
     // Arrange and Act
     DexLabelStmtNode actualDexLabelStmtNode = new DexLabelStmtNode(new DexLabel());
 
@@ -46,12 +43,9 @@ class DexLabelStmtNodeDiffblueTest {
    * <p>Method under test: {@link DexLabelStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeNode(); then DexCodeNode() stmts size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexLabelStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
+  public void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
     // Arrange
     DexLabelStmtNode dexLabelStmtNode = new DexLabelStmtNode(new DexLabel());
     DexCodeNode cv = new DexCodeNode();

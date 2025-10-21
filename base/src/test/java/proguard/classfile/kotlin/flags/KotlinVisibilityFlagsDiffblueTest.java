@@ -1,25 +1,22 @@
 package proguard.classfile.kotlin.flags;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.Assert.assertFalse;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class KotlinVisibilityFlagsDiffblueTest {
+public class KotlinVisibilityFlagsDiffblueTest {
   /**
    * Test new {@link KotlinVisibilityFlags} (default constructor).
    *
    * <p>Method under test: default or parameterless constructor of {@link KotlinVisibilityFlags}
    */
   @Test
-  @DisplayName("Test new KotlinVisibilityFlags (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void KotlinVisibilityFlags.<init>()"})
-  void testNewKotlinVisibilityFlags() {
+  public void testNewKotlinVisibilityFlags() {
     // Arrange and Act
     KotlinVisibilityFlags actualKotlinVisibilityFlags = new KotlinVisibilityFlags();
 

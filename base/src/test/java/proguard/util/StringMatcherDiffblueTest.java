@@ -1,16 +1,15 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class StringMatcherDiffblueTest {
+public class StringMatcherDiffblueTest {
   /**
    * Test {@link StringMatcher#matches(String)} with {@code String}.
    *
@@ -22,13 +21,11 @@ class StringMatcherDiffblueTest {
    * <p>Method under test: {@link StringMatcher#matches(String)}
    */
   @Test
-  @DisplayName("Test matches(String) with 'String'; when empty string; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean StringMatcher.matches(String)"})
-  void testMatchesWithString_whenEmptyString_thenReturnTrue() {
+  public void testMatchesWithString_whenEmptyString_thenReturnTrue() {
     // Arrange, Act and Assert
-    assertTrue(new EmptyStringMatcher().matches(""));
+    assertTrue((new EmptyStringMatcher()).matches(""));
   }
 
   /**
@@ -42,13 +39,11 @@ class StringMatcherDiffblueTest {
    * <p>Method under test: {@link StringMatcher#matches(String)}
    */
   @Test
-  @DisplayName("Test matches(String) with 'String'; when 'String'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean StringMatcher.matches(String)"})
-  void testMatchesWithString_whenString_thenReturnFalse() {
+  public void testMatchesWithString_whenString_thenReturnFalse() {
     // Arrange, Act and Assert
-    assertFalse(new EmptyStringMatcher().matches("String"));
+    assertFalse((new EmptyStringMatcher()).matches("String"));
   }
 
   /**
@@ -57,12 +52,10 @@ class StringMatcherDiffblueTest {
    * <p>Method under test: {@link StringMatcher#prefix()}
    */
   @Test
-  @DisplayName("Test prefix()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringMatcher.prefix()"})
-  void testPrefix() {
+  public void testPrefix() {
     // Arrange, Act and Assert
-    assertEquals("", new EmptyStringMatcher().prefix());
+    assertEquals("", (new EmptyStringMatcher()).prefix());
   }
 }

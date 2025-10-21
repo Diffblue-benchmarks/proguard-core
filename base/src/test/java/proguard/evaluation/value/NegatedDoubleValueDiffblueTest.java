@@ -1,17 +1,16 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class NegatedDoubleValueDiffblueTest {
+public class NegatedDoubleValueDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -23,16 +22,14 @@ class NegatedDoubleValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void NegatedDoubleValue.<init>(DoubleValue)",
     "java.lang.String NegatedDoubleValue.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
-    assertEquals("-d", new NegatedDoubleValue(BasicValueFactory.DOUBLE_VALUE).toString());
+    assertEquals("-d", (new NegatedDoubleValue(BasicValueFactory.DOUBLE_VALUE)).toString());
   }
 
   /**
@@ -41,14 +38,12 @@ class NegatedDoubleValueDiffblueTest {
    * <p>Method under test: {@link NegatedDoubleValue#negate()}
    */
   @Test
-  @DisplayName("Test negate()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue NegatedDoubleValue.negate()"})
-  void testNegate() {
+  public void testNegate() {
     // Arrange and Act
     DoubleValue actualNegateResult =
-        new NegatedDoubleValue(BasicValueFactory.DOUBLE_VALUE).negate();
+        (new NegatedDoubleValue(BasicValueFactory.DOUBLE_VALUE)).negate();
 
     // Assert
     assertTrue(actualNegateResult instanceof UnknownDoubleValue);
@@ -73,21 +68,20 @@ class NegatedDoubleValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean NegatedDoubleValue.equals(Object)",
     "int NegatedDoubleValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     NegatedDoubleValue negatedDoubleValue = new NegatedDoubleValue(BasicValueFactory.DOUBLE_VALUE);
     NegatedDoubleValue negatedDoubleValue2 = new NegatedDoubleValue(BasicValueFactory.DOUBLE_VALUE);
 
     // Act and Assert
     assertEquals(negatedDoubleValue, negatedDoubleValue2);
-    assertEquals(negatedDoubleValue.hashCode(), negatedDoubleValue2.hashCode());
+    int expectedHashCodeResult = negatedDoubleValue.hashCode();
+    assertEquals(expectedHashCodeResult, negatedDoubleValue2.hashCode());
   }
 
   /**
@@ -106,14 +100,12 @@ class NegatedDoubleValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean NegatedDoubleValue.equals(Object)",
     "int NegatedDoubleValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     NegatedDoubleValue negatedDoubleValue = new NegatedDoubleValue(BasicValueFactory.DOUBLE_VALUE);
 
@@ -134,14 +126,12 @@ class NegatedDoubleValueDiffblueTest {
    * <p>Method under test: {@link NegatedDoubleValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean NegatedDoubleValue.equals(Object)",
     "int NegatedDoubleValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     NegatedDoubleValue negatedDoubleValue =
         new NegatedDoubleValue(ParticularValueFactory.DOUBLE_VALUE_0);
@@ -161,14 +151,12 @@ class NegatedDoubleValueDiffblueTest {
    * <p>Method under test: {@link NegatedDoubleValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean NegatedDoubleValue.equals(Object)",
     "int NegatedDoubleValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
     NegatedDoubleValue negatedDoubleValue =
         new NegatedDoubleValue(new NegatedDoubleValue(BasicValueFactory.DOUBLE_VALUE));
@@ -188,14 +176,12 @@ class NegatedDoubleValueDiffblueTest {
    * <p>Method under test: {@link NegatedDoubleValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean NegatedDoubleValue.equals(Object)",
     "int NegatedDoubleValue.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new NegatedDoubleValue(BasicValueFactory.DOUBLE_VALUE), null);
   }
@@ -211,14 +197,12 @@ class NegatedDoubleValueDiffblueTest {
    * <p>Method under test: {@link NegatedDoubleValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean NegatedDoubleValue.equals(Object)",
     "int NegatedDoubleValue.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
         new NegatedDoubleValue(BasicValueFactory.DOUBLE_VALUE),

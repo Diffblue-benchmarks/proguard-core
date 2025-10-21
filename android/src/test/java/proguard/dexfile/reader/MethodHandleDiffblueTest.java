@@ -1,17 +1,16 @@
 package proguard.dexfile.reader;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class MethodHandleDiffblueTest {
+public class MethodHandleDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -30,10 +29,7 @@ class MethodHandleDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName(
-      "Test getters and setters; then return Field is Field(String, String, String) with 'Owner' and 'Name' and 'Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void MethodHandle.<init>(int, Field)",
     "void MethodHandle.<init>(int, Field, Method)",
@@ -42,12 +38,12 @@ class MethodHandleDiffblueTest {
     "Method MethodHandle.getMethod()",
     "int MethodHandle.getType()"
   })
-  void testGettersAndSetters_thenReturnFieldIsFieldWithOwnerAndNameAndType() {
+  public void testGettersAndSetters_thenReturnFieldIsFieldWithOwnerAndNameAndType() {
     // Arrange
     Field field = new Field("Owner", "Name", "Type");
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto);
+
+    Method method =
+        new Method("Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type"));
 
     // Act
     MethodHandle actualMethodHandle = new MethodHandle(1, field, method);
@@ -77,9 +73,7 @@ class MethodHandleDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters; then return Field is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void MethodHandle.<init>(int, Field)",
     "void MethodHandle.<init>(int, Field, Method)",
@@ -88,11 +82,10 @@ class MethodHandleDiffblueTest {
     "Method MethodHandle.getMethod()",
     "int MethodHandle.getType()"
   })
-  void testGettersAndSetters_thenReturnFieldIsNull() {
+  public void testGettersAndSetters_thenReturnFieldIsNull() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto);
+    Method method =
+        new Method("Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type"));
 
     // Act
     MethodHandle actualMethodHandle = new MethodHandle(1, method);
@@ -124,10 +117,7 @@ class MethodHandleDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName(
-      "Test getters and setters; when Field(String, String, String) with 'Owner' and 'Name' and 'Type'; then return Method is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void MethodHandle.<init>(int, Field)",
     "void MethodHandle.<init>(int, Field, Method)",
@@ -136,7 +126,7 @@ class MethodHandleDiffblueTest {
     "Method MethodHandle.getMethod()",
     "int MethodHandle.getType()"
   })
-  void testGettersAndSetters_whenFieldWithOwnerAndNameAndType_thenReturnMethodIsNull() {
+  public void testGettersAndSetters_whenFieldWithOwnerAndNameAndType_thenReturnMethodIsNull() {
     // Arrange
     Field field = new Field("Owner", "Name", "Type");
 
@@ -167,18 +157,17 @@ class MethodHandleDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MethodHandle.equals(Object)", "int MethodHandle.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     MethodHandle methodHandle = new MethodHandle(1, (Field) null);
     MethodHandle methodHandle2 = new MethodHandle(1, (Field) null);
 
     // Act and Assert
     assertEquals(methodHandle, methodHandle2);
-    assertEquals(methodHandle.hashCode(), methodHandle2.hashCode());
+    int expectedHashCodeResult = methodHandle.hashCode();
+    assertEquals(expectedHashCodeResult, methodHandle2.hashCode());
   }
 
   /**
@@ -197,14 +186,11 @@ class MethodHandleDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MethodHandle.equals(Object)", "int MethodHandle.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
-    Field field = new Field("Owner", "Name", "Type");
-    MethodHandle methodHandle = new MethodHandle(1, field);
+    MethodHandle methodHandle = new MethodHandle(1, new Field("Owner", "Name", "Type"));
 
     // Act and Assert
     assertEquals(methodHandle, methodHandle);
@@ -223,19 +209,14 @@ class MethodHandleDiffblueTest {
    * <p>Method under test: {@link MethodHandle#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MethodHandle.equals(Object)", "int MethodHandle.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
-    Field field = new Field("Owner", "Name", "Type");
-    MethodHandle methodHandle = new MethodHandle(1, field);
-    Field field2 = new Field("Owner", "Name", "Type");
-    MethodHandle methodHandle2 = new MethodHandle(1, field2);
+    MethodHandle methodHandle = new MethodHandle(1, new Field("Owner", "Name", "Type"));
 
     // Act and Assert
-    assertNotEquals(methodHandle, methodHandle2);
+    assertNotEquals(methodHandle, new MethodHandle(1, new Field("Owner", "Name", "Type")));
   }
 
   /**
@@ -249,19 +230,14 @@ class MethodHandleDiffblueTest {
    * <p>Method under test: {@link MethodHandle#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MethodHandle.equals(Object)", "int MethodHandle.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
-    Field field = new Field("Owner", "Name", "Type");
-    MethodHandle methodHandle = new MethodHandle(0, field);
-    Field field2 = new Field("Owner", "Name", "Type");
-    MethodHandle methodHandle2 = new MethodHandle(1, field2);
+    MethodHandle methodHandle = new MethodHandle(0, new Field("Owner", "Name", "Type"));
 
     // Act and Assert
-    assertNotEquals(methodHandle, methodHandle2);
+    assertNotEquals(methodHandle, new MethodHandle(1, new Field("Owner", "Name", "Type")));
   }
 
   /**
@@ -275,18 +251,14 @@ class MethodHandleDiffblueTest {
    * <p>Method under test: {@link MethodHandle#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MethodHandle.equals(Object)", "int MethodHandle.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
     // Arrange
     MethodHandle methodHandle = new MethodHandle(1, (Field) null);
-    Field field = new Field("Owner", "Name", "Type");
-    MethodHandle methodHandle2 = new MethodHandle(1, field);
 
     // Act and Assert
-    assertNotEquals(methodHandle, methodHandle2);
+    assertNotEquals(methodHandle, new MethodHandle(1, new Field("Owner", "Name", "Type")));
   }
 
   /**
@@ -300,20 +272,19 @@ class MethodHandleDiffblueTest {
    * <p>Method under test: {@link MethodHandle#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MethodHandle.equals(Object)", "int MethodHandle.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual4() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual4() {
     // Arrange
     MethodHandle methodHandle = new MethodHandle(1, (Field) null);
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto);
-    MethodHandle methodHandle2 = new MethodHandle(1, method);
 
     // Act and Assert
-    assertNotEquals(methodHandle, methodHandle2);
+    assertNotEquals(
+        methodHandle,
+        new MethodHandle(
+            1,
+            new Method(
+                "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type"))));
   }
 
   /**
@@ -327,20 +298,18 @@ class MethodHandleDiffblueTest {
    * <p>Method under test: {@link MethodHandle#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MethodHandle.equals(Object)", "int MethodHandle.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual5() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual5() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto);
-    MethodHandle methodHandle = new MethodHandle(1, method);
-    MethodHandle methodHandle2 = new MethodHandle(1, (Field) null);
+    MethodHandle methodHandle =
+        new MethodHandle(
+            1,
+            new Method(
+                "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")));
 
     // Act and Assert
-    assertNotEquals(methodHandle, methodHandle2);
+    assertNotEquals(methodHandle, new MethodHandle(1, (Field) null));
   }
 
   /**
@@ -354,17 +323,11 @@ class MethodHandleDiffblueTest {
    * <p>Method under test: {@link MethodHandle#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MethodHandle.equals(Object)", "int MethodHandle.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
-    // Arrange
-    Field field = new Field("Owner", "Name", "Type");
-    MethodHandle methodHandle = new MethodHandle(1, field);
-
-    // Act and Assert
-    assertNotEquals(methodHandle, null);
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+    // Arrange, Act and Assert
+    assertNotEquals(new MethodHandle(1, new Field("Owner", "Name", "Type")), null);
   }
 
   /**
@@ -378,16 +341,11 @@ class MethodHandleDiffblueTest {
    * <p>Method under test: {@link MethodHandle#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MethodHandle.equals(Object)", "int MethodHandle.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
-    // Arrange
-    Field field = new Field("Owner", "Name", "Type");
-    MethodHandle methodHandle = new MethodHandle(1, field);
-
-    // Act and Assert
-    assertNotEquals(methodHandle, "Different type to MethodHandle");
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+    // Arrange, Act and Assert
+    assertNotEquals(
+        new MethodHandle(1, new Field("Owner", "Name", "Type")), "Different type to MethodHandle");
   }
 }

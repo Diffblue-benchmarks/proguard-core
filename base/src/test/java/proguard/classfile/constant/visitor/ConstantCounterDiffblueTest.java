@@ -1,29 +1,26 @@
 package proguard.classfile.constant.visitor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.constant.ClassConstant;
 import proguard.classfile.constant.Constant;
 
-class ConstantCounterDiffblueTest {
+public class ConstantCounterDiffblueTest {
   /**
    * Test {@link ConstantCounter#visitAnyConstant(Clazz, Constant)}.
    *
    * <p>Method under test: {@link ConstantCounter#visitAnyConstant(Clazz, Constant)}
    */
   @Test
-  @DisplayName("Test visitAnyConstant(Clazz, Constant)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantCounter.visitAnyConstant(Clazz, Constant)"})
-  void testVisitAnyConstant() {
+  public void testVisitAnyConstant() {
     // Arrange
     ConstantCounter constantCounter = new ConstantCounter();
     LibraryClass clazz = new LibraryClass();
@@ -46,12 +43,10 @@ class ConstantCounterDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantCounter.<init>()", "int ConstantCounter.getCount()"})
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
-    assertEquals(0, new ConstantCounter().getCount());
+    assertEquals(0, (new ConstantCounter()).getCount());
   }
 }

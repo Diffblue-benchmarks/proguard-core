@@ -1,34 +1,29 @@
 package proguard.dexfile.ir.ts;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.NoSuchElementException;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.expr.Constant;
 
-class UniqueQueueDiffblueTest {
+public class UniqueQueueDiffblueTest {
   /**
    * Test new {@link UniqueQueue} (default constructor).
    *
    * <p>Method under test: default or parameterless constructor of {@link UniqueQueue}
    */
   @Test
-  @DisplayName("Test new UniqueQueue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void UniqueQueue.<init>()"})
-  void testNewUniqueQueue() {
+  public void testNewUniqueQueue() {
     // Arrange and Act
     UniqueQueue<Object> actualObjectList = new UniqueQueue<>();
 
@@ -48,12 +43,9 @@ class UniqueQueueDiffblueTest {
    * <p>Method under test: {@link UniqueQueue#addAll(Collection)}
    */
   @Test
-  @DisplayName(
-      "Test addAll(Collection) with 'Collection'; given Null; when ArrayList() add Null; then ArrayList() size is two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean UniqueQueue.addAll(Collection)"})
-  void testAddAllWithCollection_givenNull_whenArrayListAddNull_thenArrayListSizeIsTwo() {
+  public void testAddAllWithCollection_givenNull_whenArrayListAddNull_thenArrayListSizeIsTwo() {
     // Arrange
     UniqueQueue<Object> objectList = new UniqueQueue<>();
 
@@ -68,7 +60,8 @@ class UniqueQueueDiffblueTest {
     assertEquals(1, objectList.size());
     assertEquals(2, c.size());
     assertTrue(actualAddAllResult);
-    assertSame(c.get(0), objectList.get(0));
+    Object expectedGetResult = c.get(0);
+    assertSame(expectedGetResult, objectList.get(0));
   }
 
   /**
@@ -83,12 +76,9 @@ class UniqueQueueDiffblueTest {
    * <p>Method under test: {@link UniqueQueue#addAll(Collection)}
    */
   @Test
-  @DisplayName(
-      "Test addAll(Collection) with 'Collection'; given Null; when ArrayList() add Null; then UniqueQueue (default constructor) size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean UniqueQueue.addAll(Collection)"})
-  void testAddAllWithCollection_givenNull_whenArrayListAddNull_thenUniqueQueueSizeIsOne() {
+  public void testAddAllWithCollection_givenNull_whenArrayListAddNull_thenUniqueQueueSizeIsOne() {
     // Arrange
     UniqueQueue<Object> objectList = new UniqueQueue<>();
 
@@ -115,11 +105,9 @@ class UniqueQueueDiffblueTest {
    * <p>Method under test: {@link UniqueQueue#addAll(Collection)}
    */
   @Test
-  @DisplayName("Test addAll(Collection) with 'Collection'; when ArrayList(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean UniqueQueue.addAll(Collection)"})
-  void testAddAllWithCollection_whenArrayList_thenReturnFalse() {
+  public void testAddAllWithCollection_whenArrayList_thenReturnFalse() {
     // Arrange
     UniqueQueue<Object> objectList = new UniqueQueue<>();
     ArrayList<Object> c = new ArrayList<>();
@@ -140,11 +128,9 @@ class UniqueQueueDiffblueTest {
    * <p>Method under test: {@link UniqueQueue#add(Object)}
    */
   @Test
-  @DisplayName("Test add(Object) with 'Object'; given UniqueQueue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean UniqueQueue.add(Object)"})
-  void testAddWithObject_givenUniqueQueue() {
+  public void testAddWithObject_givenUniqueQueue() {
     // Arrange
     UniqueQueue<Object> objectList = new UniqueQueue<>();
     Object object = Constant.Null;
@@ -168,11 +154,9 @@ class UniqueQueueDiffblueTest {
    * <p>Method under test: {@link UniqueQueue#add(Object)}
    */
   @Test
-  @DisplayName("Test add(Object) with 'Object'; given UniqueQueue (default constructor) add Null")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean UniqueQueue.add(Object)"})
-  void testAddWithObject_givenUniqueQueueAddNull() {
+  public void testAddWithObject_givenUniqueQueueAddNull() {
     // Arrange
     UniqueQueue<Object> objectList = new UniqueQueue<>();
     objectList.add(Constant.Null);
@@ -193,11 +177,9 @@ class UniqueQueueDiffblueTest {
    * <p>Method under test: {@link UniqueQueue#poll()}
    */
   @Test
-  @DisplayName("Test poll()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Object UniqueQueue.poll()"})
-  void testPoll() {
+  public void testPoll() {
     // Arrange
     UniqueQueue<Object> objectList = new UniqueQueue<>();
 
@@ -216,12 +198,9 @@ class UniqueQueueDiffblueTest {
    * <p>Method under test: {@link UniqueQueue#pop()}
    */
   @Test
-  @DisplayName(
-      "Test pop(); given UniqueQueue (default constructor) add Null; then UniqueQueue (default constructor) Empty")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Object UniqueQueue.pop()"})
-  void testPop_givenUniqueQueueAddNull_thenUniqueQueueEmpty() {
+  public void testPop_givenUniqueQueueAddNull_thenUniqueQueueEmpty() {
     // Arrange
     UniqueQueue<Object> objectList = new UniqueQueue<>();
     objectList.add(Constant.Null);
@@ -231,29 +210,5 @@ class UniqueQueueDiffblueTest {
 
     // Assert
     assertTrue(objectList.isEmpty());
-  }
-
-  /**
-   * Test {@link UniqueQueue#pop()}.
-   *
-   * <ul>
-   *   <li>Given {@link UniqueQueue} (default constructor).
-   *   <li>Then throw {@link NoSuchElementException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link UniqueQueue#pop()}
-   */
-  @Test
-  @DisplayName(
-      "Test pop(); given UniqueQueue (default constructor); then throw NoSuchElementException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Object UniqueQueue.pop()"})
-  void testPop_givenUniqueQueue_thenThrowNoSuchElementException() {
-    // Arrange
-    UniqueQueue<Object> objectList = new UniqueQueue<>();
-
-    // Act and Assert
-    assertThrows(NoSuchElementException.class, () -> objectList.pop());
   }
 }

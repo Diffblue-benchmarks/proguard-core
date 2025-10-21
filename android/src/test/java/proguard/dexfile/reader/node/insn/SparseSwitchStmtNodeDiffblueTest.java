@@ -1,22 +1,21 @@
 package proguard.dexfile.reader.node.insn;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.reader.DexLabel;
 import proguard.dexfile.reader.Op;
 import proguard.dexfile.reader.node.DexCodeNode;
 import proguard.dexfile.reader.visitors.DexCodeVisitor;
 
-class SparseSwitchStmtNodeDiffblueTest {
+public class SparseSwitchStmtNodeDiffblueTest {
   /**
    * Test {@link SparseSwitchStmtNode#SparseSwitchStmtNode(Op, int, int[], DexLabel[])}.
    *
@@ -24,18 +23,15 @@ class SparseSwitchStmtNodeDiffblueTest {
    * DexLabel[])}
    */
   @Test
-  @DisplayName("Test new SparseSwitchStmtNode(Op, int, int[], DexLabel[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void SparseSwitchStmtNode.<init>(Op, int, int[], DexLabel[])"})
-  void testNewSparseSwitchStmtNode() {
+  public void testNewSparseSwitchStmtNode() {
     // Arrange
     DexLabel dexLabel = new DexLabel();
-    DexLabel[] labels = new DexLabel[] {dexLabel};
 
     // Act
     SparseSwitchStmtNode actualSparseSwitchStmtNode =
-        new SparseSwitchStmtNode(Op.NOP, 1, new int[] {1, -1, 1, -1}, labels);
+        new SparseSwitchStmtNode(Op.NOP, 1, new int[] {1, -1, 1, -1}, new DexLabel[] {dexLabel});
 
     // Assert
     assertEquals(0, actualSparseSwitchStmtNode.__index);
@@ -58,17 +54,13 @@ class SparseSwitchStmtNodeDiffblueTest {
    * <p>Method under test: {@link SparseSwitchStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeNode(); then DexCodeNode() stmts size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void SparseSwitchStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
+  public void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
     // Arrange
     DexLabel dexLabel = new DexLabel();
-    DexLabel[] labels = new DexLabel[] {dexLabel};
     SparseSwitchStmtNode sparseSwitchStmtNode =
-        new SparseSwitchStmtNode(Op.NOP, 1, new int[] {1, -1, 1, -1}, labels);
+        new SparseSwitchStmtNode(Op.NOP, 1, new int[] {1, -1, 1, -1}, new DexLabel[] {dexLabel});
     DexCodeNode cv = new DexCodeNode();
 
     // Act
@@ -104,17 +96,13 @@ class SparseSwitchStmtNodeDiffblueTest {
    * <p>Method under test: {@link SparseSwitchStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeVisitor(DexCodeVisitor) with visitor is DexCodeNode(); then array length is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void SparseSwitchStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeNode_thenArrayLengthIsOne() {
+  public void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeNode_thenArrayLengthIsOne() {
     // Arrange
     DexLabel dexLabel = new DexLabel();
-    DexLabel[] labels = new DexLabel[] {dexLabel};
     SparseSwitchStmtNode sparseSwitchStmtNode =
-        new SparseSwitchStmtNode(Op.NOP, 1, new int[] {1, -1, 1, -1}, labels);
+        new SparseSwitchStmtNode(Op.NOP, 1, new int[] {1, -1, 1, -1}, new DexLabel[] {dexLabel});
 
     // Act
     sparseSwitchStmtNode.accept(new DexCodeVisitor(new DexCodeNode()));
@@ -137,17 +125,13 @@ class SparseSwitchStmtNodeDiffblueTest {
    * <p>Method under test: {@link SparseSwitchStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeVisitor(DexCodeVisitor) with visitor is DexCodeVisitor(); then array length is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void SparseSwitchStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeVisitor_thenArrayLengthIsOne() {
+  public void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeVisitor_thenArrayLengthIsOne() {
     // Arrange
     DexLabel dexLabel = new DexLabel();
-    DexLabel[] labels = new DexLabel[] {dexLabel};
     SparseSwitchStmtNode sparseSwitchStmtNode =
-        new SparseSwitchStmtNode(Op.NOP, 1, new int[] {1, -1, 1, -1}, labels);
+        new SparseSwitchStmtNode(Op.NOP, 1, new int[] {1, -1, 1, -1}, new DexLabel[] {dexLabel});
 
     // Act
     sparseSwitchStmtNode.accept(new DexCodeVisitor(new DexCodeVisitor()));
@@ -169,16 +153,13 @@ class SparseSwitchStmtNodeDiffblueTest {
    * <p>Method under test: {@link SparseSwitchStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName("Test accept(DexCodeVisitor); when DexCodeVisitor(); then array length is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void SparseSwitchStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeVisitor_thenArrayLengthIsOne() {
+  public void testAccept_whenDexCodeVisitor_thenArrayLengthIsOne() {
     // Arrange
     DexLabel dexLabel = new DexLabel();
-    DexLabel[] labels = new DexLabel[] {dexLabel};
     SparseSwitchStmtNode sparseSwitchStmtNode =
-        new SparseSwitchStmtNode(Op.NOP, 1, new int[] {1, -1, 1, -1}, labels);
+        new SparseSwitchStmtNode(Op.NOP, 1, new int[] {1, -1, 1, -1}, new DexLabel[] {dexLabel});
 
     // Act
     sparseSwitchStmtNode.accept(new DexCodeVisitor());

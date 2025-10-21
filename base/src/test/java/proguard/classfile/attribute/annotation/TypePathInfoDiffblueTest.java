@@ -1,14 +1,13 @@
 package proguard.classfile.attribute.annotation;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class TypePathInfoDiffblueTest {
+public class TypePathInfoDiffblueTest {
   /**
    * Test {@link TypePathInfo#TypePathInfo()}.
    *
@@ -19,11 +18,9 @@ class TypePathInfoDiffblueTest {
    * <p>Method under test: {@link TypePathInfo#TypePathInfo()}
    */
   @Test
-  @DisplayName("Test new TypePathInfo(); then return u1typeArgumentIndex is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TypePathInfo.<init>()", "void TypePathInfo.<init>(int, int)"})
-  void testNewTypePathInfo_thenReturnU1typeArgumentIndexIsZero() {
+  public void testNewTypePathInfo_thenReturnU1typeArgumentIndexIsZero() {
     // Arrange and Act
     TypePathInfo actualTypePathInfo = new TypePathInfo();
 
@@ -43,11 +40,9 @@ class TypePathInfoDiffblueTest {
    * <p>Method under test: {@link TypePathInfo#TypePathInfo(int, int)}
    */
   @Test
-  @DisplayName("Test new TypePathInfo(int, int); when one; then return u1typeArgumentIndex is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TypePathInfo.<init>()", "void TypePathInfo.<init>(int, int)"})
-  void testNewTypePathInfo_whenOne_thenReturnU1typeArgumentIndexIsOne() {
+  public void testNewTypePathInfo_whenOne_thenReturnU1typeArgumentIndexIsOne() {
     // Arrange and Act
     TypePathInfo actualTypePathInfo = new TypePathInfo(1, 1);
 

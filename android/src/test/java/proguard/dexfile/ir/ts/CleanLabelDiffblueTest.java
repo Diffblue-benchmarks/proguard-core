@@ -1,20 +1,19 @@
 package proguard.dexfile.ir.ts;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.IrMethod;
 import proguard.dexfile.ir.stmt.StmtList;
 import proguard.dexfile.ir.stmt.Stmts;
 
-class CleanLabelDiffblueTest {
+public class CleanLabelDiffblueTest {
   /**
    * Test {@link CleanLabel#transform(IrMethod)}.
    *
@@ -27,12 +26,9 @@ class CleanLabelDiffblueTest {
    * <p>Method under test: {@link CleanLabel#transform(IrMethod)}
    */
   @Test
-  @DisplayName(
-      "Test transform(IrMethod); given ArrayList(); when IrMethod (default constructor) phiLabels is ArrayList()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void CleanLabel.transform(IrMethod)"})
-  void testTransform_givenArrayList_whenIrMethodPhiLabelsIsArrayList() {
+  public void testTransform_givenArrayList_whenIrMethodPhiLabelsIsArrayList() {
     // Arrange
     CleanLabel cleanLabel = new CleanLabel();
     IrMethod irMethod = new IrMethod();
@@ -58,12 +54,9 @@ class CleanLabelDiffblueTest {
    * <p>Method under test: {@link CleanLabel#transform(IrMethod)}
    */
   @Test
-  @DisplayName(
-      "Test transform(IrMethod); given StmtList (default constructor) add nLabel; then IrMethod (default constructor) stmts First is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void CleanLabel.transform(IrMethod)"})
-  void testTransform_givenStmtListAddNLabel_thenIrMethodStmtsFirstIsNull() {
+  public void testTransform_givenStmtListAddNLabel_thenIrMethodStmtsFirstIsNull() {
     // Arrange
     CleanLabel cleanLabel = new CleanLabel();
 
@@ -94,12 +87,9 @@ class CleanLabelDiffblueTest {
    * <p>Method under test: {@link CleanLabel#transform(IrMethod)}
    */
   @Test
-  @DisplayName(
-      "Test transform(IrMethod); given StmtList (default constructor) add nLabel; then IrMethod (default constructor) stmts First is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void CleanLabel.transform(IrMethod)"})
-  void testTransform_givenStmtListAddNLabel_thenIrMethodStmtsFirstIsNull2() {
+  public void testTransform_givenStmtListAddNLabel_thenIrMethodStmtsFirstIsNull2() {
     // Arrange
     CleanLabel cleanLabel = new CleanLabel();
 
@@ -131,12 +121,9 @@ class CleanLabelDiffblueTest {
    * <p>Method under test: {@link CleanLabel#transform(IrMethod)}
    */
   @Test
-  @DisplayName(
-      "Test transform(IrMethod); when IrMethod (default constructor); then IrMethod (default constructor) stmts Size is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void CleanLabel.transform(IrMethod)"})
-  void testTransform_whenIrMethod_thenIrMethodStmtsSizeIsZero() {
+  public void testTransform_whenIrMethod_thenIrMethodStmtsSizeIsZero() {
     // Arrange
     CleanLabel cleanLabel = new CleanLabel();
     IrMethod irMethod = new IrMethod();

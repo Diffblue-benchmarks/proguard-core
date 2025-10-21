@@ -1,17 +1,16 @@
 package proguard.dexfile.ir.ts;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.Assert.assertFalse;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.IrMethod;
 import proguard.dexfile.ir.expr.Local;
 
-class VoidInvokeTransformerDiffblueTest {
+public class VoidInvokeTransformerDiffblueTest {
   /**
    * Test {@link VoidInvokeTransformer#transformReportChanged(IrMethod)}.
    *
@@ -23,12 +22,9 @@ class VoidInvokeTransformerDiffblueTest {
    * <p>Method under test: {@link VoidInvokeTransformer#transformReportChanged(IrMethod)}
    */
   @Test
-  @DisplayName(
-      "Test transformReportChanged(IrMethod); given ArrayList() add Local(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean VoidInvokeTransformer.transformReportChanged(IrMethod)"})
-  void testTransformReportChanged_givenArrayListAddLocal_thenReturnFalse() {
+  public void testTransformReportChanged_givenArrayListAddLocal_thenReturnFalse() {
     // Arrange
     VoidInvokeTransformer voidInvokeTransformer = new VoidInvokeTransformer();
 
@@ -52,12 +48,9 @@ class VoidInvokeTransformerDiffblueTest {
    * <p>Method under test: {@link VoidInvokeTransformer#transformReportChanged(IrMethod)}
    */
   @Test
-  @DisplayName(
-      "Test transformReportChanged(IrMethod); when IrMethod (default constructor); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean VoidInvokeTransformer.transformReportChanged(IrMethod)"})
-  void testTransformReportChanged_whenIrMethod_thenReturnFalse() {
+  public void testTransformReportChanged_whenIrMethod_thenReturnFalse() {
     // Arrange
     VoidInvokeTransformer voidInvokeTransformer = new VoidInvokeTransformer();
 

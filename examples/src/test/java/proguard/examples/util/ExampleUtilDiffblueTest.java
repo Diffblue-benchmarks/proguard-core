@@ -3,8 +3,7 @@ package proguard.examples.util;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
-import com.diffblue.cover.annotations.ContributionFromDiffblue;
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -22,8 +21,7 @@ public class ExampleUtilDiffblueTest {
    * <p>Method under test: {@link ExampleUtil#createClassPool(Class[])}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassPool ExampleUtil.createClassPool(Class[])"})
   public void testCreateClassPool_whenJavaLangObject_thenReturnSizeIsOne() {
     // Arrange
@@ -44,8 +42,7 @@ public class ExampleUtilDiffblueTest {
    * <p>Method under test: {@link ExampleUtil#addClass(ClassPool, Class[])}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ExampleUtil.addClass(ClassPool, Class[])"})
   public void testAddClass_whenJavaLangObject_thenClassPoolSizeIsOne() {
     // Arrange
@@ -66,8 +63,7 @@ public class ExampleUtilDiffblueTest {
    * <p>Method under test: {@link ExampleUtil#executeMainMethod(ClassPool, String, String[])}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Object ExampleUtil.executeMainMethod(ClassPool, String, String[])"})
   public void testExecuteMainMethodWithClassPoolInternalClassNameArguments() {
     // Arrange, Act and Assert
@@ -87,8 +83,7 @@ public class ExampleUtilDiffblueTest {
    * <p>Method under test: {@link ExampleUtil#executeMainMethod(ClassPool, String)}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Object ExampleUtil.executeMainMethod(ClassPool, String)"})
   public void testExecuteMainMethodWithClassPoolInternalClassName_thenThrowRuntimeException() {
     // Arrange, Act and Assert

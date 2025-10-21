@@ -1,12 +1,11 @@
 package proguard.classfile.editor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.ProgramClass;
@@ -14,34 +13,7 @@ import proguard.classfile.attribute.BootstrapMethodInfo;
 import proguard.classfile.constant.ClassConstant;
 import proguard.classfile.constant.Constant;
 
-class BootstrapMethodsAttributeAdderDiffblueTest {
-  /**
-   * Test {@link BootstrapMethodsAttributeAdder#getBootstrapMethodIndex()}.
-   *
-   * <ul>
-   *   <li>Then return zero.
-   * </ul>
-   *
-   * <p>Method under test: {@link BootstrapMethodsAttributeAdder#getBootstrapMethodIndex()}
-   */
-  @Test
-  @DisplayName("Test getBootstrapMethodIndex(); then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"int BootstrapMethodsAttributeAdder.getBootstrapMethodIndex()"})
-  void testGetBootstrapMethodIndex_thenReturnZero() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-
-    BootstrapMethodsAttributeAdder bootstrapMethodsAttributeAdder =
-        new BootstrapMethodsAttributeAdder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass clazz = new LibraryClass();
-    bootstrapMethodsAttributeAdder.visitBootstrapMethodInfo(clazz, new BootstrapMethodInfo());
-
-    // Act and Assert
-    assertEquals(0, bootstrapMethodsAttributeAdder.getBootstrapMethodIndex());
-  }
-
+public class BootstrapMethodsAttributeAdderDiffblueTest {
   /**
    * Test {@link BootstrapMethodsAttributeAdder#visitBootstrapMethodInfo(Clazz,
    * BootstrapMethodInfo)}.
@@ -50,17 +22,15 @@ class BootstrapMethodsAttributeAdderDiffblueTest {
    * BootstrapMethodInfo)}
    */
   @Test
-  @DisplayName("Test visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void BootstrapMethodsAttributeAdder.visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)"
   })
-  void testVisitBootstrapMethodInfo() {
+  public void testVisitBootstrapMethodInfo() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     BootstrapMethodsAttributeAdder bootstrapMethodsAttributeAdder =
-        new BootstrapMethodsAttributeAdder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+        new BootstrapMethodsAttributeAdder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
     LibraryClass clazz = new LibraryClass();
 
     // Act
@@ -78,17 +48,15 @@ class BootstrapMethodsAttributeAdderDiffblueTest {
    * BootstrapMethodInfo)}
    */
   @Test
-  @DisplayName("Test visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void BootstrapMethodsAttributeAdder.visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)"
   })
-  void testVisitBootstrapMethodInfo2() {
+  public void testVisitBootstrapMethodInfo2() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     BootstrapMethodsAttributeAdder bootstrapMethodsAttributeAdder =
-        new BootstrapMethodsAttributeAdder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
+        new BootstrapMethodsAttributeAdder(
+            new ProgramClass(1, 0, new Constant[] {new ClassConstant()}, 1, 1, 1));
     LibraryClass clazz = new LibraryClass();
 
     // Act
@@ -106,13 +74,11 @@ class BootstrapMethodsAttributeAdderDiffblueTest {
    * BootstrapMethodInfo)}
    */
   @Test
-  @DisplayName("Test visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void BootstrapMethodsAttributeAdder.visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)"
   })
-  void testVisitBootstrapMethodInfo3() {
+  public void testVisitBootstrapMethodInfo3() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -142,17 +108,15 @@ class BootstrapMethodsAttributeAdderDiffblueTest {
    * BootstrapMethodInfo)}
    */
   @Test
-  @DisplayName("Test visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void BootstrapMethodsAttributeAdder.visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)"
   })
-  void testVisitBootstrapMethodInfo4() {
+  public void testVisitBootstrapMethodInfo4() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     BootstrapMethodsAttributeAdder bootstrapMethodsAttributeAdder =
-        new BootstrapMethodsAttributeAdder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+        new BootstrapMethodsAttributeAdder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
     LibraryClass clazz = new LibraryClass();
 
     // Act

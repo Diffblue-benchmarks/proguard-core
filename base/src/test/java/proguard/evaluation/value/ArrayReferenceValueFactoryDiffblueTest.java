@@ -1,19 +1,18 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 
-class ArrayReferenceValueFactoryDiffblueTest {
+public class ArrayReferenceValueFactoryDiffblueTest {
   /**
    * Test {@link ArrayReferenceValueFactory#createArrayReferenceValue(String, Clazz, IntegerValue)}
    * with {@code type}, {@code referencedClass}, {@code arrayLength}.
@@ -22,14 +21,11 @@ class ArrayReferenceValueFactoryDiffblueTest {
    * Clazz, IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue) with 'type', 'referencedClass', 'arrayLength'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue ArrayReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue)"
   })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength() {
+  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength() {
     // Arrange
     ArrayReferenceValueFactory arrayReferenceValueFactory = new ArrayReferenceValueFactory();
     LibraryClass referencedClass = new LibraryClass();
@@ -65,26 +61,21 @@ class ArrayReferenceValueFactoryDiffblueTest {
    * Clazz, IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue) with 'type', 'referencedClass', 'arrayLength'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue ArrayReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue)"
   })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength2() {
+  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength2() {
     // Arrange
     ArrayReferenceValueFactory arrayReferenceValueFactory = new ArrayReferenceValueFactory();
     IntegerValue arrayLength = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    ReferenceValue actualCreateArrayReferenceValueResult =
-        arrayReferenceValueFactory.createArrayReferenceValue(null, new LibraryClass(), arrayLength);
-
-    // Assert
-    assertSame(arrayLength, arrayReferenceValueFactory.createIntegerValue());
+    // Act and Assert
     assertSame(
-        TypedReferenceValueFactory.REFERENCE_VALUE_NULL, actualCreateArrayReferenceValueResult);
+        arrayReferenceValueFactory.REFERENCE_VALUE_NULL,
+        arrayReferenceValueFactory.createArrayReferenceValue(
+            null, new LibraryClass(), arrayLength));
+    assertSame(arrayLength, arrayReferenceValueFactory.createIntegerValue());
   }
 
   /**
@@ -96,14 +87,11 @@ class ArrayReferenceValueFactoryDiffblueTest {
    * Clazz, IntegerValue, Object)}
    */
   @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue, Object) with 'type', 'referencedClass', 'arrayLength', 'elementValues'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue ArrayReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue, Object)"
   })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLengthElementValues() {
+  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLengthElementValues() {
     // Arrange
     ArrayReferenceValueFactory arrayReferenceValueFactory = new ArrayReferenceValueFactory();
     LibraryClass referencedClass = new LibraryClass();
@@ -140,26 +128,20 @@ class ArrayReferenceValueFactoryDiffblueTest {
    * Clazz, IntegerValue, Object)}
    */
   @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue, Object) with 'type', 'referencedClass', 'arrayLength', 'elementValues'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue ArrayReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue, Object)"
   })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLengthElementValues2() {
+  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLengthElementValues2() {
     // Arrange
     ArrayReferenceValueFactory arrayReferenceValueFactory = new ArrayReferenceValueFactory();
     IntegerValue arrayLength = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    ReferenceValue actualCreateArrayReferenceValueResult =
-        arrayReferenceValueFactory.createArrayReferenceValue(
-            null, new LibraryClass(), arrayLength, "Element Values");
-
-    // Assert
-    assertSame(arrayLength, arrayReferenceValueFactory.createIntegerValue());
+    // Act and Assert
     assertSame(
-        TypedReferenceValueFactory.REFERENCE_VALUE_NULL, actualCreateArrayReferenceValueResult);
+        arrayReferenceValueFactory.REFERENCE_VALUE_NULL,
+        arrayReferenceValueFactory.createArrayReferenceValue(
+            null, new LibraryClass(), arrayLength, "Element Values"));
+    assertSame(arrayLength, arrayReferenceValueFactory.createIntegerValue());
   }
 }

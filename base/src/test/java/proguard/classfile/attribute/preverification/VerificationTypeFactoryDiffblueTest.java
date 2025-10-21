@@ -1,26 +1,23 @@
 package proguard.classfile.attribute.preverification;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class VerificationTypeFactoryDiffblueTest {
+public class VerificationTypeFactoryDiffblueTest {
   /**
    * Test {@link VerificationTypeFactory#createUninitializedType(int)}.
    *
    * <p>Method under test: {@link VerificationTypeFactory#createUninitializedType(int)}
    */
   @Test
-  @DisplayName("Test createUninitializedType(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"UninitializedType VerificationTypeFactory.createUninitializedType(int)"})
-  void testCreateUninitializedType() {
+  public void testCreateUninitializedType() {
     // Arrange and Act
     UninitializedType actualCreateUninitializedTypeResult =
         VerificationTypeFactory.createUninitializedType(1);
@@ -38,11 +35,9 @@ class VerificationTypeFactoryDiffblueTest {
    * <p>Method under test: {@link VerificationTypeFactory#createObjectType(int)}
    */
   @Test
-  @DisplayName("Test createObjectType(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ObjectType VerificationTypeFactory.createObjectType(int)"})
-  void testCreateObjectType() {
+  public void testCreateObjectType() {
     // Arrange and Act
     ObjectType actualCreateObjectTypeResult = VerificationTypeFactory.createObjectType(1);
 

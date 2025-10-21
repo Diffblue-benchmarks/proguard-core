@@ -1,18 +1,17 @@
 package proguard.dexfile.ir.ts;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.HashSet;
 import java.util.Set;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.IrMethod;
 import proguard.dexfile.ir.TypeClass;
 import proguard.dexfile.ir.expr.ArrayExpr;
@@ -29,18 +28,16 @@ import proguard.dexfile.ir.stmt.StmtList;
 import proguard.dexfile.ir.stmt.Stmts;
 import proguard.dexfile.ir.ts.TypeTransformer.TypeRef;
 
-class TypeTransformerDiffblueTest {
+public class TypeTransformerDiffblueTest {
   /**
    * Test {@link TypeTransformer#transform(IrMethod)}.
    *
    * <p>Method under test: {@link TypeTransformer#transform(IrMethod)}
    */
   @Test
-  @DisplayName("Test transform(IrMethod)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TypeTransformer.transform(IrMethod)"})
-  void testTransform() {
+  public void testTransform() {
     // Arrange
     TypeTransformer typeTransformer = new TypeTransformer();
 
@@ -65,21 +62,17 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeTransformer#transform(IrMethod)}
    */
   @Test
-  @DisplayName("Test transform(IrMethod)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TypeTransformer.transform(IrMethod)"})
-  void testTransform2() {
+  public void testTransform2() {
     // Arrange
     TypeTransformer typeTransformer = new TypeTransformer();
 
     StmtList stmtList = new StmtList();
     Local key = new Local();
-    LabelStmt[] targets = new LabelStmt[] {Stmts.nLabel()};
-
-    LookupSwitchStmt stmt =
-        new LookupSwitchStmt(key, new int[] {42, 1, 42, 1}, targets, Stmts.nLabel());
-    stmtList.add(stmt);
+    stmtList.add(
+        new LookupSwitchStmt(
+            key, new int[] {42, 1, 42, 1}, new LabelStmt[] {Stmts.nLabel()}, Stmts.nLabel()));
     IrMethod irMethod = new IrMethod();
     irMethod.stmts = stmtList;
 
@@ -100,11 +93,9 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeTransformer#transform(IrMethod)}
    */
   @Test
-  @DisplayName("Test transform(IrMethod)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TypeTransformer.transform(IrMethod)"})
-  void testTransform3() {
+  public void testTransform3() {
     // Arrange
     TypeTransformer typeTransformer = new TypeTransformer();
 
@@ -131,11 +122,9 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeTransformer#transform(IrMethod)}
    */
   @Test
-  @DisplayName("Test transform(IrMethod)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TypeTransformer.transform(IrMethod)"})
-  void testTransform4() {
+  public void testTransform4() {
     // Arrange
     TypeTransformer typeTransformer = new TypeTransformer();
 
@@ -162,56 +151,17 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeTransformer#transform(IrMethod)}
    */
   @Test
-  @DisplayName("Test transform(IrMethod)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TypeTransformer.transform(IrMethod)"})
-  void testTransform5() {
+  public void testTransform5() {
     // Arrange
     TypeTransformer typeTransformer = new TypeTransformer();
 
     StmtList stmtList = new StmtList();
     Constant key = Exprs.nByte((byte) 'A');
-    LabelStmt[] targets = new LabelStmt[] {Stmts.nLabel()};
-
-    LookupSwitchStmt stmt =
-        new LookupSwitchStmt(key, new int[] {42, 1, 42, 1}, targets, Stmts.nLabel());
-    stmtList.add(stmt);
-    IrMethod irMethod = new IrMethod();
-    irMethod.stmts = stmtList;
-
-    // Act
-    typeTransformer.transform(irMethod);
-
-    // Assert
-    Stmt first = irMethod.stmts.getFirst();
-    Value op = first.getOp();
-    assertTrue(op instanceof Constant);
-    assertTrue(first instanceof LookupSwitchStmt);
-    assertEquals("I", ((Constant) op).valueType);
-  }
-
-  /**
-   * Test {@link TypeTransformer#transform(IrMethod)}.
-   *
-   * <p>Method under test: {@link TypeTransformer#transform(IrMethod)}
-   */
-  @Test
-  @DisplayName("Test transform(IrMethod)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void TypeTransformer.transform(IrMethod)"})
-  void testTransform6() {
-    // Arrange
-    TypeTransformer typeTransformer = new TypeTransformer();
-
-    StmtList stmtList = new StmtList();
-    Constant key = Exprs.nChar('\u0001');
-    LabelStmt[] targets = new LabelStmt[] {Stmts.nLabel()};
-
-    LookupSwitchStmt stmt =
-        new LookupSwitchStmt(key, new int[] {42, 1, 42, 1}, targets, Stmts.nLabel());
-    stmtList.add(stmt);
+    stmtList.add(
+        new LookupSwitchStmt(
+            key, new int[] {42, 1, 42, 1}, new LabelStmt[] {Stmts.nLabel()}, Stmts.nLabel()));
     IrMethod irMethod = new IrMethod();
     irMethod.stmts = stmtList;
 
@@ -237,12 +187,9 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeTransformer#transform(IrMethod)}
    */
   @Test
-  @DisplayName(
-      "Test transform(IrMethod); then IrMethod (default constructor) stmts First Op valueType is 'Ljava/lang/Object;'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TypeTransformer.transform(IrMethod)"})
-  void testTransform_thenIrMethodStmtsFirstOpValueTypeIsLjavaLangObject() {
+  public void testTransform_thenIrMethodStmtsFirstOpValueTypeIsLjavaLangObject() {
     // Arrange
     TypeTransformer typeTransformer = new TypeTransformer();
 
@@ -275,12 +222,9 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#addAllUses(Set)}
    */
   @Test
-  @DisplayName(
-      "Test TypeRef addAllUses(Set); given '42'; then TypeRef(Value) with value is ArrayExpr() uses size is two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TypeRef.addAllUses(Set)"})
-  void testTypeRefAddAllUses_given42_thenTypeRefWithValueIsArrayExprUsesSizeIsTwo() {
+  public void testTypeRefAddAllUses_given42_thenTypeRefWithValueIsArrayExprUsesSizeIsTwo() {
     // Arrange
     TypeRef typeRef = new TypeRef(new ArrayExpr());
 
@@ -311,12 +255,9 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#addAllUses(Set)}
    */
   @Test
-  @DisplayName(
-      "Test TypeRef addAllUses(Set); given 'foo'; when HashSet() add 'foo'; then HashSet() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TypeRef.addAllUses(Set)"})
-  void testTypeRefAddAllUses_givenFoo_whenHashSetAddFoo_thenHashSetSizeIsOne() {
+  public void testTypeRefAddAllUses_givenFoo_whenHashSetAddFoo_thenHashSetSizeIsOne() {
     // Arrange
     TypeRef typeRef = new TypeRef(new ArrayExpr());
 
@@ -346,24 +287,18 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#addAllUses(Set)}
    */
   @Test
-  @DisplayName(
-      "Test TypeRef addAllUses(Set); given TypeRef(Value) with value is ArrayExpr() addUses 'Ele'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TypeRef.addAllUses(Set)"})
-  void testTypeRefAddAllUses_givenTypeRefWithValueIsArrayExprAddUsesEle_thenReturnFalse() {
+  public void testTypeRefAddAllUses_givenTypeRefWithValueIsArrayExprAddUsesEle_thenReturnFalse() {
     // Arrange
     TypeRef typeRef = new TypeRef(new ArrayExpr());
     typeRef.addUses("Ele");
     HashSet<String> resultUses = new HashSet<>();
 
-    // Act
-    boolean actualAddAllUsesResult = typeRef.addAllUses(resultUses);
-
-    // Assert
+    // Act and Assert
     Set<String> stringSet = typeRef.uses;
     assertEquals(1, stringSet.size());
-    assertFalse(actualAddAllUsesResult);
+    assertFalse(typeRef.addAllUses(resultUses));
     assertTrue(resultUses.isEmpty());
     assertTrue(stringSet.contains("Ele"));
   }
@@ -380,12 +315,9 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#addAllUses(Set)}
    */
   @Test
-  @DisplayName(
-      "Test TypeRef addAllUses(Set); when HashSet(); then TypeRef(Value) with value is ArrayExpr() uses Empty")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TypeRef.addAllUses(Set)"})
-  void testTypeRefAddAllUses_whenHashSet_thenTypeRefWithValueIsArrayExprUsesEmpty() {
+  public void testTypeRefAddAllUses_whenHashSet_thenTypeRefWithValueIsArrayExprUsesEmpty() {
     // Arrange
     TypeRef typeRef = new TypeRef(new ArrayExpr());
     HashSet<String> resultUses = new HashSet<>();
@@ -410,23 +342,17 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#addUses(String)}
    */
   @Test
-  @DisplayName(
-      "Test TypeRef addUses(String); given TypeRef(Value) with value is ArrayExpr() addUses 'Ele'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TypeRef.addUses(String)"})
-  void testTypeRefAddUses_givenTypeRefWithValueIsArrayExprAddUsesEle_thenReturnFalse() {
+  public void testTypeRefAddUses_givenTypeRefWithValueIsArrayExprAddUsesEle_thenReturnFalse() {
     // Arrange
     TypeRef typeRef = new TypeRef(new ArrayExpr());
     typeRef.addUses("Ele");
 
-    // Act
-    boolean actualAddUsesResult = typeRef.addUses("Ele");
-
-    // Assert
+    // Act and Assert
     Set<String> stringSet = typeRef.uses;
     assertEquals(1, stringSet.size());
-    assertFalse(actualAddUsesResult);
+    assertFalse(typeRef.addUses("Ele"));
     assertTrue(stringSet.contains("Ele"));
   }
 
@@ -441,12 +367,9 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#addUses(String)}
    */
   @Test
-  @DisplayName(
-      "Test TypeRef addUses(String); given TypeRef(Value) with value is ArrayExpr(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TypeRef.addUses(String)"})
-  void testTypeRefAddUses_givenTypeRefWithValueIsArrayExpr_thenReturnTrue() {
+  public void testTypeRefAddUses_givenTypeRefWithValueIsArrayExpr_thenReturnTrue() {
     // Arrange
     TypeRef typeRef = new TypeRef(new ArrayExpr());
 
@@ -466,13 +389,11 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#getProvideDesc()}
    */
   @Test
-  @DisplayName("Test TypeRef getProvideDesc()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TypeRef.getProvideDesc()"})
-  void testTypeRefGetProvideDesc() {
+  public void testTypeRefGetProvideDesc() {
     // Arrange, Act and Assert
-    assertNull(new TypeRef(new ArrayExpr()).getProvideDesc());
+    assertNull((new TypeRef(new ArrayExpr())).getProvideDesc());
   }
 
   /**
@@ -487,12 +408,9 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#getType()}
    */
   @Test
-  @DisplayName(
-      "Test TypeRef getType(); given TypeRef(Value) with value is ArrayExpr() addUses 'I'; then return 'I'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TypeRef.getType()"})
-  void testTypeRefGetType_givenTypeRefWithValueIsArrayExprAddUsesI_thenReturnI() {
+  public void testTypeRefGetType_givenTypeRefWithValueIsArrayExprAddUsesI_thenReturnI() {
     // Arrange
     TypeRef typeRef = new TypeRef(new ArrayExpr());
     typeRef.addUses("I");
@@ -514,12 +432,9 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#getType()}
    */
   @Test
-  @DisplayName(
-      "Test TypeRef getType(); given TypeRef(Value) with value is ArrayExpr() updateTypeClass 'BOOLEAN'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TypeRef.getType()"})
-  void testTypeRefGetType_givenTypeRefWithValueIsArrayExprUpdateTypeClassBoolean() {
+  public void testTypeRefGetType_givenTypeRefWithValueIsArrayExprUpdateTypeClassBoolean() {
     // Arrange
     TypeRef typeRef = new TypeRef(new ArrayExpr());
     typeRef.updateTypeClass(TypeClass.BOOLEAN);
@@ -541,12 +456,9 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#getType()}
    */
   @Test
-  @DisplayName(
-      "Test TypeRef getType(); given TypeRef(Value) with value is ArrayExpr() updateTypeClass 'JD'; then return 'J'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TypeRef.getType()"})
-  void testTypeRefGetType_givenTypeRefWithValueIsArrayExprUpdateTypeClassJd_thenReturnJ() {
+  public void testTypeRefGetType_givenTypeRefWithValueIsArrayExprUpdateTypeClassJd_thenReturnJ() {
     // Arrange
     TypeRef typeRef = new TypeRef(new ArrayExpr());
     typeRef.updateTypeClass(TypeClass.JD);
@@ -567,14 +479,11 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#getType()}
    */
   @Test
-  @DisplayName(
-      "Test TypeRef getType(); given TypeRef(Value) with value is ArrayExpr(); then throw RuntimeException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TypeRef.getType()"})
-  void testTypeRefGetType_givenTypeRefWithValueIsArrayExpr_thenThrowRuntimeException() {
+  public void testTypeRefGetType_givenTypeRefWithValueIsArrayExpr_thenThrowRuntimeException() {
     // Arrange, Act and Assert
-    assertThrows(RuntimeException.class, () -> new TypeRef(new ArrayExpr()).getType());
+    assertThrows(RuntimeException.class, () -> (new TypeRef(new ArrayExpr())).getType());
   }
 
   /**
@@ -587,11 +496,9 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#getType()}
    */
   @Test
-  @DisplayName("Test TypeRef getType(); then return 'I'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TypeRef.getType()"})
-  void testTypeRefGetType_thenReturnI() {
+  public void testTypeRefGetType_thenReturnI() {
     // Arrange
     TypeRef typeRef = new TypeRef(new ArrayExpr());
     typeRef.updateTypeClass(TypeClass.INT);
@@ -611,11 +518,9 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#getType()}
    */
   @Test
-  @DisplayName("Test TypeRef getType(); then return 'Z'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TypeRef.getType()"})
-  void testTypeRefGetType_thenReturnZ() {
+  public void testTypeRefGetType_thenReturnZ() {
     // Arrange
     TypeRef typeRef = new TypeRef(new ArrayExpr());
     typeRef.updateTypeClass(TypeClass.ZIL);
@@ -635,11 +540,9 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#getType()}
    */
   @Test
-  @DisplayName("Test TypeRef getType(); then throw RuntimeException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TypeRef.getType()"})
-  void testTypeRefGetType_thenThrowRuntimeException() {
+  public void testTypeRefGetType_thenThrowRuntimeException() {
     // Arrange
     TypeRef typeRef = new TypeRef(new ArrayExpr());
     typeRef.addUses("Ele");
@@ -660,12 +563,9 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#merge(TypeRef)}
    */
   @Test
-  @DisplayName(
-      "Test TypeRef merge(TypeRef); given 'Ele'; when TypeRef(Value) with value is ArrayExpr() addUses 'Ele'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TypeRef.merge(TypeRef)"})
-  void testTypeRefMerge_givenEle_whenTypeRefWithValueIsArrayExprAddUsesEle() {
+  public void testTypeRefMerge_givenEle_whenTypeRefWithValueIsArrayExprAddUsesEle() {
     // Arrange
     TypeRef typeRef = new TypeRef(new ArrayExpr());
 
@@ -690,12 +590,9 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#merge(TypeRef)}
    */
   @Test
-  @DisplayName(
-      "Test TypeRef merge(TypeRef); given TypeRef(Value) with value is ArrayExpr() addUses '42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TypeRef.merge(TypeRef)"})
-  void testTypeRefMerge_givenTypeRefWithValueIsArrayExprAddUses42() {
+  public void testTypeRefMerge_givenTypeRefWithValueIsArrayExprAddUses42() {
     // Arrange
     TypeRef typeRef = new TypeRef(new ArrayExpr());
     typeRef.addUses("42");
@@ -720,11 +617,9 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#merge(TypeRef)}
    */
   @Test
-  @DisplayName("Test TypeRef merge(TypeRef); when TypeRef(Value) with value is ArrayExpr()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TypeRef.merge(TypeRef)"})
-  void testTypeRefMerge_whenTypeRefWithValueIsArrayExpr() {
+  public void testTypeRefMerge_whenTypeRefWithValueIsArrayExpr() {
     // Arrange
     TypeRef typeRef = new TypeRef(new ArrayExpr());
     TypeRef other = new TypeRef(new ArrayExpr());
@@ -742,11 +637,9 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#TypeRef(Value)}
    */
   @Test
-  @DisplayName("Test TypeRef new TypeRef(Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TypeRef.<init>(Value)"})
-  void testTypeRefNewTypeRef() {
+  public void testTypeRefNewTypeRef() {
     // Arrange and Act
     TypeRef actualTypeRef = new TypeRef(new ArrayExpr());
 
@@ -775,18 +668,15 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#toString()}
    */
   @Test
-  @DisplayName(
-      "Test TypeRef toString(); given ArrayExpr() Op1 is ArrayExpr(); then return '?::null[null][null]: null > {}'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TypeRef.toString()"})
-  void testTypeRefToString_givenArrayExprOp1IsArrayExpr_thenReturnNullNullNullNull() {
+  public void testTypeRefToString_givenArrayExprOp1IsArrayExpr_thenReturnNullNullNullNull() {
     // Arrange
     ArrayExpr value = new ArrayExpr();
     value.setOp1(new ArrayExpr());
 
     // Act and Assert
-    assertEquals("?::null[null][null]: null > {}", new TypeRef(value).toString());
+    assertEquals("?::null[null][null]: null > {}", (new TypeRef(value)).toString());
   }
 
   /**
@@ -800,14 +690,11 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#toString()}
    */
   @Test
-  @DisplayName(
-      "Test TypeRef toString(); given TypeRef(Value) with value is ArrayExpr(); then return '?::null[null]: null > {}'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TypeRef.toString()"})
-  void testTypeRefToString_givenTypeRefWithValueIsArrayExpr_thenReturnNullNullNull() {
+  public void testTypeRefToString_givenTypeRefWithValueIsArrayExpr_thenReturnNullNullNull() {
     // Arrange, Act and Assert
-    assertEquals("?::null[null]: null > {}", new TypeRef(new ArrayExpr()).toString());
+    assertEquals("?::null[null]: null > {}", (new TypeRef(new ArrayExpr())).toString());
   }
 
   /**
@@ -821,14 +708,11 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#toString()}
    */
   @Test
-  @DisplayName(
-      "Test TypeRef toString(); given TypeRef(Value) with value is 'null'; then return '?::null: null > {}'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TypeRef.toString()"})
-  void testTypeRefToString_givenTypeRefWithValueIsNull_thenReturnNullNull() {
+  public void testTypeRefToString_givenTypeRefWithValueIsNull_thenReturnNullNull() {
     // Arrange, Act and Assert
-    assertEquals("?::null: null > {}", new TypeRef(null).toString());
+    assertEquals("?::null: null > {}", (new TypeRef(null)).toString());
   }
 
   /**
@@ -841,11 +725,9 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#toString()}
    */
   @Test
-  @DisplayName("Test TypeRef toString(); then return '?::null[null]: null > {[]}'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TypeRef.toString()"})
-  void testTypeRefToString_thenReturnNullNullNull() {
+  public void testTypeRefToString_thenReturnNullNullNull() {
     // Arrange
     TypeRef typeRef = new TypeRef(new ArrayExpr());
     typeRef.addUses("[]");
@@ -864,45 +746,16 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#toString()}
    */
   @Test
-  @DisplayName("Test TypeRef toString(); then return '?::null[null][null[null]]: null > {}'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TypeRef.toString()"})
-  void testTypeRefToString_thenReturnNullNullNullNullNull() {
+  public void testTypeRefToString_thenReturnNullNullNullNullNull() {
     // Arrange
     ArrayExpr base = new ArrayExpr();
-    ArrayExpr value = new ArrayExpr(base, new ArrayExpr(), "[]");
 
     // Act and Assert
-    assertEquals("?::null[null][null[null]]: null > {}", new TypeRef(value).toString());
-  }
-
-  /**
-   * Test TypeRef {@link TypeRef#updateTypeClass(TypeClass)}.
-   *
-   * <ul>
-   *   <li>Then {@link TypeRef#TypeRef(Value)} with value is {@link ArrayExpr#ArrayExpr()} {@link
-   *       TypeRef#clz} is {@code BOOLEAN}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#updateTypeClass(TypeClass)}
-   */
-  @Test
-  @DisplayName(
-      "Test TypeRef updateTypeClass(TypeClass); then TypeRef(Value) with value is ArrayExpr() clz is 'BOOLEAN'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean TypeRef.updateTypeClass(TypeClass)"})
-  void testTypeRefUpdateTypeClass_thenTypeRefWithValueIsArrayExprClzIsBoolean() {
-    // Arrange
-    TypeRef typeRef = new TypeRef(new ArrayExpr());
-
-    // Act
-    boolean actualUpdateTypeClassResult = typeRef.updateTypeClass(TypeClass.BOOLEAN);
-
-    // Assert
-    assertEquals(TypeClass.BOOLEAN, typeRef.clz);
-    assertTrue(actualUpdateTypeClassResult);
+    assertEquals(
+        "?::null[null][null[null]]: null > {}",
+        (new TypeRef(new ArrayExpr(base, new ArrayExpr(), "[]"))).toString());
   }
 
   /**
@@ -916,20 +769,14 @@ class TypeTransformerDiffblueTest {
    * <p>Method under test: {@link TypeRef#updateTypeClass(TypeClass)}
    */
   @Test
-  @DisplayName(
-      "Test TypeRef updateTypeClass(TypeClass); then TypeRef(Value) with value is ArrayExpr() clz is 'UNKNOWN'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TypeRef.updateTypeClass(TypeClass)"})
-  void testTypeRefUpdateTypeClass_thenTypeRefWithValueIsArrayExprClzIsUnknown() {
+  public void testTypeRefUpdateTypeClass_thenTypeRefWithValueIsArrayExprClzIsUnknown() {
     // Arrange
     TypeRef typeRef = new TypeRef(new ArrayExpr());
 
-    // Act
-    boolean actualUpdateTypeClassResult = typeRef.updateTypeClass(TypeClass.UNKNOWN);
-
-    // Assert
+    // Act and Assert
     assertEquals(TypeClass.UNKNOWN, typeRef.clz);
-    assertFalse(actualUpdateTypeClassResult);
+    assertFalse(typeRef.updateTypeClass(TypeClass.UNKNOWN));
   }
 }

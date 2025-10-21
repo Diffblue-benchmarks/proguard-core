@@ -1,21 +1,19 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.evaluation.value.object.AnalyzedObject;
 
-class TracingValueDiffblueTest {
+public class TracingValueDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -27,20 +25,18 @@ class TracingValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void TracingValue.<init>(Value, Value)",
     "java.lang.String TracingValue.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
     assertEquals(
         "Pbb",
-        new TracingValue(
+        (new TracingValue(
                 BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+                BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .toString());
   }
 
@@ -50,25 +46,21 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
    */
   @Test
-  @DisplayName("Test generalize(TracingValue) with 'TracingValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  void testGeneralizeWithTracingValue() {
+  public void testGeneralizeWithTracingValue() {
     // Arrange
     TracingValue tracingValue =
         new TracingValue(
             BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
-    // Act
-    TracingValue actualGeneralizeResult =
+    // Act and Assert
+    assertSame(
+        tracingValue,
         tracingValue.generalize(
             new TracingValue(
                 BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE));
-
-    // Assert
-    assertSame(tracingValue, actualGeneralizeResult);
+                BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
   }
 
   /**
@@ -77,11 +69,9 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
    */
   @Test
-  @DisplayName("Test generalize(TracingValue) with 'TracingValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  void testGeneralizeWithTracingValue2() {
+  public void testGeneralizeWithTracingValue2() {
     // Arrange
     TracingValue tracingValue =
         new TracingValue(
@@ -106,25 +96,21 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
    */
   @Test
-  @DisplayName("Test generalize(TracingValue) with 'TracingValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  void testGeneralizeWithTracingValue3() {
+  public void testGeneralizeWithTracingValue3() {
     // Arrange
     TracingValue tracingValue =
         new TracingValue(
             BasicRangeValueFactory.INTEGER_VALUE_SHORT, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
-    // Act
-    TracingValue actualGeneralizeResult =
+    // Act and Assert
+    assertEquals(
+        tracingValue,
         tracingValue.generalize(
             new TracingValue(
                 BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE));
-
-    // Assert
-    assertEquals(tracingValue, actualGeneralizeResult);
+                BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
   }
 
   /**
@@ -133,138 +119,9 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
    */
   @Test
-  @DisplayName("Test generalize(TracingValue) with 'TracingValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  void testGeneralizeWithTracingValue4() {
-    // Arrange
-    TracingValue tracingValue =
-        new TracingValue(BasicValueFactory.DOUBLE_VALUE, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            tracingValue.generalize(
-                new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-  }
-
-  /**
-   * Test {@link TracingValue#generalize(TracingValue)} with {@code TracingValue}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
-   */
-  @Test
-  @DisplayName("Test generalize(TracingValue) with 'TracingValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  void testGeneralizeWithTracingValue5() {
-    // Arrange
-    TracingValue tracingValue =
-        new TracingValue(BasicValueFactory.FLOAT_VALUE, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            tracingValue.generalize(
-                new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-  }
-
-  /**
-   * Test {@link TracingValue#generalize(TracingValue)} with {@code TracingValue}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
-   */
-  @Test
-  @DisplayName("Test generalize(TracingValue) with 'TracingValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  void testGeneralizeWithTracingValue6() {
-    // Arrange
-    TracingValue tracingValue =
-        new TracingValue(BasicValueFactory.LONG_VALUE, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            tracingValue.generalize(
-                new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-  }
-
-  /**
-   * Test {@link TracingValue#generalize(TracingValue)} with {@code TracingValue}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
-   */
-  @Test
-  @DisplayName("Test generalize(TracingValue) with 'TracingValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  void testGeneralizeWithTracingValue7() {
-    // Arrange
-    TracingValue tracingValue =
-        new TracingValue(
-            BasicValueFactory.REFERENCE_VALUE, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            tracingValue.generalize(
-                new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-  }
-
-  /**
-   * Test {@link TracingValue#generalize(TracingValue)} with {@code TracingValue}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
-   */
-  @Test
-  @DisplayName("Test generalize(TracingValue) with 'TracingValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  void testGeneralizeWithTracingValue8() {
-    // Arrange
-    TracingValue tracingValue =
-        new TracingValue(
-            InstructionOffsetValue.EMPTY_VALUE, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            tracingValue.generalize(
-                new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-  }
-
-  /**
-   * Test {@link TracingValue#generalize(TracingValue)} with {@code TracingValue}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
-   */
-  @Test
-  @DisplayName("Test generalize(TracingValue) with 'TracingValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  void testGeneralizeWithTracingValue9() {
+  public void testGeneralizeWithTracingValue4() {
     // Arrange
     TracingValue tracingValue =
         new TracingValue(
@@ -284,180 +141,21 @@ class TracingValueDiffblueTest {
   }
 
   /**
-   * Test {@link TracingValue#generalize(TracingValue)} with {@code TracingValue}.
+   * Test {@link TracingValue#generalize(Value)} with {@code Value}.
    *
-   * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
+   * <p>Method under test: {@link TracingValue#generalize(Value)}
    */
   @Test
-  @DisplayName("Test generalize(TracingValue) with 'TracingValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  void testGeneralizeWithTracingValue10() {
-    // Arrange
-    TracingValue tracingValue =
-        new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.DOUBLE_VALUE);
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            tracingValue.generalize(
-                new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-  }
-
-  /**
-   * Test {@link TracingValue#generalize(TracingValue)} with {@code TracingValue}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
-   */
-  @Test
-  @DisplayName("Test generalize(TracingValue) with 'TracingValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  void testGeneralizeWithTracingValue11() {
-    // Arrange
-    TracingValue tracingValue =
-        new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.FLOAT_VALUE);
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            tracingValue.generalize(
-                new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-  }
-
-  /**
-   * Test {@link TracingValue#generalize(TracingValue)} with {@code TracingValue}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
-   */
-  @Test
-  @DisplayName("Test generalize(TracingValue) with 'TracingValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  void testGeneralizeWithTracingValue12() {
-    // Arrange
-    TracingValue tracingValue =
-        new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.LONG_VALUE);
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            tracingValue.generalize(
-                new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-  }
-
-  /**
-   * Test {@link TracingValue#generalize(TracingValue)} with {@code TracingValue}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
-   */
-  @Test
-  @DisplayName("Test generalize(TracingValue) with 'TracingValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  void testGeneralizeWithTracingValue13() {
-    // Arrange
-    TracingValue tracingValue =
-        new TracingValue(
-            BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.REFERENCE_VALUE);
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            tracingValue.generalize(
-                new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-  }
-
-  /**
-   * Test {@link TracingValue#generalize(TracingValue)} with {@code TracingValue}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
-   */
-  @Test
-  @DisplayName("Test generalize(TracingValue) with 'TracingValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  void testGeneralizeWithTracingValue14() {
-    // Arrange
-    TracingValue tracingValue =
-        new TracingValue(
-            BasicRangeValueFactory.INTEGER_VALUE_BYTE, InstructionOffsetValue.EMPTY_VALUE);
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            tracingValue.generalize(
-                new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-  }
-
-  /**
-   * Test {@link TracingValue#generalize(TracingValue)} with {@code TracingValue}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
-   */
-  @Test
-  @DisplayName("Test generalize(TracingValue) with 'TracingValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  void testGeneralizeWithTracingValue15() {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"Value TracingValue.generalize(Value)"})
+  public void testGeneralizeWithValue() {
     // Arrange
     TracingValue tracingValue =
         new TracingValue(
             BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            tracingValue.generalize(
-                new TracingValue(
-                    BasicValueFactory.DOUBLE_VALUE, BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-  }
-
-  /**
-   * Test {@link TracingValue#generalize(TracingValue)} with {@code TracingValue}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
-   */
-  @Test
-  @DisplayName("Test generalize(TracingValue) with 'TracingValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  void testGeneralizeWithTracingValue16() {
-    // Arrange
-    TracingValue tracingValue =
-        new TracingValue(
-            BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            tracingValue.generalize(
-                new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.DOUBLE_VALUE)));
+    assertSame(tracingValue, tracingValue.generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
   }
 
   /**
@@ -466,35 +164,9 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#generalize(Value)}
    */
   @Test
-  @DisplayName("Test generalize(Value) with 'Value'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value TracingValue.generalize(Value)"})
-  void testGeneralizeWithValue() {
-    // Arrange
-    TracingValue tracingValue =
-        new TracingValue(
-            BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
-
-    // Act
-    Value actualGeneralizeResult =
-        tracingValue.generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
-
-    // Assert
-    assertSame(tracingValue, actualGeneralizeResult);
-  }
-
-  /**
-   * Test {@link TracingValue#generalize(Value)} with {@code Value}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(Value)}
-   */
-  @Test
-  @DisplayName("Test generalize(Value) with 'Value'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Value TracingValue.generalize(Value)"})
-  void testGeneralizeWithValue2() {
+  public void testGeneralizeWithValue2() {
     // Arrange
     TracingValue tracingValue =
         new TracingValue(
@@ -512,106 +184,6 @@ class TracingValueDiffblueTest {
   /**
    * Test {@link TracingValue#generalize(Value)} with {@code Value}.
    *
-   * <p>Method under test: {@link TracingValue#generalize(Value)}
-   */
-  @Test
-  @DisplayName("Test generalize(Value) with 'Value'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Value TracingValue.generalize(Value)"})
-  void testGeneralizeWithValue3() {
-    // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.DOUBLE_VALUE)
-                .generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
-  }
-
-  /**
-   * Test {@link TracingValue#generalize(Value)} with {@code Value}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(Value)}
-   */
-  @Test
-  @DisplayName("Test generalize(Value) with 'Value'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Value TracingValue.generalize(Value)"})
-  void testGeneralizeWithValue4() {
-    // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.FLOAT_VALUE)
-                .generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
-  }
-
-  /**
-   * Test {@link TracingValue#generalize(Value)} with {@code Value}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(Value)}
-   */
-  @Test
-  @DisplayName("Test generalize(Value) with 'Value'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Value TracingValue.generalize(Value)"})
-  void testGeneralizeWithValue5() {
-    // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.LONG_VALUE)
-                .generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
-  }
-
-  /**
-   * Test {@link TracingValue#generalize(Value)} with {@code Value}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(Value)}
-   */
-  @Test
-  @DisplayName("Test generalize(Value) with 'Value'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Value TracingValue.generalize(Value)"})
-  void testGeneralizeWithValue6() {
-    // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.REFERENCE_VALUE)
-                .generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
-  }
-
-  /**
-   * Test {@link TracingValue#generalize(Value)} with {@code Value}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(Value)}
-   */
-  @Test
-  @DisplayName("Test generalize(Value) with 'Value'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Value TracingValue.generalize(Value)"})
-  void testGeneralizeWithValue7() {
-    // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE, InstructionOffsetValue.EMPTY_VALUE)
-                .generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
-  }
-
-  /**
-   * Test {@link TracingValue#generalize(Value)} with {@code Value}.
-   *
    * <ul>
    *   <li>Then return not Category2.
    * </ul>
@@ -619,16 +191,14 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#generalize(Value)}
    */
   @Test
-  @DisplayName("Test generalize(Value) with 'Value'; then return not Category2")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value TracingValue.generalize(Value)"})
-  void testGeneralizeWithValue_thenReturnNotCategory2() {
+  public void testGeneralizeWithValue_thenReturnNotCategory2() {
     // Arrange and Act
     Value actualGeneralizeResult =
-        new TracingValue(
+        (new TracingValue(
                 BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_CHAR)
+                BasicRangeValueFactory.INTEGER_VALUE_CHAR))
             .generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
@@ -636,31 +206,6 @@ class TracingValueDiffblueTest {
     assertFalse(actualGeneralizeResult.isCategory2());
     assertFalse(actualGeneralizeResult.isParticular());
     assertFalse(actualGeneralizeResult.isSpecific());
-  }
-
-  /**
-   * Test {@link TracingValue#generalize(Value)} with {@code Value}.
-   *
-   * <ul>
-   *   <li>When {@link BasicValueFactory#DOUBLE_VALUE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#generalize(Value)}
-   */
-  @Test
-  @DisplayName("Test generalize(Value) with 'Value'; when DOUBLE_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Value TracingValue.generalize(Value)"})
-  void testGeneralizeWithValue_whenDouble_value() {
-    // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE)
-                .generalize(BasicValueFactory.DOUBLE_VALUE));
   }
 
   /**
@@ -673,16 +218,14 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#isCategory2()}
    */
   @Test
-  @DisplayName("Test isCategory2(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TracingValue.isCategory2()"})
-  void testIsCategory2_thenReturnFalse() {
+  public void testIsCategory2_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(
-        new TracingValue(
+        (new TracingValue(
                 BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+                BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .isCategory2());
   }
 
@@ -696,14 +239,13 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#isCategory2()}
    */
   @Test
-  @DisplayName("Test isCategory2(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TracingValue.isCategory2()"})
-  void testIsCategory2_thenReturnTrue() {
+  public void testIsCategory2_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(
-        new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.DOUBLE_VALUE)
+        (new TracingValue(
+                BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.DOUBLE_VALUE))
             .isCategory2());
   }
 
@@ -717,16 +259,14 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#category1Value()}
    */
   @Test
-  @DisplayName("Test category1Value(); then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Category1Value TracingValue.category1Value()"})
-  void testCategory1Value_thenReturnRangeIntegerValue() {
+  public void testCategory1Value_thenReturnRangeIntegerValue() {
     // Arrange and Act
     Category1Value actualCategory1ValueResult =
-        new TracingValue(
+        (new TracingValue(
                 BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+                BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .category1Value();
 
     // Assert
@@ -734,30 +274,6 @@ class TracingValueDiffblueTest {
     assertFalse(actualCategory1ValueResult.isCategory2());
     assertFalse(actualCategory1ValueResult.isParticular());
     assertFalse(actualCategory1ValueResult.isSpecific());
-  }
-
-  /**
-   * Test {@link TracingValue#category1Value()}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#category1Value()}
-   */
-  @Test
-  @DisplayName("Test category1Value(); then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Category1Value TracingValue.category1Value()"})
-  void testCategory1Value_thenThrowIllegalArgumentException() {
-    // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.DOUBLE_VALUE)
-                .category1Value());
   }
 
   /**
@@ -770,14 +286,13 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#category2Value()}
    */
   @Test
-  @DisplayName("Test category2Value(); then return UnknownDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Category2Value TracingValue.category2Value()"})
-  void testCategory2Value_thenReturnUnknownDoubleValue() {
+  public void testCategory2Value_thenReturnUnknownDoubleValue() {
     // Arrange and Act
     Category2Value actualCategory2ValueResult =
-        new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.DOUBLE_VALUE)
+        (new TracingValue(
+                BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.DOUBLE_VALUE))
             .category2Value();
 
     // Assert
@@ -785,31 +300,6 @@ class TracingValueDiffblueTest {
     assertFalse(actualCategory2ValueResult.isParticular());
     assertFalse(actualCategory2ValueResult.isSpecific());
     assertTrue(actualCategory2ValueResult.isCategory2());
-  }
-
-  /**
-   * Test {@link TracingValue#category2Value()}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#category2Value()}
-   */
-  @Test
-  @DisplayName("Test category2Value(); then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Category2Value TracingValue.category2Value()"})
-  void testCategory2Value_thenThrowIllegalArgumentException() {
-    // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE)
-                .category2Value());
   }
 
   /**
@@ -822,16 +312,14 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#integerValue()}
    */
   @Test
-  @DisplayName("Test integerValue(); then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue TracingValue.integerValue()"})
-  void testIntegerValue_thenReturnRangeIntegerValue() {
+  public void testIntegerValue_thenReturnRangeIntegerValue() {
     // Arrange and Act
     IntegerValue actualIntegerValueResult =
-        new TracingValue(
+        (new TracingValue(
                 BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+                BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .integerValue();
 
     // Assert
@@ -839,30 +327,6 @@ class TracingValueDiffblueTest {
     assertFalse(actualIntegerValueResult.isCategory2());
     assertFalse(actualIntegerValueResult.isParticular());
     assertFalse(actualIntegerValueResult.isSpecific());
-  }
-
-  /**
-   * Test {@link TracingValue#integerValue()}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#integerValue()}
-   */
-  @Test
-  @DisplayName("Test integerValue(); then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"IntegerValue TracingValue.integerValue()"})
-  void testIntegerValue_thenThrowIllegalArgumentException() {
-    // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.DOUBLE_VALUE)
-                .integerValue());
   }
 
   /**
@@ -875,14 +339,12 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#longValue()}
    */
   @Test
-  @DisplayName("Test longValue(); then return UnknownLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue TracingValue.longValue()"})
-  void testLongValue_thenReturnUnknownLongValue() {
+  public void testLongValue_thenReturnUnknownLongValue() {
     // Arrange and Act
     LongValue actualLongValueResult =
-        new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.LONG_VALUE)
+        (new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.LONG_VALUE))
             .longValue();
 
     // Assert
@@ -890,31 +352,6 @@ class TracingValueDiffblueTest {
     assertFalse(actualLongValueResult.isParticular());
     assertFalse(actualLongValueResult.isSpecific());
     assertTrue(actualLongValueResult.isCategory2());
-  }
-
-  /**
-   * Test {@link TracingValue#longValue()}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#longValue()}
-   */
-  @Test
-  @DisplayName("Test longValue(); then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"LongValue TracingValue.longValue()"})
-  void testLongValue_thenThrowIllegalArgumentException() {
-    // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE)
-                .longValue());
   }
 
   /**
@@ -927,14 +364,12 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#floatValue()}
    */
   @Test
-  @DisplayName("Test floatValue(); then return UnknownFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue TracingValue.floatValue()"})
-  void testFloatValue_thenReturnUnknownFloatValue() {
+  public void testFloatValue_thenReturnUnknownFloatValue() {
     // Arrange and Act
     FloatValue actualFloatValueResult =
-        new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.FLOAT_VALUE)
+        (new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.FLOAT_VALUE))
             .floatValue();
 
     // Assert
@@ -942,31 +377,6 @@ class TracingValueDiffblueTest {
     assertFalse(actualFloatValueResult.isCategory2());
     assertFalse(actualFloatValueResult.isParticular());
     assertFalse(actualFloatValueResult.isSpecific());
-  }
-
-  /**
-   * Test {@link TracingValue#floatValue()}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#floatValue()}
-   */
-  @Test
-  @DisplayName("Test floatValue(); then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"FloatValue TracingValue.floatValue()"})
-  void testFloatValue_thenThrowIllegalArgumentException() {
-    // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE)
-                .floatValue());
   }
 
   /**
@@ -979,14 +389,13 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#doubleValue()}
    */
   @Test
-  @DisplayName("Test doubleValue(); then return UnknownDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue TracingValue.doubleValue()"})
-  void testDoubleValue_thenReturnUnknownDoubleValue() {
+  public void testDoubleValue_thenReturnUnknownDoubleValue() {
     // Arrange and Act
     DoubleValue actualDoubleValueResult =
-        new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.DOUBLE_VALUE)
+        (new TracingValue(
+                BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.DOUBLE_VALUE))
             .doubleValue();
 
     // Assert
@@ -994,31 +403,6 @@ class TracingValueDiffblueTest {
     assertFalse(actualDoubleValueResult.isParticular());
     assertFalse(actualDoubleValueResult.isSpecific());
     assertTrue(actualDoubleValueResult.isCategory2());
-  }
-
-  /**
-   * Test {@link TracingValue#doubleValue()}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#doubleValue()}
-   */
-  @Test
-  @DisplayName("Test doubleValue(); then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"DoubleValue TracingValue.doubleValue()"})
-  void testDoubleValue_thenThrowIllegalArgumentException() {
-    // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE)
-                .doubleValue());
   }
 
   /**
@@ -1031,15 +415,13 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#referenceValue()}
    */
   @Test
-  @DisplayName("Test referenceValue(); then return UnknownReferenceValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ReferenceValue TracingValue.referenceValue()"})
-  void testReferenceValue_thenReturnUnknownReferenceValue() {
+  public void testReferenceValue_thenReturnUnknownReferenceValue() {
     // Arrange and Act
     ReferenceValue actualReferenceValueResult =
-        new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.REFERENCE_VALUE)
+        (new TracingValue(
+                BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.REFERENCE_VALUE))
             .referenceValue();
 
     // Assert
@@ -1057,31 +439,6 @@ class TracingValueDiffblueTest {
   }
 
   /**
-   * Test {@link TracingValue#referenceValue()}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#referenceValue()}
-   */
-  @Test
-  @DisplayName("Test referenceValue(); then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"ReferenceValue TracingValue.referenceValue()"})
-  void testReferenceValue_thenThrowIllegalArgumentException() {
-    // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE)
-                .referenceValue());
-  }
-
-  /**
    * Test {@link TracingValue#instructionOffsetValue()}.
    *
    * <ul>
@@ -1091,42 +448,17 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#instructionOffsetValue()}
    */
   @Test
-  @DisplayName("Test instructionOffsetValue(); then return EMPTY_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionOffsetValue TracingValue.instructionOffsetValue()"})
-  void testInstructionOffsetValue_thenReturnEmpty_value() {
-    // Arrange, Act and Assert
-    assertSame(
-        InstructionOffsetValue.EMPTY_VALUE,
-        new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE, InstructionOffsetValue.EMPTY_VALUE)
-            .instructionOffsetValue());
-  }
+  public void testInstructionOffsetValue_thenReturnEmpty_value() {
+    // Arrange and Act
+    InstructionOffsetValue actualInstructionOffsetValueResult =
+        (new TracingValue(
+                BasicRangeValueFactory.INTEGER_VALUE_BYTE, InstructionOffsetValue.EMPTY_VALUE))
+            .instructionOffsetValue();
 
-  /**
-   * Test {@link TracingValue#instructionOffsetValue()}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#instructionOffsetValue()}
-   */
-  @Test
-  @DisplayName("Test instructionOffsetValue(); then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionOffsetValue TracingValue.instructionOffsetValue()"})
-  void testInstructionOffsetValue_thenThrowIllegalArgumentException() {
-    // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new TracingValue(
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE)
-                .instructionOffsetValue());
+    // Assert
+    assertSame(actualInstructionOffsetValueResult.EMPTY_VALUE, actualInstructionOffsetValueResult);
   }
 
   /**
@@ -1139,16 +471,14 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#isSpecific()}
    */
   @Test
-  @DisplayName("Test isSpecific(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TracingValue.isSpecific()"})
-  void testIsSpecific_thenReturnFalse() {
+  public void testIsSpecific_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(
-        new TracingValue(
+        (new TracingValue(
                 BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+                BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .isSpecific());
   }
 
@@ -1162,15 +492,13 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#isSpecific()}
    */
   @Test
-  @DisplayName("Test isSpecific(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TracingValue.isSpecific()"})
-  void testIsSpecific_thenReturnTrue() {
+  public void testIsSpecific_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(
-        new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE, InstructionOffsetValue.EMPTY_VALUE)
+        (new TracingValue(
+                BasicRangeValueFactory.INTEGER_VALUE_BYTE, InstructionOffsetValue.EMPTY_VALUE))
             .isSpecific());
   }
 
@@ -1180,16 +508,14 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#isParticular()}
    */
   @Test
-  @DisplayName("Test isParticular()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TracingValue.isParticular()"})
-  void testIsParticular() {
+  public void testIsParticular() {
     // Arrange, Act and Assert
     assertFalse(
-        new TracingValue(
+        (new TracingValue(
                 BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+                BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .isParticular());
   }
 
@@ -1199,14 +525,13 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#isParticular()}
    */
   @Test
-  @DisplayName("Test isParticular()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TracingValue.isParticular()"})
-  void testIsParticular2() {
+  public void testIsParticular2() {
     // Arrange, Act and Assert
     assertFalse(
-        new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.DOUBLE_VALUE)
+        (new TracingValue(
+                BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.DOUBLE_VALUE))
             .isParticular());
   }
 
@@ -1220,15 +545,13 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#isParticular()}
    */
   @Test
-  @DisplayName("Test isParticular(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TracingValue.isParticular()"})
-  void testIsParticular_thenReturnTrue() {
+  public void testIsParticular_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(
-        new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE, InstructionOffsetValue.EMPTY_VALUE)
+        (new TracingValue(
+                BasicRangeValueFactory.INTEGER_VALUE_BYTE, InstructionOffsetValue.EMPTY_VALUE))
             .isParticular());
   }
 
@@ -1242,17 +565,15 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#computationalType()}
    */
   @Test
-  @DisplayName("Test computationalType(); then return one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int TracingValue.computationalType()"})
-  void testComputationalType_thenReturnOne() {
+  public void testComputationalType_thenReturnOne() {
     // Arrange, Act and Assert
     assertEquals(
         1,
-        new TracingValue(
+        (new TracingValue(
                 BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+                BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .computationalType());
   }
 
@@ -1266,17 +587,15 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#internalType()}
    */
   @Test
-  @DisplayName("Test internalType(); then return 'I'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String TracingValue.internalType()"})
-  void testInternalType_thenReturnI() {
+  public void testInternalType_thenReturnI() {
     // Arrange, Act and Assert
     assertEquals(
         "I",
-        new TracingValue(
+        (new TracingValue(
                 BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+                BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .internalType());
   }
 
@@ -1296,11 +615,9 @@ class TracingValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TracingValue.equals(Object)", "int TracingValue.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     TracingValue tracingValue =
         new TracingValue(
@@ -1311,7 +628,8 @@ class TracingValueDiffblueTest {
 
     // Act and Assert
     assertEquals(tracingValue, tracingValue2);
-    assertEquals(tracingValue.hashCode(), tracingValue2.hashCode());
+    int expectedHashCodeResult = tracingValue.hashCode();
+    assertEquals(expectedHashCodeResult, tracingValue2.hashCode());
   }
 
   /**
@@ -1330,11 +648,9 @@ class TracingValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TracingValue.equals(Object)", "int TracingValue.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     TracingValue tracingValue =
         new TracingValue(
@@ -1357,11 +673,9 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TracingValue.equals(Object)", "int TracingValue.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     TracingValue tracingValue =
         new TracingValue(
@@ -1385,11 +699,9 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TracingValue.equals(Object)", "int TracingValue.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
     TracingValue tracingValue =
         new TracingValue(
@@ -1413,11 +725,9 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TracingValue.equals(Object)", "int TracingValue.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
         new TracingValue(
@@ -1436,11 +746,9 @@ class TracingValueDiffblueTest {
    * <p>Method under test: {@link TracingValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TracingValue.equals(Object)", "int TracingValue.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
         new TracingValue(

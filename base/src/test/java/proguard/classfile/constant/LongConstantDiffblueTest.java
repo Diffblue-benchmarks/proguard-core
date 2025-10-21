@@ -1,17 +1,16 @@
 package proguard.classfile.constant;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class LongConstantDiffblueTest {
+public class LongConstantDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -27,9 +26,7 @@ class LongConstantDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void LongConstant.<init>()",
     "void LongConstant.<init>(long)",
@@ -39,7 +36,7 @@ class LongConstantDiffblueTest {
     "void LongConstant.setValue(long)",
     "String LongConstant.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     LongConstant actualLongConstant = new LongConstant();
     actualLongConstant.setValue(42L);
@@ -76,9 +73,7 @@ class LongConstantDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters; when forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void LongConstant.<init>()",
     "void LongConstant.<init>(long)",
@@ -88,7 +83,7 @@ class LongConstantDiffblueTest {
     "void LongConstant.setValue(long)",
     "String LongConstant.toString()"
   })
-  void testGettersAndSetters_whenFortyTwo() {
+  public void testGettersAndSetters_whenFortyTwo() {
     // Arrange and Act
     LongConstant actualLongConstant = new LongConstant(42L);
     actualLongConstant.setValue(42L);
@@ -122,18 +117,17 @@ class LongConstantDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LongConstant.equals(Object)", "int LongConstant.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     LongConstant longConstant = new LongConstant(42L);
     LongConstant longConstant2 = new LongConstant(42L);
 
     // Act and Assert
     assertEquals(longConstant, longConstant2);
-    assertEquals(longConstant.hashCode(), longConstant2.hashCode());
+    int expectedHashCodeResult = longConstant.hashCode();
+    assertEquals(expectedHashCodeResult, longConstant2.hashCode());
   }
 
   /**
@@ -152,11 +146,9 @@ class LongConstantDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LongConstant.equals(Object)", "int LongConstant.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     LongConstant longConstant = new LongConstant(42L);
 
@@ -177,11 +169,9 @@ class LongConstantDiffblueTest {
    * <p>Method under test: {@link LongConstant#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LongConstant.equals(Object)", "int LongConstant.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     LongConstant longConstant = new LongConstant(1L);
 
@@ -200,11 +190,9 @@ class LongConstantDiffblueTest {
    * <p>Method under test: {@link LongConstant#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LongConstant.equals(Object)", "int LongConstant.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new LongConstant(42L), null);
   }
@@ -220,11 +208,9 @@ class LongConstantDiffblueTest {
    * <p>Method under test: {@link LongConstant#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LongConstant.equals(Object)", "int LongConstant.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new LongConstant(42L), "Different type to LongConstant");
   }

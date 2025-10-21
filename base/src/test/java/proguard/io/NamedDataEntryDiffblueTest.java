@@ -1,29 +1,26 @@
 package proguard.io;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.IOException;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class NamedDataEntryDiffblueTest {
+public class NamedDataEntryDiffblueTest {
   /**
    * Test {@link NamedDataEntry#NamedDataEntry(DataEntry, String, long, boolean)}.
    *
    * <p>Method under test: {@link NamedDataEntry#NamedDataEntry(DataEntry, String, long, boolean)}
    */
   @Test
-  @DisplayName("Test new NamedDataEntry(DataEntry, String, long, boolean)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void NamedDataEntry.<init>(DataEntry, String, long, boolean)"})
-  void testNewNamedDataEntry() {
+  public void testNewNamedDataEntry() {
     // Arrange
     ClassPathDataEntry parent = new ClassPathDataEntry("Name");
 
@@ -44,17 +41,13 @@ class NamedDataEntryDiffblueTest {
    * <p>Method under test: {@link NamedDataEntry#getOriginalName()}
    */
   @Test
-  @DisplayName("Test getOriginalName()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String NamedDataEntry.getOriginalName()"})
-  void testGetOriginalName() {
-    // Arrange
-    NamedDataEntry namedDataEntry =
-        new NamedDataEntry(new ClassPathDataEntry("Name"), "Name", 3L, true);
-
-    // Act and Assert
-    assertEquals("Name", namedDataEntry.getOriginalName());
+  public void testGetOriginalName() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "Name",
+        (new NamedDataEntry(new ClassPathDataEntry("Name"), "Name", 3L, true)).getOriginalName());
   }
 
   /**
@@ -63,17 +56,15 @@ class NamedDataEntryDiffblueTest {
    * <p>Method under test: {@link NamedDataEntry#getInputStream()}
    */
   @Test
-  @DisplayName("Test getInputStream()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.io.InputStream NamedDataEntry.getInputStream()"})
-  void testGetInputStream() throws IOException {
-    // Arrange
-    NamedDataEntry namedDataEntry =
-        new NamedDataEntry(new ClassPathDataEntry("Name"), "Name", 3L, true);
-
-    // Act and Assert
-    assertThrows(UnsupportedOperationException.class, () -> namedDataEntry.getInputStream());
+  public void testGetInputStream() throws IOException {
+    // Arrange, Act and Assert
+    assertThrows(
+        UnsupportedOperationException.class,
+        () ->
+            (new NamedDataEntry(new ClassPathDataEntry("Name"), "Name", 3L, true))
+                .getInputStream());
   }
 
   /**
@@ -91,9 +82,7 @@ class NamedDataEntryDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void NamedDataEntry.closeInputStream()",
     "String NamedDataEntry.getName()",
@@ -102,7 +91,7 @@ class NamedDataEntryDiffblueTest {
     "boolean NamedDataEntry.isDirectory()",
     "String NamedDataEntry.toString()"
   })
-  void testGettersAndSetters() throws IOException {
+  public void testGettersAndSetters() throws IOException {
     // Arrange
     ClassPathDataEntry parent = new ClassPathDataEntry("Name");
     NamedDataEntry namedDataEntry = new NamedDataEntry(parent, "Name", 3L, true);

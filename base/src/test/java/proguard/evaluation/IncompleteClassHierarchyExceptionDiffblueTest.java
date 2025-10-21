@@ -1,15 +1,14 @@
 package proguard.evaluation;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class IncompleteClassHierarchyExceptionDiffblueTest {
+public class IncompleteClassHierarchyExceptionDiffblueTest {
   /**
    * Test {@link IncompleteClassHierarchyException#IncompleteClassHierarchyException(String)}.
    *
@@ -17,11 +16,9 @@ class IncompleteClassHierarchyExceptionDiffblueTest {
    * IncompleteClassHierarchyException#IncompleteClassHierarchyException(String)}
    */
   @Test
-  @DisplayName("Test new IncompleteClassHierarchyException(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void IncompleteClassHierarchyException.<init>(String)"})
-  void testNewIncompleteClassHierarchyException() {
+  public void testNewIncompleteClassHierarchyException() {
     // Arrange and Act
     IncompleteClassHierarchyException actualIncompleteClassHierarchyException =
         new IncompleteClassHierarchyException("An error occurred");
@@ -47,12 +44,9 @@ class IncompleteClassHierarchyExceptionDiffblueTest {
    * IncompleteClassHierarchyException#IncompleteClassHierarchyException(String)}
    */
   @Test
-  @DisplayName(
-      "Test new IncompleteClassHierarchyException(String); then return LocalizedMessage is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void IncompleteClassHierarchyException.<init>(String)"})
-  void testNewIncompleteClassHierarchyException_thenReturnLocalizedMessageIsNull() {
+  public void testNewIncompleteClassHierarchyException_thenReturnLocalizedMessageIsNull() {
     // Arrange and Act
     IncompleteClassHierarchyException actualIncompleteClassHierarchyException =
         new IncompleteClassHierarchyException(null);

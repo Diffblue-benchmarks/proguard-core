@@ -1,21 +1,21 @@
 {
   "meta" : {
-    "reportVersion" : "2.7"
+    "reportVersion" : "2.6"
   },
   "run" : {
-    "version" : "2025.09.01-44e352d-licensed",
-    "creationTimestamp" : "2025-10-15T15:47:43.328254Z",
+    "version" : "2025.02.02-08b2a5a-licensed",
+    "creationTimestamp" : "2025-10-20T16:55:15.491848Z",
     "command" : "dcover create --coverage-reports --upload http://localhost:8080 --project-name proguard-core --name with-diffblue-tests",
-    "totalTime" : 194.439,
-    "environmentDetectionTime" : 0.049,
-    "indexingTime" : 0.318,
-    "entryPointsTime" : 0.037,
-    "generationTime" : 2378.98,
-    "timeToFirstTest" : 306.074,
-    "timeToLastTest" : 2710.061,
-    "indexQueryTime" : 4.175,
-    "verificationTime" : 181.807,
-    "validationTime" : 29.538
+    "totalTime" : 152.284,
+    "environmentDetectionTime" : 0.337,
+    "indexingTime" : 0.405,
+    "entryPointsTime" : 0.332,
+    "generationTime" : 1886.566,
+    "timeToFirstTest" : 249.34,
+    "timeToLastTest" : 2150.459,
+    "indexQueryTime" : 4.2,
+    "verificationTime" : 133.504,
+    "validationTime" : 28.57
   },
   "codes" : {
     "R000" : "Success",
@@ -33,9 +33,9 @@
   "summary" : {
     "classesCount" : 31,
     "methodsCount" : 97,
-    "cumulativeDiffblueTestCount" : 22,
+    "cumulativeDiffblueTestCount" : 19,
     "cumulativeManualTestCount" : 0,
-    "completeTestCount" : 22,
+    "completeTestCount" : 19,
     "incompleteTestCount" : 0,
     "skeletonTestCount" : 0,
     "totalPhysicalLineCount" : 1448,
@@ -48,20 +48,20 @@
       "T021" : 2
     },
     "perMethodOutcome" : {
-      "R000" : 13,
+      "R000" : 11,
       "R002" : 2,
       "R004" : 1,
-      "R013" : 2,
+      "R013" : 4,
       "T003" : 34,
       "T005" : 24,
       "T006" : 17,
       "T012" : 4
     },
     "perTestOutcome" : {
-      "R000" : 22
+      "R000" : 19
     },
     "perTestValidation" : {
-      "V000" : 22
+      "V000" : 19
     }
   },
   "classes" : {
@@ -264,18 +264,19 @@
     },
     "proguard.examples.JarUtil" : {
       "methodsCount" : 4,
-      "completeTestCount" : 7,
+      "completeTestCount" : 5,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 3,
         "T005" : 1
       },
       "perMethodOutcome" : {
-        "R000" : 3,
+        "R000" : 2,
+        "R013" : 1,
         "T005" : 1
       },
       "perTestOutcome" : {
-        "R000" : 7
+        "R000" : 5
       }
     },
     "proguard.examples.Preverify" : {
@@ -336,7 +337,7 @@
     },
     "proguard.examples.TransformExample$MyTransformer" : {
       "methodsCount" : 3,
-      "completeTestCount" : 1,
+      "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 1,
@@ -344,11 +345,8 @@
         "T021" : 1
       },
       "perMethodOutcome" : {
-        "R000" : 1,
-        "R002" : 2
-      },
-      "perTestOutcome" : {
-        "R000" : 1
+        "R002" : 2,
+        "R013" : 1
       }
     },
     "proguard.examples.VisualizeCfa" : {
@@ -1144,13 +1142,10 @@
       ]
     },
     "proguard.examples.JarUtil.writeJar:(Lproguard/classfile/ClassPool;Ljava/lang/String;)V" : {
-      "completeTestCount" : 2,
+      "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
-      "perMethodOutcome" : "R000",
-      "perTestOutcome" : {
-        "R000" : 2
-      },
+      "perMethodOutcome" : "R013",
       "lineNumbers" : [
         87,
         90,
@@ -1291,13 +1286,10 @@
       ]
     },
     "proguard.examples.TransformExample$MyTransformer.visitProgramClass:(Lproguard/classfile/ProgramClass;)V" : {
-      "completeTestCount" : 1,
+      "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
-      "perMethodOutcome" : "R000",
-      "perTestOutcome" : {
-        "R000" : 1
-      },
+      "perMethodOutcome" : "R013",
       "lineNumbers" : [
         188,
         190,
@@ -1933,6 +1925,5 @@
         89
       ]
     }
-  },
-  "validationMetrics" : { }
+  }
 }

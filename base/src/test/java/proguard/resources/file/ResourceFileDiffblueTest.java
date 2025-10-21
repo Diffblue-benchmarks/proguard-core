@@ -1,27 +1,24 @@
 package proguard.resources.file;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ResourceFileDiffblueTest {
+public class ResourceFileDiffblueTest {
   /**
    * Test {@link ResourceFile#ResourceFile(String, long)}.
    *
    * <p>Method under test: {@link ResourceFile#ResourceFile(String, long)}
    */
   @Test
-  @DisplayName("Test new ResourceFile(String, long)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ResourceFile.<init>(String, long)"})
-  void testNewResourceFile() {
+  public void testNewResourceFile() {
     // Arrange and Act
     ResourceFile actualResourceFile = new ResourceFile("foo.txt", 3L);
 
@@ -41,11 +38,9 @@ class ResourceFileDiffblueTest {
    * <p>Method under test: {@link ResourceFile#ResourceFile(String, long, int)}
    */
   @Test
-  @DisplayName("Test new ResourceFile(String, long, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ResourceFile.<init>(String, long, int)"})
-  void testNewResourceFile2() {
+  public void testNewResourceFile2() {
     // Arrange and Act
     ResourceFile actualResourceFile = new ResourceFile("foo.txt", 3L, 1);
 
@@ -71,15 +66,13 @@ class ResourceFileDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "String ResourceFile.getFileName()",
     "long ResourceFile.getFileSize()",
     "String ResourceFile.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     ResourceFile resourceFile = new ResourceFile("foo.txt", 3L);
 

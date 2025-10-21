@@ -1,12 +1,11 @@
 package proguard.classfile.instruction.visitor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryMethod;
@@ -15,7 +14,7 @@ import proguard.classfile.attribute.CodeAttribute;
 import proguard.classfile.instruction.BranchInstruction;
 import proguard.classfile.instruction.Instruction;
 
-class InstructionCounterDiffblueTest {
+public class InstructionCounterDiffblueTest {
   /**
    * Test {@link InstructionCounter#visitAnyInstruction(Clazz, Method, CodeAttribute, int,
    * Instruction)}.
@@ -24,17 +23,16 @@ class InstructionCounterDiffblueTest {
    * CodeAttribute, int, Instruction)}
    */
   @Test
-  @DisplayName("Test visitAnyInstruction(Clazz, Method, CodeAttribute, int, Instruction)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void InstructionCounter.visitAnyInstruction(Clazz, Method, CodeAttribute, int, Instruction)"
   })
-  void testVisitAnyInstruction() {
+  public void testVisitAnyInstruction() {
     // Arrange
     InstructionCounter instructionCounter = new InstructionCounter();
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act
@@ -56,12 +54,10 @@ class InstructionCounterDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void InstructionCounter.<init>()", "int InstructionCounter.getCount()"})
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
-    assertEquals(0, new InstructionCounter().getCount());
+    assertEquals(0, (new InstructionCounter()).getCount());
   }
 }

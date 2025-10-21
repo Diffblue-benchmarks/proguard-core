@@ -1,35 +1,36 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.kotlin.KotlinConstants;
 
-class MultiTypedReferenceValueFactoryDiffblueTest {
+public class MultiTypedReferenceValueFactoryDiffblueTest {
   /**
    * Test {@link MultiTypedReferenceValueFactory#createReferenceValueNull()}.
    *
    * <p>Method under test: {@link MultiTypedReferenceValueFactory#createReferenceValueNull()}
    */
   @Test
-  @DisplayName("Test createReferenceValueNull()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ReferenceValue MultiTypedReferenceValueFactory.createReferenceValueNull()"})
-  void testCreateReferenceValueNull() {
-    // Arrange and Act
+  public void testCreateReferenceValueNull() {
+    // Arrange
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
+        new MultiTypedReferenceValueFactory();
+
+    // Act
     ReferenceValue actualCreateReferenceValueNullResult =
-        new MultiTypedReferenceValueFactory().createReferenceValueNull();
+        multiTypedReferenceValueFactory.createReferenceValueNull();
 
     // Assert
     assertTrue(actualCreateReferenceValueNullResult instanceof MultiTypedReferenceValue);
@@ -45,8 +46,9 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
     assertFalse(actualCreateReferenceValueNullResult.isSpecific());
     assertFalse(((MultiTypedReferenceValue) actualCreateReferenceValueNullResult).mayBeUnknown);
     assertEquals(Value.NEVER, actualCreateReferenceValueNullResult.isNotNull());
+    ReferenceValue expectedGeneralizedType = multiTypedReferenceValueFactory.REFERENCE_VALUE_NULL;
     assertSame(
-        TypedReferenceValueFactory.REFERENCE_VALUE_NULL,
+        expectedGeneralizedType,
         ((MultiTypedReferenceValue) actualCreateReferenceValueNullResult).getGeneralizedType());
   }
 
@@ -58,14 +60,11 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
    * Clazz, boolean, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValue(String, Clazz, boolean, boolean) with 'String', 'Clazz', 'boolean', 'boolean'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue MultiTypedReferenceValueFactory.createReferenceValue(String, Clazz, boolean, boolean)"
   })
-  void testCreateReferenceValueWithStringClazzBooleanBoolean() {
+  public void testCreateReferenceValueWithStringClazzBooleanBoolean() {
     // Arrange
     MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
         new MultiTypedReferenceValueFactory();
@@ -77,8 +76,10 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
 
     // Assert
     assertTrue(actualCreateReferenceValueResult instanceof MultiTypedReferenceValue);
+    ReferenceValue expectedGeneralizedType =
+        multiTypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_NOT_NULL;
     assertSame(
-        TypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_NOT_NULL,
+        expectedGeneralizedType,
         ((MultiTypedReferenceValue) actualCreateReferenceValueResult).getGeneralizedType());
   }
 
@@ -94,14 +95,11 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
    * Clazz, boolean, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValue(String, Clazz, boolean, boolean) with 'String', 'Clazz', 'boolean', 'boolean'; then return NotNull is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue MultiTypedReferenceValueFactory.createReferenceValue(String, Clazz, boolean, boolean)"
   })
-  void testCreateReferenceValueWithStringClazzBooleanBoolean_thenReturnNotNullIsOne() {
+  public void testCreateReferenceValueWithStringClazzBooleanBoolean_thenReturnNotNullIsOne() {
     // Arrange
     MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
         new MultiTypedReferenceValueFactory();
@@ -132,14 +130,11 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
    * Clazz, boolean, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValue(String, Clazz, boolean, boolean) with 'String', 'Clazz', 'boolean', 'boolean'; then return NotNull is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue MultiTypedReferenceValueFactory.createReferenceValue(String, Clazz, boolean, boolean)"
   })
-  void testCreateReferenceValueWithStringClazzBooleanBoolean_thenReturnNotNullIsZero() {
+  public void testCreateReferenceValueWithStringClazzBooleanBoolean_thenReturnNotNullIsZero() {
     // Arrange
     MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
         new MultiTypedReferenceValueFactory();
@@ -152,8 +147,10 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
     // Assert
     assertTrue(actualCreateReferenceValueResult instanceof MultiTypedReferenceValue);
     assertEquals(0, actualCreateReferenceValueResult.isNotNull());
+    ReferenceValue expectedGeneralizedType =
+        multiTypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL;
     assertSame(
-        TypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL,
+        expectedGeneralizedType,
         ((MultiTypedReferenceValue) actualCreateReferenceValueResult).getGeneralizedType());
   }
 
@@ -169,14 +166,11 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
    * Clazz, boolean, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValue(String, Clazz, boolean, boolean) with 'String', 'Clazz', 'boolean', 'boolean'; then return Type is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue MultiTypedReferenceValueFactory.createReferenceValue(String, Clazz, boolean, boolean)"
   })
-  void testCreateReferenceValueWithStringClazzBooleanBoolean_thenReturnTypeIsNull() {
+  public void testCreateReferenceValueWithStringClazzBooleanBoolean_thenReturnTypeIsNull() {
     // Arrange
     MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
         new MultiTypedReferenceValueFactory();
@@ -190,8 +184,9 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
     assertTrue(actualCreateReferenceValueResult instanceof MultiTypedReferenceValue);
     assertNull(actualCreateReferenceValueResult.getType());
     assertEquals(Value.NEVER, actualCreateReferenceValueResult.isNotNull());
+    ReferenceValue expectedGeneralizedType = multiTypedReferenceValueFactory.REFERENCE_VALUE_NULL;
     assertSame(
-        TypedReferenceValueFactory.REFERENCE_VALUE_NULL,
+        expectedGeneralizedType,
         ((MultiTypedReferenceValue) actualCreateReferenceValueResult).getGeneralizedType());
   }
 
@@ -208,14 +203,11 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
    * Clazz, boolean, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValue(String, Clazz, boolean, boolean) with 'String', 'Clazz', 'boolean', 'boolean'; when 'Type'; then return 'Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue MultiTypedReferenceValueFactory.createReferenceValue(String, Clazz, boolean, boolean)"
   })
-  void testCreateReferenceValueWithStringClazzBooleanBoolean_whenType_thenReturnType() {
+  public void testCreateReferenceValueWithStringClazzBooleanBoolean_whenType_thenReturnType() {
     // Arrange
     MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
         new MultiTypedReferenceValueFactory();
@@ -244,14 +236,11 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
    * Clazz, IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue) with 'type', 'referencedClass', 'arrayLength'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue MultiTypedReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue)"
   })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength() {
+  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength() {
     // Arrange
     MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
         new MultiTypedReferenceValueFactory();
@@ -280,14 +269,11 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
    * Clazz, IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue) with 'type', 'referencedClass', 'arrayLength'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue MultiTypedReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue)"
   })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength2() {
+  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength2() {
     // Arrange
     MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
         new MultiTypedReferenceValueFactory(
@@ -311,43 +297,6 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
 
   /**
    * Test {@link MultiTypedReferenceValueFactory#createArrayReferenceValue(String, Clazz,
-   * IntegerValue)} with {@code type}, {@code referencedClass}, {@code arrayLength}.
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createArrayReferenceValue(String,
-   * Clazz, IntegerValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue) with 'type', 'referencedClass', 'arrayLength'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "ReferenceValue MultiTypedReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue)"
-  })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength3() {
-    // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory(
-            true, KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool);
-
-    // Act
-    ReferenceValue actualCreateArrayReferenceValueResult =
-        multiTypedReferenceValueFactory.createArrayReferenceValue(
-            "[Ljava/lang/Object;", new LibraryClass(), BasicValueFactory.INTEGER_VALUE);
-
-    // Assert
-    Clazz referencedClass = actualCreateArrayReferenceValueResult.getReferencedClass();
-    assertTrue(referencedClass instanceof LibraryClass);
-    assertTrue(actualCreateArrayReferenceValueResult instanceof MultiTypedReferenceValue);
-    assertEquals("[[Ljava/lang/Object;", actualCreateArrayReferenceValueResult.getType());
-    TypedReferenceValue generalizedType =
-        ((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult).getGeneralizedType();
-    assertEquals("[[Ljava/lang/Object;", generalizedType.getType());
-    assertSame(referencedClass, generalizedType.getReferencedClass());
-  }
-
-  /**
-   * Test {@link MultiTypedReferenceValueFactory#createArrayReferenceValue(String, Clazz,
    * IntegerValue, Object)} with {@code type}, {@code referencedClass}, {@code arrayLength}, {@code
    * elementValues}.
    *
@@ -355,14 +304,11 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
    * Clazz, IntegerValue, Object)}
    */
   @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue, Object) with 'type', 'referencedClass', 'arrayLength', 'elementValues'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue MultiTypedReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue, Object)"
   })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLengthElementValues() {
+  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLengthElementValues() {
     // Arrange
     MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
         new MultiTypedReferenceValueFactory();
@@ -403,14 +349,11 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
    * Clazz, IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue) with 'type', 'referencedClass', 'arrayLength'; then return '[Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue MultiTypedReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue)"
   })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength_thenReturnType() {
+  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength_thenReturnType() {
     // Arrange
     MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
         new MultiTypedReferenceValueFactory();
@@ -443,14 +386,11 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
    * Clazz, IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue) with 'type', 'referencedClass', 'arrayLength'; then return '[Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue MultiTypedReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue)"
   })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength_thenReturnType2() {
+  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength_thenReturnType2() {
     // Arrange
     MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
         new MultiTypedReferenceValueFactory(
@@ -479,13 +419,74 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
    * boolean, boolean)}
    */
   @Test
-  @DisplayName("Test createValue(String, Clazz, boolean, boolean)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "Value MultiTypedReferenceValueFactory.createValue(String, Clazz, boolean, boolean)"
   })
-  void testCreateValue() {
+  public void testCreateValue() {
+    // Arrange
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
+        new MultiTypedReferenceValueFactory();
+
+    // Act
+    Value actualCreateValueResult =
+        multiTypedReferenceValueFactory.createValue(
+            "Ljava/lang/Object;", new LibraryClass(), true, true);
+
+    // Assert
+    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
+    assertNull(((MultiTypedReferenceValue) actualCreateValueResult).getReferencedClass());
+    ReferenceValue expectedGeneralizedType =
+        multiTypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL;
+    assertSame(
+        expectedGeneralizedType,
+        ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType());
+  }
+
+  /**
+   * Test {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}.
+   *
+   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createValue(String, Clazz,
+   * boolean, boolean)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "Value MultiTypedReferenceValueFactory.createValue(String, Clazz, boolean, boolean)"
+  })
+  public void testCreateValue2() {
+    // Arrange
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
+        new MultiTypedReferenceValueFactory(
+            true, KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool);
+
+    // Act
+    Value actualCreateValueResult =
+        multiTypedReferenceValueFactory.createValue(
+            "Ljava/lang/Object;", new LibraryClass(), true, true);
+
+    // Assert
+    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
+    assertNull(((MultiTypedReferenceValue) actualCreateValueResult).getReferencedClass());
+    ReferenceValue expectedGeneralizedType =
+        multiTypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL;
+    assertSame(
+        expectedGeneralizedType,
+        ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType());
+  }
+
+  /**
+   * Test {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}.
+   *
+   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createValue(String, Clazz,
+   * boolean, boolean)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "Value MultiTypedReferenceValueFactory.createValue(String, Clazz, boolean, boolean)"
+  })
+  public void testCreateValue3() {
     // Arrange
     MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
         new MultiTypedReferenceValueFactory();
@@ -498,8 +499,10 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
     // Assert
     assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
     assertEquals(1, ((MultiTypedReferenceValue) actualCreateValueResult).isNotNull());
+    ReferenceValue expectedGeneralizedType =
+        multiTypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_NOT_NULL;
     assertSame(
-        TypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_NOT_NULL,
+        expectedGeneralizedType,
         ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType());
   }
 
@@ -516,14 +519,11 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
    * boolean, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test createValue(String, Clazz, boolean, boolean); given MultiTypedReferenceValueFactory(); when 'Type'; then return 'Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "Value MultiTypedReferenceValueFactory.createValue(String, Clazz, boolean, boolean)"
   })
-  void testCreateValue_givenMultiTypedReferenceValueFactory_whenType_thenReturnType() {
+  public void testCreateValue_givenMultiTypedReferenceValueFactory_whenType_thenReturnType() {
     // Arrange
     MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
         new MultiTypedReferenceValueFactory();
@@ -548,43 +548,6 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
    * Test {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}.
    *
    * <ul>
-   *   <li>Then return ReferencedClass is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createValue(String, Clazz,
-   * boolean, boolean)}
-   */
-  @Test
-  @DisplayName(
-      "Test createValue(String, Clazz, boolean, boolean); then return ReferencedClass is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "Value MultiTypedReferenceValueFactory.createValue(String, Clazz, boolean, boolean)"
-  })
-  void testCreateValue_thenReturnReferencedClassIsNull() {
-    // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory(
-            true, KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool);
-
-    // Act
-    Value actualCreateValueResult =
-        multiTypedReferenceValueFactory.createValue(
-            "Ljava/lang/Object;", new LibraryClass(), true, true);
-
-    // Assert
-    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
-    assertNull(((MultiTypedReferenceValue) actualCreateValueResult).getReferencedClass());
-    assertSame(
-        TypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL,
-        ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType());
-  }
-
-  /**
-   * Test {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}.
-   *
-   * <ul>
    *   <li>Then return {@code Type}.
    * </ul>
    *
@@ -592,13 +555,11 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
    * boolean, boolean)}
    */
   @Test
-  @DisplayName("Test createValue(String, Clazz, boolean, boolean); then return 'Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "Value MultiTypedReferenceValueFactory.createValue(String, Clazz, boolean, boolean)"
   })
-  void testCreateValue_thenReturnType() {
+  public void testCreateValue_thenReturnType() {
     // Arrange
     MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
         new MultiTypedReferenceValueFactory(
@@ -632,14 +593,11 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
    * boolean, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test createValue(String, Clazz, boolean, boolean); when 'false'; then return GeneralizedType NotNull is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "Value MultiTypedReferenceValueFactory.createValue(String, Clazz, boolean, boolean)"
   })
-  void testCreateValue_whenFalse_thenReturnGeneralizedTypeNotNullIsOne() {
+  public void testCreateValue_whenFalse_thenReturnGeneralizedTypeNotNullIsOne() {
     // Arrange
     MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
         new MultiTypedReferenceValueFactory();
@@ -674,14 +632,11 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
    * boolean, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test createValue(String, Clazz, boolean, boolean); when 'false'; then return not GeneralizedType mayBeExtension")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "Value MultiTypedReferenceValueFactory.createValue(String, Clazz, boolean, boolean)"
   })
-  void testCreateValue_whenFalse_thenReturnNotGeneralizedTypeMayBeExtension() {
+  public void testCreateValue_whenFalse_thenReturnNotGeneralizedTypeMayBeExtension() {
     // Arrange
     MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
         new MultiTypedReferenceValueFactory();
@@ -714,14 +669,11 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
    * boolean, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test createValue(String, Clazz, boolean, boolean); when 'Ljava/lang/Object;'; then return not GeneralizedType mayBeExtension")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "Value MultiTypedReferenceValueFactory.createValue(String, Clazz, boolean, boolean)"
   })
-  void testCreateValue_whenLjavaLangObject_thenReturnNotGeneralizedTypeMayBeExtension() {
+  public void testCreateValue_whenLjavaLangObject_thenReturnNotGeneralizedTypeMayBeExtension() {
     // Arrange
     MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
         new MultiTypedReferenceValueFactory();
@@ -741,42 +693,5 @@ class MultiTypedReferenceValueFactoryDiffblueTest {
     assertFalse(generalizedType.mayBeExtension());
     assertFalse(generalizedType.mayBeExtension);
     assertSame(referencedClass, generalizedType.getReferencedClass());
-  }
-
-  /**
-   * Test {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}.
-   *
-   * <ul>
-   *   <li>When {@code Ljava/lang/Object;}.
-   *   <li>Then return ReferencedClass is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createValue(String, Clazz,
-   * boolean, boolean)}
-   */
-  @Test
-  @DisplayName(
-      "Test createValue(String, Clazz, boolean, boolean); when 'Ljava/lang/Object;'; then return ReferencedClass is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "Value MultiTypedReferenceValueFactory.createValue(String, Clazz, boolean, boolean)"
-  })
-  void testCreateValue_whenLjavaLangObject_thenReturnReferencedClassIsNull() {
-    // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory();
-
-    // Act
-    Value actualCreateValueResult =
-        multiTypedReferenceValueFactory.createValue(
-            "Ljava/lang/Object;", new LibraryClass(), true, true);
-
-    // Assert
-    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
-    assertNull(((MultiTypedReferenceValue) actualCreateValueResult).getReferencedClass());
-    assertSame(
-        TypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL,
-        ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType());
   }
 }

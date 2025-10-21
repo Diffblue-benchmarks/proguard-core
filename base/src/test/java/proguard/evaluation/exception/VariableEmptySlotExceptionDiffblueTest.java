@@ -1,28 +1,25 @@
 package proguard.evaluation.exception;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class VariableEmptySlotExceptionDiffblueTest {
+public class VariableEmptySlotExceptionDiffblueTest {
   /**
    * Test {@link VariableEmptySlotException#VariableEmptySlotException(int)}.
    *
    * <p>Method under test: {@link VariableEmptySlotException#VariableEmptySlotException(int)}
    */
   @Test
-  @DisplayName("Test new VariableEmptySlotException(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableEmptySlotException.<init>(int)"})
-  void testNewVariableEmptySlotException() {
+  public void testNewVariableEmptySlotException() {
     // Arrange and Act
     VariableEmptySlotException actualVariableEmptySlotException = new VariableEmptySlotException(1);
 

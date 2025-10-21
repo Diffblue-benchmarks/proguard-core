@@ -1,14 +1,14 @@
 package proguard.evaluation;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import java.util.Stack;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryMethod;
@@ -16,19 +16,21 @@ import proguard.classfile.Method;
 import proguard.classfile.attribute.Attribute;
 import proguard.classfile.attribute.BootstrapMethodsAttribute;
 import proguard.classfile.attribute.CodeAttribute;
+import proguard.classfile.attribute.visitor.MaxStackSizeComputer;
+import proguard.classfile.util.BranchTargetFinder;
+import proguard.evaluation.PartialEvaluator.Builder;
+import proguard.evaluation.util.jsonprinter.JsonPrinter;
 
-class InitializationFinderDiffblueTest {
+public class InitializationFinderDiffblueTest {
   /**
    * Test {@link InitializationFinder#InitializationFinder()}.
    *
    * <p>Method under test: {@link InitializationFinder#InitializationFinder()}
    */
   @Test
-  @DisplayName("Test new InitializationFinder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void InitializationFinder.<init>()"})
-  void testNewInitializationFinder() {
+  public void testNewInitializationFinder() {
     // Arrange and Act
     InitializationFinder actualInitializationFinder = new InitializationFinder();
 
@@ -44,11 +46,9 @@ class InitializationFinderDiffblueTest {
    * boolean)}
    */
   @Test
-  @DisplayName("Test new InitializationFinder(PartialEvaluator, boolean)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void InitializationFinder.<init>(PartialEvaluator, boolean)"})
-  void testNewInitializationFinder2() {
+  public void testNewInitializationFinder2() {
     // Arrange and Act
     InitializationFinder actualInitializationFinder =
         new InitializationFinder(new PartialEvaluator(), true);
@@ -64,13 +64,11 @@ class InitializationFinderDiffblueTest {
    * <p>Method under test: {@link InitializationFinder#isInitializer()}
    */
   @Test
-  @DisplayName("Test isInitializer()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InitializationFinder.isInitializer()"})
-  void testIsInitializer() {
+  public void testIsInitializer() {
     // Arrange, Act and Assert
-    assertTrue(new InitializationFinder().isInitializer());
+    assertTrue((new InitializationFinder()).isInitializer());
   }
 
   /**
@@ -84,41 +82,50 @@ class InitializationFinderDiffblueTest {
    * <p>Method under test: {@link InitializationFinder#isInitializer(int)}
    */
   @Test
-  @DisplayName("Test isInitializer(int) with 'int'; when two; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InitializationFinder.isInitializer(int)"})
-  void testIsInitializerWithInt_whenTwo_thenReturnFalse() {
+  public void testIsInitializerWithInt_whenTwo_thenReturnFalse() {
     // Arrange, Act and Assert
-    assertFalse(new InitializationFinder().isInitializer(2));
+    assertFalse((new InitializationFinder()).isInitializer(2));
   }
 
   /**
    * Test {@link InitializationFinder#visitCodeAttribute(Clazz, Method, CodeAttribute)}.
    *
-   * <ul>
-   *   <li>Given one.
-   * </ul>
-   *
    * <p>Method under test: {@link InitializationFinder#visitCodeAttribute(Clazz, Method,
    * CodeAttribute)}
    */
   @Test
-  @DisplayName("Test visitCodeAttribute(Clazz, Method, CodeAttribute); given one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void InitializationFinder.visitCodeAttribute(Clazz, Method, CodeAttribute)"})
-  void testVisitCodeAttribute_givenOne() {
+  public void testVisitCodeAttribute() {
     // Arrange
-    InitializationFinder initializationFinder =
-        new InitializationFinder(new PartialEvaluator(), false);
+    Builder createResult = Builder.create();
+    Builder setBranchTargetFinderResult =
+        createResult.setBranchTargetFinder(new BranchTargetFinder());
+    Builder setBranchUnitResult = setBranchTargetFinderResult.setBranchUnit(new BasicBranchUnit());
+    Builder setEvaluateAllCodeResult =
+        setBranchUnitResult.setCallingInstructionBlockStack(new Stack<>()).setEvaluateAllCode(true);
+    Builder setExtraInstructionVisitorResult =
+        setEvaluateAllCodeResult.setExtraInstructionVisitor(new MaxStackSizeComputer());
+    Builder setPrettyPrintingResult =
+        setExtraInstructionVisitorResult
+            .setInvocationUnit(new BasicInvocationUnit(new ParticularReferenceValueFactory()))
+            .setPrettyPrinting(1);
+    Builder stopAnalysisAfterNEvaluationsResult =
+        setPrettyPrintingResult
+            .setStateTracker(new JsonPrinter())
+            .stopAnalysisAfterNEvaluations(42);
+    PartialEvaluator partialEvaluator =
+        stopAnalysisAfterNEvaluationsResult
+            .setValueFactory(new ParticularReferenceValueFactory())
+            .build();
+    InitializationFinder initializationFinder = new InitializationFinder(partialEvaluator, false);
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-    CodeAttribute codeAttribute = new CodeAttribute(1);
-    codeAttribute.u4codeLength = 1;
 
     // Act
-    initializationFinder.visitCodeAttribute(clazz, method, codeAttribute);
+    initializationFinder.visitCodeAttribute(clazz, method, new CodeAttribute(1));
 
     // Assert
     assertFalse(initializationFinder.isInitializer());
@@ -128,29 +135,40 @@ class InitializationFinderDiffblueTest {
   /**
    * Test {@link InitializationFinder#visitCodeAttribute(Clazz, Method, CodeAttribute)}.
    *
-   * <ul>
-   *   <li>Given zero.
-   * </ul>
-   *
    * <p>Method under test: {@link InitializationFinder#visitCodeAttribute(Clazz, Method,
    * CodeAttribute)}
    */
   @Test
-  @DisplayName("Test visitCodeAttribute(Clazz, Method, CodeAttribute); given zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void InitializationFinder.visitCodeAttribute(Clazz, Method, CodeAttribute)"})
-  void testVisitCodeAttribute_givenZero() {
+  public void testVisitCodeAttribute2() {
     // Arrange
-    InitializationFinder initializationFinder =
-        new InitializationFinder(new PartialEvaluator(), false);
+    Builder createResult = Builder.create();
+    Builder setBranchTargetFinderResult =
+        createResult.setBranchTargetFinder(new BranchTargetFinder());
+    Builder setBranchUnitResult = setBranchTargetFinderResult.setBranchUnit(new BasicBranchUnit());
+    Builder setEvaluateAllCodeResult =
+        setBranchUnitResult.setCallingInstructionBlockStack(new Stack<>()).setEvaluateAllCode(true);
+    Builder setExtraInstructionVisitorResult =
+        setEvaluateAllCodeResult.setExtraInstructionVisitor(new MaxStackSizeComputer());
+    Builder setPrettyPrintingResult =
+        setExtraInstructionVisitorResult
+            .setInvocationUnit(new BasicInvocationUnit(new ParticularReferenceValueFactory()))
+            .setPrettyPrinting(1);
+    Builder stopAnalysisAfterNEvaluationsResult =
+        setPrettyPrintingResult
+            .setStateTracker(new JsonPrinter())
+            .stopAnalysisAfterNEvaluations(42);
+    PartialEvaluator partialEvaluator =
+        stopAnalysisAfterNEvaluationsResult
+            .setValueFactory(new ParticularReferenceValueFactory())
+            .build();
+    InitializationFinder initializationFinder = new InitializationFinder(partialEvaluator, false);
     LibraryClass clazz = new LibraryClass();
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-    CodeAttribute codeAttribute = new CodeAttribute(1);
-    codeAttribute.u4codeLength = 0;
+    LibraryMethod method = new LibraryMethod(1, "<init>", "Descriptor");
 
     // Act
-    initializationFinder.visitCodeAttribute(clazz, method, codeAttribute);
+    initializationFinder.visitCodeAttribute(clazz, method, new CodeAttribute(1));
 
     // Assert
     assertFalse(initializationFinder.isInitializer());
@@ -168,14 +186,12 @@ class InitializationFinderDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "int InitializationFinder.superInitializationOffset()",
     "void InitializationFinder.visitAnyAttribute(Clazz, Attribute)"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     InitializationFinder initializationFinder = new InitializationFinder();
     LibraryClass clazz = new LibraryClass();

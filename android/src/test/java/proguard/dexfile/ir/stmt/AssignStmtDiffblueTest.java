@@ -1,38 +1,33 @@
 package proguard.dexfile.ir.stmt;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.LabelAndLocalMapper;
 import proguard.dexfile.ir.expr.ArrayExpr;
-import proguard.dexfile.ir.expr.CastExpr;
 import proguard.dexfile.ir.expr.Constant;
 import proguard.dexfile.ir.expr.Exprs;
 import proguard.dexfile.ir.expr.Value;
-import proguard.dexfile.ir.expr.Value.VT;
 import proguard.dexfile.ir.stmt.Stmt.ST;
 
-class AssignStmtDiffblueTest {
+public class AssignStmtDiffblueTest {
   /**
    * Test {@link AssignStmt#AssignStmt(ST, Value, Value)}.
    *
    * <p>Method under test: {@link AssignStmt#AssignStmt(ST, Value, Value)}
    */
   @Test
-  @DisplayName("Test new AssignStmt(ST, Value, Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void AssignStmt.<init>(ST, Value, Value)"})
-  void testNewAssignStmt() {
+  public void testNewAssignStmt() {
     // Arrange
     ArrayExpr left = new ArrayExpr();
     ArrayExpr right = new ArrayExpr();
@@ -45,11 +40,11 @@ class AssignStmtDiffblueTest {
     assertTrue(op1 instanceof ArrayExpr);
     Value op2 = actualAssignStmt.getOp2();
     assertTrue(op2 instanceof ArrayExpr);
+    assertNull(actualAssignStmt.getOps());
     assertNull(actualAssignStmt.frame);
     assertNull(actualAssignStmt.exceptionHandlers);
     assertNull(actualAssignStmt._cfg_froms);
     assertNull(actualAssignStmt.getOp());
-    assertNull(actualAssignStmt.getOps());
     assertNull(actualAssignStmt.getNext());
     assertNull(actualAssignStmt.getPre());
     assertNull(actualAssignStmt._ts_default_next);
@@ -73,68 +68,33 @@ class AssignStmtDiffblueTest {
    * <p>Method under test: {@link AssignStmt#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; given nAssign nNull and nNull; then Op1 return Constant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Stmt AssignStmt.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_givenNAssignNNullAndNNull_thenOp1ReturnConstant() {
+  public void testCloneWithLabelAndLocalMapper_givenNAssignNNullAndNNull_thenOp1ReturnConstant() {
     // Arrange
     Constant left = Exprs.nNull();
-    Constant right = Exprs.nNull();
-
-    AssignStmt nAssignResult = Stmts.nAssign(left, right);
-
-    // Act
-    Stmt actualCloneResult = nAssignResult.clone(new LabelAndLocalMapper());
-
-    // Assert
-    Value op1 = actualCloneResult.getOp1();
-    assertTrue(op1 instanceof Constant);
-    Value op2 = actualCloneResult.getOp2();
-    assertTrue(op2 instanceof Constant);
-    assertTrue(actualCloneResult instanceof AssignStmt);
-    assertNull(op1.getOp());
-    assertEquals(ET.E0, ((Constant) op1).et);
-    assertEquals(VT.CONSTANT, ((Constant) op1).vt);
-    Object object = ((Constant) op1).value;
-    assertSame(right.value, object);
-    assertSame(object, ((Constant) op2).value);
-  }
-
-  /**
-   * Test {@link AssignStmt#clone(LabelAndLocalMapper)} with {@code LabelAndLocalMapper}.
-   *
-   * <ul>
-   *   <li>Then Op1 return {@link CastExpr}.
-   * </ul>
-   *
-   * <p>Method under test: {@link AssignStmt#clone(LabelAndLocalMapper)}
-   */
-  @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then Op1 return CastExpr")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Stmt AssignStmt.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenOp1ReturnCastExpr() {
-    // Arrange
-    CastExpr left =
-        new CastExpr(Exprs.nNull(), "jane.doe@example.org", "alice.liddell@example.org");
     AssignStmt nAssignResult = Stmts.nAssign(left, Exprs.nNull());
 
     // Act
     Stmt actualCloneResult = nAssignResult.clone(new LabelAndLocalMapper());
 
     // Assert
-    Value op1 = actualCloneResult.getOp1();
-    assertTrue(op1 instanceof CastExpr);
-    assertTrue(op1.getOp() instanceof Constant);
+    assertTrue(actualCloneResult.getOp1() instanceof Constant);
+    assertTrue(actualCloneResult.getOp2() instanceof Constant);
     assertTrue(actualCloneResult instanceof AssignStmt);
-    assertEquals("alice.liddell@example.org", ((CastExpr) op1).to);
-    assertEquals("jane.doe@example.org", ((CastExpr) op1).from);
-    assertEquals(ET.E1, ((CastExpr) op1).et);
-    assertEquals(VT.CAST, ((CastExpr) op1).vt);
+    assertNull(actualCloneResult.getOps());
+    assertNull(((AssignStmt) actualCloneResult).frame);
+    assertNull(((AssignStmt) actualCloneResult).exceptionHandlers);
+    assertNull(((AssignStmt) actualCloneResult)._cfg_froms);
+    assertNull(actualCloneResult.getOp());
+    assertNull(actualCloneResult.getNext());
+    assertNull(actualCloneResult.getPre());
+    assertNull(((AssignStmt) actualCloneResult)._ts_default_next);
+    assertNull(((AssignStmt) actualCloneResult).list);
+    assertEquals(0, ((AssignStmt) actualCloneResult).id);
+    assertEquals(ET.E2, ((AssignStmt) actualCloneResult).et);
+    assertEquals(ST.ASSIGN, ((AssignStmt) actualCloneResult).st);
+    assertFalse(((AssignStmt) actualCloneResult).visited);
   }
 
   /**
@@ -148,12 +108,9 @@ class AssignStmtDiffblueTest {
    * <p>Method under test: {@link AssignStmt#toString()}
    */
   @Test
-  @DisplayName(
-      "Test toString(); given ArrayExpr() Op1 is ArrayExpr(); then return 'null[null][null] = null[null]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String AssignStmt.toString()"})
-  void testToString_givenArrayExprOp1IsArrayExpr_thenReturnNullNullNullNullNull() {
+  public void testToString_givenArrayExprOp1IsArrayExpr_thenReturnNullNullNullNullNull() {
     // Arrange
     ArrayExpr left = new ArrayExpr();
     left.setOp1(new ArrayExpr());
@@ -173,12 +130,9 @@ class AssignStmtDiffblueTest {
    * <p>Method under test: {@link AssignStmt#toString()}
    */
   @Test
-  @DisplayName(
-      "Test toString(); given nAssign ArrayExpr() and ArrayExpr(); then return 'null[null] = null[null]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String AssignStmt.toString()"})
-  void testToString_givenNAssignArrayExprAndArrayExpr_thenReturnNullNullNullNull() {
+  public void testToString_givenNAssignArrayExprAndArrayExpr_thenReturnNullNullNullNull() {
     // Arrange
     ArrayExpr left = new ArrayExpr();
 
@@ -197,17 +151,11 @@ class AssignStmtDiffblueTest {
    * <p>Method under test: {@link AssignStmt#toString()}
    */
   @Test
-  @DisplayName(
-      "Test toString(); given nAssign ArrayExpr() and 'null'; then return 'null[null] = null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String AssignStmt.toString()"})
-  void testToString_givenNAssignArrayExprAndNull_thenReturnNullNullNull() {
-    // Arrange
-    AssignStmt nAssignResult = Stmts.nAssign(new ArrayExpr(), null);
-
-    // Act and Assert
-    assertEquals("null[null] = null", nAssignResult.toString());
+  public void testToString_givenNAssignArrayExprAndNull_thenReturnNullNullNull() {
+    // Arrange, Act and Assert
+    assertEquals("null[null] = null", Stmts.nAssign(new ArrayExpr(), null).toString());
   }
 
   /**
@@ -221,12 +169,9 @@ class AssignStmtDiffblueTest {
    * <p>Method under test: {@link AssignStmt#toString()}
    */
   @Test
-  @DisplayName(
-      "Test toString(); given nAssign 'null' and ArrayExpr(); then return 'null = null[null]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String AssignStmt.toString()"})
-  void testToString_givenNAssignNullAndArrayExpr_thenReturnNullNullNull() {
+  public void testToString_givenNAssignNullAndArrayExpr_thenReturnNullNullNull() {
     // Arrange, Act and Assert
     assertEquals("null = null[null]", Stmts.nAssign(null, new ArrayExpr()).toString());
   }
@@ -235,134 +180,115 @@ class AssignStmtDiffblueTest {
    * Test {@link AssignStmt#toString()}.
    *
    * <ul>
-   *   <li>Then return {@code null := null[null]}.
-   * </ul>
-   *
-   * <p>Method under test: {@link AssignStmt#toString()}
-   */
-  @Test
-  @DisplayName("Test toString(); then return 'null := null[null]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"java.lang.String AssignStmt.toString()"})
-  void testToString_thenReturnNullNullNull() {
-    // Arrange
-    AssignStmt assignStmt = new AssignStmt(ST.LOCAL_START, null, new ArrayExpr());
-
-    // Act and Assert
-    assertEquals("null := null[null]", assignStmt.toString());
-  }
-
-  /**
-   * Test {@link AssignStmt#toString()}.
-   *
-   * <ul>
-   *   <li>Then return {@code null[null] := null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link AssignStmt#toString()}
-   */
-  @Test
-  @DisplayName("Test toString(); then return 'null[null] := null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"java.lang.String AssignStmt.toString()"})
-  void testToString_thenReturnNullNullNull2() {
-    // Arrange
-    AssignStmt assignStmt = new AssignStmt(ST.LOCAL_START, new ArrayExpr(), null);
-
-    // Act and Assert
-    assertEquals("null[null] := null", assignStmt.toString());
-  }
-
-  /**
-   * Test {@link AssignStmt#toString()}.
-   *
-   * <ul>
-   *   <li>Then return {@code null <- null[null]}.
-   * </ul>
-   *
-   * <p>Method under test: {@link AssignStmt#toString()}
-   */
-  @Test
-  @DisplayName("Test toString(); then return 'null <- null[null]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"java.lang.String AssignStmt.toString()"})
-  void testToString_thenReturnNullNullNull3() {
-    // Arrange
-    AssignStmt assignStmt = new AssignStmt(ST.FILL_ARRAY_DATA, null, new ArrayExpr());
-
-    // Act and Assert
-    assertEquals("null <- null[null]", assignStmt.toString());
-  }
-
-  /**
-   * Test {@link AssignStmt#toString()}.
-   *
-   * <ul>
-   *   <li>Then return {@code null[null] <- null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link AssignStmt#toString()}
-   */
-  @Test
-  @DisplayName("Test toString(); then return 'null[null] <- null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"java.lang.String AssignStmt.toString()"})
-  void testToString_thenReturnNullNullNull4() {
-    // Arrange
-    AssignStmt assignStmt = new AssignStmt(ST.FILL_ARRAY_DATA, new ArrayExpr(), null);
-
-    // Act and Assert
-    assertEquals("null[null] <- null", assignStmt.toString());
-  }
-
-  /**
-   * Test {@link AssignStmt#toString()}.
-   *
-   * <ul>
-   *   <li>Then return {@code null[null] := null[null]}.
-   * </ul>
-   *
-   * <p>Method under test: {@link AssignStmt#toString()}
-   */
-  @Test
-  @DisplayName("Test toString(); then return 'null[null] := null[null]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"java.lang.String AssignStmt.toString()"})
-  void testToString_thenReturnNullNullNullNull() {
-    // Arrange
-    ArrayExpr left = new ArrayExpr();
-    AssignStmt assignStmt = new AssignStmt(ST.LOCAL_START, left, new ArrayExpr());
-
-    // Act and Assert
-    assertEquals("null[null] := null[null]", assignStmt.toString());
-  }
-
-  /**
-   * Test {@link AssignStmt#toString()}.
-   *
-   * <ul>
+   *   <li>Given nFillArrayData {@link ArrayExpr#ArrayExpr()} and {@link ArrayExpr#ArrayExpr()}.
    *   <li>Then return {@code null[null] <- null[null]}.
    * </ul>
    *
    * <p>Method under test: {@link AssignStmt#toString()}
    */
   @Test
-  @DisplayName("Test toString(); then return 'null[null] <- null[null]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String AssignStmt.toString()"})
-  void testToString_thenReturnNullNullNullNull2() {
+  public void testToString_givenNFillArrayDataArrayExprAndArrayExpr_thenReturnNullNullNullNull() {
     // Arrange
     ArrayExpr left = new ArrayExpr();
-    AssignStmt assignStmt = new AssignStmt(ST.FILL_ARRAY_DATA, left, new ArrayExpr());
 
     // Act and Assert
-    assertEquals("null[null] <- null[null]", assignStmt.toString());
+    assertEquals(
+        "null[null] <- null[null]", Stmts.nFillArrayData(left, new ArrayExpr()).toString());
+  }
+
+  /**
+   * Test {@link AssignStmt#toString()}.
+   *
+   * <ul>
+   *   <li>Given nFillArrayData {@link ArrayExpr#ArrayExpr()} and {@code null}.
+   *   <li>Then return {@code null[null] <- null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link AssignStmt#toString()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"java.lang.String AssignStmt.toString()"})
+  public void testToString_givenNFillArrayDataArrayExprAndNull_thenReturnNullNullNull() {
+    // Arrange, Act and Assert
+    assertEquals("null[null] <- null", Stmts.nFillArrayData(new ArrayExpr(), null).toString());
+  }
+
+  /**
+   * Test {@link AssignStmt#toString()}.
+   *
+   * <ul>
+   *   <li>Given nFillArrayData {@code null} and {@link ArrayExpr#ArrayExpr()}.
+   *   <li>Then return {@code null <- null[null]}.
+   * </ul>
+   *
+   * <p>Method under test: {@link AssignStmt#toString()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"java.lang.String AssignStmt.toString()"})
+  public void testToString_givenNFillArrayDataNullAndArrayExpr_thenReturnNullNullNull() {
+    // Arrange, Act and Assert
+    assertEquals("null <- null[null]", Stmts.nFillArrayData(null, new ArrayExpr()).toString());
+  }
+
+  /**
+   * Test {@link AssignStmt#toString()}.
+   *
+   * <ul>
+   *   <li>Given nIdentity {@link ArrayExpr#ArrayExpr()} and {@link ArrayExpr#ArrayExpr()}.
+   *   <li>Then return {@code null[null] := null[null]}.
+   * </ul>
+   *
+   * <p>Method under test: {@link AssignStmt#toString()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"java.lang.String AssignStmt.toString()"})
+  public void testToString_givenNIdentityArrayExprAndArrayExpr_thenReturnNullNullNullNull() {
+    // Arrange
+    ArrayExpr local = new ArrayExpr();
+
+    // Act and Assert
+    assertEquals("null[null] := null[null]", Stmts.nIdentity(local, new ArrayExpr()).toString());
+  }
+
+  /**
+   * Test {@link AssignStmt#toString()}.
+   *
+   * <ul>
+   *   <li>Given nIdentity {@link ArrayExpr#ArrayExpr()} and {@code null}.
+   *   <li>Then return {@code null[null] := null}.
+   * </ul>
+   *
+   * <p>Method under test: {@link AssignStmt#toString()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"java.lang.String AssignStmt.toString()"})
+  public void testToString_givenNIdentityArrayExprAndNull_thenReturnNullNullNull() {
+    // Arrange, Act and Assert
+    assertEquals("null[null] := null", Stmts.nIdentity(new ArrayExpr(), null).toString());
+  }
+
+  /**
+   * Test {@link AssignStmt#toString()}.
+   *
+   * <ul>
+   *   <li>Given nIdentity {@code null} and {@link ArrayExpr#ArrayExpr()}.
+   *   <li>Then return {@code null := null[null]}.
+   * </ul>
+   *
+   * <p>Method under test: {@link AssignStmt#toString()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"java.lang.String AssignStmt.toString()"})
+  public void testToString_givenNIdentityNullAndArrayExpr_thenReturnNullNullNull() {
+    // Arrange, Act and Assert
+    assertEquals("null := null[null]", Stmts.nIdentity(null, new ArrayExpr()).toString());
   }
 
   /**
@@ -375,11 +301,9 @@ class AssignStmtDiffblueTest {
    * <p>Method under test: {@link AssignStmt#toString()}
    */
   @Test
-  @DisplayName("Test toString(); then return 'null[null][null[null]] = null[null]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String AssignStmt.toString()"})
-  void testToString_thenReturnNullNullNullNullNullNull() {
+  public void testToString_thenReturnNullNullNullNullNullNull() {
     // Arrange
     ArrayExpr base = new ArrayExpr();
     ArrayExpr left = new ArrayExpr(base, new ArrayExpr(), "[");

@@ -1,30 +1,27 @@
 package proguard.dexfile.reader.node.insn;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.reader.Op;
 import proguard.dexfile.reader.node.DexCodeNode;
 import proguard.dexfile.reader.visitors.DexCodeVisitor;
 
-class Stmt1RNodeDiffblueTest {
+public class Stmt1RNodeDiffblueTest {
   /**
    * Test {@link Stmt1RNode#Stmt1RNode(Op, int)}.
    *
    * <p>Method under test: {@link Stmt1RNode#Stmt1RNode(Op, int)}
    */
   @Test
-  @DisplayName("Test new Stmt1RNode(Op, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Stmt1RNode.<init>(Op, int)"})
-  void testNewStmt1RNode() {
+  public void testNewStmt1RNode() {
     // Arrange and Act
     Stmt1RNode actualStmt1RNode = new Stmt1RNode(Op.NOP, 1);
 
@@ -45,12 +42,9 @@ class Stmt1RNodeDiffblueTest {
    * <p>Method under test: {@link Stmt1RNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeNode(); then DexCodeNode() stmts size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Stmt1RNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
+  public void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
     // Arrange
     Stmt1RNode stmt1RNode = new Stmt1RNode(Op.NOP, 1);
     DexCodeNode cv = new DexCodeNode();

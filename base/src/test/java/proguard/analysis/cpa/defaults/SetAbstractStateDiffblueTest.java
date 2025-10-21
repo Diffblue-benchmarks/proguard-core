@@ -1,28 +1,25 @@
 package proguard.analysis.cpa.defaults;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import java.util.Collection;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class SetAbstractStateDiffblueTest {
+public class SetAbstractStateDiffblueTest {
   /**
    * Test {@link SetAbstractState#SetAbstractState(Collection)}.
    *
    * <p>Method under test: {@link SetAbstractState#SetAbstractState(Collection)}
    */
   @Test
-  @DisplayName("Test new SetAbstractState(Collection)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void SetAbstractState.<init>(Collection)"})
-  void testNewSetAbstractState() {
+  public void testNewSetAbstractState() {
     // Arrange and Act
     SetAbstractState<Object> actualObjectSet = new SetAbstractState<>(new ArrayList<>());
 
@@ -36,11 +33,9 @@ class SetAbstractStateDiffblueTest {
    * <p>Method under test: {@link SetAbstractState#SetAbstractState(Object[])}
    */
   @Test
-  @DisplayName("Test new SetAbstractState(Object[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void SetAbstractState.<init>(Object[])"})
-  void testNewSetAbstractState2() {
+  public void testNewSetAbstractState2() {
     // Arrange and Act
     SetAbstractState<Object> actualObjectSet = new SetAbstractState<>("Items");
 

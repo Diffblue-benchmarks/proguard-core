@@ -1,18 +1,17 @@
 package proguard.classfile.constant.visitor;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertThrows;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.constant.PrimitiveArrayConstant;
 import proguard.classfile.util.PrimitiveArrayConstantReplacer;
 
-class PrimitiveArrayConstantElementVisitorDiffblueTest {
+public class PrimitiveArrayConstantElementVisitorDiffblueTest {
   /**
    * Test {@link PrimitiveArrayConstantElementVisitor#visitAnyPrimitiveArrayConstantElement(Clazz,
    * PrimitiveArrayConstant, int)}.
@@ -26,14 +25,11 @@ class PrimitiveArrayConstantElementVisitorDiffblueTest {
    * PrimitiveArrayConstant, int)}
    */
   @Test
-  @DisplayName(
-      "Test visitAnyPrimitiveArrayConstantElement(Clazz, PrimitiveArrayConstant, int); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void PrimitiveArrayConstantElementVisitor.visitAnyPrimitiveArrayConstantElement(Clazz, PrimitiveArrayConstant, int)"
   })
-  void testVisitAnyPrimitiveArrayConstantElement_thenThrowUnsupportedOperationException() {
+  public void testVisitAnyPrimitiveArrayConstantElement_thenThrowUnsupportedOperationException() {
     // Arrange
     PrimitiveArrayConstantReplacer primitiveArrayConstantReplacer =
         new PrimitiveArrayConstantReplacer();

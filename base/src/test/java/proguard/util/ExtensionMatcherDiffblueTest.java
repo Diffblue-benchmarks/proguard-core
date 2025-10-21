@@ -1,15 +1,14 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ExtensionMatcherDiffblueTest {
+public class ExtensionMatcherDiffblueTest {
   /**
    * Test {@link ExtensionMatcher#matches(String, int, int)} with {@code string}, {@code
    * beginOffset}, {@code endOffset}.
@@ -21,14 +20,11 @@ class ExtensionMatcherDiffblueTest {
    * <p>Method under test: {@link ExtensionMatcher#matches(String, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test matches(String, int, int) with 'string', 'beginOffset', 'endOffset'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ExtensionMatcher.matches(String, int, int)"})
-  void testMatchesWithStringBeginOffsetEndOffset_thenReturnFalse() {
+  public void testMatchesWithStringBeginOffsetEndOffset_thenReturnFalse() {
     // Arrange, Act and Assert
-    assertFalse(new ExtensionMatcher("Extension").matches("String", 1, 3));
+    assertFalse((new ExtensionMatcher("Extension")).matches("String", 1, 3));
   }
 
   /**
@@ -42,13 +38,10 @@ class ExtensionMatcherDiffblueTest {
    * <p>Method under test: {@link ExtensionMatcher#matches(String, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test matches(String, int, int) with 'string', 'beginOffset', 'endOffset'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ExtensionMatcher.matches(String, int, int)"})
-  void testMatchesWithStringBeginOffsetEndOffset_thenReturnTrue() {
+  public void testMatchesWithStringBeginOffsetEndOffset_thenReturnTrue() {
     // Arrange, Act and Assert
-    assertTrue(new ExtensionMatcher("").matches("String", 1, 3));
+    assertTrue((new ExtensionMatcher("")).matches("String", 1, 3));
   }
 }

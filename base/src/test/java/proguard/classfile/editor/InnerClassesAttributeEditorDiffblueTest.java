@@ -1,16 +1,15 @@
 package proguard.classfile.editor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.attribute.InnerClassesAttribute;
 import proguard.classfile.attribute.InnerClassesInfo;
 
-class InnerClassesAttributeEditorDiffblueTest {
+public class InnerClassesAttributeEditorDiffblueTest {
   /**
    * Test {@link InnerClassesAttributeEditor#addInnerClassesInfo(InnerClassesInfo)}.
    *
@@ -21,24 +20,18 @@ class InnerClassesAttributeEditorDiffblueTest {
    * <p>Method under test: {@link InnerClassesAttributeEditor#addInnerClassesInfo(InnerClassesInfo)}
    */
   @Test
-  @DisplayName("Test addInnerClassesInfo(InnerClassesInfo); then return three")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int InnerClassesAttributeEditor.addInnerClassesInfo(InnerClassesInfo)"})
-  void testAddInnerClassesInfo_thenReturnThree() {
+  public void testAddInnerClassesInfo_thenReturnThree() {
     // Arrange
-    InnerClassesInfo innerClassesInfo = new InnerClassesInfo(1, 1, 1, 1);
-    InnerClassesInfo[] classes = new InnerClassesInfo[] {innerClassesInfo};
     InnerClassesAttributeEditor innerClassesAttributeEditor =
-        new InnerClassesAttributeEditor(new InnerClassesAttribute(1, 3, classes));
-    InnerClassesInfo innerClassesInfo2 = new InnerClassesInfo(1, 1, 1, 1);
+        new InnerClassesAttributeEditor(
+            new InnerClassesAttribute(
+                1, 3, new InnerClassesInfo[] {new InnerClassesInfo(1, 1, 1, 1)}));
 
-    // Act
-    int actualAddInnerClassesInfoResult =
-        innerClassesAttributeEditor.addInnerClassesInfo(innerClassesInfo2);
-
-    // Assert
-    assertEquals(3, actualAddInnerClassesInfoResult);
+    // Act and Assert
+    assertEquals(
+        3, innerClassesAttributeEditor.addInnerClassesInfo(new InnerClassesInfo(1, 1, 1, 1)));
   }
 
   /**
@@ -51,23 +44,17 @@ class InnerClassesAttributeEditorDiffblueTest {
    * <p>Method under test: {@link InnerClassesAttributeEditor#addInnerClassesInfo(InnerClassesInfo)}
    */
   @Test
-  @DisplayName("Test addInnerClassesInfo(InnerClassesInfo); then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int InnerClassesAttributeEditor.addInnerClassesInfo(InnerClassesInfo)"})
-  void testAddInnerClassesInfo_thenReturnZero() {
+  public void testAddInnerClassesInfo_thenReturnZero() {
     // Arrange
-    InnerClassesInfo innerClassesInfo = new InnerClassesInfo(1, 1, 1, 1);
-    InnerClassesInfo[] classes = new InnerClassesInfo[] {innerClassesInfo};
     InnerClassesAttributeEditor innerClassesAttributeEditor =
-        new InnerClassesAttributeEditor(new InnerClassesAttribute(1, 0, classes));
-    InnerClassesInfo innerClassesInfo2 = new InnerClassesInfo(1, 1, 1, 1);
+        new InnerClassesAttributeEditor(
+            new InnerClassesAttribute(
+                1, 0, new InnerClassesInfo[] {new InnerClassesInfo(1, 1, 1, 1)}));
 
-    // Act
-    int actualAddInnerClassesInfoResult =
-        innerClassesAttributeEditor.addInnerClassesInfo(innerClassesInfo2);
-
-    // Assert
-    assertEquals(0, actualAddInnerClassesInfoResult);
+    // Act and Assert
+    assertEquals(
+        0, innerClassesAttributeEditor.addInnerClassesInfo(new InnerClassesInfo(1, 1, 1, 1)));
   }
 }

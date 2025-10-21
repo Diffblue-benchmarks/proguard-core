@@ -1,52 +1,49 @@
 package proguard.dexfile.ir.expr;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.LabelAndLocalMapper;
 import proguard.dexfile.ir.expr.Value.VT;
 import proguard.dexfile.reader.Method;
 import proguard.dexfile.reader.Proto;
 
-class InvokePolymorphicExprDiffblueTest {
+public class InvokePolymorphicExprDiffblueTest {
   /**
    * Test {@link InvokePolymorphicExpr#releaseMemory()}.
    *
    * <p>Method under test: {@link InvokePolymorphicExpr#releaseMemory()}
    */
   @Test
-  @DisplayName("Test releaseMemory()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void InvokePolymorphicExpr.releaseMemory()"})
-  void testReleaseMemory() {
+  public void testReleaseMemory() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method = new Method("Owner", "Name", proto2);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(new Value[] {new ArrayExpr()}, proto, method);
+        Exprs.nInvokePolymorphic(
+            new Value[] {new ArrayExpr()},
+            proto,
+            new Method(
+                "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")));
 
     // Act
     nInvokePolymorphicResult.releaseMemory();
 
     // Assert
+    assertNull(nInvokePolymorphicResult.getArgs());
+    assertNull(nInvokePolymorphicResult.getOps());
     assertNull(nInvokePolymorphicResult.getName());
     assertNull(nInvokePolymorphicResult.getOwner());
     assertNull(nInvokePolymorphicResult.getRet());
-    assertNull(nInvokePolymorphicResult.getArgs());
-    assertNull(nInvokePolymorphicResult.getOps());
     assertNull(nInvokePolymorphicResult.method);
     assertNull(nInvokePolymorphicResult.getProto());
   }
@@ -57,27 +54,22 @@ class InvokePolymorphicExprDiffblueTest {
    * <p>Method under test: {@link InvokePolymorphicExpr#getProto()}
    */
   @Test
-  @DisplayName("Test getProto()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Proto InvokePolymorphicExpr.getProto()"})
-  void testGetProto() {
+  public void testGetProto() {
     // Arrange
-    Value[] args = new Value[] {new ArrayExpr()};
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method = new Method("Owner", "Name", proto2);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     InvokePolymorphicExpr invokePolymorphicExpr =
-        new InvokePolymorphicExpr(VT.ADD, args, proto, method);
+        new InvokePolymorphicExpr(
+            VT.ADD,
+            new Value[] {new ArrayExpr()},
+            proto,
+            new Method(
+                "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")));
 
-    // Act
-    Proto actualProto = invokePolymorphicExpr.getProto();
-
-    // Assert
-    assertSame(invokePolymorphicExpr.proto, actualProto);
+    // Act and Assert
+    assertSame(invokePolymorphicExpr.proto, invokePolymorphicExpr.getProto());
   }
 
   /**
@@ -87,22 +79,21 @@ class InvokePolymorphicExprDiffblueTest {
    * Method)}
    */
   @Test
-  @DisplayName("Test new InvokePolymorphicExpr(VT, Value[], Proto, Method)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void InvokePolymorphicExpr.<init>(VT, Value[], Proto, Method)"})
-  void testNewInvokePolymorphicExpr() {
+  public void testNewInvokePolymorphicExpr() {
     // Arrange
     Value[] args = new Value[] {new ArrayExpr()};
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method = new Method("Owner", "Name", proto2);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     // Act
     InvokePolymorphicExpr actualInvokePolymorphicExpr =
-        new InvokePolymorphicExpr(VT.ADD, args, proto, method);
+        new InvokePolymorphicExpr(
+            VT.ADD,
+            args,
+            proto,
+            new Method(
+                "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")));
 
     // Assert
     assertEquals("Name", actualInvokePolymorphicExpr.getName());
@@ -133,22 +124,19 @@ class InvokePolymorphicExprDiffblueTest {
    * <p>Method under test: {@link InvokePolymorphicExpr#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then first element return Constant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokePolymorphicExpr InvokePolymorphicExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenFirstElementReturnConstant() {
+  public void testCloneWithLabelAndLocalMapper_thenFirstElementReturnConstant() {
     // Arrange
     Constant nNullResult = Exprs.nNull();
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method = new Method("Owner", "Name", proto2);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(new Value[] {nNullResult}, proto, method);
+        Exprs.nInvokePolymorphic(
+            new Value[] {nNullResult},
+            proto,
+            new Method(
+                "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")));
 
     // Act
     InvokePolymorphicExpr actualCloneResult =
@@ -176,12 +164,9 @@ class InvokePolymorphicExprDiffblueTest {
    * <p>Method under test: {@link InvokePolymorphicExpr#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then return first element toString0 is 'null.Name()'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokePolymorphicExpr InvokePolymorphicExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenReturnFirstElementToString0IsNullName() {
+  public void testCloneWithLabelAndLocalMapper_thenReturnFirstElementToString0IsNullName() {
     // Arrange
     InvokeExpr nInvokeInterfaceResult =
         Exprs.nInvokeInterface(
@@ -190,14 +175,14 @@ class InvokePolymorphicExprDiffblueTest {
             "Name",
             new String[] {"Argment Types"},
             "Return Type");
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method = new Method("Owner", "Name", proto2);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(new Value[] {nInvokeInterfaceResult}, proto, method);
+        Exprs.nInvokePolymorphic(
+            new Value[] {nInvokeInterfaceResult},
+            proto,
+            new Method(
+                "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")));
 
     // Act
     InvokePolymorphicExpr actualCloneResult =
@@ -223,35 +208,32 @@ class InvokePolymorphicExprDiffblueTest {
    * <p>Method under test: {@link InvokePolymorphicExpr#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then return first element toString0 is 'null.Name().Name()'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokePolymorphicExpr InvokePolymorphicExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenReturnFirstElementToString0IsNullNameName() {
+  public void testCloneWithLabelAndLocalMapper_thenReturnFirstElementToString0IsNullNameName() {
     // Arrange
     InvokeExpr nInvokeInterfaceResult =
         Exprs.nInvokeInterface(
-            new Value[] {Exprs.nNull()},
+            new Value[] {
+              Exprs.nInvokeInterface(
+                  new Value[] {Exprs.nNull()},
+                  "Owner",
+                  "Name",
+                  new String[] {"Argment Types"},
+                  "Return Type")
+            },
             "Owner",
             "Name",
             new String[] {"Argment Types"},
             "Return Type");
-    InvokeExpr nInvokeInterfaceResult2 =
-        Exprs.nInvokeInterface(
-            new Value[] {nInvokeInterfaceResult},
-            "Owner",
-            "Name",
-            new String[] {"Argment Types"},
-            "Return Type");
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method = new Method("Owner", "Name", proto2);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(new Value[] {nInvokeInterfaceResult2}, proto, method);
+        Exprs.nInvokePolymorphic(
+            new Value[] {nInvokeInterfaceResult},
+            proto,
+            new Method(
+                "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")));
 
     // Act
     InvokePolymorphicExpr actualCloneResult =
@@ -264,7 +246,7 @@ class InvokePolymorphicExprDiffblueTest {
     assertEquals("null.Name().Name()", value.toString0());
     assertEquals("null.Name().Name().Name()", actualCloneResult.toString0());
     assertEquals(1, ops.length);
-    assertSame(nInvokeInterfaceResult2.method, ((InvokeExpr) value).method);
+    assertSame(nInvokeInterfaceResult.method, ((InvokeExpr) value).method);
   }
 
   /**
@@ -277,11 +259,9 @@ class InvokePolymorphicExprDiffblueTest {
    * <p>Method under test: {@link InvokePolymorphicExpr#clone()}
    */
   @Test
-  @DisplayName("Test clone(); then return first element toString0 is 'null.Name()'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokePolymorphicExpr InvokePolymorphicExpr.clone()"})
-  void testClone_thenReturnFirstElementToString0IsNullName() {
+  public void testClone_thenReturnFirstElementToString0IsNullName() {
     // Arrange
     InvokeExpr nInvokeInterfaceResult =
         Exprs.nInvokeInterface(
@@ -290,17 +270,16 @@ class InvokePolymorphicExprDiffblueTest {
             "Name",
             new String[] {"Argment Types"},
             "Return Type");
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method = new Method("Owner", "Name", proto2);
-
-    InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(new Value[] {nInvokeInterfaceResult}, proto, method);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     // Act
-    InvokePolymorphicExpr actualCloneResult = nInvokePolymorphicResult.clone();
+    InvokePolymorphicExpr actualCloneResult =
+        Exprs.nInvokePolymorphic(
+                new Value[] {nInvokeInterfaceResult},
+                proto,
+                new Method(
+                    "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")))
+            .clone();
 
     // Assert
     Value[] ops = actualCloneResult.getOps();
@@ -325,37 +304,34 @@ class InvokePolymorphicExprDiffblueTest {
    * <p>Method under test: {@link InvokePolymorphicExpr#clone()}
    */
   @Test
-  @DisplayName("Test clone(); then return first element toString0 is 'null.Name().Name()'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokePolymorphicExpr InvokePolymorphicExpr.clone()"})
-  void testClone_thenReturnFirstElementToString0IsNullNameName() {
+  public void testClone_thenReturnFirstElementToString0IsNullNameName() {
     // Arrange
     InvokeExpr nInvokeInterfaceResult =
         Exprs.nInvokeInterface(
-            new Value[] {Exprs.nNull()},
+            new Value[] {
+              Exprs.nInvokeInterface(
+                  new Value[] {Exprs.nNull()},
+                  "Owner",
+                  "Name",
+                  new String[] {"Argment Types"},
+                  "Return Type")
+            },
             "Owner",
             "Name",
             new String[] {"Argment Types"},
             "Return Type");
-    InvokeExpr nInvokeInterfaceResult2 =
-        Exprs.nInvokeInterface(
-            new Value[] {nInvokeInterfaceResult},
-            "Owner",
-            "Name",
-            new String[] {"Argment Types"},
-            "Return Type");
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method = new Method("Owner", "Name", proto2);
-
-    InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(new Value[] {nInvokeInterfaceResult2}, proto, method);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     // Act
-    InvokePolymorphicExpr actualCloneResult = nInvokePolymorphicResult.clone();
+    InvokePolymorphicExpr actualCloneResult =
+        Exprs.nInvokePolymorphic(
+                new Value[] {nInvokeInterfaceResult},
+                proto,
+                new Method(
+                    "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")))
+            .clone();
 
     // Assert
     Value[] ops = actualCloneResult.getOps();
@@ -367,7 +343,7 @@ class InvokePolymorphicExprDiffblueTest {
     assertEquals("null.Name().Name().Name()", actualCloneResult.toString0());
     assertEquals(1, ops2.length);
     assertEquals(1, ops.length);
-    assertSame(nInvokeInterfaceResult2.method, ((InvokeExpr) value).method);
+    assertSame(nInvokeInterfaceResult.method, ((InvokeExpr) value).method);
   }
 
   /**
@@ -380,24 +356,21 @@ class InvokePolymorphicExprDiffblueTest {
    * <p>Method under test: {@link InvokePolymorphicExpr#clone()}
    */
   @Test
-  @DisplayName("Test clone(); then return toString0 is 'null.Name()'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokePolymorphicExpr InvokePolymorphicExpr.clone()"})
-  void testClone_thenReturnToString0IsNullName() {
+  public void testClone_thenReturnToString0IsNullName() {
     // Arrange
     Constant nNullResult = Exprs.nNull();
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method = new Method("Owner", "Name", proto2);
-
-    InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(new Value[] {nNullResult}, proto, method);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     // Act
-    InvokePolymorphicExpr actualCloneResult = nInvokePolymorphicResult.clone();
+    InvokePolymorphicExpr actualCloneResult =
+        Exprs.nInvokePolymorphic(
+                new Value[] {nNullResult},
+                proto,
+                new Method(
+                    "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")))
+            .clone();
 
     // Assert
     Value[] ops = actualCloneResult.getOps();
@@ -415,30 +388,108 @@ class InvokePolymorphicExprDiffblueTest {
    * Test {@link InvokePolymorphicExpr#toString0()}.
    *
    * <ul>
+   *   <li>Then return {@code ((double)null[null]).Name()}.
+   * </ul>
+   *
+   * <p>Method under test: {@link InvokePolymorphicExpr#toString0()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String InvokePolymorphicExpr.toString0()"})
+  public void testToString0_thenReturnDoubleNullNullName() {
+    // Arrange
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
+
+    // Act and Assert
+    assertEquals(
+        "((double)null[null]).Name()",
+        Exprs.nInvokePolymorphic(
+                new Value[] {Exprs.nCast(new ArrayExpr(), "jane.doe@example.org", "D")},
+                proto,
+                new Method(
+                    "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")))
+            .toString0());
+  }
+
+  /**
+   * Test {@link InvokePolymorphicExpr#toString0()}.
+   *
+   * <ul>
+   *   <li>Then return {@code ((float)null[null]).Name()}.
+   * </ul>
+   *
+   * <p>Method under test: {@link InvokePolymorphicExpr#toString0()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String InvokePolymorphicExpr.toString0()"})
+  public void testToString0_thenReturnFloatNullNullName() {
+    // Arrange
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
+
+    // Act and Assert
+    assertEquals(
+        "((float)null[null]).Name()",
+        Exprs.nInvokePolymorphic(
+                new Value[] {Exprs.nCast(new ArrayExpr(), "jane.doe@example.org", "F")},
+                proto,
+                new Method(
+                    "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")))
+            .toString0());
+  }
+
+  /**
+   * Test {@link InvokePolymorphicExpr#toString0()}.
+   *
+   * <ul>
+   *   <li>Then return {@code ((int)null[null]).Name()}.
+   * </ul>
+   *
+   * <p>Method under test: {@link InvokePolymorphicExpr#toString0()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String InvokePolymorphicExpr.toString0()"})
+  public void testToString0_thenReturnIntNullNullName() {
+    // Arrange
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
+
+    // Act and Assert
+    assertEquals(
+        "((int)null[null]).Name()",
+        Exprs.nInvokePolymorphic(
+                new Value[] {Exprs.nCast(new ArrayExpr(), "jane.doe@example.org", "I")},
+                proto,
+                new Method(
+                    "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")))
+            .toString0());
+  }
+
+  /**
+   * Test {@link InvokePolymorphicExpr#toString0()}.
+   *
+   * <ul>
    *   <li>Then return {@code new [][]{null[null]}.Name()}.
    * </ul>
    *
    * <p>Method under test: {@link InvokePolymorphicExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); then return 'new [][]{null[null]}.Name()'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokePolymorphicExpr.toString0()"})
-  void testToString0_thenReturnNewNullNullName() {
+  public void testToString0_thenReturnNewNullNullName() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method = new Method("Owner", "Name", proto2);
-
-    InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(
-            new Value[] {Exprs.nFilledArray("[", new Value[] {new ArrayExpr()})}, proto, method);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     // Act and Assert
-    assertEquals("new [][]{null[null]}.Name()", nInvokePolymorphicResult.toString0());
+    assertEquals(
+        "new [][]{null[null]}.Name()",
+        Exprs.nInvokePolymorphic(
+                new Value[] {Exprs.nFilledArray("[", new Value[] {new ArrayExpr()})},
+                proto,
+                new Method(
+                    "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")))
+            .toString0());
   }
 
   /**
@@ -451,58 +502,23 @@ class InvokePolymorphicExprDiffblueTest {
    * <p>Method under test: {@link InvokePolymorphicExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); then return 'new [](null[null]).Name()'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokePolymorphicExpr.toString0()"})
-  void testToString0_thenReturnNewNullNullName2() {
+  public void testToString0_thenReturnNewNullNullName2() {
     // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"["}, "[");
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method = new Method("Owner", "Name", proto2);
-
-    InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(new Value[] {nInvokeNewResult}, proto, method);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     // Act and Assert
-    assertEquals("new [](null[null]).Name()", nInvokePolymorphicResult.toString0());
-  }
-
-  /**
-   * Test {@link InvokePolymorphicExpr#toString0()}.
-   *
-   * <ul>
-   *   <li>Then return {@code new [][]{null[null]}.[().Name()}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokePolymorphicExpr#toString0()}
-   */
-  @Test
-  @DisplayName("Test toString0(); then return 'new [][]{null[null]}.[().Name()'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String InvokePolymorphicExpr.toString0()"})
-  void testToString0_thenReturnNewNullNullName3() {
-    // Arrange
-    Value[] args = new Value[] {Exprs.nFilledArray("[", new Value[] {new ArrayExpr()})};
-    String[] argumentTypes = new String[] {"["};
-
-    InvokeNewExpr invokeNewExpr = new InvokeNewExpr(VT.ADD, args, "[", "[", argumentTypes, "[");
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method = new Method("Owner", "Name", proto2);
-
-    InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(new Value[] {invokeNewExpr}, proto, method);
-
-    // Act and Assert
-    assertEquals("new [][]{null[null]}.[().Name()", nInvokePolymorphicResult.toString0());
+    assertEquals(
+        "new [](null[null]).Name()",
+        Exprs.nInvokePolymorphic(
+                new Value[] {
+                  Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"["}, "[")
+                },
+                proto,
+                new Method(
+                    "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")))
+            .toString0());
   }
 
   /**
@@ -515,26 +531,25 @@ class InvokePolymorphicExprDiffblueTest {
    * <p>Method under test: {@link InvokePolymorphicExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); then return 'new [](null[null],null[null]).Name()'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokePolymorphicExpr.toString0()"})
-  void testToString0_thenReturnNewNullNullNullNullName() {
+  public void testToString0_thenReturnNewNullNullNullNullName() {
     // Arrange
     ArrayExpr arrayExpr = new ArrayExpr();
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {arrayExpr, new ArrayExpr()}, new String[] {"["}, "[");
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method = new Method("Owner", "Name", proto2);
-
-    InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(new Value[] {nInvokeNewResult}, proto, method);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     // Act and Assert
-    assertEquals("new [](null[null],null[null]).Name()", nInvokePolymorphicResult.toString0());
+    assertEquals(
+        "new [](null[null],null[null]).Name()",
+        Exprs.nInvokePolymorphic(
+                new Value[] {
+                  Exprs.nInvokeNew(
+                      new Value[] {arrayExpr, new ArrayExpr()}, new String[] {"["}, "[")
+                },
+                proto,
+                new Method(
+                    "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")))
+            .toString0());
   }
 
   /**
@@ -547,119 +562,21 @@ class InvokePolymorphicExprDiffblueTest {
    * <p>Method under test: {@link InvokePolymorphicExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); then return 'null[null].Name()'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokePolymorphicExpr.toString0()"})
-  void testToString0_thenReturnNullNullName() {
+  public void testToString0_thenReturnNullNullName() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method = new Method("Owner", "Name", proto2);
-
-    InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(new Value[] {new ArrayExpr()}, proto, method);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     // Act and Assert
-    assertEquals("null[null].Name()", nInvokePolymorphicResult.toString0());
-  }
-
-  /**
-   * Test {@link InvokePolymorphicExpr#toString0()}.
-   *
-   * <ul>
-   *   <li>Then return {@code null[null].[().Name()}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokePolymorphicExpr#toString0()}
-   */
-  @Test
-  @DisplayName("Test toString0(); then return 'null[null].[().Name()'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String InvokePolymorphicExpr.toString0()"})
-  void testToString0_thenReturnNullNullName2() {
-    // Arrange
-    Value[] args = new Value[] {new ArrayExpr()};
-    String[] argumentTypes = new String[] {"["};
-
-    InvokeNewExpr invokeNewExpr = new InvokeNewExpr(VT.ADD, args, "[", "[", argumentTypes, "[");
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method = new Method("Owner", "Name", proto2);
-
-    InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(new Value[] {invokeNewExpr}, proto, method);
-
-    // Act and Assert
-    assertEquals("null[null].[().Name()", nInvokePolymorphicResult.toString0());
-  }
-
-  /**
-   * Test {@link InvokePolymorphicExpr#toString0()}.
-   *
-   * <ul>
-   *   <li>Then return {@code null[null].Name(([])new [][]{null[null]})}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokePolymorphicExpr#toString0()}
-   */
-  @Test
-  @DisplayName("Test toString0(); then return 'null[null].Name(([])new [][]{null[null]})'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String InvokePolymorphicExpr.toString0()"})
-  void testToString0_thenReturnNullNullNameNewNullNull() {
-    // Arrange
-    ArrayExpr arrayExpr = new ArrayExpr();
-    Proto proto = new Proto(new String[] {"[", "]"}, "Return Type");
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto2);
-
-    InvokePolymorphicExpr nInvokePolymorphicResult =
+    assertEquals(
+        "null[null].Name()",
         Exprs.nInvokePolymorphic(
-            new Value[] {arrayExpr, Exprs.nFilledArray("[", new Value[] {new ArrayExpr()})},
-            proto,
-            method);
-
-    // Act and Assert
-    assertEquals("null[null].Name(([])new [][]{null[null]})", nInvokePolymorphicResult.toString0());
-  }
-
-  /**
-   * Test {@link InvokePolymorphicExpr#toString0()}.
-   *
-   * <ul>
-   *   <li>Then return {@code null[null].Name(([])new [](null[null]))}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokePolymorphicExpr#toString0()}
-   */
-  @Test
-  @DisplayName("Test toString0(); then return 'null[null].Name(([])new [](null[null]))'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String InvokePolymorphicExpr.toString0()"})
-  void testToString0_thenReturnNullNullNameNewNullNull2() {
-    // Arrange
-    ArrayExpr arrayExpr = new ArrayExpr();
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"["}, "[");
-    Proto proto = new Proto(new String[] {"[", "]"}, "Return Type");
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto2);
-
-    InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(new Value[] {arrayExpr, nInvokeNewResult}, proto, method);
-
-    // Act and Assert
-    assertEquals("null[null].Name(([])new [](null[null]))", nInvokePolymorphicResult.toString0());
+                new Value[] {new ArrayExpr()},
+                proto,
+                new Method(
+                    "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")))
+            .toString0());
   }
 
   /**
@@ -672,22 +589,21 @@ class InvokePolymorphicExprDiffblueTest {
    * <p>Method under test: {@link InvokePolymorphicExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); then return 'null[null].Name(([])null[null])'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokePolymorphicExpr.toString0()"})
-  void testToString0_thenReturnNullNullNameNullNull() {
+  public void testToString0_thenReturnNullNullNameNullNull() {
     // Arrange
     ArrayExpr arrayExpr = new ArrayExpr();
-    Proto proto = new Proto(new String[] {"[", "]"}, "Return Type");
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto2);
-
-    InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(new Value[] {arrayExpr, new ArrayExpr()}, proto, method);
+    Proto proto = new Proto(new String[] {"["}, "Return Type");
 
     // Act and Assert
-    assertEquals("null[null].Name(([])null[null])", nInvokePolymorphicResult.toString0());
+    assertEquals(
+        "null[null].Name(([])null[null])",
+        Exprs.nInvokePolymorphic(
+                new Value[] {arrayExpr, new ArrayExpr()},
+                proto,
+                new Method(
+                    "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")))
+            .toString0());
   }
 }

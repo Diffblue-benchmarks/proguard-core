@@ -1,19 +1,18 @@
 package proguard.classfile.util.inject.location;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.ProgramClass;
 import proguard.classfile.ProgramMethod;
 import proguard.classfile.util.inject.location.InjectStrategy.InjectLocation;
 import proguard.testutils.cpa.NamedMember;
 
-class FirstBlockDiffblueTest {
+public class FirstBlockDiffblueTest {
   /**
    * Test {@link FirstBlock#getSingleInjectionLocation(ProgramClass, ProgramMethod)}.
    *
@@ -25,14 +24,11 @@ class FirstBlockDiffblueTest {
    * ProgramMethod)}
    */
   @Test
-  @DisplayName(
-      "Test getSingleInjectionLocation(ProgramClass, ProgramMethod); then return Offset is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InjectLocation FirstBlock.getSingleInjectionLocation(ProgramClass, ProgramMethod)"
   })
-  void testGetSingleInjectionLocation_thenReturnOffsetIsZero() {
+  public void testGetSingleInjectionLocation_thenReturnOffsetIsZero() {
     // Arrange
     FirstBlock firstBlock = new FirstBlock();
     ProgramClass targetClass = new ProgramClass();
@@ -58,14 +54,11 @@ class FirstBlockDiffblueTest {
    * ProgramMethod)}
    */
   @Test
-  @DisplayName(
-      "Test getAllSuitableInjectionLocation(ProgramClass, ProgramMethod); then return first element Offset is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InjectLocation[] FirstBlock.getAllSuitableInjectionLocation(ProgramClass, ProgramMethod)"
   })
-  void testGetAllSuitableInjectionLocation_thenReturnFirstElementOffsetIsZero() {
+  public void testGetAllSuitableInjectionLocation_thenReturnFirstElementOffsetIsZero() {
     // Arrange
     FirstBlock firstBlock = new FirstBlock();
     ProgramClass targetClass = new ProgramClass();

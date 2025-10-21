@@ -1,16 +1,15 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.Optional;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.evaluation.ParticularReferenceValueFactory;
@@ -18,7 +17,7 @@ import proguard.evaluation.value.object.AnalyzedObject;
 import proguard.evaluation.value.object.model.ArrayModel;
 import proguard.evaluation.value.object.model.Model;
 
-class DetailedArrayReferenceValueDiffblueTest {
+public class DetailedArrayReferenceValueDiffblueTest {
   /**
    * Test {@link DetailedArrayReferenceValue#create(String, Clazz, boolean, IntegerValue,
    * ValueFactory, int)}.
@@ -32,14 +31,11 @@ class DetailedArrayReferenceValueDiffblueTest {
    * IntegerValue, ValueFactory, int)}
    */
   @Test
-  @DisplayName(
-      "Test create(String, Clazz, boolean, IntegerValue, ValueFactory, int); when empty string; then return get() Type is empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "Optional DetailedArrayReferenceValue.create(String, Clazz, boolean, IntegerValue, ValueFactory, int)"
   })
-  void testCreate_whenEmptyString_thenReturnGetTypeIsEmptyString() {
+  public void testCreate_whenEmptyString_thenReturnGetTypeIsEmptyString() {
     // Arrange
     LibraryClass referencedClass = new LibraryClass();
 
@@ -77,14 +73,11 @@ class DetailedArrayReferenceValueDiffblueTest {
    * IntegerValue, ValueFactory, int)}
    */
   @Test
-  @DisplayName(
-      "Test create(String, Clazz, boolean, IntegerValue, ValueFactory, int); when INTEGER_VALUE_0; then return get() Type is 'Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "Optional DetailedArrayReferenceValue.create(String, Clazz, boolean, IntegerValue, ValueFactory, int)"
   })
-  void testCreate_whenInteger_value_0_thenReturnGetTypeIsType() {
+  public void testCreate_whenInteger_value_0_thenReturnGetTypeIsType() {
     // Arrange
     LibraryClass referencedClass = new LibraryClass();
 
@@ -122,14 +115,11 @@ class DetailedArrayReferenceValueDiffblueTest {
    * IntegerValue, ValueFactory, int)}
    */
   @Test
-  @DisplayName(
-      "Test create(String, Clazz, boolean, IntegerValue, ValueFactory, int); when INTEGER_VALUE_BYTE; then return not Present")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "Optional DetailedArrayReferenceValue.create(String, Clazz, boolean, IntegerValue, ValueFactory, int)"
   })
-  void testCreate_whenInteger_value_byte_thenReturnNotPresent() {
+  public void testCreate_whenInteger_value_byte_thenReturnNotPresent() {
     // Arrange
     LibraryClass referencedClass = new LibraryClass();
 
@@ -160,14 +150,11 @@ class DetailedArrayReferenceValueDiffblueTest {
    * IntegerValue, ValueFactory, int)}
    */
   @Test
-  @DisplayName(
-      "Test create(String, Clazz, boolean, IntegerValue, ValueFactory, int); when INTEGER_VALUE_M1; then return not Present")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "Optional DetailedArrayReferenceValue.create(String, Clazz, boolean, IntegerValue, ValueFactory, int)"
   })
-  void testCreate_whenInteger_value_m1_thenReturnNotPresent() {
+  public void testCreate_whenInteger_value_m1_thenReturnNotPresent() {
     // Arrange
     LibraryClass referencedClass = new LibraryClass();
 
@@ -198,14 +185,11 @@ class DetailedArrayReferenceValueDiffblueTest {
    * IntegerValue, ValueFactory, int)}
    */
   @Test
-  @DisplayName(
-      "Test create(String, Clazz, boolean, IntegerValue, ValueFactory, int); when INTEGER_VALUE; then return not Present")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "Optional DetailedArrayReferenceValue.create(String, Clazz, boolean, IntegerValue, ValueFactory, int)"
   })
-  void testCreate_whenInteger_value_thenReturnNotPresent() {
+  public void testCreate_whenInteger_value_thenReturnNotPresent() {
     // Arrange
     LibraryClass referencedClass = new LibraryClass();
 
@@ -236,27 +220,20 @@ class DetailedArrayReferenceValueDiffblueTest {
    * IntegerValue, ValueFactory, int)}
    */
   @Test
-  @DisplayName(
-      "Test create(String, Clazz, boolean, IntegerValue, ValueFactory, int); when 'Invalid type ['; then return get() Type is 'Invalid type ['")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "Optional DetailedArrayReferenceValue.create(String, Clazz, boolean, IntegerValue, ValueFactory, int)"
   })
-  void testCreate_whenInvalidType_thenReturnGetTypeIsInvalidType() {
+  public void testCreate_whenInvalidType_thenReturnGetTypeIsInvalidType() {
     // Arrange
     LibraryClass referencedClass = new LibraryClass();
     IntegerValue arrayLength = ParticularValueFactory.INTEGER_VALUE_1;
+    ParticularReferenceValueFactory valuefactory = new ParticularReferenceValueFactory();
 
     // Act
     Optional<DetailedArrayReferenceValue> actualCreateResult =
         DetailedArrayReferenceValue.create(
-            "Invalid type [",
-            referencedClass,
-            true,
-            arrayLength,
-            new ParticularReferenceValueFactory(),
-            1);
+            "Invalid type [", referencedClass, true, arrayLength, valuefactory, 1);
 
     // Assert
     DetailedArrayReferenceValue getResult = actualCreateResult.get();
@@ -269,7 +246,7 @@ class DetailedArrayReferenceValueDiffblueTest {
     Value[] values = ((ArrayModel) modeledOrNullValue).getValues();
     assertEquals(1, values.length);
     assertFalse(getResult.isParticular());
-    assertSame(BasicValueFactory.INTEGER_VALUE, values[0]);
+    assertSame(valuefactory.INTEGER_VALUE, values[0]);
     assertSame(arrayLength, getResult.arrayLength);
     assertSame(modeledOrNullValue, value.getModeledValue());
   }

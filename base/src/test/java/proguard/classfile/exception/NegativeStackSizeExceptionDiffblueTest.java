@@ -1,14 +1,13 @@
 package proguard.classfile.exception;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryMethod;
@@ -19,7 +18,7 @@ import proguard.classfile.instruction.ConstantInstruction;
 import proguard.classfile.instruction.Instruction;
 import proguard.classfile.instruction.SimpleInstruction;
 
-class NegativeStackSizeExceptionDiffblueTest {
+public class NegativeStackSizeExceptionDiffblueTest {
   /**
    * Test {@link NegativeStackSizeException#NegativeStackSizeException(Clazz, Method, Instruction,
    * int)}.
@@ -28,14 +27,13 @@ class NegativeStackSizeExceptionDiffblueTest {
    * Method, Instruction, int)}
    */
   @Test
-  @DisplayName("Test new NegativeStackSizeException(Clazz, Method, Instruction, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void NegativeStackSizeException.<init>(Clazz, Method, Instruction, int)"})
-  void testNewNegativeStackSizeException() {
+  public void testNewNegativeStackSizeException() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     Label instruction = new Label(1);
 
     // Act
@@ -68,15 +66,13 @@ class NegativeStackSizeExceptionDiffblueTest {
    * Method, Instruction, int)}
    */
   @Test
-  @DisplayName(
-      "Test new NegativeStackSizeException(Clazz, Method, Instruction, int); then Instruction return BranchInstruction")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void NegativeStackSizeException.<init>(Clazz, Method, Instruction, int)"})
-  void testNewNegativeStackSizeException_thenInstructionReturnBranchInstruction() {
+  public void testNewNegativeStackSizeException_thenInstructionReturnBranchInstruction() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     BranchInstruction instruction = new BranchInstruction((byte) 'A', 1);
 
     // Act
@@ -112,15 +108,13 @@ class NegativeStackSizeExceptionDiffblueTest {
    * Method, Instruction, int)}
    */
   @Test
-  @DisplayName(
-      "Test new NegativeStackSizeException(Clazz, Method, Instruction, int); then Instruction return ConstantInstruction")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void NegativeStackSizeException.<init>(Clazz, Method, Instruction, int)"})
-  void testNewNegativeStackSizeException_thenInstructionReturnConstantInstruction() {
+  public void testNewNegativeStackSizeException_thenInstructionReturnConstantInstruction() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     ConstantInstruction instruction = new ConstantInstruction((byte) 'A', 1);
 
     // Act
@@ -156,15 +150,13 @@ class NegativeStackSizeExceptionDiffblueTest {
    * Method, Instruction, int)}
    */
   @Test
-  @DisplayName(
-      "Test new NegativeStackSizeException(Clazz, Method, Instruction, int); then Instruction return SimpleInstruction")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void NegativeStackSizeException.<init>(Clazz, Method, Instruction, int)"})
-  void testNewNegativeStackSizeException_thenInstructionReturnSimpleInstruction() {
+  public void testNewNegativeStackSizeException_thenInstructionReturnSimpleInstruction() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     SimpleInstruction instruction = new SimpleInstruction((byte) 'A');
 
     // Act
@@ -200,19 +192,18 @@ class NegativeStackSizeExceptionDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "Clazz NegativeStackSizeException.getClazz()",
     "Instruction NegativeStackSizeException.getInstruction()",
     "int NegativeStackSizeException.getInstructionOffset()",
     "Method NegativeStackSizeException.getMethod()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     BranchInstruction instruction = new BranchInstruction((byte) 'A', 1);
 
     NegativeStackSizeException negativeStackSizeException =

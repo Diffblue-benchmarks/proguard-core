@@ -1,14 +1,13 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class SuffixRemovingStringFunctionDiffblueTest {
+public class SuffixRemovingStringFunctionDiffblueTest {
   /**
    * Test {@link SuffixRemovingStringFunction#transform(String)}.
    *
@@ -20,13 +19,11 @@ class SuffixRemovingStringFunctionDiffblueTest {
    * <p>Method under test: {@link SuffixRemovingStringFunction#transform(String)}
    */
   @Test
-  @DisplayName("Test transform(String); given SuffixRemovingStringFunction(String) with 'Suffix'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String SuffixRemovingStringFunction.transform(String)"})
-  void testTransform_givenSuffixRemovingStringFunctionWithSuffix() {
+  public void testTransform_givenSuffixRemovingStringFunctionWithSuffix() {
     // Arrange, Act and Assert
-    assertEquals("String", new SuffixRemovingStringFunction("Suffix").transform("String"));
+    assertEquals("String", (new SuffixRemovingStringFunction("Suffix")).transform("String"));
   }
 
   /**
@@ -40,13 +37,10 @@ class SuffixRemovingStringFunctionDiffblueTest {
    * <p>Method under test: {@link SuffixRemovingStringFunction#transform(String)}
    */
   @Test
-  @DisplayName(
-      "Test transform(String); given SuffixRemovingStringFunction(String) with suffix is empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String SuffixRemovingStringFunction.transform(String)"})
-  void testTransform_givenSuffixRemovingStringFunctionWithSuffixIsEmptyString() {
+  public void testTransform_givenSuffixRemovingStringFunctionWithSuffixIsEmptyString() {
     // Arrange, Act and Assert
-    assertEquals("String", new SuffixRemovingStringFunction("").transform("String"));
+    assertEquals("String", (new SuffixRemovingStringFunction("")).transform("String"));
   }
 }

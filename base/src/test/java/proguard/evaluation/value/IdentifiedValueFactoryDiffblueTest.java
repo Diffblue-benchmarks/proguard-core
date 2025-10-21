@@ -1,37 +1,34 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryMethod;
 import proguard.classfile.Method;
 import proguard.evaluation.ParticularReferenceValueFactory;
 
-class IdentifiedValueFactoryDiffblueTest {
+public class IdentifiedValueFactoryDiffblueTest {
   /**
    * Test {@link IdentifiedValueFactory#IdentifiedValueFactory()}.
    *
    * <p>Method under test: {@link IdentifiedValueFactory#IdentifiedValueFactory()}
    */
   @Test
-  @DisplayName("Test new IdentifiedValueFactory()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void IdentifiedValueFactory.<init>()"})
-  void testNewIdentifiedValueFactory() {
+  public void testNewIdentifiedValueFactory() {
     // Arrange, Act and Assert
     assertTrue(
-        new IdentifiedValueFactory().referenceValueFactory instanceof TypedReferenceValueFactory);
+        (new IdentifiedValueFactory()).referenceValueFactory instanceof TypedReferenceValueFactory);
   }
 
   /**
@@ -40,15 +37,32 @@ class IdentifiedValueFactoryDiffblueTest {
    * <p>Method under test: {@link IdentifiedValueFactory#IdentifiedValueFactory(ValueFactory)}
    */
   @Test
-  @DisplayName("Test new IdentifiedValueFactory(ValueFactory)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void IdentifiedValueFactory.<init>(ValueFactory)"})
-  void testNewIdentifiedValueFactory2() {
-    // Arrange, Act and Assert
+  public void testNewIdentifiedValueFactory2() {
+    // Arrange
+    ParticularReferenceValueFactory referenceValueFactory = new ParticularReferenceValueFactory();
+
+    // Act
+    IdentifiedValueFactory actualIdentifiedValueFactory =
+        new IdentifiedValueFactory(referenceValueFactory);
+
+    // Assert
     assertTrue(
-        new IdentifiedValueFactory(new ParticularReferenceValueFactory()).referenceValueFactory
+        actualIdentifiedValueFactory.referenceValueFactory
             instanceof ParticularReferenceValueFactory);
+    DoubleValue createDoubleValueResult = referenceValueFactory.createDoubleValue();
+    assertTrue(createDoubleValueResult instanceof UnknownDoubleValue);
+    FloatValue createFloatValueResult = referenceValueFactory.createFloatValue();
+    assertTrue(createFloatValueResult instanceof UnknownFloatValue);
+    IntegerValue createIntegerValueResult = referenceValueFactory.createIntegerValue();
+    assertTrue(createIntegerValueResult instanceof UnknownIntegerValue);
+    LongValue createLongValueResult = referenceValueFactory.createLongValue();
+    assertTrue(createLongValueResult instanceof UnknownLongValue);
+    assertSame(actualIdentifiedValueFactory.DOUBLE_VALUE, createDoubleValueResult);
+    assertSame(actualIdentifiedValueFactory.FLOAT_VALUE, createFloatValueResult);
+    assertSame(actualIdentifiedValueFactory.INTEGER_VALUE, createIntegerValueResult);
+    assertSame(actualIdentifiedValueFactory.LONG_VALUE, createLongValueResult);
   }
 
   /**
@@ -58,11 +72,9 @@ class IdentifiedValueFactoryDiffblueTest {
    * ValueFactory)}
    */
   @Test
-  @DisplayName("Test new IdentifiedValueFactory(ValueFactory, ValueFactory)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void IdentifiedValueFactory.<init>(ValueFactory, ValueFactory)"})
-  void testNewIdentifiedValueFactory3() {
+  public void testNewIdentifiedValueFactory3() {
     // Arrange
     ParticularReferenceValueFactory arrayReferenceValueFactory =
         new ParticularReferenceValueFactory();
@@ -76,6 +88,18 @@ class IdentifiedValueFactoryDiffblueTest {
     assertTrue(
         actualIdentifiedValueFactory.referenceValueFactory
             instanceof ParticularReferenceValueFactory);
+    DoubleValue createDoubleValueResult = arrayReferenceValueFactory.createDoubleValue();
+    assertTrue(createDoubleValueResult instanceof UnknownDoubleValue);
+    FloatValue createFloatValueResult = arrayReferenceValueFactory.createFloatValue();
+    assertTrue(createFloatValueResult instanceof UnknownFloatValue);
+    IntegerValue createIntegerValueResult = arrayReferenceValueFactory.createIntegerValue();
+    assertTrue(createIntegerValueResult instanceof UnknownIntegerValue);
+    LongValue createLongValueResult = arrayReferenceValueFactory.createLongValue();
+    assertTrue(createLongValueResult instanceof UnknownLongValue);
+    assertSame(actualIdentifiedValueFactory.DOUBLE_VALUE, createDoubleValueResult);
+    assertSame(actualIdentifiedValueFactory.FLOAT_VALUE, createFloatValueResult);
+    assertSame(actualIdentifiedValueFactory.INTEGER_VALUE, createIntegerValueResult);
+    assertSame(actualIdentifiedValueFactory.LONG_VALUE, createLongValueResult);
   }
 
   /**
@@ -84,13 +108,12 @@ class IdentifiedValueFactoryDiffblueTest {
    * <p>Method under test: {@link IdentifiedValueFactory#createIntegerValue()}
    */
   @Test
-  @DisplayName("Test createIntegerValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue IdentifiedValueFactory.createIntegerValue()"})
-  void testCreateIntegerValue() {
+  public void testCreateIntegerValue() {
     // Arrange and Act
-    IntegerValue actualCreateIntegerValueResult = new IdentifiedValueFactory().createIntegerValue();
+    IntegerValue actualCreateIntegerValueResult =
+        (new IdentifiedValueFactory()).createIntegerValue();
 
     // Assert
     assertTrue(actualCreateIntegerValueResult instanceof IdentifiedIntegerValue);
@@ -105,13 +128,11 @@ class IdentifiedValueFactoryDiffblueTest {
    * <p>Method under test: {@link IdentifiedValueFactory#createLongValue()}
    */
   @Test
-  @DisplayName("Test createLongValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue IdentifiedValueFactory.createLongValue()"})
-  void testCreateLongValue() {
+  public void testCreateLongValue() {
     // Arrange and Act
-    LongValue actualCreateLongValueResult = new IdentifiedValueFactory().createLongValue();
+    LongValue actualCreateLongValueResult = (new IdentifiedValueFactory()).createLongValue();
 
     // Assert
     assertTrue(actualCreateLongValueResult instanceof IdentifiedLongValue);
@@ -126,13 +147,11 @@ class IdentifiedValueFactoryDiffblueTest {
    * <p>Method under test: {@link IdentifiedValueFactory#createFloatValue()}
    */
   @Test
-  @DisplayName("Test createFloatValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue IdentifiedValueFactory.createFloatValue()"})
-  void testCreateFloatValue() {
+  public void testCreateFloatValue() {
     // Arrange and Act
-    FloatValue actualCreateFloatValueResult = new IdentifiedValueFactory().createFloatValue();
+    FloatValue actualCreateFloatValueResult = (new IdentifiedValueFactory()).createFloatValue();
 
     // Assert
     assertTrue(actualCreateFloatValueResult instanceof IdentifiedFloatValue);
@@ -147,13 +166,11 @@ class IdentifiedValueFactoryDiffblueTest {
    * <p>Method under test: {@link IdentifiedValueFactory#createDoubleValue()}
    */
   @Test
-  @DisplayName("Test createDoubleValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue IdentifiedValueFactory.createDoubleValue()"})
-  void testCreateDoubleValue() {
+  public void testCreateDoubleValue() {
     // Arrange and Act
-    DoubleValue actualCreateDoubleValueResult = new IdentifiedValueFactory().createDoubleValue();
+    DoubleValue actualCreateDoubleValueResult = (new IdentifiedValueFactory()).createDoubleValue();
 
     // Assert
     assertTrue(actualCreateDoubleValueResult instanceof IdentifiedDoubleValue);
@@ -170,14 +187,11 @@ class IdentifiedValueFactoryDiffblueTest {
    * boolean, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValue(String, Clazz, boolean, boolean) with 'String', 'Clazz', 'boolean', 'boolean'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue IdentifiedValueFactory.createReferenceValue(String, Clazz, boolean, boolean)"
   })
-  void testCreateReferenceValueWithStringClazzBooleanBoolean() {
+  public void testCreateReferenceValueWithStringClazzBooleanBoolean() {
     // Arrange
     IdentifiedValueFactory identifiedValueFactory = new IdentifiedValueFactory();
     LibraryClass referencedClass = new LibraryClass();
@@ -208,14 +222,11 @@ class IdentifiedValueFactoryDiffblueTest {
    * boolean, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValue(String, Clazz, boolean, boolean) with 'String', 'Clazz', 'boolean', 'boolean'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue IdentifiedValueFactory.createReferenceValue(String, Clazz, boolean, boolean)"
   })
-  void testCreateReferenceValueWithStringClazzBooleanBoolean2() {
+  public void testCreateReferenceValueWithStringClazzBooleanBoolean2() {
     // Arrange
     IdentifiedValueFactory identifiedValueFactory = new IdentifiedValueFactory();
 
@@ -244,24 +255,26 @@ class IdentifiedValueFactoryDiffblueTest {
    * boolean, boolean, Clazz, Method, int)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValue(String, Clazz, boolean, boolean, Clazz, Method, int) with 'String', 'Clazz', 'boolean', 'boolean', 'Clazz', 'Method', 'int'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue IdentifiedValueFactory.createReferenceValue(String, Clazz, boolean, boolean, Clazz, Method, int)"
   })
-  void testCreateReferenceValueWithStringClazzBooleanBooleanClazzMethodInt() {
+  public void testCreateReferenceValueWithStringClazzBooleanBooleanClazzMethodInt() {
     // Arrange
     IdentifiedValueFactory identifiedValueFactory = new IdentifiedValueFactory();
     LibraryClass referencedClass = new LibraryClass();
     LibraryClass creationClass = new LibraryClass();
-    LibraryMethod creationMethod = new LibraryMethod(1, "Name", "Descriptor");
 
     // Act
     ReferenceValue actualCreateReferenceValueResult =
         identifiedValueFactory.createReferenceValue(
-            "Type", referencedClass, true, true, creationClass, creationMethod, 1);
+            "Type",
+            referencedClass,
+            true,
+            true,
+            creationClass,
+            new LibraryMethod(1, "Name", "Descriptor"),
+            1);
 
     // Assert
     Clazz referencedClass2 = actualCreateReferenceValueResult.getReferencedClass();
@@ -286,24 +299,26 @@ class IdentifiedValueFactoryDiffblueTest {
    * boolean, boolean, Clazz, Method, int)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValue(String, Clazz, boolean, boolean, Clazz, Method, int) with 'String', 'Clazz', 'boolean', 'boolean', 'Clazz', 'Method', 'int'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue IdentifiedValueFactory.createReferenceValue(String, Clazz, boolean, boolean, Clazz, Method, int)"
   })
-  void testCreateReferenceValueWithStringClazzBooleanBooleanClazzMethodInt2() {
+  public void testCreateReferenceValueWithStringClazzBooleanBooleanClazzMethodInt2() {
     // Arrange
     IdentifiedValueFactory identifiedValueFactory = new IdentifiedValueFactory();
     LibraryClass referencedClass = new LibraryClass();
     LibraryClass creationClass = new LibraryClass();
-    LibraryMethod creationMethod = new LibraryMethod(1, "Name", "Descriptor");
 
     // Act
     ReferenceValue actualCreateReferenceValueResult =
         identifiedValueFactory.createReferenceValue(
-            null, referencedClass, true, true, creationClass, creationMethod, 1);
+            null,
+            referencedClass,
+            true,
+            true,
+            creationClass,
+            new LibraryMethod(1, "Name", "Descriptor"),
+            1);
 
     // Assert
     assertTrue(actualCreateReferenceValueResult instanceof TypedReferenceValue);
@@ -326,24 +341,27 @@ class IdentifiedValueFactoryDiffblueTest {
    * boolean, boolean, Clazz, Method, int, Object)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValue(String, Clazz, boolean, boolean, Clazz, Method, int, Object) with 'String', 'Clazz', 'boolean', 'boolean', 'Clazz', 'Method', 'int', 'Object'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue IdentifiedValueFactory.createReferenceValue(String, Clazz, boolean, boolean, Clazz, Method, int, Object)"
   })
-  void testCreateReferenceValueWithStringClazzBooleanBooleanClazzMethodIntObject() {
+  public void testCreateReferenceValueWithStringClazzBooleanBooleanClazzMethodIntObject() {
     // Arrange
     IdentifiedValueFactory identifiedValueFactory = new IdentifiedValueFactory();
     LibraryClass referencedClass = new LibraryClass();
     LibraryClass creationClass = new LibraryClass();
-    LibraryMethod creationMethod = new LibraryMethod(1, "Name", "Descriptor");
 
     // Act
     ReferenceValue actualCreateReferenceValueResult =
         identifiedValueFactory.createReferenceValue(
-            "Type", referencedClass, true, true, creationClass, creationMethod, 1, "Value");
+            "Type",
+            referencedClass,
+            true,
+            true,
+            creationClass,
+            new LibraryMethod(1, "Name", "Descriptor"),
+            1,
+            "Value");
 
     // Assert
     Clazz referencedClass2 = actualCreateReferenceValueResult.getReferencedClass();
@@ -368,24 +386,27 @@ class IdentifiedValueFactoryDiffblueTest {
    * boolean, boolean, Clazz, Method, int, Object)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValue(String, Clazz, boolean, boolean, Clazz, Method, int, Object) with 'String', 'Clazz', 'boolean', 'boolean', 'Clazz', 'Method', 'int', 'Object'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue IdentifiedValueFactory.createReferenceValue(String, Clazz, boolean, boolean, Clazz, Method, int, Object)"
   })
-  void testCreateReferenceValueWithStringClazzBooleanBooleanClazzMethodIntObject2() {
+  public void testCreateReferenceValueWithStringClazzBooleanBooleanClazzMethodIntObject2() {
     // Arrange
     IdentifiedValueFactory identifiedValueFactory = new IdentifiedValueFactory();
     LibraryClass referencedClass = new LibraryClass();
     LibraryClass creationClass = new LibraryClass();
-    LibraryMethod creationMethod = new LibraryMethod(1, "Name", "Descriptor");
 
     // Act
     ReferenceValue actualCreateReferenceValueResult =
         identifiedValueFactory.createReferenceValue(
-            null, referencedClass, true, true, creationClass, creationMethod, 1, "Value");
+            null,
+            referencedClass,
+            true,
+            true,
+            creationClass,
+            new LibraryMethod(1, "Name", "Descriptor"),
+            1,
+            "Value");
 
     // Assert
     assertTrue(actualCreateReferenceValueResult instanceof TypedReferenceValue);
@@ -407,14 +428,11 @@ class IdentifiedValueFactoryDiffblueTest {
    * boolean, boolean, Object)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValue(String, Clazz, boolean, boolean, Object) with 'String', 'Clazz', 'boolean', 'boolean', 'Object'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue IdentifiedValueFactory.createReferenceValue(String, Clazz, boolean, boolean, Object)"
   })
-  void testCreateReferenceValueWithStringClazzBooleanBooleanObject() {
+  public void testCreateReferenceValueWithStringClazzBooleanBooleanObject() {
     // Arrange
     IdentifiedValueFactory identifiedValueFactory = new IdentifiedValueFactory();
     LibraryClass referencedClass = new LibraryClass();
@@ -445,14 +463,11 @@ class IdentifiedValueFactoryDiffblueTest {
    * boolean, boolean, Object)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValue(String, Clazz, boolean, boolean, Object) with 'String', 'Clazz', 'boolean', 'boolean', 'Object'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue IdentifiedValueFactory.createReferenceValue(String, Clazz, boolean, boolean, Object)"
   })
-  void testCreateReferenceValueWithStringClazzBooleanBooleanObject2() {
+  public void testCreateReferenceValueWithStringClazzBooleanBooleanObject2() {
     // Arrange
     IdentifiedValueFactory identifiedValueFactory = new IdentifiedValueFactory();
 
@@ -481,14 +496,11 @@ class IdentifiedValueFactoryDiffblueTest {
    * boolean, boolean, Object)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValueForId(String, Clazz, boolean, boolean, Object) with 'type', 'referencedClass', 'mayBeExtension', 'mayBeNull', 'id'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue IdentifiedValueFactory.createReferenceValueForId(String, Clazz, boolean, boolean, Object)"
   })
-  void testCreateReferenceValueForIdWithTypeReferencedClassMayBeExtensionMayBeNullId() {
+  public void testCreateReferenceValueForIdWithTypeReferencedClassMayBeExtensionMayBeNullId() {
     // Arrange
     IdentifiedValueFactory identifiedValueFactory = new IdentifiedValueFactory();
     LibraryClass referencedClass = new LibraryClass();
@@ -521,14 +533,11 @@ class IdentifiedValueFactoryDiffblueTest {
    * boolean, boolean, Object)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValueForId(String, Clazz, boolean, boolean, Object) with 'type', 'referencedClass', 'mayBeExtension', 'mayBeNull', 'id'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue IdentifiedValueFactory.createReferenceValueForId(String, Clazz, boolean, boolean, Object)"
   })
-  void testCreateReferenceValueForIdWithTypeReferencedClassMayBeExtensionMayBeNullId2() {
+  public void testCreateReferenceValueForIdWithTypeReferencedClassMayBeExtensionMayBeNullId2() {
     // Arrange
     IdentifiedValueFactory identifiedValueFactory = new IdentifiedValueFactory();
 
@@ -558,14 +567,11 @@ class IdentifiedValueFactoryDiffblueTest {
    * boolean, boolean, Object, Object)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValueForId(String, Clazz, boolean, boolean, Object, Object) with 'type', 'referencedClass', 'mayBeExtension', 'mayBeNull', 'id', 'value'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue IdentifiedValueFactory.createReferenceValueForId(String, Clazz, boolean, boolean, Object, Object)"
   })
-  void testCreateReferenceValueForIdWithTypeReferencedClassMayBeExtensionMayBeNullIdValue() {
+  public void testCreateReferenceValueForIdWithTypeReferencedClassMayBeExtensionMayBeNullIdValue() {
     // Arrange
     IdentifiedValueFactory identifiedValueFactory = new IdentifiedValueFactory();
     LibraryClass referencedClass = new LibraryClass();
@@ -599,14 +605,12 @@ class IdentifiedValueFactoryDiffblueTest {
    * boolean, boolean, Object, Object)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValueForId(String, Clazz, boolean, boolean, Object, Object) with 'type', 'referencedClass', 'mayBeExtension', 'mayBeNull', 'id', 'value'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue IdentifiedValueFactory.createReferenceValueForId(String, Clazz, boolean, boolean, Object, Object)"
   })
-  void testCreateReferenceValueForIdWithTypeReferencedClassMayBeExtensionMayBeNullIdValue2() {
+  public void
+      testCreateReferenceValueForIdWithTypeReferencedClassMayBeExtensionMayBeNullIdValue2() {
     // Arrange
     IdentifiedValueFactory identifiedValueFactory = new IdentifiedValueFactory();
 
@@ -635,14 +639,11 @@ class IdentifiedValueFactoryDiffblueTest {
    * IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue) with 'type', 'referencedClass', 'arrayLength'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue IdentifiedValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue)"
   })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength() {
+  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength() {
     // Arrange
     IdentifiedValueFactory identifiedValueFactory = new IdentifiedValueFactory();
     LibraryClass referencedClass = new LibraryClass();
@@ -679,14 +680,11 @@ class IdentifiedValueFactoryDiffblueTest {
    * IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue) with 'type', 'referencedClass', 'arrayLength'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue IdentifiedValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue)"
   })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength2() {
+  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength2() {
     // Arrange
     IdentifiedValueFactory identifiedValueFactory = new IdentifiedValueFactory();
 
@@ -714,14 +712,11 @@ class IdentifiedValueFactoryDiffblueTest {
    * IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue) with 'type', 'referencedClass', 'arrayLength'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue IdentifiedValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue)"
   })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength3() {
+  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength3() {
     // Arrange
     DetailedArrayValueFactory detailedArrayValueFactory = new DetailedArrayValueFactory();
     LibraryClass referencedClass = new LibraryClass();

@@ -1,17 +1,16 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.nio.charset.Charset;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ObjectUtilDiffblueTest {
+public class ObjectUtilDiffblueTest {
   /**
    * Test {@link ObjectUtil#equal(Object, Object)}.
    *
@@ -23,11 +22,9 @@ class ObjectUtilDiffblueTest {
    * <p>Method under test: {@link ObjectUtil#equal(Object, Object)}
    */
   @Test
-  @DisplayName("Test equal(Object, Object); when 'null'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ObjectUtil.equal(Object, Object)"})
-  void testEqual_whenNull_thenReturnFalse() {
+  public void testEqual_whenNull_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(ObjectUtil.equal(null, "Object2"));
   }
@@ -43,11 +40,9 @@ class ObjectUtilDiffblueTest {
    * <p>Method under test: {@link ObjectUtil#equal(Object, Object)}
    */
   @Test
-  @DisplayName("Test equal(Object, Object); when 'null'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ObjectUtil.equal(Object, Object)"})
-  void testEqual_whenNull_thenReturnTrue() {
+  public void testEqual_whenNull_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ObjectUtil.equal(null, null));
   }
@@ -63,13 +58,29 @@ class ObjectUtilDiffblueTest {
    * <p>Method under test: {@link ObjectUtil#equal(Object, Object)}
    */
   @Test
-  @DisplayName("Test equal(Object, Object); when 'Object1'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ObjectUtil.equal(Object, Object)"})
-  void testEqual_whenObject1_thenReturnFalse() {
+  public void testEqual_whenObject1_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(ObjectUtil.equal("Object1", "Object2"));
+  }
+
+  /**
+   * Test {@link ObjectUtil#equal(Object, Object)}.
+   *
+   * <ul>
+   *   <li>When {@code Object2}.
+   *   <li>Then return {@code true}.
+   * </ul>
+   *
+   * <p>Method under test: {@link ObjectUtil#equal(Object, Object)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"boolean ObjectUtil.equal(Object, Object)"})
+  public void testEqual_whenObject2_thenReturnTrue() {
+    // Arrange, Act and Assert
+    assertTrue(ObjectUtil.equal("Object2", "Object2"));
   }
 
   /**
@@ -83,11 +94,9 @@ class ObjectUtilDiffblueTest {
    * <p>Method under test: {@link ObjectUtil#hashCode(Object)}
    */
   @Test
-  @DisplayName("Test hashCode(Object) with 'Object'; when 'null'; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ObjectUtil.hashCode(Object)"})
-  void testHashCodeWithObject_whenNull_thenReturnZero() {
+  public void testHashCodeWithObject_whenNull_thenReturnZero() {
     // Arrange, Act and Assert
     assertEquals(0, ObjectUtil.hashCode(null));
   }
@@ -103,11 +112,9 @@ class ObjectUtilDiffblueTest {
    * <p>Method under test: {@link ObjectUtil#hashCode(Object)}
    */
   @Test
-  @DisplayName("Test hashCode(Object) with 'Object'; when 'Object'; then return '-1939501217'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ObjectUtil.hashCode(Object)"})
-  void testHashCodeWithObject_whenObject_thenReturn1939501217() {
+  public void testHashCodeWithObject_whenObject_thenReturn1939501217() {
     // Arrange, Act and Assert
     assertEquals(-1939501217, ObjectUtil.hashCode("Object"));
   }
@@ -123,11 +130,9 @@ class ObjectUtilDiffblueTest {
    * <p>Method under test: {@link ObjectUtil#compare(Comparable, Comparable)}
    */
   @Test
-  @DisplayName("Test compare(Comparable, Comparable); when forName 'UTF-8'; then return one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ObjectUtil.compare(Comparable, Comparable)"})
-  void testCompare_whenForNameUtf8_thenReturnOne() {
+  public void testCompare_whenForNameUtf8_thenReturnOne() {
     // Arrange, Act and Assert
     assertEquals(1, ObjectUtil.compare(Charset.forName("UTF-8"), null));
   }
@@ -143,11 +148,9 @@ class ObjectUtilDiffblueTest {
    * <p>Method under test: {@link ObjectUtil#compare(Comparable, Comparable)}
    */
   @Test
-  @DisplayName("Test compare(Comparable, Comparable); when forName 'UTF-8'; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ObjectUtil.compare(Comparable, Comparable)"})
-  void testCompare_whenForNameUtf8_thenReturnZero() {
+  public void testCompare_whenForNameUtf8_thenReturnZero() {
     // Arrange
     Charset object1 = Charset.forName("UTF-8");
 
@@ -166,11 +169,9 @@ class ObjectUtilDiffblueTest {
    * <p>Method under test: {@link ObjectUtil#compare(Comparable, Comparable)}
    */
   @Test
-  @DisplayName("Test compare(Comparable, Comparable); when 'null'; then return minus one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ObjectUtil.compare(Comparable, Comparable)"})
-  void testCompare_whenNull_thenReturnMinusOne() {
+  public void testCompare_whenNull_thenReturnMinusOne() {
     // Arrange, Act and Assert
     assertEquals(-1, ObjectUtil.compare(null, Charset.forName("UTF-8")));
   }
@@ -186,11 +187,9 @@ class ObjectUtilDiffblueTest {
    * <p>Method under test: {@link ObjectUtil#compare(Comparable, Comparable)}
    */
   @Test
-  @DisplayName("Test compare(Comparable, Comparable); when 'null'; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ObjectUtil.compare(Comparable, Comparable)"})
-  void testCompare_whenNull_thenReturnZero() {
+  public void testCompare_whenNull_thenReturnZero() {
     // Arrange, Act and Assert
     assertEquals(0, ObjectUtil.compare(null, null));
   }

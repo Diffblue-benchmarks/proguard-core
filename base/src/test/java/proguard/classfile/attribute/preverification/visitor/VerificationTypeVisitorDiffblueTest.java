@@ -1,12 +1,11 @@
 package proguard.classfile.attribute.preverification.visitor;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertThrows;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryMethod;
@@ -16,7 +15,7 @@ import proguard.classfile.attribute.preverification.VerificationType;
 import proguard.classfile.attribute.preverification.VerificationTypeFactory;
 import proguard.classfile.visitor.ClassPrinter;
 
-class VerificationTypeVisitorDiffblueTest {
+public class VerificationTypeVisitorDiffblueTest {
   /**
    * Test {@link VerificationTypeVisitor#visitAnyVerificationType(Clazz, Method, CodeAttribute, int,
    * VerificationType)}.
@@ -29,18 +28,16 @@ class VerificationTypeVisitorDiffblueTest {
    * CodeAttribute, int, VerificationType)}
    */
   @Test
-  @DisplayName(
-      "Test visitAnyVerificationType(Clazz, Method, CodeAttribute, int, VerificationType); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void VerificationTypeVisitor.visitAnyVerificationType(Clazz, Method, CodeAttribute, int, VerificationType)"
   })
-  void testVisitAnyVerificationType_thenThrowUnsupportedOperationException() {
+  public void testVisitAnyVerificationType_thenThrowUnsupportedOperationException() {
     // Arrange
     ClassPrinter classPrinter = new ClassPrinter();
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act and Assert

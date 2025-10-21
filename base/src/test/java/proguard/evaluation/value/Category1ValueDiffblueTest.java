@@ -1,34 +1,28 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class Category1ValueDiffblueTest {
+public class Category1ValueDiffblueTest {
   /**
    * Test {@link Category1Value#category1Value()}.
    *
    * <p>Method under test: {@link Category1Value#category1Value()}
    */
   @Test
-  @DisplayName("Test category1Value()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Category1Value Category1Value.category1Value()"})
-  void testCategory1Value() {
+  public void testCategory1Value() {
     // Arrange
     TopValue topValue = new TopValue();
 
-    // Act
-    Category1Value actualCategory1ValueResult = topValue.category1Value();
-
-    // Assert
-    assertSame(topValue, actualCategory1ValueResult);
+    // Act and Assert
+    assertSame(topValue, topValue.category1Value());
   }
 
   /**
@@ -37,12 +31,10 @@ class Category1ValueDiffblueTest {
    * <p>Method under test: {@link Category1Value#isCategory2()}
    */
   @Test
-  @DisplayName("Test isCategory2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Category1Value.isCategory2()"})
-  void testIsCategory2() {
+  public void testIsCategory2() {
     // Arrange, Act and Assert
-    assertFalse(new TopValue().isCategory2());
+    assertFalse((new TopValue()).isCategory2());
   }
 }

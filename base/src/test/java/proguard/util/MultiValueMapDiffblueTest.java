@@ -1,30 +1,27 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.HashSet;
 import java.util.Set;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class MultiValueMapDiffblueTest {
+public class MultiValueMapDiffblueTest {
   /**
    * Test {@link MultiValueMap#createValueSet()}.
    *
    * <p>Method under test: {@link MultiValueMap#createValueSet()}
    */
   @Test
-  @DisplayName("Test createValueSet()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Set MultiValueMap.createValueSet()"})
-  void testCreateValueSet() {
+  public void testCreateValueSet() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
 
@@ -38,11 +35,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#createKeyMap()}
    */
   @Test
-  @DisplayName("Test createKeyMap()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.util.Map MultiValueMap.createKeyMap()"})
-  void testCreateKeyMap() {
+  public void testCreateKeyMap() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
 
@@ -56,11 +51,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#size()}
    */
   @Test
-  @DisplayName("Test size()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int MultiValueMap.size()"})
-  void testSize() {
+  public void testSize() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
 
@@ -74,11 +67,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#keySet()}
    */
   @Test
-  @DisplayName("Test keySet()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Set MultiValueMap.keySet()"})
-  void testKeySet() {
+  public void testKeySet() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
 
@@ -92,11 +83,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#values()}
    */
   @Test
-  @DisplayName("Test values()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.util.Collection MultiValueMap.values()"})
-  void testValues() {
+  public void testValues() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
 
@@ -110,11 +99,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#entrySet()}
    */
   @Test
-  @DisplayName("Test entrySet()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Set MultiValueMap.entrySet()"})
-  void testEntrySet() {
+  public void testEntrySet() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
 
@@ -132,11 +119,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#put(Object, Object)}
    */
   @Test
-  @DisplayName("Test put(Object, Object); given MultiValueMap (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MultiValueMap.put(Object, Object)"})
-  void testPut_givenMultiValueMap() {
+  public void testPut_givenMultiValueMap() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
 
@@ -159,12 +144,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#put(Object, Object)}
    */
   @Test
-  @DisplayName(
-      "Test put(Object, Object); given MultiValueMap (default constructor) 'Key' is 'Value'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MultiValueMap.put(Object, Object)"})
-  void testPut_givenMultiValueMapKeyIsValue() {
+  public void testPut_givenMultiValueMapKeyIsValue() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
     multiValueMap.put("Key", "Value");
@@ -188,12 +170,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#putAll(Set, Object)}
    */
   @Test
-  @DisplayName(
-      "Test putAll(Set, Object) with 'key', 'value'; given MultiValueMap (default constructor) '42' is 'Value'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MultiValueMap.putAll(Set, Object)"})
-  void testPutAllWithKeyValue_givenMultiValueMap42IsValue() {
+  public void testPutAllWithKeyValue_givenMultiValueMap42IsValue() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
     multiValueMap.put("42", "Value");
@@ -221,12 +200,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#putAll(Set, Object)}
    */
   @Test
-  @DisplayName(
-      "Test putAll(Set, Object) with 'key', 'value'; given MultiValueMap (default constructor); then MultiValueMap (default constructor) values size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MultiValueMap.putAll(Set, Object)"})
-  void testPutAllWithKeyValue_givenMultiValueMap_thenMultiValueMapValuesSizeIsOne() {
+  public void testPutAllWithKeyValue_givenMultiValueMap_thenMultiValueMapValuesSizeIsOne() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
 
@@ -253,12 +229,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#putAll(Set, Object)}
    */
   @Test
-  @DisplayName(
-      "Test putAll(Set, Object) with 'key', 'value'; given two; then MultiValueMap (default constructor) values size is two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MultiValueMap.putAll(Set, Object)"})
-  void testPutAllWithKeyValue_givenTwo_thenMultiValueMapValuesSizeIsTwo() {
+  public void testPutAllWithKeyValue_givenTwo_thenMultiValueMapValuesSizeIsTwo() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
 
@@ -286,12 +259,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#putAll(Set, Object)}
    */
   @Test
-  @DisplayName(
-      "Test putAll(Set, Object) with 'key', 'value'; when HashSet(); then MultiValueMap (default constructor) size is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MultiValueMap.putAll(Set, Object)"})
-  void testPutAllWithKeyValue_whenHashSet_thenMultiValueMapSizeIsZero() {
+  public void testPutAllWithKeyValue_whenHashSet_thenMultiValueMapSizeIsZero() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
 
@@ -315,12 +285,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#putAll(Object, Set)}
    */
   @Test
-  @DisplayName(
-      "Test putAll(Object, Set) with 'key', 'values'; given '42'; then MultiValueMap (default constructor) Values is HashSet()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MultiValueMap.putAll(Object, Set)"})
-  void testPutAllWithKeyValues_given42_thenMultiValueMapValuesIsHashSet() {
+  public void testPutAllWithKeyValues_given42_thenMultiValueMapValuesIsHashSet() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
 
@@ -347,11 +314,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#putAll(Object, Set)}
    */
   @Test
-  @DisplayName("Test putAll(Object, Set) with 'key', 'values'; given two; when HashSet() add two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MultiValueMap.putAll(Object, Set)"})
-  void testPutAllWithKeyValues_givenTwo_whenHashSetAddTwo() {
+  public void testPutAllWithKeyValues_givenTwo_whenHashSetAddTwo() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
 
@@ -378,12 +343,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#putAll(Object, Set)}
    */
   @Test
-  @DisplayName(
-      "Test putAll(Object, Set) with 'key', 'values'; then MultiValueMap (default constructor) Values size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MultiValueMap.putAll(Object, Set)"})
-  void testPutAllWithKeyValues_thenMultiValueMapValuesSizeIsOne() {
+  public void testPutAllWithKeyValues_thenMultiValueMapValuesSizeIsOne() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
     multiValueMap.put("Key", "Value");
@@ -408,12 +370,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#putAll(Object, Set)}
    */
   @Test
-  @DisplayName(
-      "Test putAll(Object, Set) with 'key', 'values'; when HashSet(); then MultiValueMap (default constructor) Values Empty")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MultiValueMap.putAll(Object, Set)"})
-  void testPutAllWithKeyValues_whenHashSet_thenMultiValueMapValuesEmpty() {
+  public void testPutAllWithKeyValues_whenHashSet_thenMultiValueMapValuesEmpty() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
 
@@ -430,71 +389,111 @@ class MultiValueMapDiffblueTest {
    * Test {@link MultiValueMap#putAll(Set, Set)} with {@code keys}, {@code values}.
    *
    * <ul>
-   *   <li>Given {@link MultiValueMap} (default constructor).
-   *   <li>Then {@link MultiValueMap} (default constructor) Values is {@link HashSet#HashSet()}.
+   *   <li>Given {@link MultiValueMap} (default constructor) {@code 42} is {@code Value}.
    * </ul>
    *
    * <p>Method under test: {@link MultiValueMap#putAll(Set, Set)}
    */
   @Test
-  @DisplayName(
-      "Test putAll(Set, Set) with 'keys', 'values'; given MultiValueMap (default constructor); then MultiValueMap (default constructor) Values is HashSet()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MultiValueMap.putAll(Set, Set)"})
-  void testPutAllWithKeysValues_givenMultiValueMap_thenMultiValueMapValuesIsHashSet() {
+  public void testPutAllWithKeysValues_givenMultiValueMap42IsValue() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
+    multiValueMap.put("42", "Value");
 
     HashSet<Object> keys = new HashSet<>();
     keys.add("42");
 
-    HashSet<Object> values = new HashSet<>();
-    values.add("42");
-
     // Act
-    multiValueMap.putAll((Set<Object>) keys, (Set<Object>) values);
+    multiValueMap.putAll((Set<Object>) keys, (Set<Object>) new HashSet<>());
 
-    // Assert
+    // Assert that nothing has changed
     assertEquals(1, multiValueMap.values().size());
     assertEquals(1, multiValueMap.size());
-    assertEquals(keys, multiValueMap.getValues());
   }
 
   /**
    * Test {@link MultiValueMap#putAll(Set, Set)} with {@code keys}, {@code values}.
    *
    * <ul>
-   *   <li>Given two.
-   *   <li>Then {@link MultiValueMap} (default constructor) Values is {@link HashSet#HashSet()}.
+   *   <li>Given {@link MultiValueMap} (default constructor).
+   *   <li>Then {@link MultiValueMap} (default constructor) size is zero.
    * </ul>
    *
    * <p>Method under test: {@link MultiValueMap#putAll(Set, Set)}
    */
   @Test
-  @DisplayName(
-      "Test putAll(Set, Set) with 'keys', 'values'; given two; then MultiValueMap (default constructor) Values is HashSet()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MultiValueMap.putAll(Set, Set)"})
-  void testPutAllWithKeysValues_givenTwo_thenMultiValueMapValuesIsHashSet() {
+  public void testPutAllWithKeysValues_givenMultiValueMap_thenMultiValueMapSizeIsZero() {
+    // Arrange
+    MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
+    HashSet<Object> keys = new HashSet<>();
+
+    // Act
+    multiValueMap.putAll((Set<Object>) keys, (Set<Object>) new HashSet<>());
+
+    // Assert that nothing has changed
+    assertEquals(0, multiValueMap.size());
+    assertTrue(multiValueMap.values().isEmpty());
+  }
+
+  /**
+   * Test {@link MultiValueMap#putAll(Set, Set)} with {@code keys}, {@code values}.
+   *
+   * <ul>
+   *   <li>Given {@link MultiValueMap} (default constructor).
+   *   <li>Then {@link MultiValueMap} (default constructor) size is zero.
+   * </ul>
+   *
+   * <p>Method under test: {@link MultiValueMap#putAll(Set, Set)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"void MultiValueMap.putAll(Set, Set)"})
+  public void testPutAllWithKeysValues_givenMultiValueMap_thenMultiValueMapSizeIsZero2() {
+    // Arrange
+    MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
+    HashSet<Object> keys = new HashSet<>();
+
+    HashSet<Object> values = new HashSet<>();
+    values.add("42");
+
+    // Act
+    multiValueMap.putAll((Set<Object>) keys, (Set<Object>) values);
+
+    // Assert that nothing has changed
+    assertEquals(0, multiValueMap.size());
+    assertTrue(multiValueMap.values().isEmpty());
+  }
+
+  /**
+   * Test {@link MultiValueMap#putAll(Set, Set)} with {@code keys}, {@code values}.
+   *
+   * <ul>
+   *   <li>Given {@link MultiValueMap} (default constructor).
+   *   <li>Then {@link MultiValueMap} (default constructor) values size is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link MultiValueMap#putAll(Set, Set)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"void MultiValueMap.putAll(Set, Set)"})
+  public void testPutAllWithKeysValues_givenMultiValueMap_thenMultiValueMapValuesSizeIsOne() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
 
     HashSet<Object> keys = new HashSet<>();
     keys.add("42");
 
-    HashSet<Object> values = new HashSet<>();
-    values.add(2);
-    values.add("42");
-
     // Act
-    multiValueMap.putAll((Set<Object>) keys, (Set<Object>) values);
+    multiValueMap.putAll((Set<Object>) keys, (Set<Object>) new HashSet<>());
 
     // Assert
     assertEquals(1, multiValueMap.values().size());
     assertEquals(1, multiValueMap.size());
-    assertEquals(values, multiValueMap.getValues());
   }
 
   /**
@@ -508,12 +507,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#putAll(Set, Set)}
    */
   @Test
-  @DisplayName(
-      "Test putAll(Set, Set) with 'keys', 'values'; given two; then MultiValueMap (default constructor) values size is two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MultiValueMap.putAll(Set, Set)"})
-  void testPutAllWithKeysValues_givenTwo_thenMultiValueMapValuesSizeIsTwo() {
+  public void testPutAllWithKeysValues_givenTwo_thenMultiValueMapValuesSizeIsTwo() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
 
@@ -527,101 +523,37 @@ class MultiValueMapDiffblueTest {
     // Assert
     assertEquals(2, multiValueMap.values().size());
     assertEquals(2, multiValueMap.size());
-    assertTrue(multiValueMap.getValues().isEmpty());
   }
 
   /**
    * Test {@link MultiValueMap#putAll(Set, Set)} with {@code keys}, {@code values}.
    *
    * <ul>
-   *   <li>Then {@link MultiValueMap} (default constructor) Values size is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link MultiValueMap#putAll(Set, Set)}
-   */
-  @Test
-  @DisplayName(
-      "Test putAll(Set, Set) with 'keys', 'values'; then MultiValueMap (default constructor) Values size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void MultiValueMap.putAll(Set, Set)"})
-  void testPutAllWithKeysValues_thenMultiValueMapValuesSizeIsOne() {
-    // Arrange
-    MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
-    multiValueMap.put("42", "Value");
-
-    HashSet<Object> keys = new HashSet<>();
-    keys.add("42");
-
-    // Act
-    multiValueMap.putAll((Set<Object>) keys, (Set<Object>) new HashSet<>());
-
-    // Assert that nothing has changed
-    assertEquals(1, multiValueMap.values().size());
-    assertEquals(1, multiValueMap.getValues().size());
-    assertEquals(1, multiValueMap.size());
-  }
-
-  /**
-   * Test {@link MultiValueMap#putAll(Set, Set)} with {@code keys}, {@code values}.
-   *
-   * <ul>
-   *   <li>When {@link HashSet#HashSet()}.
+   *   <li>Given two.
+   *   <li>When {@link HashSet#HashSet()} add two.
    *   <li>Then {@link MultiValueMap} (default constructor) size is zero.
    * </ul>
    *
    * <p>Method under test: {@link MultiValueMap#putAll(Set, Set)}
    */
   @Test
-  @DisplayName(
-      "Test putAll(Set, Set) with 'keys', 'values'; when HashSet(); then MultiValueMap (default constructor) size is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MultiValueMap.putAll(Set, Set)"})
-  void testPutAllWithKeysValues_whenHashSet_thenMultiValueMapSizeIsZero() {
+  public void testPutAllWithKeysValues_givenTwo_whenHashSetAddTwo_thenMultiValueMapSizeIsZero() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
     HashSet<Object> keys = new HashSet<>();
 
+    HashSet<Object> values = new HashSet<>();
+    values.add(2);
+    values.add("42");
+
     // Act
-    multiValueMap.putAll((Set<Object>) keys, (Set<Object>) new HashSet<>());
+    multiValueMap.putAll((Set<Object>) keys, (Set<Object>) values);
 
     // Assert that nothing has changed
     assertEquals(0, multiValueMap.size());
     assertTrue(multiValueMap.values().isEmpty());
-    assertTrue(multiValueMap.getValues().isEmpty());
-  }
-
-  /**
-   * Test {@link MultiValueMap#putAll(Set, Set)} with {@code keys}, {@code values}.
-   *
-   * <ul>
-   *   <li>When {@link HashSet#HashSet()}.
-   *   <li>Then {@link MultiValueMap} (default constructor) Values Empty.
-   * </ul>
-   *
-   * <p>Method under test: {@link MultiValueMap#putAll(Set, Set)}
-   */
-  @Test
-  @DisplayName(
-      "Test putAll(Set, Set) with 'keys', 'values'; when HashSet(); then MultiValueMap (default constructor) Values Empty")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void MultiValueMap.putAll(Set, Set)"})
-  void testPutAllWithKeysValues_whenHashSet_thenMultiValueMapValuesEmpty() {
-    // Arrange
-    MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
-
-    HashSet<Object> keys = new HashSet<>();
-    keys.add("42");
-
-    // Act
-    multiValueMap.putAll((Set<Object>) keys, (Set<Object>) new HashSet<>());
-
-    // Assert
-    assertEquals(1, multiValueMap.values().size());
-    assertEquals(1, multiValueMap.size());
-    assertTrue(multiValueMap.getValues().isEmpty());
   }
 
   /**
@@ -636,12 +568,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#remove(Object, Object)}
    */
   @Test
-  @DisplayName(
-      "Test remove(Object, Object); given MultiValueMap (default constructor) All 'Key' is HashSet(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MultiValueMap.remove(Object, Object)"})
-  void testRemove_givenMultiValueMapAllKeyIsHashSet_thenReturnFalse() {
+  public void testRemove_givenMultiValueMapAllKeyIsHashSet_thenReturnFalse() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
     multiValueMap.putAll("Key", new HashSet<>());
@@ -661,12 +590,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#remove(Object, Object)}
    */
   @Test
-  @DisplayName(
-      "Test remove(Object, Object); given MultiValueMap (default constructor) 'Key' is 'Value'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MultiValueMap.remove(Object, Object)"})
-  void testRemove_givenMultiValueMapKeyIsValue_thenReturnTrue() {
+  public void testRemove_givenMultiValueMapKeyIsValue_thenReturnTrue() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
     multiValueMap.put("Key", "Value");
@@ -686,12 +612,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#remove(Object, Object)}
    */
   @Test
-  @DisplayName(
-      "Test remove(Object, Object); given MultiValueMap (default constructor); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MultiValueMap.remove(Object, Object)"})
-  void testRemove_givenMultiValueMap_thenReturnFalse() {
+  public void testRemove_givenMultiValueMap_thenReturnFalse() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
 
@@ -705,11 +628,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#get(Object)}
    */
   @Test
-  @DisplayName("Test get(Object)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Set MultiValueMap.get(Object)"})
-  void testGet() {
+  public void testGet() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
 
@@ -723,11 +644,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: {@link MultiValueMap#getValues()}
    */
   @Test
-  @DisplayName("Test getValues()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Set MultiValueMap.getValues()"})
-  void testGetValues() {
+  public void testGetValues() {
     // Arrange
     MultiValueMap<Object, Object> multiValueMap = new MultiValueMap<>();
 
@@ -741,11 +660,9 @@ class MultiValueMapDiffblueTest {
    * <p>Method under test: default or parameterless constructor of {@link MultiValueMap}
    */
   @Test
-  @DisplayName("Test new MultiValueMap (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MultiValueMap.<init>()"})
-  void testNewMultiValueMap() {
+  public void testNewMultiValueMap() {
     // Arrange and Act
     MultiValueMap<Object, Object> actualMultiValueMap = new MultiValueMap<>();
 

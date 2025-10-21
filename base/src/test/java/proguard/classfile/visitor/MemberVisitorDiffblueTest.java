@@ -1,12 +1,11 @@
 package proguard.classfile.visitor;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertThrows;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryField;
@@ -19,7 +18,7 @@ import proguard.classfile.ProgramMember;
 import proguard.classfile.editor.AttributeSorter;
 import proguard.classfile.editor.BootstrapMethodsAttributeShrinker;
 
-class MemberVisitorDiffblueTest {
+public class MemberVisitorDiffblueTest {
   /**
    * Test {@link MemberVisitor#visitAnyMember(Clazz, Member)}.
    *
@@ -30,19 +29,17 @@ class MemberVisitorDiffblueTest {
    * <p>Method under test: {@link MemberVisitor#visitAnyMember(Clazz, Member)}
    */
   @Test
-  @DisplayName("Test visitAnyMember(Clazz, Member); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MemberVisitor.visitAnyMember(Clazz, Member)"})
-  void testVisitAnyMember_thenThrowUnsupportedOperationException() {
+  public void testVisitAnyMember_thenThrowUnsupportedOperationException() {
     // Arrange
     AttributeSorter attributeSorter = new AttributeSorter();
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
 
     // Act and Assert
     assertThrows(
-        UnsupportedOperationException.class, () -> attributeSorter.visitAnyMember(clazz, member));
+        UnsupportedOperationException.class,
+        () -> attributeSorter.visitAnyMember(clazz, new LibraryField(1, "Name", "Descriptor")));
   }
 
   /**
@@ -56,12 +53,9 @@ class MemberVisitorDiffblueTest {
    * <p>Method under test: {@link MemberVisitor#visitProgramMember(ProgramClass, ProgramMember)}
    */
   @Test
-  @DisplayName(
-      "Test visitProgramMember(ProgramClass, ProgramMember); when ProgramField(); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MemberVisitor.visitProgramMember(ProgramClass, ProgramMember)"})
-  void testVisitProgramMember_whenProgramField_thenThrowUnsupportedOperationException() {
+  public void testVisitProgramMember_whenProgramField_thenThrowUnsupportedOperationException() {
     // Arrange
     BootstrapMethodsAttributeShrinker bootstrapMethodsAttributeShrinker =
         new BootstrapMethodsAttributeShrinker();
@@ -84,21 +78,19 @@ class MemberVisitorDiffblueTest {
    * <p>Method under test: {@link MemberVisitor#visitLibraryMember(LibraryClass, LibraryMember)}
    */
   @Test
-  @DisplayName(
-      "Test visitLibraryMember(LibraryClass, LibraryMember); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MemberVisitor.visitLibraryMember(LibraryClass, LibraryMember)"})
-  void testVisitLibraryMember_thenThrowUnsupportedOperationException() {
+  public void testVisitLibraryMember_thenThrowUnsupportedOperationException() {
     // Arrange
     AttributeSorter attributeSorter = new AttributeSorter();
     LibraryClass libraryClass = new LibraryClass();
-    LibraryField libraryMember = new LibraryField(1, "Name", "Descriptor");
 
     // Act and Assert
     assertThrows(
         UnsupportedOperationException.class,
-        () -> attributeSorter.visitLibraryMember(libraryClass, libraryMember));
+        () ->
+            attributeSorter.visitLibraryMember(
+                libraryClass, new LibraryField(1, "Name", "Descriptor")));
   }
 
   /**
@@ -111,21 +103,19 @@ class MemberVisitorDiffblueTest {
    * <p>Method under test: {@link MemberVisitor#visitLibraryField(LibraryClass, LibraryField)}
    */
   @Test
-  @DisplayName(
-      "Test visitLibraryField(LibraryClass, LibraryField); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MemberVisitor.visitLibraryField(LibraryClass, LibraryField)"})
-  void testVisitLibraryField_thenThrowUnsupportedOperationException() {
+  public void testVisitLibraryField_thenThrowUnsupportedOperationException() {
     // Arrange
     AttributeSorter attributeSorter = new AttributeSorter();
     LibraryClass libraryClass = new LibraryClass();
-    LibraryField libraryField = new LibraryField(1, "Name", "Descriptor");
 
     // Act and Assert
     assertThrows(
         UnsupportedOperationException.class,
-        () -> attributeSorter.visitLibraryField(libraryClass, libraryField));
+        () ->
+            attributeSorter.visitLibraryField(
+                libraryClass, new LibraryField(1, "Name", "Descriptor")));
   }
 
   /**
@@ -138,20 +128,18 @@ class MemberVisitorDiffblueTest {
    * <p>Method under test: {@link MemberVisitor#visitLibraryMethod(LibraryClass, LibraryMethod)}
    */
   @Test
-  @DisplayName(
-      "Test visitLibraryMethod(LibraryClass, LibraryMethod); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MemberVisitor.visitLibraryMethod(LibraryClass, LibraryMethod)"})
-  void testVisitLibraryMethod_thenThrowUnsupportedOperationException() {
+  public void testVisitLibraryMethod_thenThrowUnsupportedOperationException() {
     // Arrange
     AttributeSorter attributeSorter = new AttributeSorter();
     LibraryClass libraryClass = new LibraryClass();
-    LibraryMethod libraryMethod = new LibraryMethod(1, "Name", "Descriptor");
 
     // Act and Assert
     assertThrows(
         UnsupportedOperationException.class,
-        () -> attributeSorter.visitLibraryMethod(libraryClass, libraryMethod));
+        () ->
+            attributeSorter.visitLibraryMethod(
+                libraryClass, new LibraryMethod(1, "Name", "Descriptor")));
   }
 }

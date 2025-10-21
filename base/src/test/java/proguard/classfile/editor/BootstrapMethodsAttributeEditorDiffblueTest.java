@@ -1,16 +1,15 @@
 package proguard.classfile.editor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.attribute.BootstrapMethodInfo;
 import proguard.classfile.attribute.BootstrapMethodsAttribute;
 
-class BootstrapMethodsAttributeEditorDiffblueTest {
+public class BootstrapMethodsAttributeEditorDiffblueTest {
   /**
    * Test {@link BootstrapMethodsAttributeEditor#addBootstrapMethodInfo(BootstrapMethodInfo)}.
    *
@@ -22,17 +21,16 @@ class BootstrapMethodsAttributeEditorDiffblueTest {
    * BootstrapMethodsAttributeEditor#addBootstrapMethodInfo(BootstrapMethodInfo)}
    */
   @Test
-  @DisplayName("Test addBootstrapMethodInfo(BootstrapMethodInfo); then return three")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "int BootstrapMethodsAttributeEditor.addBootstrapMethodInfo(BootstrapMethodInfo)"
   })
-  void testAddBootstrapMethodInfo_thenReturnThree() {
+  public void testAddBootstrapMethodInfo_thenReturnThree() {
     // Arrange
-    BootstrapMethodInfo[] bootstrapMethods = new BootstrapMethodInfo[] {new BootstrapMethodInfo()};
     BootstrapMethodsAttributeEditor bootstrapMethodsAttributeEditor =
-        new BootstrapMethodsAttributeEditor(new BootstrapMethodsAttribute(1, 3, bootstrapMethods));
+        new BootstrapMethodsAttributeEditor(
+            new BootstrapMethodsAttribute(
+                1, 3, new BootstrapMethodInfo[] {new BootstrapMethodInfo()}));
 
     // Act and Assert
     assertEquals(
@@ -50,17 +48,16 @@ class BootstrapMethodsAttributeEditorDiffblueTest {
    * BootstrapMethodsAttributeEditor#addBootstrapMethodInfo(BootstrapMethodInfo)}
    */
   @Test
-  @DisplayName("Test addBootstrapMethodInfo(BootstrapMethodInfo); then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "int BootstrapMethodsAttributeEditor.addBootstrapMethodInfo(BootstrapMethodInfo)"
   })
-  void testAddBootstrapMethodInfo_thenReturnZero() {
+  public void testAddBootstrapMethodInfo_thenReturnZero() {
     // Arrange
-    BootstrapMethodInfo[] bootstrapMethods = new BootstrapMethodInfo[] {new BootstrapMethodInfo()};
     BootstrapMethodsAttributeEditor bootstrapMethodsAttributeEditor =
-        new BootstrapMethodsAttributeEditor(new BootstrapMethodsAttribute(1, 0, bootstrapMethods));
+        new BootstrapMethodsAttributeEditor(
+            new BootstrapMethodsAttribute(
+                1, 0, new BootstrapMethodInfo[] {new BootstrapMethodInfo()}));
 
     // Act and Assert
     assertEquals(

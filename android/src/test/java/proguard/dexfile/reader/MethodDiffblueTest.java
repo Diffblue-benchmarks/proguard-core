@@ -1,17 +1,16 @@
 package proguard.dexfile.reader;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertSame;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class MethodDiffblueTest {
+public class MethodDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -26,9 +25,7 @@ class MethodDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void Method.<init>(String, String, Proto)",
     "String Method.getName()",
@@ -36,10 +33,9 @@ class MethodDiffblueTest {
     "Proto Method.getProto()",
     "String Method.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     // Act
     Method actualMethod = new Method("Owner", "Name", proto);
@@ -60,11 +56,9 @@ class MethodDiffblueTest {
    * <p>Method under test: {@link Method#Method(String, String, String[], String)}
    */
   @Test
-  @DisplayName("Test new Method(String, String, String[], String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Method.<init>(String, String, String[], String)"})
-  void testNewMethod() {
+  public void testNewMethod() {
     // Arrange
     String[] parameterTypes = new String[] {"Parameter Types"};
 
@@ -93,18 +87,14 @@ class MethodDiffblueTest {
    * <p>Method under test: {@link Method#getDesc()}
    */
   @Test
-  @DisplayName("Test getDesc(); then return '(Parameter Types)Return Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String Method.getDesc()"})
-  void testGetDesc_thenReturnParameterTypesReturnType() {
-    // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto);
-
-    // Act and Assert
-    assertEquals("(Parameter Types)Return Type", method.getDesc());
+  public void testGetDesc_thenReturnParameterTypesReturnType() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "(Parameter Types)Return Type",
+        (new Method("Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")))
+            .getDesc());
   }
 
   /**
@@ -117,18 +107,14 @@ class MethodDiffblueTest {
    * <p>Method under test: {@link Method#getParameterTypes()}
    */
   @Test
-  @DisplayName("Test getParameterTypes(); then return array of String with 'Parameter Types'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String[] Method.getParameterTypes()"})
-  void testGetParameterTypes_thenReturnArrayOfStringWithParameterTypes() {
-    // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto);
-
-    // Act and Assert
-    assertArrayEquals(new String[] {"Parameter Types"}, method.getParameterTypes());
+  public void testGetParameterTypes_thenReturnArrayOfStringWithParameterTypes() {
+    // Arrange, Act and Assert
+    assertArrayEquals(
+        new String[] {"Parameter Types"},
+        (new Method("Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")))
+            .getParameterTypes());
   }
 
   /**
@@ -141,18 +127,14 @@ class MethodDiffblueTest {
    * <p>Method under test: {@link Method#getReturnType()}
    */
   @Test
-  @DisplayName("Test getReturnType(); then return 'Return Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String Method.getReturnType()"})
-  void testGetReturnType_thenReturnReturnType() {
-    // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto);
-
-    // Act and Assert
-    assertEquals("Return Type", method.getReturnType());
+  public void testGetReturnType_thenReturnReturnType() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "Return Type",
+        (new Method("Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")))
+            .getReturnType());
   }
 
   /**
@@ -171,22 +153,19 @@ class MethodDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Method.equals(Object)", "int Method.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto);
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method2 = new Method("Owner", "Name", proto2);
+    Method method =
+        new Method("Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type"));
+    Method method2 =
+        new Method("Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type"));
 
     // Act and Assert
     assertEquals(method, method2);
-    assertEquals(method.hashCode(), method2.hashCode());
+    int expectedHashCodeResult = method.hashCode();
+    assertEquals(expectedHashCodeResult, method2.hashCode());
   }
 
   /**
@@ -205,22 +184,19 @@ class MethodDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Method.equals(Object)", "int Method.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual2() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual2() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method(null, "Name", proto);
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method2 = new Method(null, "Name", proto2);
+    Method method =
+        new Method(null, "Name", new Proto(new String[] {"Parameter Types"}, "Return Type"));
+    Method method2 =
+        new Method(null, "Name", new Proto(new String[] {"Parameter Types"}, "Return Type"));
 
     // Act and Assert
     assertEquals(method, method2);
-    assertEquals(method.hashCode(), method2.hashCode());
+    int expectedHashCodeResult = method.hashCode();
+    assertEquals(expectedHashCodeResult, method2.hashCode());
   }
 
   /**
@@ -239,22 +215,19 @@ class MethodDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Method.equals(Object)", "int Method.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual3() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual3() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", null, proto);
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method2 = new Method("Owner", null, proto2);
+    Method method =
+        new Method("Owner", null, new Proto(new String[] {"Parameter Types"}, "Return Type"));
+    Method method2 =
+        new Method("Owner", null, new Proto(new String[] {"Parameter Types"}, "Return Type"));
 
     // Act and Assert
     assertEquals(method, method2);
-    assertEquals(method.hashCode(), method2.hashCode());
+    int expectedHashCodeResult = method.hashCode();
+    assertEquals(expectedHashCodeResult, method2.hashCode());
   }
 
   /**
@@ -273,15 +246,12 @@ class MethodDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Method.equals(Object)", "int Method.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto);
+    Method method =
+        new Method("Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type"));
 
     // Act and Assert
     assertEquals(method, method);
@@ -300,20 +270,17 @@ class MethodDiffblueTest {
    * <p>Method under test: {@link Method#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Method.equals(Object)", "int Method.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Name", "Name", proto);
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
+    Method method =
+        new Method("Name", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type"));
 
     // Act and Assert
-    assertNotEquals(method, new Method("Owner", "Name", proto2));
+    assertNotEquals(
+        method,
+        new Method("Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")));
   }
 
   /**
@@ -327,20 +294,17 @@ class MethodDiffblueTest {
    * <p>Method under test: {@link Method#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Method.equals(Object)", "int Method.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method(null, "Name", proto);
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
+    Method method =
+        new Method(null, "Name", new Proto(new String[] {"Parameter Types"}, "Return Type"));
 
     // Act and Assert
-    assertNotEquals(method, new Method("Owner", "Name", proto2));
+    assertNotEquals(
+        method,
+        new Method("Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")));
   }
 
   /**
@@ -354,20 +318,17 @@ class MethodDiffblueTest {
    * <p>Method under test: {@link Method#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Method.equals(Object)", "int Method.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Owner", proto);
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
+    Method method =
+        new Method("Owner", "Owner", new Proto(new String[] {"Parameter Types"}, "Return Type"));
 
     // Act and Assert
-    assertNotEquals(method, new Method("Owner", "Name", proto2));
+    assertNotEquals(
+        method,
+        new Method("Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")));
   }
 
   /**
@@ -381,20 +342,17 @@ class MethodDiffblueTest {
    * <p>Method under test: {@link Method#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Method.equals(Object)", "int Method.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual4() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual4() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", null, proto);
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
+    Method method =
+        new Method("Owner", null, new Proto(new String[] {"Parameter Types"}, "Return Type"));
 
     // Act and Assert
-    assertNotEquals(method, new Method("Owner", "Name", proto2));
+    assertNotEquals(
+        method,
+        new Method("Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")));
   }
 
   /**
@@ -408,17 +366,13 @@ class MethodDiffblueTest {
    * <p>Method under test: {@link Method#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Method.equals(Object)", "int Method.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
-    // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-
-    // Act and Assert
-    assertNotEquals(new Method("Owner", "Name", proto), null);
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+    // Arrange, Act and Assert
+    assertNotEquals(
+        new Method("Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")),
+        null);
   }
 
   /**
@@ -432,16 +386,12 @@ class MethodDiffblueTest {
    * <p>Method under test: {@link Method#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Method.equals(Object)", "int Method.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
-    // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-
-    // Act and Assert
-    assertNotEquals(new Method("Owner", "Name", proto), "Different type to Method");
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+    // Arrange, Act and Assert
+    assertNotEquals(
+        new Method("Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")),
+        "Different type to Method");
   }
 }

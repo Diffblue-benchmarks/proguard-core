@@ -1,44 +1,40 @@
 package proguard.io;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.nio.file.Paths;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.kotlin.KotlinConstants;
 
-class ClassDataEntryWriterDiffblueTest {
+public class ClassDataEntryWriterDiffblueTest {
   /**
    * Test {@link ClassDataEntryWriter#createDirectory(DataEntry)}.
    *
    * <p>Method under test: {@link ClassDataEntryWriter#createDirectory(DataEntry)}
    */
   @Test
-  @DisplayName("Test createDirectory(DataEntry)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassDataEntryWriter.createDirectory(DataEntry)"})
-  void testCreateDirectory() throws IOException {
+  public void testCreateDirectory() throws IOException {
     // Arrange
     Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile();
-    FixedFileWriter dataEntryWriter =
-        new FixedFileWriter(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
+    DataEntryDirectoryFilter dataEntryFilter = new DataEntryDirectoryFilter();
     ClassDataEntryWriter classDataEntryWriter =
-        new ClassDataEntryWriter(KotlinConstants.dummyClassPool, dataEntryWriter);
+        new ClassDataEntryWriter(
+            KotlinConstants.dummyClassPool,
+            new FilteredDataEntryWriter(
+                dataEntryFilter,
+                new DirectoryWriter(
+                    Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile())));
 
-    // Act
-    boolean actualCreateDirectoryResult =
-        classDataEntryWriter.createDirectory(new ClassPathDataEntry("Name"));
-
-    // Assert
-    assertTrue(actualCreateDirectoryResult);
+    // Act and Assert
+    assertFalse(classDataEntryWriter.createDirectory(new ClassPathDataEntry("Name")));
   }
 
   /**
@@ -47,61 +43,46 @@ class ClassDataEntryWriterDiffblueTest {
    * <p>Method under test: {@link ClassDataEntryWriter#createDirectory(DataEntry)}
    */
   @Test
-  @DisplayName("Test createDirectory(DataEntry)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassDataEntryWriter.createDirectory(DataEntry)"})
-  void testCreateDirectory2() throws IOException {
+  public void testCreateDirectory2() throws IOException {
     // Arrange
     Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile();
-    new DirectoryWriter(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
-    new DirectoryWriter(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
-    DirectoryWriter dataEntryWriter =
-        new DirectoryWriter(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
-    ClassDataEntryWriter dataEntryWriter2 =
-        new ClassDataEntryWriter(KotlinConstants.dummyClassPool, dataEntryWriter);
     ClassDataEntryWriter classDataEntryWriter =
-        new ClassDataEntryWriter(KotlinConstants.dummyClassPool, dataEntryWriter2);
+        new ClassDataEntryWriter(
+            KotlinConstants.dummyClassPool,
+            new NameFilteredDataEntryWriter(
+                "Regular Expression",
+                new DirectoryWriter(
+                    Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile())));
 
-    // Act
-    boolean actualCreateDirectoryResult =
-        classDataEntryWriter.createDirectory(new ClassPathDataEntry(""));
-
-    // Assert
-    assertTrue(actualCreateDirectoryResult);
+    // Act and Assert
+    assertFalse(classDataEntryWriter.createDirectory(new ClassPathDataEntry("Name")));
   }
 
   /**
    * Test {@link ClassDataEntryWriter#createDirectory(DataEntry)}.
    *
    * <ul>
-   *   <li>Then return {@code false}.
+   *   <li>Then return {@code true}.
    * </ul>
    *
    * <p>Method under test: {@link ClassDataEntryWriter#createDirectory(DataEntry)}
    */
   @Test
-  @DisplayName("Test createDirectory(DataEntry); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassDataEntryWriter.createDirectory(DataEntry)"})
-  void testCreateDirectory_thenReturnFalse() throws IOException {
+  public void testCreateDirectory_thenReturnTrue() throws IOException {
     // Arrange
     Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile();
-    new DirectoryWriter(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
-    DirectoryWriter acceptedDataEntryWriter =
-        new DirectoryWriter(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
-    NameFilteredDataEntryWriter dataEntryWriter =
-        new NameFilteredDataEntryWriter("Regular Expression", acceptedDataEntryWriter);
     ClassDataEntryWriter classDataEntryWriter =
-        new ClassDataEntryWriter(KotlinConstants.dummyClassPool, dataEntryWriter);
+        new ClassDataEntryWriter(
+            KotlinConstants.dummyClassPool,
+            new FixedFileWriter(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile()));
 
-    // Act
-    boolean actualCreateDirectoryResult =
-        classDataEntryWriter.createDirectory(new ClassPathDataEntry("Name"));
-
-    // Assert
-    assertFalse(actualCreateDirectoryResult);
+    // Act and Assert
+    assertTrue(classDataEntryWriter.createDirectory(new ClassPathDataEntry("Name")));
   }
 
   /**
@@ -110,19 +91,18 @@ class ClassDataEntryWriterDiffblueTest {
    * <p>Method under test: {@link ClassDataEntryWriter#sameOutputStream(DataEntry, DataEntry)}
    */
   @Test
-  @DisplayName("Test sameOutputStream(DataEntry, DataEntry)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassDataEntryWriter.sameOutputStream(DataEntry, DataEntry)"})
-  void testSameOutputStream() throws IOException {
+  public void testSameOutputStream() throws IOException {
     // Arrange
     Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile();
-    DirectoryWriter dataEntryWriter =
-        new DirectoryWriter(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
-    ClassDataEntryWriter dataEntryWriter2 =
-        new ClassDataEntryWriter(KotlinConstants.dummyClassPool, dataEntryWriter);
     ClassDataEntryWriter classDataEntryWriter =
-        new ClassDataEntryWriter(KotlinConstants.dummyClassPool, dataEntryWriter2);
+        new ClassDataEntryWriter(
+            KotlinConstants.dummyClassPool,
+            new ClassDataEntryWriter(
+                KotlinConstants.dummyClassPool,
+                new DirectoryWriter(
+                    Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile())));
     ClassPathDataEntry dataEntry1 = new ClassPathDataEntry("Name");
 
     // Act and Assert
@@ -135,19 +115,18 @@ class ClassDataEntryWriterDiffblueTest {
    * <p>Method under test: {@link ClassDataEntryWriter#sameOutputStream(DataEntry, DataEntry)}
    */
   @Test
-  @DisplayName("Test sameOutputStream(DataEntry, DataEntry)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassDataEntryWriter.sameOutputStream(DataEntry, DataEntry)"})
-  void testSameOutputStream2() throws IOException {
+  public void testSameOutputStream2() throws IOException {
     // Arrange
     Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile();
-    DirectoryWriter acceptedDataEntryWriter =
-        new DirectoryWriter(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
-    NameFilteredDataEntryWriter dataEntryWriter =
-        new NameFilteredDataEntryWriter("Regular Expression", acceptedDataEntryWriter);
     ClassDataEntryWriter classDataEntryWriter =
-        new ClassDataEntryWriter(KotlinConstants.dummyClassPool, dataEntryWriter);
+        new ClassDataEntryWriter(
+            KotlinConstants.dummyClassPool,
+            new NameFilteredDataEntryWriter(
+                "Regular Expression",
+                new DirectoryWriter(
+                    Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile())));
     ClassPathDataEntry dataEntry1 = new ClassPathDataEntry("Name");
 
     // Act and Assert
@@ -164,16 +143,15 @@ class ClassDataEntryWriterDiffblueTest {
    * <p>Method under test: {@link ClassDataEntryWriter#sameOutputStream(DataEntry, DataEntry)}
    */
   @Test
-  @DisplayName("Test sameOutputStream(DataEntry, DataEntry); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassDataEntryWriter.sameOutputStream(DataEntry, DataEntry)"})
-  void testSameOutputStream_thenReturnTrue() throws IOException {
+  public void testSameOutputStream_thenReturnTrue() throws IOException {
     // Arrange
-    DirectoryWriter dataEntryWriter =
-        new DirectoryWriter(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
     ClassDataEntryWriter classDataEntryWriter =
-        new ClassDataEntryWriter(KotlinConstants.dummyClassPool, dataEntryWriter);
+        new ClassDataEntryWriter(
+            KotlinConstants.dummyClassPool,
+            new DirectoryWriter(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile()));
     ClassPathDataEntry dataEntry1 = new ClassPathDataEntry("Name");
 
     // Act and Assert
@@ -191,18 +169,16 @@ class ClassDataEntryWriterDiffblueTest {
    * <p>Method under test: {@link ClassDataEntryWriter#sameOutputStream(DataEntry, DataEntry)}
    */
   @Test
-  @DisplayName(
-      "Test sameOutputStream(DataEntry, DataEntry); when ClassPathDataEntry(String) with name is '.class'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassDataEntryWriter.sameOutputStream(DataEntry, DataEntry)"})
-  void testSameOutputStream_whenClassPathDataEntryWithNameIsClass_thenReturnFalse()
+  public void testSameOutputStream_whenClassPathDataEntryWithNameIsClass_thenReturnFalse()
       throws IOException {
     // Arrange
-    DirectoryWriter dataEntryWriter =
-        new DirectoryWriter(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
     ClassDataEntryWriter classDataEntryWriter =
-        new ClassDataEntryWriter(KotlinConstants.dummyClassPool, dataEntryWriter);
+        new ClassDataEntryWriter(
+            KotlinConstants.dummyClassPool,
+            new DirectoryWriter(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile()));
     ClassPathDataEntry dataEntry1 = new ClassPathDataEntry(".class");
 
     // Act and Assert
@@ -219,25 +195,20 @@ class ClassDataEntryWriterDiffblueTest {
    * <p>Method under test: {@link ClassDataEntryWriter#createOutputStream(DataEntry)}
    */
   @Test
-  @DisplayName("Test createOutputStream(DataEntry); then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"OutputStream ClassDataEntryWriter.createOutputStream(DataEntry)"})
-  void testCreateOutputStream_thenReturnNull() throws IOException {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"java.io.OutputStream ClassDataEntryWriter.createOutputStream(DataEntry)"})
+  public void testCreateOutputStream_thenReturnNull() throws IOException {
     // Arrange
     Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile();
-    DirectoryWriter acceptedDataEntryWriter =
-        new DirectoryWriter(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
-    NameFilteredDataEntryWriter dataEntryWriter =
-        new NameFilteredDataEntryWriter("Regular Expression", acceptedDataEntryWriter);
     ClassDataEntryWriter classDataEntryWriter =
-        new ClassDataEntryWriter(KotlinConstants.dummyClassPool, dataEntryWriter);
+        new ClassDataEntryWriter(
+            KotlinConstants.dummyClassPool,
+            new NameFilteredDataEntryWriter(
+                "Regular Expression",
+                new DirectoryWriter(
+                    Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile())));
 
-    // Act
-    OutputStream actualCreateOutputStreamResult =
-        classDataEntryWriter.createOutputStream(new ClassPathDataEntry("Name"));
-
-    // Assert
-    assertNull(actualCreateOutputStreamResult);
+    // Act and Assert
+    assertNull(classDataEntryWriter.createOutputStream(new ClassPathDataEntry("Name")));
   }
 }

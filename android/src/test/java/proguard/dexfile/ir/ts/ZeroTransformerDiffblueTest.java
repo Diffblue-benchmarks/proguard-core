@@ -1,12 +1,11 @@
 package proguard.dexfile.ir.ts;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.Assert.assertFalse;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.IrMethod;
 import proguard.dexfile.ir.expr.ArrayExpr;
 import proguard.dexfile.ir.expr.Exprs;
@@ -16,25 +15,22 @@ import proguard.dexfile.ir.stmt.Stmt.ST;
 import proguard.dexfile.ir.stmt.StmtList;
 import proguard.dexfile.ir.stmt.Stmts;
 
-class ZeroTransformerDiffblueTest {
+public class ZeroTransformerDiffblueTest {
   /**
    * Test {@link ZeroTransformer#transformReportChanged(IrMethod)}.
    *
    * <p>Method under test: {@link ZeroTransformer#transformReportChanged(IrMethod)}
    */
   @Test
-  @DisplayName("Test transformReportChanged(IrMethod)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ZeroTransformer.transformReportChanged(IrMethod)"})
-  void testTransformReportChanged() {
+  public void testTransformReportChanged() {
     // Arrange
     ZeroTransformer zeroTransformer = new ZeroTransformer();
 
     StmtList stmtList = new StmtList();
     ArrayExpr left = new ArrayExpr();
-    AssignStmt stmt = new AssignStmt(ST.ASSIGN, left, new ArrayExpr());
-    stmtList.add(stmt);
+    stmtList.add(new AssignStmt(ST.ASSIGN, left, new ArrayExpr()));
     IrMethod method = new IrMethod();
     method.stmts = stmtList;
 
@@ -48,18 +44,15 @@ class ZeroTransformerDiffblueTest {
    * <p>Method under test: {@link ZeroTransformer#transformReportChanged(IrMethod)}
    */
   @Test
-  @DisplayName("Test transformReportChanged(IrMethod)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ZeroTransformer.transformReportChanged(IrMethod)"})
-  void testTransformReportChanged2() {
+  public void testTransformReportChanged2() {
     // Arrange
     ZeroTransformer zeroTransformer = new ZeroTransformer();
 
     StmtList stmtList = new StmtList();
     Local left = new Local();
-    AssignStmt stmt = new AssignStmt(ST.ASSIGN, left, new ArrayExpr());
-    stmtList.add(stmt);
+    stmtList.add(new AssignStmt(ST.ASSIGN, left, new ArrayExpr()));
     IrMethod method = new IrMethod();
     method.stmts = stmtList;
 
@@ -73,11 +66,9 @@ class ZeroTransformerDiffblueTest {
    * <p>Method under test: {@link ZeroTransformer#transformReportChanged(IrMethod)}
    */
   @Test
-  @DisplayName("Test transformReportChanged(IrMethod)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ZeroTransformer.transformReportChanged(IrMethod)"})
-  void testTransformReportChanged3() {
+  public void testTransformReportChanged3() {
     // Arrange
     ZeroTransformer zeroTransformer = new ZeroTransformer();
 
@@ -97,18 +88,15 @@ class ZeroTransformerDiffblueTest {
    * <p>Method under test: {@link ZeroTransformer#transformReportChanged(IrMethod)}
    */
   @Test
-  @DisplayName("Test transformReportChanged(IrMethod)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ZeroTransformer.transformReportChanged(IrMethod)"})
-  void testTransformReportChanged4() {
+  public void testTransformReportChanged4() {
     // Arrange
     ZeroTransformer zeroTransformer = new ZeroTransformer();
 
     StmtList stmtList = new StmtList();
     Local left = new Local();
-    AssignStmt stmt = new AssignStmt(ST.ASSIGN, left, Exprs.nByte((byte) 'A'));
-    stmtList.add(stmt);
+    stmtList.add(new AssignStmt(ST.ASSIGN, left, Exprs.nByte((byte) 'A')));
     IrMethod method = new IrMethod();
     method.stmts = stmtList;
 
@@ -122,18 +110,15 @@ class ZeroTransformerDiffblueTest {
    * <p>Method under test: {@link ZeroTransformer#transformReportChanged(IrMethod)}
    */
   @Test
-  @DisplayName("Test transformReportChanged(IrMethod)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ZeroTransformer.transformReportChanged(IrMethod)"})
-  void testTransformReportChanged5() {
+  public void testTransformReportChanged5() {
     // Arrange
     ZeroTransformer zeroTransformer = new ZeroTransformer();
 
     StmtList stmtList = new StmtList();
     Local left = new Local();
-    AssignStmt stmt = new AssignStmt(ST.ASSIGN, left, Exprs.nByte((byte) 1));
-    stmtList.add(stmt);
+    stmtList.add(new AssignStmt(ST.ASSIGN, left, Exprs.nByte((byte) 1)));
     IrMethod method = new IrMethod();
     method.stmts = stmtList;
 
@@ -147,18 +132,15 @@ class ZeroTransformerDiffblueTest {
    * <p>Method under test: {@link ZeroTransformer#transformReportChanged(IrMethod)}
    */
   @Test
-  @DisplayName("Test transformReportChanged(IrMethod)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ZeroTransformer.transformReportChanged(IrMethod)"})
-  void testTransformReportChanged6() {
+  public void testTransformReportChanged6() {
     // Arrange
     ZeroTransformer zeroTransformer = new ZeroTransformer();
 
     StmtList stmtList = new StmtList();
     Local left = new Local();
-    AssignStmt stmt = new AssignStmt(ST.ASSIGN, left, Exprs.nByte((byte) 0));
-    stmtList.add(stmt);
+    stmtList.add(new AssignStmt(ST.ASSIGN, left, Exprs.nByte((byte) 0)));
     IrMethod method = new IrMethod();
     method.stmts = stmtList;
 
@@ -177,12 +159,9 @@ class ZeroTransformerDiffblueTest {
    * <p>Method under test: {@link ZeroTransformer#transformReportChanged(IrMethod)}
    */
   @Test
-  @DisplayName(
-      "Test transformReportChanged(IrMethod); given StmtList (default constructor) add nLabel; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ZeroTransformer.transformReportChanged(IrMethod)"})
-  void testTransformReportChanged_givenStmtListAddNLabel_thenReturnFalse() {
+  public void testTransformReportChanged_givenStmtListAddNLabel_thenReturnFalse() {
     // Arrange
     ZeroTransformer zeroTransformer = new ZeroTransformer();
 
@@ -206,12 +185,9 @@ class ZeroTransformerDiffblueTest {
    * <p>Method under test: {@link ZeroTransformer#transformReportChanged(IrMethod)}
    */
   @Test
-  @DisplayName(
-      "Test transformReportChanged(IrMethod); when IrMethod (default constructor); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ZeroTransformer.transformReportChanged(IrMethod)"})
-  void testTransformReportChanged_whenIrMethod_thenReturnFalse() {
+  public void testTransformReportChanged_whenIrMethod_thenReturnFalse() {
     // Arrange
     ZeroTransformer zeroTransformer = new ZeroTransformer();
 

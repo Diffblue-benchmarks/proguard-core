@@ -1,19 +1,18 @@
 package proguard.classfile.editor;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.UnsupportedEncodingException;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.analysis.cpa.jvm.util.ConstantLookupVisitor;
 import proguard.classfile.ClassPool;
 import proguard.classfile.Clazz;
@@ -29,6 +28,7 @@ import proguard.classfile.constant.Constant;
 import proguard.classfile.constant.DoubleConstant;
 import proguard.classfile.constant.FieldrefConstant;
 import proguard.classfile.constant.FloatConstant;
+import proguard.classfile.constant.IntegerConstant;
 import proguard.classfile.constant.InterfaceMethodrefConstant;
 import proguard.classfile.constant.InvokeDynamicConstant;
 import proguard.classfile.constant.LongConstant;
@@ -36,147 +36,26 @@ import proguard.classfile.constant.MethodrefConstant;
 import proguard.classfile.constant.NameAndTypeConstant;
 import proguard.classfile.constant.StringConstant;
 import proguard.classfile.constant.Utf8Constant;
+import proguard.classfile.constant.visitor.BootstrapMethodHandleTraveler;
+import proguard.classfile.constant.visitor.ConstantCounter;
 import proguard.classfile.constant.visitor.ConstantVisitor;
 import proguard.classfile.instruction.BranchInstruction;
 import proguard.classfile.instruction.Instruction;
 import proguard.classfile.kotlin.KotlinConstants;
 import proguard.resources.file.ResourceFile;
 
-class InstructionSequenceBuilderDiffblueTest {
+public class InstructionSequenceBuilderDiffblueTest {
   /**
    * Test {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}
    */
   @Test
-  @DisplayName("Test new InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void InstructionSequenceBuilder.<init>()"})
-  void testNewInstructionSequenceBuilder() {
+  public void testNewInstructionSequenceBuilder() {
     // Arrange, Act and Assert
-    assertEquals(0, new InstructionSequenceBuilder().size());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass)}.
-   *
-   * <p>Method under test: {@link
-   * InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass)}
-   */
-  @Test
-  @DisplayName("Test new InstructionSequenceBuilder(ProgramClass)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void InstructionSequenceBuilder.<init>(ProgramClass)"})
-  void testNewInstructionSequenceBuilder2() {
-    // Arrange
-    ProgramClass targetClass = new ProgramClass();
-
-    // Act and Assert
-    assertSame(
-        targetClass,
-        new InstructionSequenceBuilder(targetClass).getConstantPoolEditor().getTargetClass());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass)}.
-   *
-   * <p>Method under test: {@link
-   * InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass)}
-   */
-  @Test
-  @DisplayName("Test new InstructionSequenceBuilder(ProgramClass)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void InstructionSequenceBuilder.<init>(ProgramClass)"})
-  void testNewInstructionSequenceBuilder3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ProgramClass targetClass = new ProgramClass(1, 2, constantPool, 1, 1, 1);
-
-    // Act and Assert
-    assertSame(
-        targetClass,
-        new InstructionSequenceBuilder(targetClass).getConstantPoolEditor().getTargetClass());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass, ClassPool,
-   * ClassPool)}.
-   *
-   * <p>Method under test: {@link
-   * InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass, ClassPool, ClassPool)}
-   */
-  @Test
-  @DisplayName("Test new InstructionSequenceBuilder(ProgramClass, ClassPool, ClassPool)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void InstructionSequenceBuilder.<init>(ProgramClass, ClassPool, ClassPool)"})
-  void testNewInstructionSequenceBuilder4() {
-    // Arrange
-    ProgramClass targetClass = new ProgramClass();
-
-    // Act
-    InstructionSequenceBuilder actualInstructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            targetClass, KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool);
-
-    // Assert
-    assertSame(
-        targetClass, actualInstructionSequenceBuilder.getConstantPoolEditor().getTargetClass());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass, ClassPool,
-   * ClassPool)}.
-   *
-   * <p>Method under test: {@link
-   * InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass, ClassPool, ClassPool)}
-   */
-  @Test
-  @DisplayName("Test new InstructionSequenceBuilder(ProgramClass, ClassPool, ClassPool)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void InstructionSequenceBuilder.<init>(ProgramClass, ClassPool, ClassPool)"})
-  void testNewInstructionSequenceBuilder5() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ProgramClass targetClass = new ProgramClass(1, 1, constantPool, 1, 1, 1);
-
-    // Act
-    InstructionSequenceBuilder actualInstructionSequenceBuilder =
-        new InstructionSequenceBuilder(targetClass, null, KotlinConstants.dummyClassPool);
-
-    // Assert
-    assertSame(
-        targetClass, actualInstructionSequenceBuilder.getConstantPoolEditor().getTargetClass());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass, ClassPool,
-   * ClassPool)}.
-   *
-   * <p>Method under test: {@link
-   * InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass, ClassPool, ClassPool)}
-   */
-  @Test
-  @DisplayName("Test new InstructionSequenceBuilder(ProgramClass, ClassPool, ClassPool)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void InstructionSequenceBuilder.<init>(ProgramClass, ClassPool, ClassPool)"})
-  void testNewInstructionSequenceBuilder6() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ProgramClass targetClass = new ProgramClass(1, 2, constantPool, 1, 1, 1);
-
-    // Act
-    InstructionSequenceBuilder actualInstructionSequenceBuilder =
-        new InstructionSequenceBuilder(targetClass, null, KotlinConstants.dummyClassPool);
-
-    // Assert
-    assertSame(
-        targetClass, actualInstructionSequenceBuilder.getConstantPoolEditor().getTargetClass());
+    assertEquals(0, (new InstructionSequenceBuilder()).size());
   }
 
   /**
@@ -186,11 +65,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * InstructionSequenceBuilder#InstructionSequenceBuilder(ConstantPoolEditor)}
    */
   @Test
-  @DisplayName("Test new InstructionSequenceBuilder(ConstantPoolEditor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void InstructionSequenceBuilder.<init>(ConstantPoolEditor)"})
-  void testNewInstructionSequenceBuilder7() {
+  public void testNewInstructionSequenceBuilder2() {
     // Arrange
     ProgramClass targetClass = new ProgramClass();
     ConstantPoolEditor constantPoolEditor = new ConstantPoolEditor(targetClass);
@@ -208,6 +85,92 @@ class InstructionSequenceBuilderDiffblueTest {
   }
 
   /**
+   * Test {@link InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass, ClassPool,
+   * ClassPool)}.
+   *
+   * <ul>
+   *   <li>Given one.
+   * </ul>
+   *
+   * <p>Method under test: {@link
+   * InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass, ClassPool, ClassPool)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"void InstructionSequenceBuilder.<init>(ProgramClass, ClassPool, ClassPool)"})
+  public void testNewInstructionSequenceBuilder_givenOne() {
+    // Arrange
+    ProgramClass targetClass = new ProgramClass();
+    targetClass.u2constantPoolCount = 1;
+
+    // Act
+    InstructionSequenceBuilder actualInstructionSequenceBuilder =
+        new InstructionSequenceBuilder(targetClass, null, KotlinConstants.dummyClassPool);
+
+    // Assert
+    assertEquals(0, actualInstructionSequenceBuilder.size());
+    assertSame(
+        targetClass, actualInstructionSequenceBuilder.getConstantPoolEditor().getTargetClass());
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass)}.
+   *
+   * <ul>
+   *   <li>Given two.
+   * </ul>
+   *
+   * <p>Method under test: {@link
+   * InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"void InstructionSequenceBuilder.<init>(ProgramClass)"})
+  public void testNewInstructionSequenceBuilder_givenTwo() {
+    // Arrange
+    ProgramClass targetClass = new ProgramClass();
+    targetClass.u2constantPoolCount = 2;
+
+    // Act
+    InstructionSequenceBuilder actualInstructionSequenceBuilder =
+        new InstructionSequenceBuilder(targetClass);
+
+    // Assert
+    assertEquals(0, actualInstructionSequenceBuilder.size());
+    assertSame(
+        targetClass, actualInstructionSequenceBuilder.getConstantPoolEditor().getTargetClass());
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass, ClassPool,
+   * ClassPool)}.
+   *
+   * <ul>
+   *   <li>Given two.
+   * </ul>
+   *
+   * <p>Method under test: {@link
+   * InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass, ClassPool, ClassPool)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"void InstructionSequenceBuilder.<init>(ProgramClass, ClassPool, ClassPool)"})
+  public void testNewInstructionSequenceBuilder_givenTwo2() {
+    // Arrange
+    ProgramClass targetClass = new ProgramClass();
+    targetClass.u2constantPoolCount = 2;
+
+    // Act
+    InstructionSequenceBuilder actualInstructionSequenceBuilder =
+        new InstructionSequenceBuilder(targetClass, null, KotlinConstants.dummyClassPool);
+
+    // Assert
+    assertEquals(0, actualInstructionSequenceBuilder.size());
+    assertSame(
+        targetClass, actualInstructionSequenceBuilder.getConstantPoolEditor().getTargetClass());
+  }
+
+  /**
    * Test {@link InstructionSequenceBuilder#InstructionSequenceBuilder(ClassPool, ClassPool)}.
    *
    * <ul>
@@ -218,16 +181,14 @@ class InstructionSequenceBuilderDiffblueTest {
    * ClassPool)}
    */
   @Test
-  @DisplayName("Test new InstructionSequenceBuilder(ClassPool, ClassPool); when dummyClassPool")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void InstructionSequenceBuilder.<init>(ClassPool, ClassPool)"})
-  void testNewInstructionSequenceBuilder_whenDummyClassPool() {
+  public void testNewInstructionSequenceBuilder_whenDummyClassPool() {
     // Arrange, Act and Assert
     assertEquals(
         0,
-        new InstructionSequenceBuilder(
-                KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool)
+        (new InstructionSequenceBuilder(
+                KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool))
             .size());
   }
 
@@ -242,13 +203,67 @@ class InstructionSequenceBuilderDiffblueTest {
    * ClassPool)}
    */
   @Test
-  @DisplayName("Test new InstructionSequenceBuilder(ClassPool, ClassPool); when 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void InstructionSequenceBuilder.<init>(ClassPool, ClassPool)"})
-  void testNewInstructionSequenceBuilder_whenNull() {
+  public void testNewInstructionSequenceBuilder_whenNull() {
     // Arrange, Act and Assert
-    assertEquals(0, new InstructionSequenceBuilder(null, KotlinConstants.dummyClassPool).size());
+    assertEquals(0, (new InstructionSequenceBuilder(null, KotlinConstants.dummyClassPool)).size());
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass)}.
+   *
+   * <ul>
+   *   <li>When {@link ProgramClass#ProgramClass()}.
+   * </ul>
+   *
+   * <p>Method under test: {@link
+   * InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"void InstructionSequenceBuilder.<init>(ProgramClass)"})
+  public void testNewInstructionSequenceBuilder_whenProgramClass() {
+    // Arrange
+    ProgramClass targetClass = new ProgramClass();
+
+    // Act
+    InstructionSequenceBuilder actualInstructionSequenceBuilder =
+        new InstructionSequenceBuilder(targetClass);
+
+    // Assert
+    assertEquals(0, actualInstructionSequenceBuilder.size());
+    assertSame(
+        targetClass, actualInstructionSequenceBuilder.getConstantPoolEditor().getTargetClass());
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass, ClassPool,
+   * ClassPool)}.
+   *
+   * <ul>
+   *   <li>When {@link ProgramClass#ProgramClass()}.
+   * </ul>
+   *
+   * <p>Method under test: {@link
+   * InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass, ClassPool, ClassPool)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"void InstructionSequenceBuilder.<init>(ProgramClass, ClassPool, ClassPool)"})
+  public void testNewInstructionSequenceBuilder_whenProgramClass2() {
+    // Arrange
+    ProgramClass targetClass = new ProgramClass();
+
+    // Act
+    InstructionSequenceBuilder actualInstructionSequenceBuilder =
+        new InstructionSequenceBuilder(
+            targetClass, KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool);
+
+    // Assert
+    assertEquals(0, actualInstructionSequenceBuilder.size());
+    assertSame(
+        targetClass, actualInstructionSequenceBuilder.getConstantPoolEditor().getTargetClass());
   }
 
   /**
@@ -257,14 +272,12 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#getConstantPoolEditor()}
    */
   @Test
-  @DisplayName("Test getConstantPoolEditor()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ConstantPoolEditor InstructionSequenceBuilder.getConstantPoolEditor()"})
-  void testGetConstantPoolEditor() {
+  public void testGetConstantPoolEditor() {
     // Arrange, Act and Assert
     ProgramClass targetClass =
-        new InstructionSequenceBuilder().getConstantPoolEditor().getTargetClass();
+        (new InstructionSequenceBuilder()).getConstantPoolEditor().getTargetClass();
     assertNull(targetClass.getProcessingInfo());
     assertNull(targetClass.getName());
     assertNull(targetClass.getSuperName());
@@ -348,11 +361,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#label(Instruction)}
    */
   @Test
-  @DisplayName("Test label(Instruction)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.label(Instruction)"})
-  void testLabel() {
+  public void testLabel() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -371,11 +382,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#catch_(Instruction)}
    */
   @Test
-  @DisplayName("Test catch_(Instruction)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.catch_(Instruction)"})
-  void testCatch_() {
+  public void testCatch_() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -394,11 +403,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#line(Instruction)}
    */
   @Test
-  @DisplayName("Test line(Instruction)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.line(Instruction)"})
-  void testLine() {
+  public void testLine() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -417,13 +424,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#appendInstruction(Instruction)}
    */
   @Test
-  @DisplayName("Test appendInstruction(Instruction)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.appendInstruction(Instruction)"
   })
-  void testAppendInstruction() {
+  public void testAppendInstruction() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -442,13 +447,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#appendInstructions(Instruction[])}
    */
   @Test
-  @DisplayName("Test appendInstructions(Instruction[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.appendInstructions(Instruction[])"
   })
-  void testAppendInstructions() {
+  public void testAppendInstructions() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -468,13 +471,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#__()}
    */
   @Test
-  @DisplayName("Test __()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction[] InstructionSequenceBuilder.__()"})
-  void test__() {
+  public void test__() {
     // Arrange, Act and Assert
-    assertEquals(0, new InstructionSequenceBuilder().__().length);
+    assertEquals(0, (new InstructionSequenceBuilder()).__().length);
   }
 
   /**
@@ -483,13 +484,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#instructions()}
    */
   @Test
-  @DisplayName("Test instructions()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction[] InstructionSequenceBuilder.instructions()"})
-  void testInstructions() {
+  public void testInstructions() {
     // Arrange, Act and Assert
-    assertEquals(0, new InstructionSequenceBuilder().instructions().length);
+    assertEquals(0, (new InstructionSequenceBuilder()).instructions().length);
   }
 
   /**
@@ -503,12 +502,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#constants()}
    */
   @Test
-  @DisplayName(
-      "Test constants(); given InstructionSequenceBuilder(); then return first element is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Constant[] InstructionSequenceBuilder.constants()"})
-  void testConstants_givenInstructionSequenceBuilder_thenReturnFirstElementIsNull() {
+  public void testConstants_givenInstructionSequenceBuilder_thenReturnFirstElementIsNull() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -528,13 +524,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#size()}
    */
   @Test
-  @DisplayName("Test size()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int InstructionSequenceBuilder.size()"})
-  void testSize() {
+  public void testSize() {
     // Arrange, Act and Assert
-    assertEquals(0, new InstructionSequenceBuilder().size());
+    assertEquals(0, (new InstructionSequenceBuilder()).size());
   }
 
   /**
@@ -543,11 +537,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#nop()}
    */
   @Test
-  @DisplayName("Test nop()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.nop()"})
-  void testNop() {
+  public void testNop() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -565,11 +557,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#aconst_null()}
    */
   @Test
-  @DisplayName("Test aconst_null()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.aconst_null()"})
-  void testAconst_null() {
+  public void testAconst_null() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -591,11 +581,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iconst(int)}
    */
   @Test
-  @DisplayName("Test iconst(int); when minus two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iconst(int)"})
-  void testIconst_whenMinusTwo() {
+  public void testIconst_whenMinusTwo() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -617,11 +605,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iconst(int)}
    */
   @Test
-  @DisplayName("Test iconst(int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iconst(int)"})
-  void testIconst_whenOne() {
+  public void testIconst_whenOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -643,11 +629,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iconst(int)}
    */
   @Test
-  @DisplayName("Test iconst(int); when six")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iconst(int)"})
-  void testIconst_whenSix() {
+  public void testIconst_whenSix() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -665,11 +649,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iconst_m1()}
    */
   @Test
-  @DisplayName("Test iconst_m1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iconst_m1()"})
-  void testIconst_m1() {
+  public void testIconst_m1() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -687,11 +669,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iconst_0()}
    */
   @Test
-  @DisplayName("Test iconst_0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iconst_0()"})
-  void testIconst_0() {
+  public void testIconst_0() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -709,11 +689,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iconst_1()}
    */
   @Test
-  @DisplayName("Test iconst_1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iconst_1()"})
-  void testIconst_1() {
+  public void testIconst_1() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -731,11 +709,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iconst_2()}
    */
   @Test
-  @DisplayName("Test iconst_2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iconst_2()"})
-  void testIconst_2() {
+  public void testIconst_2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -753,11 +729,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iconst_3()}
    */
   @Test
-  @DisplayName("Test iconst_3()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iconst_3()"})
-  void testIconst_3() {
+  public void testIconst_3() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -775,11 +749,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iconst_4()}
    */
   @Test
-  @DisplayName("Test iconst_4()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iconst_4()"})
-  void testIconst_4() {
+  public void testIconst_4() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -797,11 +769,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iconst_5()}
    */
   @Test
-  @DisplayName("Test iconst_5()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iconst_5()"})
-  void testIconst_5() {
+  public void testIconst_5() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -823,11 +793,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lconst(int)}
    */
   @Test
-  @DisplayName("Test lconst(int); when minus one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lconst(int)"})
-  void testLconst_whenMinusOne() {
+  public void testLconst_whenMinusOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -849,11 +817,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lconst(int)}
    */
   @Test
-  @DisplayName("Test lconst(int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lconst(int)"})
-  void testLconst_whenOne() {
+  public void testLconst_whenOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -875,11 +841,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lconst(int)}
    */
   @Test
-  @DisplayName("Test lconst(int); when zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lconst(int)"})
-  void testLconst_whenZero() {
+  public void testLconst_whenZero() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -897,11 +861,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lconst_0()}
    */
   @Test
-  @DisplayName("Test lconst_0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lconst_0()"})
-  void testLconst_0() {
+  public void testLconst_0() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -919,11 +881,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lconst_1()}
    */
   @Test
-  @DisplayName("Test lconst_1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lconst_1()"})
-  void testLconst_1() {
+  public void testLconst_1() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -945,11 +905,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fconst(int)}
    */
   @Test
-  @DisplayName("Test fconst(int); when five")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fconst(int)"})
-  void testFconst_whenFive() {
+  public void testFconst_whenFive() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -971,11 +929,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fconst(int)}
    */
   @Test
-  @DisplayName("Test fconst(int); when minus one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fconst(int)"})
-  void testFconst_whenMinusOne() {
+  public void testFconst_whenMinusOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -997,11 +953,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fconst(int)}
    */
   @Test
-  @DisplayName("Test fconst(int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fconst(int)"})
-  void testFconst_whenOne() {
+  public void testFconst_whenOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -1019,11 +973,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fconst_0()}
    */
   @Test
-  @DisplayName("Test fconst_0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fconst_0()"})
-  void testFconst_0() {
+  public void testFconst_0() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -1041,11 +993,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fconst_1()}
    */
   @Test
-  @DisplayName("Test fconst_1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fconst_1()"})
-  void testFconst_1() {
+  public void testFconst_1() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -1063,11 +1013,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fconst_2()}
    */
   @Test
-  @DisplayName("Test fconst_2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fconst_2()"})
-  void testFconst_2() {
+  public void testFconst_2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -1089,11 +1037,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dconst(int)}
    */
   @Test
-  @DisplayName("Test dconst(int); when minus one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dconst(int)"})
-  void testDconst_whenMinusOne() {
+  public void testDconst_whenMinusOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -1115,11 +1061,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dconst(int)}
    */
   @Test
-  @DisplayName("Test dconst(int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dconst(int)"})
-  void testDconst_whenOne() {
+  public void testDconst_whenOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -1141,11 +1085,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dconst(int)}
    */
   @Test
-  @DisplayName("Test dconst(int); when zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dconst(int)"})
-  void testDconst_whenZero() {
+  public void testDconst_whenZero() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -1163,11 +1105,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dconst_0()}
    */
   @Test
-  @DisplayName("Test dconst_0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dconst_0()"})
-  void testDconst_0() {
+  public void testDconst_0() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -1185,11 +1125,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dconst_1()}
    */
   @Test
-  @DisplayName("Test dconst_1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dconst_1()"})
-  void testDconst_1() {
+  public void testDconst_1() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -1207,11 +1145,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#bipush(int)}
    */
   @Test
-  @DisplayName("Test bipush(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.bipush(int)"})
-  void testBipush() {
+  public void testBipush() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -1229,11 +1165,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#sipush(int)}
    */
   @Test
-  @DisplayName("Test sipush(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.sipush(int)"})
-  void testSipush() {
+  public void testSipush() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -1251,11 +1185,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Clazz)}
    */
   @Test
-  @DisplayName("Test ldc(Clazz) with 'Clazz'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Clazz)"})
-  void testLdcWithClazz() {
+  public void testLdcWithClazz() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -1269,38 +1201,9 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc((Clazz) new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc(Clazz)} with {@code Clazz}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Clazz)}
-   */
-  @Test
-  @DisplayName("Test ldc(Clazz) with 'Clazz'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Clazz)"})
-  void testLdcWithClazz2() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc((Clazz) new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder, instructionSequenceBuilder.ldc((Clazz) new LibraryClass()));
   }
 
   /**
@@ -1310,93 +1213,19 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Clazz, ConstantVisitor)}
    */
   @Test
-  @DisplayName("Test ldc(Clazz, ConstantVisitor) with 'Clazz', 'ConstantVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Clazz, ConstantVisitor)"
   })
-  void testLdcWithClazzConstantVisitor() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass clazz = new LibraryClass();
-
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc((Clazz) clazz, new ConstantLookupVisitor());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc(Clazz, ConstantVisitor)} with {@code Clazz}, {@code
-   * ConstantVisitor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Clazz, ConstantVisitor)}
-   */
-  @Test
-  @DisplayName("Test ldc(Clazz, ConstantVisitor) with 'Clazz', 'ConstantVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Clazz, ConstantVisitor)"
-  })
-  void testLdcWithClazzConstantVisitor2() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-    LibraryClass clazz = new LibraryClass();
-
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc((Clazz) clazz, new ConstantLookupVisitor());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc(Clazz, ConstantVisitor)} with {@code Clazz}, {@code
-   * ConstantVisitor}.
-   *
-   * <ul>
-   *   <li>Then {@link ConstantLookupVisitor} (default constructor) {@link
-   *       ConstantLookupVisitor#resultClazz} {@link LibraryClass}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Clazz, ConstantVisitor)}
-   */
-  @Test
-  @DisplayName(
-      "Test ldc(Clazz, ConstantVisitor) with 'Clazz', 'ConstantVisitor'; then ConstantLookupVisitor (default constructor) resultClazz LibraryClass")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Clazz, ConstantVisitor)"
-  })
-  void testLdcWithClazzConstantVisitor_thenConstantLookupVisitorResultClazzLibraryClass() {
+  public void testLdcWithClazzConstantVisitor() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
+
     ConstantLookupVisitor visitor = new ConstantLookupVisitor();
 
     // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc((Clazz) clazz, visitor);
+    instructionSequenceBuilder.ldc((Clazz) clazz, visitor);
 
     // Assert
     Clazz clazz2 = visitor.resultClazz;
@@ -1405,7 +1234,6 @@ class InstructionSequenceBuilderDiffblueTest {
     assertEquals("This Class Name", clazz2.getName());
     assertEquals("This Class Name", visitor.result);
     assertEquals(1, clazz2.getAccessFlags());
-    assertSame(instructionSequenceBuilder, actualLdcResult);
     assertSame(clazz.fields, ((LibraryClass) clazz2).fields);
     assertSame(clazz.interfaceNames, ((LibraryClass) clazz2).interfaceNames);
     assertSame(clazz.methods, ((LibraryClass) clazz2).methods);
@@ -1415,28 +1243,106 @@ class InstructionSequenceBuilderDiffblueTest {
   }
 
   /**
-   * Test {@link InstructionSequenceBuilder#ldc(Clazz, Member)} with {@code Clazz}, {@code Member}.
+   * Test {@link InstructionSequenceBuilder#ldc(Clazz, ConstantVisitor)} with {@code Clazz}, {@code
+   * ConstantVisitor}.
    *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Clazz, Member)}
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Clazz, ConstantVisitor)}
    */
   @Test
-  @DisplayName("Test ldc(Clazz, Member) with 'Clazz', 'Member'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Clazz, Member)"})
-  void testLdcWithClazzMember() {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Clazz, ConstantVisitor)"
+  })
+  public void testLdcWithClazzConstantVisitor2() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
+    ClassConstant classConstant = new ClassConstant();
+    ClassConstant classConstant2 = new ClassConstant();
+    ProgramClass targetClass =
+        new ProgramClass(
+            1, 3, new Constant[] {classConstant, classConstant2, new ClassConstant()}, 1, 1, 1);
+
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+        new InstructionSequenceBuilder(targetClass);
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
+    ConstantLookupVisitor visitor = new ConstantLookupVisitor();
 
     // Act
-    InstructionSequenceBuilder actualLdcResult = instructionSequenceBuilder.ldc(clazz, member);
+    InstructionSequenceBuilder actualLdcResult =
+        instructionSequenceBuilder.ldc((Clazz) clazz, visitor);
 
     // Assert
+    Clazz clazz2 = visitor.resultClazz;
+    assertTrue(clazz2 instanceof LibraryClass);
+    assertNull(((LibraryClass) clazz2).interfaceNames);
+    assertNull(((LibraryClass) clazz2).fields);
+    assertNull(((LibraryClass) clazz2).methods);
+    assertNull(clazz2.getName());
+    assertNull(clazz2.getSuperName());
+    assertEquals(0, clazz2.getAccessFlags());
+    assertSame(targetClass, actualLdcResult.getConstantPoolEditor().getTargetClass());
     assertSame(instructionSequenceBuilder, actualLdcResult);
+    Clazz[] clazzArray = clazz.subClasses;
+    assertSame(clazzArray, ((LibraryClass) clazz2).interfaceClasses);
+    assertSame(clazzArray, ((LibraryClass) clazz2).subClasses);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc(Clazz, ConstantVisitor)} with {@code Clazz}, {@code
+   * ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Clazz, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Clazz, ConstantVisitor)"
+  })
+  public void testLdcWithClazzConstantVisitor_thenConstantCounterCountIsOne() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
+
+    ConstantCounter visitor = new ConstantCounter();
+
+    // Act
+    InstructionSequenceBuilder actualLdcResult =
+        instructionSequenceBuilder.ldc((Clazz) clazz, visitor);
+
+    // Assert
+    assertEquals(1, visitor.getCount());
+    assertSame(instructionSequenceBuilder, actualLdcResult);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc(Clazz, ConstantVisitor)} with {@code Clazz}, {@code
+   * ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>When {@code null}.
+   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Clazz, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Clazz, ConstantVisitor)"
+  })
+  public void testLdcWithClazzConstantVisitor_whenNull_thenReturnInstructionSequenceBuilder() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc(
+            (Clazz) new LibraryClass(1, "This Class Name", "Super Class Name"),
+            (ConstantVisitor) null));
   }
 
   /**
@@ -1445,22 +1351,80 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Clazz, Member)}
    */
   @Test
-  @DisplayName("Test ldc(Clazz, Member) with 'Clazz', 'Member'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Clazz, Member)"})
-  void testLdcWithClazzMember2() {
+  public void testLdcWithClazzMember() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
+    LibraryClass clazz = new LibraryClass();
+
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc(clazz, new LibraryField(1, "Name", "Descriptor")));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc(Clazz, Member)} with {@code Clazz}, {@code Member}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Clazz, Member)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Clazz, Member)"})
+  public void testLdcWithClazzMember2() {
+    // Arrange
+    ClassConstant classConstant = new ClassConstant();
+    ClassConstant classConstant2 = new ClassConstant();
+    InstructionSequenceBuilder instructionSequenceBuilder =
+        new InstructionSequenceBuilder(
+            new ProgramClass(
+                1,
+                3,
+                new Constant[] {classConstant, classConstant2, new ClassConstant()},
+                1,
+                1,
+                1));
+    LibraryClass clazz = new LibraryClass();
+
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc(clazz, new LibraryField(1, "Name", "Descriptor")));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc(Clazz, Member, ConstantVisitor)} with {@code Clazz},
+   * {@code Member}, {@code ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Clazz, Member, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Clazz, Member, ConstantVisitor)"
+  })
+  public void testLdcWithClazzMemberConstantVisitor_thenConstantCounterCountIsOne() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass clazz = new LibraryClass();
     LibraryField member = new LibraryField(1, "Name", "Descriptor");
 
+    ConstantCounter visitor = new ConstantCounter();
+
     // Act
-    InstructionSequenceBuilder actualLdcResult = instructionSequenceBuilder.ldc(clazz, member);
+    InstructionSequenceBuilder actualLdcResult =
+        instructionSequenceBuilder.ldc(clazz, member, visitor);
 
     // Assert
+    assertEquals(1, visitor.getCount());
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdcResult);
   }
 
@@ -1469,135 +1433,28 @@ class InstructionSequenceBuilderDiffblueTest {
    * {@code Member}, {@code ConstantVisitor}.
    *
    * <ul>
-   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
+   *   <li>When {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Clazz, Member, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc(Clazz, Member, ConstantVisitor) with 'Clazz', 'Member', 'ConstantVisitor'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Clazz, Member, ConstantVisitor)"
   })
-  void testLdcWithClazzMemberConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLdcWithClazzMemberConstantVisitor_whenNull() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
 
     // Act
     InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc(clazz, member, null);
+        instructionSequenceBuilder.ldc(clazz, new LibraryField(1, "Name", "Descriptor"), null);
 
     // Assert
     assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdcResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc(Clazz, Member)} with {@code Clazz}, {@code Member}.
-   *
-   * <ul>
-   *   <li>Then eighth element return {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Clazz, Member)}
-   */
-  @Test
-  @DisplayName(
-      "Test ldc(Clazz, Member) with 'Clazz', 'Member'; then eighth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Clazz, Member)"})
-  void testLdcWithClazzMember_thenEighthElementReturnClassConstant() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-    LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder.ldc(clazz, member).getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[7] instanceof ClassConstant);
-    assertTrue(constantArray[8] instanceof FieldrefConstant);
-    assertTrue(constantArray[5] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[9] instanceof StringConstant);
-    assertTrue(constantArray[6] instanceof Utf8Constant);
-    assertEquals(10, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc(Clazz, Member)} with {@code Clazz}, {@code Member}.
-   *
-   * <ul>
-   *   <li>Then fifth element {@link StringConstant#referencedClass} return {@link LibraryClass}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Clazz, Member)}
-   */
-  @Test
-  @DisplayName(
-      "Test ldc(Clazz, Member) with 'Clazz', 'Member'; then fifth element referencedClass return LibraryClass")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Clazz, Member)"})
-  void testLdcWithClazzMember_thenFifthElementReferencedClassReturnLibraryClass()
-      throws UnsupportedEncodingException {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder.ldc(clazz, member).getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    Constant constant = constantArray[4];
-    Clazz clazz2 = ((StringConstant) constant).referencedClass;
-    assertTrue(clazz2 instanceof LibraryClass);
-    Member member2 = ((StringConstant) constant).referencedMember;
-    assertTrue(member2 instanceof LibraryField);
-    assertTrue(constant instanceof StringConstant);
-    Constant constant2 = constantArray[3];
-    assertTrue(constant2 instanceof Utf8Constant);
-    assertNull(((StringConstant) constant).javaLangStringClass);
-    assertNull(((StringConstant) constant).referencedResourceFile);
-    assertEquals(0, ((StringConstant) constant).referencedResourceId);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, ((StringConstant) constant).u2stringIndex);
-    assertEquals(5, targetClass.u2constantPoolCount);
-    assertEquals(8, constant.getTag());
-    assertFalse(constant.isCategory2());
-    assertSame(clazz, clazz2);
-    assertSame(member, member2);
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
   }
 
   /**
@@ -1610,22 +1467,17 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Clazz, Member)}
    */
   @Test
-  @DisplayName(
-      "Test ldc(Clazz, Member) with 'Clazz', 'Member'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Clazz, Member)"})
-  void testLdcWithClazzMember_thenReturnInstructionSequenceBuilder() {
+  public void testLdcWithClazzMember_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult = instructionSequenceBuilder.ldc(clazz, member);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc(clazz, new LibraryField(1, "Name", "Descriptor")));
   }
 
   /**
@@ -1638,27 +1490,29 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Clazz, Member)}
    */
   @Test
-  @DisplayName(
-      "Test ldc(Clazz, Member) with 'Clazz', 'Member'; then sixth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Clazz, Member)"})
-  void testLdcWithClazzMember_thenSixthElementReturnClassConstant() {
+  public void testLdcWithClazzMember_thenSixthElementReturnClassConstant() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
 
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder.ldc(clazz, member).getConstantPoolEditor().getTargetClass();
+    // Act
+    InstructionSequenceBuilder actualLdcResult =
+        instructionSequenceBuilder.ldc(clazz, new LibraryField(1, "Name", "Descriptor"));
+
+    // Assert
+    ProgramClass targetClass = actualLdcResult.getConstantPoolEditor().getTargetClass();
     Constant[] constantArray = targetClass.constantPool;
     assertTrue(constantArray[5] instanceof ClassConstant);
     assertTrue(constantArray[6] instanceof FieldrefConstant);
     assertTrue(constantArray[3] instanceof NameAndTypeConstant);
     assertTrue(constantArray[7] instanceof StringConstant);
     assertTrue(constantArray[2] instanceof Utf8Constant);
+    assertTrue(constantArray[4] instanceof Utf8Constant);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualLdcResult.size());
     assertEquals(8, targetClass.u2constantPoolCount);
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
   }
@@ -1673,20 +1527,17 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Clazz)}
    */
   @Test
-  @DisplayName("Test ldc(Clazz) with 'Clazz'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Clazz)"})
-  void testLdcWithClazz_thenReturnInstructionSequenceBuilder() {
+  public void testLdcWithClazz_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult = instructionSequenceBuilder.ldc((Clazz) clazz);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc(
+            (Clazz) new LibraryClass(1, "This Class Name", "Super Class Name")));
   }
 
   /**
@@ -1695,21 +1546,16 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(float)}
    */
   @Test
-  @DisplayName("Test ldc(float) with 'float'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(float)"})
-  void testLdcWithFloat() {
+  public void testLdcWithFloat() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(4, 1, constantPool, 4, 4, 4));
+        new InstructionSequenceBuilder(
+            new ProgramClass(4, 1, new Constant[] {new ClassConstant()}, 4, 4, 4));
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult = instructionSequenceBuilder.ldc(10.0f);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc(10.0f));
   }
 
   /**
@@ -1718,34 +1564,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(float)}
    */
   @Test
-  @DisplayName("Test ldc(float) with 'float'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(float)"})
-  void testLdcWithFloat2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(4, 0, constantPool, 4, 4, 4));
-
-    // Act
-    InstructionSequenceBuilder actualLdcResult = instructionSequenceBuilder.ldc(10.0f);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc(float)} with {@code float}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(float)}
-   */
-  @Test
-  @DisplayName("Test ldc(float) with 'float'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(float)"})
-  void testLdcWithFloat3() {
+  public void testLdcWithFloat2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -1759,10 +1580,36 @@ class InstructionSequenceBuilderDiffblueTest {
                 4,
                 4));
 
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc(10.0f));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc(float, ConstantVisitor)} with {@code float}, {@code
+   * ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(float, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(float, ConstantVisitor)"
+  })
+  public void testLdcWithFloatConstantVisitor_thenConstantCounterCountIsOne() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    ConstantCounter visitor = new ConstantCounter();
+
     // Act
-    InstructionSequenceBuilder actualLdcResult = instructionSequenceBuilder.ldc(10.0f);
+    InstructionSequenceBuilder actualLdcResult = instructionSequenceBuilder.ldc(10.0f, visitor);
 
     // Assert
+    assertEquals(1, visitor.getCount());
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdcResult);
   }
 
@@ -1778,14 +1625,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(float, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc(float, ConstantVisitor) with 'float', 'ConstantVisitor'; when 'null'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(float, ConstantVisitor)"
   })
-  void testLdcWithFloatConstantVisitor_whenNull_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLdcWithFloatConstantVisitor_whenNull_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -1807,19 +1651,14 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(float)}
    */
   @Test
-  @DisplayName("Test ldc(float) with 'float'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(float)"})
-  void testLdcWithFloat_thenReturnInstructionSequenceBuilder() {
+  public void testLdcWithFloat_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult = instructionSequenceBuilder.ldc(10.0f);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc(10.0f));
   }
 
   /**
@@ -1828,74 +1667,45 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(int)}
    */
   @Test
-  @DisplayName("Test ldc(int) with 'int'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(int)"})
-  void testLdcWithInt() {
+  public void testLdcWithInt() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(3, 1, constantPool, 3, 3, 3));
-
-    // Act
-    InstructionSequenceBuilder actualLdcResult = instructionSequenceBuilder.ldc(42);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc(int)} with {@code int}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(int)}
-   */
-  @Test
-  @DisplayName("Test ldc(int) with 'int'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(int)"})
-  void testLdcWithInt2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(3, 0, constantPool, 3, 3, 3));
-
-    // Act
-    InstructionSequenceBuilder actualLdcResult = instructionSequenceBuilder.ldc(42);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc(int)} with {@code int}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(int)}
-   */
-  @Test
-  @DisplayName("Test ldc(int) with 'int'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(int)"})
-  void testLdcWithInt3() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
     InstructionSequenceBuilder instructionSequenceBuilder =
         new InstructionSequenceBuilder(
-            new ProgramClass(
-                3,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                3,
-                3,
-                3));
+            new ProgramClass(3, 1, new Constant[] {new ClassConstant()}, 3, 3, 3));
+
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc(42));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc(int, ConstantVisitor)} with {@code int}, {@code
+   * ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>When {@link ConstantCounter} (default constructor).
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(int, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(int, ConstantVisitor)"
+  })
+  public void testLdcWithIntConstantVisitor_whenConstantCounter_thenConstantCounterCountIsOne() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    ConstantCounter visitor = new ConstantCounter();
 
     // Act
-    InstructionSequenceBuilder actualLdcResult = instructionSequenceBuilder.ldc(42);
+    InstructionSequenceBuilder actualLdcResult = instructionSequenceBuilder.ldc(42, visitor);
 
     // Assert
+    assertEquals(1, visitor.getCount());
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdcResult);
   }
 
@@ -1911,14 +1721,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(int, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc(int, ConstantVisitor) with 'int', 'ConstantVisitor'; when 'null'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(int, ConstantVisitor)"
   })
-  void testLdcWithIntConstantVisitor_whenNull_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLdcWithIntConstantVisitor_whenNull_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -1940,43 +1747,46 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(int)}
    */
   @Test
-  @DisplayName("Test ldc(int) with 'int'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(int)"})
-  void testLdcWithInt_thenReturnInstructionSequenceBuilder() {
+  public void testLdcWithInt_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult = instructionSequenceBuilder.ldc(42);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc(42));
   }
 
   /**
-   * Test {@link InstructionSequenceBuilder#ldc(Object)} with {@code Object}.
+   * Test {@link InstructionSequenceBuilder#ldc(int)} with {@code int}.
    *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Object)}
+   * <ul>
+   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder(ProgramClass)}
+   *       with targetClass is {@link ProgramClass#ProgramClass(int, int, Constant[], int, int,
+   *       int)}.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(int)}
    */
   @Test
-  @DisplayName("Test ldc(Object) with 'Object'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Object)"})
-  void testLdcWithObject() {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(int)"})
+  public void testLdcWithInt_thenReturnInstructionSequenceBuilderWithTargetClassIsProgramClass() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
+    ClassConstant classConstant = new ClassConstant();
+    ClassConstant classConstant2 = new ClassConstant();
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(99, 1, constantPool, 99, 99, 99));
+        new InstructionSequenceBuilder(
+            new ProgramClass(
+                3,
+                3,
+                new Constant[] {classConstant, classConstant2, new ClassConstant()},
+                3,
+                3,
+                3));
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc((Object) "Primitive Array");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc(42));
   }
 
   /**
@@ -1985,22 +1795,17 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Object)}
    */
   @Test
-  @DisplayName("Test ldc(Object) with 'Object'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Object)"})
-  void testLdcWithObject2() {
+  public void testLdcWithObject() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(99, 0, constantPool, 99, 99, 99));
+        new InstructionSequenceBuilder(
+            new ProgramClass(99, 1, new Constant[] {new ClassConstant()}, 99, 99, 99));
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc((Object) "Primitive Array");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder, instructionSequenceBuilder.ldc((Object) "Primitive Array"));
   }
 
   /**
@@ -2009,11 +1814,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Object)}
    */
   @Test
-  @DisplayName("Test ldc(Object) with 'Object'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Object)"})
-  void testLdcWithObject3() {
+  public void testLdcWithObject2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -2027,11 +1830,38 @@ class InstructionSequenceBuilderDiffblueTest {
                 99,
                 99));
 
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder, instructionSequenceBuilder.ldc((Object) "Primitive Array"));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc(Object, ConstantVisitor)} with {@code Object},
+   * {@code ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Object, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Object, ConstantVisitor)"
+  })
+  public void testLdcWithObjectConstantVisitor_thenConstantCounterCountIsOne() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    ConstantCounter visitor = new ConstantCounter();
+
     // Act
     InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc((Object) "Primitive Array");
+        instructionSequenceBuilder.ldc((Object) "Primitive Array", visitor);
 
     // Assert
+    assertEquals(1, visitor.getCount());
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdcResult);
   }
 
@@ -2046,14 +1876,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Object, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc(Object, ConstantVisitor) with 'Object', 'ConstantVisitor'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Object, ConstantVisitor)"
   })
-  void testLdcWithObjectConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLdcWithObjectConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -2076,20 +1903,15 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(Object)}
    */
   @Test
-  @DisplayName("Test ldc(Object) with 'Object'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(Object)"})
-  void testLdcWithObject_thenReturnInstructionSequenceBuilder() {
+  public void testLdcWithObject_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc((Object) "Primitive Array");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder, instructionSequenceBuilder.ldc((Object) "Primitive Array"));
   }
 
   /**
@@ -2098,22 +1920,18 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(ResourceFile)}
    */
   @Test
-  @DisplayName("Test ldc(ResourceFile) with 'ResourceFile'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(ResourceFile)"})
-  void testLdcWithResourceFile() {
+  public void testLdcWithResourceFile() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc(new ResourceFile("foo.txt", 3L));
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc(new ResourceFile("foo.txt", 3L)));
   }
 
   /**
@@ -2122,35 +1940,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(ResourceFile)}
    */
   @Test
-  @DisplayName("Test ldc(ResourceFile) with 'ResourceFile'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(ResourceFile)"})
-  void testLdcWithResourceFile2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc(new ResourceFile("foo.txt", 3L));
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc(ResourceFile)} with {@code ResourceFile}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(ResourceFile)}
-   */
-  @Test
-  @DisplayName("Test ldc(ResourceFile) with 'ResourceFile'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(ResourceFile)"})
-  void testLdcWithResourceFile3() {
+  public void testLdcWithResourceFile2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -2164,11 +1956,41 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc(new ResourceFile("foo.txt", 3L)));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc(ResourceFile, ConstantVisitor)} with {@code
+   * ResourceFile}, {@code ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(ResourceFile, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(ResourceFile, ConstantVisitor)"
+  })
+  public void testLdcWithResourceFileConstantVisitor_thenConstantCounterCountIsOne() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    ResourceFile resourceFile = new ResourceFile("foo.txt", 3L);
+
+    ConstantCounter visitor = new ConstantCounter();
+
     // Act
     InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc(new ResourceFile("foo.txt", 3L));
+        instructionSequenceBuilder.ldc(resourceFile, visitor);
 
     // Assert
+    assertEquals(1, visitor.getCount());
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdcResult);
   }
 
@@ -2183,14 +2005,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(ResourceFile, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc(ResourceFile, ConstantVisitor) with 'ResourceFile', 'ConstantVisitor'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(ResourceFile, ConstantVisitor)"
   })
-  void testLdcWithResourceFileConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLdcWithResourceFileConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -2213,21 +2032,16 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(ResourceFile)}
    */
   @Test
-  @DisplayName(
-      "Test ldc(ResourceFile) with 'ResourceFile'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(ResourceFile)"})
-  void testLdcWithResourceFile_thenReturnInstructionSequenceBuilder() {
+  public void testLdcWithResourceFile_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc(new ResourceFile("foo.txt", 3L));
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc(new ResourceFile("foo.txt", 3L)));
   }
 
   /**
@@ -2236,21 +2050,16 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String)}
    */
   @Test
-  @DisplayName("Test ldc(String) with 'String'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String)"})
-  void testLdcWithString() {
+  public void testLdcWithString() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult = instructionSequenceBuilder.ldc("String");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc("String"));
   }
 
   /**
@@ -2259,34 +2068,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String)}
    */
   @Test
-  @DisplayName("Test ldc(String) with 'String'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String)"})
-  void testLdcWithString2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualLdcResult = instructionSequenceBuilder.ldc("String");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc(String)} with {@code String}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String)}
-   */
-  @Test
-  @DisplayName("Test ldc(String) with 'String'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String)"})
-  void testLdcWithString3() {
+  public void testLdcWithString2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -2300,11 +2084,8 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult = instructionSequenceBuilder.ldc("String");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc("String"));
   }
 
   /**
@@ -2313,22 +2094,18 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, Clazz)}
    */
   @Test
-  @DisplayName("Test ldc(String, Clazz) with 'String', 'Clazz'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, Clazz)"})
-  void testLdcWithStringClazz() {
+  public void testLdcWithStringClazz() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc("Type Name", new LibraryClass()));
   }
 
   /**
@@ -2337,35 +2114,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, Clazz)}
    */
   @Test
-  @DisplayName("Test ldc(String, Clazz) with 'String', 'Clazz'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, Clazz)"})
-  void testLdcWithStringClazz2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc(String, Clazz)} with {@code String}, {@code Clazz}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, Clazz)}
-   */
-  @Test
-  @DisplayName("Test ldc(String, Clazz) with 'String', 'Clazz'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, Clazz)"})
-  void testLdcWithStringClazz3() {
+  public void testLdcWithStringClazz2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -2379,38 +2130,10 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc(String, Clazz)} with {@code String}, {@code Clazz}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, Clazz)}
-   */
-  @Test
-  @DisplayName("Test ldc(String, Clazz) with 'String', 'Clazz'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, Clazz)"})
-  void testLdcWithStringClazz4() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc("Type Name", new LibraryClass()));
   }
 
   /**
@@ -2420,118 +2143,70 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, Clazz, ConstantVisitor)}
    */
   @Test
-  @DisplayName("Test ldc(String, Clazz, ConstantVisitor) with 'String', 'Clazz', 'ConstantVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, Clazz, ConstantVisitor)"
   })
-  void testLdcWithStringClazzConstantVisitor() {
+  public void testLdcWithStringClazzConstantVisitor() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass referencedClass = new LibraryClass();
+    ConstantLookupVisitor visitor = new ConstantLookupVisitor();
 
     // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc("Type Name", referencedClass, new ConstantLookupVisitor());
+    instructionSequenceBuilder.ldc("Type Name", referencedClass, visitor);
 
     // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    Clazz clazz = visitor.resultClazz;
+    assertTrue(clazz instanceof LibraryClass);
+    assertEquals("Type Name", visitor.result);
+    assertNull(((LibraryClass) clazz).interfaceNames);
+    assertNull(((LibraryClass) clazz).fields);
+    assertNull(((LibraryClass) clazz).methods);
+    assertNull(clazz.getProcessingInfo());
+    assertNull(clazz.getName());
+    assertNull(clazz.getSuperName());
+    assertNull(clazz.getFeatureName());
+    assertNull(clazz.getSuperClass());
+    assertNull(((LibraryClass) clazz).kotlinMetadata);
+    assertEquals(0, clazz.getAccessFlags());
+    assertEquals(0, clazz.getInterfaceCount());
+    assertEquals(0, clazz.getProcessingFlags());
+    assertEquals(0, ((LibraryClass) clazz).subClassCount);
+    assertEquals(1, visitor.resultSize);
+    Clazz[] clazzArray = referencedClass.subClasses;
+    assertSame(clazzArray, ((LibraryClass) clazz).interfaceClasses);
+    assertSame(clazzArray, ((LibraryClass) clazz).subClasses);
   }
 
   /**
    * Test {@link InstructionSequenceBuilder#ldc(String, Clazz, ConstantVisitor)} with {@code
    * String}, {@code Clazz}, {@code ConstantVisitor}.
    *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, Clazz, ConstantVisitor)}
-   */
-  @Test
-  @DisplayName("Test ldc(String, Clazz, ConstantVisitor) with 'String', 'Clazz', 'ConstantVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, Clazz, ConstantVisitor)"
-  })
-  void testLdcWithStringClazzConstantVisitor2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc("Type Name", referencedClass, new ConstantLookupVisitor());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc(String, Clazz, ConstantVisitor)} with {@code
-   * String}, {@code Clazz}, {@code ConstantVisitor}.
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, Clazz, ConstantVisitor)}
    */
   @Test
-  @DisplayName("Test ldc(String, Clazz, ConstantVisitor) with 'String', 'Clazz', 'ConstantVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, Clazz, ConstantVisitor)"
   })
-  void testLdcWithStringClazzConstantVisitor3() {
+  public void testLdcWithStringClazzConstantVisitor_thenConstantCounterCountIsOne() {
     // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass referencedClass = new LibraryClass();
+    ConstantCounter visitor = new ConstantCounter();
 
     // Act
     InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc("Type Name", referencedClass, new ConstantLookupVisitor());
+        instructionSequenceBuilder.ldc("Type Name", referencedClass, visitor);
 
     // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc(String, Clazz, ConstantVisitor)} with {@code
-   * String}, {@code Clazz}, {@code ConstantVisitor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, Clazz, ConstantVisitor)}
-   */
-  @Test
-  @DisplayName("Test ldc(String, Clazz, ConstantVisitor) with 'String', 'Clazz', 'ConstantVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, Clazz, ConstantVisitor)"
-  })
-  void testLdcWithStringClazzConstantVisitor4() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc("Type Name", referencedClass, new ConstantLookupVisitor());
-
-    // Assert
+    assertEquals(1, visitor.getCount());
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdcResult);
   }
 
@@ -2540,51 +2215,17 @@ class InstructionSequenceBuilderDiffblueTest {
    * String}, {@code Clazz}, {@code ConstantVisitor}.
    *
    * <ul>
-   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, Clazz, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc(String, Clazz, ConstantVisitor) with 'String', 'Clazz', 'ConstantVisitor'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, Clazz, ConstantVisitor)"
   })
-  void testLdcWithStringClazzConstantVisitor_thenReturnInstructionSequenceBuilder() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    LibraryClass referencedClass = new LibraryClass();
-
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc("Type Name", referencedClass, new ConstantLookupVisitor());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc(String, Clazz, ConstantVisitor)} with {@code
-   * String}, {@code Clazz}, {@code ConstantVisitor}.
-   *
-   * <ul>
-   *   <li>When {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, Clazz, ConstantVisitor)}
-   */
-  @Test
-  @DisplayName(
-      "Test ldc(String, Clazz, ConstantVisitor) with 'String', 'Clazz', 'ConstantVisitor'; when 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, Clazz, ConstantVisitor)"
-  })
-  void testLdcWithStringClazzConstantVisitor_whenNull() {
+  public void testLdcWithStringClazzConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -2593,6 +2234,7 @@ class InstructionSequenceBuilderDiffblueTest {
         instructionSequenceBuilder.ldc("Type Name", new LibraryClass(), (ConstantVisitor) null);
 
     // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdcResult);
   }
 
@@ -2603,26 +2245,22 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, Clazz, Member)}
    */
   @Test
-  @DisplayName("Test ldc(String, Clazz, Member) with 'String', 'Clazz', 'Member'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, Clazz, Member)"
   })
-  void testLdcWithStringClazzMember() {
+  public void testLdcWithStringClazzMember() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
     LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedMember = new LibraryField(1, "Name", "Descriptor");
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc("String", referencedClass, referencedMember);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc(
+            "String", referencedClass, new LibraryField(1, "Name", "Descriptor")));
   }
 
   /**
@@ -2632,42 +2270,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, Clazz, Member)}
    */
   @Test
-  @DisplayName("Test ldc(String, Clazz, Member) with 'String', 'Clazz', 'Member'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, Clazz, Member)"
   })
-  void testLdcWithStringClazzMember2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedMember = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc("String", referencedClass, referencedMember);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc(String, Clazz, Member)} with {@code String}, {@code
-   * Clazz}, {@code Member}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, Clazz, Member)}
-   */
-  @Test
-  @DisplayName("Test ldc(String, Clazz, Member) with 'String', 'Clazz', 'Member'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, Clazz, Member)"
-  })
-  void testLdcWithStringClazzMember3() {
+  public void testLdcWithStringClazzMember2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -2681,14 +2288,12 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
     LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedMember = new LibraryField(1, "Name", "Descriptor");
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc("String", referencedClass, referencedMember);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc(
+            "String", referencedClass, new LibraryField(1, "Name", "Descriptor")));
   }
 
   /**
@@ -2699,24 +2304,55 @@ class InstructionSequenceBuilderDiffblueTest {
    * ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc(String, Clazz, Member, ConstantVisitor) with 'String', 'Clazz', 'Member', 'ConstantVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, Clazz, Member, ConstantVisitor)"
   })
-  void testLdcWithStringClazzMemberConstantVisitor() {
+  public void testLdcWithStringClazzMemberConstantVisitor() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    InstructionSequenceBuilder actualLdcResult =
+        instructionSequenceBuilder.ldc(
+            "String", referencedClass, new LibraryField(1, "Name", "Descriptor"), null);
+
+    // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertSame(instructionSequenceBuilder, actualLdcResult);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc(String, Clazz, Member, ConstantVisitor)} with {@code
+   * String}, {@code Clazz}, {@code Member}, {@code ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, Clazz, Member,
+   * ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, Clazz, Member, ConstantVisitor)"
+  })
+  public void testLdcWithStringClazzMemberConstantVisitor_thenConstantCounterCountIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass referencedClass = new LibraryClass();
     LibraryField referencedMember = new LibraryField(1, "Name", "Descriptor");
 
+    ConstantCounter visitor = new ConstantCounter();
+
     // Act
     InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc("String", referencedClass, referencedMember, null);
+        instructionSequenceBuilder.ldc("String", referencedClass, referencedMember, visitor);
 
     // Assert
+    assertEquals(1, visitor.getCount());
     assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdcResult);
   }
@@ -2732,25 +2368,20 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, Clazz, Member)}
    */
   @Test
-  @DisplayName(
-      "Test ldc(String, Clazz, Member) with 'String', 'Clazz', 'Member'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, Clazz, Member)"
   })
-  void testLdcWithStringClazzMember_thenReturnInstructionSequenceBuilder() {
+  public void testLdcWithStringClazzMember_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedMember = new LibraryField(1, "Name", "Descriptor");
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc("String", referencedClass, referencedMember);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc(
+            "String", referencedClass, new LibraryField(1, "Name", "Descriptor")));
   }
 
   /**
@@ -2763,20 +2394,44 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, Clazz)}
    */
   @Test
-  @DisplayName(
-      "Test ldc(String, Clazz) with 'String', 'Clazz'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, Clazz)"})
-  void testLdcWithStringClazz_thenReturnInstructionSequenceBuilder() {
+  public void testLdcWithStringClazz_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc("Type Name", new LibraryClass()));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc(String, ConstantVisitor)} with {@code String},
+   * {@code ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, ConstantVisitor)"
+  })
+  public void testLdcWithStringConstantVisitor_thenConstantCounterCountIsOne() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    ConstantCounter visitor = new ConstantCounter();
+
     // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc("Type Name", new LibraryClass());
+    InstructionSequenceBuilder actualLdcResult = instructionSequenceBuilder.ldc("String", visitor);
 
     // Assert
+    assertEquals(1, visitor.getCount());
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdcResult);
   }
 
@@ -2791,14 +2446,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc(String, ConstantVisitor) with 'String', 'ConstantVisitor'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, ConstantVisitor)"
   })
-  void testLdcWithStringConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLdcWithStringConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -2818,24 +2470,20 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, ResourceFile)}
    */
   @Test
-  @DisplayName("Test ldc(String, ResourceFile) with 'String', 'ResourceFile'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, ResourceFile)"
   })
-  void testLdcWithStringResourceFile() {
+  public void testLdcWithStringResourceFile() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc("String", new ResourceFile("foo.txt", 3L));
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc("String", new ResourceFile("foo.txt", 3L)));
   }
 
   /**
@@ -2845,40 +2493,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, ResourceFile)}
    */
   @Test
-  @DisplayName("Test ldc(String, ResourceFile) with 'String', 'ResourceFile'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, ResourceFile)"
   })
-  void testLdcWithStringResourceFile2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc("String", new ResourceFile("foo.txt", 3L));
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc(String, ResourceFile)} with {@code String}, {@code
-   * ResourceFile}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, ResourceFile)}
-   */
-  @Test
-  @DisplayName("Test ldc(String, ResourceFile) with 'String', 'ResourceFile'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, ResourceFile)"
-  })
-  void testLdcWithStringResourceFile3() {
+  public void testLdcWithStringResourceFile2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -2892,12 +2511,10 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc("String", new ResourceFile("foo.txt", 3L));
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc("String", new ResourceFile("foo.txt", 3L)));
   }
 
   /**
@@ -2908,14 +2525,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc(String, ResourceFile, ConstantVisitor) with 'String', 'ResourceFile', 'ConstantVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, ResourceFile, ConstantVisitor)"
   })
-  void testLdcWithStringResourceFileConstantVisitor() {
+  public void testLdcWithStringResourceFileConstantVisitor() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -2924,6 +2538,39 @@ class InstructionSequenceBuilderDiffblueTest {
         instructionSequenceBuilder.ldc("String", new ResourceFile("foo.txt", 3L), null);
 
     // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertSame(instructionSequenceBuilder, actualLdcResult);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc(String, ResourceFile, ConstantVisitor)} with {@code
+   * String}, {@code ResourceFile}, {@code ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, ResourceFile,
+   * ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, ResourceFile, ConstantVisitor)"
+  })
+  public void testLdcWithStringResourceFileConstantVisitor_thenConstantCounterCountIsOne() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    ResourceFile referencedResourceFile = new ResourceFile("foo.txt", 3L);
+
+    ConstantCounter visitor = new ConstantCounter();
+
+    // Act
+    InstructionSequenceBuilder actualLdcResult =
+        instructionSequenceBuilder.ldc("String", referencedResourceFile, visitor);
+
+    // Assert
+    assertEquals(1, visitor.getCount());
     assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdcResult);
   }
@@ -2939,23 +2586,18 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String, ResourceFile)}
    */
   @Test
-  @DisplayName(
-      "Test ldc(String, ResourceFile) with 'String', 'ResourceFile'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String, ResourceFile)"
   })
-  void testLdcWithStringResourceFile_thenReturnInstructionSequenceBuilder() {
+  public void testLdcWithStringResourceFile_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult =
-        instructionSequenceBuilder.ldc("String", new ResourceFile("foo.txt", 3L));
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc("String", new ResourceFile("foo.txt", 3L)));
   }
 
   /**
@@ -2968,19 +2610,14 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc(String)}
    */
   @Test
-  @DisplayName("Test ldc(String) with 'String'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc(String)"})
-  void testLdcWithString_thenReturnInstructionSequenceBuilder() {
+  public void testLdcWithString_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualLdcResult = instructionSequenceBuilder.ldc("String");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdcResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc("String"));
   }
 
   /**
@@ -2989,11 +2626,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_(int)}
    */
   @Test
-  @DisplayName("Test ldc_(int) with 'constantIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_(int)"})
-  void testLdc_WithConstantIndex() {
+  public void testLdc_WithConstantIndex() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -3010,20 +2645,17 @@ class InstructionSequenceBuilderDiffblueTest {
    * {@code visitor}.
    *
    * <ul>
-   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
+   *   <li>Then return second element is {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_(int, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc_(int, ConstantVisitor) with 'constantIndex', 'visitor'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_(int, ConstantVisitor)"
   })
-  void testLdc_WithConstantIndexVisitor_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLdc_WithConstantIndexVisitor_thenReturnSecondElementIsNull() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -3032,8 +2664,58 @@ class InstructionSequenceBuilderDiffblueTest {
         instructionSequenceBuilder.ldc_(1, new ConstantLookupVisitor());
 
     // Assert
+    ProgramClass targetClass = actualLdc_Result.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertNull(constantArray[1]);
+    assertNull(constantArray[2]);
+    assertNull(constantArray[3]);
+    assertNull(constantArray[4]);
+    assertNull(constantArray[5]);
+    assertNull(constantArray[6]);
     assertEquals(1, instructionSequenceBuilder.size());
-    assertSame(instructionSequenceBuilder, actualLdc_Result);
+    assertEquals(1, actualLdc_Result.size());
+    assertEquals(1, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc_(int, ConstantVisitor)} with {@code constantIndex},
+   * {@code visitor}.
+   *
+   * <ul>
+   *   <li>Then sixth element return {@link ClassConstant}.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_(int, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_(int, ConstantVisitor)"
+  })
+  public void testLdc_WithConstantIndexVisitor_thenSixthElementReturnClassConstant() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
+
+    // Act
+    InstructionSequenceBuilder actualLdc_Result =
+        instructionSequenceBuilder.ldc_(
+            1, new BootstrapMethodHandleTraveler(new ConstantLookupVisitor()));
+
+    // Assert
+    ProgramClass targetClass = actualLdc_Result.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertTrue(constantArray[5] instanceof ClassConstant);
+    assertTrue(constantArray[6] instanceof FieldrefConstant);
+    assertTrue(constantArray[3] instanceof NameAndTypeConstant);
+    assertTrue(constantArray[1] instanceof Utf8Constant);
+    assertTrue(constantArray[2] instanceof Utf8Constant);
+    assertTrue(constantArray[4] instanceof Utf8Constant);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualLdc_Result.size());
+    assertEquals(7, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
   }
 
   /**
@@ -3042,18 +2724,17 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When {@code null}.
+   *   <li>Then return second element is {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_(int, ConstantVisitor)}
    */
   @Test
-  @DisplayName("Test ldc_(int, ConstantVisitor) with 'constantIndex', 'visitor'; when 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_(int, ConstantVisitor)"
   })
-  void testLdc_WithConstantIndexVisitor_whenNull() {
+  public void testLdc_WithConstantIndexVisitor_whenNull_thenReturnSecondElementIsNull() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -3061,8 +2742,18 @@ class InstructionSequenceBuilderDiffblueTest {
     InstructionSequenceBuilder actualLdc_Result = instructionSequenceBuilder.ldc_(1, null);
 
     // Assert
+    ProgramClass targetClass = actualLdc_Result.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertNull(constantArray[1]);
+    assertNull(constantArray[2]);
+    assertNull(constantArray[3]);
+    assertNull(constantArray[4]);
+    assertNull(constantArray[5]);
+    assertNull(constantArray[6]);
     assertEquals(1, instructionSequenceBuilder.size());
-    assertSame(instructionSequenceBuilder, actualLdc_Result);
+    assertEquals(1, actualLdc_Result.size());
+    assertEquals(1, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
   }
 
   /**
@@ -3071,11 +2762,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Clazz)}
    */
   @Test
-  @DisplayName("Test ldc_w(Clazz) with 'Clazz'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Clazz)"})
-  void testLdc_wWithClazz() {
+  public void testLdc_wWithClazz() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -3089,38 +2778,9 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w((Clazz) new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc_w(Clazz)} with {@code Clazz}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Clazz)}
-   */
-  @Test
-  @DisplayName("Test ldc_w(Clazz) with 'Clazz'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Clazz)"})
-  void testLdc_wWithClazz2() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w((Clazz) new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder, instructionSequenceBuilder.ldc_w((Clazz) new LibraryClass()));
   }
 
   /**
@@ -3130,21 +2790,19 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Clazz, ConstantVisitor)}
    */
   @Test
-  @DisplayName("Test ldc_w(Clazz, ConstantVisitor) with 'Clazz', 'ConstantVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Clazz, ConstantVisitor)"
   })
-  void testLdc_wWithClazzConstantVisitor() {
+  public void testLdc_wWithClazzConstantVisitor() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
+
     ConstantLookupVisitor visitor = new ConstantLookupVisitor();
 
     // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w((Clazz) clazz, visitor);
+    instructionSequenceBuilder.ldc_w((Clazz) clazz, visitor);
 
     // Assert
     Clazz clazz2 = visitor.resultClazz;
@@ -3153,7 +2811,6 @@ class InstructionSequenceBuilderDiffblueTest {
     assertEquals("This Class Name", clazz2.getName());
     assertEquals("This Class Name", visitor.result);
     assertEquals(1, clazz2.getAccessFlags());
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
     assertSame(clazz.fields, ((LibraryClass) clazz2).fields);
     assertSame(clazz.interfaceNames, ((LibraryClass) clazz2).interfaceNames);
     assertSame(clazz.methods, ((LibraryClass) clazz2).methods);
@@ -3169,13 +2826,134 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Clazz, ConstantVisitor)}
    */
   @Test
-  @DisplayName("Test ldc_w(Clazz, ConstantVisitor) with 'Clazz', 'ConstantVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Clazz, ConstantVisitor)"
   })
-  void testLdc_wWithClazzConstantVisitor2() {
+  public void testLdc_wWithClazzConstantVisitor2() {
+    // Arrange
+    ClassConstant classConstant = new ClassConstant();
+    ClassConstant classConstant2 = new ClassConstant();
+    ProgramClass targetClass =
+        new ProgramClass(
+            1, 3, new Constant[] {classConstant, classConstant2, new ClassConstant()}, 1, 1, 1);
+
+    InstructionSequenceBuilder instructionSequenceBuilder =
+        new InstructionSequenceBuilder(targetClass);
+    LibraryClass clazz = new LibraryClass();
+    ConstantLookupVisitor visitor = new ConstantLookupVisitor();
+
+    // Act
+    InstructionSequenceBuilder actualLdc_wResult =
+        instructionSequenceBuilder.ldc_w((Clazz) clazz, visitor);
+
+    // Assert
+    Clazz clazz2 = visitor.resultClazz;
+    assertTrue(clazz2 instanceof LibraryClass);
+    assertNull(((LibraryClass) clazz2).interfaceNames);
+    assertNull(((LibraryClass) clazz2).fields);
+    assertNull(((LibraryClass) clazz2).methods);
+    assertNull(clazz2.getName());
+    assertNull(clazz2.getSuperName());
+    assertEquals(0, clazz2.getAccessFlags());
+    assertSame(targetClass, actualLdc_wResult.getConstantPoolEditor().getTargetClass());
+    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    Clazz[] clazzArray = clazz.subClasses;
+    assertSame(clazzArray, ((LibraryClass) clazz2).interfaceClasses);
+    assertSame(clazzArray, ((LibraryClass) clazz2).subClasses);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc_w(Clazz, ConstantVisitor)} with {@code Clazz},
+   * {@code ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Clazz, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Clazz, ConstantVisitor)"
+  })
+  public void testLdc_wWithClazzConstantVisitor_thenConstantCounterCountIsOne() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
+
+    ConstantCounter visitor = new ConstantCounter();
+
+    // Act
+    InstructionSequenceBuilder actualLdc_wResult =
+        instructionSequenceBuilder.ldc_w((Clazz) clazz, visitor);
+
+    // Assert
+    assertEquals(1, visitor.getCount());
+    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc_w(Clazz, ConstantVisitor)} with {@code Clazz},
+   * {@code ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>When {@code null}.
+   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Clazz, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Clazz, ConstantVisitor)"
+  })
+  public void testLdc_wWithClazzConstantVisitor_whenNull_thenReturnInstructionSequenceBuilder() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc_w(
+            (Clazz) new LibraryClass(1, "This Class Name", "Super Class Name"),
+            (ConstantVisitor) null));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc_w(Clazz, Member)} with {@code Clazz}, {@code
+   * Member}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Clazz, Member)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Clazz, Member)"})
+  public void testLdc_wWithClazzMember() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder =
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
+    LibraryClass clazz = new LibraryClass();
+
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc_w(clazz, new LibraryField(1, "Name", "Descriptor")));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc_w(Clazz, Member)} with {@code Clazz}, {@code
+   * Member}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Clazz, Member)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Clazz, Member)"})
+  public void testLdc_wWithClazzMember2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -3190,93 +2968,42 @@ class InstructionSequenceBuilderDiffblueTest {
                 1));
     LibraryClass clazz = new LibraryClass();
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w((Clazz) clazz, new ConstantLookupVisitor());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc_w(clazz, new LibraryField(1, "Name", "Descriptor")));
   }
 
   /**
-   * Test {@link InstructionSequenceBuilder#ldc_w(Clazz, ConstantVisitor)} with {@code Clazz},
-   * {@code ConstantVisitor}.
+   * Test {@link InstructionSequenceBuilder#ldc_w(Clazz, Member, ConstantVisitor)} with {@code
+   * Clazz}, {@code Member}, {@code ConstantVisitor}.
    *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Clazz, ConstantVisitor)}
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Clazz, Member, ConstantVisitor)}
    */
   @Test
-  @DisplayName("Test ldc_w(Clazz, ConstantVisitor) with 'Clazz', 'ConstantVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Clazz, ConstantVisitor)"
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Clazz, Member, ConstantVisitor)"
   })
-  void testLdc_wWithClazzConstantVisitor3() {
+  public void testLdc_wWithClazzMemberConstantVisitor_thenConstantCounterCountIsOne() {
     // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass clazz = new LibraryClass();
+    LibraryField member = new LibraryField(1, "Name", "Descriptor");
+
+    ConstantCounter visitor = new ConstantCounter();
 
     // Act
     InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w((Clazz) clazz, new ConstantLookupVisitor());
+        instructionSequenceBuilder.ldc_w(clazz, member, visitor);
 
     // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc_w(Clazz, Member)} with {@code Clazz}, {@code
-   * Member}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Clazz, Member)}
-   */
-  @Test
-  @DisplayName("Test ldc_w(Clazz, Member) with 'Clazz', 'Member'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Clazz, Member)"})
-  void testLdc_wWithClazzMember() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult = instructionSequenceBuilder.ldc_w(clazz, member);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc_w(Clazz, Member)} with {@code Clazz}, {@code
-   * Member}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Clazz, Member)}
-   */
-  @Test
-  @DisplayName("Test ldc_w(Clazz, Member) with 'Clazz', 'Member'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Clazz, Member)"})
-  void testLdc_wWithClazzMember2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-    LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult = instructionSequenceBuilder.ldc_w(clazz, member);
-
-    // Assert
+    assertEquals(1, visitor.getCount());
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdc_wResult);
   }
 
@@ -3285,137 +3012,28 @@ class InstructionSequenceBuilderDiffblueTest {
    * Clazz}, {@code Member}, {@code ConstantVisitor}.
    *
    * <ul>
-   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
+   *   <li>When {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Clazz, Member, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc_w(Clazz, Member, ConstantVisitor) with 'Clazz', 'Member', 'ConstantVisitor'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Clazz, Member, ConstantVisitor)"
   })
-  void testLdc_wWithClazzMemberConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLdc_wWithClazzMemberConstantVisitor_whenNull() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
 
     // Act
     InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w(clazz, member, null);
+        instructionSequenceBuilder.ldc_w(clazz, new LibraryField(1, "Name", "Descriptor"), null);
 
     // Assert
     assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdc_wResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc_w(Clazz, Member)} with {@code Clazz}, {@code
-   * Member}.
-   *
-   * <ul>
-   *   <li>Then eighth element return {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Clazz, Member)}
-   */
-  @Test
-  @DisplayName(
-      "Test ldc_w(Clazz, Member) with 'Clazz', 'Member'; then eighth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Clazz, Member)"})
-  void testLdc_wWithClazzMember_thenEighthElementReturnClassConstant() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-    LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder.ldc_w(clazz, member).getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[7] instanceof ClassConstant);
-    assertTrue(constantArray[8] instanceof FieldrefConstant);
-    assertTrue(constantArray[5] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[9] instanceof StringConstant);
-    assertTrue(constantArray[6] instanceof Utf8Constant);
-    assertEquals(10, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc_w(Clazz, Member)} with {@code Clazz}, {@code
-   * Member}.
-   *
-   * <ul>
-   *   <li>Then fifth element {@link StringConstant#referencedClass} return {@link LibraryClass}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Clazz, Member)}
-   */
-  @Test
-  @DisplayName(
-      "Test ldc_w(Clazz, Member) with 'Clazz', 'Member'; then fifth element referencedClass return LibraryClass")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Clazz, Member)"})
-  void testLdc_wWithClazzMember_thenFifthElementReferencedClassReturnLibraryClass()
-      throws UnsupportedEncodingException {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder.ldc_w(clazz, member).getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    Constant constant = constantArray[4];
-    Clazz clazz2 = ((StringConstant) constant).referencedClass;
-    assertTrue(clazz2 instanceof LibraryClass);
-    Member member2 = ((StringConstant) constant).referencedMember;
-    assertTrue(member2 instanceof LibraryField);
-    assertTrue(constant instanceof StringConstant);
-    Constant constant2 = constantArray[3];
-    assertTrue(constant2 instanceof Utf8Constant);
-    assertNull(((StringConstant) constant).javaLangStringClass);
-    assertNull(((StringConstant) constant).referencedResourceFile);
-    assertEquals(0, ((StringConstant) constant).referencedResourceId);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, ((StringConstant) constant).u2stringIndex);
-    assertEquals(5, targetClass.u2constantPoolCount);
-    assertEquals(8, constant.getTag());
-    assertFalse(constant.isCategory2());
-    assertSame(clazz, clazz2);
-    assertSame(member, member2);
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
   }
 
   /**
@@ -3429,22 +3047,17 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Clazz, Member)}
    */
   @Test
-  @DisplayName(
-      "Test ldc_w(Clazz, Member) with 'Clazz', 'Member'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Clazz, Member)"})
-  void testLdc_wWithClazzMember_thenReturnInstructionSequenceBuilder() {
+  public void testLdc_wWithClazzMember_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult = instructionSequenceBuilder.ldc_w(clazz, member);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc_w(clazz, new LibraryField(1, "Name", "Descriptor")));
   }
 
   /**
@@ -3458,27 +3071,29 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Clazz, Member)}
    */
   @Test
-  @DisplayName(
-      "Test ldc_w(Clazz, Member) with 'Clazz', 'Member'; then sixth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Clazz, Member)"})
-  void testLdc_wWithClazzMember_thenSixthElementReturnClassConstant() {
+  public void testLdc_wWithClazzMember_thenSixthElementReturnClassConstant() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
 
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder.ldc_w(clazz, member).getConstantPoolEditor().getTargetClass();
+    // Act
+    InstructionSequenceBuilder actualLdc_wResult =
+        instructionSequenceBuilder.ldc_w(clazz, new LibraryField(1, "Name", "Descriptor"));
+
+    // Assert
+    ProgramClass targetClass = actualLdc_wResult.getConstantPoolEditor().getTargetClass();
     Constant[] constantArray = targetClass.constantPool;
     assertTrue(constantArray[5] instanceof ClassConstant);
     assertTrue(constantArray[6] instanceof FieldrefConstant);
     assertTrue(constantArray[3] instanceof NameAndTypeConstant);
     assertTrue(constantArray[7] instanceof StringConstant);
     assertTrue(constantArray[2] instanceof Utf8Constant);
+    assertTrue(constantArray[4] instanceof Utf8Constant);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualLdc_wResult.size());
     assertEquals(8, targetClass.u2constantPoolCount);
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
   }
@@ -3493,20 +3108,17 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Clazz)}
    */
   @Test
-  @DisplayName("Test ldc_w(Clazz) with 'Clazz'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Clazz)"})
-  void testLdc_wWithClazz_thenReturnInstructionSequenceBuilder() {
+  public void testLdc_wWithClazz_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult = instructionSequenceBuilder.ldc_w((Clazz) clazz);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc_w(
+            (Clazz) new LibraryClass(1, "This Class Name", "Super Class Name")));
   }
 
   /**
@@ -3515,21 +3127,16 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(float)}
    */
   @Test
-  @DisplayName("Test ldc_w(float) with 'float'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(float)"})
-  void testLdc_wWithFloat() {
+  public void testLdc_wWithFloat() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(4, 1, constantPool, 4, 4, 4));
+        new InstructionSequenceBuilder(
+            new ProgramClass(4, 1, new Constant[] {new ClassConstant()}, 4, 4, 4));
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult = instructionSequenceBuilder.ldc_w(10.0f);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc_w(10.0f));
   }
 
   /**
@@ -3538,34 +3145,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(float)}
    */
   @Test
-  @DisplayName("Test ldc_w(float) with 'float'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(float)"})
-  void testLdc_wWithFloat2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(4, 0, constantPool, 4, 4, 4));
-
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult = instructionSequenceBuilder.ldc_w(10.0f);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc_w(float)} with {@code float}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(float)}
-   */
-  @Test
-  @DisplayName("Test ldc_w(float) with 'float'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(float)"})
-  void testLdc_wWithFloat3() {
+  public void testLdc_wWithFloat2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -3579,10 +3161,36 @@ class InstructionSequenceBuilderDiffblueTest {
                 4,
                 4));
 
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc_w(10.0f));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc_w(float, ConstantVisitor)} with {@code float},
+   * {@code ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(float, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(float, ConstantVisitor)"
+  })
+  public void testLdc_wWithFloatConstantVisitor_thenConstantCounterCountIsOne() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    ConstantCounter visitor = new ConstantCounter();
+
     // Act
-    InstructionSequenceBuilder actualLdc_wResult = instructionSequenceBuilder.ldc_w(10.0f);
+    InstructionSequenceBuilder actualLdc_wResult = instructionSequenceBuilder.ldc_w(10.0f, visitor);
 
     // Assert
+    assertEquals(1, visitor.getCount());
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdc_wResult);
   }
 
@@ -3591,20 +3199,17 @@ class InstructionSequenceBuilderDiffblueTest {
    * {@code ConstantVisitor}.
    *
    * <ul>
-   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
+   *   <li>When {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(float, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc_w(float, ConstantVisitor) with 'float', 'ConstantVisitor'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(float, ConstantVisitor)"
   })
-  void testLdc_wWithFloatConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLdc_wWithFloatConstantVisitor_whenNull() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -3626,19 +3231,14 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(float)}
    */
   @Test
-  @DisplayName("Test ldc_w(float) with 'float'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(float)"})
-  void testLdc_wWithFloat_thenReturnInstructionSequenceBuilder() {
+  public void testLdc_wWithFloat_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult = instructionSequenceBuilder.ldc_w(10.0f);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc_w(10.0f));
   }
 
   /**
@@ -3647,21 +3247,16 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(int)}
    */
   @Test
-  @DisplayName("Test ldc_w(int) with 'int'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(int)"})
-  void testLdc_wWithInt() {
+  public void testLdc_wWithInt() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(3, 1, constantPool, 3, 3, 3));
+        new InstructionSequenceBuilder(
+            new ProgramClass(3, 1, new Constant[] {new ClassConstant()}, 3, 3, 3));
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult = instructionSequenceBuilder.ldc_w(42);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc_w(42));
   }
 
   /**
@@ -3670,34 +3265,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(int)}
    */
   @Test
-  @DisplayName("Test ldc_w(int) with 'int'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(int)"})
-  void testLdc_wWithInt2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(3, 0, constantPool, 3, 3, 3));
-
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult = instructionSequenceBuilder.ldc_w(42);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc_w(int)} with {@code int}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(int)}
-   */
-  @Test
-  @DisplayName("Test ldc_w(int) with 'int'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(int)"})
-  void testLdc_wWithInt3() {
+  public void testLdc_wWithInt2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -3711,10 +3281,36 @@ class InstructionSequenceBuilderDiffblueTest {
                 3,
                 3));
 
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc_w(42));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc_w(int, ConstantVisitor)} with {@code int}, {@code
+   * ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(int, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(int, ConstantVisitor)"
+  })
+  public void testLdc_wWithIntConstantVisitor_thenConstantCounterCountIsOne() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    ConstantCounter visitor = new ConstantCounter();
+
     // Act
-    InstructionSequenceBuilder actualLdc_wResult = instructionSequenceBuilder.ldc_w(42);
+    InstructionSequenceBuilder actualLdc_wResult = instructionSequenceBuilder.ldc_w(42, visitor);
 
     // Assert
+    assertEquals(1, visitor.getCount());
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdc_wResult);
   }
 
@@ -3730,14 +3326,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(int, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc_w(int, ConstantVisitor) with 'int', 'ConstantVisitor'; when 'null'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(int, ConstantVisitor)"
   })
-  void testLdc_wWithIntConstantVisitor_whenNull_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLdc_wWithIntConstantVisitor_whenNull_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -3759,19 +3352,14 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(int)}
    */
   @Test
-  @DisplayName("Test ldc_w(int) with 'int'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(int)"})
-  void testLdc_wWithInt_thenReturnInstructionSequenceBuilder() {
+  public void testLdc_wWithInt_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult = instructionSequenceBuilder.ldc_w(42);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc_w(42));
   }
 
   /**
@@ -3780,22 +3368,17 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Object)}
    */
   @Test
-  @DisplayName("Test ldc_w(Object) with 'Object'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Object)"})
-  void testLdc_wWithObject() {
+  public void testLdc_wWithObject() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(99, 1, constantPool, 99, 99, 99));
+        new InstructionSequenceBuilder(
+            new ProgramClass(99, 1, new Constant[] {new ClassConstant()}, 99, 99, 99));
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w((Object) "Primitive Array");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder, instructionSequenceBuilder.ldc_w((Object) "Primitive Array"));
   }
 
   /**
@@ -3804,35 +3387,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Object)}
    */
   @Test
-  @DisplayName("Test ldc_w(Object) with 'Object'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Object)"})
-  void testLdc_wWithObject2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(99, 0, constantPool, 99, 99, 99));
-
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w((Object) "Primitive Array");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc_w(Object)} with {@code Object}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Object)}
-   */
-  @Test
-  @DisplayName("Test ldc_w(Object) with 'Object'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Object)"})
-  void testLdc_wWithObject3() {
+  public void testLdc_wWithObject2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -3846,11 +3403,38 @@ class InstructionSequenceBuilderDiffblueTest {
                 99,
                 99));
 
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder, instructionSequenceBuilder.ldc_w((Object) "Primitive Array"));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc_w(Object, ConstantVisitor)} with {@code Object},
+   * {@code ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Object, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Object, ConstantVisitor)"
+  })
+  public void testLdc_wWithObjectConstantVisitor_thenConstantCounterCountIsOne() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    ConstantCounter visitor = new ConstantCounter();
+
     // Act
     InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w((Object) "Primitive Array");
+        instructionSequenceBuilder.ldc_w((Object) "Primitive Array", visitor);
 
     // Assert
+    assertEquals(1, visitor.getCount());
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdc_wResult);
   }
 
@@ -3865,14 +3449,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Object, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc_w(Object, ConstantVisitor) with 'Object', 'ConstantVisitor'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Object, ConstantVisitor)"
   })
-  void testLdc_wWithObjectConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLdc_wWithObjectConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -3895,20 +3476,15 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(Object)}
    */
   @Test
-  @DisplayName("Test ldc_w(Object) with 'Object'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(Object)"})
-  void testLdc_wWithObject_thenReturnInstructionSequenceBuilder() {
+  public void testLdc_wWithObject_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w((Object) "Primitive Array");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder, instructionSequenceBuilder.ldc_w((Object) "Primitive Array"));
   }
 
   /**
@@ -3917,22 +3493,18 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(ResourceFile)}
    */
   @Test
-  @DisplayName("Test ldc_w(ResourceFile) with 'ResourceFile'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(ResourceFile)"})
-  void testLdc_wWithResourceFile() {
+  public void testLdc_wWithResourceFile() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w(new ResourceFile("foo.txt", 3L));
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc_w(new ResourceFile("foo.txt", 3L)));
   }
 
   /**
@@ -3941,35 +3513,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(ResourceFile)}
    */
   @Test
-  @DisplayName("Test ldc_w(ResourceFile) with 'ResourceFile'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(ResourceFile)"})
-  void testLdc_wWithResourceFile2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w(new ResourceFile("foo.txt", 3L));
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc_w(ResourceFile)} with {@code ResourceFile}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(ResourceFile)}
-   */
-  @Test
-  @DisplayName("Test ldc_w(ResourceFile) with 'ResourceFile'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(ResourceFile)"})
-  void testLdc_wWithResourceFile3() {
+  public void testLdc_wWithResourceFile2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -3983,11 +3529,41 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc_w(new ResourceFile("foo.txt", 3L)));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc_w(ResourceFile, ConstantVisitor)} with {@code
+   * ResourceFile}, {@code ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(ResourceFile, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(ResourceFile, ConstantVisitor)"
+  })
+  public void testLdc_wWithResourceFileConstantVisitor_thenConstantCounterCountIsOne() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    ResourceFile resourceFile = new ResourceFile("foo.txt", 3L);
+
+    ConstantCounter visitor = new ConstantCounter();
+
     // Act
     InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w(new ResourceFile("foo.txt", 3L));
+        instructionSequenceBuilder.ldc_w(resourceFile, visitor);
 
     // Assert
+    assertEquals(1, visitor.getCount());
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdc_wResult);
   }
 
@@ -4002,14 +3578,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(ResourceFile, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc_w(ResourceFile, ConstantVisitor) with 'ResourceFile', 'ConstantVisitor'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(ResourceFile, ConstantVisitor)"
   })
-  void testLdc_wWithResourceFileConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLdc_wWithResourceFileConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -4032,21 +3605,16 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(ResourceFile)}
    */
   @Test
-  @DisplayName(
-      "Test ldc_w(ResourceFile) with 'ResourceFile'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(ResourceFile)"})
-  void testLdc_wWithResourceFile_thenReturnInstructionSequenceBuilder() {
+  public void testLdc_wWithResourceFile_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w(new ResourceFile("foo.txt", 3L));
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc_w(new ResourceFile("foo.txt", 3L)));
   }
 
   /**
@@ -4055,21 +3623,16 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String)}
    */
   @Test
-  @DisplayName("Test ldc_w(String) with 'String'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String)"})
-  void testLdc_wWithString() {
+  public void testLdc_wWithString() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult = instructionSequenceBuilder.ldc_w("String");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc_w("String"));
   }
 
   /**
@@ -4078,34 +3641,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String)}
    */
   @Test
-  @DisplayName("Test ldc_w(String) with 'String'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String)"})
-  void testLdc_wWithString2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult = instructionSequenceBuilder.ldc_w("String");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc_w(String)} with {@code String}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String)}
-   */
-  @Test
-  @DisplayName("Test ldc_w(String) with 'String'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String)"})
-  void testLdc_wWithString3() {
+  public void testLdc_wWithString2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -4119,11 +3657,8 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult = instructionSequenceBuilder.ldc_w("String");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc_w("String"));
   }
 
   /**
@@ -4133,22 +3668,18 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, Clazz)}
    */
   @Test
-  @DisplayName("Test ldc_w(String, Clazz) with 'String', 'Clazz'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, Clazz)"})
-  void testLdc_wWithStringClazz() {
+  public void testLdc_wWithStringClazz() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc_w("Type Name", new LibraryClass()));
   }
 
   /**
@@ -4158,36 +3689,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, Clazz)}
    */
   @Test
-  @DisplayName("Test ldc_w(String, Clazz) with 'String', 'Clazz'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, Clazz)"})
-  void testLdc_wWithStringClazz2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc_w(String, Clazz)} with {@code String}, {@code
-   * Clazz}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, Clazz)}
-   */
-  @Test
-  @DisplayName("Test ldc_w(String, Clazz) with 'String', 'Clazz'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, Clazz)"})
-  void testLdc_wWithStringClazz3() {
+  public void testLdc_wWithStringClazz2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -4201,39 +3705,10 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc_w(String, Clazz)} with {@code String}, {@code
-   * Clazz}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, Clazz)}
-   */
-  @Test
-  @DisplayName("Test ldc_w(String, Clazz) with 'String', 'Clazz'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, Clazz)"})
-  void testLdc_wWithStringClazz4() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc_w("Type Name", new LibraryClass()));
   }
 
   /**
@@ -4243,122 +3718,70 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, Clazz, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc_w(String, Clazz, ConstantVisitor) with 'String', 'Clazz', 'ConstantVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, Clazz, ConstantVisitor)"
   })
-  void testLdc_wWithStringClazzConstantVisitor() {
+  public void testLdc_wWithStringClazzConstantVisitor() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass referencedClass = new LibraryClass();
+    ConstantLookupVisitor visitor = new ConstantLookupVisitor();
 
     // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w("Type Name", referencedClass, new ConstantLookupVisitor());
+    instructionSequenceBuilder.ldc_w("Type Name", referencedClass, visitor);
 
     // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    Clazz clazz = visitor.resultClazz;
+    assertTrue(clazz instanceof LibraryClass);
+    assertEquals("Type Name", visitor.result);
+    assertNull(((LibraryClass) clazz).interfaceNames);
+    assertNull(((LibraryClass) clazz).fields);
+    assertNull(((LibraryClass) clazz).methods);
+    assertNull(clazz.getProcessingInfo());
+    assertNull(clazz.getName());
+    assertNull(clazz.getSuperName());
+    assertNull(clazz.getFeatureName());
+    assertNull(clazz.getSuperClass());
+    assertNull(((LibraryClass) clazz).kotlinMetadata);
+    assertEquals(0, clazz.getAccessFlags());
+    assertEquals(0, clazz.getInterfaceCount());
+    assertEquals(0, clazz.getProcessingFlags());
+    assertEquals(0, ((LibraryClass) clazz).subClassCount);
+    assertEquals(1, visitor.resultSize);
+    Clazz[] clazzArray = referencedClass.subClasses;
+    assertSame(clazzArray, ((LibraryClass) clazz).interfaceClasses);
+    assertSame(clazzArray, ((LibraryClass) clazz).subClasses);
   }
 
   /**
    * Test {@link InstructionSequenceBuilder#ldc_w(String, Clazz, ConstantVisitor)} with {@code
    * String}, {@code Clazz}, {@code ConstantVisitor}.
    *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, Clazz, ConstantVisitor)}
-   */
-  @Test
-  @DisplayName(
-      "Test ldc_w(String, Clazz, ConstantVisitor) with 'String', 'Clazz', 'ConstantVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, Clazz, ConstantVisitor)"
-  })
-  void testLdc_wWithStringClazzConstantVisitor2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w("Type Name", referencedClass, new ConstantLookupVisitor());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc_w(String, Clazz, ConstantVisitor)} with {@code
-   * String}, {@code Clazz}, {@code ConstantVisitor}.
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, Clazz, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc_w(String, Clazz, ConstantVisitor) with 'String', 'Clazz', 'ConstantVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, Clazz, ConstantVisitor)"
   })
-  void testLdc_wWithStringClazzConstantVisitor3() {
+  public void testLdc_wWithStringClazzConstantVisitor_thenConstantCounterCountIsOne() {
     // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass referencedClass = new LibraryClass();
+    ConstantCounter visitor = new ConstantCounter();
 
     // Act
     InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w("Type Name", referencedClass, new ConstantLookupVisitor());
+        instructionSequenceBuilder.ldc_w("Type Name", referencedClass, visitor);
 
     // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc_w(String, Clazz, ConstantVisitor)} with {@code
-   * String}, {@code Clazz}, {@code ConstantVisitor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, Clazz, ConstantVisitor)}
-   */
-  @Test
-  @DisplayName(
-      "Test ldc_w(String, Clazz, ConstantVisitor) with 'String', 'Clazz', 'ConstantVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, Clazz, ConstantVisitor)"
-  })
-  void testLdc_wWithStringClazzConstantVisitor4() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w("Type Name", referencedClass, new ConstantLookupVisitor());
-
-    // Assert
+    assertEquals(1, visitor.getCount());
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdc_wResult);
   }
 
@@ -4367,51 +3790,17 @@ class InstructionSequenceBuilderDiffblueTest {
    * String}, {@code Clazz}, {@code ConstantVisitor}.
    *
    * <ul>
-   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, Clazz, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc_w(String, Clazz, ConstantVisitor) with 'String', 'Clazz', 'ConstantVisitor'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, Clazz, ConstantVisitor)"
   })
-  void testLdc_wWithStringClazzConstantVisitor_thenReturnInstructionSequenceBuilder() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    LibraryClass referencedClass = new LibraryClass();
-
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w("Type Name", referencedClass, new ConstantLookupVisitor());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc_w(String, Clazz, ConstantVisitor)} with {@code
-   * String}, {@code Clazz}, {@code ConstantVisitor}.
-   *
-   * <ul>
-   *   <li>When {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, Clazz, ConstantVisitor)}
-   */
-  @Test
-  @DisplayName(
-      "Test ldc_w(String, Clazz, ConstantVisitor) with 'String', 'Clazz', 'ConstantVisitor'; when 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, Clazz, ConstantVisitor)"
-  })
-  void testLdc_wWithStringClazzConstantVisitor_whenNull() {
+  public void testLdc_wWithStringClazzConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -4420,6 +3809,7 @@ class InstructionSequenceBuilderDiffblueTest {
         instructionSequenceBuilder.ldc_w("Type Name", new LibraryClass(), (ConstantVisitor) null);
 
     // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdc_wResult);
   }
 
@@ -4430,26 +3820,22 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, Clazz, Member)}
    */
   @Test
-  @DisplayName("Test ldc_w(String, Clazz, Member) with 'String', 'Clazz', 'Member'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, Clazz, Member)"
   })
-  void testLdc_wWithStringClazzMember() {
+  public void testLdc_wWithStringClazzMember() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
     LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedMember = new LibraryField(1, "Name", "Descriptor");
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w("String", referencedClass, referencedMember);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc_w(
+            "String", referencedClass, new LibraryField(1, "Name", "Descriptor")));
   }
 
   /**
@@ -4459,42 +3845,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, Clazz, Member)}
    */
   @Test
-  @DisplayName("Test ldc_w(String, Clazz, Member) with 'String', 'Clazz', 'Member'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, Clazz, Member)"
   })
-  void testLdc_wWithStringClazzMember2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedMember = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w("String", referencedClass, referencedMember);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc_w(String, Clazz, Member)} with {@code String},
-   * {@code Clazz}, {@code Member}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, Clazz, Member)}
-   */
-  @Test
-  @DisplayName("Test ldc_w(String, Clazz, Member) with 'String', 'Clazz', 'Member'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, Clazz, Member)"
-  })
-  void testLdc_wWithStringClazzMember3() {
+  public void testLdc_wWithStringClazzMember2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -4508,14 +3863,12 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
     LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedMember = new LibraryField(1, "Name", "Descriptor");
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w("String", referencedClass, referencedMember);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc_w(
+            "String", referencedClass, new LibraryField(1, "Name", "Descriptor")));
   }
 
   /**
@@ -4526,24 +3879,55 @@ class InstructionSequenceBuilderDiffblueTest {
    * ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc_w(String, Clazz, Member, ConstantVisitor) with 'String', 'Clazz', 'Member', 'ConstantVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, Clazz, Member, ConstantVisitor)"
   })
-  void testLdc_wWithStringClazzMemberConstantVisitor() {
+  public void testLdc_wWithStringClazzMemberConstantVisitor() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    InstructionSequenceBuilder actualLdc_wResult =
+        instructionSequenceBuilder.ldc_w(
+            "String", referencedClass, new LibraryField(1, "Name", "Descriptor"), null);
+
+    // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc_w(String, Clazz, Member, ConstantVisitor)} with
+   * {@code String}, {@code Clazz}, {@code Member}, {@code ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, Clazz, Member,
+   * ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, Clazz, Member, ConstantVisitor)"
+  })
+  public void testLdc_wWithStringClazzMemberConstantVisitor_thenConstantCounterCountIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass referencedClass = new LibraryClass();
     LibraryField referencedMember = new LibraryField(1, "Name", "Descriptor");
 
+    ConstantCounter visitor = new ConstantCounter();
+
     // Act
     InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w("String", referencedClass, referencedMember, null);
+        instructionSequenceBuilder.ldc_w("String", referencedClass, referencedMember, visitor);
 
     // Assert
+    assertEquals(1, visitor.getCount());
     assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdc_wResult);
   }
@@ -4559,25 +3943,20 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, Clazz, Member)}
    */
   @Test
-  @DisplayName(
-      "Test ldc_w(String, Clazz, Member) with 'String', 'Clazz', 'Member'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, Clazz, Member)"
   })
-  void testLdc_wWithStringClazzMember_thenReturnInstructionSequenceBuilder() {
+  public void testLdc_wWithStringClazzMember_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedMember = new LibraryField(1, "Name", "Descriptor");
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w("String", referencedClass, referencedMember);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc_w(
+            "String", referencedClass, new LibraryField(1, "Name", "Descriptor")));
   }
 
   /**
@@ -4591,20 +3970,45 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, Clazz)}
    */
   @Test
-  @DisplayName(
-      "Test ldc_w(String, Clazz) with 'String', 'Clazz'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, Clazz)"})
-  void testLdc_wWithStringClazz_thenReturnInstructionSequenceBuilder() {
+  public void testLdc_wWithStringClazz_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc_w("Type Name", new LibraryClass()));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc_w(String, ConstantVisitor)} with {@code String},
+   * {@code ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, ConstantVisitor)"
+  })
+  public void testLdc_wWithStringConstantVisitor_thenConstantCounterCountIsOne() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    ConstantCounter visitor = new ConstantCounter();
+
     // Act
     InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w("Type Name", new LibraryClass());
+        instructionSequenceBuilder.ldc_w("String", visitor);
 
     // Assert
+    assertEquals(1, visitor.getCount());
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdc_wResult);
   }
 
@@ -4619,14 +4023,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc_w(String, ConstantVisitor) with 'String', 'ConstantVisitor'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, ConstantVisitor)"
   })
-  void testLdc_wWithStringConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLdc_wWithStringConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -4646,24 +4047,20 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, ResourceFile)}
    */
   @Test
-  @DisplayName("Test ldc_w(String, ResourceFile) with 'String', 'ResourceFile'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, ResourceFile)"
   })
-  void testLdc_wWithStringResourceFile() {
+  public void testLdc_wWithStringResourceFile() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w("String", new ResourceFile("foo.txt", 3L));
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc_w("String", new ResourceFile("foo.txt", 3L)));
   }
 
   /**
@@ -4673,40 +4070,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, ResourceFile)}
    */
   @Test
-  @DisplayName("Test ldc_w(String, ResourceFile) with 'String', 'ResourceFile'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, ResourceFile)"
   })
-  void testLdc_wWithStringResourceFile2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w("String", new ResourceFile("foo.txt", 3L));
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc_w(String, ResourceFile)} with {@code String}, {@code
-   * ResourceFile}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, ResourceFile)}
-   */
-  @Test
-  @DisplayName("Test ldc_w(String, ResourceFile) with 'String', 'ResourceFile'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, ResourceFile)"
-  })
-  void testLdc_wWithStringResourceFile3() {
+  public void testLdc_wWithStringResourceFile2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -4720,12 +4088,10 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w("String", new ResourceFile("foo.txt", 3L));
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc_w("String", new ResourceFile("foo.txt", 3L)));
   }
 
   /**
@@ -4736,14 +4102,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc_w(String, ResourceFile, ConstantVisitor) with 'String', 'ResourceFile', 'ConstantVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, ResourceFile, ConstantVisitor)"
   })
-  void testLdc_wWithStringResourceFileConstantVisitor() {
+  public void testLdc_wWithStringResourceFileConstantVisitor() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -4752,6 +4115,39 @@ class InstructionSequenceBuilderDiffblueTest {
         instructionSequenceBuilder.ldc_w("String", new ResourceFile("foo.txt", 3L), null);
 
     // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc_w(String, ResourceFile, ConstantVisitor)} with
+   * {@code String}, {@code ResourceFile}, {@code ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, ResourceFile,
+   * ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, ResourceFile, ConstantVisitor)"
+  })
+  public void testLdc_wWithStringResourceFileConstantVisitor_thenConstantCounterCountIsOne() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    ResourceFile referencedResourceFile = new ResourceFile("foo.txt", 3L);
+
+    ConstantCounter visitor = new ConstantCounter();
+
+    // Act
+    InstructionSequenceBuilder actualLdc_wResult =
+        instructionSequenceBuilder.ldc_w("String", referencedResourceFile, visitor);
+
+    // Assert
+    assertEquals(1, visitor.getCount());
     assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdc_wResult);
   }
@@ -4767,23 +4163,18 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String, ResourceFile)}
    */
   @Test
-  @DisplayName(
-      "Test ldc_w(String, ResourceFile) with 'String', 'ResourceFile'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String, ResourceFile)"
   })
-  void testLdc_wWithStringResourceFile_thenReturnInstructionSequenceBuilder() {
+  public void testLdc_wWithStringResourceFile_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult =
-        instructionSequenceBuilder.ldc_w("String", new ResourceFile("foo.txt", 3L));
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.ldc_w("String", new ResourceFile("foo.txt", 3L)));
   }
 
   /**
@@ -4796,19 +4187,14 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w(String)}
    */
   @Test
-  @DisplayName("Test ldc_w(String) with 'String'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w(String)"})
-  void testLdc_wWithString_thenReturnInstructionSequenceBuilder() {
+  public void testLdc_wWithString_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualLdc_wResult = instructionSequenceBuilder.ldc_w("String");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc_wResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc_w("String"));
   }
 
   /**
@@ -4817,11 +4203,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w_(int)}
    */
   @Test
-  @DisplayName("Test ldc_w_(int) with 'constantIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w_(int)"})
-  void testLdc_w_WithConstantIndex() {
+  public void testLdc_w_WithConstantIndex() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -4838,20 +4222,17 @@ class InstructionSequenceBuilderDiffblueTest {
    * constantIndex}, {@code visitor}.
    *
    * <ul>
-   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
+   *   <li>Then return second element is {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w_(int, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc_w_(int, ConstantVisitor) with 'constantIndex', 'visitor'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w_(int, ConstantVisitor)"
   })
-  void testLdc_w_WithConstantIndexVisitor_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLdc_w_WithConstantIndexVisitor_thenReturnSecondElementIsNull() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -4860,8 +4241,58 @@ class InstructionSequenceBuilderDiffblueTest {
         instructionSequenceBuilder.ldc_w_(1, new ConstantLookupVisitor());
 
     // Assert
+    ProgramClass targetClass = actualLdc_w_Result.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertNull(constantArray[1]);
+    assertNull(constantArray[2]);
+    assertNull(constantArray[3]);
+    assertNull(constantArray[4]);
+    assertNull(constantArray[5]);
+    assertNull(constantArray[6]);
     assertEquals(1, instructionSequenceBuilder.size());
-    assertSame(instructionSequenceBuilder, actualLdc_w_Result);
+    assertEquals(1, actualLdc_w_Result.size());
+    assertEquals(1, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc_w_(int, ConstantVisitor)} with {@code
+   * constantIndex}, {@code visitor}.
+   *
+   * <ul>
+   *   <li>Then sixth element return {@link ClassConstant}.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w_(int, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w_(int, ConstantVisitor)"
+  })
+  public void testLdc_w_WithConstantIndexVisitor_thenSixthElementReturnClassConstant() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
+
+    // Act
+    InstructionSequenceBuilder actualLdc_w_Result =
+        instructionSequenceBuilder.ldc_w_(
+            1, new BootstrapMethodHandleTraveler(new ConstantLookupVisitor()));
+
+    // Assert
+    ProgramClass targetClass = actualLdc_w_Result.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertTrue(constantArray[5] instanceof ClassConstant);
+    assertTrue(constantArray[6] instanceof FieldrefConstant);
+    assertTrue(constantArray[3] instanceof NameAndTypeConstant);
+    assertTrue(constantArray[1] instanceof Utf8Constant);
+    assertTrue(constantArray[2] instanceof Utf8Constant);
+    assertTrue(constantArray[4] instanceof Utf8Constant);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualLdc_w_Result.size());
+    assertEquals(7, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
   }
 
   /**
@@ -4870,18 +4301,17 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When {@code null}.
+   *   <li>Then return second element is {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc_w_(int, ConstantVisitor)}
    */
   @Test
-  @DisplayName("Test ldc_w_(int, ConstantVisitor) with 'constantIndex', 'visitor'; when 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc_w_(int, ConstantVisitor)"
   })
-  void testLdc_w_WithConstantIndexVisitor_whenNull() {
+  public void testLdc_w_WithConstantIndexVisitor_whenNull_thenReturnSecondElementIsNull() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -4889,8 +4319,18 @@ class InstructionSequenceBuilderDiffblueTest {
     InstructionSequenceBuilder actualLdc_w_Result = instructionSequenceBuilder.ldc_w_(1, null);
 
     // Assert
+    ProgramClass targetClass = actualLdc_w_Result.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertNull(constantArray[1]);
+    assertNull(constantArray[2]);
+    assertNull(constantArray[3]);
+    assertNull(constantArray[4]);
+    assertNull(constantArray[5]);
+    assertNull(constantArray[6]);
     assertEquals(1, instructionSequenceBuilder.size());
-    assertSame(instructionSequenceBuilder, actualLdc_w_Result);
+    assertEquals(1, actualLdc_w_Result.size());
+    assertEquals(1, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
   }
 
   /**
@@ -4899,21 +4339,16 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc2_w(double)}
    */
   @Test
-  @DisplayName("Test ldc2_w(double) with 'double'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc2_w(double)"})
-  void testLdc2_wWithDouble() {
+  public void testLdc2_wWithDouble() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(6, 1, constantPool, 6, 6, 6));
+        new InstructionSequenceBuilder(
+            new ProgramClass(6, 1, new Constant[] {new ClassConstant()}, 6, 6, 6));
 
-    // Act
-    InstructionSequenceBuilder actualLdc2_wResult = instructionSequenceBuilder.ldc2_w(10.0d);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc2_wResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc2_w(10.0d));
   }
 
   /**
@@ -4922,34 +4357,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc2_w(double)}
    */
   @Test
-  @DisplayName("Test ldc2_w(double) with 'double'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc2_w(double)"})
-  void testLdc2_wWithDouble2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(6, 0, constantPool, 6, 6, 6));
-
-    // Act
-    InstructionSequenceBuilder actualLdc2_wResult = instructionSequenceBuilder.ldc2_w(10.0d);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc2_wResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc2_w(double)} with {@code double}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc2_w(double)}
-   */
-  @Test
-  @DisplayName("Test ldc2_w(double) with 'double'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc2_w(double)"})
-  void testLdc2_wWithDouble3() {
+  public void testLdc2_wWithDouble2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -4963,10 +4373,37 @@ class InstructionSequenceBuilderDiffblueTest {
                 6,
                 6));
 
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc2_w(10.0d));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc2_w(double, ConstantVisitor)} with {@code double},
+   * {@code ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc2_w(double, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc2_w(double, ConstantVisitor)"
+  })
+  public void testLdc2_wWithDoubleConstantVisitor_thenConstantCounterCountIsOne() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    ConstantCounter visitor = new ConstantCounter();
+
     // Act
-    InstructionSequenceBuilder actualLdc2_wResult = instructionSequenceBuilder.ldc2_w(10.0d);
+    InstructionSequenceBuilder actualLdc2_wResult =
+        instructionSequenceBuilder.ldc2_w(10.0d, visitor);
 
     // Assert
+    assertEquals(1, visitor.getCount());
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdc2_wResult);
   }
 
@@ -4975,20 +4412,17 @@ class InstructionSequenceBuilderDiffblueTest {
    * {@code ConstantVisitor}.
    *
    * <ul>
-   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
+   *   <li>When {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc2_w(double, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc2_w(double, ConstantVisitor) with 'double', 'ConstantVisitor'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc2_w(double, ConstantVisitor)"
   })
-  void testLdc2_wWithDoubleConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLdc2_wWithDoubleConstantVisitor_whenNull() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5010,19 +4444,14 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc2_w(double)}
    */
   @Test
-  @DisplayName("Test ldc2_w(double) with 'double'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc2_w(double)"})
-  void testLdc2_wWithDouble_thenReturnInstructionSequenceBuilder() {
+  public void testLdc2_wWithDouble_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualLdc2_wResult = instructionSequenceBuilder.ldc2_w(10.0d);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc2_wResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc2_w(10.0d));
   }
 
   /**
@@ -5031,11 +4460,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc2_w(int)}
    */
   @Test
-  @DisplayName("Test ldc2_w(int) with 'int'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc2_w(int)"})
-  void testLdc2_wWithInt() {
+  public void testLdc2_wWithInt() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5052,20 +4479,17 @@ class InstructionSequenceBuilderDiffblueTest {
    * ConstantVisitor}.
    *
    * <ul>
-   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
+   *   <li>Then return second element is {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc2_w(int, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc2_w(int, ConstantVisitor) with 'int', 'ConstantVisitor'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc2_w(int, ConstantVisitor)"
   })
-  void testLdc2_wWithIntConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLdc2_wWithIntConstantVisitor_thenReturnSecondElementIsNull() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5074,8 +4498,58 @@ class InstructionSequenceBuilderDiffblueTest {
         instructionSequenceBuilder.ldc2_w(1, new ConstantLookupVisitor());
 
     // Assert
+    ProgramClass targetClass = actualLdc2_wResult.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertNull(constantArray[1]);
+    assertNull(constantArray[2]);
+    assertNull(constantArray[3]);
+    assertNull(constantArray[4]);
+    assertNull(constantArray[5]);
+    assertNull(constantArray[6]);
     assertEquals(1, instructionSequenceBuilder.size());
-    assertSame(instructionSequenceBuilder, actualLdc2_wResult);
+    assertEquals(1, actualLdc2_wResult.size());
+    assertEquals(1, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc2_w(int, ConstantVisitor)} with {@code int}, {@code
+   * ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>Then sixth element return {@link ClassConstant}.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc2_w(int, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc2_w(int, ConstantVisitor)"
+  })
+  public void testLdc2_wWithIntConstantVisitor_thenSixthElementReturnClassConstant() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
+
+    // Act
+    InstructionSequenceBuilder actualLdc2_wResult =
+        instructionSequenceBuilder.ldc2_w(
+            1, new BootstrapMethodHandleTraveler(new ConstantLookupVisitor()));
+
+    // Assert
+    ProgramClass targetClass = actualLdc2_wResult.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertTrue(constantArray[5] instanceof ClassConstant);
+    assertTrue(constantArray[6] instanceof FieldrefConstant);
+    assertTrue(constantArray[3] instanceof NameAndTypeConstant);
+    assertTrue(constantArray[1] instanceof Utf8Constant);
+    assertTrue(constantArray[2] instanceof Utf8Constant);
+    assertTrue(constantArray[4] instanceof Utf8Constant);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualLdc2_wResult.size());
+    assertEquals(7, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
   }
 
   /**
@@ -5084,18 +4558,17 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When {@code null}.
+   *   <li>Then return second element is {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc2_w(int, ConstantVisitor)}
    */
   @Test
-  @DisplayName("Test ldc2_w(int, ConstantVisitor) with 'int', 'ConstantVisitor'; when 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc2_w(int, ConstantVisitor)"
   })
-  void testLdc2_wWithIntConstantVisitor_whenNull() {
+  public void testLdc2_wWithIntConstantVisitor_whenNull_thenReturnSecondElementIsNull() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5103,8 +4576,18 @@ class InstructionSequenceBuilderDiffblueTest {
     InstructionSequenceBuilder actualLdc2_wResult = instructionSequenceBuilder.ldc2_w(1, null);
 
     // Assert
+    ProgramClass targetClass = actualLdc2_wResult.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertNull(constantArray[1]);
+    assertNull(constantArray[2]);
+    assertNull(constantArray[3]);
+    assertNull(constantArray[4]);
+    assertNull(constantArray[5]);
+    assertNull(constantArray[6]);
     assertEquals(1, instructionSequenceBuilder.size());
-    assertSame(instructionSequenceBuilder, actualLdc2_wResult);
+    assertEquals(1, actualLdc2_wResult.size());
+    assertEquals(1, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
   }
 
   /**
@@ -5113,21 +4596,16 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc2_w(long)}
    */
   @Test
-  @DisplayName("Test ldc2_w(long) with 'long'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc2_w(long)"})
-  void testLdc2_wWithLong() {
+  public void testLdc2_wWithLong() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(5, 1, constantPool, 5, 5, 5));
+        new InstructionSequenceBuilder(
+            new ProgramClass(5, 1, new Constant[] {new ClassConstant()}, 5, 5, 5));
 
-    // Act
-    InstructionSequenceBuilder actualLdc2_wResult = instructionSequenceBuilder.ldc2_w(42L);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc2_wResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc2_w(42L));
   }
 
   /**
@@ -5136,34 +4614,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc2_w(long)}
    */
   @Test
-  @DisplayName("Test ldc2_w(long) with 'long'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc2_w(long)"})
-  void testLdc2_wWithLong2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(5, 0, constantPool, 5, 5, 5));
-
-    // Act
-    InstructionSequenceBuilder actualLdc2_wResult = instructionSequenceBuilder.ldc2_w(42L);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc2_wResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#ldc2_w(long)} with {@code long}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#ldc2_w(long)}
-   */
-  @Test
-  @DisplayName("Test ldc2_w(long) with 'long'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc2_w(long)"})
-  void testLdc2_wWithLong3() {
+  public void testLdc2_wWithLong2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -5177,10 +4630,36 @@ class InstructionSequenceBuilderDiffblueTest {
                 5,
                 5));
 
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc2_w(42L));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#ldc2_w(long, ConstantVisitor)} with {@code long}, {@code
+   * ConstantVisitor}.
+   *
+   * <ul>
+   *   <li>Then {@link ConstantCounter} (default constructor) Count is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#ldc2_w(long, ConstantVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.ldc2_w(long, ConstantVisitor)"
+  })
+  public void testLdc2_wWithLongConstantVisitor_thenConstantCounterCountIsOne() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    ConstantCounter visitor = new ConstantCounter();
+
     // Act
-    InstructionSequenceBuilder actualLdc2_wResult = instructionSequenceBuilder.ldc2_w(42L);
+    InstructionSequenceBuilder actualLdc2_wResult = instructionSequenceBuilder.ldc2_w(42L, visitor);
 
     // Assert
+    assertEquals(1, visitor.getCount());
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualLdc2_wResult);
   }
 
@@ -5189,20 +4668,17 @@ class InstructionSequenceBuilderDiffblueTest {
    * ConstantVisitor}.
    *
    * <ul>
-   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
+   *   <li>When {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc2_w(long, ConstantVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test ldc2_w(long, ConstantVisitor) with 'long', 'ConstantVisitor'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.ldc2_w(long, ConstantVisitor)"
   })
-  void testLdc2_wWithLongConstantVisitor_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLdc2_wWithLongConstantVisitor_whenNull() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5224,19 +4700,14 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldc2_w(long)}
    */
   @Test
-  @DisplayName("Test ldc2_w(long) with 'long'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldc2_w(long)"})
-  void testLdc2_wWithLong_thenReturnInstructionSequenceBuilder() {
+  public void testLdc2_wWithLong_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualLdc2_wResult = instructionSequenceBuilder.ldc2_w(42L);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualLdc2_wResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.ldc2_w(42L));
   }
 
   /**
@@ -5249,11 +4720,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iload(int)}
    */
   @Test
-  @DisplayName("Test iload(int); when minus one hundred twenty-four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iload(int)"})
-  void testIload_whenMinusOneHundredTwentyFour() {
+  public void testIload_whenMinusOneHundredTwentyFour() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5275,11 +4744,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iload(int)}
    */
   @Test
-  @DisplayName("Test iload(int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iload(int)"})
-  void testIload_whenOne() {
+  public void testIload_whenOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5301,11 +4768,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iload(int)}
    */
   @Test
-  @DisplayName("Test iload(int); when twenty-one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iload(int)"})
-  void testIload_whenTwentyOne() {
+  public void testIload_whenTwentyOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5327,11 +4792,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lload(int)}
    */
   @Test
-  @DisplayName("Test lload(int); when minus one hundred twenty-four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lload(int)"})
-  void testLload_whenMinusOneHundredTwentyFour() {
+  public void testLload_whenMinusOneHundredTwentyFour() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5353,11 +4816,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lload(int)}
    */
   @Test
-  @DisplayName("Test lload(int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lload(int)"})
-  void testLload_whenOne() {
+  public void testLload_whenOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5379,11 +4840,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lload(int)}
    */
   @Test
-  @DisplayName("Test lload(int); when twenty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lload(int)"})
-  void testLload_whenTwentyTwo() {
+  public void testLload_whenTwentyTwo() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5405,11 +4864,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fload(int)}
    */
   @Test
-  @DisplayName("Test fload(int); when minus one hundred twenty-four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fload(int)"})
-  void testFload_whenMinusOneHundredTwentyFour() {
+  public void testFload_whenMinusOneHundredTwentyFour() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5431,11 +4888,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fload(int)}
    */
   @Test
-  @DisplayName("Test fload(int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fload(int)"})
-  void testFload_whenOne() {
+  public void testFload_whenOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5457,11 +4912,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fload(int)}
    */
   @Test
-  @DisplayName("Test fload(int); when twenty-three")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fload(int)"})
-  void testFload_whenTwentyThree() {
+  public void testFload_whenTwentyThree() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5483,11 +4936,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dload(int)}
    */
   @Test
-  @DisplayName("Test dload(int); when minus one hundred twenty-four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dload(int)"})
-  void testDload_whenMinusOneHundredTwentyFour() {
+  public void testDload_whenMinusOneHundredTwentyFour() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5509,11 +4960,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dload(int)}
    */
   @Test
-  @DisplayName("Test dload(int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dload(int)"})
-  void testDload_whenOne() {
+  public void testDload_whenOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5535,11 +4984,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dload(int)}
    */
   @Test
-  @DisplayName("Test dload(int); when twenty-four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dload(int)"})
-  void testDload_whenTwentyFour() {
+  public void testDload_whenTwentyFour() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5561,11 +5008,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#aload(int)}
    */
   @Test
-  @DisplayName("Test aload(int); when minus one hundred twenty-four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.aload(int)"})
-  void testAload_whenMinusOneHundredTwentyFour() {
+  public void testAload_whenMinusOneHundredTwentyFour() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5587,11 +5032,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#aload(int)}
    */
   @Test
-  @DisplayName("Test aload(int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.aload(int)"})
-  void testAload_whenOne() {
+  public void testAload_whenOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5613,11 +5056,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#aload(int)}
    */
   @Test
-  @DisplayName("Test aload(int); when twenty-five")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.aload(int)"})
-  void testAload_whenTwentyFive() {
+  public void testAload_whenTwentyFive() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5635,11 +5076,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iload_0()}
    */
   @Test
-  @DisplayName("Test iload_0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iload_0()"})
-  void testIload_0() {
+  public void testIload_0() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5657,11 +5096,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iload_1()}
    */
   @Test
-  @DisplayName("Test iload_1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iload_1()"})
-  void testIload_1() {
+  public void testIload_1() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5679,11 +5116,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iload_2()}
    */
   @Test
-  @DisplayName("Test iload_2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iload_2()"})
-  void testIload_2() {
+  public void testIload_2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5701,11 +5136,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iload_3()}
    */
   @Test
-  @DisplayName("Test iload_3()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iload_3()"})
-  void testIload_3() {
+  public void testIload_3() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5723,11 +5156,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lload_0()}
    */
   @Test
-  @DisplayName("Test lload_0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lload_0()"})
-  void testLload_0() {
+  public void testLload_0() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5745,11 +5176,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lload_1()}
    */
   @Test
-  @DisplayName("Test lload_1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lload_1()"})
-  void testLload_1() {
+  public void testLload_1() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5767,11 +5196,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lload_2()}
    */
   @Test
-  @DisplayName("Test lload_2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lload_2()"})
-  void testLload_2() {
+  public void testLload_2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5789,11 +5216,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lload_3()}
    */
   @Test
-  @DisplayName("Test lload_3()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lload_3()"})
-  void testLload_3() {
+  public void testLload_3() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5811,11 +5236,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fload_0()}
    */
   @Test
-  @DisplayName("Test fload_0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fload_0()"})
-  void testFload_0() {
+  public void testFload_0() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5833,11 +5256,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fload_1()}
    */
   @Test
-  @DisplayName("Test fload_1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fload_1()"})
-  void testFload_1() {
+  public void testFload_1() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5855,11 +5276,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fload_2()}
    */
   @Test
-  @DisplayName("Test fload_2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fload_2()"})
-  void testFload_2() {
+  public void testFload_2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5877,11 +5296,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fload_3()}
    */
   @Test
-  @DisplayName("Test fload_3()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fload_3()"})
-  void testFload_3() {
+  public void testFload_3() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5899,11 +5316,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dload_0()}
    */
   @Test
-  @DisplayName("Test dload_0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dload_0()"})
-  void testDload_0() {
+  public void testDload_0() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5921,11 +5336,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dload_1()}
    */
   @Test
-  @DisplayName("Test dload_1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dload_1()"})
-  void testDload_1() {
+  public void testDload_1() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5943,11 +5356,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dload_2()}
    */
   @Test
-  @DisplayName("Test dload_2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dload_2()"})
-  void testDload_2() {
+  public void testDload_2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5965,11 +5376,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dload_3()}
    */
   @Test
-  @DisplayName("Test dload_3()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dload_3()"})
-  void testDload_3() {
+  public void testDload_3() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -5987,11 +5396,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#aload_0()}
    */
   @Test
-  @DisplayName("Test aload_0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.aload_0()"})
-  void testAload_0() {
+  public void testAload_0() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6009,11 +5416,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#aload_1()}
    */
   @Test
-  @DisplayName("Test aload_1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.aload_1()"})
-  void testAload_1() {
+  public void testAload_1() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6031,11 +5436,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#aload_2()}
    */
   @Test
-  @DisplayName("Test aload_2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.aload_2()"})
-  void testAload_2() {
+  public void testAload_2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6053,11 +5456,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#aload_3()}
    */
   @Test
-  @DisplayName("Test aload_3()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.aload_3()"})
-  void testAload_3() {
+  public void testAload_3() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6075,11 +5476,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iaload()}
    */
   @Test
-  @DisplayName("Test iaload()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iaload()"})
-  void testIaload() {
+  public void testIaload() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6097,11 +5496,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#laload()}
    */
   @Test
-  @DisplayName("Test laload()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.laload()"})
-  void testLaload() {
+  public void testLaload() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6119,11 +5516,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#faload()}
    */
   @Test
-  @DisplayName("Test faload()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.faload()"})
-  void testFaload() {
+  public void testFaload() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6141,11 +5536,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#daload()}
    */
   @Test
-  @DisplayName("Test daload()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.daload()"})
-  void testDaload() {
+  public void testDaload() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6163,11 +5556,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#aaload()}
    */
   @Test
-  @DisplayName("Test aaload()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.aaload()"})
-  void testAaload() {
+  public void testAaload() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6185,11 +5576,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#baload()}
    */
   @Test
-  @DisplayName("Test baload()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.baload()"})
-  void testBaload() {
+  public void testBaload() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6207,11 +5596,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#caload()}
    */
   @Test
-  @DisplayName("Test caload()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.caload()"})
-  void testCaload() {
+  public void testCaload() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6229,11 +5616,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#saload()}
    */
   @Test
-  @DisplayName("Test saload()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.saload()"})
-  void testSaload() {
+  public void testSaload() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6255,11 +5640,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#istore(int)}
    */
   @Test
-  @DisplayName("Test istore(int); when fifty-four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.istore(int)"})
-  void testIstore_whenFiftyFour() {
+  public void testIstore_whenFiftyFour() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6281,11 +5664,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#istore(int)}
    */
   @Test
-  @DisplayName("Test istore(int); when minus one hundred twenty-four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.istore(int)"})
-  void testIstore_whenMinusOneHundredTwentyFour() {
+  public void testIstore_whenMinusOneHundredTwentyFour() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6307,11 +5688,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#istore(int)}
    */
   @Test
-  @DisplayName("Test istore(int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.istore(int)"})
-  void testIstore_whenOne() {
+  public void testIstore_whenOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6333,11 +5712,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lstore(int)}
    */
   @Test
-  @DisplayName("Test lstore(int); when fifty-five")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lstore(int)"})
-  void testLstore_whenFiftyFive() {
+  public void testLstore_whenFiftyFive() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6359,11 +5736,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lstore(int)}
    */
   @Test
-  @DisplayName("Test lstore(int); when minus one hundred twenty-four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lstore(int)"})
-  void testLstore_whenMinusOneHundredTwentyFour() {
+  public void testLstore_whenMinusOneHundredTwentyFour() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6385,11 +5760,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lstore(int)}
    */
   @Test
-  @DisplayName("Test lstore(int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lstore(int)"})
-  void testLstore_whenOne() {
+  public void testLstore_whenOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6411,11 +5784,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fstore(int)}
    */
   @Test
-  @DisplayName("Test fstore(int); when fifty-six")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fstore(int)"})
-  void testFstore_whenFiftySix() {
+  public void testFstore_whenFiftySix() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6437,11 +5808,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fstore(int)}
    */
   @Test
-  @DisplayName("Test fstore(int); when minus one hundred twenty-four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fstore(int)"})
-  void testFstore_whenMinusOneHundredTwentyFour() {
+  public void testFstore_whenMinusOneHundredTwentyFour() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6463,11 +5832,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fstore(int)}
    */
   @Test
-  @DisplayName("Test fstore(int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fstore(int)"})
-  void testFstore_whenOne() {
+  public void testFstore_whenOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6489,11 +5856,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dstore(int)}
    */
   @Test
-  @DisplayName("Test dstore(int); when fifty-seven")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dstore(int)"})
-  void testDstore_whenFiftySeven() {
+  public void testDstore_whenFiftySeven() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6515,11 +5880,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dstore(int)}
    */
   @Test
-  @DisplayName("Test dstore(int); when minus one hundred twenty-four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dstore(int)"})
-  void testDstore_whenMinusOneHundredTwentyFour() {
+  public void testDstore_whenMinusOneHundredTwentyFour() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6541,11 +5904,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dstore(int)}
    */
   @Test
-  @DisplayName("Test dstore(int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dstore(int)"})
-  void testDstore_whenOne() {
+  public void testDstore_whenOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6567,11 +5928,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#astore(int)}
    */
   @Test
-  @DisplayName("Test astore(int); when fifty-eight")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.astore(int)"})
-  void testAstore_whenFiftyEight() {
+  public void testAstore_whenFiftyEight() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6593,11 +5952,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#astore(int)}
    */
   @Test
-  @DisplayName("Test astore(int); when minus one hundred twenty-four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.astore(int)"})
-  void testAstore_whenMinusOneHundredTwentyFour() {
+  public void testAstore_whenMinusOneHundredTwentyFour() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6619,11 +5976,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#astore(int)}
    */
   @Test
-  @DisplayName("Test astore(int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.astore(int)"})
-  void testAstore_whenOne() {
+  public void testAstore_whenOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6641,11 +5996,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#istore_0()}
    */
   @Test
-  @DisplayName("Test istore_0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.istore_0()"})
-  void testIstore_0() {
+  public void testIstore_0() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6663,11 +6016,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#istore_1()}
    */
   @Test
-  @DisplayName("Test istore_1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.istore_1()"})
-  void testIstore_1() {
+  public void testIstore_1() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6685,11 +6036,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#istore_2()}
    */
   @Test
-  @DisplayName("Test istore_2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.istore_2()"})
-  void testIstore_2() {
+  public void testIstore_2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6707,11 +6056,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#istore_3()}
    */
   @Test
-  @DisplayName("Test istore_3()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.istore_3()"})
-  void testIstore_3() {
+  public void testIstore_3() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6729,11 +6076,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lstore_0()}
    */
   @Test
-  @DisplayName("Test lstore_0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lstore_0()"})
-  void testLstore_0() {
+  public void testLstore_0() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6751,11 +6096,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lstore_1()}
    */
   @Test
-  @DisplayName("Test lstore_1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lstore_1()"})
-  void testLstore_1() {
+  public void testLstore_1() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6773,11 +6116,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lstore_2()}
    */
   @Test
-  @DisplayName("Test lstore_2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lstore_2()"})
-  void testLstore_2() {
+  public void testLstore_2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6795,11 +6136,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lstore_3()}
    */
   @Test
-  @DisplayName("Test lstore_3()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lstore_3()"})
-  void testLstore_3() {
+  public void testLstore_3() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6817,11 +6156,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fstore_0()}
    */
   @Test
-  @DisplayName("Test fstore_0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fstore_0()"})
-  void testFstore_0() {
+  public void testFstore_0() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6839,11 +6176,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fstore_1()}
    */
   @Test
-  @DisplayName("Test fstore_1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fstore_1()"})
-  void testFstore_1() {
+  public void testFstore_1() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6861,11 +6196,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fstore_2()}
    */
   @Test
-  @DisplayName("Test fstore_2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fstore_2()"})
-  void testFstore_2() {
+  public void testFstore_2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6883,11 +6216,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fstore_3()}
    */
   @Test
-  @DisplayName("Test fstore_3()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fstore_3()"})
-  void testFstore_3() {
+  public void testFstore_3() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6905,11 +6236,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dstore_0()}
    */
   @Test
-  @DisplayName("Test dstore_0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dstore_0()"})
-  void testDstore_0() {
+  public void testDstore_0() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6927,11 +6256,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dstore_1()}
    */
   @Test
-  @DisplayName("Test dstore_1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dstore_1()"})
-  void testDstore_1() {
+  public void testDstore_1() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6949,11 +6276,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dstore_2()}
    */
   @Test
-  @DisplayName("Test dstore_2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dstore_2()"})
-  void testDstore_2() {
+  public void testDstore_2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6971,11 +6296,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dstore_3()}
    */
   @Test
-  @DisplayName("Test dstore_3()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dstore_3()"})
-  void testDstore_3() {
+  public void testDstore_3() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -6993,11 +6316,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#astore_0()}
    */
   @Test
-  @DisplayName("Test astore_0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.astore_0()"})
-  void testAstore_0() {
+  public void testAstore_0() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7015,11 +6336,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#astore_1()}
    */
   @Test
-  @DisplayName("Test astore_1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.astore_1()"})
-  void testAstore_1() {
+  public void testAstore_1() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7037,11 +6356,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#astore_2()}
    */
   @Test
-  @DisplayName("Test astore_2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.astore_2()"})
-  void testAstore_2() {
+  public void testAstore_2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7059,11 +6376,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#astore_3()}
    */
   @Test
-  @DisplayName("Test astore_3()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.astore_3()"})
-  void testAstore_3() {
+  public void testAstore_3() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7081,11 +6396,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iastore()}
    */
   @Test
-  @DisplayName("Test iastore()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iastore()"})
-  void testIastore() {
+  public void testIastore() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7103,11 +6416,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lastore()}
    */
   @Test
-  @DisplayName("Test lastore()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lastore()"})
-  void testLastore() {
+  public void testLastore() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7125,11 +6436,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fastore()}
    */
   @Test
-  @DisplayName("Test fastore()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fastore()"})
-  void testFastore() {
+  public void testFastore() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7147,11 +6456,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dastore()}
    */
   @Test
-  @DisplayName("Test dastore()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dastore()"})
-  void testDastore() {
+  public void testDastore() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7169,11 +6476,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#aastore()}
    */
   @Test
-  @DisplayName("Test aastore()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.aastore()"})
-  void testAastore() {
+  public void testAastore() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7191,11 +6496,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#bastore()}
    */
   @Test
-  @DisplayName("Test bastore()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.bastore()"})
-  void testBastore() {
+  public void testBastore() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7213,11 +6516,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#castore()}
    */
   @Test
-  @DisplayName("Test castore()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.castore()"})
-  void testCastore() {
+  public void testCastore() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7235,11 +6536,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#sastore()}
    */
   @Test
-  @DisplayName("Test sastore()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.sastore()"})
-  void testSastore() {
+  public void testSastore() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7257,11 +6556,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#pop()}
    */
   @Test
-  @DisplayName("Test pop()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pop()"})
-  void testPop() {
+  public void testPop() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7279,11 +6576,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#pop2()}
    */
   @Test
-  @DisplayName("Test pop2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pop2()"})
-  void testPop2() {
+  public void testPop2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7301,11 +6596,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dup()}
    */
   @Test
-  @DisplayName("Test dup()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dup()"})
-  void testDup() {
+  public void testDup() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7323,11 +6616,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dup_x1()}
    */
   @Test
-  @DisplayName("Test dup_x1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dup_x1()"})
-  void testDup_x1() {
+  public void testDup_x1() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7345,11 +6636,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dup_x2()}
    */
   @Test
-  @DisplayName("Test dup_x2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dup_x2()"})
-  void testDup_x2() {
+  public void testDup_x2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7367,11 +6656,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dup2()}
    */
   @Test
-  @DisplayName("Test dup2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dup2()"})
-  void testDup2() {
+  public void testDup2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7389,11 +6676,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dup2_x1()}
    */
   @Test
-  @DisplayName("Test dup2_x1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dup2_x1()"})
-  void testDup2_x1() {
+  public void testDup2_x1() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7411,11 +6696,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dup2_x2()}
    */
   @Test
-  @DisplayName("Test dup2_x2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dup2_x2()"})
-  void testDup2_x2() {
+  public void testDup2_x2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7433,11 +6716,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#swap()}
    */
   @Test
-  @DisplayName("Test swap()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.swap()"})
-  void testSwap() {
+  public void testSwap() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7455,11 +6736,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iadd()}
    */
   @Test
-  @DisplayName("Test iadd()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iadd()"})
-  void testIadd() {
+  public void testIadd() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7477,11 +6756,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ladd()}
    */
   @Test
-  @DisplayName("Test ladd()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ladd()"})
-  void testLadd() {
+  public void testLadd() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7499,11 +6776,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fadd()}
    */
   @Test
-  @DisplayName("Test fadd()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fadd()"})
-  void testFadd() {
+  public void testFadd() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7521,11 +6796,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dadd()}
    */
   @Test
-  @DisplayName("Test dadd()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dadd()"})
-  void testDadd() {
+  public void testDadd() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7543,11 +6816,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#isub()}
    */
   @Test
-  @DisplayName("Test isub()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.isub()"})
-  void testIsub() {
+  public void testIsub() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7565,11 +6836,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lsub()}
    */
   @Test
-  @DisplayName("Test lsub()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lsub()"})
-  void testLsub() {
+  public void testLsub() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7587,11 +6856,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fsub()}
    */
   @Test
-  @DisplayName("Test fsub()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fsub()"})
-  void testFsub() {
+  public void testFsub() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7609,11 +6876,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dsub()}
    */
   @Test
-  @DisplayName("Test dsub()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dsub()"})
-  void testDsub() {
+  public void testDsub() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7631,11 +6896,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#imul()}
    */
   @Test
-  @DisplayName("Test imul()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.imul()"})
-  void testImul() {
+  public void testImul() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7653,11 +6916,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lmul()}
    */
   @Test
-  @DisplayName("Test lmul()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lmul()"})
-  void testLmul() {
+  public void testLmul() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7675,11 +6936,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fmul()}
    */
   @Test
-  @DisplayName("Test fmul()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fmul()"})
-  void testFmul() {
+  public void testFmul() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7697,11 +6956,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dmul()}
    */
   @Test
-  @DisplayName("Test dmul()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dmul()"})
-  void testDmul() {
+  public void testDmul() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7719,11 +6976,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#idiv()}
    */
   @Test
-  @DisplayName("Test idiv()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.idiv()"})
-  void testIdiv() {
+  public void testIdiv() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7741,11 +6996,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ldiv()}
    */
   @Test
-  @DisplayName("Test ldiv()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ldiv()"})
-  void testLdiv() {
+  public void testLdiv() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7763,11 +7016,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fdiv()}
    */
   @Test
-  @DisplayName("Test fdiv()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fdiv()"})
-  void testFdiv() {
+  public void testFdiv() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7785,11 +7036,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ddiv()}
    */
   @Test
-  @DisplayName("Test ddiv()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ddiv()"})
-  void testDdiv() {
+  public void testDdiv() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7807,11 +7056,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#irem()}
    */
   @Test
-  @DisplayName("Test irem()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.irem()"})
-  void testIrem() {
+  public void testIrem() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7829,11 +7076,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lrem()}
    */
   @Test
-  @DisplayName("Test lrem()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lrem()"})
-  void testLrem() {
+  public void testLrem() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7851,11 +7096,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#frem()}
    */
   @Test
-  @DisplayName("Test frem()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.frem()"})
-  void testFrem() {
+  public void testFrem() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7873,11 +7116,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#drem()}
    */
   @Test
-  @DisplayName("Test drem()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.drem()"})
-  void testDrem() {
+  public void testDrem() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7895,11 +7136,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ineg()}
    */
   @Test
-  @DisplayName("Test ineg()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ineg()"})
-  void testIneg() {
+  public void testIneg() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7917,11 +7156,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lneg()}
    */
   @Test
-  @DisplayName("Test lneg()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lneg()"})
-  void testLneg() {
+  public void testLneg() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7939,11 +7176,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fneg()}
    */
   @Test
-  @DisplayName("Test fneg()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fneg()"})
-  void testFneg() {
+  public void testFneg() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7961,11 +7196,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dneg()}
    */
   @Test
-  @DisplayName("Test dneg()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dneg()"})
-  void testDneg() {
+  public void testDneg() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -7983,11 +7216,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ishl()}
    */
   @Test
-  @DisplayName("Test ishl()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ishl()"})
-  void testIshl() {
+  public void testIshl() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8005,11 +7236,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lshl()}
    */
   @Test
-  @DisplayName("Test lshl()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lshl()"})
-  void testLshl() {
+  public void testLshl() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8027,11 +7256,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ishr()}
    */
   @Test
-  @DisplayName("Test ishr()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ishr()"})
-  void testIshr() {
+  public void testIshr() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8049,11 +7276,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lshr()}
    */
   @Test
-  @DisplayName("Test lshr()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lshr()"})
-  void testLshr() {
+  public void testLshr() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8071,11 +7296,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iushr()}
    */
   @Test
-  @DisplayName("Test iushr()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iushr()"})
-  void testIushr() {
+  public void testIushr() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8093,11 +7316,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lushr()}
    */
   @Test
-  @DisplayName("Test lushr()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lushr()"})
-  void testLushr() {
+  public void testLushr() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8115,11 +7336,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iand()}
    */
   @Test
-  @DisplayName("Test iand()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iand()"})
-  void testIand() {
+  public void testIand() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8137,11 +7356,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#land()}
    */
   @Test
-  @DisplayName("Test land()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.land()"})
-  void testLand() {
+  public void testLand() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8159,11 +7376,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ior()}
    */
   @Test
-  @DisplayName("Test ior()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ior()"})
-  void testIor() {
+  public void testIor() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8181,11 +7396,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lor()}
    */
   @Test
-  @DisplayName("Test lor()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lor()"})
-  void testLor() {
+  public void testLor() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8203,11 +7416,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ixor()}
    */
   @Test
-  @DisplayName("Test ixor()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ixor()"})
-  void testIxor() {
+  public void testIxor() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8225,11 +7436,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lxor()}
    */
   @Test
-  @DisplayName("Test lxor()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lxor()"})
-  void testLxor() {
+  public void testLxor() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8251,11 +7460,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iinc(int, int)}
    */
   @Test
-  @DisplayName("Test iinc(int, int); when four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iinc(int, int)"})
-  void testIinc_whenFour() {
+  public void testIinc_whenFour() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8278,11 +7485,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iinc(int, int)}
    */
   @Test
-  @DisplayName("Test iinc(int, int); when MIN_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iinc(int, int)"})
-  void testIinc_whenMin_value() {
+  public void testIinc_whenMin_value() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8305,11 +7510,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iinc(int, int)}
    */
   @Test
-  @DisplayName("Test iinc(int, int); when minus one hundred twenty-four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iinc(int, int)"})
-  void testIinc_whenMinusOneHundredTwentyFour() {
+  public void testIinc_whenMinusOneHundredTwentyFour() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8331,11 +7534,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iinc(int, int)}
    */
   @Test
-  @DisplayName("Test iinc(int, int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iinc(int, int)"})
-  void testIinc_whenOne() {
+  public void testIinc_whenOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8357,11 +7558,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iinc(int, int)}
    */
   @Test
-  @DisplayName("Test iinc(int, int); when two hundred fifty-five")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iinc(int, int)"})
-  void testIinc_whenTwoHundredFiftyFive() {
+  public void testIinc_whenTwoHundredFiftyFive() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8379,11 +7578,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#i2l()}
    */
   @Test
-  @DisplayName("Test i2l()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.i2l()"})
-  void testI2l() {
+  public void testI2l() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8401,11 +7598,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#i2f()}
    */
   @Test
-  @DisplayName("Test i2f()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.i2f()"})
-  void testI2f() {
+  public void testI2f() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8423,11 +7618,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#i2d()}
    */
   @Test
-  @DisplayName("Test i2d()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.i2d()"})
-  void testI2d() {
+  public void testI2d() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8445,11 +7638,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#l2i()}
    */
   @Test
-  @DisplayName("Test l2i()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.l2i()"})
-  void testL2i() {
+  public void testL2i() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8467,11 +7658,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#l2f()}
    */
   @Test
-  @DisplayName("Test l2f()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.l2f()"})
-  void testL2f() {
+  public void testL2f() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8489,11 +7678,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#l2d()}
    */
   @Test
-  @DisplayName("Test l2d()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.l2d()"})
-  void testL2d() {
+  public void testL2d() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8511,11 +7698,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#f2i()}
    */
   @Test
-  @DisplayName("Test f2i()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.f2i()"})
-  void testF2i() {
+  public void testF2i() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8533,11 +7718,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#f2l()}
    */
   @Test
-  @DisplayName("Test f2l()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.f2l()"})
-  void testF2l() {
+  public void testF2l() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8555,11 +7738,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#f2d()}
    */
   @Test
-  @DisplayName("Test f2d()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.f2d()"})
-  void testF2d() {
+  public void testF2d() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8577,11 +7758,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#d2i()}
    */
   @Test
-  @DisplayName("Test d2i()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.d2i()"})
-  void testD2i() {
+  public void testD2i() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8599,11 +7778,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#d2l()}
    */
   @Test
-  @DisplayName("Test d2l()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.d2l()"})
-  void testD2l() {
+  public void testD2l() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8621,11 +7798,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#d2f()}
    */
   @Test
-  @DisplayName("Test d2f()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.d2f()"})
-  void testD2f() {
+  public void testD2f() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8643,11 +7818,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#i2b()}
    */
   @Test
-  @DisplayName("Test i2b()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.i2b()"})
-  void testI2b() {
+  public void testI2b() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8665,11 +7838,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#i2c()}
    */
   @Test
-  @DisplayName("Test i2c()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.i2c()"})
-  void testI2c() {
+  public void testI2c() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8687,11 +7858,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#i2s()}
    */
   @Test
-  @DisplayName("Test i2s()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.i2s()"})
-  void testI2s() {
+  public void testI2s() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8709,11 +7878,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lcmp()}
    */
   @Test
-  @DisplayName("Test lcmp()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lcmp()"})
-  void testLcmp() {
+  public void testLcmp() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8731,11 +7898,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fcmpl()}
    */
   @Test
-  @DisplayName("Test fcmpl()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fcmpl()"})
-  void testFcmpl() {
+  public void testFcmpl() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8753,11 +7918,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#fcmpg()}
    */
   @Test
-  @DisplayName("Test fcmpg()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.fcmpg()"})
-  void testFcmpg() {
+  public void testFcmpg() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8775,11 +7938,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dcmpl()}
    */
   @Test
-  @DisplayName("Test dcmpl()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dcmpl()"})
-  void testDcmpl() {
+  public void testDcmpl() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8797,11 +7958,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dcmpg()}
    */
   @Test
-  @DisplayName("Test dcmpg()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dcmpg()"})
-  void testDcmpg() {
+  public void testDcmpg() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8819,11 +7978,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ifeq(int)}
    */
   @Test
-  @DisplayName("Test ifeq(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ifeq(int)"})
-  void testIfeq() {
+  public void testIfeq() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8841,11 +7998,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ifne(int)}
    */
   @Test
-  @DisplayName("Test ifne(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ifne(int)"})
-  void testIfne() {
+  public void testIfne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8863,11 +8018,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#iflt(int)}
    */
   @Test
-  @DisplayName("Test iflt(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.iflt(int)"})
-  void testIflt() {
+  public void testIflt() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8885,11 +8038,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ifge(int)}
    */
   @Test
-  @DisplayName("Test ifge(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ifge(int)"})
-  void testIfge() {
+  public void testIfge() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8907,11 +8058,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ifgt(int)}
    */
   @Test
-  @DisplayName("Test ifgt(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ifgt(int)"})
-  void testIfgt() {
+  public void testIfgt() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8929,11 +8078,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ifle(int)}
    */
   @Test
-  @DisplayName("Test ifle(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ifle(int)"})
-  void testIfle() {
+  public void testIfle() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8951,11 +8098,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ificmpeq(int)}
    */
   @Test
-  @DisplayName("Test ificmpeq(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ificmpeq(int)"})
-  void testIficmpeq() {
+  public void testIficmpeq() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8973,11 +8118,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ificmpne(int)}
    */
   @Test
-  @DisplayName("Test ificmpne(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ificmpne(int)"})
-  void testIficmpne() {
+  public void testIficmpne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -8995,11 +8138,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ificmplt(int)}
    */
   @Test
-  @DisplayName("Test ificmplt(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ificmplt(int)"})
-  void testIficmplt() {
+  public void testIficmplt() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -9017,11 +8158,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ificmpge(int)}
    */
   @Test
-  @DisplayName("Test ificmpge(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ificmpge(int)"})
-  void testIficmpge() {
+  public void testIficmpge() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -9039,11 +8178,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ificmpgt(int)}
    */
   @Test
-  @DisplayName("Test ificmpgt(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ificmpgt(int)"})
-  void testIficmpgt() {
+  public void testIficmpgt() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -9061,11 +8198,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ificmple(int)}
    */
   @Test
-  @DisplayName("Test ificmple(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ificmple(int)"})
-  void testIficmple() {
+  public void testIficmple() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -9083,11 +8218,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ifacmpeq(int)}
    */
   @Test
-  @DisplayName("Test ifacmpeq(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ifacmpeq(int)"})
-  void testIfacmpeq() {
+  public void testIfacmpeq() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -9105,11 +8238,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ifacmpne(int)}
    */
   @Test
-  @DisplayName("Test ifacmpne(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ifacmpne(int)"})
-  void testIfacmpne() {
+  public void testIfacmpne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -9127,11 +8258,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#goto_(int)}
    */
   @Test
-  @DisplayName("Test goto_(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.goto_(int)"})
-  void testGoto_() {
+  public void testGoto_() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -9149,11 +8278,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#jsr(int)}
    */
   @Test
-  @DisplayName("Test jsr(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.jsr(int)"})
-  void testJsr() {
+  public void testJsr() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -9175,11 +8302,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ret(int)}
    */
   @Test
-  @DisplayName("Test ret(int); when minus eighty-seven")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ret(int)"})
-  void testRet_whenMinusEightySeven() {
+  public void testRet_whenMinusEightySeven() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -9201,11 +8326,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ret(int)}
    */
   @Test
-  @DisplayName("Test ret(int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ret(int)"})
-  void testRet_whenOne() {
+  public void testRet_whenOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -9223,13 +8346,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#tableswitch(int, int, int, int[])}
    */
   @Test
-  @DisplayName("Test tableswitch(int, int, int, int[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.tableswitch(int, int, int, int[])"
   })
-  void testTableswitch() {
+  public void testTableswitch() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -9248,13 +8369,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lookupswitch(int, int[], int[])}
    */
   @Test
-  @DisplayName("Test lookupswitch(int, int[], int[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.lookupswitch(int, int[], int[])"
   })
-  void testLookupswitch() {
+  public void testLookupswitch() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -9274,11 +8393,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ireturn()}
    */
   @Test
-  @DisplayName("Test ireturn()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ireturn()"})
-  void testIreturn() {
+  public void testIreturn() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -9296,11 +8413,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#lreturn()}
    */
   @Test
-  @DisplayName("Test lreturn()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.lreturn()"})
-  void testLreturn() {
+  public void testLreturn() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -9318,11 +8433,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#freturn()}
    */
   @Test
-  @DisplayName("Test freturn()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.freturn()"})
-  void testFreturn() {
+  public void testFreturn() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -9340,11 +8453,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#dreturn()}
    */
   @Test
-  @DisplayName("Test dreturn()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.dreturn()"})
-  void testDreturn() {
+  public void testDreturn() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -9362,11 +8473,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#areturn()}
    */
   @Test
-  @DisplayName("Test areturn()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.areturn()"})
-  void testAreturn() {
+  public void testAreturn() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -9384,11 +8493,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#return_()}
    */
   @Test
-  @DisplayName("Test return_()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.return_()"})
-  void testReturn_() {
+  public void testReturn_() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -9407,194 +8514,51 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(String, String, String)}
    */
   @Test
-  @DisplayName("Test getstatic(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String)"
   })
-  void testGetstaticWithClassNameNameDescriptor() {
+  public void testGetstaticWithClassNameNameDescriptor() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualGetstaticResult =
-        instructionSequenceBuilder.getstatic("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getstatic(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test getstatic(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String)"
-  })
-  void testGetstaticWithClassNameNameDescriptor2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualGetstaticResult =
-        instructionSequenceBuilder.getstatic("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getstatic(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test getstatic(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String)"
-  })
-  void testGetstaticWithClassNameNameDescriptor3() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
     InstructionSequenceBuilder instructionSequenceBuilder =
         new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-
-    // Act
-    InstructionSequenceBuilder actualGetstaticResult =
-        instructionSequenceBuilder.getstatic("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getstatic(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test getstatic(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String)"
-  })
-  void testGetstaticWithClassNameNameDescriptor4() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualGetstaticResult =
-        instructionSequenceBuilder.getstatic("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getstatic(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test getstatic(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String)"
-  })
-  void testGetstaticWithClassNameNameDescriptor5() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    FieldrefConstant fieldrefConstant = new FieldrefConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, fieldrefConstant, new ClassConstant()},
-                1,
-                1,
-                1));
-
-    // Act
-    InstructionSequenceBuilder actualGetstaticResult =
-        instructionSequenceBuilder.getstatic("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getstatic(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test getstatic(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String)"
-  })
-  void testGetstaticWithClassNameNameDescriptor6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
     // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .getstatic("Class Name", "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof FieldrefConstant);
-    assertTrue(constantArray[9] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(11, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.getstatic("Class Name", "Name", "Descriptor"));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#getstatic(String, String, String)} with {@code
+   * className}, {@code name}, {@code descriptor}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(String, String, String)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String)"
+  })
+  public void testGetstaticWithClassNameNameDescriptor2() {
+    // Arrange
+    ClassConstant classConstant = new ClassConstant();
+    ClassConstant classConstant2 = new ClassConstant();
+    InstructionSequenceBuilder instructionSequenceBuilder =
+        new InstructionSequenceBuilder(
+            new ProgramClass(
+                1,
+                3,
+                new Constant[] {classConstant, classConstant2, new ClassConstant()},
+                1,
+                1,
+                1));
+
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.getstatic("Class Name", "Name", "Descriptor"));
   }
 
   /**
@@ -9606,30 +8570,86 @@ class InstructionSequenceBuilderDiffblueTest {
    * Clazz, Field)}
    */
   @Test
-  @DisplayName(
-      "Test getstatic(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String, Clazz, Field)"
   })
-  void testGetstaticWithClassNameNameDescriptorReferencedClassReferencedField()
+  public void testGetstaticWithClassNameNameDescriptorReferencedClassReferencedField()
       throws UnsupportedEncodingException {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass referencedClass = new LibraryClass();
     LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
 
-    // Act and Assert
+    // Act
+    InstructionSequenceBuilder actualGetstaticResult =
+        instructionSequenceBuilder.getstatic(
+            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
+
+    // Assert
     Constant[] constantArray =
-        instructionSequenceBuilder
-            .getstatic("Class Name", "Name", "Descriptor", referencedClass, referencedField)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
+        actualGetstaticResult.getConstantPoolEditor().getTargetClass().constantPool;
     Constant constant = constantArray[5];
     Clazz clazz = ((ClassConstant) constant).referencedClass;
     assertTrue(clazz instanceof LibraryClass);
+    Constant constant2 = constantArray[6];
+    Field field = ((FieldrefConstant) constant2).referencedField;
+    assertTrue(field instanceof LibraryField);
+    assertTrue(constant instanceof ClassConstant);
+    assertTrue(constant2 instanceof FieldrefConstant);
+    Constant constant3 = constantArray[1];
+    assertTrue(constant3 instanceof Utf8Constant);
+    Constant constant4 = constantArray[2];
+    assertTrue(constant4 instanceof Utf8Constant);
+    Constant constant5 = constantArray[4];
+    assertTrue(constant5 instanceof Utf8Constant);
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertEquals(1, actualGetstaticResult.size());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    assertSame(referencedClass, clazz);
+    assertSame(referencedClass, ((FieldrefConstant) constant2).referencedClass);
+    assertSame(referencedField, field);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant5).getBytes());
+    byte[] expectedBytes2 = "Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes3 = "Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant3).getBytes());
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#getstatic(String, String, String, Clazz, Field)} with
+   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
+   * referencedField}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(String, String, String,
+   * Clazz, Field)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String, Clazz, Field)"
+  })
+  public void testGetstaticWithClassNameNameDescriptorReferencedClassReferencedField2()
+      throws UnsupportedEncodingException {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    InstructionSequenceBuilder actualGetstaticResult =
+        instructionSequenceBuilder.getstatic(
+            "Class Name",
+            "Name",
+            "Descriptor",
+            referencedClass,
+            new LibraryField(1, "Name", "Descriptor"));
+
+    // Assert
+    Constant[] constantArray =
+        actualGetstaticResult.getConstantPoolEditor().getTargetClass().constantPool;
+    Constant constant = constantArray[5];
     assertTrue(constant instanceof ClassConstant);
     Constant constant2 = constantArray[6];
     assertTrue(constant2 instanceof FieldrefConstant);
@@ -9639,380 +8659,18 @@ class InstructionSequenceBuilderDiffblueTest {
     assertTrue(constant4 instanceof Utf8Constant);
     Constant constant5 = constantArray[4];
     assertTrue(constant5 instanceof Utf8Constant);
+    assertNull(((ClassConstant) constant).referencedClass);
+    assertNull(((FieldrefConstant) constant2).referencedClass);
+    assertNull(((FieldrefConstant) constant2).referencedField);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualGetstaticResult.size());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(clazz, ((FieldrefConstant) constant2).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getstatic(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(String, String, String,
-   * Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test getstatic(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String, Clazz, Field)"
-  })
-  void testGetstaticWithClassNameNameDescriptorReferencedClassReferencedField2() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetstaticResult =
-        instructionSequenceBuilder.getstatic(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertEquals(2, instructionSequenceBuilder.size());
-    assertSame(instructionSequenceBuilder, actualGetstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getstatic(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(String, String, String,
-   * Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test getstatic(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String, Clazz, Field)"
-  })
-  void testGetstaticWithClassNameNameDescriptorReferencedClassReferencedField3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetstaticResult =
-        instructionSequenceBuilder.getstatic(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getstatic(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(String, String, String,
-   * Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test getstatic(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String, Clazz, Field)"
-  })
-  void testGetstaticWithClassNameNameDescriptorReferencedClassReferencedField4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetstaticResult =
-        instructionSequenceBuilder.getstatic(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getstatic(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(String, String, String,
-   * Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test getstatic(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String, Clazz, Field)"
-  })
-  void testGetstaticWithClassNameNameDescriptorReferencedClassReferencedField5()
-      throws UnsupportedEncodingException {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .getstatic("Class Name", "Name", "Descriptor", referencedClass, referencedField)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[7];
-    Clazz clazz = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[8];
-    assertTrue(constant2 instanceof FieldrefConstant);
-    Constant constant3 = constantArray[3];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[6];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(19, constantArray.length);
-    assertSame(clazz, ((FieldrefConstant) constant2).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getstatic(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(String, String, String,
-   * Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test getstatic(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String, Clazz, Field)"
-  })
-  void testGetstaticWithClassNameNameDescriptorReferencedClassReferencedField6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetstaticResult =
-        instructionSequenceBuilder.getstatic(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getstatic(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(String, String, String,
-   * Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test getstatic(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String, Clazz, Field)"
-  })
-  void testGetstaticWithClassNameNameDescriptorReferencedClassReferencedField7() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    FieldrefConstant fieldrefConstant = new FieldrefConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, fieldrefConstant, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetstaticResult =
-        instructionSequenceBuilder.getstatic(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getstatic(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(String, String, String,
-   * Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test getstatic(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String, Clazz, Field)"
-  })
-  void testGetstaticWithClassNameNameDescriptorReferencedClassReferencedField8() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .getstatic("Class Name", "Name", "Descriptor", referencedClass, referencedField)
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof FieldrefConstant);
-    assertTrue(constantArray[9] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(11, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getstatic(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(String, String, String,
-   * Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test getstatic(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String, Clazz, Field)"
-  })
-  void testGetstaticWithClassNameNameDescriptorReferencedClassReferencedField9() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetstaticResult =
-        instructionSequenceBuilder.getstatic(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    ProgramClass targetClass = actualGetstaticResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[9] instanceof ClassConstant);
-    assertTrue(constantArray[13] instanceof FieldrefConstant);
-    assertTrue(constantArray[12] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[11] instanceof Utf8Constant);
-    assertEquals(14, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualGetstaticResult.size());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getstatic(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <ul>
-   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is two.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(String, String, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getstatic(String, String, String) with 'className', 'name', 'descriptor'; then InstructionSequenceBuilder() size is two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String)"
-  })
-  void testGetstaticWithClassNameNameDescriptor_thenInstructionSequenceBuilderSizeIsTwo() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetstaticResult =
-        instructionSequenceBuilder.getstatic("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertEquals(2, instructionSequenceBuilder.size());
-    assertSame(instructionSequenceBuilder, actualGetstaticResult);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant5).getBytes());
+    byte[] expectedBytes2 = "Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes3 = "Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant3).getBytes());
   }
 
   /**
@@ -10026,23 +8684,18 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(String, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test getstatic(String, String, String) with 'className', 'name', 'descriptor'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String)"
   })
-  void testGetstaticWithClassNameNameDescriptor_thenReturnInstructionSequenceBuilder() {
+  public void testGetstaticWithClassNameNameDescriptor_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualGetstaticResult =
-        instructionSequenceBuilder.getstatic("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetstaticResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.getstatic("Class Name", "Name", "Descriptor"));
   }
 
   /**
@@ -10050,159 +8703,44 @@ class InstructionSequenceBuilderDiffblueTest {
    * className}, {@code name}, {@code descriptor}.
    *
    * <ul>
-   *   <li>Then tenth element return {@link ClassConstant}.
+   *   <li>Then second element return {@link Utf8Constant}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(String, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test getstatic(String, String, String) with 'className', 'name', 'descriptor'; then tenth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(String, String, String)"
   })
-  void testGetstaticWithClassNameNameDescriptor_thenTenthElementReturnClassConstant() {
+  public void testGetstaticWithClassNameNameDescriptor_thenSecondElementReturnUtf8Constant()
+      throws UnsupportedEncodingException {
     // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
 
     // Act
     InstructionSequenceBuilder actualGetstaticResult =
         instructionSequenceBuilder.getstatic("Class Name", "Name", "Descriptor");
 
     // Assert
-    ProgramClass targetClass = actualGetstaticResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[9] instanceof ClassConstant);
-    assertTrue(constantArray[13] instanceof FieldrefConstant);
-    assertTrue(constantArray[12] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[11] instanceof Utf8Constant);
-    assertEquals(14, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualGetstaticResult.size());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getstatic(Clazz, Field)} with {@code clazz}, {@code
-   * field}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(Clazz, Field)}
-   */
-  @Test
-  @DisplayName("Test getstatic(Clazz, Field) with 'clazz', 'field'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(Clazz, Field)"
-  })
-  void testGetstaticWithClazzField() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryField field = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetstaticResult =
-        instructionSequenceBuilder.getstatic(clazz, field);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getstatic(Clazz, Field)} with {@code clazz}, {@code
-   * field}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(Clazz, Field)}
-   */
-  @Test
-  @DisplayName("Test getstatic(Clazz, Field) with 'clazz', 'field'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(Clazz, Field)"
-  })
-  void testGetstaticWithClazzField2() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryField field = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetstaticResult =
-        instructionSequenceBuilder.getstatic(clazz, field);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getstatic(Clazz, Field)} with {@code clazz}, {@code
-   * field}.
-   *
-   * <ul>
-   *   <li>Then ninth element return {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test getstatic(Clazz, Field) with 'clazz', 'field'; then ninth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(Clazz, Field)"
-  })
-  void testGetstaticWithClazzField_thenNinthElementReturnClassConstant() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryField field = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetstaticResult =
-        instructionSequenceBuilder.getstatic(clazz, field);
-
-    // Assert
-    ProgramClass targetClass = actualGetstaticResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[8] instanceof ClassConstant);
-    assertTrue(constantArray[9] instanceof FieldrefConstant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertEquals(10, targetClass.u2constantPoolCount);
+    Constant[] constantArray =
+        actualGetstaticResult.getConstantPoolEditor().getTargetClass().constantPool;
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof Utf8Constant);
+    Constant constant2 = constantArray[2];
+    assertTrue(constant2 instanceof Utf8Constant);
+    Constant constant3 = constantArray[4];
+    assertTrue(constant3 instanceof Utf8Constant);
     assertEquals(2, instructionSequenceBuilder.size());
     assertEquals(2, actualGetstaticResult.size());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes2 = "Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes3 = "Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant).getBytes());
   }
 
   /**
@@ -10210,50 +8748,28 @@ class InstructionSequenceBuilderDiffblueTest {
    * field}.
    *
    * <ul>
-   *   <li>Then sixth element {@link ClassConstant#referencedClass} return {@link LibraryClass}.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(Clazz, Field)}
    */
   @Test
-  @DisplayName(
-      "Test getstatic(Clazz, Field) with 'clazz', 'field'; then sixth element referencedClass return LibraryClass")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(Clazz, Field)"
   })
-  void testGetstaticWithClazzField_thenSixthElementReferencedClassReturnLibraryClass()
-      throws UnsupportedEncodingException {
+  public void testGetstaticWithClazzField_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryField field = new LibraryField(1, "Name", "Descriptor");
 
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .getstatic(clazz, field)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[5];
-    Clazz clazz2 = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz2 instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[6];
-    assertTrue(constant2 instanceof FieldrefConstant);
-    Constant constant3 = constantArray[1];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[2];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[4];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(clazz2, ((FieldrefConstant) constant2).referencedClass);
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("This Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
+    // Act
+    InstructionSequenceBuilder actualGetstaticResult =
+        instructionSequenceBuilder.getstatic(clazz, new LibraryField(1, "Name", "Descriptor"));
+
+    // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertSame(instructionSequenceBuilder, actualGetstaticResult);
   }
 
   /**
@@ -10262,11 +8778,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#getstatic(int)}
    */
   @Test
-  @DisplayName("Test getstatic(int) with 'constantIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.getstatic(int)"})
-  void testGetstaticWithConstantIndex() {
+  public void testGetstaticWithConstantIndex() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -10285,194 +8799,51 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(String, String, String)}
    */
   @Test
-  @DisplayName("Test putstatic(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String)"
   })
-  void testPutstaticWithClassNameNameDescriptor() {
+  public void testPutstaticWithClassNameNameDescriptor() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualPutstaticResult =
-        instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putstatic(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test putstatic(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String)"
-  })
-  void testPutstaticWithClassNameNameDescriptor2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualPutstaticResult =
-        instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putstatic(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test putstatic(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String)"
-  })
-  void testPutstaticWithClassNameNameDescriptor3() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
     InstructionSequenceBuilder instructionSequenceBuilder =
         new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-
-    // Act
-    InstructionSequenceBuilder actualPutstaticResult =
-        instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putstatic(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test putstatic(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String)"
-  })
-  void testPutstaticWithClassNameNameDescriptor4() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualPutstaticResult =
-        instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putstatic(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test putstatic(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String)"
-  })
-  void testPutstaticWithClassNameNameDescriptor5() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    FieldrefConstant fieldrefConstant = new FieldrefConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, fieldrefConstant, new ClassConstant()},
-                1,
-                1,
-                1));
-
-    // Act
-    InstructionSequenceBuilder actualPutstaticResult =
-        instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putstatic(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test putstatic(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String)"
-  })
-  void testPutstaticWithClassNameNameDescriptor6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
     // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .putstatic("Class Name", "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof FieldrefConstant);
-    assertTrue(constantArray[9] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(11, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor"));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#putstatic(String, String, String)} with {@code
+   * className}, {@code name}, {@code descriptor}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(String, String, String)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String)"
+  })
+  public void testPutstaticWithClassNameNameDescriptor2() {
+    // Arrange
+    ClassConstant classConstant = new ClassConstant();
+    ClassConstant classConstant2 = new ClassConstant();
+    InstructionSequenceBuilder instructionSequenceBuilder =
+        new InstructionSequenceBuilder(
+            new ProgramClass(
+                1,
+                3,
+                new Constant[] {classConstant, classConstant2, new ClassConstant()},
+                1,
+                1,
+                1));
+
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor"));
   }
 
   /**
@@ -10484,30 +8855,86 @@ class InstructionSequenceBuilderDiffblueTest {
    * Clazz, Field)}
    */
   @Test
-  @DisplayName(
-      "Test putstatic(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String, Clazz, Field)"
   })
-  void testPutstaticWithClassNameNameDescriptorReferencedClassReferencedField()
+  public void testPutstaticWithClassNameNameDescriptorReferencedClassReferencedField()
       throws UnsupportedEncodingException {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass referencedClass = new LibraryClass();
     LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
 
-    // Act and Assert
+    // Act
+    InstructionSequenceBuilder actualPutstaticResult =
+        instructionSequenceBuilder.putstatic(
+            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
+
+    // Assert
     Constant[] constantArray =
-        instructionSequenceBuilder
-            .putstatic("Class Name", "Name", "Descriptor", referencedClass, referencedField)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
+        actualPutstaticResult.getConstantPoolEditor().getTargetClass().constantPool;
     Constant constant = constantArray[5];
     Clazz clazz = ((ClassConstant) constant).referencedClass;
     assertTrue(clazz instanceof LibraryClass);
+    Constant constant2 = constantArray[6];
+    Field field = ((FieldrefConstant) constant2).referencedField;
+    assertTrue(field instanceof LibraryField);
+    assertTrue(constant instanceof ClassConstant);
+    assertTrue(constant2 instanceof FieldrefConstant);
+    Constant constant3 = constantArray[1];
+    assertTrue(constant3 instanceof Utf8Constant);
+    Constant constant4 = constantArray[2];
+    assertTrue(constant4 instanceof Utf8Constant);
+    Constant constant5 = constantArray[4];
+    assertTrue(constant5 instanceof Utf8Constant);
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertEquals(1, actualPutstaticResult.size());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    assertSame(referencedClass, clazz);
+    assertSame(referencedClass, ((FieldrefConstant) constant2).referencedClass);
+    assertSame(referencedField, field);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant5).getBytes());
+    byte[] expectedBytes2 = "Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes3 = "Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant3).getBytes());
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#putstatic(String, String, String, Clazz, Field)} with
+   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
+   * referencedField}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(String, String, String,
+   * Clazz, Field)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String, Clazz, Field)"
+  })
+  public void testPutstaticWithClassNameNameDescriptorReferencedClassReferencedField2()
+      throws UnsupportedEncodingException {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    InstructionSequenceBuilder actualPutstaticResult =
+        instructionSequenceBuilder.putstatic(
+            "Class Name",
+            "Name",
+            "Descriptor",
+            referencedClass,
+            new LibraryField(1, "Name", "Descriptor"));
+
+    // Assert
+    Constant[] constantArray =
+        actualPutstaticResult.getConstantPoolEditor().getTargetClass().constantPool;
+    Constant constant = constantArray[5];
     assertTrue(constant instanceof ClassConstant);
     Constant constant2 = constantArray[6];
     assertTrue(constant2 instanceof FieldrefConstant);
@@ -10517,380 +8944,18 @@ class InstructionSequenceBuilderDiffblueTest {
     assertTrue(constant4 instanceof Utf8Constant);
     Constant constant5 = constantArray[4];
     assertTrue(constant5 instanceof Utf8Constant);
+    assertNull(((ClassConstant) constant).referencedClass);
+    assertNull(((FieldrefConstant) constant2).referencedClass);
+    assertNull(((FieldrefConstant) constant2).referencedField);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualPutstaticResult.size());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(clazz, ((FieldrefConstant) constant2).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putstatic(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(String, String, String,
-   * Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test putstatic(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String, Clazz, Field)"
-  })
-  void testPutstaticWithClassNameNameDescriptorReferencedClassReferencedField2() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutstaticResult =
-        instructionSequenceBuilder.putstatic(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertEquals(2, instructionSequenceBuilder.size());
-    assertSame(instructionSequenceBuilder, actualPutstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putstatic(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(String, String, String,
-   * Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test putstatic(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String, Clazz, Field)"
-  })
-  void testPutstaticWithClassNameNameDescriptorReferencedClassReferencedField3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutstaticResult =
-        instructionSequenceBuilder.putstatic(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putstatic(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(String, String, String,
-   * Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test putstatic(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String, Clazz, Field)"
-  })
-  void testPutstaticWithClassNameNameDescriptorReferencedClassReferencedField4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutstaticResult =
-        instructionSequenceBuilder.putstatic(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putstatic(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(String, String, String,
-   * Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test putstatic(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String, Clazz, Field)"
-  })
-  void testPutstaticWithClassNameNameDescriptorReferencedClassReferencedField5()
-      throws UnsupportedEncodingException {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .putstatic("Class Name", "Name", "Descriptor", referencedClass, referencedField)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[7];
-    Clazz clazz = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[8];
-    assertTrue(constant2 instanceof FieldrefConstant);
-    Constant constant3 = constantArray[3];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[6];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(19, constantArray.length);
-    assertSame(clazz, ((FieldrefConstant) constant2).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putstatic(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(String, String, String,
-   * Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test putstatic(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String, Clazz, Field)"
-  })
-  void testPutstaticWithClassNameNameDescriptorReferencedClassReferencedField6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutstaticResult =
-        instructionSequenceBuilder.putstatic(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putstatic(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(String, String, String,
-   * Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test putstatic(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String, Clazz, Field)"
-  })
-  void testPutstaticWithClassNameNameDescriptorReferencedClassReferencedField7() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    FieldrefConstant fieldrefConstant = new FieldrefConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, fieldrefConstant, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutstaticResult =
-        instructionSequenceBuilder.putstatic(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putstatic(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(String, String, String,
-   * Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test putstatic(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String, Clazz, Field)"
-  })
-  void testPutstaticWithClassNameNameDescriptorReferencedClassReferencedField8() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .putstatic("Class Name", "Name", "Descriptor", referencedClass, referencedField)
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof FieldrefConstant);
-    assertTrue(constantArray[9] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(11, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putstatic(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(String, String, String,
-   * Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test putstatic(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String, Clazz, Field)"
-  })
-  void testPutstaticWithClassNameNameDescriptorReferencedClassReferencedField9() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutstaticResult =
-        instructionSequenceBuilder.putstatic(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    ProgramClass targetClass = actualPutstaticResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[9] instanceof ClassConstant);
-    assertTrue(constantArray[13] instanceof FieldrefConstant);
-    assertTrue(constantArray[12] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[11] instanceof Utf8Constant);
-    assertEquals(14, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualPutstaticResult.size());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putstatic(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <ul>
-   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is two.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(String, String, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test putstatic(String, String, String) with 'className', 'name', 'descriptor'; then InstructionSequenceBuilder() size is two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String)"
-  })
-  void testPutstaticWithClassNameNameDescriptor_thenInstructionSequenceBuilderSizeIsTwo() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutstaticResult =
-        instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertEquals(2, instructionSequenceBuilder.size());
-    assertSame(instructionSequenceBuilder, actualPutstaticResult);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant5).getBytes());
+    byte[] expectedBytes2 = "Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes3 = "Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant3).getBytes());
   }
 
   /**
@@ -10904,23 +8969,18 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(String, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test putstatic(String, String, String) with 'className', 'name', 'descriptor'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String)"
   })
-  void testPutstaticWithClassNameNameDescriptor_thenReturnInstructionSequenceBuilder() {
+  public void testPutstaticWithClassNameNameDescriptor_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualPutstaticResult =
-        instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutstaticResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor"));
   }
 
   /**
@@ -10928,159 +8988,44 @@ class InstructionSequenceBuilderDiffblueTest {
    * className}, {@code name}, {@code descriptor}.
    *
    * <ul>
-   *   <li>Then tenth element return {@link ClassConstant}.
+   *   <li>Then second element return {@link Utf8Constant}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(String, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test putstatic(String, String, String) with 'className', 'name', 'descriptor'; then tenth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(String, String, String)"
   })
-  void testPutstaticWithClassNameNameDescriptor_thenTenthElementReturnClassConstant() {
+  public void testPutstaticWithClassNameNameDescriptor_thenSecondElementReturnUtf8Constant()
+      throws UnsupportedEncodingException {
     // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
 
     // Act
     InstructionSequenceBuilder actualPutstaticResult =
         instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
 
     // Assert
-    ProgramClass targetClass = actualPutstaticResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[9] instanceof ClassConstant);
-    assertTrue(constantArray[13] instanceof FieldrefConstant);
-    assertTrue(constantArray[12] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[11] instanceof Utf8Constant);
-    assertEquals(14, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualPutstaticResult.size());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putstatic(Clazz, Field)} with {@code clazz}, {@code
-   * field}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(Clazz, Field)}
-   */
-  @Test
-  @DisplayName("Test putstatic(Clazz, Field) with 'clazz', 'field'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(Clazz, Field)"
-  })
-  void testPutstaticWithClazzField() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryField field = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutstaticResult =
-        instructionSequenceBuilder.putstatic(clazz, field);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putstatic(Clazz, Field)} with {@code clazz}, {@code
-   * field}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(Clazz, Field)}
-   */
-  @Test
-  @DisplayName("Test putstatic(Clazz, Field) with 'clazz', 'field'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(Clazz, Field)"
-  })
-  void testPutstaticWithClazzField2() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryField field = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutstaticResult =
-        instructionSequenceBuilder.putstatic(clazz, field);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutstaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putstatic(Clazz, Field)} with {@code clazz}, {@code
-   * field}.
-   *
-   * <ul>
-   *   <li>Then ninth element return {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test putstatic(Clazz, Field) with 'clazz', 'field'; then ninth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(Clazz, Field)"
-  })
-  void testPutstaticWithClazzField_thenNinthElementReturnClassConstant() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryField field = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutstaticResult =
-        instructionSequenceBuilder.putstatic(clazz, field);
-
-    // Assert
-    ProgramClass targetClass = actualPutstaticResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[8] instanceof ClassConstant);
-    assertTrue(constantArray[9] instanceof FieldrefConstant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertEquals(10, targetClass.u2constantPoolCount);
+    Constant[] constantArray =
+        actualPutstaticResult.getConstantPoolEditor().getTargetClass().constantPool;
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof Utf8Constant);
+    Constant constant2 = constantArray[2];
+    assertTrue(constant2 instanceof Utf8Constant);
+    Constant constant3 = constantArray[4];
+    assertTrue(constant3 instanceof Utf8Constant);
     assertEquals(2, instructionSequenceBuilder.size());
     assertEquals(2, actualPutstaticResult.size());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes2 = "Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes3 = "Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant).getBytes());
   }
 
   /**
@@ -11088,50 +9033,28 @@ class InstructionSequenceBuilderDiffblueTest {
    * field}.
    *
    * <ul>
-   *   <li>Then sixth element {@link ClassConstant#referencedClass} return {@link LibraryClass}.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(Clazz, Field)}
    */
   @Test
-  @DisplayName(
-      "Test putstatic(Clazz, Field) with 'clazz', 'field'; then sixth element referencedClass return LibraryClass")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(Clazz, Field)"
   })
-  void testPutstaticWithClazzField_thenSixthElementReferencedClassReturnLibraryClass()
-      throws UnsupportedEncodingException {
+  public void testPutstaticWithClazzField_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryField field = new LibraryField(1, "Name", "Descriptor");
 
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .putstatic(clazz, field)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[5];
-    Clazz clazz2 = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz2 instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[6];
-    assertTrue(constant2 instanceof FieldrefConstant);
-    Constant constant3 = constantArray[1];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[2];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[4];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(clazz2, ((FieldrefConstant) constant2).referencedClass);
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("This Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
+    // Act
+    InstructionSequenceBuilder actualPutstaticResult =
+        instructionSequenceBuilder.putstatic(clazz, new LibraryField(1, "Name", "Descriptor"));
+
+    // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertSame(instructionSequenceBuilder, actualPutstaticResult);
   }
 
   /**
@@ -11140,11 +9063,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#putstatic(int)}
    */
   @Test
-  @DisplayName("Test putstatic(int) with 'constantIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.putstatic(int)"})
-  void testPutstaticWithConstantIndex() {
+  public void testPutstaticWithConstantIndex() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -11163,194 +9084,51 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#getfield(String, String, String)}
    */
   @Test
-  @DisplayName("Test getfield(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String)"
   })
-  void testGetfieldWithClassNameNameDescriptor() {
+  public void testGetfieldWithClassNameNameDescriptor() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualGetfieldResult =
-        instructionSequenceBuilder.getfield("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getfield(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getfield(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test getfield(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String)"
-  })
-  void testGetfieldWithClassNameNameDescriptor2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualGetfieldResult =
-        instructionSequenceBuilder.getfield("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getfield(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getfield(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test getfield(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String)"
-  })
-  void testGetfieldWithClassNameNameDescriptor3() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
     InstructionSequenceBuilder instructionSequenceBuilder =
         new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-
-    // Act
-    InstructionSequenceBuilder actualGetfieldResult =
-        instructionSequenceBuilder.getfield("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getfield(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getfield(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test getfield(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String)"
-  })
-  void testGetfieldWithClassNameNameDescriptor4() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualGetfieldResult =
-        instructionSequenceBuilder.getfield("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getfield(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getfield(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test getfield(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String)"
-  })
-  void testGetfieldWithClassNameNameDescriptor5() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    FieldrefConstant fieldrefConstant = new FieldrefConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, fieldrefConstant, new ClassConstant()},
-                1,
-                1,
-                1));
-
-    // Act
-    InstructionSequenceBuilder actualGetfieldResult =
-        instructionSequenceBuilder.getfield("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getfield(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getfield(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test getfield(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String)"
-  })
-  void testGetfieldWithClassNameNameDescriptor6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
     // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .getfield("Class Name", "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof FieldrefConstant);
-    assertTrue(constantArray[9] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(11, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.getfield("Class Name", "Name", "Descriptor"));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#getfield(String, String, String)} with {@code
+   * className}, {@code name}, {@code descriptor}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#getfield(String, String, String)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String)"
+  })
+  public void testGetfieldWithClassNameNameDescriptor2() {
+    // Arrange
+    ClassConstant classConstant = new ClassConstant();
+    ClassConstant classConstant2 = new ClassConstant();
+    InstructionSequenceBuilder instructionSequenceBuilder =
+        new InstructionSequenceBuilder(
+            new ProgramClass(
+                1,
+                3,
+                new Constant[] {classConstant, classConstant2, new ClassConstant()},
+                1,
+                1,
+                1));
+
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.getfield("Class Name", "Name", "Descriptor"));
   }
 
   /**
@@ -11362,30 +9140,86 @@ class InstructionSequenceBuilderDiffblueTest {
    * Field)}
    */
   @Test
-  @DisplayName(
-      "Test getfield(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String, Clazz, Field)"
   })
-  void testGetfieldWithClassNameNameDescriptorReferencedClassReferencedField()
+  public void testGetfieldWithClassNameNameDescriptorReferencedClassReferencedField()
       throws UnsupportedEncodingException {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass referencedClass = new LibraryClass();
     LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
 
-    // Act and Assert
+    // Act
+    InstructionSequenceBuilder actualGetfieldResult =
+        instructionSequenceBuilder.getfield(
+            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
+
+    // Assert
     Constant[] constantArray =
-        instructionSequenceBuilder
-            .getfield("Class Name", "Name", "Descriptor", referencedClass, referencedField)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
+        actualGetfieldResult.getConstantPoolEditor().getTargetClass().constantPool;
     Constant constant = constantArray[5];
     Clazz clazz = ((ClassConstant) constant).referencedClass;
     assertTrue(clazz instanceof LibraryClass);
+    Constant constant2 = constantArray[6];
+    Field field = ((FieldrefConstant) constant2).referencedField;
+    assertTrue(field instanceof LibraryField);
+    assertTrue(constant instanceof ClassConstant);
+    assertTrue(constant2 instanceof FieldrefConstant);
+    Constant constant3 = constantArray[1];
+    assertTrue(constant3 instanceof Utf8Constant);
+    Constant constant4 = constantArray[2];
+    assertTrue(constant4 instanceof Utf8Constant);
+    Constant constant5 = constantArray[4];
+    assertTrue(constant5 instanceof Utf8Constant);
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertEquals(1, actualGetfieldResult.size());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    assertSame(referencedClass, clazz);
+    assertSame(referencedClass, ((FieldrefConstant) constant2).referencedClass);
+    assertSame(referencedField, field);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant5).getBytes());
+    byte[] expectedBytes2 = "Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes3 = "Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant3).getBytes());
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#getfield(String, String, String, Clazz, Field)} with
+   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
+   * referencedField}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#getfield(String, String, String, Clazz,
+   * Field)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String, Clazz, Field)"
+  })
+  public void testGetfieldWithClassNameNameDescriptorReferencedClassReferencedField2()
+      throws UnsupportedEncodingException {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    InstructionSequenceBuilder actualGetfieldResult =
+        instructionSequenceBuilder.getfield(
+            "Class Name",
+            "Name",
+            "Descriptor",
+            referencedClass,
+            new LibraryField(1, "Name", "Descriptor"));
+
+    // Assert
+    Constant[] constantArray =
+        actualGetfieldResult.getConstantPoolEditor().getTargetClass().constantPool;
+    Constant constant = constantArray[5];
     assertTrue(constant instanceof ClassConstant);
     Constant constant2 = constantArray[6];
     assertTrue(constant2 instanceof FieldrefConstant);
@@ -11395,380 +9229,18 @@ class InstructionSequenceBuilderDiffblueTest {
     assertTrue(constant4 instanceof Utf8Constant);
     Constant constant5 = constantArray[4];
     assertTrue(constant5 instanceof Utf8Constant);
+    assertNull(((ClassConstant) constant).referencedClass);
+    assertNull(((FieldrefConstant) constant2).referencedClass);
+    assertNull(((FieldrefConstant) constant2).referencedField);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualGetfieldResult.size());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(clazz, ((FieldrefConstant) constant2).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getfield(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getfield(String, String, String, Clazz,
-   * Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test getfield(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String, Clazz, Field)"
-  })
-  void testGetfieldWithClassNameNameDescriptorReferencedClassReferencedField2() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetfieldResult =
-        instructionSequenceBuilder.getfield(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertEquals(2, instructionSequenceBuilder.size());
-    assertSame(instructionSequenceBuilder, actualGetfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getfield(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getfield(String, String, String, Clazz,
-   * Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test getfield(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String, Clazz, Field)"
-  })
-  void testGetfieldWithClassNameNameDescriptorReferencedClassReferencedField3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetfieldResult =
-        instructionSequenceBuilder.getfield(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getfield(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getfield(String, String, String, Clazz,
-   * Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test getfield(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String, Clazz, Field)"
-  })
-  void testGetfieldWithClassNameNameDescriptorReferencedClassReferencedField4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetfieldResult =
-        instructionSequenceBuilder.getfield(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getfield(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getfield(String, String, String, Clazz,
-   * Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test getfield(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String, Clazz, Field)"
-  })
-  void testGetfieldWithClassNameNameDescriptorReferencedClassReferencedField5()
-      throws UnsupportedEncodingException {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .getfield("Class Name", "Name", "Descriptor", referencedClass, referencedField)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[7];
-    Clazz clazz = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[8];
-    assertTrue(constant2 instanceof FieldrefConstant);
-    Constant constant3 = constantArray[3];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[6];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(19, constantArray.length);
-    assertSame(clazz, ((FieldrefConstant) constant2).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getfield(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getfield(String, String, String, Clazz,
-   * Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test getfield(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String, Clazz, Field)"
-  })
-  void testGetfieldWithClassNameNameDescriptorReferencedClassReferencedField6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetfieldResult =
-        instructionSequenceBuilder.getfield(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getfield(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getfield(String, String, String, Clazz,
-   * Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test getfield(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String, Clazz, Field)"
-  })
-  void testGetfieldWithClassNameNameDescriptorReferencedClassReferencedField7() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    FieldrefConstant fieldrefConstant = new FieldrefConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, fieldrefConstant, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetfieldResult =
-        instructionSequenceBuilder.getfield(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getfield(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getfield(String, String, String, Clazz,
-   * Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test getfield(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String, Clazz, Field)"
-  })
-  void testGetfieldWithClassNameNameDescriptorReferencedClassReferencedField8() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .getfield("Class Name", "Name", "Descriptor", referencedClass, referencedField)
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof FieldrefConstant);
-    assertTrue(constantArray[9] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(11, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getfield(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getfield(String, String, String, Clazz,
-   * Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test getfield(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String, Clazz, Field)"
-  })
-  void testGetfieldWithClassNameNameDescriptorReferencedClassReferencedField9() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetfieldResult =
-        instructionSequenceBuilder.getfield(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    ProgramClass targetClass = actualGetfieldResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[9] instanceof ClassConstant);
-    assertTrue(constantArray[13] instanceof FieldrefConstant);
-    assertTrue(constantArray[12] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[11] instanceof Utf8Constant);
-    assertEquals(14, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualGetfieldResult.size());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getfield(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <ul>
-   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is two.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getfield(String, String, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test getfield(String, String, String) with 'className', 'name', 'descriptor'; then InstructionSequenceBuilder() size is two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String)"
-  })
-  void testGetfieldWithClassNameNameDescriptor_thenInstructionSequenceBuilderSizeIsTwo() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetfieldResult =
-        instructionSequenceBuilder.getfield("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertEquals(2, instructionSequenceBuilder.size());
-    assertSame(instructionSequenceBuilder, actualGetfieldResult);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant5).getBytes());
+    byte[] expectedBytes2 = "Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes3 = "Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant3).getBytes());
   }
 
   /**
@@ -11782,23 +9254,18 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#getfield(String, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test getfield(String, String, String) with 'className', 'name', 'descriptor'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String)"
   })
-  void testGetfieldWithClassNameNameDescriptor_thenReturnInstructionSequenceBuilder() {
+  public void testGetfieldWithClassNameNameDescriptor_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualGetfieldResult =
-        instructionSequenceBuilder.getfield("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetfieldResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.getfield("Class Name", "Name", "Descriptor"));
   }
 
   /**
@@ -11806,159 +9273,44 @@ class InstructionSequenceBuilderDiffblueTest {
    * className}, {@code name}, {@code descriptor}.
    *
    * <ul>
-   *   <li>Then tenth element return {@link ClassConstant}.
+   *   <li>Then second element return {@link Utf8Constant}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#getfield(String, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test getfield(String, String, String) with 'className', 'name', 'descriptor'; then tenth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(String, String, String)"
   })
-  void testGetfieldWithClassNameNameDescriptor_thenTenthElementReturnClassConstant() {
+  public void testGetfieldWithClassNameNameDescriptor_thenSecondElementReturnUtf8Constant()
+      throws UnsupportedEncodingException {
     // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
 
     // Act
     InstructionSequenceBuilder actualGetfieldResult =
         instructionSequenceBuilder.getfield("Class Name", "Name", "Descriptor");
 
     // Assert
-    ProgramClass targetClass = actualGetfieldResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[9] instanceof ClassConstant);
-    assertTrue(constantArray[13] instanceof FieldrefConstant);
-    assertTrue(constantArray[12] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[11] instanceof Utf8Constant);
-    assertEquals(14, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualGetfieldResult.size());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getfield(Clazz, Field)} with {@code clazz}, {@code
-   * field}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getfield(Clazz, Field)}
-   */
-  @Test
-  @DisplayName("Test getfield(Clazz, Field) with 'clazz', 'field'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(Clazz, Field)"
-  })
-  void testGetfieldWithClazzField() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryField field = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetfieldResult =
-        instructionSequenceBuilder.getfield(clazz, field);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getfield(Clazz, Field)} with {@code clazz}, {@code
-   * field}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getfield(Clazz, Field)}
-   */
-  @Test
-  @DisplayName("Test getfield(Clazz, Field) with 'clazz', 'field'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(Clazz, Field)"
-  })
-  void testGetfieldWithClazzField2() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryField field = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetfieldResult =
-        instructionSequenceBuilder.getfield(clazz, field);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualGetfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#getfield(Clazz, Field)} with {@code clazz}, {@code
-   * field}.
-   *
-   * <ul>
-   *   <li>Then ninth element return {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#getfield(Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test getfield(Clazz, Field) with 'clazz', 'field'; then ninth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(Clazz, Field)"
-  })
-  void testGetfieldWithClazzField_thenNinthElementReturnClassConstant() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryField field = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualGetfieldResult =
-        instructionSequenceBuilder.getfield(clazz, field);
-
-    // Assert
-    ProgramClass targetClass = actualGetfieldResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[8] instanceof ClassConstant);
-    assertTrue(constantArray[9] instanceof FieldrefConstant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertEquals(10, targetClass.u2constantPoolCount);
+    Constant[] constantArray =
+        actualGetfieldResult.getConstantPoolEditor().getTargetClass().constantPool;
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof Utf8Constant);
+    Constant constant2 = constantArray[2];
+    assertTrue(constant2 instanceof Utf8Constant);
+    Constant constant3 = constantArray[4];
+    assertTrue(constant3 instanceof Utf8Constant);
     assertEquals(2, instructionSequenceBuilder.size());
     assertEquals(2, actualGetfieldResult.size());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes2 = "Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes3 = "Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant).getBytes());
   }
 
   /**
@@ -11966,50 +9318,28 @@ class InstructionSequenceBuilderDiffblueTest {
    * field}.
    *
    * <ul>
-   *   <li>Then sixth element {@link ClassConstant#referencedClass} return {@link LibraryClass}.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#getfield(Clazz, Field)}
    */
   @Test
-  @DisplayName(
-      "Test getfield(Clazz, Field) with 'clazz', 'field'; then sixth element referencedClass return LibraryClass")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.getfield(Clazz, Field)"
   })
-  void testGetfieldWithClazzField_thenSixthElementReferencedClassReturnLibraryClass()
-      throws UnsupportedEncodingException {
+  public void testGetfieldWithClazzField_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryField field = new LibraryField(1, "Name", "Descriptor");
 
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .getfield(clazz, field)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[5];
-    Clazz clazz2 = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz2 instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[6];
-    assertTrue(constant2 instanceof FieldrefConstant);
-    Constant constant3 = constantArray[1];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[2];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[4];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(clazz2, ((FieldrefConstant) constant2).referencedClass);
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("This Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
+    // Act
+    InstructionSequenceBuilder actualGetfieldResult =
+        instructionSequenceBuilder.getfield(clazz, new LibraryField(1, "Name", "Descriptor"));
+
+    // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertSame(instructionSequenceBuilder, actualGetfieldResult);
   }
 
   /**
@@ -12018,11 +9348,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#getfield(int)}
    */
   @Test
-  @DisplayName("Test getfield(int) with 'constantIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.getfield(int)"})
-  void testGetfieldWithConstantIndex() {
+  public void testGetfieldWithConstantIndex() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -12041,194 +9369,51 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#putfield(String, String, String)}
    */
   @Test
-  @DisplayName("Test putfield(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String)"
   })
-  void testPutfieldWithClassNameNameDescriptor() {
+  public void testPutfieldWithClassNameNameDescriptor() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualPutfieldResult =
-        instructionSequenceBuilder.putfield("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putfield(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putfield(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test putfield(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String)"
-  })
-  void testPutfieldWithClassNameNameDescriptor2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualPutfieldResult =
-        instructionSequenceBuilder.putfield("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putfield(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putfield(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test putfield(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String)"
-  })
-  void testPutfieldWithClassNameNameDescriptor3() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
     InstructionSequenceBuilder instructionSequenceBuilder =
         new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-
-    // Act
-    InstructionSequenceBuilder actualPutfieldResult =
-        instructionSequenceBuilder.putfield("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putfield(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putfield(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test putfield(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String)"
-  })
-  void testPutfieldWithClassNameNameDescriptor4() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualPutfieldResult =
-        instructionSequenceBuilder.putfield("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putfield(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putfield(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test putfield(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String)"
-  })
-  void testPutfieldWithClassNameNameDescriptor5() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    FieldrefConstant fieldrefConstant = new FieldrefConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, fieldrefConstant, new ClassConstant()},
-                1,
-                1,
-                1));
-
-    // Act
-    InstructionSequenceBuilder actualPutfieldResult =
-        instructionSequenceBuilder.putfield("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putfield(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putfield(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test putfield(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String)"
-  })
-  void testPutfieldWithClassNameNameDescriptor6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
     // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .putfield("Class Name", "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof FieldrefConstant);
-    assertTrue(constantArray[9] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(11, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.putfield("Class Name", "Name", "Descriptor"));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#putfield(String, String, String)} with {@code
+   * className}, {@code name}, {@code descriptor}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#putfield(String, String, String)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String)"
+  })
+  public void testPutfieldWithClassNameNameDescriptor2() {
+    // Arrange
+    ClassConstant classConstant = new ClassConstant();
+    ClassConstant classConstant2 = new ClassConstant();
+    InstructionSequenceBuilder instructionSequenceBuilder =
+        new InstructionSequenceBuilder(
+            new ProgramClass(
+                1,
+                3,
+                new Constant[] {classConstant, classConstant2, new ClassConstant()},
+                1,
+                1,
+                1));
+
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.putfield("Class Name", "Name", "Descriptor"));
   }
 
   /**
@@ -12240,30 +9425,86 @@ class InstructionSequenceBuilderDiffblueTest {
    * Field)}
    */
   @Test
-  @DisplayName(
-      "Test putfield(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String, Clazz, Field)"
   })
-  void testPutfieldWithClassNameNameDescriptorReferencedClassReferencedField()
+  public void testPutfieldWithClassNameNameDescriptorReferencedClassReferencedField()
       throws UnsupportedEncodingException {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass referencedClass = new LibraryClass();
     LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
 
-    // Act and Assert
+    // Act
+    InstructionSequenceBuilder actualPutfieldResult =
+        instructionSequenceBuilder.putfield(
+            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
+
+    // Assert
     Constant[] constantArray =
-        instructionSequenceBuilder
-            .putfield("Class Name", "Name", "Descriptor", referencedClass, referencedField)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
+        actualPutfieldResult.getConstantPoolEditor().getTargetClass().constantPool;
     Constant constant = constantArray[5];
     Clazz clazz = ((ClassConstant) constant).referencedClass;
     assertTrue(clazz instanceof LibraryClass);
+    Constant constant2 = constantArray[6];
+    Field field = ((FieldrefConstant) constant2).referencedField;
+    assertTrue(field instanceof LibraryField);
+    assertTrue(constant instanceof ClassConstant);
+    assertTrue(constant2 instanceof FieldrefConstant);
+    Constant constant3 = constantArray[1];
+    assertTrue(constant3 instanceof Utf8Constant);
+    Constant constant4 = constantArray[2];
+    assertTrue(constant4 instanceof Utf8Constant);
+    Constant constant5 = constantArray[4];
+    assertTrue(constant5 instanceof Utf8Constant);
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertEquals(1, actualPutfieldResult.size());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    assertSame(referencedClass, clazz);
+    assertSame(referencedClass, ((FieldrefConstant) constant2).referencedClass);
+    assertSame(referencedField, field);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant5).getBytes());
+    byte[] expectedBytes2 = "Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes3 = "Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant3).getBytes());
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#putfield(String, String, String, Clazz, Field)} with
+   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
+   * referencedField}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#putfield(String, String, String, Clazz,
+   * Field)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String, Clazz, Field)"
+  })
+  public void testPutfieldWithClassNameNameDescriptorReferencedClassReferencedField2()
+      throws UnsupportedEncodingException {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    InstructionSequenceBuilder actualPutfieldResult =
+        instructionSequenceBuilder.putfield(
+            "Class Name",
+            "Name",
+            "Descriptor",
+            referencedClass,
+            new LibraryField(1, "Name", "Descriptor"));
+
+    // Assert
+    Constant[] constantArray =
+        actualPutfieldResult.getConstantPoolEditor().getTargetClass().constantPool;
+    Constant constant = constantArray[5];
     assertTrue(constant instanceof ClassConstant);
     Constant constant2 = constantArray[6];
     assertTrue(constant2 instanceof FieldrefConstant);
@@ -12273,380 +9514,18 @@ class InstructionSequenceBuilderDiffblueTest {
     assertTrue(constant4 instanceof Utf8Constant);
     Constant constant5 = constantArray[4];
     assertTrue(constant5 instanceof Utf8Constant);
+    assertNull(((ClassConstant) constant).referencedClass);
+    assertNull(((FieldrefConstant) constant2).referencedClass);
+    assertNull(((FieldrefConstant) constant2).referencedField);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualPutfieldResult.size());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(clazz, ((FieldrefConstant) constant2).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putfield(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putfield(String, String, String, Clazz,
-   * Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test putfield(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String, Clazz, Field)"
-  })
-  void testPutfieldWithClassNameNameDescriptorReferencedClassReferencedField2() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutfieldResult =
-        instructionSequenceBuilder.putfield(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertEquals(2, instructionSequenceBuilder.size());
-    assertSame(instructionSequenceBuilder, actualPutfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putfield(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putfield(String, String, String, Clazz,
-   * Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test putfield(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String, Clazz, Field)"
-  })
-  void testPutfieldWithClassNameNameDescriptorReferencedClassReferencedField3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutfieldResult =
-        instructionSequenceBuilder.putfield(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putfield(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putfield(String, String, String, Clazz,
-   * Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test putfield(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String, Clazz, Field)"
-  })
-  void testPutfieldWithClassNameNameDescriptorReferencedClassReferencedField4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutfieldResult =
-        instructionSequenceBuilder.putfield(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putfield(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putfield(String, String, String, Clazz,
-   * Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test putfield(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String, Clazz, Field)"
-  })
-  void testPutfieldWithClassNameNameDescriptorReferencedClassReferencedField5()
-      throws UnsupportedEncodingException {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .putfield("Class Name", "Name", "Descriptor", referencedClass, referencedField)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[7];
-    Clazz clazz = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[8];
-    assertTrue(constant2 instanceof FieldrefConstant);
-    Constant constant3 = constantArray[3];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[6];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(19, constantArray.length);
-    assertSame(clazz, ((FieldrefConstant) constant2).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putfield(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putfield(String, String, String, Clazz,
-   * Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test putfield(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String, Clazz, Field)"
-  })
-  void testPutfieldWithClassNameNameDescriptorReferencedClassReferencedField6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutfieldResult =
-        instructionSequenceBuilder.putfield(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putfield(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putfield(String, String, String, Clazz,
-   * Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test putfield(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String, Clazz, Field)"
-  })
-  void testPutfieldWithClassNameNameDescriptorReferencedClassReferencedField7() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    FieldrefConstant fieldrefConstant = new FieldrefConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, fieldrefConstant, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutfieldResult =
-        instructionSequenceBuilder.putfield(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putfield(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putfield(String, String, String, Clazz,
-   * Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test putfield(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String, Clazz, Field)"
-  })
-  void testPutfieldWithClassNameNameDescriptorReferencedClassReferencedField8() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .putfield("Class Name", "Name", "Descriptor", referencedClass, referencedField)
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof FieldrefConstant);
-    assertTrue(constantArray[9] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(11, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putfield(String, String, String, Clazz, Field)} with
-   * {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedField}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putfield(String, String, String, Clazz,
-   * Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test putfield(String, String, String, Clazz, Field) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedField'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String, Clazz, Field)"
-  })
-  void testPutfieldWithClassNameNameDescriptorReferencedClassReferencedField9() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryField referencedField = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutfieldResult =
-        instructionSequenceBuilder.putfield(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedField);
-
-    // Assert
-    ProgramClass targetClass = actualPutfieldResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[9] instanceof ClassConstant);
-    assertTrue(constantArray[13] instanceof FieldrefConstant);
-    assertTrue(constantArray[12] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[11] instanceof Utf8Constant);
-    assertEquals(14, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualPutfieldResult.size());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putfield(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <ul>
-   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is two.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putfield(String, String, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test putfield(String, String, String) with 'className', 'name', 'descriptor'; then InstructionSequenceBuilder() size is two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String)"
-  })
-  void testPutfieldWithClassNameNameDescriptor_thenInstructionSequenceBuilderSizeIsTwo() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutfieldResult =
-        instructionSequenceBuilder.putfield("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertEquals(2, instructionSequenceBuilder.size());
-    assertSame(instructionSequenceBuilder, actualPutfieldResult);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant5).getBytes());
+    byte[] expectedBytes2 = "Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes3 = "Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant3).getBytes());
   }
 
   /**
@@ -12660,23 +9539,18 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#putfield(String, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test putfield(String, String, String) with 'className', 'name', 'descriptor'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String)"
   })
-  void testPutfieldWithClassNameNameDescriptor_thenReturnInstructionSequenceBuilder() {
+  public void testPutfieldWithClassNameNameDescriptor_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualPutfieldResult =
-        instructionSequenceBuilder.putfield("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutfieldResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.putfield("Class Name", "Name", "Descriptor"));
   }
 
   /**
@@ -12684,159 +9558,44 @@ class InstructionSequenceBuilderDiffblueTest {
    * className}, {@code name}, {@code descriptor}.
    *
    * <ul>
-   *   <li>Then tenth element return {@link ClassConstant}.
+   *   <li>Then second element return {@link Utf8Constant}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#putfield(String, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test putfield(String, String, String) with 'className', 'name', 'descriptor'; then tenth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(String, String, String)"
   })
-  void testPutfieldWithClassNameNameDescriptor_thenTenthElementReturnClassConstant() {
+  public void testPutfieldWithClassNameNameDescriptor_thenSecondElementReturnUtf8Constant()
+      throws UnsupportedEncodingException {
     // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
 
     // Act
     InstructionSequenceBuilder actualPutfieldResult =
         instructionSequenceBuilder.putfield("Class Name", "Name", "Descriptor");
 
     // Assert
-    ProgramClass targetClass = actualPutfieldResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[9] instanceof ClassConstant);
-    assertTrue(constantArray[13] instanceof FieldrefConstant);
-    assertTrue(constantArray[12] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[11] instanceof Utf8Constant);
-    assertEquals(14, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualPutfieldResult.size());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putfield(Clazz, Field)} with {@code clazz}, {@code
-   * field}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putfield(Clazz, Field)}
-   */
-  @Test
-  @DisplayName("Test putfield(Clazz, Field) with 'clazz', 'field'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(Clazz, Field)"
-  })
-  void testPutfieldWithClazzField() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryField field = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutfieldResult =
-        instructionSequenceBuilder.putfield(clazz, field);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putfield(Clazz, Field)} with {@code clazz}, {@code
-   * field}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putfield(Clazz, Field)}
-   */
-  @Test
-  @DisplayName("Test putfield(Clazz, Field) with 'clazz', 'field'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(Clazz, Field)"
-  })
-  void testPutfieldWithClazzField2() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryField field = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutfieldResult =
-        instructionSequenceBuilder.putfield(clazz, field);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPutfieldResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#putfield(Clazz, Field)} with {@code clazz}, {@code
-   * field}.
-   *
-   * <ul>
-   *   <li>Then ninth element return {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#putfield(Clazz, Field)}
-   */
-  @Test
-  @DisplayName(
-      "Test putfield(Clazz, Field) with 'clazz', 'field'; then ninth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(Clazz, Field)"
-  })
-  void testPutfieldWithClazzField_thenNinthElementReturnClassConstant() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryField field = new LibraryField(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualPutfieldResult =
-        instructionSequenceBuilder.putfield(clazz, field);
-
-    // Assert
-    ProgramClass targetClass = actualPutfieldResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[8] instanceof ClassConstant);
-    assertTrue(constantArray[9] instanceof FieldrefConstant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertEquals(10, targetClass.u2constantPoolCount);
+    Constant[] constantArray =
+        actualPutfieldResult.getConstantPoolEditor().getTargetClass().constantPool;
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof Utf8Constant);
+    Constant constant2 = constantArray[2];
+    assertTrue(constant2 instanceof Utf8Constant);
+    Constant constant3 = constantArray[4];
+    assertTrue(constant3 instanceof Utf8Constant);
     assertEquals(2, instructionSequenceBuilder.size());
     assertEquals(2, actualPutfieldResult.size());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes2 = "Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes3 = "Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant).getBytes());
   }
 
   /**
@@ -12844,50 +9603,28 @@ class InstructionSequenceBuilderDiffblueTest {
    * field}.
    *
    * <ul>
-   *   <li>Then sixth element {@link ClassConstant#referencedClass} return {@link LibraryClass}.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#putfield(Clazz, Field)}
    */
   @Test
-  @DisplayName(
-      "Test putfield(Clazz, Field) with 'clazz', 'field'; then sixth element referencedClass return LibraryClass")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.putfield(Clazz, Field)"
   })
-  void testPutfieldWithClazzField_thenSixthElementReferencedClassReturnLibraryClass()
-      throws UnsupportedEncodingException {
+  public void testPutfieldWithClazzField_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryField field = new LibraryField(1, "Name", "Descriptor");
 
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .putfield(clazz, field)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[5];
-    Clazz clazz2 = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz2 instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[6];
-    assertTrue(constant2 instanceof FieldrefConstant);
-    Constant constant3 = constantArray[1];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[2];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[4];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(clazz2, ((FieldrefConstant) constant2).referencedClass);
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("This Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
+    // Act
+    InstructionSequenceBuilder actualPutfieldResult =
+        instructionSequenceBuilder.putfield(clazz, new LibraryField(1, "Name", "Descriptor"));
+
+    // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertSame(instructionSequenceBuilder, actualPutfieldResult);
   }
 
   /**
@@ -12896,11 +9633,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#putfield(int)}
    */
   @Test
-  @DisplayName("Test putfield(int) with 'constantIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.putfield(int)"})
-  void testPutfieldWithConstantIndex() {
+  public void testPutfieldWithConstantIndex() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -12919,22 +9654,18 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(int, String, String)}
    */
   @Test
-  @DisplayName("Test invokevirtual(int, String, String) with 'classIndex', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(int, String, String)"
   })
-  void testInvokevirtualWithClassIndexNameDescriptor() {
+  public void testInvokevirtualWithClassIndexNameDescriptor() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualInvokevirtualResult =
-        instructionSequenceBuilder.invokevirtual(1, "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokevirtualResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokevirtual(1, "Name", "Descriptor"));
   }
 
   /**
@@ -12944,1040 +9675,295 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(int, String, String)}
    */
   @Test
-  @DisplayName("Test invokevirtual(int, String, String) with 'classIndex', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(int, String, String)"
   })
-  void testInvokevirtualWithClassIndexNameDescriptor2() {
+  public void testInvokevirtualWithClassIndexNameDescriptor2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
 
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokevirtual(1, "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
+    // Act
+    InstructionSequenceBuilder actualInvokevirtualResult =
+        instructionSequenceBuilder.invokevirtual(1, "Name", "Descriptor");
+
+    // Assert
+    ProgramClass targetClass = actualInvokevirtualResult.getConstantPoolEditor().getTargetClass();
     Constant[] constantArray = targetClass.constantPool;
     assertTrue(constantArray[5] instanceof ClassConstant);
     assertTrue(constantArray[6] instanceof FieldrefConstant);
     assertTrue(constantArray[7] instanceof MethodrefConstant);
-    assertEquals(8, targetClass.u2constantPoolCount);
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(int, String, String)} with {@code
-   * classIndex}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(int, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokevirtual(int, String, String) with 'classIndex', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(int, String, String)"
-  })
-  void testInvokevirtualWithClassIndexNameDescriptor3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokevirtualResult =
-        instructionSequenceBuilder.invokevirtual(1, "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokevirtualResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(int, String, String)} with {@code
-   * classIndex}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(int, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokevirtual(int, String, String) with 'classIndex', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(int, String, String)"
-  })
-  void testInvokevirtualWithClassIndexNameDescriptor4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokevirtualResult =
-        instructionSequenceBuilder.invokevirtual(1, "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokevirtualResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(int, String, String)} with {@code
-   * classIndex}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(int, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokevirtual(int, String, String) with 'classIndex', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(int, String, String)"
-  })
-  void testInvokevirtualWithClassIndexNameDescriptor5() throws UnsupportedEncodingException {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    // Act and Assert
-    ProgramClass targetClass =
-        new InstructionSequenceBuilder(
-                new ProgramClass(
-                    1,
-                    3,
-                    new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                    1,
-                    1,
-                    1))
-            .invokevirtual(1, "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    Constant constant = constantArray[6];
-    assertTrue(constant instanceof MethodrefConstant);
-    Constant constant2 = constantArray[5];
-    assertTrue(constant2 instanceof NameAndTypeConstant);
-    Constant constant3 = constantArray[3];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    assertEquals("Descriptor", ((Utf8Constant) constant4).getString());
-    assertNull(((MethodrefConstant) constant).referencedMethod);
-    assertEquals(1, ((MethodrefConstant) constant).getClassIndex());
-    assertEquals(10, constant.getTag());
-    assertEquals(12, constant2.getTag());
-    assertEquals(19, constantArray.length);
-    assertEquals(5, ((MethodrefConstant) constant).getNameAndTypeIndex());
-    assertEquals(7, targetClass.u2constantPoolCount);
-    assertFalse(constant2.isCategory2());
-    assertFalse(constant.isCategory2());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(int, String, String)} with {@code
-   * classIndex}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(int, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokevirtual(int, String, String) with 'classIndex', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(int, String, String)"
-  })
-  void testInvokevirtualWithClassIndexNameDescriptor6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "", "");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokevirtual(1, "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[6] instanceof ClassConstant);
-    assertTrue(constantArray[7] instanceof FieldrefConstant);
-    assertTrue(constantArray[11] instanceof MethodrefConstant);
-    assertTrue(constantArray[10] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[5] instanceof Utf8Constant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(12, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(int, String, String)} with {@code
-   * classIndex}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(int, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokevirtual(int, String, String) with 'classIndex', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(int, String, String)"
-  })
-  void testInvokevirtualWithClassIndexNameDescriptor7() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "", "");
-
-    // Act
-    InstructionSequenceBuilder actualInvokevirtualResult =
-        instructionSequenceBuilder.invokevirtual(1, "Name", "Descriptor");
-
-    // Assert
-    ProgramClass targetClass = actualInvokevirtualResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof ClassConstant);
-    assertTrue(constantArray[11] instanceof FieldrefConstant);
-    assertTrue(constantArray[14] instanceof MethodrefConstant);
-    assertTrue(constantArray[13] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[12] instanceof Utf8Constant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertEquals(15, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualInvokevirtualResult.size());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokevirtual(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String)"
-  })
-  void testInvokevirtualWithClassNameNameDescriptor() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-
-    // Act
-    InstructionSequenceBuilder actualInvokevirtualResult =
-        instructionSequenceBuilder.invokevirtual("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokevirtualResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokevirtual(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String)"
-  })
-  void testInvokevirtualWithClassNameNameDescriptor2() throws UnsupportedEncodingException {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokevirtual("Class Name", "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    Constant constant = constantArray[7];
-    assertTrue(constant instanceof MethodrefConstant);
-    Constant constant2 = constantArray[1];
-    assertTrue(constant2 instanceof Utf8Constant);
-    Constant constant3 = constantArray[2];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    assertNull(((MethodrefConstant) constant).referencedMethod);
-    assertEquals(10, constant.getTag());
-    assertEquals(3, ((MethodrefConstant) constant).getNameAndTypeIndex());
-    assertEquals(5, ((MethodrefConstant) constant).getClassIndex());
-    assertEquals(8, targetClass.u2constantPoolCount);
-    assertFalse(constant.isCategory2());
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokevirtual(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String)"
-  })
-  void testInvokevirtualWithClassNameNameDescriptor3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokevirtualResult =
-        instructionSequenceBuilder.invokevirtual("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokevirtualResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokevirtual(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String)"
-  })
-  void testInvokevirtualWithClassNameNameDescriptor4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokevirtualResult =
-        instructionSequenceBuilder.invokevirtual("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokevirtualResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokevirtual(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String)"
-  })
-  void testInvokevirtualWithClassNameNameDescriptor5() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    // Act and Assert
-    ProgramClass targetClass =
-        new InstructionSequenceBuilder(
-                new ProgramClass(
-                    1,
-                    3,
-                    new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                    1,
-                    1,
-                    1))
-            .invokevirtual("Class Name", "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[7] instanceof ClassConstant);
-    assertTrue(constantArray[8] instanceof MethodrefConstant);
-    assertTrue(constantArray[5] instanceof NameAndTypeConstant);
-    assertEquals(19, constantArray.length);
-    assertEquals(9, targetClass.u2constantPoolCount);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokevirtual(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String)"
-  })
-  void testInvokevirtualWithClassNameNameDescriptor6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokevirtualResult =
-        instructionSequenceBuilder.invokevirtual("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokevirtualResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokevirtual(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String)"
-  })
-  void testInvokevirtualWithClassNameNameDescriptor7() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokevirtual("Class Name", "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof MethodrefConstant);
-    assertTrue(constantArray[9] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(11, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokevirtual(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String, Clazz, Method)"
-  })
-  void testInvokevirtualWithClassNameNameDescriptorReferencedClassReferencedMethod()
-      throws UnsupportedEncodingException {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .invokevirtual("Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[5];
-    Clazz clazz = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[6];
-    assertTrue(constant2 instanceof MethodrefConstant);
-    Constant constant3 = constantArray[1];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[2];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[4];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(clazz, ((MethodrefConstant) constant2).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokevirtual(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String, Clazz, Method)"
-  })
-  void testInvokevirtualWithClassNameNameDescriptorReferencedClassReferencedMethod2()
-      throws UnsupportedEncodingException {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokevirtual("Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    Constant constant = constantArray[7];
-    Method method = ((MethodrefConstant) constant).referencedMethod;
-    assertTrue(method instanceof LibraryMethod);
-    assertTrue(constant instanceof MethodrefConstant);
-    Constant constant2 = constantArray[1];
-    assertTrue(constant2 instanceof Utf8Constant);
-    Constant constant3 = constantArray[2];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    assertEquals(10, constant.getTag());
-    assertEquals(3, ((MethodrefConstant) constant).getNameAndTypeIndex());
-    assertEquals(5, ((MethodrefConstant) constant).getClassIndex());
-    assertEquals(8, targetClass.u2constantPoolCount);
-    assertFalse(constant.isCategory2());
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(referencedMethod, method);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokevirtual(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String, Clazz, Method)"
-  })
-  void testInvokevirtualWithClassNameNameDescriptorReferencedClassReferencedMethod3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokevirtualResult =
-        instructionSequenceBuilder.invokevirtual(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokevirtualResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokevirtual(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String, Clazz, Method)"
-  })
-  void testInvokevirtualWithClassNameNameDescriptorReferencedClassReferencedMethod4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokevirtualResult =
-        instructionSequenceBuilder.invokevirtual(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokevirtualResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokevirtual(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String, Clazz, Method)"
-  })
-  void testInvokevirtualWithClassNameNameDescriptorReferencedClassReferencedMethod5()
-      throws UnsupportedEncodingException {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .invokevirtual("Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[7];
-    Clazz clazz = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[8];
-    assertTrue(constant2 instanceof MethodrefConstant);
-    Constant constant3 = constantArray[3];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[6];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(19, constantArray.length);
-    assertSame(clazz, ((MethodrefConstant) constant2).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokevirtual(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String, Clazz, Method)"
-  })
-  void testInvokevirtualWithClassNameNameDescriptorReferencedClassReferencedMethod6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokevirtualResult =
-        instructionSequenceBuilder.invokevirtual(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokevirtualResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokevirtual(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String, Clazz, Method)"
-  })
-  void testInvokevirtualWithClassNameNameDescriptorReferencedClassReferencedMethod7() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokevirtual("Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof MethodrefConstant);
-    assertTrue(constantArray[9] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(11, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokevirtual(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String, Clazz, Method)"
-  })
-  void testInvokevirtualWithClassNameNameDescriptorReferencedClassReferencedMethod8() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokevirtualResult =
-        instructionSequenceBuilder.invokevirtual(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
-
-    // Assert
-    ProgramClass targetClass = actualInvokevirtualResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[9] instanceof ClassConstant);
-    assertTrue(constantArray[10] instanceof FieldrefConstant);
-    assertTrue(constantArray[13] instanceof MethodrefConstant);
-    assertTrue(constantArray[12] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[11] instanceof Utf8Constant);
-    assertEquals(14, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualInvokevirtualResult.size());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <ul>
-   *   <li>Then tenth element return {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokevirtual(String, String, String) with 'className', 'name', 'descriptor'; then tenth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String)"
-  })
-  void testInvokevirtualWithClassNameNameDescriptor_thenTenthElementReturnClassConstant() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-
-    // Act
-    InstructionSequenceBuilder actualInvokevirtualResult =
-        instructionSequenceBuilder.invokevirtual("Class Name", "Name", "Descriptor");
-
-    // Assert
-    ProgramClass targetClass = actualInvokevirtualResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[9] instanceof ClassConstant);
-    assertTrue(constantArray[10] instanceof FieldrefConstant);
-    assertTrue(constantArray[13] instanceof MethodrefConstant);
-    assertTrue(constantArray[12] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[11] instanceof Utf8Constant);
-    assertEquals(14, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualInvokevirtualResult.size());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(Clazz, Method)} with {@code clazz}, {@code
-   * method}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(Clazz, Method)}
-   */
-  @Test
-  @DisplayName("Test invokevirtual(Clazz, Method) with 'clazz', 'method'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(Clazz, Method)"
-  })
-  void testInvokevirtualWithClazzMethod() throws UnsupportedEncodingException {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .invokevirtual(clazz, method)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[5];
-    Clazz clazz2 = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz2 instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[6];
-    assertTrue(constant2 instanceof MethodrefConstant);
-    Constant constant3 = constantArray[1];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[2];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[4];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(clazz2, ((MethodrefConstant) constant2).referencedClass);
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("This Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(Clazz, Method)} with {@code clazz}, {@code
-   * method}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(Clazz, Method)}
-   */
-  @Test
-  @DisplayName("Test invokevirtual(Clazz, Method) with 'clazz', 'method'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(Clazz, Method)"
-  })
-  void testInvokevirtualWithClazzMethod2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokevirtualResult =
-        instructionSequenceBuilder.invokevirtual(clazz, method);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokevirtualResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(Clazz, Method)} with {@code clazz}, {@code
-   * method}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(Clazz, Method)}
-   */
-  @Test
-  @DisplayName("Test invokevirtual(Clazz, Method) with 'clazz', 'method'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(Clazz, Method)"
-  })
-  void testInvokevirtualWithClazzMethod3() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokevirtualResult =
-        instructionSequenceBuilder.invokevirtual(clazz, method);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokevirtualResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokevirtual(Clazz, Method)} with {@code clazz}, {@code
-   * method}.
-   *
-   * <ul>
-   *   <li>Then ninth element return {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokevirtual(Clazz, Method) with 'clazz', 'method'; then ninth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(Clazz, Method)"
-  })
-  void testInvokevirtualWithClazzMethod_thenNinthElementReturnClassConstant() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokevirtualResult =
-        instructionSequenceBuilder.invokevirtual(clazz, method);
-
-    // Assert
-    ProgramClass targetClass = actualInvokevirtualResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[8] instanceof ClassConstant);
-    assertTrue(constantArray[6] instanceof FieldrefConstant);
-    assertTrue(constantArray[9] instanceof MethodrefConstant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertEquals(10, targetClass.u2constantPoolCount);
     assertEquals(2, instructionSequenceBuilder.size());
     assertEquals(2, actualInvokevirtualResult.size());
+    assertEquals(8, targetClass.u2constantPoolCount);
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokevirtual(int, String, String)} with {@code
+   * classIndex}, {@code name}, {@code descriptor}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(int, String, String)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(int, String, String)"
+  })
+  public void testInvokevirtualWithClassIndexNameDescriptor3() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder =
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
+
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokevirtual(1, "Name", "Descriptor"));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokevirtual(int, String, String)} with {@code
+   * classIndex}, {@code name}, {@code descriptor}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(int, String, String)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(int, String, String)"
+  })
+  public void testInvokevirtualWithClassIndexNameDescriptor4() {
+    // Arrange
+    ClassConstant classConstant = new ClassConstant();
+    ClassConstant classConstant2 = new ClassConstant();
+    InstructionSequenceBuilder instructionSequenceBuilder =
+        new InstructionSequenceBuilder(
+            new ProgramClass(
+                1,
+                3,
+                new Constant[] {classConstant, classConstant2, new ClassConstant()},
+                1,
+                1,
+                1));
+
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokevirtual(1, "Name", "Descriptor"));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String)} with {@code
+   * className}, {@code name}, {@code descriptor}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String)"
+  })
+  public void testInvokevirtualWithClassNameNameDescriptor() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokevirtual("Class Name", "Name", "Descriptor"));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String)} with {@code
+   * className}, {@code name}, {@code descriptor}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String)"
+  })
+  public void testInvokevirtualWithClassNameNameDescriptor2() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
+
+    // Act
+    InstructionSequenceBuilder actualInvokevirtualResult =
+        instructionSequenceBuilder.invokevirtual("Class Name", "Name", "Descriptor");
+
+    // Assert
+    ProgramClass targetClass = actualInvokevirtualResult.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertTrue(constantArray[6] instanceof FieldrefConstant);
+    assertTrue(constantArray[7] instanceof MethodrefConstant);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualInvokevirtualResult.size());
+    assertEquals(8, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String)} with {@code
+   * className}, {@code name}, {@code descriptor}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String)"
+  })
+  public void testInvokevirtualWithClassNameNameDescriptor3() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder =
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
+
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokevirtual("Class Name", "Name", "Descriptor"));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String)} with {@code
+   * className}, {@code name}, {@code descriptor}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String)"
+  })
+  public void testInvokevirtualWithClassNameNameDescriptor4() {
+    // Arrange
+    ClassConstant classConstant = new ClassConstant();
+    ClassConstant classConstant2 = new ClassConstant();
+    InstructionSequenceBuilder instructionSequenceBuilder =
+        new InstructionSequenceBuilder(
+            new ProgramClass(
+                1,
+                3,
+                new Constant[] {classConstant, classConstant2, new ClassConstant()},
+                1,
+                1,
+                1));
+
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokevirtual("Class Name", "Name", "Descriptor"));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String, Clazz, Method)}
+   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
+   * referencedMethod}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String,
+   * Clazz, Method)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String, Clazz, Method)"
+  })
+  public void testInvokevirtualWithClassNameNameDescriptorReferencedClassReferencedMethod() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    InstructionSequenceBuilder actualInvokevirtualResult =
+        instructionSequenceBuilder.invokevirtual(
+            "Class Name",
+            "Name",
+            "Descriptor",
+            referencedClass,
+            new LibraryMethod(1, "Name", "Descriptor"));
+
+    // Assert
+    ProgramClass targetClass = actualInvokevirtualResult.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertTrue(constantArray[6] instanceof MethodrefConstant);
+    assertNull(constantArray[7]);
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertEquals(1, actualInvokevirtualResult.size());
+    assertEquals(7, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokevirtual(String, String, String, Clazz, Method)}
+   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
+   * referencedMethod}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(String, String, String,
+   * Clazz, Method)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(String, String, String, Clazz, Method)"
+  })
+  public void testInvokevirtualWithClassNameNameDescriptorReferencedClassReferencedMethod2() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    InstructionSequenceBuilder actualInvokevirtualResult =
+        instructionSequenceBuilder.invokevirtual(
+            "Class Name",
+            "Name",
+            "Descriptor",
+            referencedClass,
+            new LibraryMethod(1, "Name", "Descriptor"));
+
+    // Assert
+    ProgramClass targetClass = actualInvokevirtualResult.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertTrue(constantArray[6] instanceof FieldrefConstant);
+    assertTrue(constantArray[7] instanceof MethodrefConstant);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualInvokevirtualResult.size());
+    assertEquals(8, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokevirtual(Clazz, Method)} with {@code clazz}, {@code
+   * method}.
+   *
+   * <ul>
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(Clazz, Method)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(Clazz, Method)"
+  })
+  public void testInvokevirtualWithClazzMethod_thenInstructionSequenceBuilderSizeIsOne() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
+
+    // Act
+    InstructionSequenceBuilder actualInvokevirtualResult =
+        instructionSequenceBuilder.invokevirtual(clazz, new LibraryMethod(1, "Name", "Descriptor"));
+
+    // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertSame(instructionSequenceBuilder, actualInvokevirtualResult);
   }
 
   /**
@@ -13986,11 +9972,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#invokevirtual(int)}
    */
   @Test
-  @DisplayName("Test invokevirtual(int) with 'constantIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.invokevirtual(int)"})
-  void testInvokevirtualWithConstantIndex() {
+  public void testInvokevirtualWithConstantIndex() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -14010,22 +9994,18 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String)}
    */
   @Test
-  @DisplayName("Test invokespecial(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String)"
   })
-  void testInvokespecialWithClassNameNameDescriptor() {
+  public void testInvokespecialWithClassNameNameDescriptor() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualInvokespecialResult =
-        instructionSequenceBuilder.invokespecial("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokespecialResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokespecial("Class Name", "Name", "Descriptor"));
   }
 
   /**
@@ -14035,608 +10015,14 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String)}
    */
   @Test
-  @DisplayName("Test invokespecial(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String)"
   })
-  void testInvokespecialWithClassNameNameDescriptor2() throws UnsupportedEncodingException {
+  public void testInvokespecialWithClassNameNameDescriptor2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokespecial("Class Name", "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    Constant constant = constantArray[7];
-    assertTrue(constant instanceof MethodrefConstant);
-    Constant constant2 = constantArray[1];
-    assertTrue(constant2 instanceof Utf8Constant);
-    Constant constant3 = constantArray[2];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    assertNull(((MethodrefConstant) constant).referencedMethod);
-    assertEquals(10, constant.getTag());
-    assertEquals(3, ((MethodrefConstant) constant).getNameAndTypeIndex());
-    assertEquals(5, ((MethodrefConstant) constant).getClassIndex());
-    assertEquals(8, targetClass.u2constantPoolCount);
-    assertFalse(constant.isCategory2());
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokespecial(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String)"
-  })
-  void testInvokespecialWithClassNameNameDescriptor3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecialResult =
-        instructionSequenceBuilder.invokespecial("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokespecialResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokespecial(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String)"
-  })
-  void testInvokespecialWithClassNameNameDescriptor4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecialResult =
-        instructionSequenceBuilder.invokespecial("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokespecialResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokespecial(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String)"
-  })
-  void testInvokespecialWithClassNameNameDescriptor5() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    // Act and Assert
-    ProgramClass targetClass =
-        new InstructionSequenceBuilder(
-                new ProgramClass(
-                    1,
-                    3,
-                    new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                    1,
-                    1,
-                    1))
-            .invokespecial("Class Name", "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[7] instanceof ClassConstant);
-    assertTrue(constantArray[8] instanceof MethodrefConstant);
-    assertTrue(constantArray[5] instanceof NameAndTypeConstant);
-    assertEquals(19, constantArray.length);
-    assertEquals(9, targetClass.u2constantPoolCount);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokespecial(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String)"
-  })
-  void testInvokespecialWithClassNameNameDescriptor6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecialResult =
-        instructionSequenceBuilder.invokespecial("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokespecialResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokespecial(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String)"
-  })
-  void testInvokespecialWithClassNameNameDescriptor7() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokespecial("Class Name", "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof MethodrefConstant);
-    assertTrue(constantArray[9] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(11, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String, Clazz, Method)"
-  })
-  void testInvokespecialWithClassNameNameDescriptorReferencedClassReferencedMethod()
-      throws UnsupportedEncodingException {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .invokespecial("Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[5];
-    Clazz clazz = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[6];
-    assertTrue(constant2 instanceof MethodrefConstant);
-    Constant constant3 = constantArray[1];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[2];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[4];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(clazz, ((MethodrefConstant) constant2).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String, Clazz, Method)"
-  })
-  void testInvokespecialWithClassNameNameDescriptorReferencedClassReferencedMethod2()
-      throws UnsupportedEncodingException {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokespecial("Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    Constant constant = constantArray[7];
-    Method method = ((MethodrefConstant) constant).referencedMethod;
-    assertTrue(method instanceof LibraryMethod);
-    assertTrue(constant instanceof MethodrefConstant);
-    Constant constant2 = constantArray[1];
-    assertTrue(constant2 instanceof Utf8Constant);
-    Constant constant3 = constantArray[2];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    assertEquals(10, constant.getTag());
-    assertEquals(3, ((MethodrefConstant) constant).getNameAndTypeIndex());
-    assertEquals(5, ((MethodrefConstant) constant).getClassIndex());
-    assertEquals(8, targetClass.u2constantPoolCount);
-    assertFalse(constant.isCategory2());
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(referencedMethod, method);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String, Clazz, Method)"
-  })
-  void testInvokespecialWithClassNameNameDescriptorReferencedClassReferencedMethod3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecialResult =
-        instructionSequenceBuilder.invokespecial(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokespecialResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String, Clazz, Method)"
-  })
-  void testInvokespecialWithClassNameNameDescriptorReferencedClassReferencedMethod4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecialResult =
-        instructionSequenceBuilder.invokespecial(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokespecialResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String, Clazz, Method)"
-  })
-  void testInvokespecialWithClassNameNameDescriptorReferencedClassReferencedMethod5()
-      throws UnsupportedEncodingException {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .invokespecial("Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[7];
-    Clazz clazz = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[8];
-    assertTrue(constant2 instanceof MethodrefConstant);
-    Constant constant3 = constantArray[3];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[6];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(19, constantArray.length);
-    assertSame(clazz, ((MethodrefConstant) constant2).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String, Clazz, Method)"
-  })
-  void testInvokespecialWithClassNameNameDescriptorReferencedClassReferencedMethod6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecialResult =
-        instructionSequenceBuilder.invokespecial(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokespecialResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String, Clazz, Method)"
-  })
-  void testInvokespecialWithClassNameNameDescriptorReferencedClassReferencedMethod7() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokespecial("Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof MethodrefConstant);
-    assertTrue(constantArray[9] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(11, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String, Clazz, Method)"
-  })
-  void testInvokespecialWithClassNameNameDescriptorReferencedClassReferencedMethod8() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecialResult =
-        instructionSequenceBuilder.invokespecial(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
-
-    // Assert
-    ProgramClass targetClass = actualInvokespecialResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[9] instanceof ClassConstant);
-    assertTrue(constantArray[10] instanceof FieldrefConstant);
-    assertTrue(constantArray[13] instanceof MethodrefConstant);
-    assertTrue(constantArray[12] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[11] instanceof Utf8Constant);
-    assertEquals(14, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualInvokespecialResult.size());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <ul>
-   *   <li>Then tenth element return {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial(String, String, String) with 'className', 'name', 'descriptor'; then tenth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String)"
-  })
-  void testInvokespecialWithClassNameNameDescriptor_thenTenthElementReturnClassConstant() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
 
     // Act
     InstructionSequenceBuilder actualInvokespecialResult =
@@ -14645,169 +10031,172 @@ class InstructionSequenceBuilderDiffblueTest {
     // Assert
     ProgramClass targetClass = actualInvokespecialResult.getConstantPoolEditor().getTargetClass();
     Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[9] instanceof ClassConstant);
-    assertTrue(constantArray[10] instanceof FieldrefConstant);
-    assertTrue(constantArray[13] instanceof MethodrefConstant);
-    assertTrue(constantArray[12] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[11] instanceof Utf8Constant);
-    assertEquals(14, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualInvokespecialResult.size());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial(Clazz, Method)} with {@code clazz}, {@code
-   * method}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(Clazz, Method)}
-   */
-  @Test
-  @DisplayName("Test invokespecial(Clazz, Method) with 'clazz', 'method'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(Clazz, Method)"
-  })
-  void testInvokespecialWithClazzMethod() throws UnsupportedEncodingException {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .invokespecial(clazz, method)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[5];
-    Clazz clazz2 = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz2 instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[6];
-    assertTrue(constant2 instanceof MethodrefConstant);
-    Constant constant3 = constantArray[1];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[2];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[4];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(clazz2, ((MethodrefConstant) constant2).referencedClass);
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("This Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial(Clazz, Method)} with {@code clazz}, {@code
-   * method}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(Clazz, Method)}
-   */
-  @Test
-  @DisplayName("Test invokespecial(Clazz, Method) with 'clazz', 'method'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(Clazz, Method)"
-  })
-  void testInvokespecialWithClazzMethod2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecialResult =
-        instructionSequenceBuilder.invokespecial(clazz, method);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokespecialResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial(Clazz, Method)} with {@code clazz}, {@code
-   * method}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(Clazz, Method)}
-   */
-  @Test
-  @DisplayName("Test invokespecial(Clazz, Method) with 'clazz', 'method'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(Clazz, Method)"
-  })
-  void testInvokespecialWithClazzMethod3() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecialResult =
-        instructionSequenceBuilder.invokespecial(clazz, method);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokespecialResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial(Clazz, Method)} with {@code clazz}, {@code
-   * method}.
-   *
-   * <ul>
-   *   <li>Then ninth element return {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial(Clazz, Method) with 'clazz', 'method'; then ninth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(Clazz, Method)"
-  })
-  void testInvokespecialWithClazzMethod_thenNinthElementReturnClassConstant() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecialResult =
-        instructionSequenceBuilder.invokespecial(clazz, method);
-
-    // Assert
-    ProgramClass targetClass = actualInvokespecialResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[8] instanceof ClassConstant);
     assertTrue(constantArray[6] instanceof FieldrefConstant);
-    assertTrue(constantArray[9] instanceof MethodrefConstant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertEquals(10, targetClass.u2constantPoolCount);
+    assertTrue(constantArray[7] instanceof MethodrefConstant);
     assertEquals(2, instructionSequenceBuilder.size());
     assertEquals(2, actualInvokespecialResult.size());
+    assertEquals(8, targetClass.u2constantPoolCount);
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokespecial(String, String, String)} with {@code
+   * className}, {@code name}, {@code descriptor}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String)"
+  })
+  public void testInvokespecialWithClassNameNameDescriptor3() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder =
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
+
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokespecial("Class Name", "Name", "Descriptor"));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokespecial(String, String, String)} with {@code
+   * className}, {@code name}, {@code descriptor}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String)"
+  })
+  public void testInvokespecialWithClassNameNameDescriptor4() {
+    // Arrange
+    ClassConstant classConstant = new ClassConstant();
+    ClassConstant classConstant2 = new ClassConstant();
+    InstructionSequenceBuilder instructionSequenceBuilder =
+        new InstructionSequenceBuilder(
+            new ProgramClass(
+                1,
+                3,
+                new Constant[] {classConstant, classConstant2, new ClassConstant()},
+                1,
+                1,
+                1));
+
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokespecial("Class Name", "Name", "Descriptor"));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokespecial(String, String, String, Clazz, Method)}
+   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
+   * referencedMethod}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String,
+   * Clazz, Method)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String, Clazz, Method)"
+  })
+  public void testInvokespecialWithClassNameNameDescriptorReferencedClassReferencedMethod() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    InstructionSequenceBuilder actualInvokespecialResult =
+        instructionSequenceBuilder.invokespecial(
+            "Class Name",
+            "Name",
+            "Descriptor",
+            referencedClass,
+            new LibraryMethod(1, "Name", "Descriptor"));
+
+    // Assert
+    ProgramClass targetClass = actualInvokespecialResult.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertTrue(constantArray[6] instanceof MethodrefConstant);
+    assertNull(constantArray[7]);
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertEquals(1, actualInvokespecialResult.size());
+    assertEquals(7, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokespecial(String, String, String, Clazz, Method)}
+   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
+   * referencedMethod}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(String, String, String,
+   * Clazz, Method)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(String, String, String, Clazz, Method)"
+  })
+  public void testInvokespecialWithClassNameNameDescriptorReferencedClassReferencedMethod2() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    InstructionSequenceBuilder actualInvokespecialResult =
+        instructionSequenceBuilder.invokespecial(
+            "Class Name",
+            "Name",
+            "Descriptor",
+            referencedClass,
+            new LibraryMethod(1, "Name", "Descriptor"));
+
+    // Assert
+    ProgramClass targetClass = actualInvokespecialResult.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertTrue(constantArray[6] instanceof FieldrefConstant);
+    assertTrue(constantArray[7] instanceof MethodrefConstant);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualInvokespecialResult.size());
+    assertEquals(8, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokespecial(Clazz, Method)} with {@code clazz}, {@code
+   * method}.
+   *
+   * <ul>
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(Clazz, Method)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(Clazz, Method)"
+  })
+  public void testInvokespecialWithClazzMethod_thenInstructionSequenceBuilderSizeIsOne() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
+
+    // Act
+    InstructionSequenceBuilder actualInvokespecialResult =
+        instructionSequenceBuilder.invokespecial(clazz, new LibraryMethod(1, "Name", "Descriptor"));
+
+    // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertSame(instructionSequenceBuilder, actualInvokespecialResult);
   }
 
   /**
@@ -14816,11 +10205,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial(int)}
    */
   @Test
-  @DisplayName("Test invokespecial(int) with 'constantIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial(int)"})
-  void testInvokespecialWithConstantIndex() {
+  public void testInvokespecialWithConstantIndex() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -14840,577 +10227,159 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(String, String, String)}
    */
   @Test
-  @DisplayName("Test invokestatic(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(String, String, String)"
   })
-  void testInvokestaticWithClassNameNameDescriptor() throws UnsupportedEncodingException {
+  public void testInvokestaticWithClassNameNameDescriptor() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
 
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokestatic("Class Name", "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    Constant constant = constantArray[7];
-    assertTrue(constant instanceof MethodrefConstant);
-    Constant constant2 = constantArray[1];
-    assertTrue(constant2 instanceof Utf8Constant);
-    Constant constant3 = constantArray[2];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    assertNull(((MethodrefConstant) constant).referencedMethod);
-    assertEquals(10, constant.getTag());
-    assertEquals(3, ((MethodrefConstant) constant).getNameAndTypeIndex());
-    assertEquals(5, ((MethodrefConstant) constant).getClassIndex());
-    assertEquals(8, targetClass.u2constantPoolCount);
-    assertFalse(constant.isCategory2());
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokestatic(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(String, String, String)"
-  })
-  void testInvokestaticWithClassNameNameDescriptor2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
     // Act
     InstructionSequenceBuilder actualInvokestaticResult =
         instructionSequenceBuilder.invokestatic("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokestaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokestatic(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(String, String, String)"
-  })
-  void testInvokestaticWithClassNameNameDescriptor3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokestaticResult =
-        instructionSequenceBuilder.invokestatic("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokestaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokestatic(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(String, String, String)"
-  })
-  void testInvokestaticWithClassNameNameDescriptor4() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokestaticResult =
-        instructionSequenceBuilder.invokestatic("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokestaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test invokestatic(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(String, String, String)"
-  })
-  void testInvokestaticWithClassNameNameDescriptor5() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokestatic("Class Name", "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof MethodrefConstant);
-    assertTrue(constantArray[9] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(11, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(String, String, String, Clazz, Method)"
-  })
-  void testInvokestaticWithClassNameNameDescriptorReferencedClassReferencedMethod()
-      throws UnsupportedEncodingException {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .invokestatic("Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[5];
-    Clazz clazz = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[6];
-    assertTrue(constant2 instanceof MethodrefConstant);
-    Constant constant3 = constantArray[1];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[2];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[4];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(clazz, ((MethodrefConstant) constant2).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(String, String, String, Clazz, Method)"
-  })
-  void testInvokestaticWithClassNameNameDescriptorReferencedClassReferencedMethod2()
-      throws UnsupportedEncodingException {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokestatic("Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    Constant constant = constantArray[7];
-    Method method = ((MethodrefConstant) constant).referencedMethod;
-    assertTrue(method instanceof LibraryMethod);
-    assertTrue(constant instanceof MethodrefConstant);
-    Constant constant2 = constantArray[1];
-    assertTrue(constant2 instanceof Utf8Constant);
-    Constant constant3 = constantArray[2];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    assertEquals(10, constant.getTag());
-    assertEquals(3, ((MethodrefConstant) constant).getNameAndTypeIndex());
-    assertEquals(5, ((MethodrefConstant) constant).getClassIndex());
-    assertEquals(8, targetClass.u2constantPoolCount);
-    assertFalse(constant.isCategory2());
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(referencedMethod, method);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(String, String, String, Clazz, Method)"
-  })
-  void testInvokestaticWithClassNameNameDescriptorReferencedClassReferencedMethod3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokestaticResult =
-        instructionSequenceBuilder.invokestatic(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokestaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(String, String, String, Clazz, Method)"
-  })
-  void testInvokestaticWithClassNameNameDescriptorReferencedClassReferencedMethod4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokestaticResult =
-        instructionSequenceBuilder.invokestatic(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokestaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(String, String, String, Clazz, Method)"
-  })
-  void testInvokestaticWithClassNameNameDescriptorReferencedClassReferencedMethod5()
-      throws UnsupportedEncodingException {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .invokestatic("Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[7];
-    Clazz clazz = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[8];
-    assertTrue(constant2 instanceof MethodrefConstant);
-    Constant constant3 = constantArray[3];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[6];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(19, constantArray.length);
-    assertSame(clazz, ((MethodrefConstant) constant2).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(String, String, String, Clazz, Method)"
-  })
-  void testInvokestaticWithClassNameNameDescriptorReferencedClassReferencedMethod6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokestaticResult =
-        instructionSequenceBuilder.invokestatic(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokestaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(String, String, String, Clazz, Method)"
-  })
-  void testInvokestaticWithClassNameNameDescriptorReferencedClassReferencedMethod7() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokestatic("Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof MethodrefConstant);
-    assertTrue(constantArray[9] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(11, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(String, String, String, Clazz, Method)"
-  })
-  void testInvokestaticWithClassNameNameDescriptorReferencedClassReferencedMethod8() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokestaticResult =
-        instructionSequenceBuilder.invokestatic(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
 
     // Assert
     ProgramClass targetClass = actualInvokestaticResult.getConstantPoolEditor().getTargetClass();
     Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[9] instanceof ClassConstant);
-    assertTrue(constantArray[10] instanceof FieldrefConstant);
-    assertTrue(constantArray[13] instanceof MethodrefConstant);
-    assertTrue(constantArray[12] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[11] instanceof Utf8Constant);
-    assertEquals(14, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualInvokestaticResult.size());
+    assertTrue(constantArray[6] instanceof FieldrefConstant);
+    assertTrue(constantArray[7] instanceof MethodrefConstant);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualInvokestaticResult.size());
+    assertEquals(8, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
   }
 
   /**
    * Test {@link InstructionSequenceBuilder#invokestatic(String, String, String)} with {@code
    * className}, {@code name}, {@code descriptor}.
    *
-   * <ul>
-   *   <li>Then eighth element return {@link ClassConstant}.
-   * </ul>
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(String, String, String)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(String, String, String)"
+  })
+  public void testInvokestaticWithClassNameNameDescriptor2() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder =
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
+
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokestatic("Class Name", "Name", "Descriptor"));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokestatic(String, String, String)} with {@code
+   * className}, {@code name}, {@code descriptor}.
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(String, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test invokestatic(String, String, String) with 'className', 'name', 'descriptor'; then eighth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(String, String, String)"
   })
-  void testInvokestaticWithClassNameNameDescriptor_thenEighthElementReturnClassConstant() {
+  public void testInvokestaticWithClassNameNameDescriptor3() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
+    InstructionSequenceBuilder instructionSequenceBuilder =
+        new InstructionSequenceBuilder(
+            new ProgramClass(
+                1,
+                3,
+                new Constant[] {classConstant, classConstant2, new ClassConstant()},
+                1,
+                1,
+                1));
 
     // Act and Assert
-    ProgramClass targetClass =
-        new InstructionSequenceBuilder(
-                new ProgramClass(
-                    1,
-                    3,
-                    new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                    1,
-                    1,
-                    1))
-            .invokestatic("Class Name", "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokestatic("Class Name", "Name", "Descriptor"));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokestatic(String, String, String, Clazz, Method)}
+   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
+   * referencedMethod}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(String, String, String,
+   * Clazz, Method)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(String, String, String, Clazz, Method)"
+  })
+  public void testInvokestaticWithClassNameNameDescriptorReferencedClassReferencedMethod() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    InstructionSequenceBuilder actualInvokestaticResult =
+        instructionSequenceBuilder.invokestatic(
+            "Class Name",
+            "Name",
+            "Descriptor",
+            referencedClass,
+            new LibraryMethod(1, "Name", "Descriptor"));
+
+    // Assert
+    ProgramClass targetClass = actualInvokestaticResult.getConstantPoolEditor().getTargetClass();
     Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[7] instanceof ClassConstant);
-    assertTrue(constantArray[8] instanceof MethodrefConstant);
-    assertTrue(constantArray[5] instanceof NameAndTypeConstant);
-    assertEquals(19, constantArray.length);
-    assertEquals(9, targetClass.u2constantPoolCount);
+    assertTrue(constantArray[6] instanceof MethodrefConstant);
+    assertNull(constantArray[7]);
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertEquals(1, actualInvokestaticResult.size());
+    assertEquals(7, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokestatic(String, String, String, Clazz, Method)}
+   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
+   * referencedMethod}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(String, String, String,
+   * Clazz, Method)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(String, String, String, Clazz, Method)"
+  })
+  public void testInvokestaticWithClassNameNameDescriptorReferencedClassReferencedMethod2() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    InstructionSequenceBuilder actualInvokestaticResult =
+        instructionSequenceBuilder.invokestatic(
+            "Class Name",
+            "Name",
+            "Descriptor",
+            referencedClass,
+            new LibraryMethod(1, "Name", "Descriptor"));
+
+    // Assert
+    ProgramClass targetClass = actualInvokestaticResult.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertTrue(constantArray[6] instanceof FieldrefConstant);
+    assertTrue(constantArray[7] instanceof MethodrefConstant);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualInvokestaticResult.size());
+    assertEquals(8, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
   }
 
   /**
@@ -15424,188 +10393,18 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(String, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test invokestatic(String, String, String) with 'className', 'name', 'descriptor'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(String, String, String)"
   })
-  void testInvokestaticWithClassNameNameDescriptor_thenReturnInstructionSequenceBuilder() {
+  public void testInvokestaticWithClassNameNameDescriptor_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-
-    // Act
-    InstructionSequenceBuilder actualInvokestaticResult =
-        instructionSequenceBuilder.invokestatic("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokestaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <ul>
-   *   <li>Then tenth element return {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(String, String, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic(String, String, String) with 'className', 'name', 'descriptor'; then tenth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(String, String, String)"
-  })
-  void testInvokestaticWithClassNameNameDescriptor_thenTenthElementReturnClassConstant() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-
-    // Act
-    InstructionSequenceBuilder actualInvokestaticResult =
-        instructionSequenceBuilder.invokestatic("Class Name", "Name", "Descriptor");
-
-    // Assert
-    ProgramClass targetClass = actualInvokestaticResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[9] instanceof ClassConstant);
-    assertTrue(constantArray[10] instanceof FieldrefConstant);
-    assertTrue(constantArray[13] instanceof MethodrefConstant);
-    assertTrue(constantArray[12] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[11] instanceof Utf8Constant);
-    assertEquals(14, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualInvokestaticResult.size());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic(Clazz, Method)} with {@code clazz}, {@code
-   * method}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(Clazz, Method)}
-   */
-  @Test
-  @DisplayName("Test invokestatic(Clazz, Method) with 'clazz', 'method'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(Clazz, Method)"
-  })
-  void testInvokestaticWithClazzMethod() throws UnsupportedEncodingException {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .invokestatic(clazz, method)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[5];
-    Clazz clazz2 = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz2 instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[6];
-    assertTrue(constant2 instanceof MethodrefConstant);
-    Constant constant3 = constantArray[1];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[2];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[4];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(clazz2, ((MethodrefConstant) constant2).referencedClass);
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("This Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic(Clazz, Method)} with {@code clazz}, {@code
-   * method}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(Clazz, Method)}
-   */
-  @Test
-  @DisplayName("Test invokestatic(Clazz, Method) with 'clazz', 'method'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(Clazz, Method)"
-  })
-  void testInvokestaticWithClazzMethod2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokestaticResult =
-        instructionSequenceBuilder.invokestatic(clazz, method);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokestaticResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic(Clazz, Method)} with {@code clazz}, {@code
-   * method}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(Clazz, Method)}
-   */
-  @Test
-  @DisplayName("Test invokestatic(Clazz, Method) with 'clazz', 'method'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(Clazz, Method)"
-  })
-  void testInvokestaticWithClazzMethod3() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokestaticResult =
-        instructionSequenceBuilder.invokestatic(clazz, method);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokestaticResult);
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokestatic("Class Name", "Name", "Descriptor"));
   }
 
   /**
@@ -15613,41 +10412,28 @@ class InstructionSequenceBuilderDiffblueTest {
    * method}.
    *
    * <ul>
-   *   <li>Then ninth element return {@link ClassConstant}.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(Clazz, Method)}
    */
   @Test
-  @DisplayName(
-      "Test invokestatic(Clazz, Method) with 'clazz', 'method'; then ninth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(Clazz, Method)"
   })
-  void testInvokestaticWithClazzMethod_thenNinthElementReturnClassConstant() {
+  public void testInvokestaticWithClazzMethod_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
     LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     // Act
     InstructionSequenceBuilder actualInvokestaticResult =
-        instructionSequenceBuilder.invokestatic(clazz, method);
+        instructionSequenceBuilder.invokestatic(clazz, new LibraryMethod(1, "Name", "Descriptor"));
 
     // Assert
-    ProgramClass targetClass = actualInvokestaticResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[8] instanceof ClassConstant);
-    assertTrue(constantArray[6] instanceof FieldrefConstant);
-    assertTrue(constantArray[9] instanceof MethodrefConstant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertEquals(10, targetClass.u2constantPoolCount);
-    assertEquals(2, instructionSequenceBuilder.size());
-    assertEquals(2, actualInvokestaticResult.size());
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertSame(instructionSequenceBuilder, actualInvokestaticResult);
   }
 
   /**
@@ -15656,11 +10442,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic(int)}
    */
   @Test
-  @DisplayName("Test invokestatic(int) with 'constantIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic(int)"})
-  void testInvokestaticWithConstantIndex() {
+  public void testInvokestaticWithConstantIndex() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -15681,23 +10465,18 @@ class InstructionSequenceBuilderDiffblueTest {
    * String)}
    */
   @Test
-  @DisplayName(
-      "Test invokestatic_interface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String)"
   })
-  void testInvokestatic_interfaceWithClassNameNameDescriptor() {
+  public void testInvokestatic_interfaceWithClassNameNameDescriptor() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualInvokestatic_interfaceResult =
-        instructionSequenceBuilder.invokestatic_interface("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokestatic_interfaceResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokestatic_interface("Class Name", "Name", "Descriptor"));
   }
 
   /**
@@ -15708,252 +10487,14 @@ class InstructionSequenceBuilderDiffblueTest {
    * String)}
    */
   @Test
-  @DisplayName(
-      "Test invokestatic_interface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String)"
   })
-  void testInvokestatic_interfaceWithClassNameNameDescriptor2()
-      throws UnsupportedEncodingException {
+  public void testInvokestatic_interfaceWithClassNameNameDescriptor2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokestatic_interface("Class Name", "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    Constant constant = constantArray[7];
-    assertTrue(constant instanceof InterfaceMethodrefConstant);
-    Constant constant2 = constantArray[1];
-    assertTrue(constant2 instanceof Utf8Constant);
-    Constant constant3 = constantArray[2];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    assertNull(((InterfaceMethodrefConstant) constant).referencedMethod);
-    assertEquals(11, constant.getTag());
-    assertEquals(3, ((InterfaceMethodrefConstant) constant).getNameAndTypeIndex());
-    assertEquals(5, ((InterfaceMethodrefConstant) constant).getClassIndex());
-    assertEquals(8, targetClass.u2constantPoolCount);
-    assertFalse(constant.isCategory2());
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic_interface(String, String, String)} with
-   * {@code className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(String, String,
-   * String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic_interface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String)"
-  })
-  void testInvokestatic_interfaceWithClassNameNameDescriptor3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokestatic_interfaceResult =
-        instructionSequenceBuilder.invokestatic_interface("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokestatic_interfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic_interface(String, String, String)} with
-   * {@code className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(String, String,
-   * String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic_interface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String)"
-  })
-  void testInvokestatic_interfaceWithClassNameNameDescriptor4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokestatic_interfaceResult =
-        instructionSequenceBuilder.invokestatic_interface("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokestatic_interfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic_interface(String, String, String)} with
-   * {@code className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(String, String,
-   * String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic_interface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String)"
-  })
-  void testInvokestatic_interfaceWithClassNameNameDescriptor5() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    // Act and Assert
-    ProgramClass targetClass =
-        new InstructionSequenceBuilder(
-                new ProgramClass(
-                    1,
-                    3,
-                    new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                    1,
-                    1,
-                    1))
-            .invokestatic_interface("Class Name", "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[7] instanceof ClassConstant);
-    assertTrue(constantArray[8] instanceof InterfaceMethodrefConstant);
-    assertTrue(constantArray[5] instanceof NameAndTypeConstant);
-    assertEquals(19, constantArray.length);
-    assertEquals(9, targetClass.u2constantPoolCount);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic_interface(String, String, String)} with
-   * {@code className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(String, String,
-   * String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic_interface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String)"
-  })
-  void testInvokestatic_interfaceWithClassNameNameDescriptor6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokestatic_interfaceResult =
-        instructionSequenceBuilder.invokestatic_interface("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokestatic_interfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic_interface(String, String, String)} with
-   * {@code className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(String, String,
-   * String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic_interface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String)"
-  })
-  void testInvokestatic_interfaceWithClassNameNameDescriptor7() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokestatic_interface("Class Name", "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof InterfaceMethodrefConstant);
-    assertTrue(constantArray[9] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(11, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic_interface(String, String, String)} with
-   * {@code className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(String, String,
-   * String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic_interface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String)"
-  })
-  void testInvokestatic_interfaceWithClassNameNameDescriptor8() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
 
     // Act
     InstructionSequenceBuilder actualInvokestatic_interfaceResult =
@@ -15963,767 +10504,54 @@ class InstructionSequenceBuilderDiffblueTest {
     ProgramClass targetClass =
         actualInvokestatic_interfaceResult.getConstantPoolEditor().getTargetClass();
     Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[9] instanceof ClassConstant);
-    assertTrue(constantArray[10] instanceof FieldrefConstant);
-    assertTrue(constantArray[13] instanceof InterfaceMethodrefConstant);
-    assertTrue(constantArray[12] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[11] instanceof Utf8Constant);
-    assertEquals(14, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualInvokestatic_interfaceResult.size());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic_interface(String, String, String, Clazz,
-   * Method)} with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass},
-   * {@code referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(String, String,
-   * String, Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic_interface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String, Clazz, Method)"
-  })
-  void testInvokestatic_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod()
-      throws UnsupportedEncodingException {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .invokestatic_interface(
-                "Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[5];
-    Clazz clazz = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[6];
-    assertTrue(constant2 instanceof InterfaceMethodrefConstant);
-    Constant constant3 = constantArray[1];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[2];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[4];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(clazz, ((InterfaceMethodrefConstant) constant2).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic_interface(String, String, String, Clazz,
-   * Method)} with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass},
-   * {@code referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(String, String,
-   * String, Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic_interface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String, Clazz, Method)"
-  })
-  void testInvokestatic_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod2()
-      throws UnsupportedEncodingException {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokestatic_interface(
-                "Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    Constant constant = constantArray[7];
-    Method method = ((InterfaceMethodrefConstant) constant).referencedMethod;
-    assertTrue(method instanceof LibraryMethod);
-    assertTrue(constant instanceof InterfaceMethodrefConstant);
-    Constant constant2 = constantArray[1];
-    assertTrue(constant2 instanceof Utf8Constant);
-    Constant constant3 = constantArray[2];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    assertEquals(11, constant.getTag());
-    assertEquals(3, ((InterfaceMethodrefConstant) constant).getNameAndTypeIndex());
-    assertEquals(5, ((InterfaceMethodrefConstant) constant).getClassIndex());
-    assertEquals(8, targetClass.u2constantPoolCount);
-    assertFalse(constant.isCategory2());
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(referencedMethod, method);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic_interface(String, String, String, Clazz,
-   * Method)} with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass},
-   * {@code referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(String, String,
-   * String, Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic_interface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String, Clazz, Method)"
-  })
-  void testInvokestatic_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokestatic_interfaceResult =
-        instructionSequenceBuilder.invokestatic_interface(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokestatic_interfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic_interface(String, String, String, Clazz,
-   * Method)} with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass},
-   * {@code referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(String, String,
-   * String, Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic_interface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String, Clazz, Method)"
-  })
-  void testInvokestatic_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokestatic_interfaceResult =
-        instructionSequenceBuilder.invokestatic_interface(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokestatic_interfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic_interface(String, String, String, Clazz,
-   * Method)} with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass},
-   * {@code referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(String, String,
-   * String, Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic_interface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String, Clazz, Method)"
-  })
-  void testInvokestatic_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod5()
-      throws UnsupportedEncodingException {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .invokestatic_interface(
-                "Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[7];
-    Clazz clazz = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[8];
-    assertTrue(constant2 instanceof InterfaceMethodrefConstant);
-    Constant constant3 = constantArray[3];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[6];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(19, constantArray.length);
-    assertSame(clazz, ((InterfaceMethodrefConstant) constant2).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic_interface(String, String, String, Clazz,
-   * Method)} with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass},
-   * {@code referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(String, String,
-   * String, Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic_interface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String, Clazz, Method)"
-  })
-  void testInvokestatic_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokestatic_interfaceResult =
-        instructionSequenceBuilder.invokestatic_interface(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokestatic_interfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic_interface(String, String, String, Clazz,
-   * Method)} with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass},
-   * {@code referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(String, String,
-   * String, Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic_interface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String, Clazz, Method)"
-  })
-  void testInvokestatic_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod7() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokestatic_interface(
-                "Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof InterfaceMethodrefConstant);
-    assertTrue(constantArray[9] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(11, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic_interface(String, String, String, Clazz,
-   * Method)} with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass},
-   * {@code referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(String, String,
-   * String, Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic_interface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String, Clazz, Method)"
-  })
-  void testInvokestatic_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod8() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokestatic_interfaceResult =
-        instructionSequenceBuilder.invokestatic_interface(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
-
-    // Assert
-    ProgramClass targetClass =
-        actualInvokestatic_interfaceResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[9] instanceof ClassConstant);
-    assertTrue(constantArray[10] instanceof FieldrefConstant);
-    assertTrue(constantArray[13] instanceof InterfaceMethodrefConstant);
-    assertTrue(constantArray[12] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[11] instanceof Utf8Constant);
-    assertEquals(14, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualInvokestatic_interfaceResult.size());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic_interface(Clazz, Method)} with {@code
-   * clazz}, {@code method}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(Clazz, Method)}
-   */
-  @Test
-  @DisplayName("Test invokestatic_interface(Clazz, Method) with 'clazz', 'method'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(Clazz, Method)"
-  })
-  void testInvokestatic_interfaceWithClazzMethod() throws UnsupportedEncodingException {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .invokestatic_interface(clazz, method)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[5];
-    Clazz clazz2 = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz2 instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[6];
-    assertTrue(constant2 instanceof InterfaceMethodrefConstant);
-    Constant constant3 = constantArray[1];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[2];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[4];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(clazz2, ((InterfaceMethodrefConstant) constant2).referencedClass);
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("This Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic_interface(Clazz, Method)} with {@code
-   * clazz}, {@code method}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(Clazz, Method)}
-   */
-  @Test
-  @DisplayName("Test invokestatic_interface(Clazz, Method) with 'clazz', 'method'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(Clazz, Method)"
-  })
-  void testInvokestatic_interfaceWithClazzMethod2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokestatic_interfaceResult =
-        instructionSequenceBuilder.invokestatic_interface(clazz, method);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokestatic_interfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic_interface(Clazz, Method)} with {@code
-   * clazz}, {@code method}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(Clazz, Method)}
-   */
-  @Test
-  @DisplayName("Test invokestatic_interface(Clazz, Method) with 'clazz', 'method'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(Clazz, Method)"
-  })
-  void testInvokestatic_interfaceWithClazzMethod3() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokestatic_interfaceResult =
-        instructionSequenceBuilder.invokestatic_interface(clazz, method);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokestatic_interfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokestatic_interface(Clazz, Method)} with {@code
-   * clazz}, {@code method}.
-   *
-   * <ul>
-   *   <li>Then ninth element return {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokestatic_interface(Clazz, Method) with 'clazz', 'method'; then ninth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(Clazz, Method)"
-  })
-  void testInvokestatic_interfaceWithClazzMethod_thenNinthElementReturnClassConstant() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokestatic_interfaceResult =
-        instructionSequenceBuilder.invokestatic_interface(clazz, method);
-
-    // Assert
-    ProgramClass targetClass =
-        actualInvokestatic_interfaceResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[8] instanceof ClassConstant);
     assertTrue(constantArray[6] instanceof FieldrefConstant);
-    assertTrue(constantArray[9] instanceof InterfaceMethodrefConstant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertEquals(10, targetClass.u2constantPoolCount);
+    assertTrue(constantArray[7] instanceof InterfaceMethodrefConstant);
     assertEquals(2, instructionSequenceBuilder.size());
     assertEquals(2, actualInvokestatic_interfaceResult.size());
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String)} with
-   * {@code className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
-   * String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial_interface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String)"
-  })
-  void testInvokespecial_interfaceWithClassNameNameDescriptor() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecial_interfaceResult =
-        instructionSequenceBuilder.invokespecial_interface("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokespecial_interfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String)} with
-   * {@code className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
-   * String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial_interface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String)"
-  })
-  void testInvokespecial_interfaceWithClassNameNameDescriptor2()
-      throws UnsupportedEncodingException {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokespecial_interface("Class Name", "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    Constant constant = constantArray[7];
-    assertTrue(constant instanceof InterfaceMethodrefConstant);
-    Constant constant2 = constantArray[1];
-    assertTrue(constant2 instanceof Utf8Constant);
-    Constant constant3 = constantArray[2];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    assertNull(((InterfaceMethodrefConstant) constant).referencedMethod);
-    assertEquals(11, constant.getTag());
-    assertEquals(3, ((InterfaceMethodrefConstant) constant).getNameAndTypeIndex());
-    assertEquals(5, ((InterfaceMethodrefConstant) constant).getClassIndex());
     assertEquals(8, targetClass.u2constantPoolCount);
-    assertFalse(constant.isCategory2());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
   }
 
   /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String)} with
+   * Test {@link InstructionSequenceBuilder#invokestatic_interface(String, String, String)} with
    * {@code className}, {@code name}, {@code descriptor}.
    *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(String, String,
    * String)}
    */
   @Test
-  @DisplayName(
-      "Test invokespecial_interface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String)"
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String)"
   })
-  void testInvokespecial_interfaceWithClassNameNameDescriptor3() {
+  public void testInvokestatic_interfaceWithClassNameNameDescriptor3() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecial_interfaceResult =
-        instructionSequenceBuilder.invokespecial_interface("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokespecial_interfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String)} with
-   * {@code className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
-   * String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial_interface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String)"
-  })
-  void testInvokespecial_interfaceWithClassNameNameDescriptor4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecial_interfaceResult =
-        instructionSequenceBuilder.invokespecial_interface("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokespecial_interfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String)} with
-   * {@code className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
-   * String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial_interface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String)"
-  })
-  void testInvokespecial_interfaceWithClassNameNameDescriptor5() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
     // Act and Assert
-    ProgramClass targetClass =
-        new InstructionSequenceBuilder(
-                new ProgramClass(
-                    1,
-                    3,
-                    new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                    1,
-                    1,
-                    1))
-            .invokespecial_interface("Class Name", "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[7] instanceof ClassConstant);
-    assertTrue(constantArray[8] instanceof InterfaceMethodrefConstant);
-    assertTrue(constantArray[5] instanceof NameAndTypeConstant);
-    assertEquals(19, constantArray.length);
-    assertEquals(9, targetClass.u2constantPoolCount);
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokestatic_interface("Class Name", "Name", "Descriptor"));
   }
 
   /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String)} with
+   * Test {@link InstructionSequenceBuilder#invokestatic_interface(String, String, String)} with
    * {@code className}, {@code name}, {@code descriptor}.
    *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(String, String,
    * String)}
    */
   @Test
-  @DisplayName(
-      "Test invokespecial_interface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String)"
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String)"
   })
-  void testInvokespecial_interfaceWithClassNameNameDescriptor6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecial_interfaceResult =
-        instructionSequenceBuilder.invokespecial_interface("Class Name", "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokespecial_interfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String)} with
-   * {@code className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
-   * String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial_interface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String)"
-  })
-  void testInvokespecial_interfaceWithClassNameNameDescriptor7() {
+  public void testInvokestatic_interfaceWithClassNameNameDescriptor4() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
-
     InstructionSequenceBuilder instructionSequenceBuilder =
         new InstructionSequenceBuilder(
             new ProgramClass(
@@ -16733,733 +10561,212 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1,
                 1));
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
 
     // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokespecial_interface("Class Name", "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof InterfaceMethodrefConstant);
-    assertTrue(constantArray[9] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(11, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokestatic_interface("Class Name", "Name", "Descriptor"));
   }
 
   /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String)} with
-   * {@code className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
-   * String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial_interface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String)"
-  })
-  void testInvokespecial_interfaceWithClassNameNameDescriptor8() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecial_interfaceResult =
-        instructionSequenceBuilder.invokespecial_interface("Class Name", "Name", "Descriptor");
-
-    // Assert
-    ProgramClass targetClass =
-        actualInvokespecial_interfaceResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[9] instanceof ClassConstant);
-    assertTrue(constantArray[10] instanceof FieldrefConstant);
-    assertTrue(constantArray[13] instanceof InterfaceMethodrefConstant);
-    assertTrue(constantArray[12] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[11] instanceof Utf8Constant);
-    assertEquals(14, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualInvokespecial_interfaceResult.size());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String, Clazz,
+   * Test {@link InstructionSequenceBuilder#invokestatic_interface(String, String, String, Clazz,
    * Method)} with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass},
    * {@code referencedMethod}.
    *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(String, String,
    * String, Clazz, Method)}
    */
   @Test
-  @DisplayName(
-      "Test invokespecial_interface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String, Clazz, Method)"
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String, Clazz, Method)"
   })
-  void testInvokespecial_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod()
-      throws UnsupportedEncodingException {
+  public void
+      testInvokestatic_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
 
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .invokespecial_interface(
-                "Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[5];
-    Clazz clazz = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[6];
-    assertTrue(constant2 instanceof InterfaceMethodrefConstant);
-    Constant constant3 = constantArray[1];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[2];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[4];
-    assertTrue(constant5 instanceof Utf8Constant);
+    // Act
+    InstructionSequenceBuilder actualInvokestatic_interfaceResult =
+        instructionSequenceBuilder.invokestatic_interface(
+            "Class Name",
+            "Name",
+            "Descriptor",
+            referencedClass,
+            new LibraryMethod(1, "Name", "Descriptor"));
+
+    // Assert
+    ProgramClass targetClass =
+        actualInvokestatic_interfaceResult.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertTrue(constantArray[6] instanceof InterfaceMethodrefConstant);
+    assertNull(constantArray[7]);
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertEquals(1, actualInvokestatic_interfaceResult.size());
+    assertEquals(7, targetClass.u2constantPoolCount);
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(clazz, ((InterfaceMethodrefConstant) constant2).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
   }
 
   /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String, Clazz,
+   * Test {@link InstructionSequenceBuilder#invokestatic_interface(String, String, String, Clazz,
    * Method)} with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass},
    * {@code referencedMethod}.
    *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(String, String,
    * String, Clazz, Method)}
    */
   @Test
-  @DisplayName(
-      "Test invokespecial_interface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String, Clazz, Method)"
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(String, String, String, Clazz, Method)"
   })
-  void testInvokespecial_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod2()
-      throws UnsupportedEncodingException {
+  public void
+      testInvokestatic_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
     LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokespecial_interface(
-                "Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    Constant constant = constantArray[7];
-    Method method = ((InterfaceMethodrefConstant) constant).referencedMethod;
-    assertTrue(method instanceof LibraryMethod);
-    assertTrue(constant instanceof InterfaceMethodrefConstant);
-    Constant constant2 = constantArray[1];
-    assertTrue(constant2 instanceof Utf8Constant);
-    Constant constant3 = constantArray[2];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    assertEquals(11, constant.getTag());
-    assertEquals(3, ((InterfaceMethodrefConstant) constant).getNameAndTypeIndex());
-    assertEquals(5, ((InterfaceMethodrefConstant) constant).getClassIndex());
-    assertEquals(8, targetClass.u2constantPoolCount);
-    assertFalse(constant.isCategory2());
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(referencedMethod, method);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String, Clazz,
-   * Method)} with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass},
-   * {@code referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
-   * String, Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial_interface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String, Clazz, Method)"
-  })
-  void testInvokespecial_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
 
     // Act
-    InstructionSequenceBuilder actualInvokespecial_interfaceResult =
-        instructionSequenceBuilder.invokespecial_interface(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokespecial_interfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String, Clazz,
-   * Method)} with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass},
-   * {@code referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
-   * String, Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial_interface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String, Clazz, Method)"
-  })
-  void testInvokespecial_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecial_interfaceResult =
-        instructionSequenceBuilder.invokespecial_interface(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokespecial_interfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String, Clazz,
-   * Method)} with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass},
-   * {@code referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
-   * String, Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial_interface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String, Clazz, Method)"
-  })
-  void testInvokespecial_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod5()
-      throws UnsupportedEncodingException {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .invokespecial_interface(
-                "Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[7];
-    Clazz clazz = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[8];
-    assertTrue(constant2 instanceof InterfaceMethodrefConstant);
-    Constant constant3 = constantArray[3];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[6];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(19, constantArray.length);
-    assertSame(clazz, ((InterfaceMethodrefConstant) constant2).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String, Clazz,
-   * Method)} with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass},
-   * {@code referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
-   * String, Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial_interface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String, Clazz, Method)"
-  })
-  void testInvokespecial_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecial_interfaceResult =
-        instructionSequenceBuilder.invokespecial_interface(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokespecial_interfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String, Clazz,
-   * Method)} with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass},
-   * {@code referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
-   * String, Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial_interface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String, Clazz, Method)"
-  })
-  void testInvokespecial_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod7() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokespecial_interface(
-                "Class Name", "Name", "Descriptor", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof InterfaceMethodrefConstant);
-    assertTrue(constantArray[9] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(11, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String, Clazz,
-   * Method)} with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass},
-   * {@code referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
-   * String, Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial_interface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String, Clazz, Method)"
-  })
-  void testInvokespecial_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod8() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "Class Name", "Class Name");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecial_interfaceResult =
-        instructionSequenceBuilder.invokespecial_interface(
-            "Class Name", "Name", "Descriptor", referencedClass, referencedMethod);
+    InstructionSequenceBuilder actualInvokestatic_interfaceResult =
+        instructionSequenceBuilder.invokestatic_interface(
+            "Class Name",
+            "Name",
+            "Descriptor",
+            referencedClass,
+            new LibraryMethod(1, "Name", "Descriptor"));
 
     // Assert
     ProgramClass targetClass =
-        actualInvokespecial_interfaceResult.getConstantPoolEditor().getTargetClass();
+        actualInvokestatic_interfaceResult.getConstantPoolEditor().getTargetClass();
     Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[9] instanceof ClassConstant);
-    assertTrue(constantArray[10] instanceof FieldrefConstant);
-    assertTrue(constantArray[13] instanceof InterfaceMethodrefConstant);
-    assertTrue(constantArray[12] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[11] instanceof Utf8Constant);
-    assertEquals(14, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualInvokespecial_interfaceResult.size());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(Clazz, Method)} with {@code
-   * clazz}, {@code method}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(Clazz, Method)}
-   */
-  @Test
-  @DisplayName("Test invokespecial_interface(Clazz, Method) with 'clazz', 'method'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(Clazz, Method)"
-  })
-  void testInvokespecial_interfaceWithClazzMethod() throws UnsupportedEncodingException {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    Constant[] constantArray =
-        instructionSequenceBuilder
-            .invokespecial_interface(clazz, method)
-            .getConstantPoolEditor()
-            .getTargetClass()
-            .constantPool;
-    Constant constant = constantArray[5];
-    Clazz clazz2 = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz2 instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[6];
-    assertTrue(constant2 instanceof InterfaceMethodrefConstant);
-    Constant constant3 = constantArray[1];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[2];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[4];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(clazz2, ((InterfaceMethodrefConstant) constant2).referencedClass);
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("This Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(Clazz, Method)} with {@code
-   * clazz}, {@code method}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(Clazz, Method)}
-   */
-  @Test
-  @DisplayName("Test invokespecial_interface(Clazz, Method) with 'clazz', 'method'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(Clazz, Method)"
-  })
-  void testInvokespecial_interfaceWithClazzMethod2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecial_interfaceResult =
-        instructionSequenceBuilder.invokespecial_interface(clazz, method);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokespecial_interfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(Clazz, Method)} with {@code
-   * clazz}, {@code method}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(Clazz, Method)}
-   */
-  @Test
-  @DisplayName("Test invokespecial_interface(Clazz, Method) with 'clazz', 'method'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(Clazz, Method)"
-  })
-  void testInvokespecial_interfaceWithClazzMethod3() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecial_interfaceResult =
-        instructionSequenceBuilder.invokespecial_interface(clazz, method);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokespecial_interfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokespecial_interface(Clazz, Method)} with {@code
-   * clazz}, {@code method}.
-   *
-   * <ul>
-   *   <li>Then ninth element return {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokespecial_interface(Clazz, Method) with 'clazz', 'method'; then ninth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(Clazz, Method)"
-  })
-  void testInvokespecial_interfaceWithClazzMethod_thenNinthElementReturnClassConstant() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokespecial_interfaceResult =
-        instructionSequenceBuilder.invokespecial_interface(clazz, method);
-
-    // Assert
-    ProgramClass targetClass =
-        actualInvokespecial_interfaceResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[8] instanceof ClassConstant);
     assertTrue(constantArray[6] instanceof FieldrefConstant);
-    assertTrue(constantArray[9] instanceof InterfaceMethodrefConstant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertEquals(10, targetClass.u2constantPoolCount);
+    assertTrue(constantArray[7] instanceof InterfaceMethodrefConstant);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualInvokestatic_interfaceResult.size());
+    assertEquals(8, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokestatic_interface(Clazz, Method)} with {@code
+   * clazz}, {@code method}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokestatic_interface(Clazz, Method)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokestatic_interface(Clazz, Method)"
+  })
+  public void testInvokestatic_interfaceWithClazzMethod() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
+
+    // Act
+    InstructionSequenceBuilder actualInvokestatic_interfaceResult =
+        instructionSequenceBuilder.invokestatic_interface(
+            clazz, new LibraryMethod(1, "Name", "Descriptor"));
+
+    // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertSame(instructionSequenceBuilder, actualInvokestatic_interfaceResult);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String)} with
+   * {@code className}, {@code name}, {@code descriptor}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
+   * String)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String)"
+  })
+  public void testInvokespecial_interfaceWithClassNameNameDescriptor() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokespecial_interface("Class Name", "Name", "Descriptor"));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String)} with
+   * {@code className}, {@code name}, {@code descriptor}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
+   * String)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String)"
+  })
+  public void testInvokespecial_interfaceWithClassNameNameDescriptor2() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
+
+    // Act
+    InstructionSequenceBuilder actualInvokespecial_interfaceResult =
+        instructionSequenceBuilder.invokespecial_interface("Class Name", "Name", "Descriptor");
+
+    // Assert
+    ProgramClass targetClass =
+        actualInvokespecial_interfaceResult.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertTrue(constantArray[6] instanceof FieldrefConstant);
+    assertTrue(constantArray[7] instanceof InterfaceMethodrefConstant);
     assertEquals(2, instructionSequenceBuilder.size());
     assertEquals(2, actualInvokespecial_interfaceResult.size());
+    assertEquals(8, targetClass.u2constantPoolCount);
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
   }
 
   /**
-   * Test {@link InstructionSequenceBuilder#invokeinterface(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
+   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String)} with
+   * {@code className}, {@code name}, {@code descriptor}.
    *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokeinterface(String, String,
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
    * String)}
    */
   @Test
-  @DisplayName(
-      "Test invokeinterface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(String, String, String)"
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String)"
   })
-  void testInvokeinterfaceWithClassNameNameDescriptor() {
+  public void testInvokespecial_interfaceWithClassNameNameDescriptor3() {
     // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-
-    // Act
-    InstructionSequenceBuilder actualInvokeinterfaceResult =
-        instructionSequenceBuilder.invokeinterface("Class Name", "Name", "()D");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokeinterfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokeinterface(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokeinterface(String, String,
-   * String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokeinterface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(String, String, String)"
-  })
-  void testInvokeinterfaceWithClassNameNameDescriptor2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokeinterfaceResult =
-        instructionSequenceBuilder.invokeinterface("Class Name", "Name", "()D");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokeinterfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokeinterface(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokeinterface(String, String,
-   * String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokeinterface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(String, String, String)"
-  })
-  void testInvokeinterfaceWithClassNameNameDescriptor3() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "", "");
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
     // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokeinterface("Class Name", "Name", "()D")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[5] instanceof FieldrefConstant);
-    assertTrue(constantArray[9] instanceof InterfaceMethodrefConstant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertEquals(10, targetClass.u2constantPoolCount);
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokespecial_interface("Class Name", "Name", "Descriptor"));
   }
 
   /**
-   * Test {@link InstructionSequenceBuilder#invokeinterface(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
+   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String)} with
+   * {@code className}, {@code name}, {@code descriptor}.
    *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokeinterface(String, String,
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
    * String)}
    */
   @Test
-  @DisplayName(
-      "Test invokeinterface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(String, String, String)"
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String)"
   })
-  void testInvokeinterfaceWithClassNameNameDescriptor4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokeinterfaceResult =
-        instructionSequenceBuilder.invokeinterface("Class Name", "Name", "()D");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokeinterfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokeinterface(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokeinterface(String, String,
-   * String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokeinterface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(String, String, String)"
-  })
-  void testInvokeinterfaceWithClassNameNameDescriptor5() {
+  public void testInvokespecial_interfaceWithClassNameNameDescriptor4() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -17473,210 +10780,261 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualInvokeinterfaceResult =
-        instructionSequenceBuilder.invokeinterface("Class Name", "Name", "()D");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokeinterfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokeinterface(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokeinterface(String, String,
-   * String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokeinterface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(String, String, String)"
-  })
-  void testInvokeinterfaceWithClassNameNameDescriptor6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokeinterfaceResult =
-        instructionSequenceBuilder.invokeinterface("Class Name", "Name", "()D");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokeinterfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokeinterface(String, String, String)} with {@code
-   * className}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokeinterface(String, String,
-   * String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokeinterface(String, String, String) with 'className', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(String, String, String)"
-  })
-  void testInvokeinterfaceWithClassNameNameDescriptor7() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("()D", "()D", "()D");
-
     // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokeinterface("Class Name", "Name", "()D")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof ClassConstant);
-    assertTrue(constantArray[5] instanceof ClassConstant);
-    assertTrue(constantArray[6] instanceof FieldrefConstant);
-    assertTrue(constantArray[11] instanceof InterfaceMethodrefConstant);
-    assertTrue(constantArray[4] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[9] instanceof Utf8Constant);
-    assertEquals(12, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokespecial_interface("Class Name", "Name", "Descriptor"));
   }
 
   /**
-   * Test {@link InstructionSequenceBuilder#invokeinterface(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
+   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String, Clazz,
+   * Method)} with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass},
+   * {@code referencedMethod}.
    *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokeinterface(String, String, String,
-   * Clazz, Method)}
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
+   * String, Clazz, Method)}
    */
   @Test
-  @DisplayName(
-      "Test invokeinterface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(String, String, String, Clazz, Method)"
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String, Clazz, Method)"
   })
-  void testInvokeinterfaceWithClassNameNameDescriptorReferencedClassReferencedMethod()
-      throws UnsupportedEncodingException {
+  public void
+      testInvokespecial_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
 
-    // Act and Assert
+    // Act
+    InstructionSequenceBuilder actualInvokespecial_interfaceResult =
+        instructionSequenceBuilder.invokespecial_interface(
+            "Class Name",
+            "Name",
+            "Descriptor",
+            referencedClass,
+            new LibraryMethod(1, "Name", "Descriptor"));
+
+    // Assert
+    ProgramClass targetClass =
+        actualInvokespecial_interfaceResult.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertTrue(constantArray[6] instanceof InterfaceMethodrefConstant);
+    assertNull(constantArray[7]);
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertEquals(1, actualInvokespecial_interfaceResult.size());
+    assertEquals(7, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokespecial_interface(String, String, String, Clazz,
+   * Method)} with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass},
+   * {@code referencedMethod}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(String, String,
+   * String, Clazz, Method)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(String, String, String, Clazz, Method)"
+  })
+  public void
+      testInvokespecial_interfaceWithClassNameNameDescriptorReferencedClassReferencedMethod2() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    InstructionSequenceBuilder actualInvokespecial_interfaceResult =
+        instructionSequenceBuilder.invokespecial_interface(
+            "Class Name",
+            "Name",
+            "Descriptor",
+            referencedClass,
+            new LibraryMethod(1, "Name", "Descriptor"));
+
+    // Assert
+    ProgramClass targetClass =
+        actualInvokespecial_interfaceResult.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertTrue(constantArray[6] instanceof FieldrefConstant);
+    assertTrue(constantArray[7] instanceof InterfaceMethodrefConstant);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualInvokespecial_interfaceResult.size());
+    assertEquals(8, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokespecial_interface(Clazz, Method)} with {@code
+   * clazz}, {@code method}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokespecial_interface(Clazz, Method)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokespecial_interface(Clazz, Method)"
+  })
+  public void testInvokespecial_interfaceWithClazzMethod() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
+
+    // Act
+    InstructionSequenceBuilder actualInvokespecial_interfaceResult =
+        instructionSequenceBuilder.invokespecial_interface(
+            clazz, new LibraryMethod(1, "Name", "Descriptor"));
+
+    // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertSame(instructionSequenceBuilder, actualInvokespecial_interfaceResult);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokeinterface(String, String, String)} with {@code
+   * className}, {@code name}, {@code descriptor}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokeinterface(String, String,
+   * String)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(String, String, String)"
+  })
+  public void testInvokeinterfaceWithClassNameNameDescriptor() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+
+    // Act
+    InstructionSequenceBuilder actualInvokeinterfaceResult =
+        instructionSequenceBuilder.invokeinterface("Class Name", "Name", "()D");
+
+    // Assert
+    ProgramClass targetClass = actualInvokeinterfaceResult.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertTrue(constantArray[6] instanceof InterfaceMethodrefConstant);
+    assertNull(constantArray[7]);
+    assertNull(constantArray[8]);
+    assertNull(constantArray[9]);
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertEquals(1, actualInvokeinterfaceResult.size());
+    assertEquals(7, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokeinterface(String, String, String)} with {@code
+   * className}, {@code name}, {@code descriptor}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokeinterface(String, String,
+   * String)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(String, String, String)"
+  })
+  public void testInvokeinterfaceWithClassNameNameDescriptor2()
+      throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
     Constant[] constantArray =
-        instructionSequenceBuilder
-            .invokeinterface("Class Name", "Name", "()D", referencedClass, referencedMethod)
+        (new InstructionSequenceBuilder())
+            .invokeinterface("Class Name", "Name", "(D)Ljava/lang/Double;")
             .getConstantPoolEditor()
             .getTargetClass()
             .constantPool;
-    Constant constant = constantArray[5];
-    Clazz clazz = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[6];
-    assertTrue(constant2 instanceof InterfaceMethodrefConstant);
-    Constant constant3 = constantArray[1];
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof Utf8Constant);
+    Constant constant2 = constantArray[2];
+    assertTrue(constant2 instanceof Utf8Constant);
+    Constant constant3 = constantArray[4];
     assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[2];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[4];
-    assertTrue(constant5 instanceof Utf8Constant);
+    assertEquals("(D)Ljava/lang/Double;", ((Utf8Constant) constant2).getString());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertSame(clazz, ((InterfaceMethodrefConstant) constant2).referencedClass);
-    assertArrayEquals("()D".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes = "(D)Ljava/lang/Double;".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes3 = "Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant).getBytes());
   }
 
   /**
-   * Test {@link InstructionSequenceBuilder#invokeinterface(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
+   * Test {@link InstructionSequenceBuilder#invokeinterface(String, String, String)} with {@code
+   * className}, {@code name}, {@code descriptor}.
    *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokeinterface(String, String, String,
-   * Clazz, Method)}
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokeinterface(String, String,
+   * String)}
    */
   @Test
-  @DisplayName(
-      "Test invokeinterface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(String, String, String, Clazz, Method)"
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(String, String, String)"
   })
-  void testInvokeinterfaceWithClassNameNameDescriptorReferencedClassReferencedMethod2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokeinterfaceResult =
-        instructionSequenceBuilder.invokeinterface(
-            "Class Name", "Name", "()D", referencedClass, referencedMethod);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokeinterfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokeinterface(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokeinterface(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokeinterface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(String, String, String, Clazz, Method)"
-  })
-  void testInvokeinterfaceWithClassNameNameDescriptorReferencedClassReferencedMethod3() {
+  public void testInvokeinterfaceWithClassNameNameDescriptor3() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     instructionSequenceBuilder.putstatic("Class Name", "", "");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
 
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokeinterface("Class Name", "Name", "()D", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass();
+    // Act
+    InstructionSequenceBuilder actualInvokeinterfaceResult =
+        instructionSequenceBuilder.invokeinterface("Class Name", "Name", "()D");
+
+    // Assert
+    ProgramClass targetClass = actualInvokeinterfaceResult.getConstantPoolEditor().getTargetClass();
     Constant[] constantArray = targetClass.constantPool;
     assertTrue(constantArray[4] instanceof ClassConstant);
     assertTrue(constantArray[5] instanceof FieldrefConstant);
     assertTrue(constantArray[9] instanceof InterfaceMethodrefConstant);
+    assertTrue(constantArray[2] instanceof NameAndTypeConstant);
+    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
+    assertTrue(constantArray[3] instanceof Utf8Constant);
+    assertTrue(constantArray[6] instanceof Utf8Constant);
     assertTrue(constantArray[7] instanceof Utf8Constant);
     assertEquals(10, targetClass.u2constantPoolCount);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualInvokeinterfaceResult.size());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokeinterface(String, String, String)} with {@code
+   * className}, {@code name}, {@code descriptor}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokeinterface(String, String,
+   * String)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(String, String, String)"
+  })
+  public void testInvokeinterfaceWithClassNameNameDescriptor4() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("", "Name", "()D");
+    instructionSequenceBuilder.putstatic("Class Name", "", "");
+
+    // Act
+    InstructionSequenceBuilder actualInvokeinterfaceResult =
+        instructionSequenceBuilder.invokeinterface("Class Name", "Name", "()D");
+
+    // Assert
+    ProgramClass targetClass = actualInvokeinterfaceResult.getConstantPoolEditor().getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertTrue(constantArray[9] instanceof ClassConstant);
+    assertTrue(constantArray[10] instanceof FieldrefConstant);
+    assertTrue(constantArray[6] instanceof FieldrefConstant);
+    assertTrue(constantArray[11] instanceof InterfaceMethodrefConstant);
+    assertTrue(constantArray[7] instanceof NameAndTypeConstant);
+    assertTrue(constantArray[8] instanceof Utf8Constant);
+    assertEquals(12, targetClass.u2constantPoolCount);
+    assertEquals(3, instructionSequenceBuilder.size());
+    assertEquals(3, actualInvokeinterfaceResult.size());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
   }
 
@@ -17689,87 +11047,43 @@ class InstructionSequenceBuilderDiffblueTest {
    * Clazz, Method)}
    */
   @Test
-  @DisplayName(
-      "Test invokeinterface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(String, String, String, Clazz, Method)"
   })
-  void testInvokeinterfaceWithClassNameNameDescriptorReferencedClassReferencedMethod4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act
-    InstructionSequenceBuilder actualInvokeinterfaceResult =
-        instructionSequenceBuilder.invokeinterface(
-            "Class Name", "Name", "()D", referencedClass, referencedMethod);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokeinterfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokeinterface(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokeinterface(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokeinterface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(String, String, String, Clazz, Method)"
-  })
-  void testInvokeinterfaceWithClassNameNameDescriptorReferencedClassReferencedMethod5()
+  public void testInvokeinterfaceWithClassNameNameDescriptorReferencedClassReferencedMethod()
       throws UnsupportedEncodingException {
     // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
 
     // Act and Assert
     Constant[] constantArray =
         instructionSequenceBuilder
-            .invokeinterface("Class Name", "Name", "()D", referencedClass, referencedMethod)
+            .invokeinterface(
+                "Class Name",
+                "Name",
+                "()D",
+                referencedClass,
+                new LibraryMethod(1, "Name", "Descriptor"))
             .getConstantPoolEditor()
             .getTargetClass()
             .constantPool;
-    Constant constant = constantArray[7];
-    Clazz clazz = ((ClassConstant) constant).referencedClass;
-    assertTrue(clazz instanceof LibraryClass);
-    assertTrue(constant instanceof ClassConstant);
-    Constant constant2 = constantArray[8];
-    assertTrue(constant2 instanceof InterfaceMethodrefConstant);
-    Constant constant3 = constantArray[3];
+    assertTrue(constantArray[6] instanceof InterfaceMethodrefConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof Utf8Constant);
+    Constant constant2 = constantArray[2];
+    assertTrue(constant2 instanceof Utf8Constant);
+    Constant constant3 = constantArray[4];
     assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    Constant constant5 = constantArray[6];
-    assertTrue(constant5 instanceof Utf8Constant);
-    assertEquals(19, constantArray.length);
-    assertSame(clazz, ((InterfaceMethodrefConstant) constant2).referencedClass);
-    assertArrayEquals("()D".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
+    assertEquals("()D", ((Utf8Constant) constant2).getString());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    byte[] expectedBytes = "()D".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes3 = "Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant).getBytes());
   }
 
   /**
@@ -17781,80 +11095,88 @@ class InstructionSequenceBuilderDiffblueTest {
    * Clazz, Method)}
    */
   @Test
-  @DisplayName(
-      "Test invokeinterface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(String, String, String, Clazz, Method)"
   })
-  void testInvokeinterfaceWithClassNameNameDescriptorReferencedClassReferencedMethod6() {
+  public void testInvokeinterfaceWithClassNameNameDescriptorReferencedClassReferencedMethod2()
+      throws UnsupportedEncodingException {
     // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
+
+    // Act and Assert
+    Constant[] constantArray =
+        instructionSequenceBuilder
+            .invokeinterface(
+                "Class Name",
+                "Name",
+                "(D)Ljava/lang/Double;",
+                referencedClass,
+                new LibraryMethod(1, "Name", "Descriptor"))
+            .getConstantPoolEditor()
+            .getTargetClass()
+            .constantPool;
+    assertTrue(constantArray[6] instanceof InterfaceMethodrefConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof Utf8Constant);
+    Constant constant2 = constantArray[2];
+    assertTrue(constant2 instanceof Utf8Constant);
+    Constant constant3 = constantArray[4];
+    assertTrue(constant3 instanceof Utf8Constant);
+    assertEquals("(D)Ljava/lang/Double;", ((Utf8Constant) constant2).getString());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    byte[] expectedBytes = "(D)Ljava/lang/Double;".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes3 = "Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant).getBytes());
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokeinterface(String, String, String, Clazz, Method)}
+   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
+   * referencedMethod}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokeinterface(String, String, String,
+   * Clazz, Method)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(String, String, String, Clazz, Method)"
+  })
+  public void testInvokeinterfaceWithClassNameNameDescriptorReferencedClassReferencedMethod3() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("Class Name", "", "");
+    LibraryClass referencedClass = new LibraryClass();
 
     // Act
     InstructionSequenceBuilder actualInvokeinterfaceResult =
         instructionSequenceBuilder.invokeinterface(
-            "Class Name", "Name", "()D", referencedClass, referencedMethod);
+            "Class Name",
+            "Name",
+            "()D",
+            referencedClass,
+            new LibraryMethod(1, "Name", "Descriptor"));
 
     // Assert
-    assertSame(instructionSequenceBuilder, actualInvokeinterfaceResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokeinterface(String, String, String, Clazz, Method)}
-   * with {@code className}, {@code name}, {@code descriptor}, {@code referencedClass}, {@code
-   * referencedMethod}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokeinterface(String, String, String,
-   * Clazz, Method)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokeinterface(String, String, String, Clazz, Method) with 'className', 'name', 'descriptor', 'referencedClass', 'referencedMethod'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(String, String, String, Clazz, Method)"
-  })
-  void testInvokeinterfaceWithClassNameNameDescriptorReferencedClassReferencedMethod7() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("()D", "()D", "()D");
-    LibraryClass referencedClass = new LibraryClass();
-    LibraryMethod referencedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokeinterface("Class Name", "Name", "()D", referencedClass, referencedMethod)
-            .getConstantPoolEditor()
-            .getTargetClass();
+    ProgramClass targetClass = actualInvokeinterfaceResult.getConstantPoolEditor().getTargetClass();
     Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof ClassConstant);
-    assertTrue(constantArray[6] instanceof FieldrefConstant);
-    assertTrue(constantArray[11] instanceof InterfaceMethodrefConstant);
-    assertTrue(constantArray[4] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[9] instanceof Utf8Constant);
-    assertEquals(12, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
+    assertTrue(constantArray[4] instanceof ClassConstant);
+    assertTrue(constantArray[5] instanceof FieldrefConstant);
+    assertTrue(constantArray[9] instanceof InterfaceMethodrefConstant);
+    assertTrue(constantArray[2] instanceof NameAndTypeConstant);
+    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
+    assertTrue(constantArray[3] instanceof Utf8Constant);
+    assertTrue(constantArray[6] instanceof Utf8Constant);
+    assertTrue(constantArray[7] instanceof Utf8Constant);
+    assertEquals(10, targetClass.u2constantPoolCount);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualInvokeinterfaceResult.size());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
   }
 
   /**
@@ -17864,13 +11186,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#invokeinterface(int, int)}
    */
   @Test
-  @DisplayName("Test invokeinterface(int, int) with 'constantIndex', 'constant'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokeinterface(int, int)"
   })
-  void testInvokeinterfaceWithConstantIndexConstant() {
+  public void testInvokeinterfaceWithConstantIndexConstant() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -17890,23 +11210,18 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#invokedynamic(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test invokedynamic(int, String, String) with 'bootStrapMethodIndex', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokedynamic(int, String, String)"
   })
-  void testInvokedynamicWithBootStrapMethodIndexNameDescriptor() {
+  public void testInvokedynamicWithBootStrapMethodIndexNameDescriptor() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualInvokedynamicResult =
-        instructionSequenceBuilder.invokedynamic(1, "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokedynamicResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokedynamic(1, "Name", "Descriptor"));
   }
 
   /**
@@ -17916,28 +11231,27 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#invokedynamic(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test invokedynamic(int, String, String) with 'bootStrapMethodIndex', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokedynamic(int, String, String)"
   })
-  void testInvokedynamicWithBootStrapMethodIndexNameDescriptor2() {
+  public void testInvokedynamicWithBootStrapMethodIndexNameDescriptor2() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
 
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokedynamic(1, "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
+    // Act
+    InstructionSequenceBuilder actualInvokedynamicResult =
+        instructionSequenceBuilder.invokedynamic(1, "Name", "Descriptor");
+
+    // Assert
+    ProgramClass targetClass = actualInvokedynamicResult.getConstantPoolEditor().getTargetClass();
     Constant[] constantArray = targetClass.constantPool;
     assertTrue(constantArray[5] instanceof ClassConstant);
     assertTrue(constantArray[6] instanceof FieldrefConstant);
     assertTrue(constantArray[7] instanceof InvokeDynamicConstant);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualInvokedynamicResult.size());
     assertEquals(8, targetClass.u2constantPoolCount);
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
   }
@@ -17949,109 +11263,20 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#invokedynamic(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test invokedynamic(int, String, String) with 'bootStrapMethodIndex', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokedynamic(int, String, String)"
   })
-  void testInvokedynamicWithBootStrapMethodIndexNameDescriptor3() {
+  public void testInvokedynamicWithBootStrapMethodIndexNameDescriptor3() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokedynamicResult =
-        instructionSequenceBuilder.invokedynamic(1, "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokedynamicResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokedynamic(int, String, String)} with {@code
-   * bootStrapMethodIndex}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokedynamic(int, String, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokedynamic(int, String, String) with 'bootStrapMethodIndex', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokedynamic(int, String, String)"
-  })
-  void testInvokedynamicWithBootStrapMethodIndexNameDescriptor4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokedynamicResult =
-        instructionSequenceBuilder.invokedynamic(1, "Name", "Descriptor");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokedynamicResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokedynamic(int, String, String)} with {@code
-   * bootStrapMethodIndex}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokedynamic(int, String, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokedynamic(int, String, String) with 'bootStrapMethodIndex', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokedynamic(int, String, String)"
-  })
-  void testInvokedynamicWithBootStrapMethodIndexNameDescriptor5()
-      throws UnsupportedEncodingException {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
     // Act and Assert
-    ProgramClass targetClass =
-        new InstructionSequenceBuilder(
-                new ProgramClass(
-                    1,
-                    3,
-                    new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                    1,
-                    1,
-                    1))
-            .invokedynamic(1, "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    Constant constant = constantArray[6];
-    assertTrue(constant instanceof InvokeDynamicConstant);
-    Constant constant2 = constantArray[5];
-    assertTrue(constant2 instanceof NameAndTypeConstant);
-    Constant constant3 = constantArray[3];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    assertEquals("Descriptor", ((Utf8Constant) constant4).getString());
-    assertNull(((InvokeDynamicConstant) constant).referencedClasses);
-    assertEquals(1, ((InvokeDynamicConstant) constant).getBootstrapMethodAttributeIndex());
-    assertEquals(12, constant2.getTag());
-    assertEquals(18, constant.getTag());
-    assertEquals(19, constantArray.length);
-    assertEquals(5, ((InvokeDynamicConstant) constant).getNameAndTypeIndex());
-    assertEquals(7, targetClass.u2constantPoolCount);
-    assertFalse(constant2.isCategory2());
-    assertFalse(constant.isCategory2());
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokedynamic(1, "Name", "Descriptor"));
   }
 
   /**
@@ -18061,18 +11286,14 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#invokedynamic(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test invokedynamic(int, String, String) with 'bootStrapMethodIndex', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokedynamic(int, String, String)"
   })
-  void testInvokedynamicWithBootStrapMethodIndexNameDescriptor6() {
+  public void testInvokedynamicWithBootStrapMethodIndexNameDescriptor4() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
-
     InstructionSequenceBuilder instructionSequenceBuilder =
         new InstructionSequenceBuilder(
             new ProgramClass(
@@ -18082,74 +11303,11 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1,
                 1));
-    instructionSequenceBuilder.putstatic("Class Name", "", "");
 
     // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokedynamic(1, "Name", "Descriptor")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[6] instanceof ClassConstant);
-    assertTrue(constantArray[7] instanceof FieldrefConstant);
-    assertTrue(constantArray[11] instanceof InvokeDynamicConstant);
-    assertTrue(constantArray[10] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[5] instanceof Utf8Constant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(12, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokedynamic(int, String, String)} with {@code
-   * bootStrapMethodIndex}, {@code name}, {@code descriptor}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokedynamic(int, String, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test invokedynamic(int, String, String) with 'bootStrapMethodIndex', 'name', 'descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokedynamic(int, String, String)"
-  })
-  void testInvokedynamicWithBootStrapMethodIndexNameDescriptor7() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "", "");
-
-    // Act
-    InstructionSequenceBuilder actualInvokedynamicResult =
-        instructionSequenceBuilder.invokedynamic(1, "Name", "Descriptor");
-
-    // Assert
-    ProgramClass targetClass = actualInvokedynamicResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof ClassConstant);
-    assertTrue(constantArray[11] instanceof FieldrefConstant);
-    assertTrue(constantArray[14] instanceof InvokeDynamicConstant);
-    assertTrue(constantArray[13] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[12] instanceof Utf8Constant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertEquals(15, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualInvokedynamicResult.size());
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokedynamic(1, "Name", "Descriptor"));
   }
 
   /**
@@ -18160,16 +11318,37 @@ class InstructionSequenceBuilderDiffblueTest {
    * Clazz[])}
    */
   @Test
-  @DisplayName(
-      "Test invokedynamic(int, String, String, Clazz[]) with 'bootStrapMethodIndex', 'name', 'descriptor', 'referencedClasses'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokedynamic(int, String, String, Clazz[])"
   })
-  void testInvokedynamicWithBootStrapMethodIndexNameDescriptorReferencedClasses() {
+  public void testInvokedynamicWithBootStrapMethodIndexNameDescriptorReferencedClasses() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokedynamic(
+            1, "Name", "Descriptor", new Clazz[] {new LibraryClass()}));
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#invokedynamic(int, String, String, Clazz[])} with {@code
+   * bootStrapMethodIndex}, {@code name}, {@code descriptor}, {@code referencedClasses}.
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#invokedynamic(int, String, String,
+   * Clazz[])}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.invokedynamic(int, String, String, Clazz[])"
+  })
+  public void testInvokedynamicWithBootStrapMethodIndexNameDescriptorReferencedClasses2() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
 
     // Act
     InstructionSequenceBuilder actualInvokedynamicResult =
@@ -18177,39 +11356,13 @@ class InstructionSequenceBuilderDiffblueTest {
             1, "Name", "Descriptor", new Clazz[] {new LibraryClass()});
 
     // Assert
-    assertSame(instructionSequenceBuilder, actualInvokedynamicResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokedynamic(int, String, String, Clazz[])} with {@code
-   * bootStrapMethodIndex}, {@code name}, {@code descriptor}, {@code referencedClasses}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokedynamic(int, String, String,
-   * Clazz[])}
-   */
-  @Test
-  @DisplayName(
-      "Test invokedynamic(int, String, String, Clazz[]) with 'bootStrapMethodIndex', 'name', 'descriptor', 'referencedClasses'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokedynamic(int, String, String, Clazz[])"
-  })
-  void testInvokedynamicWithBootStrapMethodIndexNameDescriptorReferencedClasses2() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokedynamic(1, "Name", "Descriptor", new Clazz[] {new LibraryClass()})
-            .getConstantPoolEditor()
-            .getTargetClass();
+    ProgramClass targetClass = actualInvokedynamicResult.getConstantPoolEditor().getTargetClass();
     Constant[] constantArray = targetClass.constantPool;
     assertTrue(constantArray[5] instanceof ClassConstant);
     assertTrue(constantArray[6] instanceof FieldrefConstant);
     assertTrue(constantArray[7] instanceof InvokeDynamicConstant);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualInvokedynamicResult.size());
     assertEquals(8, targetClass.u2constantPoolCount);
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
   }
@@ -18222,118 +11375,21 @@ class InstructionSequenceBuilderDiffblueTest {
    * Clazz[])}
    */
   @Test
-  @DisplayName(
-      "Test invokedynamic(int, String, String, Clazz[]) with 'bootStrapMethodIndex', 'name', 'descriptor', 'referencedClasses'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokedynamic(int, String, String, Clazz[])"
   })
-  void testInvokedynamicWithBootStrapMethodIndexNameDescriptorReferencedClasses3() {
+  public void testInvokedynamicWithBootStrapMethodIndexNameDescriptorReferencedClasses3() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokedynamicResult =
-        instructionSequenceBuilder.invokedynamic(
-            1, "Name", "Descriptor", new Clazz[] {new LibraryClass()});
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokedynamicResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokedynamic(int, String, String, Clazz[])} with {@code
-   * bootStrapMethodIndex}, {@code name}, {@code descriptor}, {@code referencedClasses}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokedynamic(int, String, String,
-   * Clazz[])}
-   */
-  @Test
-  @DisplayName(
-      "Test invokedynamic(int, String, String, Clazz[]) with 'bootStrapMethodIndex', 'name', 'descriptor', 'referencedClasses'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokedynamic(int, String, String, Clazz[])"
-  })
-  void testInvokedynamicWithBootStrapMethodIndexNameDescriptorReferencedClasses4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInvokedynamicResult =
-        instructionSequenceBuilder.invokedynamic(
-            1, "Name", "Descriptor", new Clazz[] {new LibraryClass()});
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInvokedynamicResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokedynamic(int, String, String, Clazz[])} with {@code
-   * bootStrapMethodIndex}, {@code name}, {@code descriptor}, {@code referencedClasses}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokedynamic(int, String, String,
-   * Clazz[])}
-   */
-  @Test
-  @DisplayName(
-      "Test invokedynamic(int, String, String, Clazz[]) with 'bootStrapMethodIndex', 'name', 'descriptor', 'referencedClasses'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokedynamic(int, String, String, Clazz[])"
-  })
-  void testInvokedynamicWithBootStrapMethodIndexNameDescriptorReferencedClasses5()
-      throws UnsupportedEncodingException {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
     InstructionSequenceBuilder instructionSequenceBuilder =
         new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    Clazz[] referencedClasses = new Clazz[] {new LibraryClass()};
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
     // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokedynamic(1, "Name", "Descriptor", referencedClasses)
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    Constant constant = constantArray[6];
-    assertTrue(constant instanceof InvokeDynamicConstant);
-    Constant constant2 = constantArray[5];
-    assertTrue(constant2 instanceof NameAndTypeConstant);
-    Constant constant3 = constantArray[3];
-    assertTrue(constant3 instanceof Utf8Constant);
-    Constant constant4 = constantArray[4];
-    assertTrue(constant4 instanceof Utf8Constant);
-    assertEquals("Descriptor", ((Utf8Constant) constant4).getString());
-    assertEquals(1, ((InvokeDynamicConstant) constant).getBootstrapMethodAttributeIndex());
-    Clazz[] clazzArray = ((InvokeDynamicConstant) constant).referencedClasses;
-    assertEquals(1, clazzArray.length);
-    assertEquals(12, constant2.getTag());
-    assertEquals(18, constant.getTag());
-    assertEquals(19, constantArray.length);
-    assertEquals(5, ((InvokeDynamicConstant) constant).getNameAndTypeIndex());
-    assertEquals(7, targetClass.u2constantPoolCount);
-    assertFalse(constant2.isCategory2());
-    assertFalse(constant.isCategory2());
-    assertSame(referencedClasses, clazzArray);
-    assertArrayEquals("Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.invokedynamic(
+            1, "Name", "Descriptor", new Clazz[] {new LibraryClass()}));
   }
 
   /**
@@ -18344,18 +11400,14 @@ class InstructionSequenceBuilderDiffblueTest {
    * Clazz[])}
    */
   @Test
-  @DisplayName(
-      "Test invokedynamic(int, String, String, Clazz[]) with 'bootStrapMethodIndex', 'name', 'descriptor', 'referencedClasses'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.invokedynamic(int, String, String, Clazz[])"
   })
-  void testInvokedynamicWithBootStrapMethodIndexNameDescriptorReferencedClasses6() {
+  public void testInvokedynamicWithBootStrapMethodIndexNameDescriptorReferencedClasses4() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
-
     InstructionSequenceBuilder instructionSequenceBuilder =
         new InstructionSequenceBuilder(
             new ProgramClass(
@@ -18365,76 +11417,12 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1,
                 1));
-    instructionSequenceBuilder.putstatic("Class Name", "", "");
 
     // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .invokedynamic(1, "Name", "Descriptor", new Clazz[] {new LibraryClass()})
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[6] instanceof ClassConstant);
-    assertTrue(constantArray[7] instanceof FieldrefConstant);
-    assertTrue(constantArray[11] instanceof InvokeDynamicConstant);
-    assertTrue(constantArray[10] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[5] instanceof Utf8Constant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(12, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#invokedynamic(int, String, String, Clazz[])} with {@code
-   * bootStrapMethodIndex}, {@code name}, {@code descriptor}, {@code referencedClasses}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#invokedynamic(int, String, String,
-   * Clazz[])}
-   */
-  @Test
-  @DisplayName(
-      "Test invokedynamic(int, String, String, Clazz[]) with 'bootStrapMethodIndex', 'name', 'descriptor', 'referencedClasses'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.invokedynamic(int, String, String, Clazz[])"
-  })
-  void testInvokedynamicWithBootStrapMethodIndexNameDescriptorReferencedClasses7() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-    instructionSequenceBuilder.putstatic("Name", "Name", "Name");
-    instructionSequenceBuilder.putstatic("Class Name", "", "");
-
-    // Act
-    InstructionSequenceBuilder actualInvokedynamicResult =
+    assertSame(
+        instructionSequenceBuilder,
         instructionSequenceBuilder.invokedynamic(
-            1, "Name", "Descriptor", new Clazz[] {new LibraryClass()});
-
-    // Assert
-    ProgramClass targetClass = actualInvokedynamicResult.getConstantPoolEditor().getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[10] instanceof ClassConstant);
-    assertTrue(constantArray[11] instanceof FieldrefConstant);
-    assertTrue(constantArray[14] instanceof InvokeDynamicConstant);
-    assertTrue(constantArray[13] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[8] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[12] instanceof Utf8Constant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertEquals(15, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
-    assertEquals(3, instructionSequenceBuilder.size());
-    assertEquals(3, actualInvokedynamicResult.size());
+            1, "Name", "Descriptor", new Clazz[] {new LibraryClass()}));
   }
 
   /**
@@ -18443,11 +11431,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#invokedynamic(int)}
    */
   @Test
-  @DisplayName("Test invokedynamic(int) with 'constantIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.invokedynamic(int)"})
-  void testInvokedynamicWithConstantIndex() {
+  public void testInvokedynamicWithConstantIndex() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -18466,21 +11452,16 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#new_(String)}
    */
   @Test
-  @DisplayName("Test new_(String) with 'className'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.new_(String)"})
-  void testNew_WithClassName() {
+  public void testNew_WithClassName() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    InstructionSequenceBuilder actualNew_Result = instructionSequenceBuilder.new_("Class Name");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualNew_Result);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.new_("Class Name"));
   }
 
   /**
@@ -18489,34 +11470,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#new_(String)}
    */
   @Test
-  @DisplayName("Test new_(String) with 'className'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.new_(String)"})
-  void testNew_WithClassName2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualNew_Result = instructionSequenceBuilder.new_("Class Name");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualNew_Result);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#new_(String)} with {@code className}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#new_(String)}
-   */
-  @Test
-  @DisplayName("Test new_(String) with 'className'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.new_(String)"})
-  void testNew_WithClassName3() {
+  public void testNew_WithClassName2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -18530,36 +11486,29 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualNew_Result = instructionSequenceBuilder.new_("Class Name");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualNew_Result);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.new_("Class Name"));
   }
 
   /**
-   * Test {@link InstructionSequenceBuilder#new_(String)} with {@code className}.
+   * Test {@link InstructionSequenceBuilder#new_(String, Clazz)} with {@code className}, {@code
+   * referencedClass}.
    *
-   * <p>Method under test: {@link InstructionSequenceBuilder#new_(String)}
+   * <p>Method under test: {@link InstructionSequenceBuilder#new_(String, Clazz)}
    */
   @Test
-  @DisplayName("Test new_(String) with 'className'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.new_(String)"})
-  void testNew_WithClassName4() {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.new_(String, Clazz)"})
+  public void testNew_WithClassNameReferencedClass() {
     // Arrange
-    ClassConstant classConstant = new ClassConstant();
     InstructionSequenceBuilder instructionSequenceBuilder =
         new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    InstructionSequenceBuilder actualNew_Result = instructionSequenceBuilder.new_("Class Name");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualNew_Result);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.new_("Class Name", new LibraryClass()));
   }
 
   /**
@@ -18569,61 +11518,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#new_(String, Clazz)}
    */
   @Test
-  @DisplayName("Test new_(String, Clazz) with 'className', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.new_(String, Clazz)"})
-  void testNew_WithClassNameReferencedClass() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualNew_Result =
-        instructionSequenceBuilder.new_("Class Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualNew_Result);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#new_(String, Clazz)} with {@code className}, {@code
-   * referencedClass}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#new_(String, Clazz)}
-   */
-  @Test
-  @DisplayName("Test new_(String, Clazz) with 'className', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.new_(String, Clazz)"})
-  void testNew_WithClassNameReferencedClass2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualNew_Result =
-        instructionSequenceBuilder.new_("Class Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualNew_Result);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#new_(String, Clazz)} with {@code className}, {@code
-   * referencedClass}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#new_(String, Clazz)}
-   */
-  @Test
-  @DisplayName("Test new_(String, Clazz) with 'className', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.new_(String, Clazz)"})
-  void testNew_WithClassNameReferencedClass3() {
+  public void testNew_WithClassNameReferencedClass2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -18637,39 +11534,10 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualNew_Result =
-        instructionSequenceBuilder.new_("Class Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualNew_Result);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#new_(String, Clazz)} with {@code className}, {@code
-   * referencedClass}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#new_(String, Clazz)}
-   */
-  @Test
-  @DisplayName("Test new_(String, Clazz) with 'className', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.new_(String, Clazz)"})
-  void testNew_WithClassNameReferencedClass4() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualNew_Result =
-        instructionSequenceBuilder.new_("Class Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualNew_Result);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.new_("Class Name", new LibraryClass()));
   }
 
   /**
@@ -18683,21 +11551,16 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#new_(String, Clazz)}
    */
   @Test
-  @DisplayName(
-      "Test new_(String, Clazz) with 'className', 'referencedClass'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.new_(String, Clazz)"})
-  void testNew_WithClassNameReferencedClass_thenReturnInstructionSequenceBuilder() {
+  public void testNew_WithClassNameReferencedClass_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualNew_Result =
-        instructionSequenceBuilder.new_("Class Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualNew_Result);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.new_("Class Name", new LibraryClass()));
   }
 
   /**
@@ -18711,12 +11574,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#new_(String, Clazz)}
    */
   @Test
-  @DisplayName(
-      "Test new_(String, Clazz) with 'className', 'referencedClass'; then sixth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.new_(String, Clazz)"})
-  void testNew_WithClassNameReferencedClass_thenSixthElementReturnClassConstant() {
+  public void testNew_WithClassNameReferencedClass_thenSixthElementReturnClassConstant() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
@@ -18749,19 +11609,14 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#new_(String)}
    */
   @Test
-  @DisplayName("Test new_(String) with 'className'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.new_(String)"})
-  void testNew_WithClassName_thenReturnInstructionSequenceBuilder() {
+  public void testNew_WithClassName_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualNew_Result = instructionSequenceBuilder.new_("Class Name");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualNew_Result);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.new_("Class Name"));
   }
 
   /**
@@ -18774,11 +11629,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#new_(String)}
    */
   @Test
-  @DisplayName("Test new_(String) with 'className'; then sixth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.new_(String)"})
-  void testNew_WithClassName_thenSixthElementReturnClassConstant() {
+  public void testNew_WithClassName_thenSixthElementReturnClassConstant() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     instructionSequenceBuilder.putstatic("Class Name", "Name", "Descriptor");
@@ -18806,11 +11659,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#new_(Clazz)}
    */
   @Test
-  @DisplayName("Test new_(Clazz) with 'clazz'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.new_(Clazz)"})
-  void testNew_WithClazz() {
+  public void testNew_WithClazz() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -18824,38 +11675,8 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualNew_Result =
-        instructionSequenceBuilder.new_(new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualNew_Result);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#new_(Clazz)} with {@code clazz}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#new_(Clazz)}
-   */
-  @Test
-  @DisplayName("Test new_(Clazz) with 'clazz'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.new_(Clazz)"})
-  void testNew_WithClazz2() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualNew_Result =
-        instructionSequenceBuilder.new_(new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualNew_Result);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.new_(new LibraryClass()));
   }
 
   /**
@@ -18868,20 +11689,17 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#new_(Clazz)}
    */
   @Test
-  @DisplayName("Test new_(Clazz) with 'clazz'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.new_(Clazz)"})
-  void testNew_WithClazz_thenReturnInstructionSequenceBuilder() {
+  public void testNew_WithClazz_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
 
-    // Act
-    InstructionSequenceBuilder actualNew_Result = instructionSequenceBuilder.new_(clazz);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualNew_Result);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.new_(
+            new LibraryClass(1, "This Class Name", "Super Class Name")));
   }
 
   /**
@@ -18890,11 +11708,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#new_(int)}
    */
   @Test
-  @DisplayName("Test new_(int) with 'constantIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.new_(int)"})
-  void testNew_WithConstantIndex() {
+  public void testNew_WithConstantIndex() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -18912,11 +11728,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#newarray(int)}
    */
   @Test
-  @DisplayName("Test newarray(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.newarray(int)"})
-  void testNewarray() {
+  public void testNewarray() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -18934,11 +11748,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#anewarray(int)}
    */
   @Test
-  @DisplayName("Test anewarray(int) with 'constantIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.anewarray(int)"})
-  void testAnewarrayWithConstantIndex() {
+  public void testAnewarrayWithConstantIndex() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -18956,11 +11768,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#anewarray(Clazz)}
    */
   @Test
-  @DisplayName("Test anewarray(Clazz) with 'elementType'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.anewarray(Clazz)"})
-  void testAnewarrayWithElementType() {
+  public void testAnewarrayWithElementType() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -18974,38 +11784,9 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualAnewarrayResult =
-        instructionSequenceBuilder.anewarray(new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualAnewarrayResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#anewarray(Clazz)} with {@code elementType}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#anewarray(Clazz)}
-   */
-  @Test
-  @DisplayName("Test anewarray(Clazz) with 'elementType'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.anewarray(Clazz)"})
-  void testAnewarrayWithElementType2() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualAnewarrayResult =
-        instructionSequenceBuilder.anewarray(new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualAnewarrayResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder, instructionSequenceBuilder.anewarray(new LibraryClass()));
   }
 
   /**
@@ -19015,22 +11796,18 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#anewarray(String, Clazz)}
    */
   @Test
-  @DisplayName("Test anewarray(String, Clazz) with 'elementTypeName', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.anewarray(String, Clazz)"
   })
-  void testAnewarrayWithElementTypeNameReferencedClass() {
+  public void testAnewarrayWithElementTypeNameReferencedClass() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualAnewarrayResult =
-        instructionSequenceBuilder.anewarray("Element Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualAnewarrayResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.anewarray("Element Type Name", new LibraryClass()));
   }
 
   /**
@@ -19040,24 +11817,20 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#anewarray(String, Clazz)}
    */
   @Test
-  @DisplayName("Test anewarray(String, Clazz) with 'elementTypeName', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.anewarray(String, Clazz)"
   })
-  void testAnewarrayWithElementTypeNameReferencedClass2() {
+  public void testAnewarrayWithElementTypeNameReferencedClass2() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    InstructionSequenceBuilder actualAnewarrayResult =
-        instructionSequenceBuilder.anewarray("Element Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualAnewarrayResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.anewarray("Element Type Name", new LibraryClass()));
   }
 
   /**
@@ -19067,40 +11840,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#anewarray(String, Clazz)}
    */
   @Test
-  @DisplayName("Test anewarray(String, Clazz) with 'elementTypeName', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.anewarray(String, Clazz)"
   })
-  void testAnewarrayWithElementTypeNameReferencedClass3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualAnewarrayResult =
-        instructionSequenceBuilder.anewarray("Element Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualAnewarrayResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#anewarray(String, Clazz)} with {@code elementTypeName},
-   * {@code referencedClass}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#anewarray(String, Clazz)}
-   */
-  @Test
-  @DisplayName("Test anewarray(String, Clazz) with 'elementTypeName', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.anewarray(String, Clazz)"
-  })
-  void testAnewarrayWithElementTypeNameReferencedClass4() {
+  public void testAnewarrayWithElementTypeNameReferencedClass3() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -19114,41 +11858,10 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualAnewarrayResult =
-        instructionSequenceBuilder.anewarray("Element Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualAnewarrayResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#anewarray(String, Clazz)} with {@code elementTypeName},
-   * {@code referencedClass}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#anewarray(String, Clazz)}
-   */
-  @Test
-  @DisplayName("Test anewarray(String, Clazz) with 'elementTypeName', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.anewarray(String, Clazz)"
-  })
-  void testAnewarrayWithElementTypeNameReferencedClass5() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualAnewarrayResult =
-        instructionSequenceBuilder.anewarray("Element Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualAnewarrayResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.anewarray("Element Type Name", new LibraryClass()));
   }
 
   /**
@@ -19161,21 +11874,17 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#anewarray(Clazz)}
    */
   @Test
-  @DisplayName("Test anewarray(Clazz) with 'elementType'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.anewarray(Clazz)"})
-  void testAnewarrayWithElementType_thenReturnInstructionSequenceBuilder() {
+  public void testAnewarrayWithElementType_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    LibraryClass elementType = new LibraryClass(1, "This Class Name", "Super Class Name");
 
-    // Act
-    InstructionSequenceBuilder actualAnewarrayResult =
-        instructionSequenceBuilder.anewarray(elementType);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualAnewarrayResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.anewarray(
+            new LibraryClass(1, "This Class Name", "Super Class Name")));
   }
 
   /**
@@ -19184,11 +11893,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#arraylength()}
    */
   @Test
-  @DisplayName("Test arraylength()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.arraylength()"})
-  void testArraylength() {
+  public void testArraylength() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -19206,11 +11913,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#athrow()}
    */
   @Test
-  @DisplayName("Test athrow()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.athrow()"})
-  void testAthrow() {
+  public void testAthrow() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -19228,11 +11933,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#checkcast(int)}
    */
   @Test
-  @DisplayName("Test checkcast(int) with 'constantIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.checkcast(int)"})
-  void testCheckcastWithConstantIndex() {
+  public void testCheckcastWithConstantIndex() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -19250,11 +11953,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#checkcast(Clazz)}
    */
   @Test
-  @DisplayName("Test checkcast(Clazz) with 'type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.checkcast(Clazz)"})
-  void testCheckcastWithType() {
+  public void testCheckcastWithType() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -19268,38 +11969,27 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualCheckcastResult =
-        instructionSequenceBuilder.checkcast(new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualCheckcastResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder, instructionSequenceBuilder.checkcast(new LibraryClass()));
   }
 
   /**
-   * Test {@link InstructionSequenceBuilder#checkcast(Clazz)} with {@code type}.
+   * Test {@link InstructionSequenceBuilder#checkcast(String)} with {@code typeName}.
    *
-   * <p>Method under test: {@link InstructionSequenceBuilder#checkcast(Clazz)}
+   * <p>Method under test: {@link InstructionSequenceBuilder#checkcast(String)}
    */
   @Test
-  @DisplayName("Test checkcast(Clazz) with 'type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.checkcast(Clazz)"})
-  void testCheckcastWithType2() {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.checkcast(String)"})
+  public void testCheckcastWithTypeName() {
     // Arrange
-    ClassConstant classConstant = new ClassConstant();
     InstructionSequenceBuilder instructionSequenceBuilder =
         new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    InstructionSequenceBuilder actualCheckcastResult =
-        instructionSequenceBuilder.checkcast(new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualCheckcastResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.checkcast("Type Name"));
   }
 
   /**
@@ -19308,59 +11998,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#checkcast(String)}
    */
   @Test
-  @DisplayName("Test checkcast(String) with 'typeName'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.checkcast(String)"})
-  void testCheckcastWithTypeName() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualCheckcastResult =
-        instructionSequenceBuilder.checkcast("Type Name");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualCheckcastResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#checkcast(String)} with {@code typeName}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#checkcast(String)}
-   */
-  @Test
-  @DisplayName("Test checkcast(String) with 'typeName'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.checkcast(String)"})
-  void testCheckcastWithTypeName2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualCheckcastResult =
-        instructionSequenceBuilder.checkcast("Type Name");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualCheckcastResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#checkcast(String)} with {@code typeName}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#checkcast(String)}
-   */
-  @Test
-  @DisplayName("Test checkcast(String) with 'typeName'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.checkcast(String)"})
-  void testCheckcastWithTypeName3() {
+  public void testCheckcastWithTypeName2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -19374,38 +12014,31 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualCheckcastResult =
-        instructionSequenceBuilder.checkcast("Type Name");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualCheckcastResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.checkcast("Type Name"));
   }
 
   /**
-   * Test {@link InstructionSequenceBuilder#checkcast(String)} with {@code typeName}.
+   * Test {@link InstructionSequenceBuilder#checkcast(String, Clazz)} with {@code typeName}, {@code
+   * referencedClass}.
    *
-   * <p>Method under test: {@link InstructionSequenceBuilder#checkcast(String)}
+   * <p>Method under test: {@link InstructionSequenceBuilder#checkcast(String, Clazz)}
    */
   @Test
-  @DisplayName("Test checkcast(String) with 'typeName'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.checkcast(String)"})
-  void testCheckcastWithTypeName4() {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.checkcast(String, Clazz)"
+  })
+  public void testCheckcastWithTypeNameReferencedClass() {
     // Arrange
-    ClassConstant classConstant = new ClassConstant();
     InstructionSequenceBuilder instructionSequenceBuilder =
         new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    InstructionSequenceBuilder actualCheckcastResult =
-        instructionSequenceBuilder.checkcast("Type Name");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualCheckcastResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.checkcast("Type Name", new LibraryClass()));
   }
 
   /**
@@ -19415,67 +12048,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#checkcast(String, Clazz)}
    */
   @Test
-  @DisplayName("Test checkcast(String, Clazz) with 'typeName', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.checkcast(String, Clazz)"
   })
-  void testCheckcastWithTypeNameReferencedClass() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualCheckcastResult =
-        instructionSequenceBuilder.checkcast("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualCheckcastResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#checkcast(String, Clazz)} with {@code typeName}, {@code
-   * referencedClass}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#checkcast(String, Clazz)}
-   */
-  @Test
-  @DisplayName("Test checkcast(String, Clazz) with 'typeName', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.checkcast(String, Clazz)"
-  })
-  void testCheckcastWithTypeNameReferencedClass2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualCheckcastResult =
-        instructionSequenceBuilder.checkcast("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualCheckcastResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#checkcast(String, Clazz)} with {@code typeName}, {@code
-   * referencedClass}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#checkcast(String, Clazz)}
-   */
-  @Test
-  @DisplayName("Test checkcast(String, Clazz) with 'typeName', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.checkcast(String, Clazz)"
-  })
-  void testCheckcastWithTypeNameReferencedClass3() {
+  public void testCheckcastWithTypeNameReferencedClass2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -19489,41 +12066,10 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualCheckcastResult =
-        instructionSequenceBuilder.checkcast("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualCheckcastResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#checkcast(String, Clazz)} with {@code typeName}, {@code
-   * referencedClass}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#checkcast(String, Clazz)}
-   */
-  @Test
-  @DisplayName("Test checkcast(String, Clazz) with 'typeName', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.checkcast(String, Clazz)"
-  })
-  void testCheckcastWithTypeNameReferencedClass4() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualCheckcastResult =
-        instructionSequenceBuilder.checkcast("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualCheckcastResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.checkcast("Type Name", new LibraryClass()));
   }
 
   /**
@@ -19537,23 +12083,18 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#checkcast(String, Clazz)}
    */
   @Test
-  @DisplayName(
-      "Test checkcast(String, Clazz) with 'typeName', 'referencedClass'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.checkcast(String, Clazz)"
   })
-  void testCheckcastWithTypeNameReferencedClass_thenReturnInstructionSequenceBuilder() {
+  public void testCheckcastWithTypeNameReferencedClass_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualCheckcastResult =
-        instructionSequenceBuilder.checkcast("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualCheckcastResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.checkcast("Type Name", new LibraryClass()));
   }
 
   /**
@@ -19566,20 +12107,14 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#checkcast(String)}
    */
   @Test
-  @DisplayName("Test checkcast(String) with 'typeName'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.checkcast(String)"})
-  void testCheckcastWithTypeName_thenReturnInstructionSequenceBuilder() {
+  public void testCheckcastWithTypeName_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualCheckcastResult =
-        instructionSequenceBuilder.checkcast("Type Name");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualCheckcastResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.checkcast("Type Name"));
   }
 
   /**
@@ -19592,20 +12127,17 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#checkcast(Clazz)}
    */
   @Test
-  @DisplayName("Test checkcast(Clazz) with 'type'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.checkcast(Clazz)"})
-  void testCheckcastWithType_thenReturnInstructionSequenceBuilder() {
+  public void testCheckcastWithType_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    LibraryClass type = new LibraryClass(1, "This Class Name", "Super Class Name");
 
-    // Act
-    InstructionSequenceBuilder actualCheckcastResult = instructionSequenceBuilder.checkcast(type);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualCheckcastResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.checkcast(
+            new LibraryClass(1, "This Class Name", "Super Class Name")));
   }
 
   /**
@@ -19614,11 +12146,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#instanceof_(int)}
    */
   @Test
-  @DisplayName("Test instanceof_(int) with 'constantIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.instanceof_(int)"})
-  void testInstanceof_WithConstantIndex() {
+  public void testInstanceof_WithConstantIndex() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -19636,11 +12166,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#instanceof_(Clazz)}
    */
   @Test
-  @DisplayName("Test instanceof_(Clazz) with 'type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.instanceof_(Clazz)"})
-  void testInstanceof_WithType() {
+  public void testInstanceof_WithType() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -19654,38 +12182,32 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualInstanceof_Result =
-        instructionSequenceBuilder.instanceof_(new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInstanceof_Result);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder, instructionSequenceBuilder.instanceof_(new LibraryClass()));
   }
 
   /**
-   * Test {@link InstructionSequenceBuilder#instanceof_(Clazz)} with {@code type}.
+   * Test {@link InstructionSequenceBuilder#instanceof_(String, Clazz)} with {@code typeName},
+   * {@code referencedClass}.
    *
-   * <p>Method under test: {@link InstructionSequenceBuilder#instanceof_(Clazz)}
+   * <p>Method under test: {@link InstructionSequenceBuilder#instanceof_(String, Clazz)}
    */
   @Test
-  @DisplayName("Test instanceof_(Clazz) with 'type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.instanceof_(Clazz)"})
-  void testInstanceof_WithType2() {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.instanceof_(String, Clazz)"
+  })
+  public void testInstanceof_WithTypeNameReferencedClass() {
     // Arrange
-    ClassConstant classConstant = new ClassConstant();
     InstructionSequenceBuilder instructionSequenceBuilder =
         new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    InstructionSequenceBuilder actualInstanceof_Result =
-        instructionSequenceBuilder.instanceof_(new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInstanceof_Result);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.instanceof_("Type Name", new LibraryClass()));
   }
 
   /**
@@ -19695,67 +12217,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#instanceof_(String, Clazz)}
    */
   @Test
-  @DisplayName("Test instanceof_(String, Clazz) with 'typeName', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.instanceof_(String, Clazz)"
   })
-  void testInstanceof_WithTypeNameReferencedClass() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInstanceof_Result =
-        instructionSequenceBuilder.instanceof_("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInstanceof_Result);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#instanceof_(String, Clazz)} with {@code typeName},
-   * {@code referencedClass}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#instanceof_(String, Clazz)}
-   */
-  @Test
-  @DisplayName("Test instanceof_(String, Clazz) with 'typeName', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.instanceof_(String, Clazz)"
-  })
-  void testInstanceof_WithTypeNameReferencedClass2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInstanceof_Result =
-        instructionSequenceBuilder.instanceof_("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInstanceof_Result);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#instanceof_(String, Clazz)} with {@code typeName},
-   * {@code referencedClass}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#instanceof_(String, Clazz)}
-   */
-  @Test
-  @DisplayName("Test instanceof_(String, Clazz) with 'typeName', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.instanceof_(String, Clazz)"
-  })
-  void testInstanceof_WithTypeNameReferencedClass3() {
+  public void testInstanceof_WithTypeNameReferencedClass2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -19769,41 +12235,10 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualInstanceof_Result =
-        instructionSequenceBuilder.instanceof_("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInstanceof_Result);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#instanceof_(String, Clazz)} with {@code typeName},
-   * {@code referencedClass}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#instanceof_(String, Clazz)}
-   */
-  @Test
-  @DisplayName("Test instanceof_(String, Clazz) with 'typeName', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.instanceof_(String, Clazz)"
-  })
-  void testInstanceof_WithTypeNameReferencedClass4() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualInstanceof_Result =
-        instructionSequenceBuilder.instanceof_("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInstanceof_Result);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.instanceof_("Type Name", new LibraryClass()));
   }
 
   /**
@@ -19817,23 +12252,18 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#instanceof_(String, Clazz)}
    */
   @Test
-  @DisplayName(
-      "Test instanceof_(String, Clazz) with 'typeName', 'referencedClass'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.instanceof_(String, Clazz)"
   })
-  void testInstanceof_WithTypeNameReferencedClass_thenReturnInstructionSequenceBuilder() {
+  public void testInstanceof_WithTypeNameReferencedClass_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualInstanceof_Result =
-        instructionSequenceBuilder.instanceof_("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInstanceof_Result);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.instanceof_("Type Name", new LibraryClass()));
   }
 
   /**
@@ -19846,21 +12276,17 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#instanceof_(Clazz)}
    */
   @Test
-  @DisplayName("Test instanceof_(Clazz) with 'type'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.instanceof_(Clazz)"})
-  void testInstanceof_WithType_thenReturnInstructionSequenceBuilder() {
+  public void testInstanceof_WithType_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    LibraryClass type = new LibraryClass(1, "This Class Name", "Super Class Name");
 
-    // Act
-    InstructionSequenceBuilder actualInstanceof_Result =
-        instructionSequenceBuilder.instanceof_(type);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualInstanceof_Result);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.instanceof_(
+            new LibraryClass(1, "This Class Name", "Super Class Name")));
   }
 
   /**
@@ -19869,11 +12295,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#monitorenter()}
    */
   @Test
-  @DisplayName("Test monitorenter()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.monitorenter()"})
-  void testMonitorenter() {
+  public void testMonitorenter() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -19891,11 +12315,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#monitorexit()}
    */
   @Test
-  @DisplayName("Test monitorexit()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.monitorexit()"})
-  void testMonitorexit() {
+  public void testMonitorexit() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -19913,11 +12335,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#wide()}
    */
   @Test
-  @DisplayName("Test wide()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.wide()"})
-  void testWide() {
+  public void testWide() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -19935,11 +12355,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#multianewarray(int)}
    */
   @Test
-  @DisplayName("Test multianewarray(int) with 'constantIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.multianewarray(int)"})
-  void testMultianewarrayWithConstantIndex() {
+  public void testMultianewarrayWithConstantIndex() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -19958,11 +12376,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#multianewarray(Clazz)}
    */
   @Test
-  @DisplayName("Test multianewarray(Clazz) with 'type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.multianewarray(Clazz)"})
-  void testMultianewarrayWithType() {
+  public void testMultianewarrayWithType() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -19976,38 +12392,29 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualMultianewarrayResult =
-        instructionSequenceBuilder.multianewarray(new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualMultianewarrayResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder, instructionSequenceBuilder.multianewarray(new LibraryClass()));
   }
 
   /**
-   * Test {@link InstructionSequenceBuilder#multianewarray(Clazz)} with {@code type}.
+   * Test {@link InstructionSequenceBuilder#multianewarray(String)} with {@code typeName}.
    *
-   * <p>Method under test: {@link InstructionSequenceBuilder#multianewarray(Clazz)}
+   * <p>Method under test: {@link InstructionSequenceBuilder#multianewarray(String)}
    */
   @Test
-  @DisplayName("Test multianewarray(Clazz) with 'type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.multianewarray(Clazz)"})
-  void testMultianewarrayWithType2() {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.multianewarray(String)"
+  })
+  public void testMultianewarrayWithTypeName() {
     // Arrange
-    ClassConstant classConstant = new ClassConstant();
     InstructionSequenceBuilder instructionSequenceBuilder =
         new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    InstructionSequenceBuilder actualMultianewarrayResult =
-        instructionSequenceBuilder.multianewarray(new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualMultianewarrayResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.multianewarray("Type Name"));
   }
 
   /**
@@ -20016,65 +12423,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#multianewarray(String)}
    */
   @Test
-  @DisplayName("Test multianewarray(String) with 'typeName'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.multianewarray(String)"
   })
-  void testMultianewarrayWithTypeName() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualMultianewarrayResult =
-        instructionSequenceBuilder.multianewarray("Type Name");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualMultianewarrayResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#multianewarray(String)} with {@code typeName}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#multianewarray(String)}
-   */
-  @Test
-  @DisplayName("Test multianewarray(String) with 'typeName'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.multianewarray(String)"
-  })
-  void testMultianewarrayWithTypeName2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualMultianewarrayResult =
-        instructionSequenceBuilder.multianewarray("Type Name");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualMultianewarrayResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#multianewarray(String)} with {@code typeName}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#multianewarray(String)}
-   */
-  @Test
-  @DisplayName("Test multianewarray(String) with 'typeName'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.multianewarray(String)"
-  })
-  void testMultianewarrayWithTypeName3() {
+  public void testMultianewarrayWithTypeName2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -20088,40 +12441,8 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualMultianewarrayResult =
-        instructionSequenceBuilder.multianewarray("Type Name");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualMultianewarrayResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#multianewarray(String)} with {@code typeName}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#multianewarray(String)}
-   */
-  @Test
-  @DisplayName("Test multianewarray(String) with 'typeName'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.multianewarray(String)"
-  })
-  void testMultianewarrayWithTypeName4() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualMultianewarrayResult =
-        instructionSequenceBuilder.multianewarray("Type Name");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualMultianewarrayResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.multianewarray("Type Name"));
   }
 
   /**
@@ -20131,22 +12452,18 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#multianewarray(String, Clazz)}
    */
   @Test
-  @DisplayName("Test multianewarray(String, Clazz) with 'typeName', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.multianewarray(String, Clazz)"
   })
-  void testMultianewarrayWithTypeNameReferencedClass() {
+  public void testMultianewarrayWithTypeNameReferencedClass() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualMultianewarrayResult =
-        instructionSequenceBuilder.multianewarray("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualMultianewarrayResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.multianewarray("Type Name", new LibraryClass()));
   }
 
   /**
@@ -20156,24 +12473,20 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#multianewarray(String, Clazz)}
    */
   @Test
-  @DisplayName("Test multianewarray(String, Clazz) with 'typeName', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.multianewarray(String, Clazz)"
   })
-  void testMultianewarrayWithTypeNameReferencedClass2() {
+  public void testMultianewarrayWithTypeNameReferencedClass2() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
     InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+        new InstructionSequenceBuilder(
+            new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    InstructionSequenceBuilder actualMultianewarrayResult =
-        instructionSequenceBuilder.multianewarray("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualMultianewarrayResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.multianewarray("Type Name", new LibraryClass()));
   }
 
   /**
@@ -20183,40 +12496,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#multianewarray(String, Clazz)}
    */
   @Test
-  @DisplayName("Test multianewarray(String, Clazz) with 'typeName', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.multianewarray(String, Clazz)"
   })
-  void testMultianewarrayWithTypeNameReferencedClass3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualMultianewarrayResult =
-        instructionSequenceBuilder.multianewarray("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualMultianewarrayResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#multianewarray(String, Clazz)} with {@code typeName},
-   * {@code referencedClass}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#multianewarray(String, Clazz)}
-   */
-  @Test
-  @DisplayName("Test multianewarray(String, Clazz) with 'typeName', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.multianewarray(String, Clazz)"
-  })
-  void testMultianewarrayWithTypeNameReferencedClass4() {
+  public void testMultianewarrayWithTypeNameReferencedClass3() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -20230,41 +12514,10 @@ class InstructionSequenceBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    InstructionSequenceBuilder actualMultianewarrayResult =
-        instructionSequenceBuilder.multianewarray("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualMultianewarrayResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#multianewarray(String, Clazz)} with {@code typeName},
-   * {@code referencedClass}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#multianewarray(String, Clazz)}
-   */
-  @Test
-  @DisplayName("Test multianewarray(String, Clazz) with 'typeName', 'referencedClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.multianewarray(String, Clazz)"
-  })
-  void testMultianewarrayWithTypeNameReferencedClass5() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualMultianewarrayResult =
-        instructionSequenceBuilder.multianewarray("Type Name", new LibraryClass());
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualMultianewarrayResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.multianewarray("Type Name", new LibraryClass()));
   }
 
   /**
@@ -20277,23 +12530,16 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#multianewarray(String)}
    */
   @Test
-  @DisplayName(
-      "Test multianewarray(String) with 'typeName'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.multianewarray(String)"
   })
-  void testMultianewarrayWithTypeName_thenReturnInstructionSequenceBuilder() {
+  public void testMultianewarrayWithTypeName_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    // Act
-    InstructionSequenceBuilder actualMultianewarrayResult =
-        instructionSequenceBuilder.multianewarray("Type Name");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualMultianewarrayResult);
+    // Act and Assert
+    assertSame(instructionSequenceBuilder, instructionSequenceBuilder.multianewarray("Type Name"));
   }
 
   /**
@@ -20306,21 +12552,17 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#multianewarray(Clazz)}
    */
   @Test
-  @DisplayName("Test multianewarray(Clazz) with 'type'; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.multianewarray(Clazz)"})
-  void testMultianewarrayWithType_thenReturnInstructionSequenceBuilder() {
+  public void testMultianewarrayWithType_thenReturnInstructionSequenceBuilder() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-    LibraryClass type = new LibraryClass(1, "This Class Name", "Super Class Name");
 
-    // Act
-    InstructionSequenceBuilder actualMultianewarrayResult =
-        instructionSequenceBuilder.multianewarray(type);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualMultianewarrayResult);
+    // Act and Assert
+    assertSame(
+        instructionSequenceBuilder,
+        instructionSequenceBuilder.multianewarray(
+            new LibraryClass(1, "This Class Name", "Super Class Name")));
   }
 
   /**
@@ -20329,11 +12571,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ifnull(int)}
    */
   @Test
-  @DisplayName("Test ifnull(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ifnull(int)"})
-  void testIfnull() {
+  public void testIfnull() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -20351,11 +12591,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#ifnonnull(int)}
    */
   @Test
-  @DisplayName("Test ifnonnull(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.ifnonnull(int)"})
-  void testIfnonnull() {
+  public void testIfnonnull() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -20373,11 +12611,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#goto_w(int)}
    */
   @Test
-  @DisplayName("Test goto_w(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.goto_w(int)"})
-  void testGoto_w() {
+  public void testGoto_w() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -20395,11 +12631,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#jsr_w(int)}
    */
   @Test
-  @DisplayName("Test jsr_w(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.jsr_w(int)"})
-  void testJsr_w() {
+  public void testJsr_w() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -20414,114 +12648,18 @@ class InstructionSequenceBuilderDiffblueTest {
   /**
    * Test {@link InstructionSequenceBuilder#pushPrimitive(Object, char)}.
    *
-   * <ul>
-   *   <li>When minus one.
-   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
-   * </ul>
-   *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushPrimitive(Object, char)}
    */
   @Test
-  @DisplayName(
-      "Test pushPrimitive(Object, char); when minus one; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.pushPrimitive(Object, char)"
   })
-  void testPushPrimitive_whenMinusOne_thenInstructionSequenceBuilderSizeIsOne() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-
-    // Act
-    InstructionSequenceBuilder actualPushPrimitiveResult =
-        instructionSequenceBuilder.pushPrimitive(-1, 'B');
-
-    // Assert
-    assertEquals(1, instructionSequenceBuilder.size());
-    assertSame(instructionSequenceBuilder, actualPushPrimitiveResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushPrimitive(Object, char)}.
-   *
-   * <ul>
-   *   <li>When {@code Value}.
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushPrimitive(Object, char)}
-   */
-  @Test
-  @DisplayName(
-      "Test pushPrimitive(Object, char); when 'Value'; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.pushPrimitive(Object, char)"
-  })
-  void testPushPrimitive_whenValue_thenThrowIllegalArgumentException() {
+  public void testPushPrimitive() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
-        () -> new InstructionSequenceBuilder().pushPrimitive("Value", 'A'));
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushPrimitive(Object, char)}.
-   *
-   * <ul>
-   *   <li>When zero.
-   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushPrimitive(Object, char)}
-   */
-  @Test
-  @DisplayName(
-      "Test pushPrimitive(Object, char); when zero; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.pushPrimitive(Object, char)"
-  })
-  void testPushPrimitive_whenZero_thenInstructionSequenceBuilderSizeIsOne() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-
-    // Act
-    InstructionSequenceBuilder actualPushPrimitiveResult =
-        instructionSequenceBuilder.pushPrimitive(0, 'B');
-
-    // Assert
-    assertEquals(1, instructionSequenceBuilder.size());
-    assertSame(instructionSequenceBuilder, actualPushPrimitiveResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#boxPrimitiveType(char)}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#boxPrimitiveType(char)}
-   */
-  @Test
-  @DisplayName("Test boxPrimitiveType(char)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.boxPrimitiveType(char)"
-  })
-  void testBoxPrimitiveType() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(66, 1, constantPool, 66, 66, 66));
-
-    // Act
-    InstructionSequenceBuilder actualBoxPrimitiveTypeResult =
-        instructionSequenceBuilder.boxPrimitiveType('B');
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualBoxPrimitiveTypeResult);
+        () -> (new InstructionSequenceBuilder()).pushPrimitive("Value", 'A'));
   }
 
   /**
@@ -20534,13 +12672,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#boxPrimitiveType(char)}
    */
   @Test
-  @DisplayName("Test boxPrimitiveType(char); then fourth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.boxPrimitiveType(char)"
   })
-  void testBoxPrimitiveType_thenFourthElementReturnClassConstant() {
+  public void testBoxPrimitiveType_thenFourthElementReturnClassConstant() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
     instructionSequenceBuilder.putstatic("java/lang/Byte", "java/lang/Byte", "java/lang/Byte");
@@ -20577,17 +12713,15 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#boxPrimitiveType(char)}
    */
   @Test
-  @DisplayName("Test boxPrimitiveType(char); when 'A'; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.boxPrimitiveType(char)"
   })
-  void testBoxPrimitiveType_whenA_thenThrowIllegalArgumentException() {
+  public void testBoxPrimitiveType_whenA_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
-        () -> new InstructionSequenceBuilder().boxPrimitiveType('A'));
+        () -> (new InstructionSequenceBuilder()).boxPrimitiveType('A'));
   }
 
   /**
@@ -20601,18 +12735,15 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#boxPrimitiveType(char)}
    */
   @Test
-  @DisplayName(
-      "Test boxPrimitiveType(char); when 'B'; then return third element String is '(B)Ljava/lang/Byte;'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.boxPrimitiveType(char)"
   })
-  void testBoxPrimitiveType_whenB_thenReturnThirdElementStringIsBLjavaLangByte()
+  public void testBoxPrimitiveType_whenB_thenReturnThirdElementStringIsBLjavaLangByte()
       throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     Constant[] constantArray =
-        new InstructionSequenceBuilder()
+        (new InstructionSequenceBuilder())
             .boxPrimitiveType('B')
             .getConstantPoolEditor()
             .getTargetClass()
@@ -20626,10 +12757,12 @@ class InstructionSequenceBuilderDiffblueTest {
     assertEquals("(B)Ljava/lang/Byte;", ((Utf8Constant) constant2).getString());
     assertEquals("java/lang/Byte", ((Utf8Constant) constant3).getString());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals(
-        "(B)Ljava/lang/Byte;".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-    assertArrayEquals("java/lang/Byte".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("valueOf".getBytes("UTF-8"), ((Utf8Constant) constant).getBytes());
+    byte[] expectedBytes = "(B)Ljava/lang/Byte;".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "java/lang/Byte".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes3 = "valueOf".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant).getBytes());
   }
 
   /**
@@ -20643,18 +12776,15 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#boxPrimitiveType(char)}
    */
   @Test
-  @DisplayName(
-      "Test boxPrimitiveType(char); when 'C'; then return third element String is '(C)Ljava/lang/Character;'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.boxPrimitiveType(char)"
   })
-  void testBoxPrimitiveType_whenC_thenReturnThirdElementStringIsCLjavaLangCharacter()
+  public void testBoxPrimitiveType_whenC_thenReturnThirdElementStringIsCLjavaLangCharacter()
       throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     Constant[] constantArray =
-        new InstructionSequenceBuilder()
+        (new InstructionSequenceBuilder())
             .boxPrimitiveType('C')
             .getConstantPoolEditor()
             .getTargetClass()
@@ -20668,11 +12798,12 @@ class InstructionSequenceBuilderDiffblueTest {
     assertEquals("(C)Ljava/lang/Character;", ((Utf8Constant) constant2).getString());
     assertEquals("java/lang/Character", ((Utf8Constant) constant3).getString());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals(
-        "(C)Ljava/lang/Character;".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-    assertArrayEquals(
-        "java/lang/Character".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("valueOf".getBytes("UTF-8"), ((Utf8Constant) constant).getBytes());
+    byte[] expectedBytes = "(C)Ljava/lang/Character;".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "java/lang/Character".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes3 = "valueOf".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant).getBytes());
   }
 
   /**
@@ -20686,18 +12817,15 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#boxPrimitiveType(char)}
    */
   @Test
-  @DisplayName(
-      "Test boxPrimitiveType(char); when 'D'; then return third element String is '(D)Ljava/lang/Double;'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.boxPrimitiveType(char)"
   })
-  void testBoxPrimitiveType_whenD_thenReturnThirdElementStringIsDLjavaLangDouble()
+  public void testBoxPrimitiveType_whenD_thenReturnThirdElementStringIsDLjavaLangDouble()
       throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     Constant[] constantArray =
-        new InstructionSequenceBuilder()
+        (new InstructionSequenceBuilder())
             .boxPrimitiveType('D')
             .getConstantPoolEditor()
             .getTargetClass()
@@ -20711,10 +12839,12 @@ class InstructionSequenceBuilderDiffblueTest {
     assertEquals("(D)Ljava/lang/Double;", ((Utf8Constant) constant2).getString());
     assertEquals("java/lang/Double", ((Utf8Constant) constant3).getString());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals(
-        "(D)Ljava/lang/Double;".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-    assertArrayEquals("java/lang/Double".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("valueOf".getBytes("UTF-8"), ((Utf8Constant) constant).getBytes());
+    byte[] expectedBytes = "(D)Ljava/lang/Double;".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "java/lang/Double".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes3 = "valueOf".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant).getBytes());
   }
 
   /**
@@ -20728,18 +12858,15 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#boxPrimitiveType(char)}
    */
   @Test
-  @DisplayName(
-      "Test boxPrimitiveType(char); when 'F'; then return third element String is '(F)Ljava/lang/Float;'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.boxPrimitiveType(char)"
   })
-  void testBoxPrimitiveType_whenF_thenReturnThirdElementStringIsFLjavaLangFloat()
+  public void testBoxPrimitiveType_whenF_thenReturnThirdElementStringIsFLjavaLangFloat()
       throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     Constant[] constantArray =
-        new InstructionSequenceBuilder()
+        (new InstructionSequenceBuilder())
             .boxPrimitiveType('F')
             .getConstantPoolEditor()
             .getTargetClass()
@@ -20753,10 +12880,12 @@ class InstructionSequenceBuilderDiffblueTest {
     assertEquals("(F)Ljava/lang/Float;", ((Utf8Constant) constant2).getString());
     assertEquals("java/lang/Float", ((Utf8Constant) constant3).getString());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals(
-        "(F)Ljava/lang/Float;".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-    assertArrayEquals("java/lang/Float".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("valueOf".getBytes("UTF-8"), ((Utf8Constant) constant).getBytes());
+    byte[] expectedBytes = "(F)Ljava/lang/Float;".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "java/lang/Float".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes3 = "valueOf".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant).getBytes());
   }
 
   /**
@@ -20770,18 +12899,15 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#boxPrimitiveType(char)}
    */
   @Test
-  @DisplayName(
-      "Test boxPrimitiveType(char); when 'I'; then return third element String is '(I)Ljava/lang/Integer;'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.boxPrimitiveType(char)"
   })
-  void testBoxPrimitiveType_whenI_thenReturnThirdElementStringIsILjavaLangInteger()
+  public void testBoxPrimitiveType_whenI_thenReturnThirdElementStringIsILjavaLangInteger()
       throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     Constant[] constantArray =
-        new InstructionSequenceBuilder()
+        (new InstructionSequenceBuilder())
             .boxPrimitiveType('I')
             .getConstantPoolEditor()
             .getTargetClass()
@@ -20795,10 +12921,12 @@ class InstructionSequenceBuilderDiffblueTest {
     assertEquals("(I)Ljava/lang/Integer;", ((Utf8Constant) constant2).getString());
     assertEquals("java/lang/Integer", ((Utf8Constant) constant3).getString());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals(
-        "(I)Ljava/lang/Integer;".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-    assertArrayEquals("java/lang/Integer".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("valueOf".getBytes("UTF-8"), ((Utf8Constant) constant).getBytes());
+    byte[] expectedBytes = "(I)Ljava/lang/Integer;".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "java/lang/Integer".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes3 = "valueOf".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant).getBytes());
   }
 
   /**
@@ -20812,18 +12940,15 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#boxPrimitiveType(char)}
    */
   @Test
-  @DisplayName(
-      "Test boxPrimitiveType(char); when 'J'; then return third element String is '(J)Ljava/lang/Long;'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.boxPrimitiveType(char)"
   })
-  void testBoxPrimitiveType_whenJ_thenReturnThirdElementStringIsJLjavaLangLong()
+  public void testBoxPrimitiveType_whenJ_thenReturnThirdElementStringIsJLjavaLangLong()
       throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     Constant[] constantArray =
-        new InstructionSequenceBuilder()
+        (new InstructionSequenceBuilder())
             .boxPrimitiveType('J')
             .getConstantPoolEditor()
             .getTargetClass()
@@ -20837,10 +12962,12 @@ class InstructionSequenceBuilderDiffblueTest {
     assertEquals("(J)Ljava/lang/Long;", ((Utf8Constant) constant2).getString());
     assertEquals("java/lang/Long", ((Utf8Constant) constant3).getString());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals(
-        "(J)Ljava/lang/Long;".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-    assertArrayEquals("java/lang/Long".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("valueOf".getBytes("UTF-8"), ((Utf8Constant) constant).getBytes());
+    byte[] expectedBytes = "(J)Ljava/lang/Long;".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "java/lang/Long".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes3 = "valueOf".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant).getBytes());
   }
 
   /**
@@ -20854,18 +12981,15 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#boxPrimitiveType(char)}
    */
   @Test
-  @DisplayName(
-      "Test boxPrimitiveType(char); when 'S'; then return third element String is '(S)Ljava/lang/Short;'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.boxPrimitiveType(char)"
   })
-  void testBoxPrimitiveType_whenS_thenReturnThirdElementStringIsSLjavaLangShort()
+  public void testBoxPrimitiveType_whenS_thenReturnThirdElementStringIsSLjavaLangShort()
       throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     Constant[] constantArray =
-        new InstructionSequenceBuilder()
+        (new InstructionSequenceBuilder())
             .boxPrimitiveType('S')
             .getConstantPoolEditor()
             .getTargetClass()
@@ -20879,10 +13003,12 @@ class InstructionSequenceBuilderDiffblueTest {
     assertEquals("(S)Ljava/lang/Short;", ((Utf8Constant) constant2).getString());
     assertEquals("java/lang/Short", ((Utf8Constant) constant3).getString());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals(
-        "(S)Ljava/lang/Short;".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-    assertArrayEquals("java/lang/Short".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("valueOf".getBytes("UTF-8"), ((Utf8Constant) constant).getBytes());
+    byte[] expectedBytes = "(S)Ljava/lang/Short;".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "java/lang/Short".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes3 = "valueOf".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant).getBytes());
   }
 
   /**
@@ -20896,18 +13022,15 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#boxPrimitiveType(char)}
    */
   @Test
-  @DisplayName(
-      "Test boxPrimitiveType(char); when 'Z'; then return third element String is '(Z)Ljava/lang/Boolean;'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.boxPrimitiveType(char)"
   })
-  void testBoxPrimitiveType_whenZ_thenReturnThirdElementStringIsZLjavaLangBoolean()
+  public void testBoxPrimitiveType_whenZ_thenReturnThirdElementStringIsZLjavaLangBoolean()
       throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     Constant[] constantArray =
-        new InstructionSequenceBuilder()
+        (new InstructionSequenceBuilder())
             .boxPrimitiveType('Z')
             .getConstantPoolEditor()
             .getTargetClass()
@@ -20921,193 +13044,29 @@ class InstructionSequenceBuilderDiffblueTest {
     assertEquals("(Z)Ljava/lang/Boolean;", ((Utf8Constant) constant2).getString());
     assertEquals("java/lang/Boolean", ((Utf8Constant) constant3).getString());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals(
-        "(Z)Ljava/lang/Boolean;".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-    assertArrayEquals("java/lang/Boolean".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals("valueOf".getBytes("UTF-8"), ((Utf8Constant) constant).getBytes());
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#unboxPrimitiveType(String, String)}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#unboxPrimitiveType(String, String)}
-   */
-  @Test
-  @DisplayName("Test unboxPrimitiveType(String, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.unboxPrimitiveType(String, String)"
-  })
-  void testUnboxPrimitiveType() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(66, 1, constantPool, 66, 66, 66));
-
-    // Act
-    InstructionSequenceBuilder actualUnboxPrimitiveTypeResult =
-        instructionSequenceBuilder.unboxPrimitiveType("Source Type", "Source Type");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualUnboxPrimitiveTypeResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#unboxPrimitiveType(String, String)}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#unboxPrimitiveType(String, String)}
-   */
-  @Test
-  @DisplayName("Test unboxPrimitiveType(String, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.unboxPrimitiveType(String, String)"
-  })
-  void testUnboxPrimitiveType2() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                66,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                66,
-                66,
-                66));
-
-    // Act
-    InstructionSequenceBuilder actualUnboxPrimitiveTypeResult =
-        instructionSequenceBuilder.unboxPrimitiveType("Source Type", "Source Type");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualUnboxPrimitiveTypeResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#unboxPrimitiveType(String, String)}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#unboxPrimitiveType(String, String)}
-   */
-  @Test
-  @DisplayName("Test unboxPrimitiveType(String, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.unboxPrimitiveType(String, String)"
-  })
-  void testUnboxPrimitiveType3() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                66, 3, new Constant[] {classConstant, null, new ClassConstant()}, 66, 66, 66));
-
-    // Act
-    InstructionSequenceBuilder actualUnboxPrimitiveTypeResult =
-        instructionSequenceBuilder.unboxPrimitiveType("Source Type", "Source Type");
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualUnboxPrimitiveTypeResult);
+    byte[] expectedBytes = "(Z)Ljava/lang/Boolean;".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "java/lang/Boolean".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes3 = "valueOf".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant).getBytes());
   }
 
   /**
    * Test {@link InstructionSequenceBuilder#unboxPrimitiveType(String, String)}.
    *
    * <ul>
-   *   <li>Then fifth element return {@link ClassConstant}.
+   *   <li>Then sixth element return {@link ClassConstant}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#unboxPrimitiveType(String, String)}
    */
   @Test
-  @DisplayName("Test unboxPrimitiveType(String, String); then fifth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.unboxPrimitiveType(String, String)"
   })
-  void testUnboxPrimitiveType_thenFifthElementReturnClassConstant() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-
-    // Act and Assert
-    ProgramClass targetClass =
-        new InstructionSequenceBuilder(new ProgramClass(66, 0, constantPool, 66, 66, 66))
-            .unboxPrimitiveType("Source Type", "Source Type")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[4] instanceof ClassConstant);
-    assertTrue(constantArray[5] instanceof MethodrefConstant);
-    assertTrue(constantArray[2] instanceof NameAndTypeConstant);
-    assertNull(constantArray[6]);
-    assertEquals(17, constantArray.length);
-    assertEquals(6, targetClass.u2constantPoolCount);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#unboxPrimitiveType(String, String)}.
-   *
-   * <ul>
-   *   <li>Then fourth element return {@link FieldrefConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#unboxPrimitiveType(String, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test unboxPrimitiveType(String, String); then fourth element return FieldrefConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.unboxPrimitiveType(String, String)"
-  })
-  void testUnboxPrimitiveType_thenFourthElementReturnFieldrefConstant() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(66, 0, constantPool, 66, 66, 66));
-    instructionSequenceBuilder.putstatic("java/lang/Short", "java/lang/Short", "java/lang/Short");
-
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .unboxPrimitiveType("Source Type", "Source Type")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[3] instanceof FieldrefConstant);
-    assertTrue(constantArray[7] instanceof MethodrefConstant);
-    assertTrue(constantArray[1] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[6] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[5] instanceof Utf8Constant);
-    assertEquals(17, constantArray.length);
-    assertEquals(8, targetClass.u2constantPoolCount);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#unboxPrimitiveType(String, String)}.
-   *
-   * <ul>
-   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#unboxPrimitiveType(String, String)}
-   */
-  @Test
-  @DisplayName("Test unboxPrimitiveType(String, String); then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.unboxPrimitiveType(String, String)"
-  })
-  void testUnboxPrimitiveType_thenReturnInstructionSequenceBuilder() {
+  public void testUnboxPrimitiveType_thenSixthElementReturnClassConstant() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -21116,60 +13075,48 @@ class InstructionSequenceBuilderDiffblueTest {
         instructionSequenceBuilder.unboxPrimitiveType("Source Type", "Source Type");
 
     // Assert
-    assertSame(instructionSequenceBuilder, actualUnboxPrimitiveTypeResult);
+    Constant[] constantArray =
+        actualUnboxPrimitiveTypeResult.getConstantPoolEditor().getTargetClass().constantPool;
+    assertTrue(constantArray[5] instanceof ClassConstant);
+    assertTrue(constantArray[3] instanceof NameAndTypeConstant);
+    assertTrue(constantArray[2] instanceof Utf8Constant);
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertEquals(1, actualUnboxPrimitiveTypeResult.size());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
   }
 
   /**
    * Test {@link InstructionSequenceBuilder#unboxPrimitiveType(String, String)}.
    *
    * <ul>
-   *   <li>Then twelfth element return {@link ClassConstant}.
+   *   <li>When {@code Ljava/lang/Object;}.
+   *   <li>Then third element return {@link ClassConstant}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#unboxPrimitiveType(String, String)}
    */
   @Test
-  @DisplayName("Test unboxPrimitiveType(String, String); then twelfth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.unboxPrimitiveType(String, String)"
   })
-  void testUnboxPrimitiveType_thenTwelfthElementReturnClassConstant() {
+  public void testUnboxPrimitiveType_whenLjavaLangObject_thenThirdElementReturnClassConstant() {
     // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                66,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                66,
-                66,
-                66));
-    instructionSequenceBuilder.putstatic(
-        "Ljava/lang/Object;", "Ljava/lang/Object;", "Ljava/lang/Object;");
+    // Act
+    InstructionSequenceBuilder actualUnboxPrimitiveTypeResult =
+        instructionSequenceBuilder.unboxPrimitiveType("Ljava/lang/Object;", "Source Type");
 
-    // Act and Assert
-    ProgramClass targetClass =
-        instructionSequenceBuilder
-            .unboxPrimitiveType("Source Type", "Source Type")
-            .getConstantPoolEditor()
-            .getTargetClass();
-    Constant[] constantArray = targetClass.constantPool;
-    assertTrue(constantArray[11] instanceof ClassConstant);
-    assertTrue(constantArray[5] instanceof ClassConstant);
-    assertTrue(constantArray[6] instanceof FieldrefConstant);
-    assertTrue(constantArray[12] instanceof MethodrefConstant);
-    assertTrue(constantArray[4] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[9] instanceof NameAndTypeConstant);
-    assertTrue(constantArray[10] instanceof Utf8Constant);
-    assertTrue(constantArray[7] instanceof Utf8Constant);
-    assertTrue(constantArray[8] instanceof Utf8Constant);
-    assertEquals(13, targetClass.u2constantPoolCount);
-    assertEquals(19, constantArray.length);
+    // Assert
+    Constant[] constantArray =
+        actualUnboxPrimitiveTypeResult.getConstantPoolEditor().getTargetClass().constantPool;
+    assertTrue(constantArray[2] instanceof ClassConstant);
+    assertTrue(constantArray[5] instanceof NameAndTypeConstant);
+    assertTrue(constantArray[3] instanceof Utf8Constant);
+    assertEquals(2, instructionSequenceBuilder.size());
+    assertEquals(2, actualUnboxPrimitiveTypeResult.size());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
   }
 
   /**
@@ -21183,18 +13130,15 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#unboxPrimitiveType(String, String)}
    */
   @Test
-  @DisplayName(
-      "Test unboxPrimitiveType(String, String); when 'Target Type'; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.unboxPrimitiveType(String, String)"
   })
-  void testUnboxPrimitiveType_whenTargetType_thenThrowIllegalArgumentException() {
+  public void testUnboxPrimitiveType_whenTargetType_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
-        () -> new InstructionSequenceBuilder().unboxPrimitiveType("Source Type", "Target Type"));
+        () -> (new InstructionSequenceBuilder()).unboxPrimitiveType("Source Type", "Target Type"));
   }
 
   /**
@@ -21209,18 +13153,16 @@ class InstructionSequenceBuilderDiffblueTest {
    * boolean)}
    */
   @Test
-  @DisplayName(
-      "Test pushPrimitiveOrString(Object, String, boolean) with 'value', 'type', 'allowBoxing'; when 'java/lang/Void'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.pushPrimitiveOrString(Object, String, boolean)"
   })
-  void testPushPrimitiveOrStringWithValueTypeAllowBoxing_whenJavaLangVoid() {
+  public void testPushPrimitiveOrStringWithValueTypeAllowBoxing_whenJavaLangVoid() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
-        () -> new InstructionSequenceBuilder().pushPrimitiveOrString(-1, "java/lang/Void", false));
+        () ->
+            (new InstructionSequenceBuilder()).pushPrimitiveOrString(-1, "java/lang/Void", false));
   }
 
   /**
@@ -21235,18 +13177,15 @@ class InstructionSequenceBuilderDiffblueTest {
    * boolean)}
    */
   @Test
-  @DisplayName(
-      "Test pushPrimitiveOrString(Object, String, boolean) with 'value', 'type', 'allowBoxing'; when 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.pushPrimitiveOrString(Object, String, boolean)"
   })
-  void testPushPrimitiveOrStringWithValueTypeAllowBoxing_whenNull() {
+  public void testPushPrimitiveOrStringWithValueTypeAllowBoxing_whenNull() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
-        () -> new InstructionSequenceBuilder().pushPrimitiveOrString(-1, null, false));
+        () -> (new InstructionSequenceBuilder()).pushPrimitiveOrString(-1, null, false));
   }
 
   /**
@@ -21261,18 +13200,15 @@ class InstructionSequenceBuilderDiffblueTest {
    * boolean)}
    */
   @Test
-  @DisplayName(
-      "Test pushPrimitiveOrString(Object, String, boolean) with 'value', 'type', 'allowBoxing'; when 'Value'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.pushPrimitiveOrString(Object, String, boolean)"
   })
-  void testPushPrimitiveOrStringWithValueTypeAllowBoxing_whenValue() {
+  public void testPushPrimitiveOrStringWithValueTypeAllowBoxing_whenValue() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
-        () -> new InstructionSequenceBuilder().pushPrimitiveOrString("Value", "Type", true));
+        () -> (new InstructionSequenceBuilder()).pushPrimitiveOrString("Value", "Type", true));
   }
 
   /**
@@ -21280,23 +13216,21 @@ class InstructionSequenceBuilderDiffblueTest {
    * value}, {@code type}.
    *
    * <ul>
-   *   <li>When {@code null}.
+   *   <li>When minus one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushPrimitiveOrString(Object, String)}
    */
   @Test
-  @DisplayName("Test pushPrimitiveOrString(Object, String) with 'value', 'type'; when 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.pushPrimitiveOrString(Object, String)"
   })
-  void testPushPrimitiveOrStringWithValueType_whenNull() {
+  public void testPushPrimitiveOrStringWithValueType_whenMinusOne() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
-        () -> new InstructionSequenceBuilder().pushPrimitiveOrString(-1, null));
+        () -> (new InstructionSequenceBuilder()).pushPrimitiveOrString(-1, null));
   }
 
   /**
@@ -21310,42 +13244,15 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#pushPrimitiveOrString(Object, String)}
    */
   @Test
-  @DisplayName("Test pushPrimitiveOrString(Object, String) with 'value', 'type'; when 'Value'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.pushPrimitiveOrString(Object, String)"
   })
-  void testPushPrimitiveOrStringWithValueType_whenValue() {
+  public void testPushPrimitiveOrStringWithValueType_whenValue() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
-        () -> new InstructionSequenceBuilder().pushPrimitiveOrString("Value", "Type"));
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushBoxedPrimitive(Object, String)}.
-   *
-   * <ul>
-   *   <li>When empty string.
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushBoxedPrimitive(Object, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test pushBoxedPrimitive(Object, String); when empty string; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.pushBoxedPrimitive(Object, String)"
-  })
-  void testPushBoxedPrimitive_whenEmptyString_thenThrowIllegalArgumentException() {
-    // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> new InstructionSequenceBuilder().pushBoxedPrimitive(-1, ""));
+        () -> (new InstructionSequenceBuilder()).pushPrimitiveOrString("Value", "Type"));
   }
 
   /**
@@ -21359,18 +13266,15 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#pushBoxedPrimitive(Object, String)}
    */
   @Test
-  @DisplayName(
-      "Test pushBoxedPrimitive(Object, String); when 'Value'; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.pushBoxedPrimitive(Object, String)"
   })
-  void testPushBoxedPrimitive_whenValue_thenThrowIllegalArgumentException() {
+  public void testPushBoxedPrimitive_whenValue_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
-        () -> new InstructionSequenceBuilder().pushBoxedPrimitive("Value", "Type"));
+        () -> (new InstructionSequenceBuilder()).pushBoxedPrimitive("Value", "Type"));
   }
 
   /**
@@ -21378,16 +13282,15 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When five.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushInt(int)}
    */
   @Test
-  @DisplayName("Test pushInt(int); when five")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushInt(int)"})
-  void testPushInt_whenFive() {
+  public void testPushInt_whenFive_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -21404,16 +13307,15 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When forty-two.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushInt(int)}
    */
   @Test
-  @DisplayName("Test pushInt(int); when forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushInt(int)"})
-  void testPushInt_whenFortyTwo() {
+  public void testPushInt_whenFortyTwo_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -21430,16 +13332,15 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When four.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushInt(int)}
    */
   @Test
-  @DisplayName("Test pushInt(int); when four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushInt(int)"})
-  void testPushInt_whenFour() {
+  public void testPushInt_whenFour_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -21455,17 +13356,48 @@ class InstructionSequenceBuilderDiffblueTest {
    * Test {@link InstructionSequenceBuilder#pushInt(int)}.
    *
    * <ul>
-   *   <li>When minus one.
+   *   <li>When {@link Integer#MIN_VALUE}.
+   *   <li>Then second element return {@link IntegerConstant}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushInt(int)}
    */
   @Test
-  @DisplayName("Test pushInt(int); when minus one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushInt(int)"})
-  void testPushInt_whenMinusOne() {
+  public void testPushInt_whenMin_value_thenSecondElementReturnIntegerConstant() {
+    // Arrange, Act and Assert
+    ProgramClass targetClass =
+        (new InstructionSequenceBuilder())
+            .pushInt(Integer.MIN_VALUE)
+            .getConstantPoolEditor()
+            .getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof IntegerConstant);
+    assertNull(constant.getProcessingInfo());
+    assertEquals(0, constant.getProcessingFlags());
+    assertEquals(2, targetClass.u2constantPoolCount);
+    assertEquals(3, constant.getTag());
+    assertFalse(constant.isCategory2());
+    assertEquals(Integer.MIN_VALUE, ((IntegerConstant) constant).getValue());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#pushInt(int)}.
+   *
+   * <ul>
+   *   <li>When minus one.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#pushInt(int)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushInt(int)"})
+  public void testPushInt_whenMinusOne_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -21482,16 +13414,15 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When one.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushInt(int)}
    */
   @Test
-  @DisplayName("Test pushInt(int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushInt(int)"})
-  void testPushInt_whenOne() {
+  public void testPushInt_whenOne_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -21508,16 +13439,15 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When three.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushInt(int)}
    */
   @Test
-  @DisplayName("Test pushInt(int); when three")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushInt(int)"})
-  void testPushInt_whenThree() {
+  public void testPushInt_whenThree_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -21534,16 +13464,15 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When two.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushInt(int)}
    */
   @Test
-  @DisplayName("Test pushInt(int); when two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushInt(int)"})
-  void testPushInt_whenTwo() {
+  public void testPushInt_whenTwo_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -21560,16 +13489,15 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When zero.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushInt(int)}
    */
   @Test
-  @DisplayName("Test pushInt(int); when zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushInt(int)"})
-  void testPushInt_whenZero() {
+  public void testPushInt_whenZero_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -21584,77 +13512,25 @@ class InstructionSequenceBuilderDiffblueTest {
   /**
    * Test {@link InstructionSequenceBuilder#pushFloat(float)}.
    *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushFloat(float)}
-   */
-  @Test
-  @DisplayName("Test pushFloat(float)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushFloat(float)"})
-  void testPushFloat() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualPushFloatResult = instructionSequenceBuilder.pushFloat(10.0f);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushFloatResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushFloat(float)}.
+   * <ul>
+   *   <li>When one.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
+   * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushFloat(float)}
    */
   @Test
-  @DisplayName("Test pushFloat(float)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushFloat(float)"})
-  void testPushFloat2() {
+  public void testPushFloat_whenOne_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
     // Act
-    InstructionSequenceBuilder actualPushFloatResult = instructionSequenceBuilder.pushFloat(10.0f);
+    InstructionSequenceBuilder actualPushFloatResult = instructionSequenceBuilder.pushFloat(1.0f);
 
     // Assert
-    assertSame(instructionSequenceBuilder, actualPushFloatResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushFloat(float)}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushFloat(float)}
-   */
-  @Test
-  @DisplayName("Test pushFloat(float)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushFloat(float)"})
-  void testPushFloat3() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-
-    // Act
-    InstructionSequenceBuilder actualPushFloatResult = instructionSequenceBuilder.pushFloat(10.0f);
-
-    // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualPushFloatResult);
   }
 
@@ -21662,26 +13538,28 @@ class InstructionSequenceBuilderDiffblueTest {
    * Test {@link InstructionSequenceBuilder#pushFloat(float)}.
    *
    * <ul>
+   *   <li>When ten.
    *   <li>Then second element return {@link FloatConstant}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushFloat(float)}
    */
   @Test
-  @DisplayName("Test pushFloat(float); then second element return FloatConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushFloat(float)"})
-  void testPushFloat_thenSecondElementReturnFloatConstant() {
+  public void testPushFloat_whenTen_thenSecondElementReturnFloatConstant() {
     // Arrange, Act and Assert
     ProgramClass targetClass =
-        new InstructionSequenceBuilder().pushFloat(10.0f).getConstantPoolEditor().getTargetClass();
+        (new InstructionSequenceBuilder())
+            .pushFloat(10.0f)
+            .getConstantPoolEditor()
+            .getTargetClass();
     Constant[] constantArray = targetClass.constantPool;
     Constant constant = constantArray[1];
     assertTrue(constant instanceof FloatConstant);
     assertNull(constant.getProcessingInfo());
     assertEquals(0, constant.getProcessingFlags());
-    assertEquals(10.0f, ((FloatConstant) constant).getValue());
+    assertEquals(10.0f, ((FloatConstant) constant).getValue(), 0.0f);
     assertEquals(2, targetClass.u2constantPoolCount);
     assertEquals(4, constant.getTag());
     assertFalse(constant.isCategory2());
@@ -21692,44 +13570,16 @@ class InstructionSequenceBuilderDiffblueTest {
    * Test {@link InstructionSequenceBuilder#pushFloat(float)}.
    *
    * <ul>
-   *   <li>When one.
-   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushFloat(float)}
-   */
-  @Test
-  @DisplayName("Test pushFloat(float); when one; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushFloat(float)"})
-  void testPushFloat_whenOne_thenReturnInstructionSequenceBuilder() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-
-    // Act
-    InstructionSequenceBuilder actualPushFloatResult = instructionSequenceBuilder.pushFloat(1.0f);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushFloatResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushFloat(float)}.
-   *
-   * <ul>
    *   <li>When two.
-   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushFloat(float)}
    */
   @Test
-  @DisplayName("Test pushFloat(float); when two; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushFloat(float)"})
-  void testPushFloat_whenTwo_thenReturnInstructionSequenceBuilder() {
+  public void testPushFloat_whenTwo_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -21737,6 +13587,7 @@ class InstructionSequenceBuilderDiffblueTest {
     InstructionSequenceBuilder actualPushFloatResult = instructionSequenceBuilder.pushFloat(2.0f);
 
     // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualPushFloatResult);
   }
 
@@ -21745,17 +13596,15 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When zero.
-   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushFloat(float)}
    */
   @Test
-  @DisplayName("Test pushFloat(float); when zero; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushFloat(float)"})
-  void testPushFloat_whenZero_thenReturnInstructionSequenceBuilder() {
+  public void testPushFloat_whenZero_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -21763,84 +13612,8 @@ class InstructionSequenceBuilderDiffblueTest {
     InstructionSequenceBuilder actualPushFloatResult = instructionSequenceBuilder.pushFloat(0.0f);
 
     // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualPushFloatResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushLong(long)}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushLong(long)}
-   */
-  @Test
-  @DisplayName("Test pushLong(long)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushLong(long)"})
-  void testPushLong() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(42, 1, constantPool, 42, 42, 42));
-
-    // Act
-    InstructionSequenceBuilder actualPushLongResult = instructionSequenceBuilder.pushLong(42L);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushLongResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushLong(long)}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushLong(long)}
-   */
-  @Test
-  @DisplayName("Test pushLong(long)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushLong(long)"})
-  void testPushLong2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(42, 0, constantPool, 42, 42, 42));
-
-    // Act
-    InstructionSequenceBuilder actualPushLongResult = instructionSequenceBuilder.pushLong(42L);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushLongResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushLong(long)}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushLong(long)}
-   */
-  @Test
-  @DisplayName("Test pushLong(long)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushLong(long)"})
-  void testPushLong3() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                42,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                42,
-                42,
-                42));
-
-    // Act
-    InstructionSequenceBuilder actualPushLongResult = instructionSequenceBuilder.pushLong(42L);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushLongResult);
   }
 
   /**
@@ -21854,15 +13627,12 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#pushLong(long)}
    */
   @Test
-  @DisplayName(
-      "Test pushLong(long); given InstructionSequenceBuilder(); then second element return LongConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushLong(long)"})
-  void testPushLong_givenInstructionSequenceBuilder_thenSecondElementReturnLongConstant() {
+  public void testPushLong_givenInstructionSequenceBuilder_thenSecondElementReturnLongConstant() {
     // Arrange, Act and Assert
     ProgramClass targetClass =
-        new InstructionSequenceBuilder().pushLong(42L).getConstantPoolEditor().getTargetClass();
+        (new InstructionSequenceBuilder()).pushLong(42L).getConstantPoolEditor().getTargetClass();
     Constant[] constantArray = targetClass.constantPool;
     Constant constant = constantArray[1];
     assertTrue(constant instanceof LongConstant);
@@ -21880,17 +13650,15 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When one.
-   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushLong(long)}
    */
   @Test
-  @DisplayName("Test pushLong(long); when one; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushLong(long)"})
-  void testPushLong_whenOne_thenReturnInstructionSequenceBuilder() {
+  public void testPushLong_whenOne_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -21898,6 +13666,7 @@ class InstructionSequenceBuilderDiffblueTest {
     InstructionSequenceBuilder actualPushLongResult = instructionSequenceBuilder.pushLong(1L);
 
     // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualPushLongResult);
   }
 
@@ -21906,17 +13675,15 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When zero.
-   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushLong(long)}
    */
   @Test
-  @DisplayName("Test pushLong(long); when zero; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushLong(long)"})
-  void testPushLong_whenZero_thenReturnInstructionSequenceBuilder() {
+  public void testPushLong_whenZero_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -21924,87 +13691,8 @@ class InstructionSequenceBuilderDiffblueTest {
     InstructionSequenceBuilder actualPushLongResult = instructionSequenceBuilder.pushLong(0L);
 
     // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualPushLongResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushDouble(double)}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushDouble(double)}
-   */
-  @Test
-  @DisplayName("Test pushDouble(double)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushDouble(double)"})
-  void testPushDouble() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualPushDoubleResult =
-        instructionSequenceBuilder.pushDouble(10.0d);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushDoubleResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushDouble(double)}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushDouble(double)}
-   */
-  @Test
-  @DisplayName("Test pushDouble(double)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushDouble(double)"})
-  void testPushDouble2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    InstructionSequenceBuilder actualPushDoubleResult =
-        instructionSequenceBuilder.pushDouble(10.0d);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushDoubleResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushDouble(double)}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushDouble(double)}
-   */
-  @Test
-  @DisplayName("Test pushDouble(double)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushDouble(double)"})
-  void testPushDouble3() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-
-    // Act
-    InstructionSequenceBuilder actualPushDoubleResult =
-        instructionSequenceBuilder.pushDouble(10.0d);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushDoubleResult);
   }
 
   /**
@@ -22017,20 +13705,21 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#pushDouble(double)}
    */
   @Test
-  @DisplayName("Test pushDouble(double); then second element return DoubleConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushDouble(double)"})
-  void testPushDouble_thenSecondElementReturnDoubleConstant() {
+  public void testPushDouble_thenSecondElementReturnDoubleConstant() {
     // Arrange, Act and Assert
     ProgramClass targetClass =
-        new InstructionSequenceBuilder().pushDouble(10.0d).getConstantPoolEditor().getTargetClass();
+        (new InstructionSequenceBuilder())
+            .pushDouble(10.0d)
+            .getConstantPoolEditor()
+            .getTargetClass();
     Constant[] constantArray = targetClass.constantPool;
     Constant constant = constantArray[1];
     assertTrue(constant instanceof DoubleConstant);
     assertNull(constant.getProcessingInfo());
     assertEquals(0, constant.getProcessingFlags());
-    assertEquals(10.0d, ((DoubleConstant) constant).getValue());
+    assertEquals(10.0d, ((DoubleConstant) constant).getValue(), 0.0);
     assertEquals(3, targetClass.u2constantPoolCount);
     assertEquals(6, constant.getTag());
     assertTrue(constant.isCategory2());
@@ -22042,17 +13731,15 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When one.
-   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushDouble(double)}
    */
   @Test
-  @DisplayName("Test pushDouble(double); when one; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushDouble(double)"})
-  void testPushDouble_whenOne_thenReturnInstructionSequenceBuilder() {
+  public void testPushDouble_whenOne_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -22060,6 +13747,7 @@ class InstructionSequenceBuilderDiffblueTest {
     InstructionSequenceBuilder actualPushDoubleResult = instructionSequenceBuilder.pushDouble(1.0d);
 
     // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualPushDoubleResult);
   }
 
@@ -22068,17 +13756,15 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When zero.
-   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
+   *   <li>Then {@link InstructionSequenceBuilder#InstructionSequenceBuilder()} size is one.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushDouble(double)}
    */
   @Test
-  @DisplayName("Test pushDouble(double); when zero; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushDouble(double)"})
-  void testPushDouble_whenZero_thenReturnInstructionSequenceBuilder() {
+  public void testPushDouble_whenZero_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -22086,149 +13772,8 @@ class InstructionSequenceBuilderDiffblueTest {
     InstructionSequenceBuilder actualPushDoubleResult = instructionSequenceBuilder.pushDouble(0.0d);
 
     // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
     assertSame(instructionSequenceBuilder, actualPushDoubleResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushNewArray(String, int)}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushNewArray(String, int)}
-   */
-  @Test
-  @DisplayName("Test pushNewArray(String, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.pushNewArray(String, int)"
-  })
-  void testPushNewArray() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(-1, 1, constantPool, -1, -1, -1));
-
-    // Act
-    InstructionSequenceBuilder actualPushNewArrayResult =
-        instructionSequenceBuilder.pushNewArray("Type", 3);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushNewArrayResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushNewArray(String, int)}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushNewArray(String, int)}
-   */
-  @Test
-  @DisplayName("Test pushNewArray(String, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.pushNewArray(String, int)"
-  })
-  void testPushNewArray2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(new ProgramClass(-1, 0, constantPool, -1, -1, -1));
-
-    // Act
-    InstructionSequenceBuilder actualPushNewArrayResult =
-        instructionSequenceBuilder.pushNewArray("Type", 3);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushNewArrayResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushNewArray(String, int)}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushNewArray(String, int)}
-   */
-  @Test
-  @DisplayName("Test pushNewArray(String, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.pushNewArray(String, int)"
-  })
-  void testPushNewArray3() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                -1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                -1,
-                -1,
-                -1));
-
-    // Act
-    InstructionSequenceBuilder actualPushNewArrayResult =
-        instructionSequenceBuilder.pushNewArray("Type", 3);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushNewArrayResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushNewArray(String, int)}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushNewArray(String, int)}
-   */
-  @Test
-  @DisplayName("Test pushNewArray(String, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.pushNewArray(String, int)"
-  })
-  void testPushNewArray4() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    InstructionSequenceBuilder instructionSequenceBuilder =
-        new InstructionSequenceBuilder(
-            new ProgramClass(
-                -1, 3, new Constant[] {classConstant, null, new ClassConstant()}, -1, -1, -1));
-
-    // Act
-    InstructionSequenceBuilder actualPushNewArrayResult =
-        instructionSequenceBuilder.pushNewArray("Type", 3);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushNewArrayResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushNewArray(String, int)}.
-   *
-   * <ul>
-   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushNewArray(String, int)}
-   */
-  @Test
-  @DisplayName("Test pushNewArray(String, int); then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.pushNewArray(String, int)"
-  })
-  void testPushNewArray_thenReturnInstructionSequenceBuilder() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-
-    // Act
-    InstructionSequenceBuilder actualPushNewArrayResult =
-        instructionSequenceBuilder.pushNewArray("Type", 3);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushNewArrayResult);
   }
 
   /**
@@ -22236,29 +13781,42 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When five.
-   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
+   *   <li>Then third element return {@link ClassConstant}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushNewArray(String, int)}
    */
   @Test
-  @DisplayName(
-      "Test pushNewArray(String, int); when five; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.pushNewArray(String, int)"
   })
-  void testPushNewArray_whenFive_thenReturnInstructionSequenceBuilder() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-
-    // Act
-    InstructionSequenceBuilder actualPushNewArrayResult =
-        instructionSequenceBuilder.pushNewArray("Type", 5);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushNewArrayResult);
+  public void testPushNewArray_whenFive_thenThirdElementReturnClassConstant()
+      throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
+    ProgramClass targetClass =
+        (new InstructionSequenceBuilder())
+            .pushNewArray("Type", 5)
+            .getConstantPoolEditor()
+            .getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    Constant constant = constantArray[2];
+    assertTrue(constant instanceof ClassConstant);
+    Constant constant2 = constantArray[1];
+    assertTrue(constant2 instanceof Utf8Constant);
+    assertEquals("Type", ((Utf8Constant) constant2).getString());
+    assertNull(((ClassConstant) constant).javaLangClassClass);
+    assertNull(((ClassConstant) constant).referencedClass);
+    assertNull(constantArray[3]);
+    assertEquals(1, constant2.getTag());
+    assertEquals(1, ((ClassConstant) constant).u2nameIndex);
+    assertEquals(3, targetClass.u2constantPoolCount);
+    assertEquals(7, constant.getTag());
+    assertFalse(constant2.isCategory2());
+    assertFalse(constant.isCategory2());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    byte[] expectedBytes = "Type".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
   }
 
   /**
@@ -22266,29 +13824,114 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When four.
-   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
+   *   <li>Then third element return {@link ClassConstant}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushNewArray(String, int)}
    */
   @Test
-  @DisplayName(
-      "Test pushNewArray(String, int); when four; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.pushNewArray(String, int)"
   })
-  void testPushNewArray_whenFour_thenReturnInstructionSequenceBuilder() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+  public void testPushNewArray_whenFour_thenThirdElementReturnClassConstant()
+      throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
+    ProgramClass targetClass =
+        (new InstructionSequenceBuilder())
+            .pushNewArray("Type", 4)
+            .getConstantPoolEditor()
+            .getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    Constant constant = constantArray[2];
+    assertTrue(constant instanceof ClassConstant);
+    Constant constant2 = constantArray[1];
+    assertTrue(constant2 instanceof Utf8Constant);
+    assertEquals("Type", ((Utf8Constant) constant2).getString());
+    assertNull(((ClassConstant) constant).javaLangClassClass);
+    assertNull(((ClassConstant) constant).referencedClass);
+    assertNull(constantArray[3]);
+    assertEquals(1, constant2.getTag());
+    assertEquals(1, ((ClassConstant) constant).u2nameIndex);
+    assertEquals(3, targetClass.u2constantPoolCount);
+    assertEquals(7, constant.getTag());
+    assertFalse(constant2.isCategory2());
+    assertFalse(constant.isCategory2());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    byte[] expectedBytes = "Type".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+  }
 
-    // Act
-    InstructionSequenceBuilder actualPushNewArrayResult =
-        instructionSequenceBuilder.pushNewArray("Type", 4);
+  /**
+   * Test {@link InstructionSequenceBuilder#pushNewArray(String, int)}.
+   *
+   * <ul>
+   *   <li>When {@link Integer#MIN_VALUE}.
+   *   <li>Then fourth element return {@link ClassConstant}.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#pushNewArray(String, int)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.pushNewArray(String, int)"
+  })
+  public void testPushNewArray_whenMin_value_thenFourthElementReturnClassConstant() {
+    // Arrange, Act and Assert
+    ProgramClass targetClass =
+        (new InstructionSequenceBuilder())
+            .pushNewArray("Type", Integer.MIN_VALUE)
+            .getConstantPoolEditor()
+            .getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    assertTrue(constantArray[3] instanceof ClassConstant);
+    assertTrue(constantArray[1] instanceof IntegerConstant);
+    assertTrue(constantArray[2] instanceof Utf8Constant);
+    assertEquals(4, targetClass.u2constantPoolCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
 
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushNewArrayResult);
+  /**
+   * Test {@link InstructionSequenceBuilder#pushNewArray(String, int)}.
+   *
+   * <ul>
+   *   <li>When minus one hundred twenty-eight.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#pushNewArray(String, int)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.pushNewArray(String, int)"
+  })
+  public void testPushNewArray_whenMinusOneHundredTwentyEight()
+      throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
+    ProgramClass targetClass =
+        (new InstructionSequenceBuilder())
+            .pushNewArray("Type", -128)
+            .getConstantPoolEditor()
+            .getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    Constant constant = constantArray[2];
+    assertTrue(constant instanceof ClassConstant);
+    Constant constant2 = constantArray[1];
+    assertTrue(constant2 instanceof Utf8Constant);
+    assertEquals("Type", ((Utf8Constant) constant2).getString());
+    assertNull(((ClassConstant) constant).javaLangClassClass);
+    assertNull(((ClassConstant) constant).referencedClass);
+    assertNull(constantArray[3]);
+    assertEquals(1, constant2.getTag());
+    assertEquals(1, ((ClassConstant) constant).u2nameIndex);
+    assertEquals(3, targetClass.u2constantPoolCount);
+    assertEquals(7, constant.getTag());
+    assertFalse(constant2.isCategory2());
+    assertFalse(constant.isCategory2());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    byte[] expectedBytes = "Type".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
   }
 
   /**
@@ -22296,59 +13939,42 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When minus one.
-   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
+   *   <li>Then third element return {@link ClassConstant}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushNewArray(String, int)}
    */
   @Test
-  @DisplayName(
-      "Test pushNewArray(String, int); when minus one; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.pushNewArray(String, int)"
   })
-  void testPushNewArray_whenMinusOne_thenReturnInstructionSequenceBuilder() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-
-    // Act
-    InstructionSequenceBuilder actualPushNewArrayResult =
-        instructionSequenceBuilder.pushNewArray("Type", -1);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushNewArrayResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushNewArray(String, int)}.
-   *
-   * <ul>
-   *   <li>When minus two.
-   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushNewArray(String, int)}
-   */
-  @Test
-  @DisplayName(
-      "Test pushNewArray(String, int); when minus two; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.pushNewArray(String, int)"
-  })
-  void testPushNewArray_whenMinusTwo_thenReturnInstructionSequenceBuilder() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-
-    // Act
-    InstructionSequenceBuilder actualPushNewArrayResult =
-        instructionSequenceBuilder.pushNewArray("Type", -2);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushNewArrayResult);
+  public void testPushNewArray_whenMinusOne_thenThirdElementReturnClassConstant()
+      throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
+    ProgramClass targetClass =
+        (new InstructionSequenceBuilder())
+            .pushNewArray("Type", -1)
+            .getConstantPoolEditor()
+            .getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    Constant constant = constantArray[2];
+    assertTrue(constant instanceof ClassConstant);
+    Constant constant2 = constantArray[1];
+    assertTrue(constant2 instanceof Utf8Constant);
+    assertEquals("Type", ((Utf8Constant) constant2).getString());
+    assertNull(((ClassConstant) constant).javaLangClassClass);
+    assertNull(((ClassConstant) constant).referencedClass);
+    assertNull(constantArray[3]);
+    assertEquals(1, constant2.getTag());
+    assertEquals(1, ((ClassConstant) constant).u2nameIndex);
+    assertEquals(3, targetClass.u2constantPoolCount);
+    assertEquals(7, constant.getTag());
+    assertFalse(constant2.isCategory2());
+    assertFalse(constant.isCategory2());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    byte[] expectedBytes = "Type".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
   }
 
   /**
@@ -22356,28 +13982,85 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When one.
-   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
+   *   <li>Then third element return {@link ClassConstant}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushNewArray(String, int)}
    */
   @Test
-  @DisplayName("Test pushNewArray(String, int); when one; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.pushNewArray(String, int)"
   })
-  void testPushNewArray_whenOne_thenReturnInstructionSequenceBuilder() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+  public void testPushNewArray_whenOne_thenThirdElementReturnClassConstant()
+      throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
+    ProgramClass targetClass =
+        (new InstructionSequenceBuilder())
+            .pushNewArray("Type", 1)
+            .getConstantPoolEditor()
+            .getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    Constant constant = constantArray[2];
+    assertTrue(constant instanceof ClassConstant);
+    Constant constant2 = constantArray[1];
+    assertTrue(constant2 instanceof Utf8Constant);
+    assertEquals("Type", ((Utf8Constant) constant2).getString());
+    assertNull(((ClassConstant) constant).javaLangClassClass);
+    assertNull(((ClassConstant) constant).referencedClass);
+    assertNull(constantArray[3]);
+    assertEquals(1, constant2.getTag());
+    assertEquals(1, ((ClassConstant) constant).u2nameIndex);
+    assertEquals(3, targetClass.u2constantPoolCount);
+    assertEquals(7, constant.getTag());
+    assertFalse(constant2.isCategory2());
+    assertFalse(constant.isCategory2());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    byte[] expectedBytes = "Type".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+  }
 
-    // Act
-    InstructionSequenceBuilder actualPushNewArrayResult =
-        instructionSequenceBuilder.pushNewArray("Type", 1);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushNewArrayResult);
+  /**
+   * Test {@link InstructionSequenceBuilder#pushNewArray(String, int)}.
+   *
+   * <ul>
+   *   <li>When three.
+   *   <li>Then third element return {@link ClassConstant}.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#pushNewArray(String, int)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "InstructionSequenceBuilder InstructionSequenceBuilder.pushNewArray(String, int)"
+  })
+  public void testPushNewArray_whenThree_thenThirdElementReturnClassConstant()
+      throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
+    ProgramClass targetClass =
+        (new InstructionSequenceBuilder())
+            .pushNewArray("Type", 3)
+            .getConstantPoolEditor()
+            .getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    Constant constant = constantArray[2];
+    assertTrue(constant instanceof ClassConstant);
+    Constant constant2 = constantArray[1];
+    assertTrue(constant2 instanceof Utf8Constant);
+    assertEquals("Type", ((Utf8Constant) constant2).getString());
+    assertNull(((ClassConstant) constant).javaLangClassClass);
+    assertNull(((ClassConstant) constant).referencedClass);
+    assertNull(constantArray[3]);
+    assertEquals(1, constant2.getTag());
+    assertEquals(1, ((ClassConstant) constant).u2nameIndex);
+    assertEquals(3, targetClass.u2constantPoolCount);
+    assertEquals(7, constant.getTag());
+    assertFalse(constant2.isCategory2());
+    assertFalse(constant.isCategory2());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    byte[] expectedBytes = "Type".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
   }
 
   /**
@@ -22385,28 +14068,42 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When two.
-   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
+   *   <li>Then third element return {@link ClassConstant}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushNewArray(String, int)}
    */
   @Test
-  @DisplayName("Test pushNewArray(String, int); when two; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.pushNewArray(String, int)"
   })
-  void testPushNewArray_whenTwo_thenReturnInstructionSequenceBuilder() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-
-    // Act
-    InstructionSequenceBuilder actualPushNewArrayResult =
-        instructionSequenceBuilder.pushNewArray("Type", 2);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushNewArrayResult);
+  public void testPushNewArray_whenTwo_thenThirdElementReturnClassConstant()
+      throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
+    ProgramClass targetClass =
+        (new InstructionSequenceBuilder())
+            .pushNewArray("Type", 2)
+            .getConstantPoolEditor()
+            .getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    Constant constant = constantArray[2];
+    assertTrue(constant instanceof ClassConstant);
+    Constant constant2 = constantArray[1];
+    assertTrue(constant2 instanceof Utf8Constant);
+    assertEquals("Type", ((Utf8Constant) constant2).getString());
+    assertNull(((ClassConstant) constant).javaLangClassClass);
+    assertNull(((ClassConstant) constant).referencedClass);
+    assertNull(constantArray[3]);
+    assertEquals(1, constant2.getTag());
+    assertEquals(1, ((ClassConstant) constant).u2nameIndex);
+    assertEquals(3, targetClass.u2constantPoolCount);
+    assertEquals(7, constant.getTag());
+    assertFalse(constant2.isCategory2());
+    assertFalse(constant.isCategory2());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    byte[] expectedBytes = "Type".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
   }
 
   /**
@@ -22414,114 +14111,42 @@ class InstructionSequenceBuilderDiffblueTest {
    *
    * <ul>
    *   <li>When zero.
-   *   <li>Then return {@link InstructionSequenceBuilder#InstructionSequenceBuilder()}.
+   *   <li>Then third element return {@link ClassConstant}.
    * </ul>
    *
    * <p>Method under test: {@link InstructionSequenceBuilder#pushNewArray(String, int)}
    */
   @Test
-  @DisplayName(
-      "Test pushNewArray(String, int); when zero; then return InstructionSequenceBuilder()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.pushNewArray(String, int)"
   })
-  void testPushNewArray_whenZero_thenReturnInstructionSequenceBuilder() {
-    // Arrange
-    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
-
-    // Act
-    InstructionSequenceBuilder actualPushNewArrayResult =
-        instructionSequenceBuilder.pushNewArray("Type", 0);
-
-    // Assert
-    assertSame(instructionSequenceBuilder, actualPushNewArrayResult);
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushPrimitiveOrStringArray(String, Object[])}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushPrimitiveOrStringArray(String,
-   * Object[])}
-   */
-  @Test
-  @DisplayName("Test pushPrimitiveOrStringArray(String, Object[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.pushPrimitiveOrStringArray(String, Object[])"
-  })
-  void testPushPrimitiveOrStringArray() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new InstructionSequenceBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1))
-                .pushPrimitiveOrStringArray("Type", new Object[] {"Values"}));
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushPrimitiveOrStringArray(String, Object[])}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushPrimitiveOrStringArray(String,
-   * Object[])}
-   */
-  @Test
-  @DisplayName("Test pushPrimitiveOrStringArray(String, Object[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.pushPrimitiveOrStringArray(String, Object[])"
-  })
-  void testPushPrimitiveOrStringArray2() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new InstructionSequenceBuilder(
-                    new ProgramClass(
-                        1,
-                        3,
-                        new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                        1,
-                        1,
-                        1))
-                .pushPrimitiveOrStringArray("Type", new Object[] {"Values"}));
-  }
-
-  /**
-   * Test {@link InstructionSequenceBuilder#pushPrimitiveOrStringArray(String, Object[])}.
-   *
-   * <p>Method under test: {@link InstructionSequenceBuilder#pushPrimitiveOrStringArray(String,
-   * Object[])}
-   */
-  @Test
-  @DisplayName("Test pushPrimitiveOrStringArray(String, Object[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "InstructionSequenceBuilder InstructionSequenceBuilder.pushPrimitiveOrStringArray(String, Object[])"
-  })
-  void testPushPrimitiveOrStringArray3() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new InstructionSequenceBuilder(
-                    new ProgramClass(
-                        1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1))
-                .pushPrimitiveOrStringArray("Type", new Object[] {"Values"}));
+  public void testPushNewArray_whenZero_thenThirdElementReturnClassConstant()
+      throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
+    ProgramClass targetClass =
+        (new InstructionSequenceBuilder())
+            .pushNewArray("Type", 0)
+            .getConstantPoolEditor()
+            .getTargetClass();
+    Constant[] constantArray = targetClass.constantPool;
+    Constant constant = constantArray[2];
+    assertTrue(constant instanceof ClassConstant);
+    Constant constant2 = constantArray[1];
+    assertTrue(constant2 instanceof Utf8Constant);
+    assertEquals("Type", ((Utf8Constant) constant2).getString());
+    assertNull(((ClassConstant) constant).javaLangClassClass);
+    assertNull(((ClassConstant) constant).referencedClass);
+    assertNull(constantArray[3]);
+    assertEquals(1, constant2.getTag());
+    assertEquals(1, ((ClassConstant) constant).u2nameIndex);
+    assertEquals(3, targetClass.u2constantPoolCount);
+    assertEquals(7, constant.getTag());
+    assertFalse(constant2.isCategory2());
+    assertFalse(constant.isCategory2());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    byte[] expectedBytes = "Type".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
   }
 
   /**
@@ -22536,14 +14161,11 @@ class InstructionSequenceBuilderDiffblueTest {
    * Object[])}
    */
   @Test
-  @DisplayName(
-      "Test pushPrimitiveOrStringArray(String, Object[]); then InstructionSequenceBuilder() size is seventy-five")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.pushPrimitiveOrStringArray(String, Object[])"
   })
-  void testPushPrimitiveOrStringArray_thenInstructionSequenceBuilderSizeIsSeventyFive() {
+  public void testPushPrimitiveOrStringArray_thenInstructionSequenceBuilderSizeIsSeventyFive() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -22565,6 +14187,7 @@ class InstructionSequenceBuilderDiffblueTest {
    * Test {@link InstructionSequenceBuilder#pushPrimitiveOrStringArray(String, Object[])}.
    *
    * <ul>
+   *   <li>When {@code Type}.
    *   <li>Then throw {@link IllegalArgumentException}.
    * </ul>
    *
@@ -22572,19 +14195,16 @@ class InstructionSequenceBuilderDiffblueTest {
    * Object[])}
    */
   @Test
-  @DisplayName(
-      "Test pushPrimitiveOrStringArray(String, Object[]); then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionSequenceBuilder InstructionSequenceBuilder.pushPrimitiveOrStringArray(String, Object[])"
   })
-  void testPushPrimitiveOrStringArray_thenThrowIllegalArgumentException() {
+  public void testPushPrimitiveOrStringArray_whenType_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
         () ->
-            new InstructionSequenceBuilder()
+            (new InstructionSequenceBuilder())
                 .pushPrimitiveOrStringArray("Type", new Object[] {"Values"}));
   }
 
@@ -22599,12 +14219,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#pushDefault(String)}
    */
   @Test
-  @DisplayName(
-      "Test pushDefault(String); when 'Type'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.pushDefault(String)"})
-  void testPushDefault_whenType_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testPushDefault_whenType_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -22627,11 +14244,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#load(int, char)}
    */
   @Test
-  @DisplayName("Test load(int, char) with 'int', 'char'; when 'A'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.load(int, char)"})
-  void testLoadWithIntChar_whenA() {
+  public void testLoadWithIntChar_whenA() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -22653,11 +14268,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#load(int, char)}
    */
   @Test
-  @DisplayName("Test load(int, char) with 'int', 'char'; when 'B'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.load(int, char)"})
-  void testLoadWithIntChar_whenB() {
+  public void testLoadWithIntChar_whenB() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -22679,11 +14292,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#load(int, char)}
    */
   @Test
-  @DisplayName("Test load(int, char) with 'int', 'char'; when 'D'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.load(int, char)"})
-  void testLoadWithIntChar_whenD() {
+  public void testLoadWithIntChar_whenD() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -22705,11 +14316,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#load(int, char)}
    */
   @Test
-  @DisplayName("Test load(int, char) with 'int', 'char'; when 'F'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.load(int, char)"})
-  void testLoadWithIntChar_whenF() {
+  public void testLoadWithIntChar_whenF() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -22731,16 +14340,38 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#load(int, char)}
    */
   @Test
-  @DisplayName("Test load(int, char) with 'int', 'char'; when 'J'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.load(int, char)"})
-  void testLoadWithIntChar_whenJ() {
+  public void testLoadWithIntChar_whenJ() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
     // Act
     InstructionSequenceBuilder actualLoadResult = instructionSequenceBuilder.load(1, 'J');
+
+    // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertSame(instructionSequenceBuilder, actualLoadResult);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#load(int, char)} with {@code int}, {@code char}.
+   *
+   * <ul>
+   *   <li>When minus one hundred twenty-eight.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#load(int, char)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.load(int, char)"})
+  public void testLoadWithIntChar_whenMinusOneHundredTwentyEight() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+
+    // Act
+    InstructionSequenceBuilder actualLoadResult = instructionSequenceBuilder.load(-128, 'C');
 
     // Assert
     assertEquals(1, instructionSequenceBuilder.size());
@@ -22757,11 +14388,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#load(int, String)}
    */
   @Test
-  @DisplayName("Test load(int, String) with 'int', 'String'; when minus one hundred twenty-eight")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.load(int, String)"})
-  void testLoadWithIntString_whenMinusOneHundredTwentyEight() {
+  public void testLoadWithIntString_whenMinusOneHundredTwentyEight() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -22784,12 +14413,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#load(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test load(int, String) with 'int', 'String'; when one; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.load(int, String)"})
-  void testLoadWithIntString_whenOne_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLoadWithIntString_whenOne_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -22812,12 +14438,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#load(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test load(int, String) with 'int', 'String'; when sixty-six; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.load(int, String)"})
-  void testLoadWithIntString_whenSixtySix_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLoadWithIntString_whenSixtySix_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -22839,11 +14462,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#store(int, char)}
    */
   @Test
-  @DisplayName("Test store(int, char) with 'int', 'char'; when 'A'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.store(int, char)"})
-  void testStoreWithIntChar_whenA() {
+  public void testStoreWithIntChar_whenA() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -22865,11 +14486,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#store(int, char)}
    */
   @Test
-  @DisplayName("Test store(int, char) with 'int', 'char'; when 'B'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.store(int, char)"})
-  void testStoreWithIntChar_whenB() {
+  public void testStoreWithIntChar_whenB() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -22891,11 +14510,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#store(int, char)}
    */
   @Test
-  @DisplayName("Test store(int, char) with 'int', 'char'; when 'D'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.store(int, char)"})
-  void testStoreWithIntChar_whenD() {
+  public void testStoreWithIntChar_whenD() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -22917,11 +14534,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#store(int, char)}
    */
   @Test
-  @DisplayName("Test store(int, char) with 'int', 'char'; when 'F'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.store(int, char)"})
-  void testStoreWithIntChar_whenF() {
+  public void testStoreWithIntChar_whenF() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -22943,16 +14558,38 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#store(int, char)}
    */
   @Test
-  @DisplayName("Test store(int, char) with 'int', 'char'; when 'J'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.store(int, char)"})
-  void testStoreWithIntChar_whenJ() {
+  public void testStoreWithIntChar_whenJ() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
     // Act
     InstructionSequenceBuilder actualStoreResult = instructionSequenceBuilder.store(1, 'J');
+
+    // Assert
+    assertEquals(1, instructionSequenceBuilder.size());
+    assertSame(instructionSequenceBuilder, actualStoreResult);
+  }
+
+  /**
+   * Test {@link InstructionSequenceBuilder#store(int, char)} with {@code int}, {@code char}.
+   *
+   * <ul>
+   *   <li>When minus one hundred twenty-eight.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionSequenceBuilder#store(int, char)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.store(int, char)"})
+  public void testStoreWithIntChar_whenMinusOneHundredTwentyEight() {
+    // Arrange
+    InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
+
+    // Act
+    InstructionSequenceBuilder actualStoreResult = instructionSequenceBuilder.store(-128, 'C');
 
     // Assert
     assertEquals(1, instructionSequenceBuilder.size());
@@ -22969,11 +14606,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#store(int, String)}
    */
   @Test
-  @DisplayName("Test store(int, String) with 'int', 'String'; when minus one hundred twenty-eight")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.store(int, String)"})
-  void testStoreWithIntString_whenMinusOneHundredTwentyEight() {
+  public void testStoreWithIntString_whenMinusOneHundredTwentyEight() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -22996,12 +14631,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#store(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test store(int, String) with 'int', 'String'; when one; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.store(int, String)"})
-  void testStoreWithIntString_whenOne_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testStoreWithIntString_whenOne_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -23024,12 +14656,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#store(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test store(int, String) with 'int', 'String'; when sixty-six; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.store(int, String)"})
-  void testStoreWithIntString_whenSixtySix_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testStoreWithIntString_whenSixtySix_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -23052,12 +14681,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#storeToArray(String)}
    */
   @Test
-  @DisplayName(
-      "Test storeToArray(String); when 'Element Type'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.storeToArray(String)"})
-  void testStoreToArray_whenElementType_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testStoreToArray_whenElementType_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 
@@ -23081,12 +14707,9 @@ class InstructionSequenceBuilderDiffblueTest {
    * <p>Method under test: {@link InstructionSequenceBuilder#loadFromArray(String)}
    */
   @Test
-  @DisplayName(
-      "Test loadFromArray(String); when 'Element Type'; then InstructionSequenceBuilder() size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionSequenceBuilder InstructionSequenceBuilder.loadFromArray(String)"})
-  void testLoadFromArray_whenElementType_thenInstructionSequenceBuilderSizeIsOne() {
+  public void testLoadFromArray_whenElementType_thenInstructionSequenceBuilderSizeIsOne() {
     // Arrange
     InstructionSequenceBuilder instructionSequenceBuilder = new InstructionSequenceBuilder();
 

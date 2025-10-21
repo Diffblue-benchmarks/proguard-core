@@ -1,12 +1,11 @@
 package proguard.classfile.attribute.annotation.target.visitor;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertThrows;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.attribute.annotation.TypeAnnotation;
@@ -14,7 +13,7 @@ import proguard.classfile.attribute.annotation.target.CatchTargetInfo;
 import proguard.classfile.attribute.annotation.target.TargetInfo;
 import proguard.classfile.visitor.ClassPrinter;
 
-class TargetInfoVisitorDiffblueTest {
+public class TargetInfoVisitorDiffblueTest {
   /**
    * Test {@link TargetInfoVisitor#visitAnyTargetInfo(Clazz, TypeAnnotation, TargetInfo)}.
    *
@@ -26,14 +25,11 @@ class TargetInfoVisitorDiffblueTest {
    * TargetInfo)}
    */
   @Test
-  @DisplayName(
-      "Test visitAnyTargetInfo(Clazz, TypeAnnotation, TargetInfo); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void TargetInfoVisitor.visitAnyTargetInfo(Clazz, TypeAnnotation, TargetInfo)"
   })
-  void testVisitAnyTargetInfo_thenThrowUnsupportedOperationException() {
+  public void testVisitAnyTargetInfo_thenThrowUnsupportedOperationException() {
     // Arrange
     ClassPrinter classPrinter = new ClassPrinter();
     LibraryClass clazz = new LibraryClass();

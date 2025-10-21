@@ -1,15 +1,14 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.UnsupportedEncodingException;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class Base64UtilDiffblueTest {
+public class Base64UtilDiffblueTest {
   /**
    * Test {@link Base64Util#encode(byte[])}.
    *
@@ -21,11 +20,9 @@ class Base64UtilDiffblueTest {
    * <p>Method under test: {@link Base64Util#encode(byte[])}
    */
   @Test
-  @DisplayName("Test encode(byte[]); when 'A'; then return 'QQNBA0EDQQNBA0EDQQNBAw=='")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String Base64Util.encode(byte[])"})
-  void testEncode_whenA_thenReturnQQNBA0EDQQNBA0EDQQNBAw() {
+  public void testEncode_whenA_thenReturnQQNBA0EDQQNBA0EDQQNBAw() {
     // Arrange, Act and Assert
     assertEquals(
         "QQNBA0EDQQNBA0EDQQNBAw==",
@@ -44,11 +41,9 @@ class Base64UtilDiffblueTest {
    * <p>Method under test: {@link Base64Util#encode(byte[])}
    */
   @Test
-  @DisplayName("Test encode(byte[]); when 'AXAXAXAX' Bytes is 'UTF-8'; then return 'QVhBWEFYQVg='")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String Base64Util.encode(byte[])"})
-  void testEncode_whenAxaxaxaxBytesIsUtf8_thenReturnQVhBWEFYQVg()
+  public void testEncode_whenAxaxaxaxBytesIsUtf8_thenReturnQVhBWEFYQVg()
       throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     assertEquals("QVhBWEFYQVg=", Base64Util.encode("AXAXAXAX".getBytes("UTF-8")));

@@ -1,19 +1,18 @@
 package proguard.classfile.editor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.constant.DynamicConstant;
 import proguard.classfile.constant.InvokeDynamicConstant;
 
-class BootstrapMethodRemapperDiffblueTest {
+public class BootstrapMethodRemapperDiffblueTest {
   /**
    * Test {@link BootstrapMethodRemapper#visitDynamicConstant(Clazz, DynamicConstant)}.
    *
@@ -25,12 +24,9 @@ class BootstrapMethodRemapperDiffblueTest {
    * DynamicConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitDynamicConstant(Clazz, DynamicConstant); then DynamicConstant() BootstrapMethodAttributeIndex is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void BootstrapMethodRemapper.visitDynamicConstant(Clazz, DynamicConstant)"})
-  void testVisitDynamicConstant_thenDynamicConstantBootstrapMethodAttributeIndexIsOne() {
+  public void testVisitDynamicConstant_thenDynamicConstantBootstrapMethodAttributeIndexIsOne() {
     // Arrange
     BootstrapMethodRemapper bootstrapMethodRemapper = new BootstrapMethodRemapper(true);
     bootstrapMethodRemapper.setBootstrapMethodIndexMap(new int[] {1, 0, 1, 0});
@@ -55,12 +51,9 @@ class BootstrapMethodRemapperDiffblueTest {
    * DynamicConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitDynamicConstant(Clazz, DynamicConstant); then DynamicConstant() BootstrapMethodAttributeIndex is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void BootstrapMethodRemapper.visitDynamicConstant(Clazz, DynamicConstant)"})
-  void testVisitDynamicConstant_thenDynamicConstantBootstrapMethodAttributeIndexIsZero() {
+  public void testVisitDynamicConstant_thenDynamicConstantBootstrapMethodAttributeIndexIsZero() {
     // Arrange
     BootstrapMethodRemapper bootstrapMethodRemapper = new BootstrapMethodRemapper(true);
     bootstrapMethodRemapper.setBootstrapMethodIndexMap(new int[] {-1, 0, 1, 0});
@@ -85,12 +78,9 @@ class BootstrapMethodRemapperDiffblueTest {
    * DynamicConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitDynamicConstant(Clazz, DynamicConstant); then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void BootstrapMethodRemapper.visitDynamicConstant(Clazz, DynamicConstant)"})
-  void testVisitDynamicConstant_thenThrowIllegalArgumentException() {
+  public void testVisitDynamicConstant_thenThrowIllegalArgumentException() {
     // Arrange
     BootstrapMethodRemapper bootstrapMethodRemapper = new BootstrapMethodRemapper(false);
     bootstrapMethodRemapper.setBootstrapMethodIndexMap(new int[] {-1, 0, 1, 0});
@@ -109,13 +99,11 @@ class BootstrapMethodRemapperDiffblueTest {
    * InvokeDynamicConstant)}
    */
   @Test
-  @DisplayName("Test visitInvokeDynamicConstant(Clazz, InvokeDynamicConstant)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void BootstrapMethodRemapper.visitInvokeDynamicConstant(Clazz, InvokeDynamicConstant)"
   })
-  void testVisitInvokeDynamicConstant() {
+  public void testVisitInvokeDynamicConstant() {
     // Arrange
     BootstrapMethodRemapper bootstrapMethodRemapper = new BootstrapMethodRemapper(true);
     bootstrapMethodRemapper.setBootstrapMethodIndexMap(new int[] {1, 0, 1, 0});
@@ -136,13 +124,11 @@ class BootstrapMethodRemapperDiffblueTest {
    * InvokeDynamicConstant)}
    */
   @Test
-  @DisplayName("Test visitInvokeDynamicConstant(Clazz, InvokeDynamicConstant)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void BootstrapMethodRemapper.visitInvokeDynamicConstant(Clazz, InvokeDynamicConstant)"
   })
-  void testVisitInvokeDynamicConstant2() {
+  public void testVisitInvokeDynamicConstant2() {
     // Arrange
     BootstrapMethodRemapper bootstrapMethodRemapper = new BootstrapMethodRemapper(true);
     bootstrapMethodRemapper.setBootstrapMethodIndexMap(new int[] {-1, 0, 1, 0});
@@ -167,14 +153,11 @@ class BootstrapMethodRemapperDiffblueTest {
    * InvokeDynamicConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitInvokeDynamicConstant(Clazz, InvokeDynamicConstant); then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void BootstrapMethodRemapper.visitInvokeDynamicConstant(Clazz, InvokeDynamicConstant)"
   })
-  void testVisitInvokeDynamicConstant_thenThrowIllegalArgumentException() {
+  public void testVisitInvokeDynamicConstant_thenThrowIllegalArgumentException() {
     // Arrange
     BootstrapMethodRemapper bootstrapMethodRemapper = new BootstrapMethodRemapper(false);
     bootstrapMethodRemapper.setBootstrapMethodIndexMap(new int[] {-1, 0, 1, 0});

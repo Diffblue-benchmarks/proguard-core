@@ -1,25 +1,22 @@
 package proguard.dexfile.reader;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class VisibilityDiffblueTest {
+public class VisibilityDiffblueTest {
   /**
    * Test {@link Visibility#displayName()}.
    *
    * <p>Method under test: {@link Visibility#displayName()}
    */
   @Test
-  @DisplayName("Test displayName()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String Visibility.displayName()"})
-  void testDisplayName() {
+  public void testDisplayName() {
     // Arrange, Act and Assert
     assertEquals("build", Visibility.BUILD.displayName());
   }

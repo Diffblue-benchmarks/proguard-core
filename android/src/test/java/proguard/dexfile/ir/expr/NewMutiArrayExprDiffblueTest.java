@@ -1,31 +1,28 @@
 package proguard.dexfile.ir.expr;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.LabelAndLocalMapper;
 import proguard.dexfile.ir.expr.Value.VT;
 
-class NewMutiArrayExprDiffblueTest {
+public class NewMutiArrayExprDiffblueTest {
   /**
    * Test {@link NewMutiArrayExpr#NewMutiArrayExpr(String, int, Value[])}.
    *
    * <p>Method under test: {@link NewMutiArrayExpr#NewMutiArrayExpr(String, int, Value[])}
    */
   @Test
-  @DisplayName("Test new NewMutiArrayExpr(String, int, Value[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void NewMutiArrayExpr.<init>(String, int, Value[])"})
-  void testNewNewMutiArrayExpr() {
+  public void testNewNewMutiArrayExpr() {
     // Arrange
     Value[] sizes = new Value[] {new ArrayExpr()};
 
@@ -52,11 +49,9 @@ class NewMutiArrayExprDiffblueTest {
    * <p>Method under test: {@link NewMutiArrayExpr#releaseMemory()}
    */
   @Test
-  @DisplayName("Test releaseMemory()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void NewMutiArrayExpr.releaseMemory()"})
-  void testReleaseMemory() {
+  public void testReleaseMemory() {
     // Arrange
     NewMutiArrayExpr nNewMutiArrayResult =
         Exprs.nNewMutiArray("Base", 1, new Value[] {new ArrayExpr()});
@@ -65,46 +60,8 @@ class NewMutiArrayExprDiffblueTest {
     nNewMutiArrayResult.releaseMemory();
 
     // Assert
-    assertNull(nNewMutiArrayResult.baseType);
     assertNull(nNewMutiArrayResult.getOps());
-  }
-
-  /**
-   * Test {@link NewMutiArrayExpr#clone(LabelAndLocalMapper)} with {@code LabelAndLocalMapper}.
-   *
-   * <ul>
-   *   <li>Then first element return {@link CastExpr}.
-   * </ul>
-   *
-   * <p>Method under test: {@link NewMutiArrayExpr#clone(LabelAndLocalMapper)}
-   */
-  @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then first element return CastExpr")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Value NewMutiArrayExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenFirstElementReturnCastExpr() {
-    // Arrange
-    CastExpr nCastResult =
-        Exprs.nCast(Exprs.nNull(), "jane.doe@example.org", "alice.liddell@example.org");
-    NewMutiArrayExpr nNewMutiArrayResult =
-        Exprs.nNewMutiArray("Base", 1, new Value[] {nCastResult});
-
-    // Act
-    Value actualCloneResult = nNewMutiArrayResult.clone(new LabelAndLocalMapper());
-
-    // Assert
-    Value[] ops = actualCloneResult.getOps();
-    Value value = ops[0];
-    assertTrue(value instanceof CastExpr);
-    assertTrue(value.getOp() instanceof Constant);
-    assertTrue(actualCloneResult instanceof NewMutiArrayExpr);
-    assertEquals("alice.liddell@example.org", ((CastExpr) value).to);
-    assertEquals("jane.doe@example.org", ((CastExpr) value).from);
-    assertEquals(1, ops.length);
-    assertEquals(ET.E1, ((CastExpr) value).et);
-    assertEquals(VT.CAST, ((CastExpr) value).vt);
+    assertNull(nNewMutiArrayResult.baseType);
   }
 
   /**
@@ -117,12 +74,9 @@ class NewMutiArrayExprDiffblueTest {
    * <p>Method under test: {@link NewMutiArrayExpr#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then first element return FilledArrayExpr")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value NewMutiArrayExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenFirstElementReturnFilledArrayExpr() {
+  public void testCloneWithLabelAndLocalMapper_thenFirstElementReturnFilledArrayExpr() {
     // Arrange
     NewMutiArrayExpr nNewMutiArrayResult =
         Exprs.nNewMutiArray(
@@ -157,12 +111,9 @@ class NewMutiArrayExprDiffblueTest {
    * <p>Method under test: {@link NewMutiArrayExpr#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then return toString0 is 'new byte[null]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value NewMutiArrayExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenReturnToString0IsNewByteNull() {
+  public void testCloneWithLabelAndLocalMapper_thenReturnToString0IsNewByteNull() {
     // Arrange
     Constant nNullResult = Exprs.nNull();
     NewMutiArrayExpr nNewMutiArrayResult =
@@ -177,6 +128,7 @@ class NewMutiArrayExprDiffblueTest {
     assertTrue(value instanceof Constant);
     assertTrue(actualCloneResult instanceof NewMutiArrayExpr);
     assertEquals("new byte[null]", actualCloneResult.toString0());
+    assertNull(value.getOps());
     assertEquals(1, ops.length);
     assertEquals(ET.E0, ((Constant) value).et);
     assertEquals(VT.CONSTANT, ((Constant) value).vt);
@@ -193,11 +145,9 @@ class NewMutiArrayExprDiffblueTest {
    * <p>Method under test: {@link NewMutiArrayExpr#clone()}
    */
   @Test
-  @DisplayName("Test clone(); then return NewMutiArrayExpr")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value NewMutiArrayExpr.clone()"})
-  void testClone_thenReturnNewMutiArrayExpr() {
+  public void testClone_thenReturnNewMutiArrayExpr() {
     // Arrange and Act
     Value actualCloneResult = Exprs.nNewMutiArray("Base", 1, new Value[] {}).clone();
 
@@ -222,16 +172,16 @@ class NewMutiArrayExprDiffblueTest {
    * <p>Method under test: {@link NewMutiArrayExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String NewMutiArrayExpr.toString0()"})
-  void testToString0() {
+  public void testToString0() {
     // Arrange
-    Value[] sizes = new Value[] {new ArrayExpr()};
+    NewMutiArrayExpr nNewMutiArrayResult =
+        Exprs.nNewMutiArray("Base", 1, new Value[] {new ArrayExpr()});
+    nNewMutiArrayResult.baseType = null;
 
     // Act and Assert
-    assertEquals("new [null[null]]", new NewMutiArrayExpr(null, 1, sizes).toString0());
+    assertEquals("new [null[null]]", nNewMutiArrayResult.toString0());
   }
 
   /**
@@ -245,12 +195,9 @@ class NewMutiArrayExprDiffblueTest {
    * <p>Method under test: {@link NewMutiArrayExpr#toString0()}
    */
   @Test
-  @DisplayName(
-      "Test toString0(); given ArrayExpr() Op1 is ArrayExpr(); then return 'new byte[null[null][null]]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String NewMutiArrayExpr.toString0()"})
-  void testToString0_givenArrayExprOp1IsArrayExpr_thenReturnNewByteNullNullNull() {
+  public void testToString0_givenArrayExprOp1IsArrayExpr_thenReturnNewByteNullNullNull() {
     // Arrange
     ArrayExpr arrayExpr = new ArrayExpr();
     arrayExpr.setOp1(new ArrayExpr());
@@ -265,43 +212,20 @@ class NewMutiArrayExprDiffblueTest {
    * Test {@link NewMutiArrayExpr#toString0()}.
    *
    * <ul>
-   *   <li>Then return {@code new byte[]}.
+   *   <li>Then return a string.
    * </ul>
    *
    * <p>Method under test: {@link NewMutiArrayExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); then return 'new byte[]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String NewMutiArrayExpr.toString0()"})
-  void testToString0_thenReturnNewByte() {
+  public void testToString0_thenReturnAString() {
     // Arrange, Act and Assert
-    assertEquals("new byte[]", Exprs.nNewMutiArray("Base", 1, new Value[] {}).toString0());
-  }
-
-  /**
-   * Test {@link NewMutiArrayExpr#toString0()}.
-   *
-   * <ul>
-   *   <li>Then return {@code new byte[((double)null[null])]}.
-   * </ul>
-   *
-   * <p>Method under test: {@link NewMutiArrayExpr#toString0()}
-   */
-  @Test
-  @DisplayName("Test toString0(); then return 'new byte[((double)null[null])]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String NewMutiArrayExpr.toString0()"})
-  void testToString0_thenReturnNewByteDoubleNullNull() {
-    // Arrange
-    CastExpr nCastResult = Exprs.nCast(new ArrayExpr(), "jane.doe@example.org", "D");
-
-    // Act and Assert
     assertEquals(
-        "new byte[((double)null[null])]",
-        Exprs.nNewMutiArray("Base", 1, new Value[] {nCastResult}).toString0());
+        "new byte[null[null]][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]"
+            + "[][][][][][][][][][][][][][][][][][][][][][][][][]",
+        Exprs.nNewMutiArray("Base", 66, new Value[] {new ArrayExpr()}).toString0());
   }
 
   /**
@@ -314,11 +238,9 @@ class NewMutiArrayExprDiffblueTest {
    * <p>Method under test: {@link NewMutiArrayExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); then return 'new byte[null]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String NewMutiArrayExpr.toString0()"})
-  void testToString0_thenReturnNewByteNull() {
+  public void testToString0_thenReturnNewByteNull() {
     // Arrange, Act and Assert
     assertEquals("new byte[null]", Exprs.nNewMutiArray("Base", 1, new Value[] {null}).toString0());
   }
@@ -333,11 +255,9 @@ class NewMutiArrayExprDiffblueTest {
    * <p>Method under test: {@link NewMutiArrayExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); then return 'new byte[null[null]]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String NewMutiArrayExpr.toString0()"})
-  void testToString0_thenReturnNewByteNullNull() {
+  public void testToString0_thenReturnNewByteNullNull() {
     // Arrange, Act and Assert
     assertEquals(
         "new byte[null[null]]",
@@ -354,19 +274,17 @@ class NewMutiArrayExprDiffblueTest {
    * <p>Method under test: {@link NewMutiArrayExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); then return 'new byte[null[null][null[null]]]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String NewMutiArrayExpr.toString0()"})
-  void testToString0_thenReturnNewByteNullNullNullNull() {
+  public void testToString0_thenReturnNewByteNullNullNullNull() {
     // Arrange
     ArrayExpr base = new ArrayExpr();
-    ArrayExpr nArrayResult = Exprs.nArray(base, new ArrayExpr(), "new ");
 
     // Act and Assert
     assertEquals(
         "new byte[null[null][null[null]]]",
-        Exprs.nNewMutiArray("Base", 1, new Value[] {nArrayResult}).toString0());
+        Exprs.nNewMutiArray("Base", 1, new Value[] {Exprs.nArray(base, new ArrayExpr(), "new ")})
+            .toString0());
   }
 
   /**
@@ -379,11 +297,9 @@ class NewMutiArrayExprDiffblueTest {
    * <p>Method under test: {@link NewMutiArrayExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); then return 'new double[null[null]]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String NewMutiArrayExpr.toString0()"})
-  void testToString0_thenReturnNewDoubleNullNull() {
+  public void testToString0_thenReturnNewDoubleNullNull() {
     // Arrange, Act and Assert
     assertEquals(
         "new double[null[null]]",
@@ -400,11 +316,9 @@ class NewMutiArrayExprDiffblueTest {
    * <p>Method under test: {@link NewMutiArrayExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); then return 'new float[null[null]]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String NewMutiArrayExpr.toString0()"})
-  void testToString0_thenReturnNewFloatNullNull() {
+  public void testToString0_thenReturnNewFloatNullNull() {
     // Arrange, Act and Assert
     assertEquals(
         "new float[null[null]]",
@@ -421,36 +335,13 @@ class NewMutiArrayExprDiffblueTest {
    * <p>Method under test: {@link NewMutiArrayExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); then return 'new int[null[null]]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String NewMutiArrayExpr.toString0()"})
-  void testToString0_thenReturnNewIntNullNull() {
+  public void testToString0_thenReturnNewIntNullNull() {
     // Arrange, Act and Assert
     assertEquals(
         "new int[null[null]]",
         Exprs.nNewMutiArray("I", 1, new Value[] {new ArrayExpr()}).toString0());
-  }
-
-  /**
-   * Test {@link NewMutiArrayExpr#toString0()}.
-   *
-   * <ul>
-   *   <li>Then return {@code new long[null[null]]}.
-   * </ul>
-   *
-   * <p>Method under test: {@link NewMutiArrayExpr#toString0()}
-   */
-  @Test
-  @DisplayName("Test toString0(); then return 'new long[null[null]]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String NewMutiArrayExpr.toString0()"})
-  void testToString0_thenReturnNewLongNullNull() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "new long[null[null]]",
-        Exprs.nNewMutiArray("J", 1, new Value[] {new ArrayExpr()}).toString0());
   }
 
   /**
@@ -463,16 +354,13 @@ class NewMutiArrayExprDiffblueTest {
    * <p>Method under test: {@link NewMutiArrayExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); then return 'new [][null[null]]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String NewMutiArrayExpr.toString0()"})
-  void testToString0_thenReturnNewNullNull() {
-    // Arrange
-    Value[] sizes = new Value[] {new ArrayExpr()};
-
-    // Act and Assert
-    assertEquals("new [][null[null]]", new NewMutiArrayExpr("[", 1, sizes).toString0());
+  public void testToString0_thenReturnNewNullNull() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "new [][null[null]]",
+        Exprs.nNewMutiArray("[", 1, new Value[] {new ArrayExpr()}).toString0());
   }
 
   /**
@@ -481,15 +369,15 @@ class NewMutiArrayExprDiffblueTest {
    * <p>Method under test: {@link NewMutiArrayExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String NewMutiArrayExpr.toString0()"})
-  void testToString02() {
+  public void testToString02() {
     // Arrange
-    Value[] sizes = new Value[] {new ArrayExpr()};
+    NewMutiArrayExpr nNewMutiArrayResult =
+        Exprs.nNewMutiArray("Base", 1, new Value[] {new ArrayExpr()});
+    nNewMutiArrayResult.baseType = "";
 
     // Act and Assert
-    assertEquals("new [null[null]]", new NewMutiArrayExpr("", 1, sizes).toString0());
+    assertEquals("new [null[null]]", nNewMutiArrayResult.toString0());
   }
 }

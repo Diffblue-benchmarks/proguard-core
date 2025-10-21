@@ -1,17 +1,16 @@
 package proguard.dexfile.ir.ts;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.IrMethod;
 import proguard.dexfile.ir.expr.ArrayExpr;
 import proguard.dexfile.ir.expr.BinopExpr;
@@ -31,18 +30,16 @@ import proguard.dexfile.reader.Field;
 import proguard.dexfile.reader.MethodHandle;
 import proguard.dexfile.reader.Proto;
 
-class AggTransformerDiffblueTest {
+public class AggTransformerDiffblueTest {
   /**
    * Test MergeResult new {@link MergeResult} (default constructor).
    *
    * <p>Method under test: default or parameterless constructor of {@link MergeResult}
    */
   @Test
-  @DisplayName("Test MergeResult new MergeResult (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MergeResult.<init>()"})
-  void testMergeResultNewMergeResult() {
+  public void testMergeResultNewMergeResult() {
     // Arrange and Act
     MergeResult actualMergeResult = new MergeResult();
 
@@ -58,11 +55,9 @@ class AggTransformerDiffblueTest {
    * <p>Method under test: default or parameterless constructor of {@link ReplaceX}
    */
   @Test
-  @DisplayName("Test ReplaceX new ReplaceX (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ReplaceX.<init>()"})
-  void testReplaceXNewReplaceX() {
+  public void testReplaceXNewReplaceX() {
     // Arrange and Act
     ReplaceX actualReplaceX = new ReplaceX();
 
@@ -77,22 +72,16 @@ class AggTransformerDiffblueTest {
    * <p>Method under test: {@link ReplaceX#onAssign(Local, AssignStmt)}
    */
   @Test
-  @DisplayName("Test ReplaceX onAssign(Local, AssignStmt)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value ReplaceX.onAssign(Local, AssignStmt)"})
-  void testReplaceXOnAssign() {
+  public void testReplaceXOnAssign() {
     // Arrange
     ReplaceX replaceX = new ReplaceX();
     Local v = new Local();
     ArrayExpr left = new ArrayExpr();
-    AssignStmt as = new AssignStmt(ST.LOCAL_START, left, new ArrayExpr());
 
-    // Act
-    Value actualOnAssignResult = replaceX.onAssign(v, as);
-
-    // Assert
-    assertSame(v, actualOnAssignResult);
+    // Act and Assert
+    assertSame(v, replaceX.onAssign(v, new AssignStmt(ST.LOCAL_START, left, new ArrayExpr())));
   }
 
   /**
@@ -106,20 +95,15 @@ class AggTransformerDiffblueTest {
    * <p>Method under test: {@link ReplaceX#onUse(Local)}
    */
   @Test
-  @DisplayName("Test ReplaceX onUse(Local); when Local(); then return Local()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value ReplaceX.onUse(Local)"})
-  void testReplaceXOnUse_whenLocal_thenReturnLocal() {
+  public void testReplaceXOnUse_whenLocal_thenReturnLocal() {
     // Arrange
     ReplaceX replaceX = new ReplaceX();
     Local v = new Local();
 
-    // Act
-    Value actualOnUseResult = replaceX.onUse(v);
-
-    // Assert
-    assertSame(v, actualOnUseResult);
+    // Act and Assert
+    assertSame(v, replaceX.onUse(v));
   }
 
   /**
@@ -133,13 +117,11 @@ class AggTransformerDiffblueTest {
    * <p>Method under test: {@link ReplaceX#onUse(Local)}
    */
   @Test
-  @DisplayName("Test ReplaceX onUse(Local); when 'null'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value ReplaceX.onUse(Local)"})
-  void testReplaceXOnUse_whenNull_thenReturnNull() {
+  public void testReplaceXOnUse_whenNull_thenReturnNull() {
     // Arrange, Act and Assert
-    assertNull(new ReplaceX().onUse(null));
+    assertNull((new ReplaceX()).onUse(null));
   }
 
   /**
@@ -153,12 +135,9 @@ class AggTransformerDiffblueTest {
    * <p>Method under test: {@link AggTransformer#transformReportChanged(IrMethod)}
    */
   @Test
-  @DisplayName(
-      "Test transformReportChanged(IrMethod); given ArrayList() add Local(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AggTransformer.transformReportChanged(IrMethod)"})
-  void testTransformReportChanged_givenArrayListAddLocal_thenReturnFalse() {
+  public void testTransformReportChanged_givenArrayListAddLocal_thenReturnFalse() {
     // Arrange
     AggTransformer aggTransformer = new AggTransformer();
 
@@ -182,12 +161,9 @@ class AggTransformerDiffblueTest {
    * <p>Method under test: {@link AggTransformer#transformReportChanged(IrMethod)}
    */
   @Test
-  @DisplayName(
-      "Test transformReportChanged(IrMethod); when IrMethod (default constructor); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AggTransformer.transformReportChanged(IrMethod)"})
-  void testTransformReportChanged_whenIrMethod_thenReturnFalse() {
+  public void testTransformReportChanged_whenIrMethod_thenReturnFalse() {
     // Arrange
     AggTransformer aggTransformer = new AggTransformer();
 
@@ -201,17 +177,15 @@ class AggTransformerDiffblueTest {
    * <p>Method under test: {@link AggTransformer#isLocationInsensitive(Value)}
    */
   @Test
-  @DisplayName("Test isLocationInsensitive(Value) with 'op'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AggTransformer.isLocationInsensitive(Value)"})
-  void testIsLocationInsensitiveWithOp() {
+  public void testIsLocationInsensitiveWithOp() {
     // Arrange
     ArrayExpr op1 = new ArrayExpr();
-    BinopExpr op = new BinopExpr(VT.ADD, op1, new ArrayExpr(), "Type");
 
     // Act and Assert
-    assertFalse(AggTransformer.isLocationInsensitive(op));
+    assertFalse(
+        AggTransformer.isLocationInsensitive(new BinopExpr(VT.ADD, op1, new ArrayExpr(), "Type")));
   }
 
   /**
@@ -220,17 +194,52 @@ class AggTransformerDiffblueTest {
    * <p>Method under test: {@link AggTransformer#isLocationInsensitive(Value)}
    */
   @Test
-  @DisplayName("Test isLocationInsensitive(Value) with 'op'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AggTransformer.isLocationInsensitive(Value)"})
-  void testIsLocationInsensitiveWithOp2() {
+  public void testIsLocationInsensitiveWithOp2() {
+    // Arrange, Act and Assert
+    assertFalse(
+        AggTransformer.isLocationInsensitive(
+            new CastExpr(new ArrayExpr(), "jane.doe@example.org", "alice.liddell@example.org")));
+  }
+
+  /**
+   * Test {@link AggTransformer#isLocationInsensitive(Value)} with {@code op}.
+   *
+   * <p>Method under test: {@link AggTransformer#isLocationInsensitive(Value)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"boolean AggTransformer.isLocationInsensitive(Value)"})
+  public void testIsLocationInsensitiveWithOp3() {
+    // Arrange, Act and Assert
+    assertFalse(
+        AggTransformer.isLocationInsensitive(
+            new FilledArrayExpr(new Value[] {new ArrayExpr()}, "Type")));
+  }
+
+  /**
+   * Test {@link AggTransformer#isLocationInsensitive(Value)} with {@code op}.
+   *
+   * <p>Method under test: {@link AggTransformer#isLocationInsensitive(Value)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"boolean AggTransformer.isLocationInsensitive(Value)"})
+  public void testIsLocationInsensitiveWithOp4() {
     // Arrange
-    CastExpr op =
-        new CastExpr(new ArrayExpr(), "jane.doe@example.org", "alice.liddell@example.org");
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     // Act and Assert
-    assertFalse(AggTransformer.isLocationInsensitive(op));
+    assertFalse(
+        AggTransformer.isLocationInsensitive(
+            new InvokeCustomExpr(
+                VT.ADD,
+                new Value[] {new ArrayExpr()},
+                "Method Name",
+                proto,
+                new MethodHandle(1, new Field("Owner", "Name", "Type")),
+                new Object[] {Constant.Null})));
   }
 
   /**
@@ -239,61 +248,15 @@ class AggTransformerDiffblueTest {
    * <p>Method under test: {@link AggTransformer#isLocationInsensitive(Value)}
    */
   @Test
-  @DisplayName("Test isLocationInsensitive(Value) with 'op'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AggTransformer.isLocationInsensitive(Value)"})
-  void testIsLocationInsensitiveWithOp3() {
-    // Arrange
-    Value[] datas = new Value[] {new ArrayExpr()};
-    FilledArrayExpr op = new FilledArrayExpr(datas, "Type");
-
-    // Act and Assert
-    assertFalse(AggTransformer.isLocationInsensitive(op));
-  }
-
-  /**
-   * Test {@link AggTransformer#isLocationInsensitive(Value)} with {@code op}.
-   *
-   * <p>Method under test: {@link AggTransformer#isLocationInsensitive(Value)}
-   */
-  @Test
-  @DisplayName("Test isLocationInsensitive(Value) with 'op'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean AggTransformer.isLocationInsensitive(Value)"})
-  void testIsLocationInsensitiveWithOp4() {
-    // Arrange
-    Value[] args = new Value[] {new ArrayExpr()};
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Field field = new Field("Owner", "Name", "Type");
-    MethodHandle handle = new MethodHandle(1, field);
-    Object[] bsmArgs = new Object[] {Constant.Null};
-
-    InvokeCustomExpr op = new InvokeCustomExpr(VT.ADD, args, "Method Name", proto, handle, bsmArgs);
-
-    // Act and Assert
-    assertFalse(AggTransformer.isLocationInsensitive(op));
-  }
-
-  /**
-   * Test {@link AggTransformer#isLocationInsensitive(Value)} with {@code op}.
-   *
-   * <p>Method under test: {@link AggTransformer#isLocationInsensitive(Value)}
-   */
-  @Test
-  @DisplayName("Test isLocationInsensitive(Value) with 'op'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean AggTransformer.isLocationInsensitive(Value)"})
-  void testIsLocationInsensitiveWithOp5() {
+  public void testIsLocationInsensitiveWithOp5() {
     // Arrange
     Constant op1 = Exprs.nNull();
-    BinopExpr op = new BinopExpr(VT.ADD, op1, new ArrayExpr(), "Type");
 
     // Act and Assert
-    assertFalse(AggTransformer.isLocationInsensitive(op));
+    assertFalse(
+        AggTransformer.isLocationInsensitive(new BinopExpr(VT.ADD, op1, new ArrayExpr(), "Type")));
   }
 
   /**
@@ -302,23 +265,22 @@ class AggTransformerDiffblueTest {
    * <p>Method under test: {@link AggTransformer#isLocationInsensitive(Value)}
    */
   @Test
-  @DisplayName("Test isLocationInsensitive(Value) with 'op'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AggTransformer.isLocationInsensitive(Value)"})
-  void testIsLocationInsensitiveWithOp6() {
+  public void testIsLocationInsensitiveWithOp6() {
     // Arrange
-    Value[] args = new Value[] {Exprs.nNull()};
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Field field = new Field("Owner", "Name", "Type");
-    MethodHandle handle = new MethodHandle(1, field);
-    Object[] bsmArgs = new Object[] {Constant.Null};
-
-    InvokeCustomExpr op = new InvokeCustomExpr(VT.ADD, args, "Method Name", proto, handle, bsmArgs);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     // Act and Assert
-    assertTrue(AggTransformer.isLocationInsensitive(op));
+    assertTrue(
+        AggTransformer.isLocationInsensitive(
+            new InvokeCustomExpr(
+                VT.ADD,
+                new Value[] {Exprs.nNull()},
+                "Method Name",
+                proto,
+                new MethodHandle(1, new Field("Owner", "Name", "Type")),
+                new Object[] {Constant.Null})));
   }
 
   /**
@@ -327,17 +289,15 @@ class AggTransformerDiffblueTest {
    * <p>Method under test: {@link AggTransformer#isLocationInsensitive(Value)}
    */
   @Test
-  @DisplayName("Test isLocationInsensitive(Value) with 'op'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AggTransformer.isLocationInsensitive(Value)"})
-  void testIsLocationInsensitiveWithOp7() {
+  public void testIsLocationInsensitiveWithOp7() {
     // Arrange
     Constant op1 = Exprs.nNull();
-    BinopExpr op = new BinopExpr(VT.ADD, op1, Exprs.nNull(), "Type");
 
     // Act and Assert
-    assertTrue(AggTransformer.isLocationInsensitive(op));
+    assertTrue(
+        AggTransformer.isLocationInsensitive(new BinopExpr(VT.ADD, op1, Exprs.nNull(), "Type")));
   }
 
   /**
@@ -351,11 +311,9 @@ class AggTransformerDiffblueTest {
    * <p>Method under test: {@link AggTransformer#isLocationInsensitive(Value)}
    */
   @Test
-  @DisplayName("Test isLocationInsensitive(Value) with 'op'; when ArrayExpr(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AggTransformer.isLocationInsensitive(Value)"})
-  void testIsLocationInsensitiveWithOp_whenArrayExpr_thenReturnFalse() {
+  public void testIsLocationInsensitiveWithOp_whenArrayExpr_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(AggTransformer.isLocationInsensitive(new ArrayExpr()));
   }
@@ -371,11 +329,9 @@ class AggTransformerDiffblueTest {
    * <p>Method under test: {@link AggTransformer#isLocationInsensitive(Value)}
    */
   @Test
-  @DisplayName("Test isLocationInsensitive(Value) with 'op'; when nNull; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AggTransformer.isLocationInsensitive(Value)"})
-  void testIsLocationInsensitiveWithOp_whenNNull_thenReturnTrue() {
+  public void testIsLocationInsensitiveWithOp_whenNNull_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(AggTransformer.isLocationInsensitive(Exprs.nNull()));
   }
@@ -391,11 +347,9 @@ class AggTransformerDiffblueTest {
    * <p>Method under test: {@link AggTransformer#isLocationInsensitive(Value.VT)}
    */
   @Test
-  @DisplayName("Test isLocationInsensitive(VT) with 'vt'; when 'ADD'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AggTransformer.isLocationInsensitive(Value.VT)"})
-  void testIsLocationInsensitiveWithVt_whenAdd_thenReturnTrue() {
+  public void testIsLocationInsensitiveWithVt_whenAdd_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(AggTransformer.isLocationInsensitive(VT.ADD));
   }
@@ -411,11 +365,9 @@ class AggTransformerDiffblueTest {
    * <p>Method under test: {@link AggTransformer#isLocationInsensitive(Value.VT)}
    */
   @Test
-  @DisplayName("Test isLocationInsensitive(VT) with 'vt'; when 'FIELD'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AggTransformer.isLocationInsensitive(Value.VT)"})
-  void testIsLocationInsensitiveWithVt_whenField_thenReturnFalse() {
+  public void testIsLocationInsensitiveWithVt_whenField_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(AggTransformer.isLocationInsensitive(VT.FIELD));
   }

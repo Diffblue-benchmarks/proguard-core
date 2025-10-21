@@ -1,15 +1,14 @@
 package proguard.resources.file.util;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.resources.file.ResourceFilePool;
 
-class FilePoolNameFunctionDiffblueTest {
+public class FilePoolNameFunctionDiffblueTest {
   /**
    * Test {@link FilePoolNameFunction#transform(String)}.
    *
@@ -20,12 +19,10 @@ class FilePoolNameFunctionDiffblueTest {
    * <p>Method under test: {@link FilePoolNameFunction#transform(String)}
    */
   @Test
-  @DisplayName("Test transform(String); then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String FilePoolNameFunction.transform(String)"})
-  void testTransform_thenReturnNull() {
+  public void testTransform_thenReturnNull() {
     // Arrange, Act and Assert
-    assertNull(new FilePoolNameFunction(new ResourceFilePool()).transform("String"));
+    assertNull((new FilePoolNameFunction(new ResourceFilePool())).transform("String"));
   }
 }

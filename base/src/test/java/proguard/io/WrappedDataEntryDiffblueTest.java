@@ -1,18 +1,17 @@
 package proguard.io;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.IOException;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class WrappedDataEntryDiffblueTest {
+public class WrappedDataEntryDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -24,16 +23,14 @@ class WrappedDataEntryDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void WrappedDataEntry.<init>(DataEntry)",
     "java.lang.String WrappedDataEntry.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
-    assertEquals("Name", new WrappedDataEntry(new ClassPathDataEntry("Name")).toString());
+    assertEquals("Name", (new WrappedDataEntry(new ClassPathDataEntry("Name"))).toString());
   }
 
   /**
@@ -47,13 +44,11 @@ class WrappedDataEntryDiffblueTest {
    * <p>Method under test: {@link WrappedDataEntry#getName()}
    */
   @Test
-  @DisplayName("Test getName(); given ClassPathDataEntry(String) with 'Name'; then return 'Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String WrappedDataEntry.getName()"})
-  void testGetName_givenClassPathDataEntryWithName_thenReturnName() {
+  public void testGetName_givenClassPathDataEntryWithName_thenReturnName() {
     // Arrange, Act and Assert
-    assertEquals("Name", new WrappedDataEntry(new ClassPathDataEntry("Name")).getName());
+    assertEquals("Name", (new WrappedDataEntry(new ClassPathDataEntry("Name"))).getName());
   }
 
   /**
@@ -67,17 +62,13 @@ class WrappedDataEntryDiffblueTest {
    * <p>Method under test: {@link WrappedDataEntry#getName()}
    */
   @Test
-  @DisplayName(
-      "Test getName(); given WrappedDataEntry(DataEntry) with wrappedEntry is WrappedDataEntry(DataEntry)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String WrappedDataEntry.getName()"})
-  void testGetName_givenWrappedDataEntryWithWrappedEntryIsWrappedDataEntry() {
-    // Arrange
-    WrappedDataEntry wrappedEntry = new WrappedDataEntry(new ClassPathDataEntry("Name"));
-
-    // Act and Assert
-    assertEquals("Name", new WrappedDataEntry(wrappedEntry).getName());
+  public void testGetName_givenWrappedDataEntryWithWrappedEntryIsWrappedDataEntry() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "Name",
+        (new WrappedDataEntry(new WrappedDataEntry(new ClassPathDataEntry("Name")))).getName());
   }
 
   /**
@@ -86,16 +77,14 @@ class WrappedDataEntryDiffblueTest {
    * <p>Method under test: {@link WrappedDataEntry#getOriginalName()}
    */
   @Test
-  @DisplayName("Test getOriginalName()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String WrappedDataEntry.getOriginalName()"})
-  void testGetOriginalName() {
-    // Arrange
-    RenamedDataEntry wrappedEntry = new RenamedDataEntry(new ClassPathDataEntry("Name"), "Name");
-
-    // Act and Assert
-    assertEquals("Name", new WrappedDataEntry(wrappedEntry).getOriginalName());
+  public void testGetOriginalName() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "Name",
+        (new WrappedDataEntry(new RenamedDataEntry(new ClassPathDataEntry("Name"), "Name")))
+            .getOriginalName());
   }
 
   /**
@@ -109,14 +98,11 @@ class WrappedDataEntryDiffblueTest {
    * <p>Method under test: {@link WrappedDataEntry#getOriginalName()}
    */
   @Test
-  @DisplayName(
-      "Test getOriginalName(); given WrappedDataEntry(DataEntry) with wrappedEntry is ClassPathDataEntry(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String WrappedDataEntry.getOriginalName()"})
-  void testGetOriginalName_givenWrappedDataEntryWithWrappedEntryIsClassPathDataEntry() {
+  public void testGetOriginalName_givenWrappedDataEntryWithWrappedEntryIsClassPathDataEntry() {
     // Arrange, Act and Assert
-    assertEquals("Name", new WrappedDataEntry(new ClassPathDataEntry("Name")).getOriginalName());
+    assertEquals("Name", (new WrappedDataEntry(new ClassPathDataEntry("Name"))).getOriginalName());
   }
 
   /**
@@ -130,17 +116,14 @@ class WrappedDataEntryDiffblueTest {
    * <p>Method under test: {@link WrappedDataEntry#getSize()}
    */
   @Test
-  @DisplayName(
-      "Test getSize(); given RenamedDataEntry(DataEntry, String) with dataEntry is ClassPathDataEntry(String) and 'Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"long WrappedDataEntry.getSize()"})
-  void testGetSize_givenRenamedDataEntryWithDataEntryIsClassPathDataEntryAndName() {
-    // Arrange
-    RenamedDataEntry wrappedEntry = new RenamedDataEntry(new ClassPathDataEntry("Name"), "Name");
-
-    // Act and Assert
-    assertEquals(-1L, new WrappedDataEntry(wrappedEntry).getSize());
+  public void testGetSize_givenRenamedDataEntryWithDataEntryIsClassPathDataEntryAndName() {
+    // Arrange, Act and Assert
+    assertEquals(
+        -1L,
+        (new WrappedDataEntry(new RenamedDataEntry(new ClassPathDataEntry("Name"), "Name")))
+            .getSize());
   }
 
   /**
@@ -154,14 +137,11 @@ class WrappedDataEntryDiffblueTest {
    * <p>Method under test: {@link WrappedDataEntry#getSize()}
    */
   @Test
-  @DisplayName(
-      "Test getSize(); given WrappedDataEntry(DataEntry) with wrappedEntry is ClassPathDataEntry(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"long WrappedDataEntry.getSize()"})
-  void testGetSize_givenWrappedDataEntryWithWrappedEntryIsClassPathDataEntry() {
+  public void testGetSize_givenWrappedDataEntryWithWrappedEntryIsClassPathDataEntry() {
     // Arrange, Act and Assert
-    assertEquals(-1L, new WrappedDataEntry(new ClassPathDataEntry("Name")).getSize());
+    assertEquals(-1L, (new WrappedDataEntry(new ClassPathDataEntry("Name"))).getSize());
   }
 
   /**
@@ -175,17 +155,13 @@ class WrappedDataEntryDiffblueTest {
    * <p>Method under test: {@link WrappedDataEntry#isDirectory()}
    */
   @Test
-  @DisplayName(
-      "Test isDirectory(); given RenamedDataEntry(DataEntry, String) with dataEntry is ClassPathDataEntry(String) and 'Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean WrappedDataEntry.isDirectory()"})
-  void testIsDirectory_givenRenamedDataEntryWithDataEntryIsClassPathDataEntryAndName() {
-    // Arrange
-    RenamedDataEntry wrappedEntry = new RenamedDataEntry(new ClassPathDataEntry("Name"), "Name");
-
-    // Act and Assert
-    assertFalse(new WrappedDataEntry(wrappedEntry).isDirectory());
+  public void testIsDirectory_givenRenamedDataEntryWithDataEntryIsClassPathDataEntryAndName() {
+    // Arrange, Act and Assert
+    assertFalse(
+        (new WrappedDataEntry(new RenamedDataEntry(new ClassPathDataEntry("Name"), "Name")))
+            .isDirectory());
   }
 
   /**
@@ -199,14 +175,11 @@ class WrappedDataEntryDiffblueTest {
    * <p>Method under test: {@link WrappedDataEntry#isDirectory()}
    */
   @Test
-  @DisplayName(
-      "Test isDirectory(); given WrappedDataEntry(DataEntry) with wrappedEntry is ClassPathDataEntry(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean WrappedDataEntry.isDirectory()"})
-  void testIsDirectory_givenWrappedDataEntryWithWrappedEntryIsClassPathDataEntry() {
+  public void testIsDirectory_givenWrappedDataEntryWithWrappedEntryIsClassPathDataEntry() {
     // Arrange, Act and Assert
-    assertFalse(new WrappedDataEntry(new ClassPathDataEntry("Name")).isDirectory());
+    assertFalse((new WrappedDataEntry(new ClassPathDataEntry("Name"))).isDirectory());
   }
 
   /**
@@ -219,17 +192,13 @@ class WrappedDataEntryDiffblueTest {
    * <p>Method under test: {@link WrappedDataEntry#isDirectory()}
    */
   @Test
-  @DisplayName("Test isDirectory(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean WrappedDataEntry.isDirectory()"})
-  void testIsDirectory_thenReturnTrue() {
-    // Arrange
-    DummyDataEntry wrappedEntry =
-        new DummyDataEntry(new ClassPathDataEntry("Name"), "Name", 3L, true);
-
-    // Act and Assert
-    assertTrue(new WrappedDataEntry(wrappedEntry).isDirectory());
+  public void testIsDirectory_thenReturnTrue() {
+    // Arrange, Act and Assert
+    assertTrue(
+        (new WrappedDataEntry(new DummyDataEntry(new ClassPathDataEntry("Name"), "Name", 3L, true)))
+            .isDirectory());
   }
 
   /**
@@ -243,18 +212,14 @@ class WrappedDataEntryDiffblueTest {
    * <p>Method under test: {@link WrappedDataEntry#getInputStream()}
    */
   @Test
-  @DisplayName(
-      "Test getInputStream(); given RenamedDataEntry(DataEntry, String) with dataEntry is ClassPathDataEntry(String) and 'Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.io.InputStream WrappedDataEntry.getInputStream()"})
-  void testGetInputStream_givenRenamedDataEntryWithDataEntryIsClassPathDataEntryAndName()
+  public void testGetInputStream_givenRenamedDataEntryWithDataEntryIsClassPathDataEntryAndName()
       throws IOException {
-    // Arrange
-    RenamedDataEntry wrappedEntry = new RenamedDataEntry(new ClassPathDataEntry("Name"), "Name");
-
-    // Act and Assert
-    assertNull(new WrappedDataEntry(wrappedEntry).getInputStream());
+    // Arrange, Act and Assert
+    assertNull(
+        (new WrappedDataEntry(new RenamedDataEntry(new ClassPathDataEntry("Name"), "Name")))
+            .getInputStream());
   }
 
   /**
@@ -268,15 +233,12 @@ class WrappedDataEntryDiffblueTest {
    * <p>Method under test: {@link WrappedDataEntry#getInputStream()}
    */
   @Test
-  @DisplayName(
-      "Test getInputStream(); given WrappedDataEntry(DataEntry) with wrappedEntry is ClassPathDataEntry(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.io.InputStream WrappedDataEntry.getInputStream()"})
-  void testGetInputStream_givenWrappedDataEntryWithWrappedEntryIsClassPathDataEntry()
+  public void testGetInputStream_givenWrappedDataEntryWithWrappedEntryIsClassPathDataEntry()
       throws IOException {
     // Arrange, Act and Assert
-    assertNull(new WrappedDataEntry(new ClassPathDataEntry("Name")).getInputStream());
+    assertNull((new WrappedDataEntry(new ClassPathDataEntry("Name"))).getInputStream());
   }
 
   /**
@@ -290,17 +252,13 @@ class WrappedDataEntryDiffblueTest {
    * <p>Method under test: {@link WrappedDataEntry#getParent()}
    */
   @Test
-  @DisplayName(
-      "Test getParent(); given RenamedDataEntry(DataEntry, String) with dataEntry is ClassPathDataEntry(String) and 'Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DataEntry WrappedDataEntry.getParent()"})
-  void testGetParent_givenRenamedDataEntryWithDataEntryIsClassPathDataEntryAndName() {
-    // Arrange
-    RenamedDataEntry wrappedEntry = new RenamedDataEntry(new ClassPathDataEntry("Name"), "Name");
-
-    // Act and Assert
-    assertNull(new WrappedDataEntry(wrappedEntry).getParent());
+  public void testGetParent_givenRenamedDataEntryWithDataEntryIsClassPathDataEntryAndName() {
+    // Arrange, Act and Assert
+    assertNull(
+        (new WrappedDataEntry(new RenamedDataEntry(new ClassPathDataEntry("Name"), "Name")))
+            .getParent());
   }
 
   /**
@@ -314,13 +272,10 @@ class WrappedDataEntryDiffblueTest {
    * <p>Method under test: {@link WrappedDataEntry#getParent()}
    */
   @Test
-  @DisplayName(
-      "Test getParent(); given WrappedDataEntry(DataEntry) with wrappedEntry is ClassPathDataEntry(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DataEntry WrappedDataEntry.getParent()"})
-  void testGetParent_givenWrappedDataEntryWithWrappedEntryIsClassPathDataEntry() {
+  public void testGetParent_givenWrappedDataEntryWithWrappedEntryIsClassPathDataEntry() {
     // Arrange, Act and Assert
-    assertNull(new WrappedDataEntry(new ClassPathDataEntry("Name")).getParent());
+    assertNull((new WrappedDataEntry(new ClassPathDataEntry("Name"))).getParent());
   }
 }

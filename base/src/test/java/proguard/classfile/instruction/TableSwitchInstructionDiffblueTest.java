@@ -1,20 +1,19 @@
 package proguard.classfile.instruction;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class TableSwitchInstructionDiffblueTest {
+public class TableSwitchInstructionDiffblueTest {
   /**
    * Test {@link TableSwitchInstruction#TableSwitchInstruction()}.
    *
@@ -25,14 +24,12 @@ class TableSwitchInstructionDiffblueTest {
    * <p>Method under test: {@link TableSwitchInstruction#TableSwitchInstruction()}
    */
   @Test
-  @DisplayName("Test new TableSwitchInstruction(); then return Name is 'nop'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void TableSwitchInstruction.<init>()",
     "void TableSwitchInstruction.<init>(byte, int, int, int, int[])"
   })
-  void testNewTableSwitchInstruction_thenReturnNameIsNop() {
+  public void testNewTableSwitchInstruction_thenReturnNameIsNop() {
     // Arrange and Act
     TableSwitchInstruction actualTableSwitchInstruction = new TableSwitchInstruction();
 
@@ -59,15 +56,12 @@ class TableSwitchInstructionDiffblueTest {
    * int[])}
    */
   @Test
-  @DisplayName(
-      "Test new TableSwitchInstruction(byte, int, int, int, int[]); when 'A'; then return Name is 'lstore_2'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void TableSwitchInstruction.<init>()",
     "void TableSwitchInstruction.<init>(byte, int, int, int, int[])"
   })
-  void testNewTableSwitchInstruction_whenA_thenReturnNameIsLstore2() {
+  public void testNewTableSwitchInstruction_whenA_thenReturnNameIsLstore2() {
     // Arrange and Act
     TableSwitchInstruction actualTableSwitchInstruction =
         new TableSwitchInstruction((byte) 'A', 1, 1, 1, new int[] {1, 0, 1, 0});
@@ -94,21 +88,14 @@ class TableSwitchInstructionDiffblueTest {
    * <p>Method under test: {@link TableSwitchInstruction#copy(TableSwitchInstruction)}
    */
   @Test
-  @DisplayName(
-      "Test copy(TableSwitchInstruction) with 'tableSwitchInstruction'; then return TableSwitchInstruction()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"TableSwitchInstruction TableSwitchInstruction.copy(TableSwitchInstruction)"})
-  void testCopyWithTableSwitchInstruction_thenReturnTableSwitchInstruction() {
+  public void testCopyWithTableSwitchInstruction_thenReturnTableSwitchInstruction() {
     // Arrange
     TableSwitchInstruction tableSwitchInstruction = new TableSwitchInstruction();
 
-    // Act
-    TableSwitchInstruction actualCopyResult =
-        tableSwitchInstruction.copy(new TableSwitchInstruction());
-
-    // Assert
-    assertSame(tableSwitchInstruction, actualCopyResult);
+    // Act and Assert
+    assertSame(tableSwitchInstruction, tableSwitchInstruction.copy(new TableSwitchInstruction()));
   }
 
   /**
@@ -117,19 +104,14 @@ class TableSwitchInstructionDiffblueTest {
    * <p>Method under test: {@link TableSwitchInstruction#shrink()}
    */
   @Test
-  @DisplayName("Test shrink()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction TableSwitchInstruction.shrink()"})
-  void testShrink() {
+  public void testShrink() {
     // Arrange
     TableSwitchInstruction tableSwitchInstruction = new TableSwitchInstruction();
 
-    // Act
-    Instruction actualShrinkResult = tableSwitchInstruction.shrink();
-
-    // Assert
-    assertSame(tableSwitchInstruction, actualShrinkResult);
+    // Act and Assert
+    assertSame(tableSwitchInstruction, tableSwitchInstruction.shrink());
   }
 
   /**
@@ -144,12 +126,9 @@ class TableSwitchInstructionDiffblueTest {
    * <p>Method under test: {@link TableSwitchInstruction#readInfo(byte[], int)}
    */
   @Test
-  @DisplayName(
-      "Test readInfo(byte[], int); when 'A'; then TableSwitchInstruction() defaultOffset is '1090732291'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TableSwitchInstruction.readInfo(byte[], int)"})
-  void testReadInfo_whenA_thenTableSwitchInstructionDefaultOffsetIs1090732291() {
+  public void testReadInfo_whenA_thenTableSwitchInstructionDefaultOffsetIs1090732291() {
     // Arrange
     TableSwitchInstruction tableSwitchInstruction = new TableSwitchInstruction();
 
@@ -193,21 +172,13 @@ class TableSwitchInstructionDiffblueTest {
   /**
    * Test {@link TableSwitchInstruction#writeInfo(byte[], int)}.
    *
-   * <ul>
-   *   <li>Then array of {@code byte} with {@code A} and {@link Instruction#OP_ICONST_0}.
-   * </ul>
-   *
    * <p>Method under test: {@link TableSwitchInstruction#writeInfo(byte[], int)}
    */
   @Test
-  @DisplayName("Test writeInfo(byte[], int); then array of byte with 'A' and OP_ICONST_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TableSwitchInstruction.writeInfo(byte[], int)"})
-  void testWriteInfo_thenArrayOfByteWithAAndOp_iconst_0() {
+  public void testWriteInfo() {
     // Arrange
-    TableSwitchInstruction tableSwitchInstruction =
-        new TableSwitchInstruction((byte) 'A', 3, 255, 3, new int[] {3, 2, 3, 2});
     byte[] code =
         new byte[] {
           'A',
@@ -229,7 +200,7 @@ class TableSwitchInstructionDiffblueTest {
         };
 
     // Act
-    tableSwitchInstruction.writeInfo(code, 2);
+    (new TableSwitchInstruction((byte) 'A', 3, 255, 3, new int[] {3, 2, 3, 2})).writeInfo(code, 2);
 
     // Assert
     assertArrayEquals(
@@ -258,24 +229,26 @@ class TableSwitchInstructionDiffblueTest {
    * Test {@link TableSwitchInstruction#writeInfo(byte[], int)}.
    *
    * <ul>
-   *   <li>Then array of {@code byte} with {@code A} and {@link Instruction#OP_ICONST_0} is array of
-   *       {@code byte} with {@link Instruction#OP_NOP} and {@link Instruction#OP_NOP}.
+   *   <li>Then array of {@code byte} with {@code A} and {@link Instruction#OP_ICONST_0}.
    * </ul>
    *
    * <p>Method under test: {@link TableSwitchInstruction#writeInfo(byte[], int)}
    */
   @Test
-  @DisplayName(
-      "Test writeInfo(byte[], int); then array of byte with 'A' and OP_ICONST_0 is array of byte with OP_NOP and OP_NOP")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TableSwitchInstruction.writeInfo(byte[], int)"})
-  void testWriteInfo_thenArrayOfByteWithAAndOp_iconst_0IsArrayOfByteWithOp_nopAndOp_nop() {
+  public void testWriteInfo_thenArrayOfByteWithAAndOp_iconst_0() {
     // Arrange
-    TableSwitchInstruction tableSwitchInstruction =
-        new TableSwitchInstruction((byte) 'A', 3, 3, 3, new int[] {3, 2, 3, 2});
     byte[] code =
         new byte[] {
+          'A',
+          Instruction.OP_ICONST_0,
+          'A',
+          Instruction.OP_ICONST_0,
+          'A',
+          Instruction.OP_ICONST_0,
+          'A',
+          Instruction.OP_ICONST_0,
           'A',
           Instruction.OP_ICONST_0,
           'A',
@@ -295,11 +268,15 @@ class TableSwitchInstructionDiffblueTest {
         };
 
     // Act
-    tableSwitchInstruction.writeInfo(code, 0);
+    (new TableSwitchInstruction((byte) 'A', 3, 3, 3, new int[] {3, 2, 3, 2})).writeInfo(code, 2);
 
     // Assert
     assertArrayEquals(
         new byte[] {
+          'A',
+          Instruction.OP_ICONST_0,
+          Instruction.OP_NOP,
+          Instruction.OP_NOP,
           Instruction.OP_NOP,
           Instruction.OP_NOP,
           Instruction.OP_NOP,
@@ -315,6 +292,10 @@ class TableSwitchInstructionDiffblueTest {
           Instruction.OP_NOP,
           Instruction.OP_NOP,
           Instruction.OP_NOP,
+          Instruction.OP_ICONST_0,
+          'A',
+          Instruction.OP_ICONST_0,
+          'A',
           Instruction.OP_ICONST_0
         },
         code);
@@ -326,13 +307,11 @@ class TableSwitchInstructionDiffblueTest {
    * <p>Method under test: {@link TableSwitchInstruction#length(int)}
    */
   @Test
-  @DisplayName("Test length(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int TableSwitchInstruction.length(int)"})
-  void testLength() {
+  public void testLength() {
     // Arrange, Act and Assert
-    assertEquals(18, new TableSwitchInstruction().length(2));
+    assertEquals(18, (new TableSwitchInstruction()).length(2));
   }
 
   /**
@@ -352,21 +331,20 @@ class TableSwitchInstructionDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean TableSwitchInstruction.equals(Object)",
     "int TableSwitchInstruction.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     TableSwitchInstruction tableSwitchInstruction = new TableSwitchInstruction();
     TableSwitchInstruction tableSwitchInstruction2 = new TableSwitchInstruction();
 
     // Act and Assert
     assertEquals(tableSwitchInstruction, tableSwitchInstruction2);
-    assertEquals(tableSwitchInstruction.hashCode(), tableSwitchInstruction2.hashCode());
+    int expectedHashCodeResult = tableSwitchInstruction.hashCode();
+    assertEquals(expectedHashCodeResult, tableSwitchInstruction2.hashCode());
   }
 
   /**
@@ -386,14 +364,12 @@ class TableSwitchInstructionDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean TableSwitchInstruction.equals(Object)",
     "int TableSwitchInstruction.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     TableSwitchInstruction tableSwitchInstruction = new TableSwitchInstruction();
 
@@ -414,78 +390,18 @@ class TableSwitchInstructionDiffblueTest {
    * <p>Method under test: {@link TableSwitchInstruction#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean TableSwitchInstruction.equals(Object)",
     "int TableSwitchInstruction.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     TableSwitchInstruction tableSwitchInstruction =
         new TableSwitchInstruction((byte) 'A', 1, 1, 1, new int[] {1, 0, 1, 0});
 
     // Act and Assert
     assertNotEquals(tableSwitchInstruction, new TableSwitchInstruction());
-  }
-
-  /**
-   * Test {@link TableSwitchInstruction#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link TableSwitchInstruction#equals(Object)}
-   */
-  @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "boolean TableSwitchInstruction.equals(Object)",
-    "int TableSwitchInstruction.hashCode()"
-  })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
-    // Arrange
-    TableSwitchInstruction tableSwitchInstruction =
-        new TableSwitchInstruction((byte) 'A', 1, 0, 1, new int[] {1, 0, 1, 0});
-
-    // Act and Assert
-    assertNotEquals(
-        tableSwitchInstruction,
-        new TableSwitchInstruction((byte) 'A', 1, 1, 1, new int[] {1, 0, 1, 0}));
-  }
-
-  /**
-   * Test {@link TableSwitchInstruction#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link TableSwitchInstruction#equals(Object)}
-   */
-  @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "boolean TableSwitchInstruction.equals(Object)",
-    "int TableSwitchInstruction.hashCode()"
-  })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
-    // Arrange
-    TableSwitchInstruction tableSwitchInstruction =
-        new TableSwitchInstruction((byte) 'A', 1, 1, 0, new int[] {1, 0, 1, 0});
-
-    // Act and Assert
-    assertNotEquals(
-        tableSwitchInstruction,
-        new TableSwitchInstruction((byte) 'A', 1, 1, 1, new int[] {1, 0, 1, 0}));
   }
 
   /**
@@ -499,14 +415,12 @@ class TableSwitchInstructionDiffblueTest {
    * <p>Method under test: {@link TableSwitchInstruction#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean TableSwitchInstruction.equals(Object)",
     "int TableSwitchInstruction.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new TableSwitchInstruction(), null);
   }
@@ -522,14 +436,12 @@ class TableSwitchInstructionDiffblueTest {
    * <p>Method under test: {@link TableSwitchInstruction#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean TableSwitchInstruction.equals(Object)",
     "int TableSwitchInstruction.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new TableSwitchInstruction(), "Different type to TableSwitchInstruction");
   }

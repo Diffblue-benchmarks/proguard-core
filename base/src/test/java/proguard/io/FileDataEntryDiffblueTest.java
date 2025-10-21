@@ -1,20 +1,17 @@
 package proguard.io;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.File;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class FileDataEntryDiffblueTest {
+public class FileDataEntryDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -27,16 +24,14 @@ class FileDataEntryDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void FileDataEntry.<init>(File)",
     "void FileDataEntry.<init>(File, File)",
     "proguard.io.DataEntry FileDataEntry.getParent()",
     "String FileDataEntry.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     FileDataEntry actualFileDataEntry =
         new FileDataEntry(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
@@ -59,21 +54,21 @@ class FileDataEntryDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void FileDataEntry.<init>(File)",
     "void FileDataEntry.<init>(File, File)",
     "proguard.io.DataEntry FileDataEntry.getParent()",
     "String FileDataEntry.toString()"
   })
-  void testGettersAndSetters2() {
-    // Arrange and Act
+  public void testGettersAndSetters2() {
+    // Arrange
+    File directory = Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile();
+
+    // Act
     FileDataEntry actualFileDataEntry =
         new FileDataEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(),
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
+            directory, Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
     String actualToStringResult = actualFileDataEntry.toString();
 
     // Assert
@@ -87,20 +82,18 @@ class FileDataEntryDiffblueTest {
    * <p>Method under test: {@link FileDataEntry#getFile()}
    */
   @Test
-  @DisplayName("Test getFile()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"File FileDataEntry.getFile()"})
-  void testGetFile() {
+  public void testGetFile() {
     // Arrange
     Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile();
-    FileDataEntry fileDataEntry =
-        new FileDataEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(),
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
+    File directory = Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile();
 
     // Act
-    File actualFile = fileDataEntry.getFile();
+    File actualFile =
+        (new FileDataEntry(
+                directory, Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile()))
+            .getFile();
 
     // Assert
     assertEquals("test.txt", actualFile.getName());
@@ -118,15 +111,12 @@ class FileDataEntryDiffblueTest {
    * <p>Method under test: {@link FileDataEntry#getFile()}
    */
   @Test
-  @DisplayName(
-      "Test getFile(); given FileDataEntry(File) with file is Property is 'java.io.tmpdir' is 'test.txt' toFile")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"File FileDataEntry.getFile()"})
-  void testGetFile_givenFileDataEntryWithFileIsPropertyIsJavaIoTmpdirIsTestTxtToFile() {
+  public void testGetFile_givenFileDataEntryWithFileIsPropertyIsJavaIoTmpdirIsTestTxtToFile() {
     // Arrange and Act
     File actualFile =
-        new FileDataEntry(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile())
+        (new FileDataEntry(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile()))
             .getFile();
 
     // Assert
@@ -144,20 +134,18 @@ class FileDataEntryDiffblueTest {
    * <p>Method under test: {@link FileDataEntry#getFile()}
    */
   @Test
-  @DisplayName("Test getFile(); then return Name is '.txt'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"File FileDataEntry.getFile()"})
-  void testGetFile_thenReturnNameIsTxt() {
+  public void testGetFile_thenReturnNameIsTxt() {
     // Arrange
     Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile();
-    FileDataEntry fileDataEntry =
-        new FileDataEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "foo").toFile(),
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
+    File directory = Paths.get(System.getProperty("java.io.tmpdir"), "foo").toFile();
 
     // Act
-    File actualFile = fileDataEntry.getFile();
+    File actualFile =
+        (new FileDataEntry(
+                directory, Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile()))
+            .getFile();
 
     // Assert
     assertEquals(".txt", actualFile.getName());
@@ -170,20 +158,19 @@ class FileDataEntryDiffblueTest {
    * <p>Method under test: {@link FileDataEntry#getName()}
    */
   @Test
-  @DisplayName("Test getName()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String FileDataEntry.getName()"})
-  void testGetName() {
+  public void testGetName() {
     // Arrange
     Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile();
-    FileDataEntry fileDataEntry =
-        new FileDataEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(),
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
+    File directory = Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile();
 
     // Act and Assert
-    assertEquals("test.txt", fileDataEntry.getName());
+    assertEquals(
+        "test.txt",
+        (new FileDataEntry(
+                directory, Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile()))
+            .getName());
   }
 
   /**
@@ -197,16 +184,13 @@ class FileDataEntryDiffblueTest {
    * <p>Method under test: {@link FileDataEntry#getName()}
    */
   @Test
-  @DisplayName(
-      "Test getName(); given FileDataEntry(File) with file is Property is 'java.io.tmpdir' is 'test.txt' toFile")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String FileDataEntry.getName()"})
-  void testGetName_givenFileDataEntryWithFileIsPropertyIsJavaIoTmpdirIsTestTxtToFile() {
+  public void testGetName_givenFileDataEntryWithFileIsPropertyIsJavaIoTmpdirIsTestTxtToFile() {
     // Arrange, Act and Assert
     assertEquals(
         "test.txt",
-        new FileDataEntry(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile())
+        (new FileDataEntry(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile()))
             .getName());
   }
 
@@ -220,20 +204,19 @@ class FileDataEntryDiffblueTest {
    * <p>Method under test: {@link FileDataEntry#getName()}
    */
   @Test
-  @DisplayName("Test getName(); then return '.txt'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String FileDataEntry.getName()"})
-  void testGetName_thenReturnTxt() {
+  public void testGetName_thenReturnTxt() {
     // Arrange
     Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile();
-    FileDataEntry fileDataEntry =
-        new FileDataEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "foo").toFile(),
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
+    File directory = Paths.get(System.getProperty("java.io.tmpdir"), "foo").toFile();
 
     // Act and Assert
-    assertEquals(".txt", fileDataEntry.getName());
+    assertEquals(
+        ".txt",
+        (new FileDataEntry(
+                directory, Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile()))
+            .getName());
   }
 
   /**
@@ -242,15 +225,13 @@ class FileDataEntryDiffblueTest {
    * <p>Method under test: {@link FileDataEntry#getOriginalName()}
    */
   @Test
-  @DisplayName("Test getOriginalName()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String FileDataEntry.getOriginalName()"})
-  void testGetOriginalName() {
+  public void testGetOriginalName() {
     // Arrange, Act and Assert
     assertEquals(
         "test.txt",
-        new FileDataEntry(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile())
+        (new FileDataEntry(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile()))
             .getOriginalName());
   }
 
@@ -260,20 +241,19 @@ class FileDataEntryDiffblueTest {
    * <p>Method under test: {@link FileDataEntry#getOriginalName()}
    */
   @Test
-  @DisplayName("Test getOriginalName()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String FileDataEntry.getOriginalName()"})
-  void testGetOriginalName2() {
+  public void testGetOriginalName2() {
     // Arrange
     Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile();
-    FileDataEntry fileDataEntry =
-        new FileDataEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(),
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
+    File directory = Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile();
 
     // Act and Assert
-    assertEquals("test.txt", fileDataEntry.getOriginalName());
+    assertEquals(
+        "test.txt",
+        (new FileDataEntry(
+                directory, Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile()))
+            .getOriginalName());
   }
 
   /**
@@ -286,42 +266,19 @@ class FileDataEntryDiffblueTest {
    * <p>Method under test: {@link FileDataEntry#getOriginalName()}
    */
   @Test
-  @DisplayName("Test getOriginalName(); then return '.txt'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String FileDataEntry.getOriginalName()"})
-  void testGetOriginalName_thenReturnTxt() {
+  public void testGetOriginalName_thenReturnTxt() {
     // Arrange
     Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile();
-    FileDataEntry fileDataEntry =
-        new FileDataEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "foo").toFile(),
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
+    File directory = Paths.get(System.getProperty("java.io.tmpdir"), "foo").toFile();
 
     // Act and Assert
-    assertEquals(".txt", fileDataEntry.getOriginalName());
-  }
-
-  /**
-   * Test {@link FileDataEntry#isDirectory()}.
-   *
-   * <ul>
-   *   <li>Then return {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link FileDataEntry#isDirectory()}
-   */
-  @Test
-  @DisplayName("Test isDirectory(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean FileDataEntry.isDirectory()"})
-  void testIsDirectory_thenReturnFalse() {
-    // Arrange
-    Path getResult = Paths.get(System.getProperty("java.io.tmpdir"), "42", "42", "foo");
-
-    // Act and Assert
-    assertFalse(new FileDataEntry(getResult.toFile()).isDirectory());
+    assertEquals(
+        ".txt",
+        (new FileDataEntry(
+                directory, Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile()))
+            .getOriginalName());
   }
 
   /**
@@ -334,14 +291,12 @@ class FileDataEntryDiffblueTest {
    * <p>Method under test: {@link FileDataEntry#isDirectory()}
    */
   @Test
-  @DisplayName("Test isDirectory(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FileDataEntry.isDirectory()"})
-  void testIsDirectory_thenReturnTrue() {
+  public void testIsDirectory_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(
-        new FileDataEntry(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile())
+        (new FileDataEntry(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile()))
             .isDirectory());
   }
 }

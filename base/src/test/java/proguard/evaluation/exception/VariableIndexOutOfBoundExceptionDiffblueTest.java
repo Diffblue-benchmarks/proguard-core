@@ -1,17 +1,16 @@
 package proguard.evaluation.exception;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class VariableIndexOutOfBoundExceptionDiffblueTest {
+public class VariableIndexOutOfBoundExceptionDiffblueTest {
   /**
    * Test {@link VariableIndexOutOfBoundException#VariableIndexOutOfBoundException(int, int)}.
    *
@@ -19,11 +18,9 @@ class VariableIndexOutOfBoundExceptionDiffblueTest {
    * VariableIndexOutOfBoundException#VariableIndexOutOfBoundException(int, int)}
    */
   @Test
-  @DisplayName("Test new VariableIndexOutOfBoundException(int, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableIndexOutOfBoundException.<init>(int, int)"})
-  void testNewVariableIndexOutOfBoundException() {
+  public void testNewVariableIndexOutOfBoundException() {
     // Arrange and Act
     VariableIndexOutOfBoundException actualVariableIndexOutOfBoundException =
         new VariableIndexOutOfBoundException(1, 1);
@@ -51,12 +48,10 @@ class VariableIndexOutOfBoundExceptionDiffblueTest {
    * <p>Method under test: {@link VariableIndexOutOfBoundException#getBound()}
    */
   @Test
-  @DisplayName("Test getBound()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int VariableIndexOutOfBoundException.getBound()"})
-  void testGetBound() {
+  public void testGetBound() {
     // Arrange, Act and Assert
-    assertEquals(1, new VariableIndexOutOfBoundException(1, 1).getBound());
+    assertEquals(1, (new VariableIndexOutOfBoundException(1, 1)).getBound());
   }
 }

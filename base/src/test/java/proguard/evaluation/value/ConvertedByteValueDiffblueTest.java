@@ -1,15 +1,14 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ConvertedByteValueDiffblueTest {
+public class ConvertedByteValueDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -21,17 +20,16 @@ class ConvertedByteValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ConvertedByteValue.<init>(IntegerValue)",
     "java.lang.String ConvertedByteValue.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
     assertEquals(
-        "(byte)(b)", new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).toString());
+        "(byte)(b)",
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).toString());
   }
 
   /**
@@ -50,14 +48,12 @@ class ConvertedByteValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean ConvertedByteValue.equals(Object)",
     "int ConvertedByteValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -66,7 +62,8 @@ class ConvertedByteValueDiffblueTest {
 
     // Act and Assert
     assertEquals(convertedByteValue, convertedByteValue2);
-    assertEquals(convertedByteValue.hashCode(), convertedByteValue2.hashCode());
+    int expectedHashCodeResult = convertedByteValue.hashCode();
+    assertEquals(expectedHashCodeResult, convertedByteValue2.hashCode());
   }
 
   /**
@@ -85,14 +82,12 @@ class ConvertedByteValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean ConvertedByteValue.equals(Object)",
     "int ConvertedByteValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -114,14 +109,12 @@ class ConvertedByteValueDiffblueTest {
    * <p>Method under test: {@link ConvertedByteValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean ConvertedByteValue.equals(Object)",
     "int ConvertedByteValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_CHAR);
@@ -142,14 +135,12 @@ class ConvertedByteValueDiffblueTest {
    * <p>Method under test: {@link ConvertedByteValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean ConvertedByteValue.equals(Object)",
     "int ConvertedByteValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
@@ -170,14 +161,12 @@ class ConvertedByteValueDiffblueTest {
    * <p>Method under test: {@link ConvertedByteValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean ConvertedByteValue.equals(Object)",
     "int ConvertedByteValue.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE), null);
   }
@@ -193,14 +182,12 @@ class ConvertedByteValueDiffblueTest {
    * <p>Method under test: {@link ConvertedByteValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean ConvertedByteValue.equals(Object)",
     "int ConvertedByteValue.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE),

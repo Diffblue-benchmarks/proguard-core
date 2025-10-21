@@ -1,22 +1,21 @@
 package proguard.classfile.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 
-class ClassUtilDiffblueTest {
+public class ClassUtilDiffblueTest {
   /**
    * Test {@link ClassUtil#checkMagicNumber(int)}.
    *
@@ -28,11 +27,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#checkMagicNumber(int)}
    */
   @Test
-  @DisplayName("Test checkMagicNumber(int); when ten; then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassUtil.checkMagicNumber(int)"})
-  void testCheckMagicNumber_whenTen_thenThrowUnsupportedOperationException()
+  public void testCheckMagicNumber_whenTen_thenThrowUnsupportedOperationException()
       throws UnsupportedOperationException {
     // Arrange, Act and Assert
     assertThrows(UnsupportedOperationException.class, () -> ClassUtil.checkMagicNumber(10));
@@ -49,12 +46,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '5'; then return '3211264'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when5_thenReturn3211264() {
+  public void testInternalClassVersionWithExternalClassVersion_when5_thenReturn3211264() {
     // Arrange, Act and Assert
     assertEquals(3211264, ClassUtil.internalClassVersion("5"));
   }
@@ -70,12 +64,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '6'; then return '3276800'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when6_thenReturn3276800() {
+  public void testInternalClassVersionWithExternalClassVersion_when6_thenReturn3276800() {
     // Arrange, Act and Assert
     assertEquals(3276800, ClassUtil.internalClassVersion("6"));
   }
@@ -91,12 +82,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '7'; then return '3342336'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when7_thenReturn3342336() {
+  public void testInternalClassVersionWithExternalClassVersion_when7_thenReturn3342336() {
     // Arrange, Act and Assert
     assertEquals(3342336, ClassUtil.internalClassVersion("7"));
   }
@@ -112,12 +100,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '8'; then return '3407872'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when8_thenReturn3407872() {
+  public void testInternalClassVersionWithExternalClassVersion_when8_thenReturn3407872() {
     // Arrange, Act and Assert
     assertEquals(3407872, ClassUtil.internalClassVersion("8"));
   }
@@ -133,12 +118,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '9'; then return '3473408'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when9_thenReturn3473408() {
+  public void testInternalClassVersionWithExternalClassVersion_when9_thenReturn3473408() {
     // Arrange, Act and Assert
     assertEquals(3473408, ClassUtil.internalClassVersion("9"));
   }
@@ -154,12 +136,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '1.0'; then return '2949123'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when10_thenReturn2949123() {
+  public void testInternalClassVersionWithExternalClassVersion_when10_thenReturn2949123() {
     // Arrange, Act and Assert
     assertEquals(2949123, ClassUtil.internalClassVersion("1.0"));
   }
@@ -175,12 +154,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '10'; then return '3538944'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when10_thenReturn3538944() {
+  public void testInternalClassVersionWithExternalClassVersion_when10_thenReturn3538944() {
     // Arrange, Act and Assert
     assertEquals(3538944, ClassUtil.internalClassVersion("10"));
   }
@@ -196,12 +172,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '1.1'; then return '2949123'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when11_thenReturn2949123() {
+  public void testInternalClassVersionWithExternalClassVersion_when11_thenReturn2949123() {
     // Arrange, Act and Assert
     assertEquals(2949123, ClassUtil.internalClassVersion("1.1"));
   }
@@ -217,12 +190,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '11'; then return '3604480'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when11_thenReturn3604480() {
+  public void testInternalClassVersionWithExternalClassVersion_when11_thenReturn3604480() {
     // Arrange, Act and Assert
     assertEquals(3604480, ClassUtil.internalClassVersion("11"));
   }
@@ -238,12 +208,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '1.2'; then return '3014656'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when12_thenReturn3014656() {
+  public void testInternalClassVersionWithExternalClassVersion_when12_thenReturn3014656() {
     // Arrange, Act and Assert
     assertEquals(3014656, ClassUtil.internalClassVersion("1.2"));
   }
@@ -259,12 +226,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '12'; then return '3670016'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when12_thenReturn3670016() {
+  public void testInternalClassVersionWithExternalClassVersion_when12_thenReturn3670016() {
     // Arrange, Act and Assert
     assertEquals(3670016, ClassUtil.internalClassVersion("12"));
   }
@@ -280,12 +244,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '1.3'; then return '3080192'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when13_thenReturn3080192() {
+  public void testInternalClassVersionWithExternalClassVersion_when13_thenReturn3080192() {
     // Arrange, Act and Assert
     assertEquals(3080192, ClassUtil.internalClassVersion("1.3"));
   }
@@ -301,12 +262,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '13'; then return '3735552'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when13_thenReturn3735552() {
+  public void testInternalClassVersionWithExternalClassVersion_when13_thenReturn3735552() {
     // Arrange, Act and Assert
     assertEquals(3735552, ClassUtil.internalClassVersion("13"));
   }
@@ -322,12 +280,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '1.4'; then return '3145728'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when14_thenReturn3145728() {
+  public void testInternalClassVersionWithExternalClassVersion_when14_thenReturn3145728() {
     // Arrange, Act and Assert
     assertEquals(3145728, ClassUtil.internalClassVersion("1.4"));
   }
@@ -343,12 +298,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '14'; then return '3801088'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when14_thenReturn3801088() {
+  public void testInternalClassVersionWithExternalClassVersion_when14_thenReturn3801088() {
     // Arrange, Act and Assert
     assertEquals(3801088, ClassUtil.internalClassVersion("14"));
   }
@@ -364,12 +316,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '1.5'; then return '3211264'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when15_thenReturn3211264() {
+  public void testInternalClassVersionWithExternalClassVersion_when15_thenReturn3211264() {
     // Arrange, Act and Assert
     assertEquals(3211264, ClassUtil.internalClassVersion("1.5"));
   }
@@ -385,12 +334,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '15'; then return '3866624'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when15_thenReturn3866624() {
+  public void testInternalClassVersionWithExternalClassVersion_when15_thenReturn3866624() {
     // Arrange, Act and Assert
     assertEquals(3866624, ClassUtil.internalClassVersion("15"));
   }
@@ -406,12 +352,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '1.6'; then return '3276800'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when16_thenReturn3276800() {
+  public void testInternalClassVersionWithExternalClassVersion_when16_thenReturn3276800() {
     // Arrange, Act and Assert
     assertEquals(3276800, ClassUtil.internalClassVersion("1.6"));
   }
@@ -427,12 +370,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '16'; then return '3932160'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when16_thenReturn3932160() {
+  public void testInternalClassVersionWithExternalClassVersion_when16_thenReturn3932160() {
     // Arrange, Act and Assert
     assertEquals(3932160, ClassUtil.internalClassVersion("16"));
   }
@@ -448,12 +388,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '1.7'; then return '3342336'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when17_thenReturn3342336() {
+  public void testInternalClassVersionWithExternalClassVersion_when17_thenReturn3342336() {
     // Arrange, Act and Assert
     assertEquals(3342336, ClassUtil.internalClassVersion("1.7"));
   }
@@ -469,12 +406,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '17'; then return '3997696'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when17_thenReturn3997696() {
+  public void testInternalClassVersionWithExternalClassVersion_when17_thenReturn3997696() {
     // Arrange, Act and Assert
     assertEquals(3997696, ClassUtil.internalClassVersion("17"));
   }
@@ -490,12 +424,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '1.8'; then return '3407872'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when18_thenReturn3407872() {
+  public void testInternalClassVersionWithExternalClassVersion_when18_thenReturn3407872() {
     // Arrange, Act and Assert
     assertEquals(3407872, ClassUtil.internalClassVersion("1.8"));
   }
@@ -511,12 +442,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '18'; then return '4063232'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when18_thenReturn4063232() {
+  public void testInternalClassVersionWithExternalClassVersion_when18_thenReturn4063232() {
     // Arrange, Act and Assert
     assertEquals(4063232, ClassUtil.internalClassVersion("18"));
   }
@@ -532,12 +460,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '1.9'; then return '3473408'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when19_thenReturn3473408() {
+  public void testInternalClassVersionWithExternalClassVersion_when19_thenReturn3473408() {
     // Arrange, Act and Assert
     assertEquals(3473408, ClassUtil.internalClassVersion("1.9"));
   }
@@ -553,12 +478,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '19'; then return '4128768'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when19_thenReturn4128768() {
+  public void testInternalClassVersionWithExternalClassVersion_when19_thenReturn4128768() {
     // Arrange, Act and Assert
     assertEquals(4128768, ClassUtil.internalClassVersion("19"));
   }
@@ -574,12 +496,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '20'; then return '4194304'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when20_thenReturn4194304() {
+  public void testInternalClassVersionWithExternalClassVersion_when20_thenReturn4194304() {
     // Arrange, Act and Assert
     assertEquals(4194304, ClassUtil.internalClassVersion("20"));
   }
@@ -595,12 +514,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '21'; then return '4259840'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when21_thenReturn4259840() {
+  public void testInternalClassVersionWithExternalClassVersion_when21_thenReturn4259840() {
     // Arrange, Act and Assert
     assertEquals(4259840, ClassUtil.internalClassVersion("21"));
   }
@@ -616,12 +532,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '22'; then return '4325376'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when22_thenReturn4325376() {
+  public void testInternalClassVersionWithExternalClassVersion_when22_thenReturn4325376() {
     // Arrange, Act and Assert
     assertEquals(4325376, ClassUtil.internalClassVersion("22"));
   }
@@ -637,12 +550,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '23'; then return '4390912'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when23_thenReturn4390912() {
+  public void testInternalClassVersionWithExternalClassVersion_when23_thenReturn4390912() {
     // Arrange, Act and Assert
     assertEquals(4390912, ClassUtil.internalClassVersion("23"));
   }
@@ -658,12 +568,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(String) with 'externalClassVersion'; when '1.0.2'; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(String)"})
-  void testInternalClassVersionWithExternalClassVersion_when102_thenReturnZero() {
+  public void testInternalClassVersionWithExternalClassVersion_when102_thenReturnZero() {
     // Arrange, Act and Assert
     assertEquals(0, ClassUtil.internalClassVersion("1.0.2"));
   }
@@ -680,12 +587,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(int, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(int, int) with 'majorVersion', 'minorVersion'; when one; then return '65537'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(int, int)"})
-  void testInternalClassVersionWithMajorVersionMinorVersion_whenOne_thenReturn65537() {
+  public void testInternalClassVersionWithMajorVersionMinorVersion_whenOne_thenReturn65537() {
     // Arrange, Act and Assert
     assertEquals(65537, ClassUtil.internalClassVersion(1, 1));
   }
@@ -702,12 +606,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(int, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(int, int) with 'majorVersion', 'minorVersion'; when SIZE; then return '1048577'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(int, int)"})
-  void testInternalClassVersionWithMajorVersionMinorVersion_whenSize_thenReturn1048577() {
+  public void testInternalClassVersionWithMajorVersionMinorVersion_whenSize_thenReturn1048577() {
     // Arrange, Act and Assert
     assertEquals(1048577, ClassUtil.internalClassVersion(Short.SIZE, 1));
   }
@@ -724,12 +625,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(int, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(int, int) with 'majorVersion', 'minorVersion'; when three; then return '196609'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(int, int)"})
-  void testInternalClassVersionWithMajorVersionMinorVersion_whenThree_thenReturn196609() {
+  public void testInternalClassVersionWithMajorVersionMinorVersion_whenThree_thenReturn196609() {
     // Arrange, Act and Assert
     assertEquals(196609, ClassUtil.internalClassVersion(3, 1));
   }
@@ -746,12 +644,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassVersion(int, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassVersion(int, int) with 'majorVersion', 'minorVersion'; when zero; then return one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalClassVersion(int, int)"})
-  void testInternalClassVersionWithMajorVersionMinorVersion_whenZero_thenReturnOne() {
+  public void testInternalClassVersionWithMajorVersionMinorVersion_whenZero_thenReturnOne() {
     // Arrange, Act and Assert
     assertEquals(1, ClassUtil.internalClassVersion(0, 1));
   }
@@ -762,11 +657,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMajorClassVersion(int)}
    */
   @Test
-  @DisplayName("Test internalMajorClassVersion(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalMajorClassVersion(int)"})
-  void testInternalMajorClassVersion() {
+  public void testInternalMajorClassVersion() {
     // Arrange, Act and Assert
     assertEquals(0, ClassUtil.internalMajorClassVersion(1));
   }
@@ -777,11 +670,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMinorClassVersion(int)}
    */
   @Test
-  @DisplayName("Test internalMinorClassVersion(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalMinorClassVersion(int)"})
-  void testInternalMinorClassVersion() {
+  public void testInternalMinorClassVersion() {
     // Arrange, Act and Assert
     assertEquals(1, ClassUtil.internalMinorClassVersion(1));
   }
@@ -797,11 +688,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '2949123'; then return '1.0'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when2949123_thenReturn10() {
+  public void testExternalClassVersion_when2949123_thenReturn10() {
     // Arrange, Act and Assert
     assertEquals("1.0", ClassUtil.externalClassVersion(2949123));
   }
@@ -817,11 +706,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '3014656'; then return '1.2'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when3014656_thenReturn12() {
+  public void testExternalClassVersion_when3014656_thenReturn12() {
     // Arrange, Act and Assert
     assertEquals("1.2", ClassUtil.externalClassVersion(3014656));
   }
@@ -837,11 +724,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '3080192'; then return '1.3'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when3080192_thenReturn13() {
+  public void testExternalClassVersion_when3080192_thenReturn13() {
     // Arrange, Act and Assert
     assertEquals("1.3", ClassUtil.externalClassVersion(3080192));
   }
@@ -857,11 +742,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '3145728'; then return '1.4'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when3145728_thenReturn14() {
+  public void testExternalClassVersion_when3145728_thenReturn14() {
     // Arrange, Act and Assert
     assertEquals("1.4", ClassUtil.externalClassVersion(3145728));
   }
@@ -877,11 +760,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '3211264'; then return '1.5'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when3211264_thenReturn15() {
+  public void testExternalClassVersion_when3211264_thenReturn15() {
     // Arrange, Act and Assert
     assertEquals("1.5", ClassUtil.externalClassVersion(3211264));
   }
@@ -897,11 +778,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '3276800'; then return '1.6'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when3276800_thenReturn16() {
+  public void testExternalClassVersion_when3276800_thenReturn16() {
     // Arrange, Act and Assert
     assertEquals("1.6", ClassUtil.externalClassVersion(3276800));
   }
@@ -917,11 +796,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '3342336'; then return '1.7'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when3342336_thenReturn17() {
+  public void testExternalClassVersion_when3342336_thenReturn17() {
     // Arrange, Act and Assert
     assertEquals("1.7", ClassUtil.externalClassVersion(3342336));
   }
@@ -937,11 +814,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '3407872'; then return '1.8'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when3407872_thenReturn18() {
+  public void testExternalClassVersion_when3407872_thenReturn18() {
     // Arrange, Act and Assert
     assertEquals("1.8", ClassUtil.externalClassVersion(3407872));
   }
@@ -957,11 +832,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '3473408'; then return '1.9'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when3473408_thenReturn19() {
+  public void testExternalClassVersion_when3473408_thenReturn19() {
     // Arrange, Act and Assert
     assertEquals("1.9", ClassUtil.externalClassVersion(3473408));
   }
@@ -977,11 +850,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '3538944'; then return '10'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when3538944_thenReturn10() {
+  public void testExternalClassVersion_when3538944_thenReturn10() {
     // Arrange, Act and Assert
     assertEquals("10", ClassUtil.externalClassVersion(3538944));
   }
@@ -997,11 +868,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '3604480'; then return '11'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when3604480_thenReturn11() {
+  public void testExternalClassVersion_when3604480_thenReturn11() {
     // Arrange, Act and Assert
     assertEquals("11", ClassUtil.externalClassVersion(3604480));
   }
@@ -1017,11 +886,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '3670016'; then return '12'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when3670016_thenReturn12() {
+  public void testExternalClassVersion_when3670016_thenReturn12() {
     // Arrange, Act and Assert
     assertEquals("12", ClassUtil.externalClassVersion(3670016));
   }
@@ -1037,11 +904,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '3735552'; then return '13'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when3735552_thenReturn13() {
+  public void testExternalClassVersion_when3735552_thenReturn13() {
     // Arrange, Act and Assert
     assertEquals("13", ClassUtil.externalClassVersion(3735552));
   }
@@ -1057,11 +922,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '3801088'; then return '14'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when3801088_thenReturn14() {
+  public void testExternalClassVersion_when3801088_thenReturn14() {
     // Arrange, Act and Assert
     assertEquals("14", ClassUtil.externalClassVersion(3801088));
   }
@@ -1077,11 +940,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '3866624'; then return '15'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when3866624_thenReturn15() {
+  public void testExternalClassVersion_when3866624_thenReturn15() {
     // Arrange, Act and Assert
     assertEquals("15", ClassUtil.externalClassVersion(3866624));
   }
@@ -1097,11 +958,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '3932160'; then return '16'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when3932160_thenReturn16() {
+  public void testExternalClassVersion_when3932160_thenReturn16() {
     // Arrange, Act and Assert
     assertEquals("16", ClassUtil.externalClassVersion(3932160));
   }
@@ -1117,11 +976,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '3997696'; then return '17'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when3997696_thenReturn17() {
+  public void testExternalClassVersion_when3997696_thenReturn17() {
     // Arrange, Act and Assert
     assertEquals("17", ClassUtil.externalClassVersion(3997696));
   }
@@ -1137,11 +994,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '4063232'; then return '18'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when4063232_thenReturn18() {
+  public void testExternalClassVersion_when4063232_thenReturn18() {
     // Arrange, Act and Assert
     assertEquals("18", ClassUtil.externalClassVersion(4063232));
   }
@@ -1157,11 +1012,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '4128768'; then return '19'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when4128768_thenReturn19() {
+  public void testExternalClassVersion_when4128768_thenReturn19() {
     // Arrange, Act and Assert
     assertEquals("19", ClassUtil.externalClassVersion(4128768));
   }
@@ -1177,11 +1030,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '4194304'; then return '20'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when4194304_thenReturn20() {
+  public void testExternalClassVersion_when4194304_thenReturn20() {
     // Arrange, Act and Assert
     assertEquals("20", ClassUtil.externalClassVersion(4194304));
   }
@@ -1197,11 +1048,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '4259840'; then return '21'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when4259840_thenReturn21() {
+  public void testExternalClassVersion_when4259840_thenReturn21() {
     // Arrange, Act and Assert
     assertEquals("21", ClassUtil.externalClassVersion(4259840));
   }
@@ -1217,11 +1066,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '4325376'; then return '22'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when4325376_thenReturn22() {
+  public void testExternalClassVersion_when4325376_thenReturn22() {
     // Arrange, Act and Assert
     assertEquals("22", ClassUtil.externalClassVersion(4325376));
   }
@@ -1237,11 +1084,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when '4390912'; then return '23'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_when4390912_thenReturn23() {
+  public void testExternalClassVersion_when4390912_thenReturn23() {
     // Arrange, Act and Assert
     assertEquals("23", ClassUtil.externalClassVersion(4390912));
   }
@@ -1257,11 +1102,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassVersion(int)}
    */
   @Test
-  @DisplayName("Test externalClassVersion(int); when one; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassVersion(int)"})
-  void testExternalClassVersion_whenOne_thenReturnNull() {
+  public void testExternalClassVersion_whenOne_thenReturnNull() {
     // Arrange, Act and Assert
     assertNull(ClassUtil.externalClassVersion(1));
   }
@@ -1277,12 +1120,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#checkVersionNumbers(int)}
    */
   @Test
-  @DisplayName(
-      "Test checkVersionNumbers(int); when '4456448'; then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassUtil.checkVersionNumbers(int)"})
-  void testCheckVersionNumbers_when4456448_thenThrowUnsupportedOperationException()
+  public void testCheckVersionNumbers_when4456448_thenThrowUnsupportedOperationException()
       throws UnsupportedOperationException {
     // Arrange, Act and Assert
     assertThrows(UnsupportedOperationException.class, () -> ClassUtil.checkVersionNumbers(4456448));
@@ -1299,11 +1139,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#checkVersionNumbers(int)}
    */
   @Test
-  @DisplayName("Test checkVersionNumbers(int); when one; then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassUtil.checkVersionNumbers(int)"})
-  void testCheckVersionNumbers_whenOne_thenThrowUnsupportedOperationException()
+  public void testCheckVersionNumbers_whenOne_thenThrowUnsupportedOperationException()
       throws UnsupportedOperationException {
     // Arrange, Act and Assert
     assertThrows(UnsupportedOperationException.class, () -> ClassUtil.checkVersionNumbers(1));
@@ -1315,11 +1153,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassName(String)}
    */
   @Test
-  @DisplayName("Test internalClassName(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalClassName(String)"})
-  void testInternalClassName() {
+  public void testInternalClassName() {
     // Arrange, Act and Assert
     assertEquals("External Class Name", ClassUtil.internalClassName("External Class Name"));
   }
@@ -1330,11 +1166,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#canonicalClassName(String)}
    */
   @Test
-  @DisplayName("Test canonicalClassName(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.canonicalClassName(String)"})
-  void testCanonicalClassName() {
+  public void testCanonicalClassName() {
     // Arrange, Act and Assert
     assertEquals("External Class Name", ClassUtil.canonicalClassName("External Class Name"));
   }
@@ -1345,11 +1179,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullClassDescription(int, String)}
    */
   @Test
-  @DisplayName("Test externalFullClassDescription(int, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullClassDescription(int, String)"})
-  void testExternalFullClassDescription() {
+  public void testExternalFullClassDescription() {
     // Arrange, Act and Assert
     assertEquals(
         "private protected static final @interface Internal Class Name",
@@ -1366,12 +1198,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullClassDescription(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullClassDescription(int, String); then return 'private final Internal Class Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullClassDescription(int, String)"})
-  void testExternalFullClassDescription_thenReturnPrivateFinalInternalClassName() {
+  public void testExternalFullClassDescription_thenReturnPrivateFinalInternalClassName() {
     // Arrange, Act and Assert
     assertEquals(
         "private final Internal Class Name",
@@ -1389,12 +1218,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullClassDescription(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullClassDescription(int, String); when '1024'; then return 'abstract Internal Class Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullClassDescription(int, String)"})
-  void testExternalFullClassDescription_when1024_thenReturnAbstractInternalClassName() {
+  public void testExternalFullClassDescription_when1024_thenReturnAbstractInternalClassName() {
     // Arrange, Act and Assert
     assertEquals(
         "abstract Internal Class Name",
@@ -1412,12 +1238,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullClassDescription(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullClassDescription(int, String); when '4096'; then return 'synthetic Internal Class Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullClassDescription(int, String)"})
-  void testExternalFullClassDescription_when4096_thenReturnSyntheticInternalClassName() {
+  public void testExternalFullClassDescription_when4096_thenReturnSyntheticInternalClassName() {
     // Arrange, Act and Assert
     assertEquals(
         "synthetic Internal Class Name",
@@ -1435,12 +1258,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullClassDescription(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullClassDescription(int, String); when '16384'; then return 'enum Internal Class Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullClassDescription(int, String)"})
-  void testExternalFullClassDescription_when16384_thenReturnEnumInternalClassName() {
+  public void testExternalFullClassDescription_when16384_thenReturnEnumInternalClassName() {
     // Arrange, Act and Assert
     assertEquals(
         "enum Internal Class Name",
@@ -1458,12 +1278,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullClassDescription(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullClassDescription(int, String); when '32768'; then return 'module Internal Class Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullClassDescription(int, String)"})
-  void testExternalFullClassDescription_when32768_thenReturnModuleInternalClassName() {
+  public void testExternalFullClassDescription_when32768_thenReturnModuleInternalClassName() {
     // Arrange, Act and Assert
     assertEquals(
         "module Internal Class Name",
@@ -1481,12 +1298,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullClassDescription(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullClassDescription(int, String); when eight; then return 'static Internal Class Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullClassDescription(int, String)"})
-  void testExternalFullClassDescription_whenEight_thenReturnStaticInternalClassName() {
+  public void testExternalFullClassDescription_whenEight_thenReturnStaticInternalClassName() {
     // Arrange, Act and Assert
     assertEquals(
         "static Internal Class Name",
@@ -1504,12 +1318,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullClassDescription(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullClassDescription(int, String); when four; then return 'protected Internal Class Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullClassDescription(int, String)"})
-  void testExternalFullClassDescription_whenFour_thenReturnProtectedInternalClassName() {
+  public void testExternalFullClassDescription_whenFour_thenReturnProtectedInternalClassName() {
     // Arrange, Act and Assert
     assertEquals(
         "protected Internal Class Name",
@@ -1527,12 +1338,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullClassDescription(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullClassDescription(int, String); when one; then return 'public Internal Class Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullClassDescription(int, String)"})
-  void testExternalFullClassDescription_whenOne_thenReturnPublicInternalClassName() {
+  public void testExternalFullClassDescription_whenOne_thenReturnPublicInternalClassName() {
     // Arrange, Act and Assert
     assertEquals(
         "public Internal Class Name",
@@ -1550,12 +1358,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullClassDescription(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullClassDescription(int, String); when zero; then return 'Internal Class Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullClassDescription(int, String)"})
-  void testExternalFullClassDescription_whenZero_thenReturnInternalClassName() {
+  public void testExternalFullClassDescription_whenZero_thenReturnInternalClassName() {
     // Arrange, Act and Assert
     assertEquals(
         "Internal Class Name", ClassUtil.externalFullClassDescription(0, "Internal Class Name"));
@@ -1567,11 +1372,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassName(String)}
    */
   @Test
-  @DisplayName("Test externalClassName(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassName(String)"})
-  void testExternalClassName() {
+  public void testExternalClassName() {
     // Arrange, Act and Assert
     assertEquals("Internal Class Name", ClassUtil.externalClassName("Internal Class Name"));
   }
@@ -1586,11 +1389,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalBaseType(String)}
    */
   @Test
-  @DisplayName("Test externalBaseType(String); then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalBaseType(String)"})
-  void testExternalBaseType_thenReturnEmptyString() {
+  public void testExternalBaseType_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalBaseType("[]"));
   }
@@ -1606,12 +1407,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalBaseType(String)}
    */
   @Test
-  @DisplayName(
-      "Test externalBaseType(String); when 'External Array Type'; then return 'External Array Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalBaseType(String)"})
-  void testExternalBaseType_whenExternalArrayType_thenReturnExternalArrayType() {
+  public void testExternalBaseType_whenExternalArrayType_thenReturnExternalArrayType() {
     // Arrange, Act and Assert
     assertEquals("External Array Type", ClassUtil.externalBaseType("External Array Type"));
   }
@@ -1622,11 +1420,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalShortClassName(String)}
    */
   @Test
-  @DisplayName("Test externalShortClassName(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalShortClassName(String)"})
-  void testExternalShortClassName() {
+  public void testExternalShortClassName() {
     // Arrange, Act and Assert
     assertEquals("External Class Name", ClassUtil.externalShortClassName("External Class Name"));
   }
@@ -1637,11 +1433,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalShortClassName(String)}
    */
   @Test
-  @DisplayName("Test internalShortClassName(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalShortClassName(String)"})
-  void testInternalShortClassName() {
+  public void testInternalShortClassName() {
     // Arrange, Act and Assert
     assertEquals("Internal Class Name", ClassUtil.internalShortClassName("Internal Class Name"));
   }
@@ -1656,11 +1450,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalArrayType(String)}
    */
   @Test
-  @DisplayName("Test isInternalArrayType(String); when empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalArrayType(String)"})
-  void testIsInternalArrayType_whenEmptyString() {
+  public void testIsInternalArrayType_whenEmptyString() {
     // Arrange, Act and Assert
     assertFalse(ClassUtil.isInternalArrayType(""));
   }
@@ -1675,11 +1467,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalArrayType(String)}
    */
   @Test
-  @DisplayName("Test isInternalArrayType(String); when 'Internal Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalArrayType(String)"})
-  void testIsInternalArrayType_whenInternalType() {
+  public void testIsInternalArrayType_whenInternalType() {
     // Arrange, Act and Assert
     assertFalse(ClassUtil.isInternalArrayType("Internal Type"));
   }
@@ -1694,11 +1484,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalArrayTypeDimensionCount(String)}
    */
   @Test
-  @DisplayName("Test internalArrayTypeDimensionCount(String); when empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalArrayTypeDimensionCount(String)"})
-  void testInternalArrayTypeDimensionCount_whenEmptyString() {
+  public void testInternalArrayTypeDimensionCount_whenEmptyString() {
     // Arrange, Act and Assert
     assertEquals(0, ClassUtil.internalArrayTypeDimensionCount(""));
   }
@@ -1713,11 +1501,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalArrayTypeDimensionCount(String)}
    */
   @Test
-  @DisplayName("Test internalArrayTypeDimensionCount(String); when 'Internal Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalArrayTypeDimensionCount(String)"})
-  void testInternalArrayTypeDimensionCount_whenInternalType() {
+  public void testInternalArrayTypeDimensionCount_whenInternalType() {
     // Arrange, Act and Assert
     assertEquals(0, ClassUtil.internalArrayTypeDimensionCount("Internal Type"));
   }
@@ -1733,12 +1519,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalArrayInterfaceName(String)}
    */
   @Test
-  @DisplayName(
-      "Test isInternalArrayInterfaceName(String); when 'Internal Class Name'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalArrayInterfaceName(String)"})
-  void testIsInternalArrayInterfaceName_whenInternalClassName_thenReturnFalse() {
+  public void testIsInternalArrayInterfaceName_whenInternalClassName_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(ClassUtil.isInternalArrayInterfaceName("Internal Class Name"));
   }
@@ -1754,12 +1537,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalArrayInterfaceName(String)}
    */
   @Test
-  @DisplayName(
-      "Test isInternalArrayInterfaceName(String); when 'java/io/Serializable'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalArrayInterfaceName(String)"})
-  void testIsInternalArrayInterfaceName_whenJavaIoSerializable_thenReturnTrue() {
+  public void testIsInternalArrayInterfaceName_whenJavaIoSerializable_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalArrayInterfaceName("java/io/Serializable"));
   }
@@ -1775,12 +1555,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalArrayInterfaceName(String)}
    */
   @Test
-  @DisplayName(
-      "Test isInternalArrayInterfaceName(String); when 'java/lang/Cloneable'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalArrayInterfaceName(String)"})
-  void testIsInternalArrayInterfaceName_whenJavaLangCloneable_thenReturnTrue() {
+  public void testIsInternalArrayInterfaceName_whenJavaLangCloneable_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalArrayInterfaceName("java/lang/Cloneable"));
   }
@@ -1796,12 +1573,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalArrayInterfaceName(String)}
    */
   @Test
-  @DisplayName(
-      "Test isInternalArrayInterfaceName(String); when 'java/lang/Object'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalArrayInterfaceName(String)"})
-  void testIsInternalArrayInterfaceName_whenJavaLangObject_thenReturnTrue() {
+  public void testIsInternalArrayInterfaceName_whenJavaLangObject_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalArrayInterfaceName("java/lang/Object"));
   }
@@ -1817,11 +1591,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveType(char)}
    */
   @Test
-  @DisplayName("Test isInternalPrimitiveType(char) with 'char'; when 'A'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveType(char)"})
-  void testIsInternalPrimitiveTypeWithChar_whenA_thenReturnFalse() {
+  public void testIsInternalPrimitiveTypeWithChar_whenA_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(ClassUtil.isInternalPrimitiveType('A'));
   }
@@ -1837,11 +1609,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveType(char)}
    */
   @Test
-  @DisplayName("Test isInternalPrimitiveType(char) with 'char'; when 'B'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveType(char)"})
-  void testIsInternalPrimitiveTypeWithChar_whenB_thenReturnTrue() {
+  public void testIsInternalPrimitiveTypeWithChar_whenB_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalPrimitiveType('B'));
   }
@@ -1857,11 +1627,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveType(char)}
    */
   @Test
-  @DisplayName("Test isInternalPrimitiveType(char) with 'char'; when 'C'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveType(char)"})
-  void testIsInternalPrimitiveTypeWithChar_whenC_thenReturnTrue() {
+  public void testIsInternalPrimitiveTypeWithChar_whenC_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalPrimitiveType('C'));
   }
@@ -1877,11 +1645,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveType(char)}
    */
   @Test
-  @DisplayName("Test isInternalPrimitiveType(char) with 'char'; when 'D'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveType(char)"})
-  void testIsInternalPrimitiveTypeWithChar_whenD_thenReturnTrue() {
+  public void testIsInternalPrimitiveTypeWithChar_whenD_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalPrimitiveType('D'));
   }
@@ -1897,11 +1663,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveType(char)}
    */
   @Test
-  @DisplayName("Test isInternalPrimitiveType(char) with 'char'; when 'F'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveType(char)"})
-  void testIsInternalPrimitiveTypeWithChar_whenF_thenReturnTrue() {
+  public void testIsInternalPrimitiveTypeWithChar_whenF_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalPrimitiveType('F'));
   }
@@ -1917,11 +1681,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveType(char)}
    */
   @Test
-  @DisplayName("Test isInternalPrimitiveType(char) with 'char'; when 'I'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveType(char)"})
-  void testIsInternalPrimitiveTypeWithChar_whenI_thenReturnTrue() {
+  public void testIsInternalPrimitiveTypeWithChar_whenI_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalPrimitiveType('I'));
   }
@@ -1937,11 +1699,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveType(char)}
    */
   @Test
-  @DisplayName("Test isInternalPrimitiveType(char) with 'char'; when 'J'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveType(char)"})
-  void testIsInternalPrimitiveTypeWithChar_whenJ_thenReturnTrue() {
+  public void testIsInternalPrimitiveTypeWithChar_whenJ_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalPrimitiveType('J'));
   }
@@ -1957,11 +1717,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveType(char)}
    */
   @Test
-  @DisplayName("Test isInternalPrimitiveType(char) with 'char'; when 'S'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveType(char)"})
-  void testIsInternalPrimitiveTypeWithChar_whenS_thenReturnTrue() {
+  public void testIsInternalPrimitiveTypeWithChar_whenS_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalPrimitiveType('S'));
   }
@@ -1977,11 +1735,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveType(char)}
    */
   @Test
-  @DisplayName("Test isInternalPrimitiveType(char) with 'char'; when 'Z'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveType(char)"})
-  void testIsInternalPrimitiveTypeWithChar_whenZ_thenReturnTrue() {
+  public void testIsInternalPrimitiveTypeWithChar_whenZ_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalPrimitiveType('Z'));
   }
@@ -1997,11 +1753,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveType(String)}
    */
   @Test
-  @DisplayName("Test isInternalPrimitiveType(String) with 'String'; when '42'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveType(String)"})
-  void testIsInternalPrimitiveTypeWithString_when42_thenReturnFalse() {
+  public void testIsInternalPrimitiveTypeWithString_when42_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(ClassUtil.isInternalPrimitiveType("42"));
   }
@@ -2017,12 +1771,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveType(String)}
    */
   @Test
-  @DisplayName(
-      "Test isInternalPrimitiveType(String) with 'String'; when 'Internal Type'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveType(String)"})
-  void testIsInternalPrimitiveTypeWithString_whenInternalType_thenReturnTrue() {
+  public void testIsInternalPrimitiveTypeWithString_whenInternalType_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalPrimitiveType("Internal Type"));
   }
@@ -2038,12 +1789,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveBoxingType(String)}
    */
   @Test
-  @DisplayName(
-      "Test isInternalPrimitiveBoxingType(String); when 'Internal Type'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveBoxingType(String)"})
-  void testIsInternalPrimitiveBoxingType_whenInternalType_thenReturnFalse() {
+  public void testIsInternalPrimitiveBoxingType_whenInternalType_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(ClassUtil.isInternalPrimitiveBoxingType("Internal Type"));
   }
@@ -2059,12 +1807,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveBoxingType(String)}
    */
   @Test
-  @DisplayName(
-      "Test isInternalPrimitiveBoxingType(String); when 'Ljava/lang/Boolean;'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveBoxingType(String)"})
-  void testIsInternalPrimitiveBoxingType_whenLjavaLangBoolean_thenReturnTrue() {
+  public void testIsInternalPrimitiveBoxingType_whenLjavaLangBoolean_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalPrimitiveBoxingType("Ljava/lang/Boolean;"));
   }
@@ -2080,12 +1825,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveBoxingType(String)}
    */
   @Test
-  @DisplayName(
-      "Test isInternalPrimitiveBoxingType(String); when 'Ljava/lang/Byte;'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveBoxingType(String)"})
-  void testIsInternalPrimitiveBoxingType_whenLjavaLangByte_thenReturnTrue() {
+  public void testIsInternalPrimitiveBoxingType_whenLjavaLangByte_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalPrimitiveBoxingType("Ljava/lang/Byte;"));
   }
@@ -2101,12 +1843,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveBoxingType(String)}
    */
   @Test
-  @DisplayName(
-      "Test isInternalPrimitiveBoxingType(String); when 'Ljava/lang/Character;'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveBoxingType(String)"})
-  void testIsInternalPrimitiveBoxingType_whenLjavaLangCharacter_thenReturnTrue() {
+  public void testIsInternalPrimitiveBoxingType_whenLjavaLangCharacter_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalPrimitiveBoxingType("Ljava/lang/Character;"));
   }
@@ -2122,12 +1861,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveBoxingType(String)}
    */
   @Test
-  @DisplayName(
-      "Test isInternalPrimitiveBoxingType(String); when 'Ljava/lang/Double;'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveBoxingType(String)"})
-  void testIsInternalPrimitiveBoxingType_whenLjavaLangDouble_thenReturnTrue() {
+  public void testIsInternalPrimitiveBoxingType_whenLjavaLangDouble_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalPrimitiveBoxingType("Ljava/lang/Double;"));
   }
@@ -2143,12 +1879,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveBoxingType(String)}
    */
   @Test
-  @DisplayName(
-      "Test isInternalPrimitiveBoxingType(String); when 'Ljava/lang/Float;'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveBoxingType(String)"})
-  void testIsInternalPrimitiveBoxingType_whenLjavaLangFloat_thenReturnTrue() {
+  public void testIsInternalPrimitiveBoxingType_whenLjavaLangFloat_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalPrimitiveBoxingType("Ljava/lang/Float;"));
   }
@@ -2164,12 +1897,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveBoxingType(String)}
    */
   @Test
-  @DisplayName(
-      "Test isInternalPrimitiveBoxingType(String); when 'Ljava/lang/Integer;'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveBoxingType(String)"})
-  void testIsInternalPrimitiveBoxingType_whenLjavaLangInteger_thenReturnTrue() {
+  public void testIsInternalPrimitiveBoxingType_whenLjavaLangInteger_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalPrimitiveBoxingType("Ljava/lang/Integer;"));
   }
@@ -2185,12 +1915,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveBoxingType(String)}
    */
   @Test
-  @DisplayName(
-      "Test isInternalPrimitiveBoxingType(String); when 'Ljava/lang/Long;'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveBoxingType(String)"})
-  void testIsInternalPrimitiveBoxingType_whenLjavaLangLong_thenReturnTrue() {
+  public void testIsInternalPrimitiveBoxingType_whenLjavaLangLong_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalPrimitiveBoxingType("Ljava/lang/Long;"));
   }
@@ -2206,12 +1933,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveBoxingType(String)}
    */
   @Test
-  @DisplayName(
-      "Test isInternalPrimitiveBoxingType(String); when 'Ljava/lang/Short;'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveBoxingType(String)"})
-  void testIsInternalPrimitiveBoxingType_whenLjavaLangShort_thenReturnTrue() {
+  public void testIsInternalPrimitiveBoxingType_whenLjavaLangShort_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalPrimitiveBoxingType("Ljava/lang/Short;"));
   }
@@ -2222,11 +1946,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromPrimitiveBoxingType(String)}
    */
   @Test
-  @DisplayName("Test internalPrimitiveTypeFromPrimitiveBoxingType(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromPrimitiveBoxingType(String)"})
-  void testInternalPrimitiveTypeFromPrimitiveBoxingType() {
+  public void testInternalPrimitiveTypeFromPrimitiveBoxingType() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -2243,11 +1965,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromPrimitiveBoxingType(String)}
    */
   @Test
-  @DisplayName("Test internalPrimitiveTypeFromPrimitiveBoxingType(String); then return 'C'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromPrimitiveBoxingType(String)"})
-  void testInternalPrimitiveTypeFromPrimitiveBoxingType_thenReturnC() {
+  public void testInternalPrimitiveTypeFromPrimitiveBoxingType_thenReturnC() {
     // Arrange, Act and Assert
     assertEquals(
         'C', ClassUtil.internalPrimitiveTypeFromPrimitiveBoxingType("Ljava/lang/Character;"));
@@ -2263,11 +1983,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromPrimitiveBoxingType(String)}
    */
   @Test
-  @DisplayName("Test internalPrimitiveTypeFromPrimitiveBoxingType(String); then return 'I'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromPrimitiveBoxingType(String)"})
-  void testInternalPrimitiveTypeFromPrimitiveBoxingType_thenReturnI() {
+  public void testInternalPrimitiveTypeFromPrimitiveBoxingType_thenReturnI() {
     // Arrange, Act and Assert
     assertEquals(
         'I', ClassUtil.internalPrimitiveTypeFromPrimitiveBoxingType("Ljava/lang/Integer;"));
@@ -2283,11 +2001,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromPrimitiveBoxingType(String)}
    */
   @Test
-  @DisplayName("Test internalPrimitiveTypeFromPrimitiveBoxingType(String); then return 'Z'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromPrimitiveBoxingType(String)"})
-  void testInternalPrimitiveTypeFromPrimitiveBoxingType_thenReturnZ() {
+  public void testInternalPrimitiveTypeFromPrimitiveBoxingType_thenReturnZ() {
     // Arrange, Act and Assert
     assertEquals(
         'Z', ClassUtil.internalPrimitiveTypeFromPrimitiveBoxingType("Ljava/lang/Boolean;"));
@@ -2304,12 +2020,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromPrimitiveBoxingType(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalPrimitiveTypeFromPrimitiveBoxingType(String); when 'Ljava/lang/Byte;'; then return 'B'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromPrimitiveBoxingType(String)"})
-  void testInternalPrimitiveTypeFromPrimitiveBoxingType_whenLjavaLangByte_thenReturnB() {
+  public void testInternalPrimitiveTypeFromPrimitiveBoxingType_whenLjavaLangByte_thenReturnB() {
     // Arrange, Act and Assert
     assertEquals('B', ClassUtil.internalPrimitiveTypeFromPrimitiveBoxingType("Ljava/lang/Byte;"));
   }
@@ -2325,12 +2038,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromPrimitiveBoxingType(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalPrimitiveTypeFromPrimitiveBoxingType(String); when 'Ljava/lang/Double;'; then return 'D'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromPrimitiveBoxingType(String)"})
-  void testInternalPrimitiveTypeFromPrimitiveBoxingType_whenLjavaLangDouble_thenReturnD() {
+  public void testInternalPrimitiveTypeFromPrimitiveBoxingType_whenLjavaLangDouble_thenReturnD() {
     // Arrange, Act and Assert
     assertEquals('D', ClassUtil.internalPrimitiveTypeFromPrimitiveBoxingType("Ljava/lang/Double;"));
   }
@@ -2346,12 +2056,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromPrimitiveBoxingType(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalPrimitiveTypeFromPrimitiveBoxingType(String); when 'Ljava/lang/Float;'; then return 'F'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromPrimitiveBoxingType(String)"})
-  void testInternalPrimitiveTypeFromPrimitiveBoxingType_whenLjavaLangFloat_thenReturnF() {
+  public void testInternalPrimitiveTypeFromPrimitiveBoxingType_whenLjavaLangFloat_thenReturnF() {
     // Arrange, Act and Assert
     assertEquals('F', ClassUtil.internalPrimitiveTypeFromPrimitiveBoxingType("Ljava/lang/Float;"));
   }
@@ -2367,12 +2074,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromPrimitiveBoxingType(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalPrimitiveTypeFromPrimitiveBoxingType(String); when 'Ljava/lang/Long;'; then return 'J'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromPrimitiveBoxingType(String)"})
-  void testInternalPrimitiveTypeFromPrimitiveBoxingType_whenLjavaLangLong_thenReturnJ() {
+  public void testInternalPrimitiveTypeFromPrimitiveBoxingType_whenLjavaLangLong_thenReturnJ() {
     // Arrange, Act and Assert
     assertEquals('J', ClassUtil.internalPrimitiveTypeFromPrimitiveBoxingType("Ljava/lang/Long;"));
   }
@@ -2388,12 +2092,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromPrimitiveBoxingType(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalPrimitiveTypeFromPrimitiveBoxingType(String); when 'Ljava/lang/Short;'; then return 'S'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromPrimitiveBoxingType(String)"})
-  void testInternalPrimitiveTypeFromPrimitiveBoxingType_whenLjavaLangShort_thenReturnS() {
+  public void testInternalPrimitiveTypeFromPrimitiveBoxingType_whenLjavaLangShort_thenReturnS() {
     // Arrange, Act and Assert
     assertEquals('S', ClassUtil.internalPrimitiveTypeFromPrimitiveBoxingType("Ljava/lang/Short;"));
   }
@@ -2409,11 +2110,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveTypeOrString(String)}
    */
   @Test
-  @DisplayName("Test isInternalPrimitiveTypeOrString(String); when '42'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveTypeOrString(String)"})
-  void testIsInternalPrimitiveTypeOrString_when42_thenReturnFalse() {
+  public void testIsInternalPrimitiveTypeOrString_when42_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(ClassUtil.isInternalPrimitiveTypeOrString("42"));
   }
@@ -2429,12 +2128,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveTypeOrString(String)}
    */
   @Test
-  @DisplayName(
-      "Test isInternalPrimitiveTypeOrString(String); when 'Internal Type'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveTypeOrString(String)"})
-  void testIsInternalPrimitiveTypeOrString_whenInternalType_thenReturnTrue() {
+  public void testIsInternalPrimitiveTypeOrString_whenInternalType_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalPrimitiveTypeOrString("Internal Type"));
   }
@@ -2450,12 +2146,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalPrimitiveTypeOrString(String)}
    */
   @Test
-  @DisplayName(
-      "Test isInternalPrimitiveTypeOrString(String); when 'Ljava/lang/String;'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalPrimitiveTypeOrString(String)"})
-  void testIsInternalPrimitiveTypeOrString_whenLjavaLangString_thenReturnTrue() {
+  public void testIsInternalPrimitiveTypeOrString_whenLjavaLangString_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInternalPrimitiveTypeOrString("Ljava/lang/String;"));
   }
@@ -2470,11 +2163,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalCategory2Type(String)}
    */
   @Test
-  @DisplayName("Test isInternalCategory2Type(String); when 'Internal Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalCategory2Type(String)"})
-  void testIsInternalCategory2Type_whenInternalType() {
+  public void testIsInternalCategory2Type_whenInternalType() {
     // Arrange, Act and Assert
     assertFalse(ClassUtil.isInternalCategory2Type("Internal Type"));
   }
@@ -2489,11 +2180,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalCategory2Type(String)}
    */
   @Test
-  @DisplayName("Test isInternalCategory2Type(String); when '%'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalCategory2Type(String)"})
-  void testIsInternalCategory2Type_whenPercentSign() {
+  public void testIsInternalCategory2Type_whenPercentSign() {
     // Arrange, Act and Assert
     assertFalse(ClassUtil.isInternalCategory2Type("%"));
   }
@@ -2508,11 +2197,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalClassType(String)}
    */
   @Test
-  @DisplayName("Test isInternalClassType(String); when empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalClassType(String)"})
-  void testIsInternalClassType_whenEmptyString() {
+  public void testIsInternalClassType_whenEmptyString() {
     // Arrange, Act and Assert
     assertFalse(ClassUtil.isInternalClassType(""));
   }
@@ -2527,11 +2214,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalClassType(String)}
    */
   @Test
-  @DisplayName("Test isInternalClassType(String); when 'Internal Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalClassType(String)"})
-  void testIsInternalClassType_whenInternalType() {
+  public void testIsInternalClassType_whenInternalType() {
     // Arrange, Act and Assert
     assertFalse(ClassUtil.isInternalClassType("Internal Type"));
   }
@@ -2547,11 +2232,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalType(String)}
    */
   @Test
-  @DisplayName("Test isInternalType(String); when '%'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalType(String)"})
-  void testIsInternalType_whenPercentSign_thenReturnFalse() {
+  public void testIsInternalType_whenPercentSign_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(ClassUtil.isInternalType("%"));
   }
@@ -2567,11 +2250,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalType(String)}
    */
   @Test
-  @DisplayName("Test isInternalType(String); when 'Type'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalType(String)"})
-  void testIsInternalType_whenType_thenReturnFalse() {
+  public void testIsInternalType_whenType_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(ClassUtil.isInternalType("Type"));
   }
@@ -2582,11 +2263,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalTypeFromClassName(String)}
    */
   @Test
-  @DisplayName("Test internalTypeFromClassName(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalTypeFromClassName(String)"})
-  void testInternalTypeFromClassName() {
+  public void testInternalTypeFromClassName() {
     // Arrange, Act and Assert
     assertEquals(
         "LInternal Class Name;", ClassUtil.internalTypeFromClassName("Internal Class Name"));
@@ -2603,12 +2282,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalArrayTypeFromClassName(String, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalArrayTypeFromClassName(String, int); when three; then return '[[[LInternal Class Name;'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalArrayTypeFromClassName(String, int)"})
-  void testInternalArrayTypeFromClassName_whenThree_thenReturnLInternalClassName() {
+  public void testInternalArrayTypeFromClassName_whenThree_thenReturnLInternalClassName() {
     // Arrange, Act and Assert
     assertEquals(
         "[[[LInternal Class Name;",
@@ -2626,12 +2302,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalArrayTypeFromType(String, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalArrayTypeFromType(String, int); when two; then return '[[Internal Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalArrayTypeFromType(String, int)"})
-  void testInternalArrayTypeFromType_whenTwo_thenReturnInternalType() {
+  public void testInternalArrayTypeFromType_whenTwo_thenReturnInternalType() {
     // Arrange, Act and Assert
     assertEquals("[[Internal Type", ClassUtil.internalArrayTypeFromType("Internal Type", 2));
   }
@@ -2642,11 +2315,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalTypeFromArrayType(String)}
    */
   @Test
-  @DisplayName("Test internalTypeFromArrayType(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalTypeFromArrayType(String)"})
-  void testInternalTypeFromArrayType() {
+  public void testInternalTypeFromArrayType() {
     // Arrange, Act and Assert
     assertEquals("Internal Array Type", ClassUtil.internalTypeFromArrayType("Internal Array Type"));
   }
@@ -2662,12 +2333,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassTypeFromType(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassTypeFromType(String); when empty string; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalClassTypeFromType(String)"})
-  void testInternalClassTypeFromType_whenEmptyString_thenReturnEmptyString() {
+  public void testInternalClassTypeFromType_whenEmptyString_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.internalClassTypeFromType(""));
   }
@@ -2683,12 +2351,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassTypeFromType(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassTypeFromType(String); when 'Internal Type'; then return 'Internal Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalClassTypeFromType(String)"})
-  void testInternalClassTypeFromType_whenInternalType_thenReturnInternalType() {
+  public void testInternalClassTypeFromType_whenInternalType_thenReturnInternalType() {
     // Arrange, Act and Assert
     assertEquals("Internal Type", ClassUtil.internalClassTypeFromType("Internal Type"));
   }
@@ -2704,11 +2369,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalTypeFromClassType(String)}
    */
   @Test
-  @DisplayName("Test internalTypeFromClassType(String); when empty string; then return 'L;'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalTypeFromClassType(String)"})
-  void testInternalTypeFromClassType_whenEmptyString_thenReturnL() {
+  public void testInternalTypeFromClassType_whenEmptyString_thenReturnL() {
     // Arrange, Act and Assert
     assertEquals("L;", ClassUtil.internalTypeFromClassType(""));
   }
@@ -2724,12 +2387,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalTypeFromClassType(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalTypeFromClassType(String); when 'Internal Type'; then return 'LInternal Type;'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalTypeFromClassType(String)"})
-  void testInternalTypeFromClassType_whenInternalType_thenReturnLInternalType() {
+  public void testInternalTypeFromClassType_whenInternalType_thenReturnLInternalType() {
     // Arrange, Act and Assert
     assertEquals("LInternal Type;", ClassUtil.internalTypeFromClassType("Internal Type"));
   }
@@ -2744,11 +2404,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassNameFromClassType(String)}
    */
   @Test
-  @DisplayName("Test internalClassNameFromClassType(String); then return 'Internal Class Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalClassNameFromClassType(String)"})
-  void testInternalClassNameFromClassType_thenReturnInternalClassType() {
+  public void testInternalClassNameFromClassType_thenReturnInternalClassType() {
     // Arrange, Act and Assert
     assertEquals(
         "Internal Class Type", ClassUtil.internalClassNameFromClassType("Internal Class Type"));
@@ -2765,12 +2423,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassNameFromClassType(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassNameFromClassType(String); when empty string; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalClassNameFromClassType(String)"})
-  void testInternalClassNameFromClassType_whenEmptyString_thenReturnEmptyString() {
+  public void testInternalClassNameFromClassType_whenEmptyString_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.internalClassNameFromClassType(""));
   }
@@ -2785,11 +2440,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassNameFromClassSignature(String)}
    */
   @Test
-  @DisplayName("Test internalClassNameFromClassSignature(String); then return 'Class Signature'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalClassNameFromClassSignature(String)"})
-  void testInternalClassNameFromClassSignature_thenReturnClassSignature() {
+  public void testInternalClassNameFromClassSignature_thenReturnClassSignature() {
     // Arrange, Act and Assert
     assertEquals(
         "Class Signature", ClassUtil.internalClassNameFromClassSignature("Class Signature"));
@@ -2806,12 +2459,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassNameFromClassSignature(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalClassNameFromClassSignature(String); when empty string; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalClassNameFromClassSignature(String)"})
-  void testInternalClassNameFromClassSignature_whenEmptyString_thenReturnEmptyString() {
+  public void testInternalClassNameFromClassSignature_whenEmptyString_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.internalClassNameFromClassSignature(""));
   }
@@ -2822,11 +2472,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#removeGenericTypes(String)}
    */
   @Test
-  @DisplayName("Test removeGenericTypes(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.removeGenericTypes(String)"})
-  void testRemoveGenericTypes() {
+  public void testRemoveGenericTypes() {
     // Arrange, Act and Assert
     assertEquals("Descriptor", ClassUtil.removeGenericTypes("Descriptor"));
   }
@@ -2841,11 +2489,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassNameFromType(String)}
    */
   @Test
-  @DisplayName("Test internalClassNameFromType(String); when empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalClassNameFromType(String)"})
-  void testInternalClassNameFromType_whenEmptyString() {
+  public void testInternalClassNameFromType_whenEmptyString() {
     // Arrange, Act and Assert
     assertNull(ClassUtil.internalClassNameFromType(""));
   }
@@ -2860,11 +2506,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalClassNameFromType(String)}
    */
   @Test
-  @DisplayName("Test internalClassNameFromType(String); when 'Internal Class Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalClassNameFromType(String)"})
-  void testInternalClassNameFromType_whenInternalClassType() {
+  public void testInternalClassNameFromType_whenInternalClassType() {
     // Arrange, Act and Assert
     assertNull(ClassUtil.internalClassNameFromType("Internal Class Type"));
   }
@@ -2879,12 +2523,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalNumericClassNameFromPrimitiveType(char)}
    */
   @Test
-  @DisplayName(
-      "Test internalNumericClassNameFromPrimitiveType(char); then return 'java/lang/reflect/Array'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalNumericClassNameFromPrimitiveType(char)"})
-  void testInternalNumericClassNameFromPrimitiveType_thenReturnJavaLangReflectArray() {
+  public void testInternalNumericClassNameFromPrimitiveType_thenReturnJavaLangReflectArray() {
     // Arrange, Act and Assert
     assertEquals(
         "java/lang/reflect/Array", ClassUtil.internalNumericClassNameFromPrimitiveType('['));
@@ -2900,12 +2541,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalNumericClassNameFromPrimitiveType(char)}
    */
   @Test
-  @DisplayName(
-      "Test internalNumericClassNameFromPrimitiveType(char); then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalNumericClassNameFromPrimitiveType(char)"})
-  void testInternalNumericClassNameFromPrimitiveType_thenThrowIllegalArgumentException() {
+  public void testInternalNumericClassNameFromPrimitiveType_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -2923,12 +2561,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalNumericClassNameFromPrimitiveType(char)}
    */
   @Test
-  @DisplayName(
-      "Test internalNumericClassNameFromPrimitiveType(char); when 'B'; then return 'java/lang/Byte'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalNumericClassNameFromPrimitiveType(char)"})
-  void testInternalNumericClassNameFromPrimitiveType_whenB_thenReturnJavaLangByte() {
+  public void testInternalNumericClassNameFromPrimitiveType_whenB_thenReturnJavaLangByte() {
     // Arrange, Act and Assert
     assertEquals("java/lang/Byte", ClassUtil.internalNumericClassNameFromPrimitiveType('B'));
   }
@@ -2944,12 +2579,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalNumericClassNameFromPrimitiveType(char)}
    */
   @Test
-  @DisplayName(
-      "Test internalNumericClassNameFromPrimitiveType(char); when 'C'; then return 'java/lang/Character'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalNumericClassNameFromPrimitiveType(char)"})
-  void testInternalNumericClassNameFromPrimitiveType_whenC_thenReturnJavaLangCharacter() {
+  public void testInternalNumericClassNameFromPrimitiveType_whenC_thenReturnJavaLangCharacter() {
     // Arrange, Act and Assert
     assertEquals("java/lang/Character", ClassUtil.internalNumericClassNameFromPrimitiveType('C'));
   }
@@ -2965,12 +2597,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalNumericClassNameFromPrimitiveType(char)}
    */
   @Test
-  @DisplayName(
-      "Test internalNumericClassNameFromPrimitiveType(char); when 'D'; then return 'java/lang/Double'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalNumericClassNameFromPrimitiveType(char)"})
-  void testInternalNumericClassNameFromPrimitiveType_whenD_thenReturnJavaLangDouble() {
+  public void testInternalNumericClassNameFromPrimitiveType_whenD_thenReturnJavaLangDouble() {
     // Arrange, Act and Assert
     assertEquals("java/lang/Double", ClassUtil.internalNumericClassNameFromPrimitiveType('D'));
   }
@@ -2986,12 +2615,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalNumericClassNameFromPrimitiveType(char)}
    */
   @Test
-  @DisplayName(
-      "Test internalNumericClassNameFromPrimitiveType(char); when 'F'; then return 'java/lang/Float'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalNumericClassNameFromPrimitiveType(char)"})
-  void testInternalNumericClassNameFromPrimitiveType_whenF_thenReturnJavaLangFloat() {
+  public void testInternalNumericClassNameFromPrimitiveType_whenF_thenReturnJavaLangFloat() {
     // Arrange, Act and Assert
     assertEquals("java/lang/Float", ClassUtil.internalNumericClassNameFromPrimitiveType('F'));
   }
@@ -3007,12 +2633,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalNumericClassNameFromPrimitiveType(char)}
    */
   @Test
-  @DisplayName(
-      "Test internalNumericClassNameFromPrimitiveType(char); when 'I'; then return 'java/lang/Integer'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalNumericClassNameFromPrimitiveType(char)"})
-  void testInternalNumericClassNameFromPrimitiveType_whenI_thenReturnJavaLangInteger() {
+  public void testInternalNumericClassNameFromPrimitiveType_whenI_thenReturnJavaLangInteger() {
     // Arrange, Act and Assert
     assertEquals("java/lang/Integer", ClassUtil.internalNumericClassNameFromPrimitiveType('I'));
   }
@@ -3028,12 +2651,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalNumericClassNameFromPrimitiveType(char)}
    */
   @Test
-  @DisplayName(
-      "Test internalNumericClassNameFromPrimitiveType(char); when 'J'; then return 'java/lang/Long'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalNumericClassNameFromPrimitiveType(char)"})
-  void testInternalNumericClassNameFromPrimitiveType_whenJ_thenReturnJavaLangLong() {
+  public void testInternalNumericClassNameFromPrimitiveType_whenJ_thenReturnJavaLangLong() {
     // Arrange, Act and Assert
     assertEquals("java/lang/Long", ClassUtil.internalNumericClassNameFromPrimitiveType('J'));
   }
@@ -3049,12 +2669,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalNumericClassNameFromPrimitiveType(char)}
    */
   @Test
-  @DisplayName(
-      "Test internalNumericClassNameFromPrimitiveType(char); when 'S'; then return 'java/lang/Short'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalNumericClassNameFromPrimitiveType(char)"})
-  void testInternalNumericClassNameFromPrimitiveType_whenS_thenReturnJavaLangShort() {
+  public void testInternalNumericClassNameFromPrimitiveType_whenS_thenReturnJavaLangShort() {
     // Arrange, Act and Assert
     assertEquals("java/lang/Short", ClassUtil.internalNumericClassNameFromPrimitiveType('S'));
   }
@@ -3070,12 +2687,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalNumericClassNameFromPrimitiveType(char)}
    */
   @Test
-  @DisplayName(
-      "Test internalNumericClassNameFromPrimitiveType(char); when 'V'; then return 'java/lang/Void'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalNumericClassNameFromPrimitiveType(char)"})
-  void testInternalNumericClassNameFromPrimitiveType_whenV_thenReturnJavaLangVoid() {
+  public void testInternalNumericClassNameFromPrimitiveType_whenV_thenReturnJavaLangVoid() {
     // Arrange, Act and Assert
     assertEquals("java/lang/Void", ClassUtil.internalNumericClassNameFromPrimitiveType('V'));
   }
@@ -3091,12 +2705,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalNumericClassNameFromPrimitiveType(char)}
    */
   @Test
-  @DisplayName(
-      "Test internalNumericClassNameFromPrimitiveType(char); when 'Z'; then return 'java/lang/Boolean'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalNumericClassNameFromPrimitiveType(char)"})
-  void testInternalNumericClassNameFromPrimitiveType_whenZ_thenReturnJavaLangBoolean() {
+  public void testInternalNumericClassNameFromPrimitiveType_whenZ_thenReturnJavaLangBoolean() {
     // Arrange, Act and Assert
     assertEquals("java/lang/Boolean", ClassUtil.internalNumericClassNameFromPrimitiveType('Z'));
   }
@@ -3111,11 +2722,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromNumericClassName(String)}
    */
   @Test
-  @DisplayName("Test internalPrimitiveTypeFromNumericClassName(String); then return '['")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromNumericClassName(String)"})
-  void testInternalPrimitiveTypeFromNumericClassName_thenReturnLeftSquareBracket() {
+  public void testInternalPrimitiveTypeFromNumericClassName_thenReturnLeftSquareBracket() {
     // Arrange, Act and Assert
     assertEquals(
         '[', ClassUtil.internalPrimitiveTypeFromNumericClassName("java/lang/reflect/Array"));
@@ -3131,12 +2740,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromNumericClassName(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalPrimitiveTypeFromNumericClassName(String); then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromNumericClassName(String)"})
-  void testInternalPrimitiveTypeFromNumericClassName_thenThrowIllegalArgumentException() {
+  public void testInternalPrimitiveTypeFromNumericClassName_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -3154,12 +2760,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromNumericClassName(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalPrimitiveTypeFromNumericClassName(String); when 'java/lang/Boolean'; then return 'Z'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromNumericClassName(String)"})
-  void testInternalPrimitiveTypeFromNumericClassName_whenJavaLangBoolean_thenReturnZ() {
+  public void testInternalPrimitiveTypeFromNumericClassName_whenJavaLangBoolean_thenReturnZ() {
     // Arrange, Act and Assert
     assertEquals('Z', ClassUtil.internalPrimitiveTypeFromNumericClassName("java/lang/Boolean"));
   }
@@ -3175,12 +2778,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromNumericClassName(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalPrimitiveTypeFromNumericClassName(String); when 'java/lang/Byte'; then return 'B'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromNumericClassName(String)"})
-  void testInternalPrimitiveTypeFromNumericClassName_whenJavaLangByte_thenReturnB() {
+  public void testInternalPrimitiveTypeFromNumericClassName_whenJavaLangByte_thenReturnB() {
     // Arrange, Act and Assert
     assertEquals('B', ClassUtil.internalPrimitiveTypeFromNumericClassName("java/lang/Byte"));
   }
@@ -3196,12 +2796,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromNumericClassName(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalPrimitiveTypeFromNumericClassName(String); when 'java/lang/Character'; then return 'C'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromNumericClassName(String)"})
-  void testInternalPrimitiveTypeFromNumericClassName_whenJavaLangCharacter_thenReturnC() {
+  public void testInternalPrimitiveTypeFromNumericClassName_whenJavaLangCharacter_thenReturnC() {
     // Arrange, Act and Assert
     assertEquals('C', ClassUtil.internalPrimitiveTypeFromNumericClassName("java/lang/Character"));
   }
@@ -3217,12 +2814,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromNumericClassName(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalPrimitiveTypeFromNumericClassName(String); when 'java/lang/Double'; then return 'D'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromNumericClassName(String)"})
-  void testInternalPrimitiveTypeFromNumericClassName_whenJavaLangDouble_thenReturnD() {
+  public void testInternalPrimitiveTypeFromNumericClassName_whenJavaLangDouble_thenReturnD() {
     // Arrange, Act and Assert
     assertEquals('D', ClassUtil.internalPrimitiveTypeFromNumericClassName("java/lang/Double"));
   }
@@ -3238,12 +2832,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromNumericClassName(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalPrimitiveTypeFromNumericClassName(String); when 'java/lang/Float'; then return 'F'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromNumericClassName(String)"})
-  void testInternalPrimitiveTypeFromNumericClassName_whenJavaLangFloat_thenReturnF() {
+  public void testInternalPrimitiveTypeFromNumericClassName_whenJavaLangFloat_thenReturnF() {
     // Arrange, Act and Assert
     assertEquals('F', ClassUtil.internalPrimitiveTypeFromNumericClassName("java/lang/Float"));
   }
@@ -3259,12 +2850,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromNumericClassName(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalPrimitiveTypeFromNumericClassName(String); when 'java/lang/Integer'; then return 'I'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromNumericClassName(String)"})
-  void testInternalPrimitiveTypeFromNumericClassName_whenJavaLangInteger_thenReturnI() {
+  public void testInternalPrimitiveTypeFromNumericClassName_whenJavaLangInteger_thenReturnI() {
     // Arrange, Act and Assert
     assertEquals('I', ClassUtil.internalPrimitiveTypeFromNumericClassName("java/lang/Integer"));
   }
@@ -3280,12 +2868,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromNumericClassName(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalPrimitiveTypeFromNumericClassName(String); when 'java/lang/Long'; then return 'J'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromNumericClassName(String)"})
-  void testInternalPrimitiveTypeFromNumericClassName_whenJavaLangLong_thenReturnJ() {
+  public void testInternalPrimitiveTypeFromNumericClassName_whenJavaLangLong_thenReturnJ() {
     // Arrange, Act and Assert
     assertEquals('J', ClassUtil.internalPrimitiveTypeFromNumericClassName("java/lang/Long"));
   }
@@ -3301,12 +2886,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromNumericClassName(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalPrimitiveTypeFromNumericClassName(String); when 'java/lang/Short'; then return 'S'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromNumericClassName(String)"})
-  void testInternalPrimitiveTypeFromNumericClassName_whenJavaLangShort_thenReturnS() {
+  public void testInternalPrimitiveTypeFromNumericClassName_whenJavaLangShort_thenReturnS() {
     // Arrange, Act and Assert
     assertEquals('S', ClassUtil.internalPrimitiveTypeFromNumericClassName("java/lang/Short"));
   }
@@ -3322,12 +2904,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeFromNumericClassName(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalPrimitiveTypeFromNumericClassName(String); when 'java/lang/Void'; then return 'V'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char ClassUtil.internalPrimitiveTypeFromNumericClassName(String)"})
-  void testInternalPrimitiveTypeFromNumericClassName_whenJavaLangVoid_thenReturnV() {
+  public void testInternalPrimitiveTypeFromNumericClassName_whenJavaLangVoid_thenReturnV() {
     // Arrange, Act and Assert
     assertEquals('V', ClassUtil.internalPrimitiveTypeFromNumericClassName("java/lang/Void"));
   }
@@ -3338,11 +2917,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalSimpleClassName(String)}
    */
   @Test
-  @DisplayName("Test internalSimpleClassName(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalSimpleClassName(String)"})
-  void testInternalSimpleClassName() {
+  public void testInternalSimpleClassName() {
     // Arrange, Act and Assert
     assertEquals("Internal Class Name", ClassUtil.internalSimpleClassName("Internal Class Name"));
   }
@@ -3357,11 +2934,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeToComputationalType(String)}
    */
   @Test
-  @DisplayName("Test internalPrimitiveTypeToComputationalType(String); then return UNKNOWN")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalPrimitiveTypeToComputationalType(String)"})
-  void testInternalPrimitiveTypeToComputationalType_thenReturnUnknown() {
+  public void testInternalPrimitiveTypeToComputationalType_thenReturnUnknown() {
     // Arrange, Act and Assert
     assertEquals(
         BranchTargetFinder.UNKNOWN,
@@ -3379,11 +2954,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeToComputationalType(String)}
    */
   @Test
-  @DisplayName("Test internalPrimitiveTypeToComputationalType(String); when 'D'; then return four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalPrimitiveTypeToComputationalType(String)"})
-  void testInternalPrimitiveTypeToComputationalType_whenD_thenReturnFour() {
+  public void testInternalPrimitiveTypeToComputationalType_whenD_thenReturnFour() {
     // Arrange, Act and Assert
     assertEquals(4, ClassUtil.internalPrimitiveTypeToComputationalType("D"));
   }
@@ -3399,11 +2972,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeToComputationalType(String)}
    */
   @Test
-  @DisplayName("Test internalPrimitiveTypeToComputationalType(String); when 'F'; then return three")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalPrimitiveTypeToComputationalType(String)"})
-  void testInternalPrimitiveTypeToComputationalType_whenF_thenReturnThree() {
+  public void testInternalPrimitiveTypeToComputationalType_whenF_thenReturnThree() {
     // Arrange, Act and Assert
     assertEquals(3, ClassUtil.internalPrimitiveTypeToComputationalType("F"));
   }
@@ -3419,11 +2990,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeToComputationalType(String)}
    */
   @Test
-  @DisplayName("Test internalPrimitiveTypeToComputationalType(String); when 'I'; then return one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalPrimitiveTypeToComputationalType(String)"})
-  void testInternalPrimitiveTypeToComputationalType_whenI_thenReturnOne() {
+  public void testInternalPrimitiveTypeToComputationalType_whenI_thenReturnOne() {
     // Arrange, Act and Assert
     assertEquals(1, ClassUtil.internalPrimitiveTypeToComputationalType("I"));
   }
@@ -3439,11 +3008,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeToComputationalType(String)}
    */
   @Test
-  @DisplayName("Test internalPrimitiveTypeToComputationalType(String); when 'J'; then return two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalPrimitiveTypeToComputationalType(String)"})
-  void testInternalPrimitiveTypeToComputationalType_whenJ_thenReturnTwo() {
+  public void testInternalPrimitiveTypeToComputationalType_whenJ_thenReturnTwo() {
     // Arrange, Act and Assert
     assertEquals(2, ClassUtil.internalPrimitiveTypeToComputationalType("J"));
   }
@@ -3459,11 +3026,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPrimitiveTypeToComputationalType(String)}
    */
   @Test
-  @DisplayName("Test internalPrimitiveTypeToComputationalType(String); when 'Z'; then return one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalPrimitiveTypeToComputationalType(String)"})
-  void testInternalPrimitiveTypeToComputationalType_whenZ_thenReturnOne() {
+  public void testInternalPrimitiveTypeToComputationalType_whenZ_thenReturnOne() {
     // Arrange, Act and Assert
     assertEquals(1, ClassUtil.internalPrimitiveTypeToComputationalType("Z"));
   }
@@ -3479,11 +3044,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInitializer(String)}
    */
   @Test
-  @DisplayName("Test isInitializer(String); when '<clinit>'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInitializer(String)"})
-  void testIsInitializer_whenClinit_thenReturnTrue() {
+  public void testIsInitializer_whenClinit_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInitializer("<clinit>"));
   }
@@ -3499,11 +3062,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInitializer(String)}
    */
   @Test
-  @DisplayName("Test isInitializer(String); when '<init>'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInitializer(String)"})
-  void testIsInitializer_whenInit_thenReturnTrue() {
+  public void testIsInitializer_whenInit_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInitializer("<init>"));
   }
@@ -3519,11 +3080,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInitializer(String)}
    */
   @Test
-  @DisplayName("Test isInitializer(String); when 'Internal Method Name'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInitializer(String)"})
-  void testIsInitializer_whenInternalMethodName_thenReturnFalse() {
+  public void testIsInitializer_whenInternalMethodName_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(ClassUtil.isInitializer("Internal Method Name"));
   }
@@ -3539,11 +3098,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isClassInitializer(String)}
    */
   @Test
-  @DisplayName("Test isClassInitializer(String); when '<clinit>'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isClassInitializer(String)"})
-  void testIsClassInitializer_whenClinit_thenReturnTrue() {
+  public void testIsClassInitializer_whenClinit_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isClassInitializer("<clinit>"));
   }
@@ -3559,11 +3116,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isClassInitializer(String)}
    */
   @Test
-  @DisplayName("Test isClassInitializer(String); when 'Internal Method Name'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isClassInitializer(String)"})
-  void testIsClassInitializer_whenInternalMethodName_thenReturnFalse() {
+  public void testIsClassInitializer_whenInternalMethodName_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(ClassUtil.isClassInitializer("Internal Method Name"));
   }
@@ -3579,11 +3134,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInstanceInitializer(String)}
    */
   @Test
-  @DisplayName("Test isInstanceInitializer(String); when '<init>'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInstanceInitializer(String)"})
-  void testIsInstanceInitializer_whenInit_thenReturnTrue() {
+  public void testIsInstanceInitializer_whenInit_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isInstanceInitializer("<init>"));
   }
@@ -3599,12 +3152,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInstanceInitializer(String)}
    */
   @Test
-  @DisplayName(
-      "Test isInstanceInitializer(String); when 'Internal Method Name'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInstanceInitializer(String)"})
-  void testIsInstanceInitializer_whenInternalMethodName_thenReturnFalse() {
+  public void testIsInstanceInitializer_whenInternalMethodName_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(ClassUtil.isInstanceInitializer("Internal Method Name"));
   }
@@ -3615,11 +3165,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodReturnType(String)}
    */
   @Test
-  @DisplayName("Test internalMethodReturnType(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalMethodReturnType(String)"})
-  void testInternalMethodReturnType() {
+  public void testInternalMethodReturnType() {
     // Arrange, Act and Assert
     assertEquals(
         "Internal Method Descriptor",
@@ -3633,11 +3181,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodParameterCount(String)}
    */
   @Test
-  @DisplayName("Test internalMethodParameterCount(String) with 'internalMethodDescriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalMethodParameterCount(String)"})
-  void testInternalMethodParameterCountWithInternalMethodDescriptor() {
+  public void testInternalMethodParameterCountWithInternalMethodDescriptor() {
     // Arrange, Act and Assert
     assertEquals(25, ClassUtil.internalMethodParameterCount("Internal Method Descriptor)"));
   }
@@ -3653,12 +3199,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodParameterSize(String)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodParameterSize(String) with 'internalMethodDescriptor'; then return twenty-six")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalMethodParameterSize(String)"})
-  void testInternalMethodParameterSizeWithInternalMethodDescriptor_thenReturnTwentySix() {
+  public void testInternalMethodParameterSizeWithInternalMethodDescriptor_thenReturnTwentySix() {
     // Arrange, Act and Assert
     assertEquals(26, ClassUtil.internalMethodParameterSize("Internal Method Descriptor)"));
   }
@@ -3670,12 +3213,10 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodParameterNumber(String, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodParameterNumber(String, int, int) with 'internalMethodDescriptor', 'accessFlags', 'variableIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalMethodParameterNumber(String, int, int)"})
-  void testInternalMethodParameterNumberWithInternalMethodDescriptorAccessFlagsVariableIndex() {
+  public void
+      testInternalMethodParameterNumberWithInternalMethodDescriptorAccessFlagsVariableIndex() {
     // Arrange, Act and Assert
     assertEquals(1, ClassUtil.internalMethodParameterNumber("Internal Method Descriptor", 1, 1));
   }
@@ -3687,12 +3228,10 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodParameterNumber(String, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodParameterNumber(String, int, int) with 'internalMethodDescriptor', 'accessFlags', 'variableIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalMethodParameterNumber(String, int, int)"})
-  void testInternalMethodParameterNumberWithInternalMethodDescriptorAccessFlagsVariableIndex2() {
+  public void
+      testInternalMethodParameterNumberWithInternalMethodDescriptorAccessFlagsVariableIndex2() {
     // Arrange, Act and Assert
     assertEquals(0, ClassUtil.internalMethodParameterNumber("Internal Method Descriptor", 1, 0));
   }
@@ -3704,12 +3243,10 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodParameterNumber(String, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodParameterNumber(String, int, int) with 'internalMethodDescriptor', 'accessFlags', 'variableIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalMethodParameterNumber(String, int, int)"})
-  void testInternalMethodParameterNumberWithInternalMethodDescriptorAccessFlagsVariableIndex3() {
+  public void
+      testInternalMethodParameterNumberWithInternalMethodDescriptorAccessFlagsVariableIndex3() {
     // Arrange, Act and Assert
     assertEquals(1, ClassUtil.internalMethodParameterNumber("Internal Method Descriptor", 8, 1));
   }
@@ -3721,12 +3258,10 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodParameterNumber(String, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodParameterNumber(String, int, int) with 'internalMethodDescriptor', 'accessFlags', 'variableIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalMethodParameterNumber(String, int, int)"})
-  void testInternalMethodParameterNumberWithInternalMethodDescriptorAccessFlagsVariableIndex4() {
+  public void
+      testInternalMethodParameterNumberWithInternalMethodDescriptorAccessFlagsVariableIndex4() {
     // Arrange, Act and Assert
     assertEquals(
         BranchTargetFinder.UNKNOWN,
@@ -3740,12 +3275,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodParameterNumber(String, boolean, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodParameterNumber(String, boolean, int) with 'internalMethodDescriptor', 'isStatic', 'variableIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalMethodParameterNumber(String, boolean, int)"})
-  void testInternalMethodParameterNumberWithInternalMethodDescriptorIsStaticVariableIndex() {
+  public void testInternalMethodParameterNumberWithInternalMethodDescriptorIsStaticVariableIndex() {
     // Arrange, Act and Assert
     assertEquals(1, ClassUtil.internalMethodParameterNumber("Internal Method Descriptor", true, 1));
   }
@@ -3757,12 +3289,10 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodParameterNumber(String, boolean, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodParameterNumber(String, boolean, int) with 'internalMethodDescriptor', 'isStatic', 'variableIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalMethodParameterNumber(String, boolean, int)"})
-  void testInternalMethodParameterNumberWithInternalMethodDescriptorIsStaticVariableIndex2() {
+  public void
+      testInternalMethodParameterNumberWithInternalMethodDescriptorIsStaticVariableIndex2() {
     // Arrange, Act and Assert
     assertEquals(
         0, ClassUtil.internalMethodParameterNumber("Internal Method Descriptor", false, 0));
@@ -3775,12 +3305,10 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodParameterNumber(String, boolean, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodParameterNumber(String, boolean, int) with 'internalMethodDescriptor', 'isStatic', 'variableIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalMethodParameterNumber(String, boolean, int)"})
-  void testInternalMethodParameterNumberWithInternalMethodDescriptorIsStaticVariableIndex3() {
+  public void
+      testInternalMethodParameterNumberWithInternalMethodDescriptorIsStaticVariableIndex3() {
     // Arrange, Act and Assert
     assertEquals(
         1, ClassUtil.internalMethodParameterNumber("Internal Method Descriptor", false, 1));
@@ -3793,12 +3321,10 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodParameterNumber(String, boolean, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodParameterNumber(String, boolean, int) with 'internalMethodDescriptor', 'isStatic', 'variableIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalMethodParameterNumber(String, boolean, int)"})
-  void testInternalMethodParameterNumberWithInternalMethodDescriptorIsStaticVariableIndex4() {
+  public void
+      testInternalMethodParameterNumberWithInternalMethodDescriptorIsStaticVariableIndex4() {
     // Arrange, Act and Assert
     assertEquals(
         BranchTargetFinder.UNKNOWN,
@@ -3812,12 +3338,10 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodVariableIndex(String, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodVariableIndex(String, int, int) with 'internalMethodDescriptor', 'accessFlags', 'parameterNumber'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalMethodVariableIndex(String, int, int)"})
-  void testInternalMethodVariableIndexWithInternalMethodDescriptorAccessFlagsParameterNumber() {
+  public void
+      testInternalMethodVariableIndexWithInternalMethodDescriptorAccessFlagsParameterNumber() {
     // Arrange, Act and Assert
     assertEquals(11, ClassUtil.internalMethodVariableIndex("Internal Method Descriptor", 1, 10));
   }
@@ -3829,12 +3353,10 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodVariableIndex(String, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodVariableIndex(String, int, int) with 'internalMethodDescriptor', 'accessFlags', 'parameterNumber'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalMethodVariableIndex(String, int, int)"})
-  void testInternalMethodVariableIndexWithInternalMethodDescriptorAccessFlagsParameterNumber2() {
+  public void
+      testInternalMethodVariableIndexWithInternalMethodDescriptorAccessFlagsParameterNumber2() {
     // Arrange, Act and Assert
     assertEquals(19, ClassUtil.internalMethodVariableIndex("Internal Method Descriptor", 1, 17));
   }
@@ -3846,12 +3368,10 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodVariableIndex(String, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodVariableIndex(String, int, int) with 'internalMethodDescriptor', 'accessFlags', 'parameterNumber'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalMethodVariableIndex(String, int, int)"})
-  void testInternalMethodVariableIndexWithInternalMethodDescriptorAccessFlagsParameterNumber3() {
+  public void
+      testInternalMethodVariableIndexWithInternalMethodDescriptorAccessFlagsParameterNumber3() {
     // Arrange, Act and Assert
     assertEquals(10, ClassUtil.internalMethodVariableIndex("Internal Method Descriptor", 8, 10));
   }
@@ -3863,12 +3383,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodVariableIndex(String, boolean, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodVariableIndex(String, boolean, int) with 'internalMethodDescriptor', 'isStatic', 'parameterNumber'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalMethodVariableIndex(String, boolean, int)"})
-  void testInternalMethodVariableIndexWithInternalMethodDescriptorIsStaticParameterNumber() {
+  public void testInternalMethodVariableIndexWithInternalMethodDescriptorIsStaticParameterNumber() {
     // Arrange, Act and Assert
     assertEquals(10, ClassUtil.internalMethodVariableIndex("Internal Method Descriptor", true, 10));
   }
@@ -3880,12 +3397,10 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodVariableIndex(String, boolean, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodVariableIndex(String, boolean, int) with 'internalMethodDescriptor', 'isStatic', 'parameterNumber'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalMethodVariableIndex(String, boolean, int)"})
-  void testInternalMethodVariableIndexWithInternalMethodDescriptorIsStaticParameterNumber2() {
+  public void
+      testInternalMethodVariableIndexWithInternalMethodDescriptorIsStaticParameterNumber2() {
     // Arrange, Act and Assert
     assertEquals(1, ClassUtil.internalMethodVariableIndex("Internal Method Descriptor", false, 0));
   }
@@ -3897,12 +3412,10 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodVariableIndex(String, boolean, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodVariableIndex(String, boolean, int) with 'internalMethodDescriptor', 'isStatic', 'parameterNumber'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalMethodVariableIndex(String, boolean, int)"})
-  void testInternalMethodVariableIndexWithInternalMethodDescriptorIsStaticParameterNumber3() {
+  public void
+      testInternalMethodVariableIndexWithInternalMethodDescriptorIsStaticParameterNumber3() {
     // Arrange, Act and Assert
     assertEquals(
         19, ClassUtil.internalMethodVariableIndex("Internal Method Descriptor", false, 17));
@@ -3919,12 +3432,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodParameterType(String, int)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodParameterType(String, int); when 'Internal Method Descriptor'; then return 'n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalMethodParameterType(String, int)"})
-  void testInternalMethodParameterType_whenInternalMethodDescriptor_thenReturnN() {
+  public void testInternalMethodParameterType_whenInternalMethodDescriptor_thenReturnN() {
     // Arrange, Act and Assert
     assertEquals("n", ClassUtil.internalMethodParameterType("Internal Method Descriptor", 1));
   }
@@ -3939,11 +3449,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalTypeSize(String)}
    */
   @Test
-  @DisplayName("Test internalTypeSize(String); when 'Internal Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalTypeSize(String)"})
-  void testInternalTypeSize_whenInternalType() {
+  public void testInternalTypeSize_whenInternalType() {
     // Arrange, Act and Assert
     assertEquals(1, ClassUtil.internalTypeSize("Internal Type"));
   }
@@ -3958,11 +3466,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalTypeSize(String)}
    */
   @Test
-  @DisplayName("Test internalTypeSize(String); when '%'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.internalTypeSize(String)"})
-  void testInternalTypeSize_whenPercentSign() {
+  public void testInternalTypeSize_whenPercentSign() {
     // Arrange, Act and Assert
     assertEquals(1, ClassUtil.internalTypeSize("%"));
   }
@@ -3978,11 +3484,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalType(String)}
    */
   @Test
-  @DisplayName("Test internalType(String); when 'boolean'; then return 'Z'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalType(String)"})
-  void testInternalType_whenBoolean_thenReturnZ() {
+  public void testInternalType_whenBoolean_thenReturnZ() {
     // Arrange, Act and Assert
     assertEquals("Z", ClassUtil.internalType("boolean"));
   }
@@ -3998,11 +3502,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalType(String)}
    */
   @Test
-  @DisplayName("Test internalType(String); when 'byte'; then return 'B'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalType(String)"})
-  void testInternalType_whenByte_thenReturnB() {
+  public void testInternalType_whenByte_thenReturnB() {
     // Arrange, Act and Assert
     assertEquals("B", ClassUtil.internalType("byte"));
   }
@@ -4018,11 +3520,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalType(String)}
    */
   @Test
-  @DisplayName("Test internalType(String); when 'char'; then return 'C'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalType(String)"})
-  void testInternalType_whenChar_thenReturnC() {
+  public void testInternalType_whenChar_thenReturnC() {
     // Arrange, Act and Assert
     assertEquals("C", ClassUtil.internalType("char"));
   }
@@ -4038,11 +3538,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalType(String)}
    */
   @Test
-  @DisplayName("Test internalType(String); when 'double'; then return 'D'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalType(String)"})
-  void testInternalType_whenDouble_thenReturnD() {
+  public void testInternalType_whenDouble_thenReturnD() {
     // Arrange, Act and Assert
     assertEquals("D", ClassUtil.internalType("double"));
   }
@@ -4058,11 +3556,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalType(String)}
    */
   @Test
-  @DisplayName("Test internalType(String); when 'External Type'; then return 'LExternal Type;'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalType(String)"})
-  void testInternalType_whenExternalType_thenReturnLExternalType() {
+  public void testInternalType_whenExternalType_thenReturnLExternalType() {
     // Arrange, Act and Assert
     assertEquals("LExternal Type;", ClassUtil.internalType("External Type"));
   }
@@ -4078,11 +3574,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalType(String)}
    */
   @Test
-  @DisplayName("Test internalType(String); when 'float'; then return 'F'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalType(String)"})
-  void testInternalType_whenFloat_thenReturnF() {
+  public void testInternalType_whenFloat_thenReturnF() {
     // Arrange, Act and Assert
     assertEquals("F", ClassUtil.internalType("float"));
   }
@@ -4098,11 +3592,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalType(String)}
    */
   @Test
-  @DisplayName("Test internalType(String); when 'int'; then return 'I'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalType(String)"})
-  void testInternalType_whenInt_thenReturnI() {
+  public void testInternalType_whenInt_thenReturnI() {
     // Arrange, Act and Assert
     assertEquals("I", ClassUtil.internalType("int"));
   }
@@ -4118,11 +3610,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalType(String)}
    */
   @Test
-  @DisplayName("Test internalType(String); when '[]'; then return '[L;'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalType(String)"})
-  void testInternalType_whenLeftSquareBracketRightSquareBracket_thenReturnL() {
+  public void testInternalType_whenLeftSquareBracketRightSquareBracket_thenReturnL() {
     // Arrange, Act and Assert
     assertEquals("[L;", ClassUtil.internalType("[]"));
   }
@@ -4138,11 +3628,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalType(String)}
    */
   @Test
-  @DisplayName("Test internalType(String); when 'long'; then return 'J'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalType(String)"})
-  void testInternalType_whenLong_thenReturnJ() {
+  public void testInternalType_whenLong_thenReturnJ() {
     // Arrange, Act and Assert
     assertEquals("J", ClassUtil.internalType("long"));
   }
@@ -4158,11 +3646,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalType(String)}
    */
   @Test
-  @DisplayName("Test internalType(String); when '%'; then return '%'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalType(String)"})
-  void testInternalType_whenPercentSign_thenReturnPercentSign() {
+  public void testInternalType_whenPercentSign_thenReturnPercentSign() {
     // Arrange, Act and Assert
     assertEquals("%", ClassUtil.internalType("%"));
   }
@@ -4178,11 +3664,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalType(String)}
    */
   @Test
-  @DisplayName("Test internalType(String); when 'short'; then return 'S'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalType(String)"})
-  void testInternalType_whenShort_thenReturnS() {
+  public void testInternalType_whenShort_thenReturnS() {
     // Arrange, Act and Assert
     assertEquals("S", ClassUtil.internalType("short"));
   }
@@ -4198,11 +3682,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalType(String)}
    */
   @Test
-  @DisplayName("Test internalType(String); when 'void'; then return 'V'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalType(String)"})
-  void testInternalType_whenVoid_thenReturnV() {
+  public void testInternalType_whenVoid_thenReturnV() {
     // Arrange, Act and Assert
     assertEquals("V", ClassUtil.internalType("void"));
   }
@@ -4217,11 +3699,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalArrayTypeDimensionCount(String)}
    */
   @Test
-  @DisplayName("Test externalArrayTypeDimensionCount(String); then return one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.externalArrayTypeDimensionCount(String)"})
-  void testExternalArrayTypeDimensionCount_thenReturnOne() {
+  public void testExternalArrayTypeDimensionCount_thenReturnOne() {
     // Arrange, Act and Assert
     assertEquals(1, ClassUtil.externalArrayTypeDimensionCount("[]"));
   }
@@ -4237,12 +3717,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalArrayTypeDimensionCount(String)}
    */
   @Test
-  @DisplayName(
-      "Test externalArrayTypeDimensionCount(String); when 'External Type'; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassUtil.externalArrayTypeDimensionCount(String)"})
-  void testExternalArrayTypeDimensionCount_whenExternalType_thenReturnZero() {
+  public void testExternalArrayTypeDimensionCount_whenExternalType_thenReturnZero() {
     // Arrange, Act and Assert
     assertEquals(0, ClassUtil.externalArrayTypeDimensionCount("External Type"));
   }
@@ -4258,11 +3735,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalType(String)}
    */
   @Test
-  @DisplayName("Test externalType(String); when empty string; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalType(String)"})
-  void testExternalType_whenEmptyString_thenThrowIllegalArgumentException() {
+  public void testExternalType_whenEmptyString_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(IllegalArgumentException.class, () -> ClassUtil.externalType(""));
   }
@@ -4278,12 +3753,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalType(String)}
    */
   @Test
-  @DisplayName(
-      "Test externalType(String); when 'Internal Type'; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalType(String)"})
-  void testExternalType_whenInternalType_thenThrowIllegalArgumentException() {
+  public void testExternalType_whenInternalType_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(IllegalArgumentException.class, () -> ClassUtil.externalType("Internal Type"));
   }
@@ -4299,11 +3771,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalType(String)}
    */
   @Test
-  @DisplayName("Test externalType(String); when 'null'; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalType(String)"})
-  void testExternalType_whenNull_thenThrowIllegalArgumentException() {
+  public void testExternalType_whenNull_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(IllegalArgumentException.class, () -> ClassUtil.externalType(null));
   }
@@ -4319,11 +3789,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalType(String)}
    */
   @Test
-  @DisplayName("Test externalType(String); when '%'; then return '%'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalType(String)"})
-  void testExternalType_whenPercentSign_thenReturnPercentSign() {
+  public void testExternalType_whenPercentSign_thenReturnPercentSign() {
     // Arrange, Act and Assert
     assertEquals("%", ClassUtil.externalType("%"));
   }
@@ -4339,11 +3807,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalType(String)}
    */
   @Test
-  @DisplayName("Test externalType(String); when ']'; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalType(String)"})
-  void testExternalType_whenRightSquareBracket_thenThrowIllegalArgumentException() {
+  public void testExternalType_whenRightSquareBracket_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(IllegalArgumentException.class, () -> ClassUtil.externalType("]"));
   }
@@ -4359,11 +3825,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassForNameType(String)}
    */
   @Test
-  @DisplayName("Test externalClassForNameType(String); when empty string; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassForNameType(String)"})
-  void testExternalClassForNameType_whenEmptyString_thenReturnEmptyString() {
+  public void testExternalClassForNameType_whenEmptyString_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalClassForNameType(""));
   }
@@ -4379,12 +3843,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassForNameType(String)}
    */
   @Test
-  @DisplayName(
-      "Test externalClassForNameType(String); when 'Internal Type'; then return 'Internal Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassForNameType(String)"})
-  void testExternalClassForNameType_whenInternalType_thenReturnInternalType() {
+  public void testExternalClassForNameType_whenInternalType_thenReturnInternalType() {
     // Arrange, Act and Assert
     assertEquals("Internal Type", ClassUtil.externalClassForNameType("Internal Type"));
   }
@@ -4400,12 +3861,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isInternalMethodDescriptor(String)}
    */
   @Test
-  @DisplayName(
-      "Test isInternalMethodDescriptor(String); when 'Internal Descriptor'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isInternalMethodDescriptor(String)"})
-  void testIsInternalMethodDescriptor_whenInternalDescriptor_thenReturnFalse() {
+  public void testIsInternalMethodDescriptor_whenInternalDescriptor_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(ClassUtil.isInternalMethodDescriptor("Internal Descriptor"));
   }
@@ -4416,11 +3874,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isExternalMethodNameAndArguments(String)}
    */
   @Test
-  @DisplayName("Test isExternalMethodNameAndArguments(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isExternalMethodNameAndArguments(String)"})
-  void testIsExternalMethodNameAndArguments() {
+  public void testIsExternalMethodNameAndArguments() {
     // Arrange, Act and Assert
     assertFalse(ClassUtil.isExternalMethodNameAndArguments("External Member Name And Arguments"));
   }
@@ -4432,12 +3888,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodDescriptor(String, List) with 'externalReturnType', 'externalArguments'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
-  void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments() {
+  public void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments() {
     // Arrange, Act and Assert
     assertEquals(
         "()LExternal Return Type;",
@@ -4451,12 +3904,23 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodDescriptor(String, List) with 'externalReturnType', 'externalArguments'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
-  void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments2() {
+  public void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments2() {
+    // Arrange, Act and Assert
+    assertEquals("()%", ClassUtil.internalMethodDescriptor("%", new ArrayList<>()));
+  }
+
+  /**
+   * Test {@link ClassUtil#internalMethodDescriptor(String, List)} with {@code externalReturnType},
+   * {@code externalArguments}.
+   *
+   * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
+  public void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments3() {
     // Arrange
     ArrayList<String> externalArguments = new ArrayList<>();
     externalArguments.add("[]");
@@ -4474,12 +3938,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodDescriptor(String, List) with 'externalReturnType', 'externalArguments'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
-  void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments3() {
+  public void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments4() {
     // Arrange
     ArrayList<String> externalArguments = new ArrayList<>();
     externalArguments.add("void");
@@ -4498,169 +3959,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodDescriptor(String, List) with 'externalReturnType', 'externalArguments'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
-  void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments4() {
-    // Arrange
-    ArrayList<String> externalArguments = new ArrayList<>();
-    externalArguments.add("boolean");
-    externalArguments.add("void");
-    externalArguments.add("[]");
-
-    // Act and Assert
-    assertEquals(
-        "(ZV[L;)LExternal Return Type;",
-        ClassUtil.internalMethodDescriptor("External Return Type", externalArguments));
-  }
-
-  /**
-   * Test {@link ClassUtil#internalMethodDescriptor(String, List)} with {@code externalReturnType},
-   * {@code externalArguments}.
-   *
-   * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
-   */
-  @Test
-  @DisplayName(
-      "Test internalMethodDescriptor(String, List) with 'externalReturnType', 'externalArguments'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
-  void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments5() {
-    // Arrange
-    ArrayList<String> externalArguments = new ArrayList<>();
-    externalArguments.add("byte");
-
-    // Act and Assert
-    assertEquals(
-        "(B)LExternal Return Type;",
-        ClassUtil.internalMethodDescriptor("External Return Type", externalArguments));
-  }
-
-  /**
-   * Test {@link ClassUtil#internalMethodDescriptor(String, List)} with {@code externalReturnType},
-   * {@code externalArguments}.
-   *
-   * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
-   */
-  @Test
-  @DisplayName(
-      "Test internalMethodDescriptor(String, List) with 'externalReturnType', 'externalArguments'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
-  void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments6() {
-    // Arrange
-    ArrayList<String> externalArguments = new ArrayList<>();
-    externalArguments.add("char");
-
-    // Act and Assert
-    assertEquals(
-        "(C)LExternal Return Type;",
-        ClassUtil.internalMethodDescriptor("External Return Type", externalArguments));
-  }
-
-  /**
-   * Test {@link ClassUtil#internalMethodDescriptor(String, List)} with {@code externalReturnType},
-   * {@code externalArguments}.
-   *
-   * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
-   */
-  @Test
-  @DisplayName(
-      "Test internalMethodDescriptor(String, List) with 'externalReturnType', 'externalArguments'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
-  void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments7() {
-    // Arrange
-    ArrayList<String> externalArguments = new ArrayList<>();
-    externalArguments.add("short");
-
-    // Act and Assert
-    assertEquals(
-        "(S)LExternal Return Type;",
-        ClassUtil.internalMethodDescriptor("External Return Type", externalArguments));
-  }
-
-  /**
-   * Test {@link ClassUtil#internalMethodDescriptor(String, List)} with {@code externalReturnType},
-   * {@code externalArguments}.
-   *
-   * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
-   */
-  @Test
-  @DisplayName(
-      "Test internalMethodDescriptor(String, List) with 'externalReturnType', 'externalArguments'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
-  void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments8() {
-    // Arrange
-    ArrayList<String> externalArguments = new ArrayList<>();
-    externalArguments.add("int");
-
-    // Act and Assert
-    assertEquals(
-        "(I)LExternal Return Type;",
-        ClassUtil.internalMethodDescriptor("External Return Type", externalArguments));
-  }
-
-  /**
-   * Test {@link ClassUtil#internalMethodDescriptor(String, List)} with {@code externalReturnType},
-   * {@code externalArguments}.
-   *
-   * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
-   */
-  @Test
-  @DisplayName(
-      "Test internalMethodDescriptor(String, List) with 'externalReturnType', 'externalArguments'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
-  void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments9() {
-    // Arrange
-    ArrayList<String> externalArguments = new ArrayList<>();
-    externalArguments.add("float");
-
-    // Act and Assert
-    assertEquals(
-        "(F)LExternal Return Type;",
-        ClassUtil.internalMethodDescriptor("External Return Type", externalArguments));
-  }
-
-  /**
-   * Test {@link ClassUtil#internalMethodDescriptor(String, List)} with {@code externalReturnType},
-   * {@code externalArguments}.
-   *
-   * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
-   */
-  @Test
-  @DisplayName(
-      "Test internalMethodDescriptor(String, List) with 'externalReturnType', 'externalArguments'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
-  void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments10() {
-    // Arrange, Act and Assert
-    assertEquals("()%", ClassUtil.internalMethodDescriptor("%", new ArrayList<>()));
-  }
-
-  /**
-   * Test {@link ClassUtil#internalMethodDescriptor(String, List)} with {@code externalReturnType},
-   * {@code externalArguments}.
-   *
-   * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
-   */
-  @Test
-  @DisplayName(
-      "Test internalMethodDescriptor(String, List) with 'externalReturnType', 'externalArguments'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
-  void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments11() {
+  public void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments5() {
     // Arrange
     ArrayList<String> externalArguments = new ArrayList<>();
     externalArguments.add("long");
@@ -4678,12 +3979,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodDescriptor(String, List) with 'externalReturnType', 'externalArguments'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
-  void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments12() {
+  public void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments6() {
     // Arrange
     ArrayList<String> externalArguments = new ArrayList<>();
     externalArguments.add("double");
@@ -4695,16 +3993,158 @@ class ClassUtilDiffblueTest {
   }
 
   /**
+   * Test {@link ClassUtil#internalMethodDescriptor(String, List)} with {@code externalReturnType},
+   * {@code externalArguments}.
+   *
+   * <ul>
+   *   <li>Then return {@code ()B}.
+   * </ul>
+   *
+   * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
+  public void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments_thenReturnB() {
+    // Arrange, Act and Assert
+    assertEquals("()B", ClassUtil.internalMethodDescriptor("byte", new ArrayList<>()));
+  }
+
+  /**
+   * Test {@link ClassUtil#internalMethodDescriptor(String, List)} with {@code externalReturnType},
+   * {@code externalArguments}.
+   *
+   * <ul>
+   *   <li>Then return {@code ()C}.
+   * </ul>
+   *
+   * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
+  public void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments_thenReturnC() {
+    // Arrange, Act and Assert
+    assertEquals("()C", ClassUtil.internalMethodDescriptor("char", new ArrayList<>()));
+  }
+
+  /**
+   * Test {@link ClassUtil#internalMethodDescriptor(String, List)} with {@code externalReturnType},
+   * {@code externalArguments}.
+   *
+   * <ul>
+   *   <li>Then return {@code ()F}.
+   * </ul>
+   *
+   * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
+  public void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments_thenReturnF() {
+    // Arrange, Act and Assert
+    assertEquals("()F", ClassUtil.internalMethodDescriptor("float", new ArrayList<>()));
+  }
+
+  /**
+   * Test {@link ClassUtil#internalMethodDescriptor(String, List)} with {@code externalReturnType},
+   * {@code externalArguments}.
+   *
+   * <ul>
+   *   <li>Then return {@code ()I}.
+   * </ul>
+   *
+   * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
+  public void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments_thenReturnI() {
+    // Arrange, Act and Assert
+    assertEquals("()I", ClassUtil.internalMethodDescriptor("int", new ArrayList<>()));
+  }
+
+  /**
+   * Test {@link ClassUtil#internalMethodDescriptor(String, List)} with {@code externalReturnType},
+   * {@code externalArguments}.
+   *
+   * <ul>
+   *   <li>Then return {@code ()[L;}.
+   * </ul>
+   *
+   * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
+  public void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments_thenReturnL() {
+    // Arrange, Act and Assert
+    assertEquals("()[L;", ClassUtil.internalMethodDescriptor("[]", new ArrayList<>()));
+  }
+
+  /**
+   * Test {@link ClassUtil#internalMethodDescriptor(String, List)} with {@code externalReturnType},
+   * {@code externalArguments}.
+   *
+   * <ul>
+   *   <li>Then return {@code ()S}.
+   * </ul>
+   *
+   * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
+  public void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments_thenReturnS() {
+    // Arrange, Act and Assert
+    assertEquals("()S", ClassUtil.internalMethodDescriptor("short", new ArrayList<>()));
+  }
+
+  /**
+   * Test {@link ClassUtil#internalMethodDescriptor(String, List)} with {@code externalReturnType},
+   * {@code externalArguments}.
+   *
+   * <ul>
+   *   <li>Then return {@code ()V}.
+   * </ul>
+   *
+   * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
+  public void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments_thenReturnV() {
+    // Arrange, Act and Assert
+    assertEquals("()V", ClassUtil.internalMethodDescriptor("void", new ArrayList<>()));
+  }
+
+  /**
+   * Test {@link ClassUtil#internalMethodDescriptor(String, List)} with {@code externalReturnType},
+   * {@code externalArguments}.
+   *
+   * <ul>
+   *   <li>Then return {@code ()Z}.
+   * </ul>
+   *
+   * <p>Method under test: {@link ClassUtil#internalMethodDescriptor(String, List)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String ClassUtil.internalMethodDescriptor(String, List)"})
+  public void testInternalMethodDescriptorWithExternalReturnTypeExternalArguments_thenReturnZ() {
+    // Arrange, Act and Assert
+    assertEquals("()Z", ClassUtil.internalMethodDescriptor("boolean", new ArrayList<>()));
+  }
+
+  /**
    * Test {@link ClassUtil#internalMethodDescriptorFromInternalTypes(String, List)}.
    *
    * <p>Method under test: {@link ClassUtil#internalMethodDescriptorFromInternalTypes(String, List)}
    */
   @Test
-  @DisplayName("Test internalMethodDescriptorFromInternalTypes(String, List)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalMethodDescriptorFromInternalTypes(String, List)"})
-  void testInternalMethodDescriptorFromInternalTypes() {
+  public void testInternalMethodDescriptorFromInternalTypes() {
     // Arrange
     ArrayList<String> internalArguments = new ArrayList<>();
     internalArguments.add("Internal Arguments");
@@ -4726,12 +4166,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodDescriptorFromInternalTypes(String, List)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodDescriptorFromInternalTypes(String, List); then return '(42foo)Internal Return Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalMethodDescriptorFromInternalTypes(String, List)"})
-  void testInternalMethodDescriptorFromInternalTypes_thenReturn42fooInternalReturnType() {
+  public void testInternalMethodDescriptorFromInternalTypes_thenReturn42fooInternalReturnType() {
     // Arrange
     ArrayList<String> internalArguments = new ArrayList<>();
     internalArguments.add("42");
@@ -4754,12 +4191,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalMethodDescriptorFromInternalTypes(String, List)}
    */
   @Test
-  @DisplayName(
-      "Test internalMethodDescriptorFromInternalTypes(String, List); then return '()Internal Return Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalMethodDescriptorFromInternalTypes(String, List)"})
-  void testInternalMethodDescriptorFromInternalTypes_thenReturnInternalReturnType() {
+  public void testInternalMethodDescriptorFromInternalTypes_thenReturnInternalReturnType() {
     // Arrange, Act and Assert
     assertEquals(
         "()Internal Return Type",
@@ -4778,12 +4212,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullFieldDescription(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullFieldDescription(int, String, String); when '-889275714'; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullFieldDescription(int, String, String)"})
-  void testExternalFullFieldDescription_when889275714_thenThrowIllegalArgumentException() {
+  public void testExternalFullFieldDescription_when889275714_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -4803,12 +4234,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullFieldDescription(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullFieldDescription(int, String, String); when eight; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullFieldDescription(int, String, String)"})
-  void testExternalFullFieldDescription_whenEight_thenThrowIllegalArgumentException() {
+  public void testExternalFullFieldDescription_whenEight_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -4825,11 +4253,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullFieldDescription(int, String, String)}
    */
   @Test
-  @DisplayName("Test externalFullFieldDescription(int, String, String); when empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullFieldDescription(int, String, String)"})
-  void testExternalFullFieldDescription_whenEmptyString() {
+  public void testExternalFullFieldDescription_whenEmptyString() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -4847,12 +4273,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullFieldDescription(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullFieldDescription(int, String, String); when fifty; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullFieldDescription(int, String, String)"})
-  void testExternalFullFieldDescription_whenFifty_thenThrowIllegalArgumentException() {
+  public void testExternalFullFieldDescription_whenFifty_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -4871,39 +4294,13 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullFieldDescription(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullFieldDescription(int, String, String); when four; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullFieldDescription(int, String, String)"})
-  void testExternalFullFieldDescription_whenFour_thenThrowIllegalArgumentException() {
+  public void testExternalFullFieldDescription_whenFour_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
         () -> ClassUtil.externalFullFieldDescription(4, "Field Name", "Internal Field Descriptor"));
-  }
-
-  /**
-   * Test {@link ClassUtil#externalFullFieldDescription(int, String, String)}.
-   *
-   * <ul>
-   *   <li>When {@code null}.
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassUtil#externalFullFieldDescription(int, String, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test externalFullFieldDescription(int, String, String); when 'null'; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String ClassUtil.externalFullFieldDescription(int, String, String)"})
-  void testExternalFullFieldDescription_whenNull_thenThrowIllegalArgumentException() {
-    // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> ClassUtil.externalFullFieldDescription(1, "Field Name", null));
   }
 
   /**
@@ -4917,12 +4314,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullFieldDescription(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullFieldDescription(int, String, String); when one; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullFieldDescription(int, String, String)"})
-  void testExternalFullFieldDescription_whenOne_thenThrowIllegalArgumentException() {
+  public void testExternalFullFieldDescription_whenOne_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -4940,18 +4334,12 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullFieldDescription(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullFieldDescription(int, String, String); when '%'; then return 'public % Field Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullFieldDescription(int, String, String)"})
-  void testExternalFullFieldDescription_whenPercentSign_thenReturnPublicFieldName() {
-    // Arrange and Act
-    String actualExternalFullFieldDescriptionResult =
-        ClassUtil.externalFullFieldDescription(1, "Field Name", "%");
-
-    // Assert
-    assertEquals("public % Field Name", actualExternalFullFieldDescriptionResult);
+  public void testExternalFullFieldDescription_whenPercentSign_thenReturnPublicFieldName() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "public % Field Name", ClassUtil.externalFullFieldDescription(1, "Field Name", "%"));
   }
 
   /**
@@ -4965,12 +4353,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullFieldDescription(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullFieldDescription(int, String, String); when 'public'; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullFieldDescription(int, String, String)"})
-  void testExternalFullFieldDescription_whenPublic_thenThrowIllegalArgumentException() {
+  public void testExternalFullFieldDescription_whenPublic_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -4988,12 +4373,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullFieldDescription(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullFieldDescription(int, String, String); when UNKNOWN; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullFieldDescription(int, String, String)"})
-  void testExternalFullFieldDescription_whenUnknown_thenThrowIllegalArgumentException() {
+  public void testExternalFullFieldDescription_whenUnknown_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -5013,16 +4395,13 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFullFieldDescription(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullFieldDescription(int, String, String); when zero; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullFieldDescription(int, String, String)"})
-  void testExternalFullFieldDescription_whenZero_thenThrowIllegalArgumentException() {
+  public void testExternalFullFieldDescription_whenZero_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
-        () -> ClassUtil.externalFullFieldDescription(0, "Field Name", "Internal Field Descriptor"));
+        () -> ClassUtil.externalFullFieldDescription(0, "Field Name", null));
   }
 
   /**
@@ -5036,19 +4415,14 @@ class ClassUtilDiffblueTest {
    * String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullMethodDescription(String, int, String, String); then return 'public % Internal Method Name(%)'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullMethodDescription(String, int, String, String)"})
-  void testExternalFullMethodDescription_thenReturnPublicInternalMethodName() {
-    // Arrange and Act
-    String actualExternalFullMethodDescriptionResult =
+  public void testExternalFullMethodDescription_thenReturnPublicInternalMethodName() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "public % Internal Method Name(%)",
         ClassUtil.externalFullMethodDescription(
-            "Internal Class Name", 1, "Internal Method Name", "%");
-
-    // Assert
-    assertEquals("public % Internal Method Name(%)", actualExternalFullMethodDescriptionResult);
+            "Internal Class Name", 1, "Internal Method Name", "%"));
   }
 
   /**
@@ -5062,11 +4436,9 @@ class ClassUtilDiffblueTest {
    * String)}
    */
   @Test
-  @DisplayName("Test externalFullMethodDescription(String, int, String, String); when '-889275714'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullMethodDescription(String, int, String, String)"})
-  void testExternalFullMethodDescription_when889275714() {
+  public void testExternalFullMethodDescription_when889275714() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -5090,12 +4462,9 @@ class ClassUtilDiffblueTest {
    * String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullMethodDescription(String, int, String, String); when eight; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullMethodDescription(String, int, String, String)"})
-  void testExternalFullMethodDescription_whenEight_thenThrowIllegalArgumentException() {
+  public void testExternalFullMethodDescription_whenEight_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -5115,11 +4484,9 @@ class ClassUtilDiffblueTest {
    * String)}
    */
   @Test
-  @DisplayName("Test externalFullMethodDescription(String, int, String, String); when empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullMethodDescription(String, int, String, String)"})
-  void testExternalFullMethodDescription_whenEmptyString() {
+  public void testExternalFullMethodDescription_whenEmptyString() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -5140,12 +4507,9 @@ class ClassUtilDiffblueTest {
    * String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullMethodDescription(String, int, String, String); when fifty; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullMethodDescription(String, int, String, String)"})
-  void testExternalFullMethodDescription_whenFifty_thenThrowIllegalArgumentException() {
+  public void testExternalFullMethodDescription_whenFifty_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -5166,12 +4530,9 @@ class ClassUtilDiffblueTest {
    * String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullMethodDescription(String, int, String, String); when four; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullMethodDescription(String, int, String, String)"})
-  void testExternalFullMethodDescription_whenFour_thenThrowIllegalArgumentException() {
+  public void testExternalFullMethodDescription_whenFour_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -5192,44 +4553,13 @@ class ClassUtilDiffblueTest {
    * String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullMethodDescription(String, int, String, String); when '<init>'; then return 'public Internal Class Name()'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullMethodDescription(String, int, String, String)"})
-  void testExternalFullMethodDescription_whenInit_thenReturnPublicInternalClassName() {
-    // Arrange and Act
-    String actualExternalFullMethodDescriptionResult =
-        ClassUtil.externalFullMethodDescription("Internal Class Name", 1, "<init>", "<init>");
-
-    // Assert
-    assertEquals("public Internal Class Name()", actualExternalFullMethodDescriptionResult);
-  }
-
-  /**
-   * Test {@link ClassUtil#externalFullMethodDescription(String, int, String, String)}.
-   *
-   * <ul>
-   *   <li>When {@code <init>}.
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassUtil#externalFullMethodDescription(String, int, String,
-   * String)}
-   */
-  @Test
-  @DisplayName(
-      "Test externalFullMethodDescription(String, int, String, String); when '<init>'; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String ClassUtil.externalFullMethodDescription(String, int, String, String)"})
-  void testExternalFullMethodDescription_whenInit_thenThrowIllegalArgumentException() {
+  public void testExternalFullMethodDescription_whenInit_thenReturnPublicInternalClassName() {
     // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            ClassUtil.externalFullMethodDescription(
-                "Internal Class Name", 1, "<init>", "Internal Method Descriptor"));
+    assertEquals(
+        "public Internal Class Name()",
+        ClassUtil.externalFullMethodDescription("Internal Class Name", 1, "<init>", "<init>"));
   }
 
   /**
@@ -5244,12 +4574,9 @@ class ClassUtilDiffblueTest {
    * String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullMethodDescription(String, int, String, String); when one; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullMethodDescription(String, int, String, String)"})
-  void testExternalFullMethodDescription_whenOne_thenThrowIllegalArgumentException() {
+  public void testExternalFullMethodDescription_whenOne_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -5270,12 +4597,9 @@ class ClassUtilDiffblueTest {
    * String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullMethodDescription(String, int, String, String); when UNKNOWN; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullMethodDescription(String, int, String, String)"})
-  void testExternalFullMethodDescription_whenUnknown_thenThrowIllegalArgumentException() {
+  public void testExternalFullMethodDescription_whenUnknown_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -5299,18 +4623,15 @@ class ClassUtilDiffblueTest {
    * String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFullMethodDescription(String, int, String, String); when zero; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFullMethodDescription(String, int, String, String)"})
-  void testExternalFullMethodDescription_whenZero_thenThrowIllegalArgumentException() {
+  public void testExternalFullMethodDescription_whenZero_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
         () ->
             ClassUtil.externalFullMethodDescription(
-                "Internal Class Name", 0, "Internal Method Name", "Internal Method Descriptor"));
+                "Internal Class Name", 0, "<init>", "Internal Method Descriptor"));
   }
 
   /**
@@ -5319,11 +4640,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int)}
    */
   @Test
-  @DisplayName("Test externalClassAccessFlags(int) with 'accessFlags'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int)"})
-  void testExternalClassAccessFlagsWithAccessFlags() {
+  public void testExternalClassAccessFlagsWithAccessFlags() {
     // Arrange, Act and Assert
     assertEquals(
         "private protected static final @interface ",
@@ -5337,11 +4656,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int, String)}
    */
   @Test
-  @DisplayName("Test externalClassAccessFlags(int, String) with 'accessFlags', 'prefix'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int, String)"})
-  void testExternalClassAccessFlagsWithAccessFlagsPrefix() {
+  public void testExternalClassAccessFlagsWithAccessFlagsPrefix() {
     // Arrange, Act and Assert
     assertEquals("Prefixprivate Prefixfinal ", ClassUtil.externalClassAccessFlags(50, "Prefix"));
   }
@@ -5353,11 +4670,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int, String)}
    */
   @Test
-  @DisplayName("Test externalClassAccessFlags(int, String) with 'accessFlags', 'prefix'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int, String)"})
-  void testExternalClassAccessFlagsWithAccessFlagsPrefix2() {
+  public void testExternalClassAccessFlagsWithAccessFlagsPrefix2() {
     // Arrange, Act and Assert
     assertEquals(
         "Prefixprivate Prefixprotected Prefixstatic Prefixfinal Prefix@Prefixinterface ",
@@ -5375,12 +4690,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalClassAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixabstract'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int, String)"})
-  void testExternalClassAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixabstract() {
+  public void testExternalClassAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixabstract() {
     // Arrange, Act and Assert
     assertEquals("Prefixabstract ", ClassUtil.externalClassAccessFlags(1024, "Prefix"));
   }
@@ -5396,12 +4708,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalClassAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixmodule'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int, String)"})
-  void testExternalClassAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixmodule() {
+  public void testExternalClassAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixmodule() {
     // Arrange, Act and Assert
     assertEquals("Prefixmodule ", ClassUtil.externalClassAccessFlags(32768, "Prefix"));
   }
@@ -5417,12 +4726,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalClassAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixprotected'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int, String)"})
-  void testExternalClassAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixprotected() {
+  public void testExternalClassAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixprotected() {
     // Arrange, Act and Assert
     assertEquals("Prefixprotected ", ClassUtil.externalClassAccessFlags(4, "Prefix"));
   }
@@ -5438,12 +4744,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalClassAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixstatic'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int, String)"})
-  void testExternalClassAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixstatic() {
+  public void testExternalClassAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixstatic() {
     // Arrange, Act and Assert
     assertEquals("Prefixstatic ", ClassUtil.externalClassAccessFlags(8, "Prefix"));
   }
@@ -5459,12 +4762,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalClassAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixsynthetic'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int, String)"})
-  void testExternalClassAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixsynthetic() {
+  public void testExternalClassAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixsynthetic() {
     // Arrange, Act and Assert
     assertEquals("Prefixsynthetic ", ClassUtil.externalClassAccessFlags(4096, "Prefix"));
   }
@@ -5481,12 +4781,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalClassAccessFlags(int, String) with 'accessFlags', 'prefix'; when '16384'; then return 'Prefixenum'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int, String)"})
-  void testExternalClassAccessFlagsWithAccessFlagsPrefix_when16384_thenReturnPrefixenum() {
+  public void testExternalClassAccessFlagsWithAccessFlagsPrefix_when16384_thenReturnPrefixenum() {
     // Arrange, Act and Assert
     assertEquals("Prefixenum ", ClassUtil.externalClassAccessFlags(16384, "Prefix"));
   }
@@ -5503,12 +4800,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalClassAccessFlags(int, String) with 'accessFlags', 'prefix'; when one; then return 'Prefixpublic'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int, String)"})
-  void testExternalClassAccessFlagsWithAccessFlagsPrefix_whenOne_thenReturnPrefixpublic() {
+  public void testExternalClassAccessFlagsWithAccessFlagsPrefix_whenOne_thenReturnPrefixpublic() {
     // Arrange, Act and Assert
     assertEquals("Prefixpublic ", ClassUtil.externalClassAccessFlags(1, "Prefix"));
   }
@@ -5525,12 +4819,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalClassAccessFlags(int, String) with 'accessFlags', 'prefix'; when zero; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int, String)"})
-  void testExternalClassAccessFlagsWithAccessFlagsPrefix_whenZero_thenReturnEmptyString() {
+  public void testExternalClassAccessFlagsWithAccessFlagsPrefix_whenZero_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalClassAccessFlags(0, "Prefix"));
   }
@@ -5546,12 +4837,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalClassAccessFlags(int) with 'accessFlags'; when '1024'; then return 'abstract'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int)"})
-  void testExternalClassAccessFlagsWithAccessFlags_when1024_thenReturnAbstract() {
+  public void testExternalClassAccessFlagsWithAccessFlags_when1024_thenReturnAbstract() {
     // Arrange, Act and Assert
     assertEquals("abstract ", ClassUtil.externalClassAccessFlags(1024));
   }
@@ -5567,12 +4855,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalClassAccessFlags(int) with 'accessFlags'; when '4096'; then return 'synthetic'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int)"})
-  void testExternalClassAccessFlagsWithAccessFlags_when4096_thenReturnSynthetic() {
+  public void testExternalClassAccessFlagsWithAccessFlags_when4096_thenReturnSynthetic() {
     // Arrange, Act and Assert
     assertEquals("synthetic ", ClassUtil.externalClassAccessFlags(4096));
   }
@@ -5588,12 +4873,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalClassAccessFlags(int) with 'accessFlags'; when '16384'; then return 'enum'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int)"})
-  void testExternalClassAccessFlagsWithAccessFlags_when16384_thenReturnEnum() {
+  public void testExternalClassAccessFlagsWithAccessFlags_when16384_thenReturnEnum() {
     // Arrange, Act and Assert
     assertEquals("enum ", ClassUtil.externalClassAccessFlags(16384));
   }
@@ -5609,12 +4891,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalClassAccessFlags(int) with 'accessFlags'; when '32768'; then return 'module'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int)"})
-  void testExternalClassAccessFlagsWithAccessFlags_when32768_thenReturnModule() {
+  public void testExternalClassAccessFlagsWithAccessFlags_when32768_thenReturnModule() {
     // Arrange, Act and Assert
     assertEquals("module ", ClassUtil.externalClassAccessFlags(32768));
   }
@@ -5630,12 +4909,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalClassAccessFlags(int) with 'accessFlags'; when eight; then return 'static'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int)"})
-  void testExternalClassAccessFlagsWithAccessFlags_whenEight_thenReturnStatic() {
+  public void testExternalClassAccessFlagsWithAccessFlags_whenEight_thenReturnStatic() {
     // Arrange, Act and Assert
     assertEquals("static ", ClassUtil.externalClassAccessFlags(8));
   }
@@ -5651,12 +4927,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalClassAccessFlags(int) with 'accessFlags'; when fifty; then return 'private final'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int)"})
-  void testExternalClassAccessFlagsWithAccessFlags_whenFifty_thenReturnPrivateFinal() {
+  public void testExternalClassAccessFlagsWithAccessFlags_whenFifty_thenReturnPrivateFinal() {
     // Arrange, Act and Assert
     assertEquals("private final ", ClassUtil.externalClassAccessFlags(50));
   }
@@ -5672,12 +4945,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalClassAccessFlags(int) with 'accessFlags'; when four; then return 'protected'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int)"})
-  void testExternalClassAccessFlagsWithAccessFlags_whenFour_thenReturnProtected() {
+  public void testExternalClassAccessFlagsWithAccessFlags_whenFour_thenReturnProtected() {
     // Arrange, Act and Assert
     assertEquals("protected ", ClassUtil.externalClassAccessFlags(4));
   }
@@ -5693,12 +4963,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalClassAccessFlags(int) with 'accessFlags'; when one; then return 'public'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int)"})
-  void testExternalClassAccessFlagsWithAccessFlags_whenOne_thenReturnPublic() {
+  public void testExternalClassAccessFlagsWithAccessFlags_whenOne_thenReturnPublic() {
     // Arrange, Act and Assert
     assertEquals("public ", ClassUtil.externalClassAccessFlags(1));
   }
@@ -5714,12 +4981,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalClassAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalClassAccessFlags(int) with 'accessFlags'; when zero; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalClassAccessFlags(int)"})
-  void testExternalClassAccessFlagsWithAccessFlags_whenZero_thenReturnEmptyString() {
+  public void testExternalClassAccessFlagsWithAccessFlags_whenZero_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalClassAccessFlags(0));
   }
@@ -5730,11 +4994,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFieldAccessFlags(int)}
    */
   @Test
-  @DisplayName("Test externalFieldAccessFlags(int) with 'accessFlags'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFieldAccessFlags(int)"})
-  void testExternalFieldAccessFlagsWithAccessFlags() {
+  public void testExternalFieldAccessFlagsWithAccessFlags() {
     // Arrange, Act and Assert
     assertEquals(
         "private protected static final transient synthetic ",
@@ -5747,11 +5009,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFieldAccessFlags(int)}
    */
   @Test
-  @DisplayName("Test externalFieldAccessFlags(int) with 'accessFlags'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFieldAccessFlags(int)"})
-  void testExternalFieldAccessFlagsWithAccessFlags2() {
+  public void testExternalFieldAccessFlagsWithAccessFlags2() {
     // Arrange, Act and Assert
     assertEquals(
         "public private protected static final volatile transient synthetic ",
@@ -5765,11 +5025,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFieldAccessFlags(int, String)}
    */
   @Test
-  @DisplayName("Test externalFieldAccessFlags(int, String) with 'accessFlags', 'prefix'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFieldAccessFlags(int, String)"})
-  void testExternalFieldAccessFlagsWithAccessFlagsPrefix() {
+  public void testExternalFieldAccessFlagsWithAccessFlagsPrefix() {
     // Arrange, Act and Assert
     assertEquals("Prefixprivate Prefixfinal ", ClassUtil.externalFieldAccessFlags(50, "Prefix"));
   }
@@ -5781,11 +5039,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFieldAccessFlags(int, String)}
    */
   @Test
-  @DisplayName("Test externalFieldAccessFlags(int, String) with 'accessFlags', 'prefix'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFieldAccessFlags(int, String)"})
-  void testExternalFieldAccessFlagsWithAccessFlagsPrefix2() {
+  public void testExternalFieldAccessFlagsWithAccessFlagsPrefix2() {
     // Arrange, Act and Assert
     assertEquals(
         "Prefixprivate Prefixprotected Prefixstatic Prefixfinal Prefixtransient Prefixsynthetic ",
@@ -5803,12 +5059,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFieldAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFieldAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixprotected'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFieldAccessFlags(int, String)"})
-  void testExternalFieldAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixprotected() {
+  public void testExternalFieldAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixprotected() {
     // Arrange, Act and Assert
     assertEquals("Prefixprotected ", ClassUtil.externalFieldAccessFlags(4, "Prefix"));
   }
@@ -5824,12 +5077,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFieldAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFieldAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixstatic'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFieldAccessFlags(int, String)"})
-  void testExternalFieldAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixstatic() {
+  public void testExternalFieldAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixstatic() {
     // Arrange, Act and Assert
     assertEquals("Prefixstatic ", ClassUtil.externalFieldAccessFlags(8, "Prefix"));
   }
@@ -5846,12 +5096,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFieldAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFieldAccessFlags(int, String) with 'accessFlags', 'prefix'; when one; then return 'Prefixpublic'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFieldAccessFlags(int, String)"})
-  void testExternalFieldAccessFlagsWithAccessFlagsPrefix_whenOne_thenReturnPrefixpublic() {
+  public void testExternalFieldAccessFlagsWithAccessFlagsPrefix_whenOne_thenReturnPrefixpublic() {
     // Arrange, Act and Assert
     assertEquals("Prefixpublic ", ClassUtil.externalFieldAccessFlags(1, "Prefix"));
   }
@@ -5868,12 +5115,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFieldAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFieldAccessFlags(int, String) with 'accessFlags', 'prefix'; when UNKNOWN; then return a string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFieldAccessFlags(int, String)"})
-  void testExternalFieldAccessFlagsWithAccessFlagsPrefix_whenUnknown_thenReturnAString() {
+  public void testExternalFieldAccessFlagsWithAccessFlagsPrefix_whenUnknown_thenReturnAString() {
     // Arrange, Act and Assert
     assertEquals(
         "Prefixpublic Prefixprivate Prefixprotected Prefixstatic Prefixfinal Prefixvolatile Prefixtransient"
@@ -5893,12 +5137,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFieldAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalFieldAccessFlags(int, String) with 'accessFlags', 'prefix'; when zero; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFieldAccessFlags(int, String)"})
-  void testExternalFieldAccessFlagsWithAccessFlagsPrefix_whenZero_thenReturnEmptyString() {
+  public void testExternalFieldAccessFlagsWithAccessFlagsPrefix_whenZero_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalFieldAccessFlags(0, "Prefix"));
   }
@@ -5914,12 +5155,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFieldAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalFieldAccessFlags(int) with 'accessFlags'; when eight; then return 'static'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFieldAccessFlags(int)"})
-  void testExternalFieldAccessFlagsWithAccessFlags_whenEight_thenReturnStatic() {
+  public void testExternalFieldAccessFlagsWithAccessFlags_whenEight_thenReturnStatic() {
     // Arrange, Act and Assert
     assertEquals("static ", ClassUtil.externalFieldAccessFlags(8));
   }
@@ -5935,12 +5173,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFieldAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalFieldAccessFlags(int) with 'accessFlags'; when fifty; then return 'private final'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFieldAccessFlags(int)"})
-  void testExternalFieldAccessFlagsWithAccessFlags_whenFifty_thenReturnPrivateFinal() {
+  public void testExternalFieldAccessFlagsWithAccessFlags_whenFifty_thenReturnPrivateFinal() {
     // Arrange, Act and Assert
     assertEquals("private final ", ClassUtil.externalFieldAccessFlags(50));
   }
@@ -5956,12 +5191,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFieldAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalFieldAccessFlags(int) with 'accessFlags'; when four; then return 'protected'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFieldAccessFlags(int)"})
-  void testExternalFieldAccessFlagsWithAccessFlags_whenFour_thenReturnProtected() {
+  public void testExternalFieldAccessFlagsWithAccessFlags_whenFour_thenReturnProtected() {
     // Arrange, Act and Assert
     assertEquals("protected ", ClassUtil.externalFieldAccessFlags(4));
   }
@@ -5977,12 +5209,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFieldAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalFieldAccessFlags(int) with 'accessFlags'; when one; then return 'public'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFieldAccessFlags(int)"})
-  void testExternalFieldAccessFlagsWithAccessFlags_whenOne_thenReturnPublic() {
+  public void testExternalFieldAccessFlagsWithAccessFlags_whenOne_thenReturnPublic() {
     // Arrange, Act and Assert
     assertEquals("public ", ClassUtil.externalFieldAccessFlags(1));
   }
@@ -5998,12 +5227,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalFieldAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalFieldAccessFlags(int) with 'accessFlags'; when zero; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalFieldAccessFlags(int)"})
-  void testExternalFieldAccessFlagsWithAccessFlags_whenZero_thenReturnEmptyString() {
+  public void testExternalFieldAccessFlagsWithAccessFlags_whenZero_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalFieldAccessFlags(0));
   }
@@ -6014,11 +5240,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodAccessFlags(int)}
    */
   @Test
-  @DisplayName("Test externalMethodAccessFlags(int) with 'accessFlags'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodAccessFlags(int)"})
-  void testExternalMethodAccessFlagsWithAccessFlags() {
+  public void testExternalMethodAccessFlagsWithAccessFlags() {
     // Arrange, Act and Assert
     assertEquals(
         "private protected static final synchronized varargs strictfp synthetic ",
@@ -6031,11 +5255,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodAccessFlags(int)}
    */
   @Test
-  @DisplayName("Test externalMethodAccessFlags(int) with 'accessFlags'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodAccessFlags(int)"})
-  void testExternalMethodAccessFlagsWithAccessFlags2() {
+  public void testExternalMethodAccessFlagsWithAccessFlags2() {
     // Arrange, Act and Assert
     assertEquals(
         "public private protected static final synchronized bridge varargs native abstract strictfp"
@@ -6050,11 +5272,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodAccessFlags(int, String)}
    */
   @Test
-  @DisplayName("Test externalMethodAccessFlags(int, String) with 'accessFlags', 'prefix'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodAccessFlags(int, String)"})
-  void testExternalMethodAccessFlagsWithAccessFlagsPrefix() {
+  public void testExternalMethodAccessFlagsWithAccessFlagsPrefix() {
     // Arrange, Act and Assert
     assertEquals(
         "Prefixprivate Prefixfinal Prefixsynchronized ",
@@ -6072,12 +5292,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalMethodAccessFlags(int, String) with 'accessFlags', 'prefix'; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodAccessFlags(int, String)"})
-  void testExternalMethodAccessFlagsWithAccessFlagsPrefix_thenReturnEmptyString() {
+  public void testExternalMethodAccessFlagsWithAccessFlagsPrefix_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalMethodAccessFlags(0, "Prefix"));
   }
@@ -6093,12 +5310,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalMethodAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixprotected'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodAccessFlags(int, String)"})
-  void testExternalMethodAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixprotected() {
+  public void testExternalMethodAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixprotected() {
     // Arrange, Act and Assert
     assertEquals("Prefixprotected ", ClassUtil.externalMethodAccessFlags(4, "Prefix"));
   }
@@ -6114,12 +5328,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalMethodAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixpublic'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodAccessFlags(int, String)"})
-  void testExternalMethodAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixpublic() {
+  public void testExternalMethodAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixpublic() {
     // Arrange, Act and Assert
     assertEquals("Prefixpublic ", ClassUtil.externalMethodAccessFlags(1, "Prefix"));
   }
@@ -6135,12 +5346,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalMethodAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixstatic'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodAccessFlags(int, String)"})
-  void testExternalMethodAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixstatic() {
+  public void testExternalMethodAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixstatic() {
     // Arrange, Act and Assert
     assertEquals("Prefixstatic ", ClassUtil.externalMethodAccessFlags(8, "Prefix"));
   }
@@ -6156,12 +5364,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalMethodAccessFlags(int, String) with 'accessFlags', 'prefix'; when '-889275714'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodAccessFlags(int, String)"})
-  void testExternalMethodAccessFlagsWithAccessFlagsPrefix_when889275714() {
+  public void testExternalMethodAccessFlagsWithAccessFlagsPrefix_when889275714() {
     // Arrange, Act and Assert
     assertEquals(
         "Prefixprivate Prefixprotected Prefixstatic Prefixfinal Prefixsynchronized Prefixvarargs Prefixstrictfp"
@@ -6181,12 +5386,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalMethodAccessFlags(int, String) with 'accessFlags', 'prefix'; when UNKNOWN; then return a string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodAccessFlags(int, String)"})
-  void testExternalMethodAccessFlagsWithAccessFlagsPrefix_whenUnknown_thenReturnAString() {
+  public void testExternalMethodAccessFlagsWithAccessFlagsPrefix_whenUnknown_thenReturnAString() {
     // Arrange, Act and Assert
     assertEquals(
         "Prefixpublic Prefixprivate Prefixprotected Prefixstatic Prefixfinal Prefixsynchronized Prefixbridge"
@@ -6204,12 +5406,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalMethodAccessFlags(int) with 'accessFlags'; then return 'private final synchronized'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodAccessFlags(int)"})
-  void testExternalMethodAccessFlagsWithAccessFlags_thenReturnPrivateFinalSynchronized() {
+  public void testExternalMethodAccessFlagsWithAccessFlags_thenReturnPrivateFinalSynchronized() {
     // Arrange, Act and Assert
     assertEquals("private final synchronized ", ClassUtil.externalMethodAccessFlags(50));
   }
@@ -6225,12 +5424,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalMethodAccessFlags(int) with 'accessFlags'; when eight; then return 'static'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodAccessFlags(int)"})
-  void testExternalMethodAccessFlagsWithAccessFlags_whenEight_thenReturnStatic() {
+  public void testExternalMethodAccessFlagsWithAccessFlags_whenEight_thenReturnStatic() {
     // Arrange, Act and Assert
     assertEquals("static ", ClassUtil.externalMethodAccessFlags(8));
   }
@@ -6246,12 +5442,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalMethodAccessFlags(int) with 'accessFlags'; when four; then return 'protected'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodAccessFlags(int)"})
-  void testExternalMethodAccessFlagsWithAccessFlags_whenFour_thenReturnProtected() {
+  public void testExternalMethodAccessFlagsWithAccessFlags_whenFour_thenReturnProtected() {
     // Arrange, Act and Assert
     assertEquals("protected ", ClassUtil.externalMethodAccessFlags(4));
   }
@@ -6267,12 +5460,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalMethodAccessFlags(int) with 'accessFlags'; when one; then return 'public'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodAccessFlags(int)"})
-  void testExternalMethodAccessFlagsWithAccessFlags_whenOne_thenReturnPublic() {
+  public void testExternalMethodAccessFlagsWithAccessFlags_whenOne_thenReturnPublic() {
     // Arrange, Act and Assert
     assertEquals("public ", ClassUtil.externalMethodAccessFlags(1));
   }
@@ -6288,12 +5478,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalMethodAccessFlags(int) with 'accessFlags'; when zero; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodAccessFlags(int)"})
-  void testExternalMethodAccessFlagsWithAccessFlags_whenZero_thenReturnEmptyString() {
+  public void testExternalMethodAccessFlagsWithAccessFlags_whenZero_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalMethodAccessFlags(0));
   }
@@ -6309,12 +5496,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalParameterAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalParameterAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixfinal'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalParameterAccessFlags(int, String)"})
-  void testExternalParameterAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixfinal() {
+  public void testExternalParameterAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixfinal() {
     // Arrange, Act and Assert
     assertEquals("Prefixfinal ", ClassUtil.externalParameterAccessFlags(50, "Prefix"));
   }
@@ -6330,12 +5514,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalParameterAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalParameterAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixmandated'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalParameterAccessFlags(int, String)"})
-  void testExternalParameterAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixmandated() {
+  public void testExternalParameterAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixmandated() {
     // Arrange, Act and Assert
     assertEquals("Prefixmandated ", ClassUtil.externalParameterAccessFlags(32768, "Prefix"));
   }
@@ -6351,12 +5532,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalParameterAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalParameterAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixsynthetic'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalParameterAccessFlags(int, String)"})
-  void testExternalParameterAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixsynthetic() {
+  public void testExternalParameterAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixsynthetic() {
     // Arrange, Act and Assert
     assertEquals("Prefixsynthetic ", ClassUtil.externalParameterAccessFlags(4096, "Prefix"));
   }
@@ -6372,12 +5550,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalParameterAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalParameterAccessFlags(int, String) with 'accessFlags', 'prefix'; when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalParameterAccessFlags(int, String)"})
-  void testExternalParameterAccessFlagsWithAccessFlagsPrefix_whenOne() {
+  public void testExternalParameterAccessFlagsWithAccessFlagsPrefix_whenOne() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalParameterAccessFlags(1, "Prefix"));
   }
@@ -6393,12 +5568,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalParameterAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalParameterAccessFlags(int, String) with 'accessFlags', 'prefix'; when zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalParameterAccessFlags(int, String)"})
-  void testExternalParameterAccessFlagsWithAccessFlagsPrefix_whenZero() {
+  public void testExternalParameterAccessFlagsWithAccessFlagsPrefix_whenZero() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalParameterAccessFlags(0, "Prefix"));
   }
@@ -6414,12 +5586,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalParameterAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalParameterAccessFlags(int) with 'accessFlags'; when '4096'; then return 'synthetic'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalParameterAccessFlags(int)"})
-  void testExternalParameterAccessFlagsWithAccessFlags_when4096_thenReturnSynthetic() {
+  public void testExternalParameterAccessFlagsWithAccessFlags_when4096_thenReturnSynthetic() {
     // Arrange, Act and Assert
     assertEquals("synthetic ", ClassUtil.externalParameterAccessFlags(4096));
   }
@@ -6435,12 +5604,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalParameterAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalParameterAccessFlags(int) with 'accessFlags'; when '32768'; then return 'mandated'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalParameterAccessFlags(int)"})
-  void testExternalParameterAccessFlagsWithAccessFlags_when32768_thenReturnMandated() {
+  public void testExternalParameterAccessFlagsWithAccessFlags_when32768_thenReturnMandated() {
     // Arrange, Act and Assert
     assertEquals("mandated ", ClassUtil.externalParameterAccessFlags(32768));
   }
@@ -6456,12 +5622,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalParameterAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalParameterAccessFlags(int) with 'accessFlags'; when fifty; then return 'final'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalParameterAccessFlags(int)"})
-  void testExternalParameterAccessFlagsWithAccessFlags_whenFifty_thenReturnFinal() {
+  public void testExternalParameterAccessFlagsWithAccessFlags_whenFifty_thenReturnFinal() {
     // Arrange, Act and Assert
     assertEquals("final ", ClassUtil.externalParameterAccessFlags(50));
   }
@@ -6477,12 +5640,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalParameterAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalParameterAccessFlags(int) with 'accessFlags'; when one; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalParameterAccessFlags(int)"})
-  void testExternalParameterAccessFlagsWithAccessFlags_whenOne_thenReturnEmptyString() {
+  public void testExternalParameterAccessFlagsWithAccessFlags_whenOne_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalParameterAccessFlags(1));
   }
@@ -6498,12 +5658,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalParameterAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalParameterAccessFlags(int) with 'accessFlags'; when zero; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalParameterAccessFlags(int)"})
-  void testExternalParameterAccessFlagsWithAccessFlags_whenZero_thenReturnEmptyString() {
+  public void testExternalParameterAccessFlagsWithAccessFlags_whenZero_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalParameterAccessFlags(0));
   }
@@ -6519,12 +5676,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodReturnType(String)}
    */
   @Test
-  @DisplayName(
-      "Test externalMethodReturnType(String); when empty string; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodReturnType(String)"})
-  void testExternalMethodReturnType_whenEmptyString_thenThrowIllegalArgumentException() {
+  public void testExternalMethodReturnType_whenEmptyString_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(IllegalArgumentException.class, () -> ClassUtil.externalMethodReturnType(""));
   }
@@ -6539,11 +5693,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodReturnType(String)}
    */
   @Test
-  @DisplayName("Test externalMethodReturnType(String); when 'Internal Method Descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodReturnType(String)"})
-  void testExternalMethodReturnType_whenInternalMethodDescriptor() {
+  public void testExternalMethodReturnType_whenInternalMethodDescriptor() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -6561,11 +5713,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodReturnType(String)}
    */
   @Test
-  @DisplayName("Test externalMethodReturnType(String); when '%'; then return '%'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodReturnType(String)"})
-  void testExternalMethodReturnType_whenPercentSign_thenReturnPercentSign() {
+  public void testExternalMethodReturnType_whenPercentSign_thenReturnPercentSign() {
     // Arrange, Act and Assert
     assertEquals("%", ClassUtil.externalMethodReturnType("%"));
   }
@@ -6580,11 +5730,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodReturnType(String)}
    */
   @Test
-  @DisplayName("Test externalMethodReturnType(String); when ']'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodReturnType(String)"})
-  void testExternalMethodReturnType_whenRightSquareBracket() {
+  public void testExternalMethodReturnType_whenRightSquareBracket() {
     // Arrange, Act and Assert
     assertThrows(IllegalArgumentException.class, () -> ClassUtil.externalMethodReturnType("]"));
   }
@@ -6600,12 +5748,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalModuleAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalModuleAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixmandated'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalModuleAccessFlags(int, String)"})
-  void testExternalModuleAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixmandated() {
+  public void testExternalModuleAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixmandated() {
     // Arrange, Act and Assert
     assertEquals("Prefixmandated ", ClassUtil.externalModuleAccessFlags(32768, "Prefix"));
   }
@@ -6621,12 +5766,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalModuleAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalModuleAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixopen'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalModuleAccessFlags(int, String)"})
-  void testExternalModuleAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixopen() {
+  public void testExternalModuleAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixopen() {
     // Arrange, Act and Assert
     assertEquals("Prefixopen ", ClassUtil.externalModuleAccessFlags(50, "Prefix"));
   }
@@ -6642,12 +5784,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalModuleAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalModuleAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixsynthetic'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalModuleAccessFlags(int, String)"})
-  void testExternalModuleAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixsynthetic() {
+  public void testExternalModuleAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixsynthetic() {
     // Arrange, Act and Assert
     assertEquals("Prefixsynthetic ", ClassUtil.externalModuleAccessFlags(4096, "Prefix"));
   }
@@ -6664,12 +5803,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalModuleAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalModuleAccessFlags(int, String) with 'accessFlags', 'prefix'; when one; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalModuleAccessFlags(int, String)"})
-  void testExternalModuleAccessFlagsWithAccessFlagsPrefix_whenOne_thenReturnEmptyString() {
+  public void testExternalModuleAccessFlagsWithAccessFlagsPrefix_whenOne_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalModuleAccessFlags(1, "Prefix"));
   }
@@ -6685,12 +5821,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalModuleAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalModuleAccessFlags(int, String) with 'accessFlags', 'prefix'; when zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalModuleAccessFlags(int, String)"})
-  void testExternalModuleAccessFlagsWithAccessFlagsPrefix_whenZero() {
+  public void testExternalModuleAccessFlagsWithAccessFlagsPrefix_whenZero() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalModuleAccessFlags(0, "Prefix"));
   }
@@ -6706,12 +5839,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalModuleAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalModuleAccessFlags(int) with 'accessFlags'; when '4096'; then return 'synthetic'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalModuleAccessFlags(int)"})
-  void testExternalModuleAccessFlagsWithAccessFlags_when4096_thenReturnSynthetic() {
+  public void testExternalModuleAccessFlagsWithAccessFlags_when4096_thenReturnSynthetic() {
     // Arrange, Act and Assert
     assertEquals("synthetic ", ClassUtil.externalModuleAccessFlags(4096));
   }
@@ -6727,12 +5857,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalModuleAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalModuleAccessFlags(int) with 'accessFlags'; when '32768'; then return 'mandated'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalModuleAccessFlags(int)"})
-  void testExternalModuleAccessFlagsWithAccessFlags_when32768_thenReturnMandated() {
+  public void testExternalModuleAccessFlagsWithAccessFlags_when32768_thenReturnMandated() {
     // Arrange, Act and Assert
     assertEquals("mandated ", ClassUtil.externalModuleAccessFlags(32768));
   }
@@ -6748,12 +5875,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalModuleAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalModuleAccessFlags(int) with 'accessFlags'; when fifty; then return 'open'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalModuleAccessFlags(int)"})
-  void testExternalModuleAccessFlagsWithAccessFlags_whenFifty_thenReturnOpen() {
+  public void testExternalModuleAccessFlagsWithAccessFlags_whenFifty_thenReturnOpen() {
     // Arrange, Act and Assert
     assertEquals("open ", ClassUtil.externalModuleAccessFlags(50));
   }
@@ -6769,12 +5893,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalModuleAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalModuleAccessFlags(int) with 'accessFlags'; when one; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalModuleAccessFlags(int)"})
-  void testExternalModuleAccessFlagsWithAccessFlags_whenOne_thenReturnEmptyString() {
+  public void testExternalModuleAccessFlagsWithAccessFlags_whenOne_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalModuleAccessFlags(1));
   }
@@ -6790,12 +5911,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalModuleAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalModuleAccessFlags(int) with 'accessFlags'; when zero; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalModuleAccessFlags(int)"})
-  void testExternalModuleAccessFlagsWithAccessFlags_whenZero_thenReturnEmptyString() {
+  public void testExternalModuleAccessFlagsWithAccessFlags_whenZero_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalModuleAccessFlags(0));
   }
@@ -6811,12 +5929,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalRequiresAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalRequiresAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixmandated'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalRequiresAccessFlags(int, String)"})
-  void testExternalRequiresAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixmandated() {
+  public void testExternalRequiresAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixmandated() {
     // Arrange, Act and Assert
     assertEquals("Prefixmandated ", ClassUtil.externalRequiresAccessFlags(32768, "Prefix"));
   }
@@ -6832,12 +5947,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalRequiresAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalRequiresAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixstatic'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalRequiresAccessFlags(int, String)"})
-  void testExternalRequiresAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixstatic() {
+  public void testExternalRequiresAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixstatic() {
     // Arrange, Act and Assert
     assertEquals("Prefixstatic ", ClassUtil.externalRequiresAccessFlags(Double.SIZE, "Prefix"));
   }
@@ -6853,12 +5965,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalRequiresAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalRequiresAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixsynthetic'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalRequiresAccessFlags(int, String)"})
-  void testExternalRequiresAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixsynthetic() {
+  public void testExternalRequiresAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixsynthetic() {
     // Arrange, Act and Assert
     assertEquals("Prefixsynthetic ", ClassUtil.externalRequiresAccessFlags(4096, "Prefix"));
   }
@@ -6874,12 +5983,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalRequiresAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalRequiresAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixtransitive'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalRequiresAccessFlags(int, String)"})
-  void testExternalRequiresAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixtransitive() {
+  public void testExternalRequiresAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixtransitive() {
     // Arrange, Act and Assert
     assertEquals("Prefixtransitive ", ClassUtil.externalRequiresAccessFlags(50, "Prefix"));
   }
@@ -6895,12 +6001,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalRequiresAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalRequiresAccessFlags(int, String) with 'accessFlags', 'prefix'; when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalRequiresAccessFlags(int, String)"})
-  void testExternalRequiresAccessFlagsWithAccessFlagsPrefix_whenOne() {
+  public void testExternalRequiresAccessFlagsWithAccessFlagsPrefix_whenOne() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalRequiresAccessFlags(1, "Prefix"));
   }
@@ -6916,12 +6019,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalRequiresAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalRequiresAccessFlags(int, String) with 'accessFlags', 'prefix'; when zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalRequiresAccessFlags(int, String)"})
-  void testExternalRequiresAccessFlagsWithAccessFlagsPrefix_whenZero() {
+  public void testExternalRequiresAccessFlagsWithAccessFlagsPrefix_whenZero() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalRequiresAccessFlags(0, "Prefix"));
   }
@@ -6937,12 +6037,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalRequiresAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalRequiresAccessFlags(int) with 'accessFlags'; when '4096'; then return 'synthetic'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalRequiresAccessFlags(int)"})
-  void testExternalRequiresAccessFlagsWithAccessFlags_when4096_thenReturnSynthetic() {
+  public void testExternalRequiresAccessFlagsWithAccessFlags_when4096_thenReturnSynthetic() {
     // Arrange, Act and Assert
     assertEquals("synthetic ", ClassUtil.externalRequiresAccessFlags(4096));
   }
@@ -6958,12 +6055,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalRequiresAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalRequiresAccessFlags(int) with 'accessFlags'; when '32768'; then return 'mandated'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalRequiresAccessFlags(int)"})
-  void testExternalRequiresAccessFlagsWithAccessFlags_when32768_thenReturnMandated() {
+  public void testExternalRequiresAccessFlagsWithAccessFlags_when32768_thenReturnMandated() {
     // Arrange, Act and Assert
     assertEquals("mandated ", ClassUtil.externalRequiresAccessFlags(32768));
   }
@@ -6979,12 +6073,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalRequiresAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalRequiresAccessFlags(int) with 'accessFlags'; when fifty; then return 'transitive'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalRequiresAccessFlags(int)"})
-  void testExternalRequiresAccessFlagsWithAccessFlags_whenFifty_thenReturnTransitive() {
+  public void testExternalRequiresAccessFlagsWithAccessFlags_whenFifty_thenReturnTransitive() {
     // Arrange, Act and Assert
     assertEquals("transitive ", ClassUtil.externalRequiresAccessFlags(50));
   }
@@ -7000,12 +6091,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalRequiresAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalRequiresAccessFlags(int) with 'accessFlags'; when one; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalRequiresAccessFlags(int)"})
-  void testExternalRequiresAccessFlagsWithAccessFlags_whenOne_thenReturnEmptyString() {
+  public void testExternalRequiresAccessFlagsWithAccessFlags_whenOne_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalRequiresAccessFlags(1));
   }
@@ -7021,12 +6109,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalRequiresAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalRequiresAccessFlags(int) with 'accessFlags'; when SIZE; then return 'static'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalRequiresAccessFlags(int)"})
-  void testExternalRequiresAccessFlagsWithAccessFlags_whenSize_thenReturnStatic() {
+  public void testExternalRequiresAccessFlagsWithAccessFlags_whenSize_thenReturnStatic() {
     // Arrange, Act and Assert
     assertEquals("static ", ClassUtil.externalRequiresAccessFlags(Double.SIZE));
   }
@@ -7042,12 +6127,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalRequiresAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalRequiresAccessFlags(int) with 'accessFlags'; when zero; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalRequiresAccessFlags(int)"})
-  void testExternalRequiresAccessFlagsWithAccessFlags_whenZero_thenReturnEmptyString() {
+  public void testExternalRequiresAccessFlagsWithAccessFlags_whenZero_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalRequiresAccessFlags(0));
   }
@@ -7063,12 +6145,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalExportsAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalExportsAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixmandated'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalExportsAccessFlags(int, String)"})
-  void testExternalExportsAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixmandated() {
+  public void testExternalExportsAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixmandated() {
     // Arrange, Act and Assert
     assertEquals("Prefixmandated ", ClassUtil.externalExportsAccessFlags(32768, "Prefix"));
   }
@@ -7084,12 +6163,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalExportsAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalExportsAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixsynthetic'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalExportsAccessFlags(int, String)"})
-  void testExternalExportsAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixsynthetic() {
+  public void testExternalExportsAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixsynthetic() {
     // Arrange, Act and Assert
     assertEquals("Prefixsynthetic ", ClassUtil.externalExportsAccessFlags(4096, "Prefix"));
   }
@@ -7105,12 +6181,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalExportsAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalExportsAccessFlags(int, String) with 'accessFlags', 'prefix'; when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalExportsAccessFlags(int, String)"})
-  void testExternalExportsAccessFlagsWithAccessFlagsPrefix_whenOne() {
+  public void testExternalExportsAccessFlagsWithAccessFlagsPrefix_whenOne() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalExportsAccessFlags(1, "Prefix"));
   }
@@ -7126,12 +6199,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalExportsAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalExportsAccessFlags(int, String) with 'accessFlags', 'prefix'; when zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalExportsAccessFlags(int, String)"})
-  void testExternalExportsAccessFlagsWithAccessFlagsPrefix_whenZero() {
+  public void testExternalExportsAccessFlagsWithAccessFlagsPrefix_whenZero() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalExportsAccessFlags(0, "Prefix"));
   }
@@ -7147,12 +6217,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalExportsAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalExportsAccessFlags(int) with 'accessFlags'; when '4096'; then return 'synthetic'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalExportsAccessFlags(int)"})
-  void testExternalExportsAccessFlagsWithAccessFlags_when4096_thenReturnSynthetic() {
+  public void testExternalExportsAccessFlagsWithAccessFlags_when4096_thenReturnSynthetic() {
     // Arrange, Act and Assert
     assertEquals("synthetic ", ClassUtil.externalExportsAccessFlags(4096));
   }
@@ -7168,12 +6235,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalExportsAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalExportsAccessFlags(int) with 'accessFlags'; when '32768'; then return 'mandated'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalExportsAccessFlags(int)"})
-  void testExternalExportsAccessFlagsWithAccessFlags_when32768_thenReturnMandated() {
+  public void testExternalExportsAccessFlagsWithAccessFlags_when32768_thenReturnMandated() {
     // Arrange, Act and Assert
     assertEquals("mandated ", ClassUtil.externalExportsAccessFlags(32768));
   }
@@ -7189,12 +6253,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalExportsAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalExportsAccessFlags(int) with 'accessFlags'; when one; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalExportsAccessFlags(int)"})
-  void testExternalExportsAccessFlagsWithAccessFlags_whenOne_thenReturnEmptyString() {
+  public void testExternalExportsAccessFlagsWithAccessFlags_whenOne_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalExportsAccessFlags(1));
   }
@@ -7210,12 +6271,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalExportsAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalExportsAccessFlags(int) with 'accessFlags'; when zero; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalExportsAccessFlags(int)"})
-  void testExternalExportsAccessFlagsWithAccessFlags_whenZero_thenReturnEmptyString() {
+  public void testExternalExportsAccessFlagsWithAccessFlags_whenZero_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalExportsAccessFlags(0));
   }
@@ -7231,12 +6289,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalOpensAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalOpensAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixmandated'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalOpensAccessFlags(int, String)"})
-  void testExternalOpensAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixmandated() {
+  public void testExternalOpensAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixmandated() {
     // Arrange, Act and Assert
     assertEquals("Prefixmandated ", ClassUtil.externalOpensAccessFlags(32768, "Prefix"));
   }
@@ -7252,12 +6307,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalOpensAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalOpensAccessFlags(int, String) with 'accessFlags', 'prefix'; then return 'Prefixsynthetic'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalOpensAccessFlags(int, String)"})
-  void testExternalOpensAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixsynthetic() {
+  public void testExternalOpensAccessFlagsWithAccessFlagsPrefix_thenReturnPrefixsynthetic() {
     // Arrange, Act and Assert
     assertEquals("Prefixsynthetic ", ClassUtil.externalOpensAccessFlags(4096, "Prefix"));
   }
@@ -7274,12 +6326,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalOpensAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalOpensAccessFlags(int, String) with 'accessFlags', 'prefix'; when one; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalOpensAccessFlags(int, String)"})
-  void testExternalOpensAccessFlagsWithAccessFlagsPrefix_whenOne_thenReturnEmptyString() {
+  public void testExternalOpensAccessFlagsWithAccessFlagsPrefix_whenOne_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalOpensAccessFlags(1, "Prefix"));
   }
@@ -7296,12 +6345,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalOpensAccessFlags(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test externalOpensAccessFlags(int, String) with 'accessFlags', 'prefix'; when zero; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalOpensAccessFlags(int, String)"})
-  void testExternalOpensAccessFlagsWithAccessFlagsPrefix_whenZero_thenReturnEmptyString() {
+  public void testExternalOpensAccessFlagsWithAccessFlagsPrefix_whenZero_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalOpensAccessFlags(0, "Prefix"));
   }
@@ -7317,12 +6363,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalOpensAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalOpensAccessFlags(int) with 'accessFlags'; when '4096'; then return 'synthetic'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalOpensAccessFlags(int)"})
-  void testExternalOpensAccessFlagsWithAccessFlags_when4096_thenReturnSynthetic() {
+  public void testExternalOpensAccessFlagsWithAccessFlags_when4096_thenReturnSynthetic() {
     // Arrange, Act and Assert
     assertEquals("synthetic ", ClassUtil.externalOpensAccessFlags(4096));
   }
@@ -7338,12 +6381,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalOpensAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalOpensAccessFlags(int) with 'accessFlags'; when '32768'; then return 'mandated'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalOpensAccessFlags(int)"})
-  void testExternalOpensAccessFlagsWithAccessFlags_when32768_thenReturnMandated() {
+  public void testExternalOpensAccessFlagsWithAccessFlags_when32768_thenReturnMandated() {
     // Arrange, Act and Assert
     assertEquals("mandated ", ClassUtil.externalOpensAccessFlags(32768));
   }
@@ -7359,12 +6399,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalOpensAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalOpensAccessFlags(int) with 'accessFlags'; when one; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalOpensAccessFlags(int)"})
-  void testExternalOpensAccessFlagsWithAccessFlags_whenOne_thenReturnEmptyString() {
+  public void testExternalOpensAccessFlagsWithAccessFlags_whenOne_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalOpensAccessFlags(1));
   }
@@ -7380,12 +6417,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalOpensAccessFlags(int)}
    */
   @Test
-  @DisplayName(
-      "Test externalOpensAccessFlags(int) with 'accessFlags'; when zero; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalOpensAccessFlags(int)"})
-  void testExternalOpensAccessFlagsWithAccessFlags_whenZero_thenReturnEmptyString() {
+  public void testExternalOpensAccessFlagsWithAccessFlags_whenZero_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalOpensAccessFlags(0));
   }
@@ -7400,11 +6434,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodArguments(String)}
    */
   @Test
-  @DisplayName("Test externalMethodArguments(String); then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodArguments(String)"})
-  void testExternalMethodArguments_thenThrowIllegalArgumentException() {
+  public void testExternalMethodArguments_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -7422,11 +6454,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalMethodArguments(String)}
    */
   @Test
-  @DisplayName("Test externalMethodArguments(String); when '%'; then return '%'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalMethodArguments(String)"})
-  void testExternalMethodArguments_whenPercentSign_thenReturnPercentSign() {
+  public void testExternalMethodArguments_whenPercentSign_thenReturnPercentSign() {
     // Arrange, Act and Assert
     assertEquals("%", ClassUtil.externalMethodArguments("%"));
   }
@@ -7437,11 +6467,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPackageName(String)}
    */
   @Test
-  @DisplayName("Test internalPackageName(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalPackageName(String)"})
-  void testInternalPackageName() {
+  public void testInternalPackageName() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.internalPackageName("Internal Class Name"));
   }
@@ -7452,11 +6480,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#internalPackagePrefix(String)}
    */
   @Test
-  @DisplayName("Test internalPackagePrefix(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.internalPackagePrefix(String)"})
-  void testInternalPackagePrefix() {
+  public void testInternalPackagePrefix() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.internalPackagePrefix("Internal Class Name"));
   }
@@ -7472,11 +6498,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalPackageName(String)}
    */
   @Test
-  @DisplayName("Test externalPackageName(String); when '1.0'; then return '1'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalPackageName(String)"})
-  void testExternalPackageName_when10_thenReturn1() {
+  public void testExternalPackageName_when10_thenReturn1() {
     // Arrange, Act and Assert
     assertEquals("1", ClassUtil.externalPackageName("1.0"));
   }
@@ -7492,12 +6516,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalPackageName(String)}
    */
   @Test
-  @DisplayName(
-      "Test externalPackageName(String); when 'External Class Name'; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalPackageName(String)"})
-  void testExternalPackageName_whenExternalClassName_thenReturnEmptyString() {
+  public void testExternalPackageName_whenExternalClassName_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalPackageName("External Class Name"));
   }
@@ -7508,11 +6529,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#externalPackagePrefix(String)}
    */
   @Test
-  @DisplayName("Test externalPackagePrefix(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassUtil.externalPackagePrefix(String)"})
-  void testExternalPackagePrefix() {
+  public void testExternalPackagePrefix() {
     // Arrange, Act and Assert
     assertEquals("", ClassUtil.externalPackagePrefix("External Class Name"));
   }
@@ -7527,16 +6546,13 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isExtendable(Clazz)}
    */
   @Test
-  @DisplayName("Test isExtendable(Clazz); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isExtendable(Clazz)"})
-  void testIsExtendable_thenReturnFalse() {
-    // Arrange
-    LibraryClass clazz = new LibraryClass(Short.SIZE, "This Class Name", "Super Class Name");
-
-    // Act and Assert
-    assertFalse(ClassUtil.isExtendable(clazz));
+  public void testIsExtendable_thenReturnFalse() {
+    // Arrange, Act and Assert
+    assertFalse(
+        ClassUtil.isExtendable(
+            new LibraryClass(Short.SIZE, "This Class Name", "Super Class Name")));
   }
 
   /**
@@ -7550,11 +6566,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isExtendable(Clazz)}
    */
   @Test
-  @DisplayName("Test isExtendable(Clazz); when LibraryClass(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isExtendable(Clazz)"})
-  void testIsExtendable_whenLibraryClass_thenReturnTrue() {
+  public void testIsExtendable_whenLibraryClass_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isExtendable(new LibraryClass()));
   }
@@ -7570,11 +6584,9 @@ class ClassUtilDiffblueTest {
    * <p>Method under test: {@link ClassUtil#isExtendable(Clazz)}
    */
   @Test
-  @DisplayName("Test isExtendable(Clazz); when 'null'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassUtil.isExtendable(Clazz)"})
-  void testIsExtendable_whenNull_thenReturnTrue() {
+  public void testIsExtendable_whenNull_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ClassUtil.isExtendable(null));
   }

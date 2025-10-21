@@ -1,33 +1,30 @@
 package proguard.classfile.attribute.annotation.target;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class TypeArgumentTargetInfoDiffblueTest {
+public class TypeArgumentTargetInfoDiffblueTest {
   /**
    * Test {@link TypeArgumentTargetInfo#TypeArgumentTargetInfo()}.
    *
    * <p>Method under test: {@link TypeArgumentTargetInfo#TypeArgumentTargetInfo()}
    */
   @Test
-  @DisplayName("Test new TypeArgumentTargetInfo()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void TypeArgumentTargetInfo.<init>()",
     "void TypeArgumentTargetInfo.<init>(byte)",
     "void TypeArgumentTargetInfo.<init>(byte, int, int)"
   })
-  void testNewTypeArgumentTargetInfo() {
+  public void testNewTypeArgumentTargetInfo() {
     // Arrange, Act and Assert
     assertEquals(
         TargetInfo.TARGET_TYPE_PARAMETER_GENERIC_CLASS,
-        new TypeArgumentTargetInfo().getTargetType());
+        (new TypeArgumentTargetInfo()).getTargetType());
   }
 
   /**
@@ -41,17 +38,15 @@ class TypeArgumentTargetInfoDiffblueTest {
    * <p>Method under test: {@link TypeArgumentTargetInfo#TypeArgumentTargetInfo(byte)}
    */
   @Test
-  @DisplayName("Test new TypeArgumentTargetInfo(byte); when 'A'; then return TargetType is 'A'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void TypeArgumentTargetInfo.<init>()",
     "void TypeArgumentTargetInfo.<init>(byte)",
     "void TypeArgumentTargetInfo.<init>(byte, int, int)"
   })
-  void testNewTypeArgumentTargetInfo_whenA_thenReturnTargetTypeIsA() {
+  public void testNewTypeArgumentTargetInfo_whenA_thenReturnTargetTypeIsA() {
     // Arrange, Act and Assert
-    assertEquals('A', new TypeArgumentTargetInfo((byte) 'A').getTargetType());
+    assertEquals('A', (new TypeArgumentTargetInfo((byte) 'A')).getTargetType());
   }
 
   /**
@@ -65,17 +60,14 @@ class TypeArgumentTargetInfoDiffblueTest {
    * <p>Method under test: {@link TypeArgumentTargetInfo#TypeArgumentTargetInfo(byte, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test new TypeArgumentTargetInfo(byte, int, int); when two; then return TargetType is 'A'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void TypeArgumentTargetInfo.<init>()",
     "void TypeArgumentTargetInfo.<init>(byte)",
     "void TypeArgumentTargetInfo.<init>(byte, int, int)"
   })
-  void testNewTypeArgumentTargetInfo_whenTwo_thenReturnTargetTypeIsA() {
+  public void testNewTypeArgumentTargetInfo_whenTwo_thenReturnTargetTypeIsA() {
     // Arrange, Act and Assert
-    assertEquals('A', new TypeArgumentTargetInfo((byte) 'A', 2, 1).getTargetType());
+    assertEquals('A', (new TypeArgumentTargetInfo((byte) 'A', 2, 1)).getTargetType());
   }
 }

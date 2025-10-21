@@ -1,16 +1,15 @@
 package proguard.evaluation;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.constant.ClassConstant;
@@ -23,18 +22,16 @@ import proguard.evaluation.value.object.AnalyzedObject;
 import proguard.evaluation.value.object.model.ClassModel;
 import proguard.evaluation.value.object.model.Model;
 
-class ClassConstantValueFactoryDiffblueTest {
+public class ClassConstantValueFactoryDiffblueTest {
   /**
    * Test {@link ClassConstantValueFactory#ClassConstantValueFactory(ValueFactory)}.
    *
    * <p>Method under test: {@link ClassConstantValueFactory#ClassConstantValueFactory(ValueFactory)}
    */
   @Test
-  @DisplayName("Test new ClassConstantValueFactory(ValueFactory)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassConstantValueFactory.<init>(ValueFactory)"})
-  void testNewClassConstantValueFactory() {
+  public void testNewClassConstantValueFactory() {
     // Arrange and Act
     ClassConstantValueFactory actualClassConstantValueFactory =
         new ClassConstantValueFactory(new ParticularReferenceValueFactory());
@@ -52,11 +49,9 @@ class ClassConstantValueFactoryDiffblueTest {
    * ClassConstant)}
    */
   @Test
-  @DisplayName("Test visitClassConstant(Clazz, ClassConstant)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassConstantValueFactory.visitClassConstant(Clazz, ClassConstant)"})
-  void testVisitClassConstant() {
+  public void testVisitClassConstant() {
     // Arrange
     ClassConstantValueFactory classConstantValueFactory =
         new ClassConstantValueFactory(new ParticularReferenceValueFactory());
@@ -90,11 +85,9 @@ class ClassConstantValueFactoryDiffblueTest {
    * ClassConstant)}
    */
   @Test
-  @DisplayName("Test visitClassConstant(Clazz, ClassConstant)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassConstantValueFactory.visitClassConstant(Clazz, ClassConstant)"})
-  void testVisitClassConstant2() {
+  public void testVisitClassConstant2() {
     // Arrange
     ClassConstantValueFactory classConstantValueFactory =
         new ClassConstantValueFactory(new PrimitiveTypedReferenceValueFactory());

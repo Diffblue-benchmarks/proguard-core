@@ -1,30 +1,27 @@
 package proguard.dexfile.ir.expr;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.LabelAndLocalMapper;
 import proguard.dexfile.ir.expr.Value.VT;
 
-class RefExprDiffblueTest {
+public class RefExprDiffblueTest {
   /**
    * Test {@link RefExpr#releaseMemory()}.
    *
    * <p>Method under test: {@link RefExpr#releaseMemory()}
    */
   @Test
-  @DisplayName("Test releaseMemory()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void RefExpr.releaseMemory()"})
-  void testReleaseMemory() {
+  public void testReleaseMemory() {
     // Arrange
     RefExpr nExceptionRefResult = Exprs.nExceptionRef("Type");
 
@@ -41,22 +38,20 @@ class RefExprDiffblueTest {
    * <p>Method under test: {@link RefExpr#RefExpr(VT, String, int)}
    */
   @Test
-  @DisplayName("Test new RefExpr(VT, String, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void RefExpr.<init>(VT, String, int)"})
-  void testNewRefExpr() {
+  public void testNewRefExpr() {
     // Arrange and Act
     RefExpr actualRefExpr = new RefExpr(VT.ADD, "Ref Type", 1);
 
     // Assert
     assertEquals("Ref Type", actualRefExpr.type);
+    assertNull(actualRefExpr.getOps());
     assertNull(actualRefExpr.tag);
     assertNull(actualRefExpr.valueType);
     assertNull(actualRefExpr.getOp());
     assertNull(actualRefExpr.getOp1());
     assertNull(actualRefExpr.getOp2());
-    assertNull(actualRefExpr.getOps());
     assertEquals(1, actualRefExpr.parameterIndex);
     assertEquals(ET.E0, actualRefExpr.et);
     assertEquals(VT.ADD, actualRefExpr.vt);
@@ -68,11 +63,9 @@ class RefExprDiffblueTest {
    * <p>Method under test: {@link RefExpr#clone()}
    */
   @Test
-  @DisplayName("Test clone()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value RefExpr.clone()"})
-  void testClone() {
+  public void testClone() {
     // Arrange and Act
     Value actualCloneResult = Exprs.nExceptionRef("Type").clone();
 
@@ -80,12 +73,12 @@ class RefExprDiffblueTest {
     assertTrue(actualCloneResult instanceof RefExpr);
     assertEquals("@Exception", actualCloneResult.toString0());
     assertEquals("Type", ((RefExpr) actualCloneResult).type);
+    assertNull(actualCloneResult.getOps());
     assertNull(((RefExpr) actualCloneResult).tag);
     assertNull(((RefExpr) actualCloneResult).valueType);
     assertNull(actualCloneResult.getOp());
     assertNull(actualCloneResult.getOp1());
     assertNull(actualCloneResult.getOp2());
-    assertNull(actualCloneResult.getOps());
     assertEquals(-1, ((RefExpr) actualCloneResult).parameterIndex);
     assertEquals(ET.E0, ((RefExpr) actualCloneResult).et);
     assertEquals(VT.EXCEPTION_REF, ((RefExpr) actualCloneResult).vt);
@@ -97,11 +90,9 @@ class RefExprDiffblueTest {
    * <p>Method under test: {@link RefExpr#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName("Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value RefExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper() {
+  public void testCloneWithLabelAndLocalMapper() {
     // Arrange
     RefExpr nExceptionRefResult = Exprs.nExceptionRef("Type");
 
@@ -112,12 +103,12 @@ class RefExprDiffblueTest {
     assertTrue(actualCloneResult instanceof RefExpr);
     assertEquals("@Exception", actualCloneResult.toString0());
     assertEquals("Type", ((RefExpr) actualCloneResult).type);
+    assertNull(actualCloneResult.getOps());
     assertNull(((RefExpr) actualCloneResult).tag);
     assertNull(((RefExpr) actualCloneResult).valueType);
     assertNull(actualCloneResult.getOp());
     assertNull(actualCloneResult.getOp1());
     assertNull(actualCloneResult.getOp2());
-    assertNull(actualCloneResult.getOps());
     assertEquals(-1, ((RefExpr) actualCloneResult).parameterIndex);
     assertEquals(ET.E0, ((RefExpr) actualCloneResult).et);
     assertEquals(VT.EXCEPTION_REF, ((RefExpr) actualCloneResult).vt);
@@ -134,11 +125,9 @@ class RefExprDiffblueTest {
    * <p>Method under test: {@link RefExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); given nExceptionRef 'Type'; then return '@Exception'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String RefExpr.toString0()"})
-  void testToString0_givenNExceptionRefType_thenReturnException() {
+  public void testToString0_givenNExceptionRefType_thenReturnException() {
     // Arrange, Act and Assert
     assertEquals("@Exception", Exprs.nExceptionRef("Type").toString0());
   }
@@ -147,40 +136,35 @@ class RefExprDiffblueTest {
    * Test {@link RefExpr#toString0()}.
    *
    * <ul>
-   *   <li>Given {@link RefExpr#RefExpr(VT, String, int)} with vt is {@code THIS_REF} and {@code Ref
-   *       Type} and index is one.
-   *   <li>Then return {@code @this}.
-   * </ul>
-   *
-   * <p>Method under test: {@link RefExpr#toString0()}
-   */
-  @Test
-  @DisplayName(
-      "Test toString0(); given RefExpr(VT, String, int) with vt is 'THIS_REF' and 'Ref Type' and index is one; then return '@this'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String RefExpr.toString0()"})
-  void testToString0_givenRefExprWithVtIsThisRefAndRefTypeAndIndexIsOne_thenReturnThis() {
-    // Arrange, Act and Assert
-    assertEquals("@this", new RefExpr(VT.THIS_REF, "Ref Type", 1).toString0());
-  }
-
-  /**
-   * Test {@link RefExpr#toString0()}.
-   *
-   * <ul>
+   *   <li>Given nParameterRef {@code @Exception} and one.
    *   <li>Then return {@code @parameter_1}.
    * </ul>
    *
    * <p>Method under test: {@link RefExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); then return '@parameter_1'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String RefExpr.toString0()"})
-  void testToString0_thenReturnParameter1() {
+  public void testToString0_givenNParameterRefExceptionAndOne_thenReturnParameter1() {
     // Arrange, Act and Assert
-    assertEquals("@parameter_1", new RefExpr(VT.PARAMETER_REF, "Ref Type", 1).toString0());
+    assertEquals("@parameter_1", Exprs.nParameterRef("@Exception", 1).toString0());
+  }
+
+  /**
+   * Test {@link RefExpr#toString0()}.
+   *
+   * <ul>
+   *   <li>Given nThisRef {@code @Exception}.
+   *   <li>Then return {@code @this}.
+   * </ul>
+   *
+   * <p>Method under test: {@link RefExpr#toString0()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String RefExpr.toString0()"})
+  public void testToString0_givenNThisRefException_thenReturnThis() {
+    // Arrange, Act and Assert
+    assertEquals("@this", Exprs.nThisRef("@Exception").toString0());
   }
 }

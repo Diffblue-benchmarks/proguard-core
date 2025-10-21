@@ -1,16 +1,15 @@
 package proguard.dexfile.ir.stmt;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.LabelAndLocalMapper;
 import proguard.dexfile.ir.expr.ArrayExpr;
@@ -21,31 +20,29 @@ import proguard.dexfile.ir.expr.Value;
 import proguard.dexfile.ir.expr.Value.VT;
 import proguard.dexfile.ir.stmt.Stmt.ST;
 
-class TableSwitchStmtDiffblueTest {
+public class TableSwitchStmtDiffblueTest {
   /**
    * Test {@link TableSwitchStmt#TableSwitchStmt()}.
    *
    * <p>Method under test: {@link TableSwitchStmt#TableSwitchStmt()}
    */
   @Test
-  @DisplayName("Test new TableSwitchStmt()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TableSwitchStmt.<init>()"})
-  void testNewTableSwitchStmt() {
+  public void testNewTableSwitchStmt() {
     // Arrange and Act
     TableSwitchStmt actualTableSwitchStmt = new TableSwitchStmt();
 
     // Assert
+    assertNull(actualTableSwitchStmt.getOps());
+    assertNull(actualTableSwitchStmt.targets);
     assertNull(actualTableSwitchStmt.frame);
     assertNull(actualTableSwitchStmt.exceptionHandlers);
     assertNull(actualTableSwitchStmt._cfg_froms);
     assertNull(actualTableSwitchStmt.getOp1());
     assertNull(actualTableSwitchStmt.getOp2());
     assertNull(actualTableSwitchStmt.getOp());
-    assertNull(actualTableSwitchStmt.getOps());
     assertNull(actualTableSwitchStmt.defaultTarget);
-    assertNull(actualTableSwitchStmt.targets);
     assertNull(actualTableSwitchStmt.getNext());
     assertNull(actualTableSwitchStmt.getPre());
     assertNull(actualTableSwitchStmt._ts_default_next);
@@ -64,27 +61,25 @@ class TableSwitchStmtDiffblueTest {
    * LabelStmt)}
    */
   @Test
-  @DisplayName("Test new TableSwitchStmt(Value, int, LabelStmt[], LabelStmt)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TableSwitchStmt.<init>(Value, int, LabelStmt[], LabelStmt)"})
-  void testNewTableSwitchStmt2() {
+  public void testNewTableSwitchStmt2() {
     // Arrange
     ArrayExpr key = new ArrayExpr();
-    LabelStmt[] targets = new LabelStmt[] {Stmts.nLabel()};
 
     // Act
-    TableSwitchStmt actualTableSwitchStmt = new TableSwitchStmt(key, 1, targets, Stmts.nLabel());
+    TableSwitchStmt actualTableSwitchStmt =
+        new TableSwitchStmt(key, 1, new LabelStmt[] {Stmts.nLabel()}, Stmts.nLabel());
 
     // Assert
     Value op = actualTableSwitchStmt.getOp();
     assertTrue(op instanceof ArrayExpr);
+    assertNull(actualTableSwitchStmt.getOps());
     assertNull(actualTableSwitchStmt.frame);
     assertNull(actualTableSwitchStmt.exceptionHandlers);
     assertNull(actualTableSwitchStmt._cfg_froms);
     assertNull(actualTableSwitchStmt.getOp1());
     assertNull(actualTableSwitchStmt.getOp2());
-    assertNull(actualTableSwitchStmt.getOps());
     assertNull(actualTableSwitchStmt.getNext());
     assertNull(actualTableSwitchStmt.getPre());
     assertNull(actualTableSwitchStmt._ts_default_next);
@@ -108,12 +103,9 @@ class TableSwitchStmtDiffblueTest {
    * <p>Method under test: {@link TableSwitchStmt#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then Op return Constant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Stmt TableSwitchStmt.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenOpReturnConstant() {
+  public void testCloneWithLabelAndLocalMapper_thenOpReturnConstant() {
     // Arrange
     Constant key = Exprs.nNull();
     TableSwitchStmt nTableSwitchResult =
@@ -140,11 +132,9 @@ class TableSwitchStmtDiffblueTest {
    * <p>Method under test: {@link TableSwitchStmt#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName("Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then Op return Local")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Stmt TableSwitchStmt.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenOpReturnLocal() {
+  public void testCloneWithLabelAndLocalMapper_thenOpReturnLocal() {
     // Arrange
     Local key = new Local();
     TableSwitchStmt nTableSwitchResult =

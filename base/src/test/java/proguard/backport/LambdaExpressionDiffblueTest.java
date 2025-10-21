@@ -1,15 +1,14 @@
 package proguard.backport;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryMethod;
@@ -18,7 +17,7 @@ import proguard.classfile.ProgramClass;
 import proguard.classfile.attribute.BootstrapMethodInfo;
 import proguard.testutils.cpa.NamedClass;
 
-class LambdaExpressionDiffblueTest {
+public class LambdaExpressionDiffblueTest {
   /**
    * Test {@link LambdaExpression#LambdaExpression(ProgramClass, int, BootstrapMethodInfo, String,
    * String[], String[], String, String, int, String, String, String, Clazz, Method, int)}.
@@ -28,21 +27,15 @@ class LambdaExpressionDiffblueTest {
    * Clazz, Method, int)}
    */
   @Test
-  @DisplayName(
-      "Test new LambdaExpression(ProgramClass, int, BootstrapMethodInfo, String, String[], String[], String, String, int, String, String, String, Clazz, Method, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void LambdaExpression.<init>(ProgramClass, int, BootstrapMethodInfo, String, String[], String[], String, String, int, String, String, String, Clazz, Method, int)"
   })
-  void testNewLambdaExpression() {
+  public void testNewLambdaExpression() {
     // Arrange
     ProgramClass referencedClass = new ProgramClass();
     BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
     LibraryClass referencedInvokedClass = new LibraryClass();
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(1, "Name", "Descriptor");
 
     // Act
     LambdaExpression actualLambdaExpression =
@@ -51,8 +44,8 @@ class LambdaExpressionDiffblueTest {
             1,
             bootstrapMethodInfo,
             "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
+            new String[] {"Interfaces"},
+            new String[] {"Bridge Method Descriptors"},
             "Interface Method",
             "Interface Method Descriptor",
             1,
@@ -60,7 +53,7 @@ class LambdaExpressionDiffblueTest {
             "Invoked Method Name",
             "Invoked Method Desc",
             referencedInvokedClass,
-            referencedInvokedMethod,
+            new LibraryMethod(1, "Name", "Descriptor"),
             1);
 
     // Assert
@@ -88,39 +81,34 @@ class LambdaExpressionDiffblueTest {
    * <p>Method under test: {@link LambdaExpression#getLambdaClassName()}
    */
   @Test
-  @DisplayName("Test getLambdaClassName(); then return '%s$$Lambda$%d$$Lambda$1'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String LambdaExpression.getLambdaClassName()"})
-  void testGetLambdaClassName_thenReturnSLambdaDLambda1() {
+  public void testGetLambdaClassName_thenReturnSLambdaDLambda1() {
     // Arrange
     NamedClass referencedClass = new NamedClass("%s$$Lambda$%d");
     BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
     LibraryClass referencedInvokedClass = new LibraryClass();
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    LambdaExpression lambdaExpression =
-        new LambdaExpression(
-            referencedClass,
-            1,
-            bootstrapMethodInfo,
-            "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
-            "Interface Method",
-            "Interface Method Descriptor",
-            1,
-            "Invoked Class Name",
-            "Invoked Method Name",
-            "Invoked Method Desc",
-            referencedInvokedClass,
-            referencedInvokedMethod,
-            1);
 
     // Act and Assert
-    assertEquals("%s$$Lambda$%d$$Lambda$1", lambdaExpression.getLambdaClassName());
+    assertEquals(
+        "%s$$Lambda$%d$$Lambda$1",
+        (new LambdaExpression(
+                referencedClass,
+                1,
+                bootstrapMethodInfo,
+                "Factory Method Descriptor",
+                new String[] {"Interfaces"},
+                new String[] {"Bridge Method Descriptors"},
+                "Interface Method",
+                "Interface Method Descriptor",
+                1,
+                "Invoked Class Name",
+                "Invoked Method Name",
+                "Invoked Method Desc",
+                referencedInvokedClass,
+                new LibraryMethod(1, "Name", "Descriptor"),
+                1))
+            .getLambdaClassName());
   }
 
   /**
@@ -133,39 +121,33 @@ class LambdaExpressionDiffblueTest {
    * <p>Method under test: {@link LambdaExpression#isSerializable()}
    */
   @Test
-  @DisplayName("Test isSerializable(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LambdaExpression.isSerializable()"})
-  void testIsSerializable_thenReturnFalse() {
+  public void testIsSerializable_thenReturnFalse() {
     // Arrange
     ProgramClass referencedClass = new ProgramClass();
     BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
     LibraryClass referencedInvokedClass = new LibraryClass();
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    LambdaExpression lambdaExpression =
-        new LambdaExpression(
-            referencedClass,
-            1,
-            bootstrapMethodInfo,
-            "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
-            "Interface Method",
-            "Interface Method Descriptor",
-            1,
-            "Invoked Class Name",
-            "Invoked Method Name",
-            "Invoked Method Desc",
-            referencedInvokedClass,
-            referencedInvokedMethod,
-            1);
 
     // Act and Assert
-    assertFalse(lambdaExpression.isSerializable());
+    assertFalse(
+        (new LambdaExpression(
+                referencedClass,
+                1,
+                bootstrapMethodInfo,
+                "Factory Method Descriptor",
+                new String[] {"Interfaces"},
+                new String[] {"Bridge Method Descriptors"},
+                "Interface Method",
+                "Interface Method Descriptor",
+                1,
+                "Invoked Class Name",
+                "Invoked Method Name",
+                "Invoked Method Desc",
+                referencedInvokedClass,
+                new LibraryMethod(1, "Name", "Descriptor"),
+                1))
+            .isSerializable());
   }
 
   /**
@@ -178,38 +160,33 @@ class LambdaExpressionDiffblueTest {
    * <p>Method under test: {@link LambdaExpression#isSerializable()}
    */
   @Test
-  @DisplayName("Test isSerializable(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LambdaExpression.isSerializable()"})
-  void testIsSerializable_thenReturnTrue() {
+  public void testIsSerializable_thenReturnTrue() {
     // Arrange
     ProgramClass referencedClass = new ProgramClass();
     BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
     LibraryClass referencedInvokedClass = new LibraryClass();
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    LambdaExpression lambdaExpression =
-        new LambdaExpression(
-            referencedClass,
-            1,
-            bootstrapMethodInfo,
-            "Factory Method Descriptor",
-            new String[] {"java/io/Serializable", "Interfaces"},
-            bridgeMethodDescriptors,
-            "Interface Method",
-            "Interface Method Descriptor",
-            1,
-            "Invoked Class Name",
-            "Invoked Method Name",
-            "Invoked Method Desc",
-            referencedInvokedClass,
-            referencedInvokedMethod,
-            1);
 
     // Act and Assert
-    assertTrue(lambdaExpression.isSerializable());
+    assertTrue(
+        (new LambdaExpression(
+                referencedClass,
+                1,
+                bootstrapMethodInfo,
+                "Factory Method Descriptor",
+                new String[] {"java/io/Serializable"},
+                new String[] {"Bridge Method Descriptors"},
+                "Interface Method",
+                "Interface Method Descriptor",
+                1,
+                "Invoked Class Name",
+                "Invoked Method Name",
+                "Invoked Method Desc",
+                referencedInvokedClass,
+                new LibraryMethod(1, "Name", "Descriptor"),
+                1))
+            .isSerializable());
   }
 
   /**
@@ -222,36 +199,31 @@ class LambdaExpressionDiffblueTest {
    * <p>Method under test: {@link LambdaExpression#isMethodReference()}
    */
   @Test
-  @DisplayName("Test isMethodReference(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LambdaExpression.isMethodReference()"})
-  void testIsMethodReference_thenReturnFalse() {
+  public void testIsMethodReference_thenReturnFalse() {
     // Arrange
     ProgramClass referencedClass = new ProgramClass();
     BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
     LibraryClass referencedInvokedClass = new LibraryClass();
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
     LambdaExpression lambdaExpression =
         new LambdaExpression(
             referencedClass,
             1,
             bootstrapMethodInfo,
             "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
+            new String[] {"Interfaces"},
+            new String[] {"Bridge Method Descriptors"},
             "Interface Method",
             "Interface Method Descriptor",
             1,
             "Invoked Class Name",
-            "lambda$",
+            "Invoked Method Name",
             "Invoked Method Desc",
             referencedInvokedClass,
-            referencedInvokedMethod,
+            new LibraryMethod(1, "Name", "Descriptor"),
             1);
+    lambdaExpression.invokedMethodName = "lambda$";
 
     // Act and Assert
     assertFalse(lambdaExpression.isMethodReference());
@@ -267,39 +239,33 @@ class LambdaExpressionDiffblueTest {
    * <p>Method under test: {@link LambdaExpression#isMethodReference()}
    */
   @Test
-  @DisplayName("Test isMethodReference(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LambdaExpression.isMethodReference()"})
-  void testIsMethodReference_thenReturnTrue() {
+  public void testIsMethodReference_thenReturnTrue() {
     // Arrange
     ProgramClass referencedClass = new ProgramClass();
     BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
     LibraryClass referencedInvokedClass = new LibraryClass();
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    LambdaExpression lambdaExpression =
-        new LambdaExpression(
-            referencedClass,
-            1,
-            bootstrapMethodInfo,
-            "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
-            "Interface Method",
-            "Interface Method Descriptor",
-            1,
-            "Invoked Class Name",
-            "Invoked Method Name",
-            "Invoked Method Desc",
-            referencedInvokedClass,
-            referencedInvokedMethod,
-            1);
 
     // Act and Assert
-    assertTrue(lambdaExpression.isMethodReference());
+    assertTrue(
+        (new LambdaExpression(
+                referencedClass,
+                1,
+                bootstrapMethodInfo,
+                "Factory Method Descriptor",
+                new String[] {"Interfaces"},
+                new String[] {"Bridge Method Descriptors"},
+                "Interface Method",
+                "Interface Method Descriptor",
+                1,
+                "Invoked Class Name",
+                "Invoked Method Name",
+                "Invoked Method Desc",
+                referencedInvokedClass,
+                new LibraryMethod(1, "Name", "Descriptor"),
+                1))
+            .isMethodReference());
   }
 
   /**
@@ -308,39 +274,33 @@ class LambdaExpressionDiffblueTest {
    * <p>Method under test: {@link LambdaExpression#invokesStaticInterfaceMethod()}
    */
   @Test
-  @DisplayName("Test invokesStaticInterfaceMethod()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LambdaExpression.invokesStaticInterfaceMethod()"})
-  void testInvokesStaticInterfaceMethod() {
+  public void testInvokesStaticInterfaceMethod() {
     // Arrange
     ProgramClass referencedClass = new ProgramClass();
     BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
     LibraryClass referencedInvokedClass = new LibraryClass();
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    LambdaExpression lambdaExpression =
-        new LambdaExpression(
-            referencedClass,
-            1,
-            bootstrapMethodInfo,
-            "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
-            "Interface Method",
-            "Interface Method Descriptor",
-            1,
-            "Invoked Class Name",
-            "Invoked Method Name",
-            "Invoked Method Desc",
-            referencedInvokedClass,
-            referencedInvokedMethod,
-            1);
 
     // Act and Assert
-    assertFalse(lambdaExpression.invokesStaticInterfaceMethod());
+    assertFalse(
+        (new LambdaExpression(
+                referencedClass,
+                1,
+                bootstrapMethodInfo,
+                "Factory Method Descriptor",
+                new String[] {"Interfaces"},
+                new String[] {"Bridge Method Descriptors"},
+                "Interface Method",
+                "Interface Method Descriptor",
+                1,
+                "Invoked Class Name",
+                "Invoked Method Name",
+                "Invoked Method Desc",
+                referencedInvokedClass,
+                new LibraryMethod(1, "Name", "Descriptor"),
+                1))
+            .invokesStaticInterfaceMethod());
   }
 
   /**
@@ -349,35 +309,32 @@ class LambdaExpressionDiffblueTest {
    * <p>Method under test: {@link LambdaExpression#invokesStaticInterfaceMethod()}
    */
   @Test
-  @DisplayName("Test invokesStaticInterfaceMethod()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LambdaExpression.invokesStaticInterfaceMethod()"})
-  void testInvokesStaticInterfaceMethod2() {
+  public void testInvokesStaticInterfaceMethod2() {
     // Arrange
     ProgramClass referencedClass = new ProgramClass();
     BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
+    LibraryClass referencedInvokedClass = new LibraryClass();
     LambdaExpression lambdaExpression =
         new LambdaExpression(
             referencedClass,
             1,
             bootstrapMethodInfo,
             "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
+            new String[] {"Interfaces"},
+            new String[] {"Bridge Method Descriptors"},
             "Interface Method",
             "Interface Method Descriptor",
-            6,
+            1,
             "Invoked Class Name",
             "Invoked Method Name",
             "Invoked Method Desc",
-            null,
-            referencedInvokedMethod,
+            referencedInvokedClass,
+            new LibraryMethod(1, "Name", "Descriptor"),
             1);
+    lambdaExpression.invokedReferenceKind = 6;
+    lambdaExpression.referencedInvokedClass = null;
 
     // Act and Assert
     assertFalse(lambdaExpression.invokesStaticInterfaceMethod());
@@ -389,36 +346,32 @@ class LambdaExpressionDiffblueTest {
    * <p>Method under test: {@link LambdaExpression#invokesStaticInterfaceMethod()}
    */
   @Test
-  @DisplayName("Test invokesStaticInterfaceMethod()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LambdaExpression.invokesStaticInterfaceMethod()"})
-  void testInvokesStaticInterfaceMethod3() {
+  public void testInvokesStaticInterfaceMethod3() {
     // Arrange
     ProgramClass referencedClass = new ProgramClass();
     BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
     LibraryClass referencedInvokedClass = new LibraryClass();
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
     LambdaExpression lambdaExpression =
         new LambdaExpression(
             referencedClass,
             1,
             bootstrapMethodInfo,
             "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
+            new String[] {"Interfaces"},
+            new String[] {"Bridge Method Descriptors"},
             "Interface Method",
             "Interface Method Descriptor",
-            6,
+            1,
             "Invoked Class Name",
             "Invoked Method Name",
             "Invoked Method Desc",
             referencedInvokedClass,
-            referencedInvokedMethod,
+            new LibraryMethod(1, "Name", "Descriptor"),
             1);
+    lambdaExpression.invokedReferenceKind = 6;
+    lambdaExpression.referencedInvokedClass = new LibraryClass();
 
     // Act and Assert
     assertFalse(lambdaExpression.invokesStaticInterfaceMethod());
@@ -430,27 +383,56 @@ class LambdaExpressionDiffblueTest {
    * <p>Method under test: {@link LambdaExpression#referencesPrivateSyntheticInterfaceMethod()}
    */
   @Test
-  @DisplayName("Test referencesPrivateSyntheticInterfaceMethod()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LambdaExpression.referencesPrivateSyntheticInterfaceMethod()"})
-  void testReferencesPrivateSyntheticInterfaceMethod() {
+  public void testReferencesPrivateSyntheticInterfaceMethod() {
     // Arrange
     ProgramClass referencedClass = new ProgramClass();
     BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
     LibraryClass referencedInvokedClass = new LibraryClass();
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(1, "Name", "Descriptor");
 
+    // Act and Assert
+    assertFalse(
+        (new LambdaExpression(
+                referencedClass,
+                1,
+                bootstrapMethodInfo,
+                "Factory Method Descriptor",
+                new String[] {"Interfaces"},
+                new String[] {"Bridge Method Descriptors"},
+                "Interface Method",
+                "Interface Method Descriptor",
+                1,
+                "Invoked Class Name",
+                "Invoked Method Name",
+                "Invoked Method Desc",
+                referencedInvokedClass,
+                new LibraryMethod(1, "Name", "Descriptor"),
+                1))
+            .referencesPrivateSyntheticInterfaceMethod());
+  }
+
+  /**
+   * Test {@link LambdaExpression#referencesPrivateSyntheticInterfaceMethod()}.
+   *
+   * <p>Method under test: {@link LambdaExpression#referencesPrivateSyntheticInterfaceMethod()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"boolean LambdaExpression.referencesPrivateSyntheticInterfaceMethod()"})
+  public void testReferencesPrivateSyntheticInterfaceMethod2() {
+    // Arrange
+    ProgramClass referencedClass = new ProgramClass();
+    BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
+    LibraryClass referencedInvokedClass = new LibraryClass();
     LambdaExpression lambdaExpression =
         new LambdaExpression(
             referencedClass,
             1,
             bootstrapMethodInfo,
             "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
+            new String[] {"Interfaces"},
+            new String[] {"Bridge Method Descriptors"},
             "Interface Method",
             "Interface Method Descriptor",
             1,
@@ -458,8 +440,9 @@ class LambdaExpressionDiffblueTest {
             "Invoked Method Name",
             "Invoked Method Desc",
             referencedInvokedClass,
-            referencedInvokedMethod,
+            new LibraryMethod(1, "Name", "Descriptor"),
             1);
+    lambdaExpression.referencedInvokedClass = null;
 
     // Act and Assert
     assertFalse(lambdaExpression.referencesPrivateSyntheticInterfaceMethod());
@@ -471,126 +454,34 @@ class LambdaExpressionDiffblueTest {
    * <p>Method under test: {@link LambdaExpression#referencesPrivateSyntheticInterfaceMethod()}
    */
   @Test
-  @DisplayName("Test referencesPrivateSyntheticInterfaceMethod()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LambdaExpression.referencesPrivateSyntheticInterfaceMethod()"})
-  void testReferencesPrivateSyntheticInterfaceMethod2() {
+  public void testReferencesPrivateSyntheticInterfaceMethod3() {
     // Arrange
     ProgramClass referencedClass = new ProgramClass();
     BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    LambdaExpression lambdaExpression =
-        new LambdaExpression(
-            referencedClass,
-            1,
-            bootstrapMethodInfo,
-            "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
-            "Interface Method",
-            "Interface Method Descriptor",
-            1,
-            "Invoked Class Name",
-            "Invoked Method Name",
-            "Invoked Method Desc",
-            null,
-            referencedInvokedMethod,
-            1);
-
-    // Act and Assert
-    assertFalse(lambdaExpression.referencesPrivateSyntheticInterfaceMethod());
-  }
-
-  /**
-   * Test {@link LambdaExpression#referencesPrivateSyntheticInterfaceMethod()}.
-   *
-   * <p>Method under test: {@link LambdaExpression#referencesPrivateSyntheticInterfaceMethod()}
-   */
-  @Test
-  @DisplayName("Test referencesPrivateSyntheticInterfaceMethod()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean LambdaExpression.referencesPrivateSyntheticInterfaceMethod()"})
-  void testReferencesPrivateSyntheticInterfaceMethod3() {
-    // Arrange
-    ProgramClass referencedClass = new ProgramClass();
-    BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
     LibraryClass referencedInvokedClass =
         new LibraryClass(512, "This Class Name", "Super Class Name");
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    LambdaExpression lambdaExpression =
-        new LambdaExpression(
-            referencedClass,
-            1,
-            bootstrapMethodInfo,
-            "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
-            "Interface Method",
-            "Interface Method Descriptor",
-            1,
-            "Invoked Class Name",
-            "Invoked Method Name",
-            "Invoked Method Desc",
-            referencedInvokedClass,
-            referencedInvokedMethod,
-            1);
 
     // Act and Assert
-    assertFalse(lambdaExpression.referencesPrivateSyntheticInterfaceMethod());
-  }
-
-  /**
-   * Test {@link LambdaExpression#referencesPrivateSyntheticInterfaceMethod()}.
-   *
-   * <ul>
-   *   <li>Then return {@code true}.
-   * </ul>
-   *
-   * <p>Method under test: {@link LambdaExpression#referencesPrivateSyntheticInterfaceMethod()}
-   */
-  @Test
-  @DisplayName("Test referencesPrivateSyntheticInterfaceMethod(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean LambdaExpression.referencesPrivateSyntheticInterfaceMethod()"})
-  void testReferencesPrivateSyntheticInterfaceMethod_thenReturnTrue() {
-    // Arrange
-    ProgramClass referencedClass = new ProgramClass();
-    BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
-    LibraryClass referencedInvokedClass =
-        new LibraryClass(512, "This Class Name", "Super Class Name");
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(4098, "Name", "Descriptor");
-
-    LambdaExpression lambdaExpression =
-        new LambdaExpression(
-            referencedClass,
-            1,
-            bootstrapMethodInfo,
-            "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
-            "Interface Method",
-            "Interface Method Descriptor",
-            1,
-            "Invoked Class Name",
-            "Invoked Method Name",
-            "Invoked Method Desc",
-            referencedInvokedClass,
-            referencedInvokedMethod,
-            1);
-
-    // Act and Assert
-    assertTrue(lambdaExpression.referencesPrivateSyntheticInterfaceMethod());
+    assertFalse(
+        (new LambdaExpression(
+                referencedClass,
+                1,
+                bootstrapMethodInfo,
+                "Factory Method Descriptor",
+                new String[] {"Interfaces"},
+                new String[] {"Bridge Method Descriptors"},
+                "Interface Method",
+                "Interface Method Descriptor",
+                1,
+                "Invoked Class Name",
+                "Invoked Method Name",
+                "Invoked Method Desc",
+                referencedInvokedClass,
+                new LibraryMethod(1, "Name", "Descriptor"),
+                1))
+            .referencesPrivateSyntheticInterfaceMethod());
   }
 
   /**
@@ -599,40 +490,34 @@ class LambdaExpressionDiffblueTest {
    * <p>Method under test: {@link LambdaExpression#needsAccessorMethod()}
    */
   @Test
-  @DisplayName("Test needsAccessorMethod()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LambdaExpression.needsAccessorMethod()"})
-  void testNeedsAccessorMethod() {
+  public void testNeedsAccessorMethod() {
     // Arrange
     ProgramClass referencedClass = new ProgramClass();
     BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
     LibraryClass referencedInvokedClass =
         new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    LambdaExpression lambdaExpression =
-        new LambdaExpression(
-            referencedClass,
-            1,
-            bootstrapMethodInfo,
-            "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
-            "Interface Method",
-            "Interface Method Descriptor",
-            1,
-            "Invoked Class Name",
-            "Invoked Method Name",
-            "Invoked Method Desc",
-            referencedInvokedClass,
-            referencedInvokedMethod,
-            1);
 
     // Act and Assert
-    assertTrue(lambdaExpression.needsAccessorMethod());
+    assertTrue(
+        (new LambdaExpression(
+                referencedClass,
+                1,
+                bootstrapMethodInfo,
+                "Factory Method Descriptor",
+                new String[] {"Interfaces"},
+                new String[] {"Bridge Method Descriptors"},
+                "Interface Method",
+                "Interface Method Descriptor",
+                1,
+                "Invoked Class Name",
+                "Invoked Method Name",
+                "Invoked Method Desc",
+                referencedInvokedClass,
+                new LibraryMethod(1, "Name", "Descriptor"),
+                1))
+            .needsAccessorMethod());
   }
 
   /**
@@ -641,40 +526,34 @@ class LambdaExpressionDiffblueTest {
    * <p>Method under test: {@link LambdaExpression#needsAccessorMethod()}
    */
   @Test
-  @DisplayName("Test needsAccessorMethod()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LambdaExpression.needsAccessorMethod()"})
-  void testNeedsAccessorMethod2() {
+  public void testNeedsAccessorMethod2() {
     // Arrange
     ProgramClass referencedClass = new ProgramClass();
     BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
     LibraryClass referencedInvokedClass =
         new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    LambdaExpression lambdaExpression =
-        new LambdaExpression(
-            referencedClass,
-            1,
-            bootstrapMethodInfo,
-            "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
-            "Interface Method",
-            "Interface Method Descriptor",
-            1,
-            "Invoked Class Name",
-            null,
-            "Invoked Method Desc",
-            referencedInvokedClass,
-            referencedInvokedMethod,
-            1);
 
     // Act and Assert
-    assertTrue(lambdaExpression.needsAccessorMethod());
+    assertTrue(
+        (new LambdaExpression(
+                referencedClass,
+                1,
+                bootstrapMethodInfo,
+                "Factory Method Descriptor",
+                new String[] {"Interfaces"},
+                new String[] {"Bridge Method Descriptors"},
+                "Interface Method",
+                "Interface Method Descriptor",
+                1,
+                "Invoked Class Name",
+                null,
+                "Invoked Method Desc",
+                referencedInvokedClass,
+                new LibraryMethod(1, "Name", "Descriptor"),
+                1))
+            .needsAccessorMethod());
   }
 
   /**
@@ -683,40 +562,34 @@ class LambdaExpressionDiffblueTest {
    * <p>Method under test: {@link LambdaExpression#needsAccessorMethod()}
    */
   @Test
-  @DisplayName("Test needsAccessorMethod()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LambdaExpression.needsAccessorMethod()"})
-  void testNeedsAccessorMethod3() {
+  public void testNeedsAccessorMethod3() {
     // Arrange
     ProgramClass referencedClass = new ProgramClass();
     BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
     LibraryClass referencedInvokedClass =
         new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    LambdaExpression lambdaExpression =
-        new LambdaExpression(
-            referencedClass,
-            1,
-            bootstrapMethodInfo,
-            "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
-            "Interface Method",
-            "Interface Method Descriptor",
-            1,
-            "Invoked Class Name",
-            "Invoked Method Name",
-            null,
-            referencedInvokedClass,
-            referencedInvokedMethod,
-            1);
 
     // Act and Assert
-    assertTrue(lambdaExpression.needsAccessorMethod());
+    assertTrue(
+        (new LambdaExpression(
+                referencedClass,
+                1,
+                bootstrapMethodInfo,
+                "Factory Method Descriptor",
+                new String[] {"Interfaces"},
+                new String[] {"Bridge Method Descriptors"},
+                "Interface Method",
+                "Interface Method Descriptor",
+                1,
+                "Invoked Class Name",
+                "Invoked Method Name",
+                null,
+                referencedInvokedClass,
+                new LibraryMethod(1, "Name", "Descriptor"),
+                1))
+            .needsAccessorMethod());
   }
 
   /**
@@ -729,38 +602,32 @@ class LambdaExpressionDiffblueTest {
    * <p>Method under test: {@link LambdaExpression#needsAccessorMethod()}
    */
   @Test
-  @DisplayName("Test needsAccessorMethod(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LambdaExpression.needsAccessorMethod()"})
-  void testNeedsAccessorMethod_thenReturnFalse() {
+  public void testNeedsAccessorMethod_thenReturnFalse() {
     // Arrange
     ProgramClass referencedClass = new ProgramClass();
     BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    LambdaExpression lambdaExpression =
-        new LambdaExpression(
-            referencedClass,
-            1,
-            bootstrapMethodInfo,
-            "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
-            "Interface Method",
-            "Interface Method Descriptor",
-            1,
-            "Invoked Class Name",
-            "Invoked Method Name",
-            "Invoked Method Desc",
-            null,
-            referencedInvokedMethod,
-            1);
 
     // Act and Assert
-    assertFalse(lambdaExpression.needsAccessorMethod());
+    assertFalse(
+        (new LambdaExpression(
+                referencedClass,
+                1,
+                bootstrapMethodInfo,
+                "Factory Method Descriptor",
+                new String[] {"Interfaces"},
+                new String[] {"Bridge Method Descriptors"},
+                "Interface Method",
+                "Interface Method Descriptor",
+                1,
+                "Invoked Class Name",
+                "Invoked Method Name",
+                "Invoked Method Desc",
+                null,
+                new LibraryMethod(1, "Name", "Descriptor"),
+                1))
+            .needsAccessorMethod());
   }
 
   /**
@@ -769,27 +636,56 @@ class LambdaExpressionDiffblueTest {
    * <p>Method under test: {@link LambdaExpression#referencesPrivateConstructor()}
    */
   @Test
-  @DisplayName("Test referencesPrivateConstructor()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LambdaExpression.referencesPrivateConstructor()"})
-  void testReferencesPrivateConstructor() {
+  public void testReferencesPrivateConstructor() {
     // Arrange
     ProgramClass referencedClass = new ProgramClass();
     BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
     LibraryClass referencedInvokedClass = new LibraryClass();
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(1, "Name", "Descriptor");
 
+    // Act and Assert
+    assertFalse(
+        (new LambdaExpression(
+                referencedClass,
+                1,
+                bootstrapMethodInfo,
+                "Factory Method Descriptor",
+                new String[] {"Interfaces"},
+                new String[] {"Bridge Method Descriptors"},
+                "Interface Method",
+                "Interface Method Descriptor",
+                1,
+                "Invoked Class Name",
+                "Invoked Method Name",
+                "Invoked Method Desc",
+                referencedInvokedClass,
+                new LibraryMethod(1, "Name", "Descriptor"),
+                1))
+            .referencesPrivateConstructor());
+  }
+
+  /**
+   * Test {@link LambdaExpression#referencesPrivateConstructor()}.
+   *
+   * <p>Method under test: {@link LambdaExpression#referencesPrivateConstructor()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"boolean LambdaExpression.referencesPrivateConstructor()"})
+  public void testReferencesPrivateConstructor2() {
+    // Arrange
+    ProgramClass referencedClass = new ProgramClass();
+    BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
+    LibraryClass referencedInvokedClass = new LibraryClass();
     LambdaExpression lambdaExpression =
         new LambdaExpression(
             referencedClass,
             1,
             bootstrapMethodInfo,
             "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
+            new String[] {"Interfaces"},
+            new String[] {"Bridge Method Descriptors"},
             "Interface Method",
             "Interface Method Descriptor",
             1,
@@ -797,8 +693,10 @@ class LambdaExpressionDiffblueTest {
             "Invoked Method Name",
             "Invoked Method Desc",
             referencedInvokedClass,
-            referencedInvokedMethod,
+            new LibraryMethod(1, "Name", "Descriptor"),
             1);
+    lambdaExpression.invokedReferenceKind = 8;
+    lambdaExpression.invokedMethodName = "<init>";
 
     // Act and Assert
     assertFalse(lambdaExpression.referencesPrivateConstructor());
@@ -810,124 +708,32 @@ class LambdaExpressionDiffblueTest {
    * <p>Method under test: {@link LambdaExpression#referencesPrivateConstructor()}
    */
   @Test
-  @DisplayName("Test referencesPrivateConstructor()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean LambdaExpression.referencesPrivateConstructor()"})
-  void testReferencesPrivateConstructor2() {
+  public void testReferencesPrivateConstructor3() {
     // Arrange
     ProgramClass referencedClass = new ProgramClass();
     BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
     LibraryClass referencedInvokedClass = new LibraryClass();
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    LambdaExpression lambdaExpression =
-        new LambdaExpression(
-            referencedClass,
-            1,
-            bootstrapMethodInfo,
-            "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
-            "Interface Method",
-            "Interface Method Descriptor",
-            8,
-            "Invoked Class Name",
-            "<init>",
-            "Invoked Method Desc",
-            referencedInvokedClass,
-            referencedInvokedMethod,
-            1);
 
     // Act and Assert
-    assertFalse(lambdaExpression.referencesPrivateConstructor());
-  }
-
-  /**
-   * Test {@link LambdaExpression#referencesPrivateConstructor()}.
-   *
-   * <p>Method under test: {@link LambdaExpression#referencesPrivateConstructor()}
-   */
-  @Test
-  @DisplayName("Test referencesPrivateConstructor()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean LambdaExpression.referencesPrivateConstructor()"})
-  void testReferencesPrivateConstructor3() {
-    // Arrange
-    ProgramClass referencedClass = new ProgramClass();
-    BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
-    LibraryClass referencedInvokedClass = new LibraryClass();
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(1, "Name", "Descriptor");
-
-    LambdaExpression lambdaExpression =
-        new LambdaExpression(
-            referencedClass,
-            1,
-            bootstrapMethodInfo,
-            "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
-            "Interface Method",
-            "Interface Method Descriptor",
-            8,
-            "Invoked Class Name",
-            "Invoked Method Name",
-            "Invoked Method Desc",
-            referencedInvokedClass,
-            referencedInvokedMethod,
-            1);
-
-    // Act and Assert
-    assertFalse(lambdaExpression.referencesPrivateConstructor());
-  }
-
-  /**
-   * Test {@link LambdaExpression#referencesPrivateConstructor()}.
-   *
-   * <ul>
-   *   <li>Then return {@code true}.
-   * </ul>
-   *
-   * <p>Method under test: {@link LambdaExpression#referencesPrivateConstructor()}
-   */
-  @Test
-  @DisplayName("Test referencesPrivateConstructor(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean LambdaExpression.referencesPrivateConstructor()"})
-  void testReferencesPrivateConstructor_thenReturnTrue() {
-    // Arrange
-    ProgramClass referencedClass = new ProgramClass();
-    BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
-    String[] interfaces = new String[] {"Interfaces"};
-    String[] bridgeMethodDescriptors = new String[] {"Bridge Method Descriptors"};
-    LibraryClass referencedInvokedClass = new LibraryClass();
-    LibraryMethod referencedInvokedMethod = new LibraryMethod(2, "Name", "Descriptor");
-
-    LambdaExpression lambdaExpression =
-        new LambdaExpression(
-            referencedClass,
-            1,
-            bootstrapMethodInfo,
-            "Factory Method Descriptor",
-            interfaces,
-            bridgeMethodDescriptors,
-            "Interface Method",
-            "Interface Method Descriptor",
-            8,
-            "Invoked Class Name",
-            "<init>",
-            "Invoked Method Desc",
-            referencedInvokedClass,
-            referencedInvokedMethod,
-            1);
-
-    // Act and Assert
-    assertTrue(lambdaExpression.referencesPrivateConstructor());
+    assertFalse(
+        (new LambdaExpression(
+                referencedClass,
+                1,
+                bootstrapMethodInfo,
+                "Factory Method Descriptor",
+                new String[] {"Interfaces"},
+                new String[] {"Bridge Method Descriptors"},
+                "Interface Method",
+                "Interface Method Descriptor",
+                8,
+                "Invoked Class Name",
+                "Invoked Method Name",
+                "Invoked Method Desc",
+                referencedInvokedClass,
+                new LibraryMethod(1, "Name", "Descriptor"),
+                1))
+            .referencesPrivateConstructor());
   }
 }

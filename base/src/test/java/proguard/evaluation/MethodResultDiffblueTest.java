@@ -1,19 +1,18 @@
 package proguard.evaluation;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.evaluation.MethodResult.Builder;
 import proguard.evaluation.value.BasicValueFactory;
 import proguard.evaluation.value.DoubleValue;
@@ -22,7 +21,7 @@ import proguard.evaluation.value.UnknownReferenceValue;
 import proguard.evaluation.value.Value;
 import proguard.evaluation.value.object.AnalyzedObject;
 
-class MethodResultDiffblueTest {
+public class MethodResultDiffblueTest {
   /**
    * Test Builder {@link Builder#build()}.
    *
@@ -34,29 +33,27 @@ class MethodResultDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test Builder build()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Builder.<init>()", "MethodResult Builder.build()"})
-  void testBuilderBuild() {
+  public void testBuilderBuild() {
     // Arrange
-    ReferenceValue updatedInstance = BasicValueFactory.REFERENCE_VALUE;
+    Builder setUpdatedInstanceResult =
+        (new Builder()).setUpdatedInstance(BasicValueFactory.REFERENCE_VALUE);
+    ArrayList<Value> updatedParameters = new ArrayList<>();
 
     // Act
-    Builder actualSetUpdatedInstanceResult = new Builder().setUpdatedInstance(updatedInstance);
-    ArrayList<Value> updatedParameters = new ArrayList<>();
-    MethodResult actualMethodResult =
-        actualSetUpdatedInstanceResult.setUpdatedParameters(updatedParameters).build();
+    MethodResult actualBuildResult =
+        setUpdatedInstanceResult.setUpdatedParameters(updatedParameters).build();
 
     // Assert
-    assertFalse(actualMethodResult.isReturnValuePresent());
-    List<Value> updatedParameters2 = actualMethodResult.getUpdatedParameters();
+    assertTrue(actualBuildResult.getUpdatedInstance() instanceof UnknownReferenceValue);
+    assertFalse(actualBuildResult.isReturnValuePresent());
+    List<Value> updatedParameters2 = actualBuildResult.getUpdatedParameters();
     assertTrue(updatedParameters2.isEmpty());
-    assertTrue(actualMethodResult.isAnyParameterUpdated());
-    assertTrue(actualMethodResult.isInstanceUpdated());
-    assertTrue(actualMethodResult.isResultValid());
+    assertTrue(actualBuildResult.isAnyParameterUpdated());
+    assertTrue(actualBuildResult.isInstanceUpdated());
+    assertTrue(actualBuildResult.isResultValid());
     assertSame(updatedParameters, updatedParameters2);
-    assertSame(updatedInstance, actualMethodResult.getUpdatedInstance());
   }
 
   /**
@@ -65,11 +62,9 @@ class MethodResultDiffblueTest {
    * <p>Method under test: {@link Builder#setReturnValue(Value)}
    */
   @Test
-  @DisplayName("Test Builder setReturnValue(Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Builder Builder.setReturnValue(Value)"})
-  void testBuilderSetReturnValue() {
+  public void testBuilderSetReturnValue() {
     // Arrange
     Builder builder = new Builder();
     DoubleValue returnValue = BasicValueFactory.DOUBLE_VALUE;
@@ -78,10 +73,10 @@ class MethodResultDiffblueTest {
     Builder actualSetReturnValueResult = builder.setReturnValue(returnValue);
 
     // Assert
-    MethodResult methodResult = builder.build();
-    assertTrue(methodResult.isReturnValuePresent());
+    MethodResult buildResult = builder.build();
+    assertTrue(buildResult.isReturnValuePresent());
     assertSame(builder, actualSetReturnValueResult);
-    assertSame(returnValue, methodResult.getReturnValue());
+    assertSame(returnValue, buildResult.getReturnValue());
   }
 
   /**
@@ -95,12 +90,9 @@ class MethodResultDiffblueTest {
    * <p>Method under test: {@link Builder#setUpdatedInstance(ReferenceValue)}
    */
   @Test
-  @DisplayName(
-      "Test Builder setUpdatedInstance(ReferenceValue); given Builder (default constructor); then Builder (default constructor) build InstanceUpdated")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Builder Builder.setUpdatedInstance(ReferenceValue)"})
-  void testBuilderSetUpdatedInstance_givenBuilder_thenBuilderBuildInstanceUpdated() {
+  public void testBuilderSetUpdatedInstance_givenBuilder_thenBuilderBuildInstanceUpdated() {
     // Arrange
     Builder builder = new Builder();
     ReferenceValue updatedInstance = BasicValueFactory.REFERENCE_VALUE;
@@ -109,10 +101,10 @@ class MethodResultDiffblueTest {
     Builder actualSetUpdatedInstanceResult = builder.setUpdatedInstance(updatedInstance);
 
     // Assert
-    MethodResult methodResult = builder.build();
-    assertTrue(methodResult.isInstanceUpdated());
+    MethodResult buildResult = builder.build();
+    assertTrue(buildResult.isInstanceUpdated());
     assertSame(builder, actualSetUpdatedInstanceResult);
-    assertSame(updatedInstance, methodResult.getUpdatedInstance());
+    assertSame(updatedInstance, buildResult.getUpdatedInstance());
   }
 
   /**
@@ -125,11 +117,9 @@ class MethodResultDiffblueTest {
    * <p>Method under test: {@link Builder#setUpdatedInstance(ReferenceValue)}
    */
   @Test
-  @DisplayName("Test Builder setUpdatedInstance(ReferenceValue); then throw IllegalStateException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Builder Builder.setUpdatedInstance(ReferenceValue)"})
-  void testBuilderSetUpdatedInstance_thenThrowIllegalStateException() {
+  public void testBuilderSetUpdatedInstance_thenThrowIllegalStateException() {
     // Arrange
     Builder builder = new Builder();
     builder.setUpdatedInstance(BasicValueFactory.REFERENCE_VALUE);
@@ -150,12 +140,9 @@ class MethodResultDiffblueTest {
    * <p>Method under test: {@link Builder#setUpdatedParameters(List)}
    */
   @Test
-  @DisplayName(
-      "Test Builder setUpdatedParameters(List); then Builder (default constructor) build AnyParameterUpdated")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Builder Builder.setUpdatedParameters(List)"})
-  void testBuilderSetUpdatedParameters_thenBuilderBuildAnyParameterUpdated() {
+  public void testBuilderSetUpdatedParameters_thenBuilderBuildAnyParameterUpdated() {
     // Arrange
     Builder builder = new Builder();
     ArrayList<Value> updatedParameters = new ArrayList<>();
@@ -164,9 +151,9 @@ class MethodResultDiffblueTest {
     Builder actualSetUpdatedParametersResult = builder.setUpdatedParameters(updatedParameters);
 
     // Assert
-    MethodResult methodResult = builder.build();
-    assertTrue(methodResult.isAnyParameterUpdated());
-    assertSame(updatedParameters, methodResult.getUpdatedParameters());
+    MethodResult buildResult = builder.build();
+    assertTrue(buildResult.isAnyParameterUpdated());
+    assertSame(updatedParameters, buildResult.getUpdatedParameters());
     assertSame(builder, actualSetUpdatedParametersResult);
   }
 
@@ -180,12 +167,9 @@ class MethodResultDiffblueTest {
    * <p>Method under test: {@link Builder#setUpdatedParameters(List)}
    */
   @Test
-  @DisplayName(
-      "Test Builder setUpdatedParameters(List); then return build UpdatedParameters is ArrayList()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Builder Builder.setUpdatedParameters(List)"})
-  void testBuilderSetUpdatedParameters_thenReturnBuildUpdatedParametersIsArrayList() {
+  public void testBuilderSetUpdatedParameters_thenReturnBuildUpdatedParametersIsArrayList() {
     // Arrange
     Builder builder = new Builder();
 
@@ -208,12 +192,9 @@ class MethodResultDiffblueTest {
    * <p>Method under test: {@link Builder#setUpdatedParameters(List)}
    */
   @Test
-  @DisplayName(
-      "Test Builder setUpdatedParameters(List); then return build UpdatedParameters is ArrayList()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Builder Builder.setUpdatedParameters(List)"})
-  void testBuilderSetUpdatedParameters_thenReturnBuildUpdatedParametersIsArrayList2() {
+  public void testBuilderSetUpdatedParameters_thenReturnBuildUpdatedParametersIsArrayList2() {
     // Arrange
     Builder builder = new Builder();
 
@@ -228,40 +209,14 @@ class MethodResultDiffblueTest {
   }
 
   /**
-   * Test Builder {@link Builder#setUpdatedParameters(List)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalStateException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Builder#setUpdatedParameters(List)}
-   */
-  @Test
-  @DisplayName("Test Builder setUpdatedParameters(List); then throw IllegalStateException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Builder Builder.setUpdatedParameters(List)"})
-  void testBuilderSetUpdatedParameters_thenThrowIllegalStateException() {
-    // Arrange
-    Builder builder = new Builder();
-    builder.setUpdatedParameters(new ArrayList<>());
-
-    // Act and Assert
-    assertThrows(
-        IllegalStateException.class, () -> builder.setUpdatedParameters(new ArrayList<>()));
-  }
-
-  /**
    * Test {@link MethodResult#invalidResult()}.
    *
    * <p>Method under test: {@link MethodResult#invalidResult()}
    */
   @Test
-  @DisplayName("Test invalidResult()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"MethodResult MethodResult.invalidResult()"})
-  void testInvalidResult() {
+  public void testInvalidResult() {
     // Arrange and Act
     MethodResult actualInvalidResultResult = MethodResult.invalidResult();
 
@@ -283,11 +238,9 @@ class MethodResultDiffblueTest {
    * <p>Method under test: {@link MethodResult#isResultValid()}
    */
   @Test
-  @DisplayName("Test isResultValid(); given invalidResult; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MethodResult.isResultValid()"})
-  void testIsResultValid_givenInvalidResult_thenReturnFalse() {
+  public void testIsResultValid_givenInvalidResult_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(MethodResult.invalidResult().isResultValid());
   }
@@ -302,18 +255,17 @@ class MethodResultDiffblueTest {
    * <p>Method under test: {@link MethodResult#isResultValid()}
    */
   @Test
-  @DisplayName("Test isResultValid(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MethodResult.isResultValid()"})
-  void testIsResultValid_thenReturnTrue() {
+  public void testIsResultValid_thenReturnTrue() {
     // Arrange
     Builder setUpdatedInstanceResult =
-        new Builder().setUpdatedInstance(BasicValueFactory.REFERENCE_VALUE);
+        (new Builder()).setUpdatedInstance(BasicValueFactory.REFERENCE_VALUE);
+    MethodResult buildResult =
+        setUpdatedInstanceResult.setUpdatedParameters(new ArrayList<>()).build();
 
     // Act and Assert
-    assertTrue(
-        setUpdatedInstanceResult.setUpdatedParameters(new ArrayList<>()).build().isResultValid());
+    assertTrue(buildResult.isResultValid());
   }
 
   /**
@@ -322,21 +274,17 @@ class MethodResultDiffblueTest {
    * <p>Method under test: {@link MethodResult#isReturnValuePresent()}
    */
   @Test
-  @DisplayName("Test isReturnValuePresent()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MethodResult.isReturnValuePresent()"})
-  void testIsReturnValuePresent() {
+  public void testIsReturnValuePresent() {
     // Arrange
     Builder setUpdatedInstanceResult =
-        new Builder().setUpdatedInstance(BasicValueFactory.REFERENCE_VALUE);
+        (new Builder()).setUpdatedInstance(BasicValueFactory.REFERENCE_VALUE);
+    MethodResult buildResult =
+        setUpdatedInstanceResult.setUpdatedParameters(new ArrayList<>()).build();
 
     // Act and Assert
-    assertFalse(
-        setUpdatedInstanceResult
-            .setUpdatedParameters(new ArrayList<>())
-            .build()
-            .isReturnValuePresent());
+    assertFalse(buildResult.isReturnValuePresent());
   }
 
   /**
@@ -350,11 +298,9 @@ class MethodResultDiffblueTest {
    * <p>Method under test: {@link MethodResult#isInstanceUpdated()}
    */
   @Test
-  @DisplayName("Test isInstanceUpdated(); given invalidResult; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MethodResult.isInstanceUpdated()"})
-  void testIsInstanceUpdated_givenInvalidResult_thenReturnFalse() {
+  public void testIsInstanceUpdated_givenInvalidResult_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(MethodResult.invalidResult().isInstanceUpdated());
   }
@@ -369,21 +315,17 @@ class MethodResultDiffblueTest {
    * <p>Method under test: {@link MethodResult#isInstanceUpdated()}
    */
   @Test
-  @DisplayName("Test isInstanceUpdated(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MethodResult.isInstanceUpdated()"})
-  void testIsInstanceUpdated_thenReturnTrue() {
+  public void testIsInstanceUpdated_thenReturnTrue() {
     // Arrange
     Builder setUpdatedInstanceResult =
-        new Builder().setUpdatedInstance(BasicValueFactory.REFERENCE_VALUE);
+        (new Builder()).setUpdatedInstance(BasicValueFactory.REFERENCE_VALUE);
+    MethodResult buildResult =
+        setUpdatedInstanceResult.setUpdatedParameters(new ArrayList<>()).build();
 
     // Act and Assert
-    assertTrue(
-        setUpdatedInstanceResult
-            .setUpdatedParameters(new ArrayList<>())
-            .build()
-            .isInstanceUpdated());
+    assertTrue(buildResult.isInstanceUpdated());
   }
 
   /**
@@ -397,11 +339,9 @@ class MethodResultDiffblueTest {
    * <p>Method under test: {@link MethodResult#isAnyParameterUpdated()}
    */
   @Test
-  @DisplayName("Test isAnyParameterUpdated(); given invalidResult; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MethodResult.isAnyParameterUpdated()"})
-  void testIsAnyParameterUpdated_givenInvalidResult_thenReturnFalse() {
+  public void testIsAnyParameterUpdated_givenInvalidResult_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(MethodResult.invalidResult().isAnyParameterUpdated());
   }
@@ -416,21 +356,17 @@ class MethodResultDiffblueTest {
    * <p>Method under test: {@link MethodResult#isAnyParameterUpdated()}
    */
   @Test
-  @DisplayName("Test isAnyParameterUpdated(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MethodResult.isAnyParameterUpdated()"})
-  void testIsAnyParameterUpdated_thenReturnTrue() {
+  public void testIsAnyParameterUpdated_thenReturnTrue() {
     // Arrange
     Builder setUpdatedInstanceResult =
-        new Builder().setUpdatedInstance(BasicValueFactory.REFERENCE_VALUE);
+        (new Builder()).setUpdatedInstance(BasicValueFactory.REFERENCE_VALUE);
+    MethodResult buildResult =
+        setUpdatedInstanceResult.setUpdatedParameters(new ArrayList<>()).build();
 
     // Act and Assert
-    assertTrue(
-        setUpdatedInstanceResult
-            .setUpdatedParameters(new ArrayList<>())
-            .build()
-            .isAnyParameterUpdated());
+    assertTrue(buildResult.isAnyParameterUpdated());
   }
 
   /**
@@ -439,11 +375,9 @@ class MethodResultDiffblueTest {
    * <p>Method under test: {@link MethodResult#getReturnValue()}
    */
   @Test
-  @DisplayName("Test getReturnValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value MethodResult.getReturnValue()"})
-  void testGetReturnValue() {
+  public void testGetReturnValue() {
     // Arrange, Act and Assert
     assertThrows(IllegalStateException.class, () -> MethodResult.invalidResult().getReturnValue());
   }
@@ -459,11 +393,9 @@ class MethodResultDiffblueTest {
    * <p>Method under test: {@link MethodResult#getUpdatedInstance()}
    */
   @Test
-  @DisplayName("Test getUpdatedInstance(); given invalidResult; then throw IllegalStateException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ReferenceValue MethodResult.getUpdatedInstance()"})
-  void testGetUpdatedInstance_givenInvalidResult_thenThrowIllegalStateException() {
+  public void testGetUpdatedInstance_givenInvalidResult_thenThrowIllegalStateException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalStateException.class, () -> MethodResult.invalidResult().getUpdatedInstance());
@@ -479,21 +411,17 @@ class MethodResultDiffblueTest {
    * <p>Method under test: {@link MethodResult#getUpdatedInstance()}
    */
   @Test
-  @DisplayName("Test getUpdatedInstance(); then return UnknownReferenceValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ReferenceValue MethodResult.getUpdatedInstance()"})
-  void testGetUpdatedInstance_thenReturnUnknownReferenceValue() {
+  public void testGetUpdatedInstance_thenReturnUnknownReferenceValue() {
     // Arrange
     Builder setUpdatedInstanceResult =
-        new Builder().setUpdatedInstance(BasicValueFactory.REFERENCE_VALUE);
+        (new Builder()).setUpdatedInstance(BasicValueFactory.REFERENCE_VALUE);
+    MethodResult buildResult =
+        setUpdatedInstanceResult.setUpdatedParameters(new ArrayList<>()).build();
 
     // Act
-    ReferenceValue actualUpdatedInstance =
-        setUpdatedInstanceResult
-            .setUpdatedParameters(new ArrayList<>())
-            .build()
-            .getUpdatedInstance();
+    ReferenceValue actualUpdatedInstance = buildResult.getUpdatedInstance();
 
     // Assert
     assertTrue(actualUpdatedInstance instanceof UnknownReferenceValue);
@@ -520,11 +448,9 @@ class MethodResultDiffblueTest {
    * <p>Method under test: {@link MethodResult#getUpdatedParameters()}
    */
   @Test
-  @DisplayName("Test getUpdatedParameters(); given invalidResult; then throw IllegalStateException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"List MethodResult.getUpdatedParameters()"})
-  void testGetUpdatedParameters_givenInvalidResult_thenThrowIllegalStateException() {
+  public void testGetUpdatedParameters_givenInvalidResult_thenThrowIllegalStateException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalStateException.class, () -> MethodResult.invalidResult().getUpdatedParameters());
@@ -540,21 +466,16 @@ class MethodResultDiffblueTest {
    * <p>Method under test: {@link MethodResult#getUpdatedParameters()}
    */
   @Test
-  @DisplayName("Test getUpdatedParameters(); then return Empty")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"List MethodResult.getUpdatedParameters()"})
-  void testGetUpdatedParameters_thenReturnEmpty() {
+  public void testGetUpdatedParameters_thenReturnEmpty() {
     // Arrange
     Builder setUpdatedInstanceResult =
-        new Builder().setUpdatedInstance(BasicValueFactory.REFERENCE_VALUE);
+        (new Builder()).setUpdatedInstance(BasicValueFactory.REFERENCE_VALUE);
+    MethodResult buildResult =
+        setUpdatedInstanceResult.setUpdatedParameters(new ArrayList<>()).build();
 
     // Act and Assert
-    assertTrue(
-        setUpdatedInstanceResult
-            .setUpdatedParameters(new ArrayList<>())
-            .build()
-            .getUpdatedParameters()
-            .isEmpty());
+    assertTrue(buildResult.getUpdatedParameters().isEmpty());
   }
 }

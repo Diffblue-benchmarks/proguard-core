@@ -1,37 +1,33 @@
 package proguard.evaluation.value.object;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.evaluation.value.BasicValueFactory;
 import proguard.evaluation.value.Value;
 import proguard.evaluation.value.object.model.ArrayModel;
 
-class ArrayObjectDiffblueTest {
+public class ArrayObjectDiffblueTest {
   /**
    * Test {@link ArrayObject#getPreciseValue()}.
    *
    * <p>Method under test: {@link ArrayObject#getPreciseValue()}
    */
   @Test
-  @DisplayName("Test getPreciseValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Object[] ArrayObject.getPreciseValue()"})
-  void testGetPreciseValue() {
-    // Arrange
-    Value[] values = new Value[] {BasicValueFactory.DOUBLE_VALUE};
-    ArrayModel value = new ArrayModel(values, "Type");
-
-    // Act and Assert
+  public void testGetPreciseValue() {
+    // Arrange, Act and Assert
     assertThrows(
-        UnsupportedOperationException.class, () -> new ArrayObject(value).getPreciseValue());
+        UnsupportedOperationException.class,
+        () ->
+            (new ArrayObject(new ArrayModel(new Value[] {BasicValueFactory.DOUBLE_VALUE}, "Type")))
+                .getPreciseValue());
   }
 
   /**
@@ -40,17 +36,14 @@ class ArrayObjectDiffblueTest {
    * <p>Method under test: {@link ArrayObject#getType()}
    */
   @Test
-  @DisplayName("Test getType()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String ArrayObject.getType()"})
-  void testGetType() {
-    // Arrange
-    Value[] values = new Value[] {BasicValueFactory.DOUBLE_VALUE};
-    ArrayModel value = new ArrayModel(values, "Type");
-
-    // Act and Assert
-    assertEquals("Type", new ArrayObject(value).getType());
+  public void testGetType() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "Type",
+        (new ArrayObject(new ArrayModel(new Value[] {BasicValueFactory.DOUBLE_VALUE}, "Type")))
+            .getType());
   }
 
   /**
@@ -69,22 +62,19 @@ class ArrayObjectDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ArrayObject.equals(Object)", "int ArrayObject.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
-    Value[] values = new Value[] {BasicValueFactory.DOUBLE_VALUE};
-    ArrayModel value = new ArrayModel(values, "Type");
-    ArrayObject arrayObject = new ArrayObject(value);
-    Value[] values2 = new Value[] {BasicValueFactory.DOUBLE_VALUE};
-    ArrayModel value2 = new ArrayModel(values2, "Type");
-    ArrayObject arrayObject2 = new ArrayObject(value2);
+    ArrayObject arrayObject =
+        new ArrayObject(new ArrayModel(new Value[] {BasicValueFactory.DOUBLE_VALUE}, "Type"));
+    ArrayObject arrayObject2 =
+        new ArrayObject(new ArrayModel(new Value[] {BasicValueFactory.DOUBLE_VALUE}, "Type"));
 
     // Act and Assert
     assertEquals(arrayObject, arrayObject2);
-    assertEquals(arrayObject.hashCode(), arrayObject2.hashCode());
+    int expectedHashCodeResult = arrayObject.hashCode();
+    assertEquals(expectedHashCodeResult, arrayObject2.hashCode());
   }
 
   /**
@@ -103,15 +93,12 @@ class ArrayObjectDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ArrayObject.equals(Object)", "int ArrayObject.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
-    Value[] values = new Value[] {BasicValueFactory.DOUBLE_VALUE};
-    ArrayModel value = new ArrayModel(values, "Type");
-    ArrayObject arrayObject = new ArrayObject(value);
+    ArrayObject arrayObject =
+        new ArrayObject(new ArrayModel(new Value[] {BasicValueFactory.DOUBLE_VALUE}, "Type"));
 
     // Act and Assert
     assertEquals(arrayObject, arrayObject);
@@ -130,20 +117,17 @@ class ArrayObjectDiffblueTest {
    * <p>Method under test: {@link ArrayObject#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ArrayObject.equals(Object)", "int ArrayObject.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
-    Value[] values = new Value[] {BasicValueFactory.DOUBLE_VALUE};
-    ArrayModel value = new ArrayModel(values, "proguard.evaluation.value.object.model.ArrayModel");
-    ArrayObject arrayObject = new ArrayObject(value);
-    Value[] values2 = new Value[] {BasicValueFactory.DOUBLE_VALUE};
-    ArrayModel value2 = new ArrayModel(values2, "Type");
+    ArrayObject arrayObject =
+        new ArrayObject(new ArrayModel(new Value[] {BasicValueFactory.FLOAT_VALUE}, "Type"));
 
     // Act and Assert
-    assertNotEquals(arrayObject, new ArrayObject(value2));
+    assertNotEquals(
+        arrayObject,
+        new ArrayObject(new ArrayModel(new Value[] {BasicValueFactory.DOUBLE_VALUE}, "Type")));
   }
 
   /**
@@ -157,17 +141,13 @@ class ArrayObjectDiffblueTest {
    * <p>Method under test: {@link ArrayObject#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ArrayObject.equals(Object)", "int ArrayObject.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
-    // Arrange
-    Value[] values = new Value[] {BasicValueFactory.DOUBLE_VALUE};
-    ArrayModel value = new ArrayModel(values, "Type");
-
-    // Act and Assert
-    assertNotEquals(new ArrayObject(value), null);
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+    // Arrange, Act and Assert
+    assertNotEquals(
+        new ArrayObject(new ArrayModel(new Value[] {BasicValueFactory.DOUBLE_VALUE}, "Type")),
+        null);
   }
 
   /**
@@ -181,16 +161,12 @@ class ArrayObjectDiffblueTest {
    * <p>Method under test: {@link ArrayObject#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ArrayObject.equals(Object)", "int ArrayObject.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
-    // Arrange
-    Value[] values = new Value[] {BasicValueFactory.DOUBLE_VALUE};
-    ArrayModel value = new ArrayModel(values, "Type");
-
-    // Act and Assert
-    assertNotEquals(new ArrayObject(value), "Different type to ArrayObject");
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+    // Arrange, Act and Assert
+    assertNotEquals(
+        new ArrayObject(new ArrayModel(new Value[] {BasicValueFactory.DOUBLE_VALUE}, "Type")),
+        "Different type to ArrayObject");
   }
 }

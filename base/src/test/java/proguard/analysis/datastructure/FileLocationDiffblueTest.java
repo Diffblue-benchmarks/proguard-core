@@ -1,17 +1,16 @@
 package proguard.analysis.datastructure;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryField;
 
-class FileLocationDiffblueTest {
+public class FileLocationDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -24,16 +23,14 @@ class FileLocationDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void FileLocation.<init>(String, int)",
     "void FileLocation.<init>(String, int, String)",
     "String FileLocation.getName()",
     "String FileLocation.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     FileLocation actualFileLocation = new FileLocation("foo.txt", 2);
     String actualToStringResult = actualFileLocation.toString();
@@ -55,16 +52,14 @@ class FileLocationDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void FileLocation.<init>(String, int)",
     "void FileLocation.<init>(String, int, String)",
     "String FileLocation.getName()",
     "String FileLocation.toString()"
   })
-  void testGettersAndSetters2() {
+  public void testGettersAndSetters2() {
     // Arrange and Act
     FileLocation actualFileLocation = new FileLocation("foo.txt", 2, "foo.txt");
     String actualToStringResult = actualFileLocation.toString();
@@ -90,18 +85,17 @@ class FileLocationDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FileLocation.equals(Object)", "int FileLocation.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     FileLocation fileLocation = new FileLocation("foo.txt", 2);
     FileLocation fileLocation2 = new FileLocation("foo.txt", 2);
 
     // Act and Assert
     assertEquals(fileLocation, fileLocation2);
-    assertEquals(fileLocation.hashCode(), fileLocation2.hashCode());
+    int expectedHashCodeResult = fileLocation.hashCode();
+    assertEquals(expectedHashCodeResult, fileLocation2.hashCode());
   }
 
   /**
@@ -120,11 +114,9 @@ class FileLocationDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FileLocation.equals(Object)", "int FileLocation.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     FileLocation fileLocation = new FileLocation("foo.txt", 2);
 
@@ -145,11 +137,9 @@ class FileLocationDiffblueTest {
    * <p>Method under test: {@link FileLocation#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FileLocation.equals(Object)", "int FileLocation.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     FileLocation fileLocation = new FileLocation("Filename", 2);
 
@@ -168,11 +158,9 @@ class FileLocationDiffblueTest {
    * <p>Method under test: {@link FileLocation#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FileLocation.equals(Object)", "int FileLocation.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
     FileLocation fileLocation = new FileLocation("foo.txt", 1);
 
@@ -191,11 +179,9 @@ class FileLocationDiffblueTest {
    * <p>Method under test: {@link FileLocation#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FileLocation.equals(Object)", "int FileLocation.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new FileLocation("foo.txt", 2), null);
   }
@@ -211,11 +197,9 @@ class FileLocationDiffblueTest {
    * <p>Method under test: {@link FileLocation#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FileLocation.equals(Object)", "int FileLocation.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new FileLocation("foo.txt", 2), "Different type to FileLocation");
   }
@@ -230,19 +214,14 @@ class FileLocationDiffblueTest {
    * <p>Method under test: {@link FileLocation#compareTo(Location)}
    */
   @Test
-  @DisplayName("Test compareTo(Location) with 'Location'; then return minus thirty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int FileLocation.compareTo(Location)"})
-  void testCompareToWithLocation_thenReturnMinusThirtyTwo() {
+  public void testCompareToWithLocation_thenReturnMinusThirtyTwo() {
     // Arrange
     FileLocation fileLocation = new FileLocation("Filename", 2);
 
-    // Act
-    int actualCompareToResult = fileLocation.compareTo(new FileLocation("foo.txt", 2));
-
-    // Assert
-    assertEquals(-32, actualCompareToResult);
+    // Act and Assert
+    assertEquals(-32, fileLocation.compareTo(new FileLocation("foo.txt", 2)));
   }
 
   /**
@@ -255,23 +234,18 @@ class FileLocationDiffblueTest {
    * <p>Method under test: {@link FileLocation#compareTo(Location)}
    */
   @Test
-  @DisplayName("Test compareTo(Location) with 'Location'; then return UNKNOWN_LINE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int FileLocation.compareTo(Location)"})
-  void testCompareToWithLocation_thenReturnUnknown_line() {
+  public void testCompareToWithLocation_thenReturnUnknown_line() {
     // Arrange
     FileLocation fileLocation = new FileLocation("foo.txt", 2);
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "foo.txt", "foo.txt");
 
-    CodeLocation o = new CodeLocation(clazz, member, 2);
-
-    // Act
-    int actualCompareToResult = fileLocation.compareTo(o);
-
-    // Assert
-    assertEquals(Location.UNKNOWN_LINE, actualCompareToResult);
+    // Act and Assert
+    assertEquals(
+        Location.UNKNOWN_LINE,
+        fileLocation.compareTo(
+            new CodeLocation(clazz, new LibraryField(1, "foo.txt", "foo.txt"), 2)));
   }
 
   /**
@@ -284,19 +258,14 @@ class FileLocationDiffblueTest {
    * <p>Method under test: {@link FileLocation#compareTo(Location)}
    */
   @Test
-  @DisplayName("Test compareTo(Location) with 'Location'; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int FileLocation.compareTo(Location)"})
-  void testCompareToWithLocation_thenReturnZero() {
+  public void testCompareToWithLocation_thenReturnZero() {
     // Arrange
     FileLocation fileLocation = new FileLocation("foo.txt", 2);
 
-    // Act
-    int actualCompareToResult = fileLocation.compareTo(new FileLocation("foo.txt", 2));
-
-    // Assert
-    assertEquals(0, actualCompareToResult);
+    // Act and Assert
+    assertEquals(0, fileLocation.compareTo(new FileLocation("foo.txt", 2)));
   }
 
   /**
@@ -309,11 +278,9 @@ class FileLocationDiffblueTest {
    * <p>Method under test: {@link FileLocation#getOriginalFilename()}
    */
   @Test
-  @DisplayName("Test getOriginalFilename(); then return 'foo'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String FileLocation.getOriginalFilename()"})
-  void testGetOriginalFilename_thenReturnFoo() {
+  public void testGetOriginalFilename_thenReturnFoo() {
     // Arrange
     FileLocation fileLocation = new FileLocation("foo.txt", 2);
     fileLocation.obfuscatedFilename = "foo";
@@ -332,12 +299,10 @@ class FileLocationDiffblueTest {
    * <p>Method under test: {@link FileLocation#getOriginalFilename()}
    */
   @Test
-  @DisplayName("Test getOriginalFilename(); then return 'foo.txt'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String FileLocation.getOriginalFilename()"})
-  void testGetOriginalFilename_thenReturnFooTxt() {
+  public void testGetOriginalFilename_thenReturnFooTxt() {
     // Arrange, Act and Assert
-    assertEquals("foo.txt", new FileLocation("foo.txt", 2).getOriginalFilename());
+    assertEquals("foo.txt", (new FileLocation("foo.txt", 2)).getOriginalFilename());
   }
 }

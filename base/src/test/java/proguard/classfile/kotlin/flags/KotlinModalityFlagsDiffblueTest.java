@@ -1,25 +1,22 @@
 package proguard.classfile.kotlin.flags;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.Assert.assertFalse;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class KotlinModalityFlagsDiffblueTest {
+public class KotlinModalityFlagsDiffblueTest {
   /**
    * Test new {@link KotlinModalityFlags} (default constructor).
    *
    * <p>Method under test: default or parameterless constructor of {@link KotlinModalityFlags}
    */
   @Test
-  @DisplayName("Test new KotlinModalityFlags (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void KotlinModalityFlags.<init>()"})
-  void testNewKotlinModalityFlags() {
+  public void testNewKotlinModalityFlags() {
     // Arrange and Act
     KotlinModalityFlags actualKotlinModalityFlags = new KotlinModalityFlags();
 

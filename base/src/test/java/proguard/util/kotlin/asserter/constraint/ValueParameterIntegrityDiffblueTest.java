@@ -1,18 +1,17 @@
 package proguard.util.kotlin.asserter.constraint;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.kotlin.KotlinValueParameterMetadata;
 import proguard.classfile.kotlin.flags.KotlinValueParameterFlags;
 
-class ValueParameterIntegrityDiffblueTest {
+public class ValueParameterIntegrityDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -25,14 +24,12 @@ class ValueParameterIntegrityDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ValueParameterIntegrity.<init>()",
     "void ValueParameterIntegrity.visitAnyValueParameter(Clazz, KotlinValueParameterMetadata)"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     ValueParameterIntegrity actualValueParameterIntegrity = new ValueParameterIntegrity();
     LibraryClass clazz = new LibraryClass();

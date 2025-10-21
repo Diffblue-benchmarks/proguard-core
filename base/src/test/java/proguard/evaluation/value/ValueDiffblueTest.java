@@ -1,30 +1,27 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ValueDiffblueTest {
+public class ValueDiffblueTest {
   /**
    * Test {@link Value#category1Value()}.
    *
    * <p>Method under test: {@link Value#category1Value()}
    */
   @Test
-  @DisplayName("Test category1Value()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"proguard.evaluation.value.Category1Value Value.category1Value()"})
-  void testCategory1Value() {
+  public void testCategory1Value() {
     // Arrange, Act and Assert
-    assertThrows(IllegalArgumentException.class, () -> new UnknownDoubleValue().category1Value());
+    assertThrows(IllegalArgumentException.class, () -> (new UnknownDoubleValue()).category1Value());
   }
 
   /**
@@ -33,13 +30,11 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#category2Value()}
    */
   @Test
-  @DisplayName("Test category2Value()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"proguard.evaluation.value.Category2Value Value.category2Value()"})
-  void testCategory2Value() {
+  public void testCategory2Value() {
     // Arrange, Act and Assert
-    assertThrows(IllegalArgumentException.class, () -> new TopValue().category2Value());
+    assertThrows(IllegalArgumentException.class, () -> (new TopValue()).category2Value());
   }
 
   /**
@@ -48,13 +43,11 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#integerValue()}
    */
   @Test
-  @DisplayName("Test integerValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"proguard.evaluation.value.IntegerValue Value.integerValue()"})
-  void testIntegerValue() {
+  public void testIntegerValue() {
     // Arrange, Act and Assert
-    assertThrows(IllegalArgumentException.class, () -> new TopValue().integerValue());
+    assertThrows(IllegalArgumentException.class, () -> (new TopValue()).integerValue());
   }
 
   /**
@@ -63,13 +56,11 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#longValue()}
    */
   @Test
-  @DisplayName("Test longValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"proguard.evaluation.value.LongValue Value.longValue()"})
-  void testLongValue() {
+  public void testLongValue() {
     // Arrange, Act and Assert
-    assertThrows(IllegalArgumentException.class, () -> new TopValue().longValue());
+    assertThrows(IllegalArgumentException.class, () -> (new TopValue()).longValue());
   }
 
   /**
@@ -78,13 +69,11 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#floatValue()}
    */
   @Test
-  @DisplayName("Test floatValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"proguard.evaluation.value.FloatValue Value.floatValue()"})
-  void testFloatValue() {
+  public void testFloatValue() {
     // Arrange, Act and Assert
-    assertThrows(IllegalArgumentException.class, () -> new TopValue().floatValue());
+    assertThrows(IllegalArgumentException.class, () -> (new TopValue()).floatValue());
   }
 
   /**
@@ -93,13 +82,11 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#doubleValue()}
    */
   @Test
-  @DisplayName("Test doubleValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"proguard.evaluation.value.DoubleValue Value.doubleValue()"})
-  void testDoubleValue() {
+  public void testDoubleValue() {
     // Arrange, Act and Assert
-    assertThrows(IllegalArgumentException.class, () -> new TopValue().doubleValue());
+    assertThrows(IllegalArgumentException.class, () -> (new TopValue()).doubleValue());
   }
 
   /**
@@ -108,13 +95,11 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#referenceValue()}
    */
   @Test
-  @DisplayName("Test referenceValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"proguard.evaluation.value.ReferenceValue Value.referenceValue()"})
-  void testReferenceValue() {
+  public void testReferenceValue() {
     // Arrange, Act and Assert
-    assertThrows(IllegalArgumentException.class, () -> new TopValue().referenceValue());
+    assertThrows(IllegalArgumentException.class, () -> (new TopValue()).referenceValue());
   }
 
   /**
@@ -123,15 +108,13 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#instructionOffsetValue()}
    */
   @Test
-  @DisplayName("Test instructionOffsetValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "proguard.evaluation.value.InstructionOffsetValue Value.instructionOffsetValue()"
   })
-  void testInstructionOffsetValue() {
+  public void testInstructionOffsetValue() {
     // Arrange, Act and Assert
-    assertThrows(IllegalArgumentException.class, () -> new TopValue().instructionOffsetValue());
+    assertThrows(IllegalArgumentException.class, () -> (new TopValue()).instructionOffsetValue());
   }
 
   /**
@@ -145,11 +128,9 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#isSpecific()}
    */
   @Test
-  @DisplayName("Test isSpecific(); given INTEGER_VALUE_0; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Value.isSpecific()"})
-  void testIsSpecific_givenInteger_value_0_thenReturnTrue() {
+  public void testIsSpecific_givenInteger_value_0_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ParticularValueFactory.INTEGER_VALUE_0.isSpecific());
   }
@@ -165,14 +146,11 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#isSpecific()}
    */
   @Test
-  @DisplayName(
-      "Test isSpecific(); given UnknownDoubleValue (default constructor); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Value.isSpecific()"})
-  void testIsSpecific_givenUnknownDoubleValue_thenReturnFalse() {
+  public void testIsSpecific_givenUnknownDoubleValue_thenReturnFalse() {
     // Arrange, Act and Assert
-    assertFalse(new UnknownDoubleValue().isSpecific());
+    assertFalse((new UnknownDoubleValue()).isSpecific());
   }
 
   /**
@@ -186,11 +164,9 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#isParticular()}
    */
   @Test
-  @DisplayName("Test isParticular(); given INTEGER_VALUE_0; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Value.isParticular()"})
-  void testIsParticular_givenInteger_value_0_thenReturnTrue() {
+  public void testIsParticular_givenInteger_value_0_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(ParticularValueFactory.INTEGER_VALUE_0.isParticular());
   }
@@ -206,14 +182,11 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#isParticular()}
    */
   @Test
-  @DisplayName(
-      "Test isParticular(); given UnknownDoubleValue (default constructor); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Value.isParticular()"})
-  void testIsParticular_givenUnknownDoubleValue_thenReturnFalse() {
+  public void testIsParticular_givenUnknownDoubleValue_thenReturnFalse() {
     // Arrange, Act and Assert
-    assertFalse(new UnknownDoubleValue().isParticular());
+    assertFalse((new UnknownDoubleValue()).isParticular());
   }
 
   /**
@@ -222,18 +195,13 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#copyIfMutable()}
    */
   @Test
-  @DisplayName("Test copyIfMutable()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value Value.copyIfMutable()"})
-  void testCopyIfMutable() {
+  public void testCopyIfMutable() {
     // Arrange
     TopValue topValue = new TopValue();
 
-    // Act
-    Value actualCopyIfMutableResult = topValue.copyIfMutable();
-
-    // Assert
-    assertSame(topValue, actualCopyIfMutableResult);
+    // Act and Assert
+    assertSame(topValue, topValue.copyIfMutable());
   }
 }

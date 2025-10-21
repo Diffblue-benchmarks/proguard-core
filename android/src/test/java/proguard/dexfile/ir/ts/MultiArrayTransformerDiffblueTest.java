@@ -1,15 +1,14 @@
 package proguard.dexfile.ir.ts;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.Assert.assertFalse;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.IrMethod;
 
-class MultiArrayTransformerDiffblueTest {
+public class MultiArrayTransformerDiffblueTest {
   /**
    * Test {@link MultiArrayTransformer#transformReportChanged(IrMethod)}.
    *
@@ -21,12 +20,9 @@ class MultiArrayTransformerDiffblueTest {
    * <p>Method under test: {@link MultiArrayTransformer#transformReportChanged(IrMethod)}
    */
   @Test
-  @DisplayName(
-      "Test transformReportChanged(IrMethod); when IrMethod (default constructor); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean MultiArrayTransformer.transformReportChanged(IrMethod)"})
-  void testTransformReportChanged_whenIrMethod_thenReturnFalse() {
+  public void testTransformReportChanged_whenIrMethod_thenReturnFalse() {
     // Arrange
     MultiArrayTransformer multiArrayTransformer = new MultiArrayTransformer();
 

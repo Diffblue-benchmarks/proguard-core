@@ -1,15 +1,14 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.LibraryClass;
 
-class ProcessingFlagSetterDiffblueTest {
+public class ProcessingFlagSetterDiffblueTest {
   /**
    * Test {@link ProcessingFlagSetter#visitAnyProcessable(Processable)}.
    *
@@ -21,12 +20,9 @@ class ProcessingFlagSetterDiffblueTest {
    * <p>Method under test: {@link ProcessingFlagSetter#visitAnyProcessable(Processable)}
    */
   @Test
-  @DisplayName(
-      "Test visitAnyProcessable(Processable); when LibraryClass(); then LibraryClass() ProcessingFlags is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ProcessingFlagSetter.visitAnyProcessable(Processable)"})
-  void testVisitAnyProcessable_whenLibraryClass_thenLibraryClassProcessingFlagsIsOne() {
+  public void testVisitAnyProcessable_whenLibraryClass_thenLibraryClassProcessingFlagsIsOne() {
     // Arrange
     ProcessingFlagSetter processingFlagSetter = new ProcessingFlagSetter(1);
     LibraryClass processable = new LibraryClass();

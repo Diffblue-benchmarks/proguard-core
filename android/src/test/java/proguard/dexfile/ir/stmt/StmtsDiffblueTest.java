@@ -1,34 +1,31 @@
 package proguard.dexfile.ir.stmt;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.expr.ArrayExpr;
 import proguard.dexfile.ir.expr.Value;
 import proguard.dexfile.ir.stmt.Stmt.ST;
 
-class StmtsDiffblueTest {
+public class StmtsDiffblueTest {
   /**
    * Test {@link Stmts#nAssign(Value, Value)}.
    *
    * <p>Method under test: {@link Stmts#nAssign(Value, Value)}
    */
   @Test
-  @DisplayName("Test nAssign(Value, Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"AssignStmt Stmts.nAssign(Value, Value)"})
-  void testNAssign() {
+  public void testNAssign() {
     // Arrange
     ArrayExpr left = new ArrayExpr();
     ArrayExpr right = new ArrayExpr();
@@ -41,11 +38,11 @@ class StmtsDiffblueTest {
     assertTrue(op1 instanceof ArrayExpr);
     Value op2 = actualNAssignResult.getOp2();
     assertTrue(op2 instanceof ArrayExpr);
+    assertNull(actualNAssignResult.getOps());
     assertNull(actualNAssignResult.frame);
     assertNull(actualNAssignResult.exceptionHandlers);
     assertNull(actualNAssignResult._cfg_froms);
     assertNull(actualNAssignResult.getOp());
-    assertNull(actualNAssignResult.getOps());
     assertNull(actualNAssignResult.getNext());
     assertNull(actualNAssignResult.getPre());
     assertNull(actualNAssignResult._ts_default_next);
@@ -64,11 +61,9 @@ class StmtsDiffblueTest {
    * <p>Method under test: {@link Stmts#nFillArrayData(Value, Value)}
    */
   @Test
-  @DisplayName("Test nFillArrayData(Value, Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"AssignStmt Stmts.nFillArrayData(Value, Value)"})
-  void testNFillArrayData() {
+  public void testNFillArrayData() {
     // Arrange
     ArrayExpr left = new ArrayExpr();
     ArrayExpr arrayData = new ArrayExpr();
@@ -81,11 +76,11 @@ class StmtsDiffblueTest {
     assertTrue(op1 instanceof ArrayExpr);
     Value op2 = actualNFillArrayDataResult.getOp2();
     assertTrue(op2 instanceof ArrayExpr);
+    assertNull(actualNFillArrayDataResult.getOps());
     assertNull(actualNFillArrayDataResult.frame);
     assertNull(actualNFillArrayDataResult.exceptionHandlers);
     assertNull(actualNFillArrayDataResult._cfg_froms);
     assertNull(actualNFillArrayDataResult.getOp());
-    assertNull(actualNFillArrayDataResult.getOps());
     assertNull(actualNFillArrayDataResult.getNext());
     assertNull(actualNFillArrayDataResult.getPre());
     assertNull(actualNFillArrayDataResult._ts_default_next);
@@ -104,11 +99,9 @@ class StmtsDiffblueTest {
    * <p>Method under test: {@link Stmts#nGoto(LabelStmt)}
    */
   @Test
-  @DisplayName("Test nGoto(LabelStmt)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"GotoStmt Stmts.nGoto(LabelStmt)"})
-  void testNGoto() {
+  public void testNGoto() {
     // Arrange
     LabelStmt target = Stmts.nLabel();
 
@@ -116,13 +109,13 @@ class StmtsDiffblueTest {
     GotoStmt actualNGotoResult = Stmts.nGoto(target);
 
     // Assert
+    assertNull(actualNGotoResult.getOps());
     assertNull(actualNGotoResult.frame);
     assertNull(actualNGotoResult.exceptionHandlers);
     assertNull(actualNGotoResult._cfg_froms);
     assertNull(actualNGotoResult.getOp());
     assertNull(actualNGotoResult.getOp1());
     assertNull(actualNGotoResult.getOp2());
-    assertNull(actualNGotoResult.getOps());
     assertNull(actualNGotoResult.getNext());
     assertNull(actualNGotoResult.getPre());
     assertNull(actualNGotoResult._ts_default_next);
@@ -140,11 +133,9 @@ class StmtsDiffblueTest {
    * <p>Method under test: {@link Stmts#nIdentity(Value, Value)}
    */
   @Test
-  @DisplayName("Test nIdentity(Value, Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"AssignStmt Stmts.nIdentity(Value, Value)"})
-  void testNIdentity() {
+  public void testNIdentity() {
     // Arrange
     ArrayExpr local = new ArrayExpr();
     ArrayExpr identityRef = new ArrayExpr();
@@ -157,11 +148,11 @@ class StmtsDiffblueTest {
     assertTrue(op1 instanceof ArrayExpr);
     Value op2 = actualNIdentityResult.getOp2();
     assertTrue(op2 instanceof ArrayExpr);
+    assertNull(actualNIdentityResult.getOps());
     assertNull(actualNIdentityResult.frame);
     assertNull(actualNIdentityResult.exceptionHandlers);
     assertNull(actualNIdentityResult._cfg_froms);
     assertNull(actualNIdentityResult.getOp());
-    assertNull(actualNIdentityResult.getOps());
     assertNull(actualNIdentityResult.getNext());
     assertNull(actualNIdentityResult.getPre());
     assertNull(actualNIdentityResult._ts_default_next);
@@ -180,11 +171,9 @@ class StmtsDiffblueTest {
    * <p>Method under test: {@link Stmts#nIf(Value, LabelStmt)}
    */
   @Test
-  @DisplayName("Test nIf(Value, LabelStmt)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IfStmt Stmts.nIf(Value, LabelStmt)"})
-  void testNIf() {
+  public void testNIf() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     LabelStmt target = Stmts.nLabel();
@@ -195,12 +184,12 @@ class StmtsDiffblueTest {
     // Assert
     Value op = actualNIfResult.getOp();
     assertTrue(op instanceof ArrayExpr);
+    assertNull(actualNIfResult.getOps());
     assertNull(actualNIfResult.frame);
     assertNull(actualNIfResult.exceptionHandlers);
     assertNull(actualNIfResult._cfg_froms);
     assertNull(actualNIfResult.getOp1());
     assertNull(actualNIfResult.getOp2());
-    assertNull(actualNIfResult.getOps());
     assertNull(actualNIfResult.getNext());
     assertNull(actualNIfResult.getPre());
     assertNull(actualNIfResult._ts_default_next);
@@ -219,15 +208,14 @@ class StmtsDiffblueTest {
    * <p>Method under test: {@link Stmts#nLabel()}
    */
   @Test
-  @DisplayName("Test nLabel()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LabelStmt Stmts.nLabel()"})
-  void testNLabel() {
+  public void testNLabel() {
     // Arrange and Act
     LabelStmt actualNLabelResult = Stmts.nLabel();
 
     // Assert
+    assertNull(actualNLabelResult.getOps());
     assertNull(actualNLabelResult.tag);
     assertNull(actualNLabelResult.frame);
     assertNull(actualNLabelResult.displayName);
@@ -237,7 +225,6 @@ class StmtsDiffblueTest {
     assertNull(actualNLabelResult.getOp());
     assertNull(actualNLabelResult.getOp1());
     assertNull(actualNLabelResult.getOp2());
-    assertNull(actualNLabelResult.getOps());
     assertNull(actualNLabelResult.getNext());
     assertNull(actualNLabelResult.getPre());
     assertNull(actualNLabelResult._ts_default_next);
@@ -255,11 +242,9 @@ class StmtsDiffblueTest {
    * <p>Method under test: {@link Stmts#nLock(Value)}
    */
   @Test
-  @DisplayName("Test nLock(Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"UnopStmt Stmts.nLock(Value)"})
-  void testNLock() {
+  public void testNLock() {
     // Arrange
     ArrayExpr op = new ArrayExpr();
 
@@ -269,12 +254,12 @@ class StmtsDiffblueTest {
     // Assert
     Value op2 = actualNLockResult.getOp();
     assertTrue(op2 instanceof ArrayExpr);
+    assertNull(actualNLockResult.getOps());
     assertNull(actualNLockResult.frame);
     assertNull(actualNLockResult.exceptionHandlers);
     assertNull(actualNLockResult._cfg_froms);
     assertNull(actualNLockResult.getOp1());
     assertNull(actualNLockResult.getOp2());
-    assertNull(actualNLockResult.getOps());
     assertNull(actualNLockResult.getNext());
     assertNull(actualNLockResult.getPre());
     assertNull(actualNLockResult._ts_default_next);
@@ -292,11 +277,9 @@ class StmtsDiffblueTest {
    * <p>Method under test: {@link Stmts#nLookupSwitch(Value, int[], LabelStmt[], LabelStmt)}
    */
   @Test
-  @DisplayName("Test nLookupSwitch(Value, int[], LabelStmt[], LabelStmt)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LookupSwitchStmt Stmts.nLookupSwitch(Value, int[], LabelStmt[], LabelStmt)"})
-  void testNLookupSwitch() {
+  public void testNLookupSwitch() {
     // Arrange
     ArrayExpr key = new ArrayExpr();
 
@@ -308,12 +291,12 @@ class StmtsDiffblueTest {
     // Assert
     Value op = actualNLookupSwitchResult.getOp();
     assertTrue(op instanceof ArrayExpr);
+    assertNull(actualNLookupSwitchResult.getOps());
     assertNull(actualNLookupSwitchResult.frame);
     assertNull(actualNLookupSwitchResult.exceptionHandlers);
     assertNull(actualNLookupSwitchResult._cfg_froms);
     assertNull(actualNLookupSwitchResult.getOp1());
     assertNull(actualNLookupSwitchResult.getOp2());
-    assertNull(actualNLookupSwitchResult.getOps());
     assertNull(actualNLookupSwitchResult.getNext());
     assertNull(actualNLookupSwitchResult.getPre());
     assertNull(actualNLookupSwitchResult._ts_default_next);
@@ -333,22 +316,20 @@ class StmtsDiffblueTest {
    * <p>Method under test: {@link Stmts#nNop()}
    */
   @Test
-  @DisplayName("Test nNop()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"NopStmt Stmts.nNop()"})
-  void testNNop() {
+  public void testNNop() {
     // Arrange and Act
     NopStmt actualNNopResult = Stmts.nNop();
 
     // Assert
+    assertNull(actualNNopResult.getOps());
     assertNull(actualNNopResult.frame);
     assertNull(actualNNopResult.exceptionHandlers);
     assertNull(actualNNopResult._cfg_froms);
     assertNull(actualNNopResult.getOp());
     assertNull(actualNNopResult.getOp1());
     assertNull(actualNNopResult.getOp2());
-    assertNull(actualNNopResult.getOps());
     assertNull(actualNNopResult.getNext());
     assertNull(actualNNopResult.getPre());
     assertNull(actualNNopResult._ts_default_next);
@@ -365,11 +346,9 @@ class StmtsDiffblueTest {
    * <p>Method under test: {@link Stmts#nReturn(Value)}
    */
   @Test
-  @DisplayName("Test nReturn(Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"UnopStmt Stmts.nReturn(Value)"})
-  void testNReturn() {
+  public void testNReturn() {
     // Arrange
     ArrayExpr op = new ArrayExpr();
 
@@ -379,12 +358,12 @@ class StmtsDiffblueTest {
     // Assert
     Value op2 = actualNReturnResult.getOp();
     assertTrue(op2 instanceof ArrayExpr);
+    assertNull(actualNReturnResult.getOps());
     assertNull(actualNReturnResult.frame);
     assertNull(actualNReturnResult.exceptionHandlers);
     assertNull(actualNReturnResult._cfg_froms);
     assertNull(actualNReturnResult.getOp1());
     assertNull(actualNReturnResult.getOp2());
-    assertNull(actualNReturnResult.getOps());
     assertNull(actualNReturnResult.getNext());
     assertNull(actualNReturnResult.getPre());
     assertNull(actualNReturnResult._ts_default_next);
@@ -402,22 +381,20 @@ class StmtsDiffblueTest {
    * <p>Method under test: {@link Stmts#nReturnVoid()}
    */
   @Test
-  @DisplayName("Test nReturnVoid()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ReturnVoidStmt Stmts.nReturnVoid()"})
-  void testNReturnVoid() {
+  public void testNReturnVoid() {
     // Arrange and Act
     ReturnVoidStmt actualNReturnVoidResult = Stmts.nReturnVoid();
 
     // Assert
+    assertNull(actualNReturnVoidResult.getOps());
     assertNull(actualNReturnVoidResult.frame);
     assertNull(actualNReturnVoidResult.exceptionHandlers);
     assertNull(actualNReturnVoidResult._cfg_froms);
     assertNull(actualNReturnVoidResult.getOp());
     assertNull(actualNReturnVoidResult.getOp1());
     assertNull(actualNReturnVoidResult.getOp2());
-    assertNull(actualNReturnVoidResult.getOps());
     assertNull(actualNReturnVoidResult.getNext());
     assertNull(actualNReturnVoidResult.getPre());
     assertNull(actualNReturnVoidResult._ts_default_next);
@@ -434,11 +411,9 @@ class StmtsDiffblueTest {
    * <p>Method under test: {@link Stmts#nTableSwitch(Value, int, LabelStmt[], LabelStmt)}
    */
   @Test
-  @DisplayName("Test nTableSwitch(Value, int, LabelStmt[], LabelStmt)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"TableSwitchStmt Stmts.nTableSwitch(Value, int, LabelStmt[], LabelStmt)"})
-  void testNTableSwitch() {
+  public void testNTableSwitch() {
     // Arrange
     ArrayExpr key = new ArrayExpr();
 
@@ -449,12 +424,12 @@ class StmtsDiffblueTest {
     // Assert
     Value op = actualNTableSwitchResult.getOp();
     assertTrue(op instanceof ArrayExpr);
+    assertNull(actualNTableSwitchResult.getOps());
     assertNull(actualNTableSwitchResult.frame);
     assertNull(actualNTableSwitchResult.exceptionHandlers);
     assertNull(actualNTableSwitchResult._cfg_froms);
     assertNull(actualNTableSwitchResult.getOp1());
     assertNull(actualNTableSwitchResult.getOp2());
-    assertNull(actualNTableSwitchResult.getOps());
     assertNull(actualNTableSwitchResult.getNext());
     assertNull(actualNTableSwitchResult.getPre());
     assertNull(actualNTableSwitchResult._ts_default_next);
@@ -474,11 +449,9 @@ class StmtsDiffblueTest {
    * <p>Method under test: {@link Stmts#nThrow(Value)}
    */
   @Test
-  @DisplayName("Test nThrow(Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"UnopStmt Stmts.nThrow(Value)"})
-  void testNThrow() {
+  public void testNThrow() {
     // Arrange
     ArrayExpr op = new ArrayExpr();
 
@@ -488,12 +461,12 @@ class StmtsDiffblueTest {
     // Assert
     Value op2 = actualNThrowResult.getOp();
     assertTrue(op2 instanceof ArrayExpr);
+    assertNull(actualNThrowResult.getOps());
     assertNull(actualNThrowResult.frame);
     assertNull(actualNThrowResult.exceptionHandlers);
     assertNull(actualNThrowResult._cfg_froms);
     assertNull(actualNThrowResult.getOp1());
     assertNull(actualNThrowResult.getOp2());
-    assertNull(actualNThrowResult.getOps());
     assertNull(actualNThrowResult.getNext());
     assertNull(actualNThrowResult.getPre());
     assertNull(actualNThrowResult._ts_default_next);
@@ -511,11 +484,9 @@ class StmtsDiffblueTest {
    * <p>Method under test: {@link Stmts#nUnLock(Value)}
    */
   @Test
-  @DisplayName("Test nUnLock(Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"UnopStmt Stmts.nUnLock(Value)"})
-  void testNUnLock() {
+  public void testNUnLock() {
     // Arrange
     ArrayExpr op = new ArrayExpr();
 
@@ -525,12 +496,12 @@ class StmtsDiffblueTest {
     // Assert
     Value op2 = actualNUnLockResult.getOp();
     assertTrue(op2 instanceof ArrayExpr);
+    assertNull(actualNUnLockResult.getOps());
     assertNull(actualNUnLockResult.frame);
     assertNull(actualNUnLockResult.exceptionHandlers);
     assertNull(actualNUnLockResult._cfg_froms);
     assertNull(actualNUnLockResult.getOp1());
     assertNull(actualNUnLockResult.getOp2());
-    assertNull(actualNUnLockResult.getOps());
     assertNull(actualNUnLockResult.getNext());
     assertNull(actualNUnLockResult.getPre());
     assertNull(actualNUnLockResult._ts_default_next);
@@ -548,11 +519,9 @@ class StmtsDiffblueTest {
    * <p>Method under test: {@link Stmts#nVoidInvoke(Value)}
    */
   @Test
-  @DisplayName("Test nVoidInvoke(Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"VoidInvokeStmt Stmts.nVoidInvoke(Value)"})
-  void testNVoidInvoke() {
+  public void testNVoidInvoke() {
     // Arrange
     ArrayExpr op = new ArrayExpr();
 
@@ -562,12 +531,12 @@ class StmtsDiffblueTest {
     // Assert
     Value op2 = actualNVoidInvokeResult.getOp();
     assertTrue(op2 instanceof ArrayExpr);
+    assertNull(actualNVoidInvokeResult.getOps());
     assertNull(actualNVoidInvokeResult.frame);
     assertNull(actualNVoidInvokeResult.exceptionHandlers);
     assertNull(actualNVoidInvokeResult._cfg_froms);
     assertNull(actualNVoidInvokeResult.getOp1());
     assertNull(actualNVoidInvokeResult.getOp2());
-    assertNull(actualNVoidInvokeResult.getOps());
     assertNull(actualNVoidInvokeResult.getNext());
     assertNull(actualNVoidInvokeResult.getPre());
     assertNull(actualNVoidInvokeResult._ts_default_next);

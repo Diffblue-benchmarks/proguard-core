@@ -1,26 +1,23 @@
 package proguard.classfile.util.renderer;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.util.renderer.MemberViewModel.Pair;
 
-class MemberViewModelDiffblueTest {
+public class MemberViewModelDiffblueTest {
   /**
    * Test Pair {@link Pair#Pair(Object, Object)}.
    *
    * <p>Method under test: {@link Pair#Pair(Object, Object)}
    */
   @Test
-  @DisplayName("Test Pair new Pair(Object, Object)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Pair.<init>(Object, Object)"})
-  void testPairNewPair() {
+  public void testPairNewPair() {
     // Arrange and Act
     Pair<Object, Object> actualPair = new Pair<>("Key", "Value");
 

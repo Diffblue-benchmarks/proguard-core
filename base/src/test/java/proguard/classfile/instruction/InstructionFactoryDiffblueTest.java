@@ -1,19 +1,18 @@
 package proguard.classfile.instruction;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.UnsupportedEncodingException;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class InstructionFactoryDiffblueTest {
+public class InstructionFactoryDiffblueTest {
   /**
    * Test {@link InstructionFactory#create(byte[], int)} with {@code code}, {@code offset}.
    *
@@ -25,12 +24,9 @@ class InstructionFactoryDiffblueTest {
    * <p>Method under test: {@link InstructionFactory#create(byte[], int)}
    */
   @Test
-  @DisplayName(
-      "Test create(byte[], int) with 'code', 'offset'; when 'A'; then return constant is '16728'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction InstructionFactory.create(byte[], int)"})
-  void testCreateWithCodeOffset_whenA_thenReturnConstantIs16728() {
+  public void testCreateWithCodeOffset_whenA_thenReturnConstantIs16728() {
     // Arrange and Act
     Instruction actualCreateResult =
         InstructionFactory.create(
@@ -58,12 +54,9 @@ class InstructionFactoryDiffblueTest {
    * <p>Method under test: {@link InstructionFactory#create(byte[], int)}
    */
   @Test
-  @DisplayName(
-      "Test create(byte[], int) with 'code', 'offset'; when 'AXAXAXAX' Bytes is 'UTF-8'; then return Name is 'lstore_2'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction InstructionFactory.create(byte[], int)"})
-  void testCreateWithCodeOffset_whenAxaxaxaxBytesIsUtf8_thenReturnNameIsLstore2()
+  public void testCreateWithCodeOffset_whenAxaxaxaxBytesIsUtf8_thenReturnNameIsLstore2()
       throws UnsupportedEncodingException {
     // Arrange and Act
     Instruction actualCreateResult = InstructionFactory.create("AXAXAXAX".getBytes("UTF-8"), 2);
@@ -87,12 +80,9 @@ class InstructionFactoryDiffblueTest {
    * <p>Method under test: {@link InstructionFactory#create(byte[], int)}
    */
   @Test
-  @DisplayName(
-      "Test create(byte[], int) with 'code', 'offset'; when 'X'; then return constant is sixty-five")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction InstructionFactory.create(byte[], int)"})
-  void testCreateWithCodeOffset_whenX_thenReturnConstantIsSixtyFive() {
+  public void testCreateWithCodeOffset_whenX_thenReturnConstantIsSixtyFive() {
     // Arrange and Act
     Instruction actualCreateResult =
         InstructionFactory.create(
@@ -120,12 +110,9 @@ class InstructionFactoryDiffblueTest {
    * <p>Method under test: {@link InstructionFactory#create(byte[], int)}
    */
   @Test
-  @DisplayName(
-      "Test create(byte[], int) with 'code', 'offset'; when 'X'; then return SimpleInstruction")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction InstructionFactory.create(byte[], int)"})
-  void testCreateWithCodeOffset_whenX_thenReturnSimpleInstruction() {
+  public void testCreateWithCodeOffset_whenX_thenReturnSimpleInstruction() {
     // Arrange and Act
     Instruction actualCreateResult =
         InstructionFactory.create(
@@ -149,12 +136,9 @@ class InstructionFactoryDiffblueTest {
    * <p>Method under test: {@link InstructionFactory#create(byte[], int)}
    */
   @Test
-  @DisplayName(
-      "Test create(byte[], int) with 'code', 'offset'; when 'X'; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction InstructionFactory.create(byte[], int)"})
-  void testCreateWithCodeOffset_whenX_thenThrowIllegalArgumentException() {
+  public void testCreateWithCodeOffset_whenX_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -172,12 +156,9 @@ class InstructionFactoryDiffblueTest {
    * <p>Method under test: {@link InstructionFactory#create(byte, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test create(byte, boolean) with 'opcode', 'wide'; when 'A'; then return VariableInstruction")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction InstructionFactory.create(byte, boolean)"})
-  void testCreateWithOpcodeWide_whenA_thenReturnVariableInstruction() {
+  public void testCreateWithOpcodeWide_whenA_thenReturnVariableInstruction() {
     // Arrange and Act
     Instruction actualCreateResult = InstructionFactory.create((byte) 'A', true);
 
@@ -200,12 +181,9 @@ class InstructionFactoryDiffblueTest {
    * <p>Method under test: {@link InstructionFactory#create(byte, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test create(byte, boolean) with 'opcode', 'wide'; when OP_IFEQ; then return BranchInstruction")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction InstructionFactory.create(byte, boolean)"})
-  void testCreateWithOpcodeWide_whenOp_ifeq_thenReturnBranchInstruction() {
+  public void testCreateWithOpcodeWide_whenOp_ifeq_thenReturnBranchInstruction() {
     // Arrange and Act
     Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_IFEQ, true);
 
@@ -229,12 +207,9 @@ class InstructionFactoryDiffblueTest {
    * <p>Method under test: {@link InstructionFactory#create(byte, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test create(byte, boolean) with 'opcode', 'wide'; when OP_IOR; then return SimpleInstruction")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction InstructionFactory.create(byte, boolean)"})
-  void testCreateWithOpcodeWide_whenOp_ior_thenReturnSimpleInstruction() {
+  public void testCreateWithOpcodeWide_whenOp_ior_thenReturnSimpleInstruction() {
     // Arrange and Act
     Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_IOR, true);
 
@@ -258,12 +233,9 @@ class InstructionFactoryDiffblueTest {
    * <p>Method under test: {@link InstructionFactory#create(byte, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test create(byte, boolean) with 'opcode', 'wide'; when OP_LOOKUPSWITCH; then return LookUpSwitchInstruction")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction InstructionFactory.create(byte, boolean)"})
-  void testCreateWithOpcodeWide_whenOp_lookupswitch_thenReturnLookUpSwitchInstruction() {
+  public void testCreateWithOpcodeWide_whenOp_lookupswitch_thenReturnLookUpSwitchInstruction() {
     // Arrange and Act
     Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_LOOKUPSWITCH, true);
 
@@ -285,12 +257,9 @@ class InstructionFactoryDiffblueTest {
    * <p>Method under test: {@link InstructionFactory#create(byte, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test create(byte, boolean) with 'opcode', 'wide'; when OP_TABLESWITCH; then return TableSwitchInstruction")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction InstructionFactory.create(byte, boolean)"})
-  void testCreateWithOpcodeWide_whenOp_tableswitch_thenReturnTableSwitchInstruction() {
+  public void testCreateWithOpcodeWide_whenOp_tableswitch_thenReturnTableSwitchInstruction() {
     // Arrange and Act
     Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_TABLESWITCH, true);
 
@@ -313,12 +282,9 @@ class InstructionFactoryDiffblueTest {
    * <p>Method under test: {@link InstructionFactory#create(byte, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test create(byte, boolean) with 'opcode', 'wide'; when OP_WIDE; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction InstructionFactory.create(byte, boolean)"})
-  void testCreateWithOpcodeWide_whenOp_wide_thenThrowIllegalArgumentException() {
+  public void testCreateWithOpcodeWide_whenOp_wide_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class, () -> InstructionFactory.create(Instruction.OP_WIDE, true));
@@ -335,11 +301,9 @@ class InstructionFactoryDiffblueTest {
    * <p>Method under test: {@link InstructionFactory#create(byte)}
    */
   @Test
-  @DisplayName("Test create(byte) with 'opcode'; when 'A'; then return VariableInstruction")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction InstructionFactory.create(byte)"})
-  void testCreateWithOpcode_whenA_thenReturnVariableInstruction() {
+  public void testCreateWithOpcode_whenA_thenReturnVariableInstruction() {
     // Arrange and Act
     Instruction actualCreateResult = InstructionFactory.create((byte) 'A');
 
@@ -365,11 +329,9 @@ class InstructionFactoryDiffblueTest {
    * <p>Method under test: {@link InstructionFactory#create(byte)}
    */
   @Test
-  @DisplayName("Test create(byte) with 'opcode'; when OP_IFEQ; then return BranchInstruction")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction InstructionFactory.create(byte)"})
-  void testCreateWithOpcode_whenOp_ifeq_thenReturnBranchInstruction() {
+  public void testCreateWithOpcode_whenOp_ifeq_thenReturnBranchInstruction() {
     // Arrange and Act
     Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_IFEQ);
 
@@ -391,11 +353,9 @@ class InstructionFactoryDiffblueTest {
    * <p>Method under test: {@link InstructionFactory#create(byte)}
    */
   @Test
-  @DisplayName("Test create(byte) with 'opcode'; when OP_IOR; then return SimpleInstruction")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction InstructionFactory.create(byte)"})
-  void testCreateWithOpcode_whenOp_ior_thenReturnSimpleInstruction() {
+  public void testCreateWithOpcode_whenOp_ior_thenReturnSimpleInstruction() {
     // Arrange and Act
     Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_IOR);
 
@@ -417,12 +377,9 @@ class InstructionFactoryDiffblueTest {
    * <p>Method under test: {@link InstructionFactory#create(byte)}
    */
   @Test
-  @DisplayName(
-      "Test create(byte) with 'opcode'; when OP_LOOKUPSWITCH; then return LookUpSwitchInstruction")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction InstructionFactory.create(byte)"})
-  void testCreateWithOpcode_whenOp_lookupswitch_thenReturnLookUpSwitchInstruction() {
+  public void testCreateWithOpcode_whenOp_lookupswitch_thenReturnLookUpSwitchInstruction() {
     // Arrange and Act
     Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_LOOKUPSWITCH);
 
@@ -445,12 +402,9 @@ class InstructionFactoryDiffblueTest {
    * <p>Method under test: {@link InstructionFactory#create(byte)}
    */
   @Test
-  @DisplayName(
-      "Test create(byte) with 'opcode'; when OP_TABLESWITCH; then return TableSwitchInstruction")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction InstructionFactory.create(byte)"})
-  void testCreateWithOpcode_whenOp_tableswitch_thenReturnTableSwitchInstruction() {
+  public void testCreateWithOpcode_whenOp_tableswitch_thenReturnTableSwitchInstruction() {
     // Arrange and Act
     Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_TABLESWITCH);
 
@@ -473,11 +427,9 @@ class InstructionFactoryDiffblueTest {
    * <p>Method under test: {@link InstructionFactory#create(byte)}
    */
   @Test
-  @DisplayName("Test create(byte) with 'opcode'; when OP_WIDE; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction InstructionFactory.create(byte)"})
-  void testCreateWithOpcode_whenOp_wide_thenThrowIllegalArgumentException() {
+  public void testCreateWithOpcode_whenOp_wide_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class, () -> InstructionFactory.create(Instruction.OP_WIDE));

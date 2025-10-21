@@ -1,17 +1,16 @@
 package proguard.evaluation.executor.model;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.ClassPool;
 import proguard.classfile.kotlin.KotlinConstants;
 import proguard.evaluation.executor.model.ClassModelExecutor.Builder;
 
-class ClassModelExecutorDiffblueTest {
+public class ClassModelExecutorDiffblueTest {
   /**
    * Test Builder {@link Builder#build()}.
    *
@@ -23,17 +22,15 @@ class ClassModelExecutorDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test Builder build()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void Builder.<init>(ClassPool, ClassPool)",
     "ClassModelExecutor Builder.build()"
   })
-  void testBuilderBuild() {
+  public void testBuilderBuild() {
     // Arrange, Act and Assert
     assertTrue(
-        new Builder(KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool)
+        (new Builder(KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool))
             .build()
             .getSupportedMethodSignatures()
             .isEmpty());

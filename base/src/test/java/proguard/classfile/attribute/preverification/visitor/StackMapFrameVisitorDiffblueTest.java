@@ -1,13 +1,12 @@
 package proguard.classfile.attribute.preverification.visitor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryMethod;
@@ -20,7 +19,7 @@ import proguard.classfile.attribute.preverification.StackMapFrame;
 import proguard.classfile.visitor.ClassCleaner;
 import proguard.classfile.visitor.ProcessingInfoSetter;
 
-class StackMapFrameVisitorDiffblueTest {
+public class StackMapFrameVisitorDiffblueTest {
   /**
    * Test {@link StackMapFrameVisitor#visitAnyStackMapFrame(Clazz, Method, CodeAttribute, int,
    * StackMapFrame)}.
@@ -34,18 +33,16 @@ class StackMapFrameVisitorDiffblueTest {
    * CodeAttribute, int, StackMapFrame)}
    */
   @Test
-  @DisplayName(
-      "Test visitAnyStackMapFrame(Clazz, Method, CodeAttribute, int, StackMapFrame); when FullFrame(); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void StackMapFrameVisitor.visitAnyStackMapFrame(Clazz, Method, CodeAttribute, int, StackMapFrame)"
   })
-  void testVisitAnyStackMapFrame_whenFullFrame_thenThrowUnsupportedOperationException() {
+  public void testVisitAnyStackMapFrame_whenFullFrame_thenThrowUnsupportedOperationException() {
     // Arrange
     ClassCleaner classCleaner = new ClassCleaner();
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act and Assert
@@ -67,18 +64,16 @@ class StackMapFrameVisitorDiffblueTest {
    * CodeAttribute, int, SameOneFrame)}
    */
   @Test
-  @DisplayName(
-      "Test visitSameOneFrame(Clazz, Method, CodeAttribute, int, SameOneFrame); then SameOneFrame(int) with tag is one ProcessingInfo is 'Processing Info'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void StackMapFrameVisitor.visitSameOneFrame(Clazz, Method, CodeAttribute, int, SameOneFrame)"
   })
-  void testVisitSameOneFrame_thenSameOneFrameWithTagIsOneProcessingInfoIsProcessingInfo() {
+  public void testVisitSameOneFrame_thenSameOneFrameWithTagIsOneProcessingInfoIsProcessingInfo() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
     SameOneFrame sameOneFrame = new SameOneFrame(1);
 
@@ -97,17 +92,16 @@ class StackMapFrameVisitorDiffblueTest {
    * CodeAttribute, int, MoreZeroFrame)}
    */
   @Test
-  @DisplayName("Test visitMoreZeroFrame(Clazz, Method, CodeAttribute, int, MoreZeroFrame)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void StackMapFrameVisitor.visitMoreZeroFrame(Clazz, Method, CodeAttribute, int, MoreZeroFrame)"
   })
-  void testVisitMoreZeroFrame() {
+  public void testVisitMoreZeroFrame() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
     MoreZeroFrame moreZeroFrame = new MoreZeroFrame(1);
 
@@ -130,18 +124,16 @@ class StackMapFrameVisitorDiffblueTest {
    * int, FullFrame)}
    */
   @Test
-  @DisplayName(
-      "Test visitFullFrame(Clazz, Method, CodeAttribute, int, FullFrame); when FullFrame(); then FullFrame() ProcessingInfo is 'Processing Info'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void StackMapFrameVisitor.visitFullFrame(Clazz, Method, CodeAttribute, int, FullFrame)"
   })
-  void testVisitFullFrame_whenFullFrame_thenFullFrameProcessingInfoIsProcessingInfo() {
+  public void testVisitFullFrame_whenFullFrame_thenFullFrameProcessingInfoIsProcessingInfo() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
     FullFrame fullFrame = new FullFrame();
 

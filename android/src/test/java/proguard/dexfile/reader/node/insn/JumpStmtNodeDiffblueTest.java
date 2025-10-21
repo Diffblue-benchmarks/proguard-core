@@ -1,32 +1,29 @@
 package proguard.dexfile.reader.node.insn;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.reader.DexLabel;
 import proguard.dexfile.reader.Op;
 import proguard.dexfile.reader.node.DexCodeNode;
 import proguard.dexfile.reader.visitors.DexCodeVisitor;
 
-class JumpStmtNodeDiffblueTest {
+public class JumpStmtNodeDiffblueTest {
   /**
    * Test {@link JumpStmtNode#JumpStmtNode(Op, int, int, DexLabel)}.
    *
    * <p>Method under test: {@link JumpStmtNode#JumpStmtNode(Op, int, int, DexLabel)}
    */
   @Test
-  @DisplayName("Test new JumpStmtNode(Op, int, int, DexLabel)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void JumpStmtNode.<init>(Op, int, int, DexLabel)"})
-  void testNewJumpStmtNode() {
+  public void testNewJumpStmtNode() {
     // Arrange and Act
     JumpStmtNode actualJumpStmtNode = new JumpStmtNode(Op.NOP, 1, 1, new DexLabel());
 
@@ -48,12 +45,9 @@ class JumpStmtNodeDiffblueTest {
    * <p>Method under test: {@link JumpStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeNode(); then DexCodeNode() stmts size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void JumpStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
+  public void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
     // Arrange
     JumpStmtNode jumpStmtNode = new JumpStmtNode(Op.NOP, 1, 1, new DexLabel());
     DexCodeNode cv = new DexCodeNode();

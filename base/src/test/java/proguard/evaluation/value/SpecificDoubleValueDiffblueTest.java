@@ -1,18 +1,17 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class SpecificDoubleValueDiffblueTest {
+public class SpecificDoubleValueDiffblueTest {
   /**
    * Test {@link SpecificDoubleValue#negate()}.
    *
@@ -23,14 +22,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#negate()}
    */
   @Test
-  @DisplayName("Test negate(); then return NegatedDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.negate()"})
-  void testNegate_thenReturnNegatedDoubleValue() {
+  public void testNegate_thenReturnNegatedDoubleValue() {
     // Arrange and Act
     DoubleValue actualNegateResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).negate();
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).negate();
 
     // Assert
     assertTrue(actualNegateResult instanceof NegatedDoubleValue);
@@ -49,17 +46,15 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#negate()}
    */
   @Test
-  @DisplayName("Test negate(); then return ParticularDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.negate()"})
-  void testNegate_thenReturnParticularDoubleValue() {
+  public void testNegate_thenReturnParticularDoubleValue() {
     // Arrange and Act
-    DoubleValue actualNegateResult = new ParticularDoubleValue(10.0d).negate();
+    DoubleValue actualNegateResult = (new ParticularDoubleValue(10.0d)).negate();
 
     // Assert
     assertTrue(actualNegateResult instanceof ParticularDoubleValue);
-    assertEquals(-10.0d, actualNegateResult.value());
+    assertEquals(-10.0d, actualNegateResult.value(), 0.0);
     assertTrue(actualNegateResult.isCategory2());
     assertTrue(actualNegateResult.isParticular());
     assertTrue(actualNegateResult.isSpecific());
@@ -75,14 +70,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#convertToInteger()}
    */
   @Test
-  @DisplayName("Test convertToInteger(); then return ConvertedIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificDoubleValue.convertToInteger()"})
-  void testConvertToInteger_thenReturnConvertedIntegerValue() {
+  public void testConvertToInteger_thenReturnConvertedIntegerValue() {
     // Arrange and Act
     IntegerValue actualConvertToIntegerResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).convertToInteger();
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).convertToInteger();
 
     // Assert
     assertTrue(actualConvertToIntegerResult instanceof ConvertedIntegerValue);
@@ -101,13 +94,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#convertToInteger()}
    */
   @Test
-  @DisplayName("Test convertToInteger(); then return ParticularIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificDoubleValue.convertToInteger()"})
-  void testConvertToInteger_thenReturnParticularIntegerValue() {
+  public void testConvertToInteger_thenReturnParticularIntegerValue() {
     // Arrange and Act
-    IntegerValue actualConvertToIntegerResult = new ParticularDoubleValue(10.0d).convertToInteger();
+    IntegerValue actualConvertToIntegerResult =
+        (new ParticularDoubleValue(10.0d)).convertToInteger();
 
     // Assert
     assertTrue(actualConvertToIntegerResult instanceof ParticularIntegerValue);
@@ -127,14 +119,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#convertToLong()}
    */
   @Test
-  @DisplayName("Test convertToLong(); then return ConvertedLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificDoubleValue.convertToLong()"})
-  void testConvertToLong_thenReturnConvertedLongValue() {
+  public void testConvertToLong_thenReturnConvertedLongValue() {
     // Arrange and Act
     LongValue actualConvertToLongResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).convertToLong();
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).convertToLong();
 
     // Assert
     assertTrue(actualConvertToLongResult instanceof ConvertedLongValue);
@@ -153,13 +143,11 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#convertToLong()}
    */
   @Test
-  @DisplayName("Test convertToLong(); then return ParticularLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificDoubleValue.convertToLong()"})
-  void testConvertToLong_thenReturnParticularLongValue() {
+  public void testConvertToLong_thenReturnParticularLongValue() {
     // Arrange and Act
-    LongValue actualConvertToLongResult = new ParticularDoubleValue(10.0d).convertToLong();
+    LongValue actualConvertToLongResult = (new ParticularDoubleValue(10.0d)).convertToLong();
 
     // Assert
     assertTrue(actualConvertToLongResult instanceof ParticularLongValue);
@@ -179,14 +167,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#convertToFloat()}
    */
   @Test
-  @DisplayName("Test convertToFloat(); then return ConvertedFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue SpecificDoubleValue.convertToFloat()"})
-  void testConvertToFloat_thenReturnConvertedFloatValue() {
+  public void testConvertToFloat_thenReturnConvertedFloatValue() {
     // Arrange and Act
     FloatValue actualConvertToFloatResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).convertToFloat();
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).convertToFloat();
 
     // Assert
     assertTrue(actualConvertToFloatResult instanceof ConvertedFloatValue);
@@ -205,17 +191,15 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#convertToFloat()}
    */
   @Test
-  @DisplayName("Test convertToFloat(); then return ParticularFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue SpecificDoubleValue.convertToFloat()"})
-  void testConvertToFloat_thenReturnParticularFloatValue() {
+  public void testConvertToFloat_thenReturnParticularFloatValue() {
     // Arrange and Act
-    FloatValue actualConvertToFloatResult = new ParticularDoubleValue(10.0d).convertToFloat();
+    FloatValue actualConvertToFloatResult = (new ParticularDoubleValue(10.0d)).convertToFloat();
 
     // Assert
     assertTrue(actualConvertToFloatResult instanceof ParticularFloatValue);
-    assertEquals(10.0f, actualConvertToFloatResult.value());
+    assertEquals(10.0f, actualConvertToFloatResult.value(), 0.0f);
     assertFalse(actualConvertToFloatResult.isCategory2());
     assertTrue(actualConvertToFloatResult.isParticular());
     assertTrue(actualConvertToFloatResult.isSpecific());
@@ -227,11 +211,9 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#generalize(DoubleValue)}
    */
   @Test
-  @DisplayName("Test generalize(DoubleValue) with 'DoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.generalize(DoubleValue)"})
-  void testGeneralizeWithDoubleValue() {
+  public void testGeneralizeWithDoubleValue() {
     // Arrange
     ConvertedDoubleValue convertedDoubleValue =
         new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -261,12 +243,9 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#generalize(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(DoubleValue) with 'DoubleValue'; given ConvertedDoubleValue(Value) with value is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.generalize(DoubleValue)"})
-  void testGeneralizeWithDoubleValue_givenConvertedDoubleValueWithValueIsNull() {
+  public void testGeneralizeWithDoubleValue_givenConvertedDoubleValueWithValueIsNull() {
     // Arrange
     ConvertedDoubleValue convertedDoubleValue = new ConvertedDoubleValue(null);
 
@@ -294,20 +273,14 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#generalize(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(DoubleValue) with 'DoubleValue'; given ParticularDoubleValue(double) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.generalize(DoubleValue)"})
-  void testGeneralizeWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
+  public void testGeneralizeWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
     // Arrange
     DoubleValue other = BasicValueFactory.DOUBLE_VALUE;
 
-    // Act
-    DoubleValue actualGeneralizeResult = new ParticularDoubleValue(10.0d).generalize(other);
-
-    // Assert
-    assertSame(other, actualGeneralizeResult);
+    // Act and Assert
+    assertSame(other, (new ParticularDoubleValue(10.0d)).generalize(other));
   }
 
   /**
@@ -320,11 +293,9 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#generalize(DoubleValue)}
    */
   @Test
-  @DisplayName("Test generalize(DoubleValue) with 'DoubleValue'; then return ConvertedDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.generalize(DoubleValue)"})
-  void testGeneralizeWithDoubleValue_thenReturnConvertedDoubleValue() {
+  public void testGeneralizeWithDoubleValue_thenReturnConvertedDoubleValue() {
     // Arrange
     ConvertedDoubleValue convertedDoubleValue =
         new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -351,15 +322,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#generalize(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(DoubleValue) with 'DoubleValue'; when DOUBLE_VALUE_0; then return UnknownDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.generalize(DoubleValue)"})
-  void testGeneralizeWithDoubleValue_whenDouble_value_0_thenReturnUnknownDoubleValue() {
+  public void testGeneralizeWithDoubleValue_whenDouble_value_0_thenReturnUnknownDoubleValue() {
     // Arrange and Act
     DoubleValue actualGeneralizeResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .generalize(ParticularValueFactory.DOUBLE_VALUE_0);
 
     // Assert
@@ -380,21 +348,16 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#generalize(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(DoubleValue) with 'DoubleValue'; when DOUBLE_VALUE; then return DOUBLE_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.generalize(DoubleValue)"})
-  void testGeneralizeWithDoubleValue_whenDouble_value_thenReturnDouble_value() {
+  public void testGeneralizeWithDoubleValue_whenDouble_value_thenReturnDouble_value() {
     // Arrange
     DoubleValue other = BasicValueFactory.DOUBLE_VALUE;
 
-    // Act
-    DoubleValue actualGeneralizeResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).generalize(other);
-
-    // Assert
-    assertSame(other, actualGeneralizeResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).generalize(other));
   }
 
   /**
@@ -404,20 +367,16 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#generalize(SpecificDoubleValue)}
    */
   @Test
-  @DisplayName("Test generalize(SpecificDoubleValue) with 'SpecificDoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.generalize(SpecificDoubleValue)"})
-  void testGeneralizeWithSpecificDoubleValue() {
+  public void testGeneralizeWithSpecificDoubleValue() {
     // Arrange
     ParticularDoubleValue particularDoubleValue = new ParticularDoubleValue(10.0d);
 
-    // Act
-    DoubleValue actualGeneralizeResult =
-        particularDoubleValue.generalize((SpecificDoubleValue) new ParticularDoubleValue(10.0d));
-
-    // Assert
-    assertSame(particularDoubleValue, actualGeneralizeResult);
+    // Act and Assert
+    assertSame(
+        particularDoubleValue,
+        particularDoubleValue.generalize((SpecificDoubleValue) new ParticularDoubleValue(10.0d)));
   }
 
   /**
@@ -427,11 +386,9 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#generalize(SpecificDoubleValue)}
    */
   @Test
-  @DisplayName("Test generalize(SpecificDoubleValue) with 'SpecificDoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.generalize(SpecificDoubleValue)"})
-  void testGeneralizeWithSpecificDoubleValue2() {
+  public void testGeneralizeWithSpecificDoubleValue2() {
     // Arrange
     ParticularDoubleValue particularDoubleValue = new ParticularDoubleValue(10.0d);
 
@@ -452,6 +409,35 @@ class SpecificDoubleValueDiffblueTest {
    * SpecificDoubleValue}.
    *
    * <ul>
+   *   <li>Given {@link ParticularDoubleValue#ParticularDoubleValue(double)} with value is {@code
+   *       0.5}.
+   * </ul>
+   *
+   * <p>Method under test: {@link SpecificDoubleValue#generalize(SpecificDoubleValue)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"DoubleValue SpecificDoubleValue.generalize(SpecificDoubleValue)"})
+  public void testGeneralizeWithSpecificDoubleValue_givenParticularDoubleValueWithValueIs05() {
+    // Arrange
+    ParticularDoubleValue particularDoubleValue = new ParticularDoubleValue(0.5d);
+
+    // Act
+    DoubleValue actualGeneralizeResult =
+        particularDoubleValue.generalize((SpecificDoubleValue) new ParticularDoubleValue(10.0d));
+
+    // Assert
+    assertTrue(actualGeneralizeResult instanceof UnknownDoubleValue);
+    assertFalse(actualGeneralizeResult.isParticular());
+    assertFalse(actualGeneralizeResult.isSpecific());
+    assertTrue(actualGeneralizeResult.isCategory2());
+  }
+
+  /**
+   * Test {@link SpecificDoubleValue#generalize(SpecificDoubleValue)} with {@code
+   * SpecificDoubleValue}.
+   *
+   * <ul>
    *   <li>When {@code null}.
    *   <li>Then return {@link UnknownDoubleValue}.
    * </ul>
@@ -459,15 +445,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#generalize(SpecificDoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(SpecificDoubleValue) with 'SpecificDoubleValue'; when 'null'; then return UnknownDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.generalize(SpecificDoubleValue)"})
-  void testGeneralizeWithSpecificDoubleValue_whenNull_thenReturnUnknownDoubleValue() {
+  public void testGeneralizeWithSpecificDoubleValue_whenNull_thenReturnUnknownDoubleValue() {
     // Arrange and Act
     DoubleValue actualGeneralizeResult =
-        new ParticularDoubleValue(10.0d).generalize((SpecificDoubleValue) null);
+        (new ParticularDoubleValue(10.0d)).generalize((SpecificDoubleValue) null);
 
     // Assert
     assertTrue(actualGeneralizeResult instanceof UnknownDoubleValue);
@@ -486,20 +469,14 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#add(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test add(DoubleValue) with 'DoubleValue'; given ParticularDoubleValue(double) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.add(DoubleValue)"})
-  void testAddWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
+  public void testAddWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
     // Arrange
     DoubleValue other = BasicValueFactory.DOUBLE_VALUE;
 
-    // Act
-    DoubleValue actualAddResult = new ParticularDoubleValue(10.0d).add(other);
-
-    // Assert
-    assertSame(other, actualAddResult);
+    // Act and Assert
+    assertSame(other, (new ParticularDoubleValue(10.0d)).add(other));
   }
 
   /**
@@ -513,15 +490,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#add(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test add(DoubleValue) with 'DoubleValue'; when DOUBLE_VALUE_0; then return CompositeDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.add(DoubleValue)"})
-  void testAddWithDoubleValue_whenDouble_value_0_thenReturnCompositeDoubleValue() {
+  public void testAddWithDoubleValue_whenDouble_value_0_thenReturnCompositeDoubleValue() {
     // Arrange and Act
     DoubleValue actualAddResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .add(ParticularValueFactory.DOUBLE_VALUE_0);
 
     // Assert
@@ -542,21 +516,15 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#add(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test add(DoubleValue) with 'DoubleValue'; when DOUBLE_VALUE; then return DOUBLE_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.add(DoubleValue)"})
-  void testAddWithDoubleValue_whenDouble_value_thenReturnDouble_value() {
+  public void testAddWithDoubleValue_whenDouble_value_thenReturnDouble_value() {
     // Arrange
     DoubleValue other = BasicValueFactory.DOUBLE_VALUE;
 
-    // Act
-    DoubleValue actualAddResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).add(other);
-
-    // Assert
-    assertSame(other, actualAddResult);
+    // Act and Assert
+    assertSame(
+        other, (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).add(other));
   }
 
   /**
@@ -565,11 +533,9 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#add(SpecificDoubleValue)}
    */
   @Test
-  @DisplayName("Test add(SpecificDoubleValue) with 'SpecificDoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.add(SpecificDoubleValue)"})
-  void testAddWithSpecificDoubleValue() {
+  public void testAddWithSpecificDoubleValue() {
     // Arrange
     ParticularDoubleValue particularDoubleValue = new ParticularDoubleValue(10.0d);
 
@@ -594,20 +560,14 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#subtract(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(DoubleValue) with 'DoubleValue'; given ParticularDoubleValue(double) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.subtract(DoubleValue)"})
-  void testSubtractWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
+  public void testSubtractWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
     // Arrange
     DoubleValue other = BasicValueFactory.DOUBLE_VALUE;
 
-    // Act
-    DoubleValue actualSubtractResult = new ParticularDoubleValue(10.0d).subtract(other);
-
-    // Assert
-    assertSame(other, actualSubtractResult);
+    // Act and Assert
+    assertSame(other, (new ParticularDoubleValue(10.0d)).subtract(other));
   }
 
   /**
@@ -621,15 +581,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#subtract(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(DoubleValue) with 'DoubleValue'; when DOUBLE_VALUE_0; then return CompositeDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.subtract(DoubleValue)"})
-  void testSubtractWithDoubleValue_whenDouble_value_0_thenReturnCompositeDoubleValue() {
+  public void testSubtractWithDoubleValue_whenDouble_value_0_thenReturnCompositeDoubleValue() {
     // Arrange and Act
     DoubleValue actualSubtractResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .subtract(ParticularValueFactory.DOUBLE_VALUE_0);
 
     // Assert
@@ -650,21 +607,16 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#subtract(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(DoubleValue) with 'DoubleValue'; when DOUBLE_VALUE; then return DOUBLE_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.subtract(DoubleValue)"})
-  void testSubtractWithDoubleValue_whenDouble_value_thenReturnDouble_value() {
+  public void testSubtractWithDoubleValue_whenDouble_value_thenReturnDouble_value() {
     // Arrange
     DoubleValue other = BasicValueFactory.DOUBLE_VALUE;
 
-    // Act
-    DoubleValue actualSubtractResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).subtract(other);
-
-    // Assert
-    assertSame(other, actualSubtractResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).subtract(other));
   }
 
   /**
@@ -674,11 +626,9 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#subtract(SpecificDoubleValue)}
    */
   @Test
-  @DisplayName("Test subtract(SpecificDoubleValue) with 'SpecificDoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.subtract(SpecificDoubleValue)"})
-  void testSubtractWithSpecificDoubleValue() {
+  public void testSubtractWithSpecificDoubleValue() {
     // Arrange
     ParticularDoubleValue particularDoubleValue = new ParticularDoubleValue(10.0d);
 
@@ -703,20 +653,14 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#subtractFrom(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtractFrom(DoubleValue) with 'DoubleValue'; given ParticularDoubleValue(double) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.subtractFrom(DoubleValue)"})
-  void testSubtractFromWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
+  public void testSubtractFromWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
     // Arrange
     DoubleValue other = BasicValueFactory.DOUBLE_VALUE;
 
-    // Act
-    DoubleValue actualSubtractFromResult = new ParticularDoubleValue(10.0d).subtractFrom(other);
-
-    // Assert
-    assertSame(other, actualSubtractFromResult);
+    // Act and Assert
+    assertSame(other, (new ParticularDoubleValue(10.0d)).subtractFrom(other));
   }
 
   /**
@@ -729,15 +673,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#subtractFrom(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtractFrom(DoubleValue) with 'DoubleValue'; then return CompositeDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.subtractFrom(DoubleValue)"})
-  void testSubtractFromWithDoubleValue_thenReturnCompositeDoubleValue() {
+  public void testSubtractFromWithDoubleValue_thenReturnCompositeDoubleValue() {
     // Arrange and Act
     DoubleValue actualSubtractFromResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .subtractFrom(ParticularValueFactory.DOUBLE_VALUE_0);
 
     // Assert
@@ -758,21 +699,16 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#subtractFrom(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtractFrom(DoubleValue) with 'DoubleValue'; when DOUBLE_VALUE; then return DOUBLE_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.subtractFrom(DoubleValue)"})
-  void testSubtractFromWithDoubleValue_whenDouble_value_thenReturnDouble_value() {
+  public void testSubtractFromWithDoubleValue_whenDouble_value_thenReturnDouble_value() {
     // Arrange
     DoubleValue other = BasicValueFactory.DOUBLE_VALUE;
 
-    // Act
-    DoubleValue actualSubtractFromResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).subtractFrom(other);
-
-    // Assert
-    assertSame(other, actualSubtractFromResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).subtractFrom(other));
   }
 
   /**
@@ -782,11 +718,9 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#subtractFrom(SpecificDoubleValue)}
    */
   @Test
-  @DisplayName("Test subtractFrom(SpecificDoubleValue) with 'SpecificDoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.subtractFrom(SpecificDoubleValue)"})
-  void testSubtractFromWithSpecificDoubleValue() {
+  public void testSubtractFromWithSpecificDoubleValue() {
     // Arrange
     ParticularDoubleValue particularDoubleValue = new ParticularDoubleValue(10.0d);
 
@@ -811,20 +745,14 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#multiply(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test multiply(DoubleValue) with 'DoubleValue'; given ParticularDoubleValue(double) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.multiply(DoubleValue)"})
-  void testMultiplyWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
+  public void testMultiplyWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
     // Arrange
     DoubleValue other = BasicValueFactory.DOUBLE_VALUE;
 
-    // Act
-    DoubleValue actualMultiplyResult = new ParticularDoubleValue(10.0d).multiply(other);
-
-    // Assert
-    assertSame(other, actualMultiplyResult);
+    // Act and Assert
+    assertSame(other, (new ParticularDoubleValue(10.0d)).multiply(other));
   }
 
   /**
@@ -838,15 +766,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#multiply(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test multiply(DoubleValue) with 'DoubleValue'; when DOUBLE_VALUE_0; then return CompositeDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.multiply(DoubleValue)"})
-  void testMultiplyWithDoubleValue_whenDouble_value_0_thenReturnCompositeDoubleValue() {
+  public void testMultiplyWithDoubleValue_whenDouble_value_0_thenReturnCompositeDoubleValue() {
     // Arrange and Act
     DoubleValue actualMultiplyResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .multiply(ParticularValueFactory.DOUBLE_VALUE_0);
 
     // Assert
@@ -867,21 +792,16 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#multiply(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test multiply(DoubleValue) with 'DoubleValue'; when DOUBLE_VALUE; then return DOUBLE_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.multiply(DoubleValue)"})
-  void testMultiplyWithDoubleValue_whenDouble_value_thenReturnDouble_value() {
+  public void testMultiplyWithDoubleValue_whenDouble_value_thenReturnDouble_value() {
     // Arrange
     DoubleValue other = BasicValueFactory.DOUBLE_VALUE;
 
-    // Act
-    DoubleValue actualMultiplyResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).multiply(other);
-
-    // Assert
-    assertSame(other, actualMultiplyResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).multiply(other));
   }
 
   /**
@@ -891,11 +811,9 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#multiply(SpecificDoubleValue)}
    */
   @Test
-  @DisplayName("Test multiply(SpecificDoubleValue) with 'SpecificDoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.multiply(SpecificDoubleValue)"})
-  void testMultiplyWithSpecificDoubleValue() {
+  public void testMultiplyWithSpecificDoubleValue() {
     // Arrange
     ParticularDoubleValue particularDoubleValue = new ParticularDoubleValue(10.0d);
 
@@ -920,20 +838,14 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#divide(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test divide(DoubleValue) with 'DoubleValue'; given ParticularDoubleValue(double) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.divide(DoubleValue)"})
-  void testDivideWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
+  public void testDivideWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
     // Arrange
     DoubleValue other = BasicValueFactory.DOUBLE_VALUE;
 
-    // Act
-    DoubleValue actualDivideResult = new ParticularDoubleValue(10.0d).divide(other);
-
-    // Assert
-    assertSame(other, actualDivideResult);
+    // Act and Assert
+    assertSame(other, (new ParticularDoubleValue(10.0d)).divide(other));
   }
 
   /**
@@ -947,15 +859,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#divide(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test divide(DoubleValue) with 'DoubleValue'; when DOUBLE_VALUE_0; then return CompositeDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.divide(DoubleValue)"})
-  void testDivideWithDoubleValue_whenDouble_value_0_thenReturnCompositeDoubleValue() {
+  public void testDivideWithDoubleValue_whenDouble_value_0_thenReturnCompositeDoubleValue() {
     // Arrange and Act
     DoubleValue actualDivideResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .divide(ParticularValueFactory.DOUBLE_VALUE_0);
 
     // Assert
@@ -976,21 +885,15 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#divide(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test divide(DoubleValue) with 'DoubleValue'; when DOUBLE_VALUE; then return DOUBLE_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.divide(DoubleValue)"})
-  void testDivideWithDoubleValue_whenDouble_value_thenReturnDouble_value() {
+  public void testDivideWithDoubleValue_whenDouble_value_thenReturnDouble_value() {
     // Arrange
     DoubleValue other = BasicValueFactory.DOUBLE_VALUE;
 
-    // Act
-    DoubleValue actualDivideResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).divide(other);
-
-    // Assert
-    assertSame(other, actualDivideResult);
+    // Act and Assert
+    assertSame(
+        other, (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).divide(other));
   }
 
   /**
@@ -999,11 +902,9 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#divide(SpecificDoubleValue)}
    */
   @Test
-  @DisplayName("Test divide(SpecificDoubleValue) with 'SpecificDoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.divide(SpecificDoubleValue)"})
-  void testDivideWithSpecificDoubleValue() {
+  public void testDivideWithSpecificDoubleValue() {
     // Arrange
     ParticularDoubleValue particularDoubleValue = new ParticularDoubleValue(10.0d);
 
@@ -1028,20 +929,14 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#divideOf(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test divideOf(DoubleValue) with 'DoubleValue'; given ParticularDoubleValue(double) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.divideOf(DoubleValue)"})
-  void testDivideOfWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
+  public void testDivideOfWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
     // Arrange
     DoubleValue other = BasicValueFactory.DOUBLE_VALUE;
 
-    // Act
-    DoubleValue actualDivideOfResult = new ParticularDoubleValue(10.0d).divideOf(other);
-
-    // Assert
-    assertSame(other, actualDivideOfResult);
+    // Act and Assert
+    assertSame(other, (new ParticularDoubleValue(10.0d)).divideOf(other));
   }
 
   /**
@@ -1055,15 +950,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#divideOf(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test divideOf(DoubleValue) with 'DoubleValue'; when DOUBLE_VALUE_0; then return CompositeDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.divideOf(DoubleValue)"})
-  void testDivideOfWithDoubleValue_whenDouble_value_0_thenReturnCompositeDoubleValue() {
+  public void testDivideOfWithDoubleValue_whenDouble_value_0_thenReturnCompositeDoubleValue() {
     // Arrange and Act
     DoubleValue actualDivideOfResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .divideOf(ParticularValueFactory.DOUBLE_VALUE_0);
 
     // Assert
@@ -1084,21 +976,16 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#divideOf(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test divideOf(DoubleValue) with 'DoubleValue'; when DOUBLE_VALUE; then return DOUBLE_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.divideOf(DoubleValue)"})
-  void testDivideOfWithDoubleValue_whenDouble_value_thenReturnDouble_value() {
+  public void testDivideOfWithDoubleValue_whenDouble_value_thenReturnDouble_value() {
     // Arrange
     DoubleValue other = BasicValueFactory.DOUBLE_VALUE;
 
-    // Act
-    DoubleValue actualDivideOfResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).divideOf(other);
-
-    // Assert
-    assertSame(other, actualDivideOfResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).divideOf(other));
   }
 
   /**
@@ -1108,11 +995,9 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#divideOf(SpecificDoubleValue)}
    */
   @Test
-  @DisplayName("Test divideOf(SpecificDoubleValue) with 'SpecificDoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.divideOf(SpecificDoubleValue)"})
-  void testDivideOfWithSpecificDoubleValue() {
+  public void testDivideOfWithSpecificDoubleValue() {
     // Arrange
     ParticularDoubleValue particularDoubleValue = new ParticularDoubleValue(10.0d);
 
@@ -1137,20 +1022,14 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#remainder(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainder(DoubleValue) with 'DoubleValue'; given ParticularDoubleValue(double) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.remainder(DoubleValue)"})
-  void testRemainderWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
+  public void testRemainderWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
     // Arrange
     DoubleValue other = BasicValueFactory.DOUBLE_VALUE;
 
-    // Act
-    DoubleValue actualRemainderResult = new ParticularDoubleValue(10.0d).remainder(other);
-
-    // Assert
-    assertSame(other, actualRemainderResult);
+    // Act and Assert
+    assertSame(other, (new ParticularDoubleValue(10.0d)).remainder(other));
   }
 
   /**
@@ -1164,15 +1043,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#remainder(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainder(DoubleValue) with 'DoubleValue'; when DOUBLE_VALUE_0; then return CompositeDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.remainder(DoubleValue)"})
-  void testRemainderWithDoubleValue_whenDouble_value_0_thenReturnCompositeDoubleValue() {
+  public void testRemainderWithDoubleValue_whenDouble_value_0_thenReturnCompositeDoubleValue() {
     // Arrange and Act
     DoubleValue actualRemainderResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .remainder(ParticularValueFactory.DOUBLE_VALUE_0);
 
     // Assert
@@ -1193,21 +1069,16 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#remainder(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainder(DoubleValue) with 'DoubleValue'; when DOUBLE_VALUE; then return DOUBLE_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.remainder(DoubleValue)"})
-  void testRemainderWithDoubleValue_whenDouble_value_thenReturnDouble_value() {
+  public void testRemainderWithDoubleValue_whenDouble_value_thenReturnDouble_value() {
     // Arrange
     DoubleValue other = BasicValueFactory.DOUBLE_VALUE;
 
-    // Act
-    DoubleValue actualRemainderResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).remainder(other);
-
-    // Assert
-    assertSame(other, actualRemainderResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).remainder(other));
   }
 
   /**
@@ -1217,11 +1088,9 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#remainder(SpecificDoubleValue)}
    */
   @Test
-  @DisplayName("Test remainder(SpecificDoubleValue) with 'SpecificDoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.remainder(SpecificDoubleValue)"})
-  void testRemainderWithSpecificDoubleValue() {
+  public void testRemainderWithSpecificDoubleValue() {
     // Arrange
     ParticularDoubleValue particularDoubleValue = new ParticularDoubleValue(10.0d);
 
@@ -1246,20 +1115,14 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#remainderOf(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainderOf(DoubleValue) with 'DoubleValue'; given ParticularDoubleValue(double) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.remainderOf(DoubleValue)"})
-  void testRemainderOfWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
+  public void testRemainderOfWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
     // Arrange
     DoubleValue other = BasicValueFactory.DOUBLE_VALUE;
 
-    // Act
-    DoubleValue actualRemainderOfResult = new ParticularDoubleValue(10.0d).remainderOf(other);
-
-    // Assert
-    assertSame(other, actualRemainderOfResult);
+    // Act and Assert
+    assertSame(other, (new ParticularDoubleValue(10.0d)).remainderOf(other));
   }
 
   /**
@@ -1273,15 +1136,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#remainderOf(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainderOf(DoubleValue) with 'DoubleValue'; when DOUBLE_VALUE_0; then return CompositeDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.remainderOf(DoubleValue)"})
-  void testRemainderOfWithDoubleValue_whenDouble_value_0_thenReturnCompositeDoubleValue() {
+  public void testRemainderOfWithDoubleValue_whenDouble_value_0_thenReturnCompositeDoubleValue() {
     // Arrange and Act
     DoubleValue actualRemainderOfResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .remainderOf(ParticularValueFactory.DOUBLE_VALUE_0);
 
     // Assert
@@ -1302,21 +1162,16 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#remainderOf(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainderOf(DoubleValue) with 'DoubleValue'; when DOUBLE_VALUE; then return DOUBLE_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.remainderOf(DoubleValue)"})
-  void testRemainderOfWithDoubleValue_whenDouble_value_thenReturnDouble_value() {
+  public void testRemainderOfWithDoubleValue_whenDouble_value_thenReturnDouble_value() {
     // Arrange
     DoubleValue other = BasicValueFactory.DOUBLE_VALUE;
 
-    // Act
-    DoubleValue actualRemainderOfResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).remainderOf(other);
-
-    // Assert
-    assertSame(other, actualRemainderOfResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).remainderOf(other));
   }
 
   /**
@@ -1326,11 +1181,9 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#remainderOf(SpecificDoubleValue)}
    */
   @Test
-  @DisplayName("Test remainderOf(SpecificDoubleValue) with 'SpecificDoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificDoubleValue.remainderOf(SpecificDoubleValue)"})
-  void testRemainderOfWithSpecificDoubleValue() {
+  public void testRemainderOfWithSpecificDoubleValue() {
     // Arrange
     ParticularDoubleValue particularDoubleValue = new ParticularDoubleValue(10.0d);
 
@@ -1355,15 +1208,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#compare(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test compare(DoubleValue) with 'DoubleValue'; given ParticularDoubleValue(double) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificDoubleValue.compare(DoubleValue)"})
-  void testCompareWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
+  public void testCompareWithDoubleValue_givenParticularDoubleValueWithValueIsTen() {
     // Arrange and Act
     IntegerValue actualCompareResult =
-        new ParticularDoubleValue(10.0d).compare(BasicValueFactory.DOUBLE_VALUE);
+        (new ParticularDoubleValue(10.0d)).compare(BasicValueFactory.DOUBLE_VALUE);
 
     // Assert
     assertTrue(actualCompareResult instanceof UnknownIntegerValue);
@@ -1383,15 +1233,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#compare(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test compare(DoubleValue) with 'DoubleValue'; when DOUBLE_VALUE_0; then return UnknownIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificDoubleValue.compare(DoubleValue)"})
-  void testCompareWithDoubleValue_whenDouble_value_0_thenReturnUnknownIntegerValue() {
+  public void testCompareWithDoubleValue_whenDouble_value_0_thenReturnUnknownIntegerValue() {
     // Arrange and Act
     IntegerValue actualCompareResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .compare(ParticularValueFactory.DOUBLE_VALUE_0);
 
     // Assert
@@ -1412,15 +1259,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#compare(DoubleValue)}
    */
   @Test
-  @DisplayName(
-      "Test compare(DoubleValue) with 'DoubleValue'; when DOUBLE_VALUE; then return UnknownIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificDoubleValue.compare(DoubleValue)"})
-  void testCompareWithDoubleValue_whenDouble_value_thenReturnUnknownIntegerValue() {
+  public void testCompareWithDoubleValue_whenDouble_value_thenReturnUnknownIntegerValue() {
     // Arrange and Act
     IntegerValue actualCompareResult =
-        new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedDoubleValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .compare(BasicValueFactory.DOUBLE_VALUE);
 
     // Assert
@@ -1436,11 +1280,9 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#compare(SpecificDoubleValue)}
    */
   @Test
-  @DisplayName("Test compare(SpecificDoubleValue) with 'SpecificDoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificDoubleValue.compare(SpecificDoubleValue)"})
-  void testCompareWithSpecificDoubleValue() {
+  public void testCompareWithSpecificDoubleValue() {
     // Arrange
     ParticularDoubleValue particularDoubleValue = new ParticularDoubleValue(10.0d);
 
@@ -1461,13 +1303,11 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#isSpecific()}
    */
   @Test
-  @DisplayName("Test isSpecific()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean SpecificDoubleValue.isSpecific()"})
-  void testIsSpecific() {
+  public void testIsSpecific() {
     // Arrange, Act and Assert
-    assertTrue(new ParticularDoubleValue(10.0d).isSpecific());
+    assertTrue((new ParticularDoubleValue(10.0d)).isSpecific());
   }
 
   /**
@@ -1481,21 +1321,20 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SpecificDoubleValue.equals(Object)",
     "int SpecificDoubleValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     ParticularDoubleValue particularDoubleValue = new ParticularDoubleValue(10.0d);
     ParticularDoubleValue particularDoubleValue2 = new ParticularDoubleValue(10.0d);
 
     // Act and Assert
     assertEquals(particularDoubleValue, particularDoubleValue2);
-    assertEquals(particularDoubleValue.hashCode(), particularDoubleValue2.hashCode());
+    int expectedHashCodeResult = particularDoubleValue.hashCode();
+    assertEquals(expectedHashCodeResult, particularDoubleValue2.hashCode());
   }
 
   /**
@@ -1509,14 +1348,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SpecificDoubleValue.equals(Object)",
     "int SpecificDoubleValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     ParticularDoubleValue particularDoubleValue = new ParticularDoubleValue(10.0d);
 
@@ -1537,14 +1374,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SpecificDoubleValue.equals(Object)",
     "int SpecificDoubleValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     ParticularDoubleValue particularDoubleValue = new ParticularDoubleValue(0.5d);
 
@@ -1563,14 +1398,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SpecificDoubleValue.equals(Object)",
     "int SpecificDoubleValue.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new ParticularDoubleValue(10.0d), null);
   }
@@ -1586,14 +1419,12 @@ class SpecificDoubleValueDiffblueTest {
    * <p>Method under test: {@link SpecificDoubleValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SpecificDoubleValue.equals(Object)",
     "int SpecificDoubleValue.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new ParticularDoubleValue(10.0d), "Different type to SpecificDoubleValue");
   }

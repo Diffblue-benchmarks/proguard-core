@@ -1,18 +1,17 @@
 package proguard.dexfile.reader.node;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.expr.Constant;
 import proguard.dexfile.reader.Field;
 import proguard.dexfile.reader.Method;
@@ -21,18 +20,16 @@ import proguard.dexfile.reader.Visibility;
 import proguard.dexfile.reader.visitors.DexClassVisitor;
 import proguard.dexfile.reader.visitors.DexFileVisitor;
 
-class DexFileNodeDiffblueTest {
+public class DexFileNodeDiffblueTest {
   /**
    * Test {@link DexFileNode#visitDexFileVersion(int)}.
    *
    * <p>Method under test: {@link DexFileNode#visitDexFileVersion(int)}
    */
   @Test
-  @DisplayName("Test visitDexFileVersion(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexFileNode.visitDexFileVersion(int)"})
-  void testVisitDexFileVersion() {
+  public void testVisitDexFileVersion() {
     // Arrange
     DexFileNode dexFileNode = new DexFileNode();
 
@@ -54,12 +51,9 @@ class DexFileNodeDiffblueTest {
    * <p>Method under test: {@link DexFileNode#visit(int, String, String, String[])}
    */
   @Test
-  @DisplayName(
-      "Test visit(int, String, String, String[]); given DexFileNode (default constructor); then return DexClassNode")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DexClassVisitor DexFileNode.visit(int, String, String, String[])"})
-  void testVisit_givenDexFileNode_thenReturnDexClassNode() {
+  public void testVisit_givenDexFileNode_thenReturnDexClassNode() {
     // Arrange
     DexFileNode dexFileNode = new DexFileNode();
 
@@ -87,23 +81,20 @@ class DexFileNodeDiffblueTest {
    * <p>Method under test: {@link DexFileNode#accept(DexClassVisitor)}
    */
   @Test
-  @DisplayName("Test accept(DexClassVisitor) with 'dcv'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexFileNode.accept(DexClassVisitor)"})
-  void testAcceptWithDcv() {
+  public void testAcceptWithDcv() {
     // Arrange
-    String[] interfaceNames = new String[] {"Interface Names"};
-
-    DexClassNode dexClassNode = new DexClassNode(1, "Class Name", "Super Class", interfaceNames);
+    DexClassNode dexClassNode =
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"});
     dexClassNode.visitAnnotation("Name", Visibility.BUILD);
 
     ArrayList<DexClassNode> dexClassNodeList = new ArrayList<>();
     dexClassNodeList.add(dexClassNode);
     DexFileNode dexFileNode = new DexFileNode();
     dexFileNode.clzs = dexClassNodeList;
-    String[] interfaceNames2 = new String[] {"Interface Names"};
-    DexClassNode dcv = new DexClassNode(1, "Class Name", "Super Class", interfaceNames2);
+    DexClassNode dcv =
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"});
 
     // Act
     dexFileNode.accept(dcv);
@@ -123,24 +114,22 @@ class DexFileNodeDiffblueTest {
    * <p>Method under test: {@link DexFileNode#accept(DexClassVisitor)}
    */
   @Test
-  @DisplayName("Test accept(DexClassVisitor) with 'dcv'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexFileNode.accept(DexClassVisitor)"})
-  void testAcceptWithDcv2() {
+  public void testAcceptWithDcv2() {
     // Arrange
-    String[] interfaceNames = new String[] {"Interface Names"};
-
-    DexClassNode dexClassNode = new DexClassNode(1, "Class Name", "Super Class", interfaceNames);
+    DexClassNode dexClassNode =
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"});
     Field field = new Field("Owner", "Name", "Type");
+
     dexClassNode.visitField(1, field, Constant.Null);
 
     ArrayList<DexClassNode> dexClassNodeList = new ArrayList<>();
     dexClassNodeList.add(dexClassNode);
     DexFileNode dexFileNode = new DexFileNode();
     dexFileNode.clzs = dexClassNodeList;
-    String[] interfaceNames2 = new String[] {"Interface Names"};
-    DexClassNode dcv = new DexClassNode(1, "Class Name", "Super Class", interfaceNames2);
+    DexClassNode dcv =
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"});
 
     // Act
     dexFileNode.accept(dcv);
@@ -160,26 +149,23 @@ class DexFileNodeDiffblueTest {
    * <p>Method under test: {@link DexFileNode#accept(DexClassVisitor)}
    */
   @Test
-  @DisplayName("Test accept(DexClassVisitor) with 'dcv'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexFileNode.accept(DexClassVisitor)"})
-  void testAcceptWithDcv3() {
+  public void testAcceptWithDcv3() {
     // Arrange
-    String[] interfaceNames = new String[] {"Interface Names"};
+    DexClassNode dexClassNode =
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"});
+    Method method =
+        new Method("Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type"));
 
-    DexClassNode dexClassNode = new DexClassNode(1, "Class Name", "Super Class", interfaceNames);
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto);
     dexClassNode.visitMethod(1, method);
 
     ArrayList<DexClassNode> dexClassNodeList = new ArrayList<>();
     dexClassNodeList.add(dexClassNode);
     DexFileNode dexFileNode = new DexFileNode();
     dexFileNode.clzs = dexClassNodeList;
-    String[] interfaceNames2 = new String[] {"Interface Names"};
-    DexClassNode dcv = new DexClassNode(1, "Class Name", "Super Class", interfaceNames2);
+    DexClassNode dcv =
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"});
 
     // Act
     dexFileNode.accept(dcv);
@@ -188,8 +174,8 @@ class DexFileNodeDiffblueTest {
     List<DexMethodNode> dexMethodNodeList = dcv.methods;
     assertEquals(1, dexMethodNodeList.size());
     DexMethodNode getResult = dexMethodNodeList.get(0);
-    assertNull(getResult.anns);
     assertNull(getResult.parameterAnns);
+    assertNull(getResult.anns);
     assertNull(getResult.codeNode);
     assertEquals(1, getResult.access);
     assertSame(method, getResult.method);
@@ -201,23 +187,20 @@ class DexFileNodeDiffblueTest {
    * <p>Method under test: {@link DexFileNode#accept(DexClassVisitor)}
    */
   @Test
-  @DisplayName("Test accept(DexClassVisitor) with 'dcv'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexFileNode.accept(DexClassVisitor)"})
-  void testAcceptWithDcv4() {
+  public void testAcceptWithDcv4() {
     // Arrange
-    String[] interfaceNames = new String[] {"Interface Names"};
-
-    DexClassNode dexClassNode = new DexClassNode(1, "Class Name", "Super Class", interfaceNames);
+    DexClassNode dexClassNode =
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"});
     dexClassNode.visitSource("File");
 
     ArrayList<DexClassNode> dexClassNodeList = new ArrayList<>();
     dexClassNodeList.add(dexClassNode);
     DexFileNode dexFileNode = new DexFileNode();
     dexFileNode.clzs = dexClassNodeList;
-    String[] interfaceNames2 = new String[] {"Interface Names"};
-    DexClassNode dcv = new DexClassNode(1, "Class Name", "Super Class", interfaceNames2);
+    DexClassNode dcv =
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"});
 
     // Act
     dexFileNode.accept(dcv);
@@ -227,130 +210,6 @@ class DexFileNodeDiffblueTest {
     assertNull(dcv.anns);
     assertNull(dcv.fields);
     assertNull(dcv.methods);
-  }
-
-  /**
-   * Test {@link DexFileNode#accept(DexClassVisitor)} with {@code dcv}.
-   *
-   * <p>Method under test: {@link DexFileNode#accept(DexClassVisitor)}
-   */
-  @Test
-  @DisplayName("Test accept(DexClassVisitor) with 'dcv'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void DexFileNode.accept(DexClassVisitor)"})
-  void testAcceptWithDcv5() {
-    // Arrange
-    String[] interfaceNames = new String[] {"Interface Names"};
-
-    DexClassNode dexClassNode = new DexClassNode(1, "Class Name", "Super Class", interfaceNames);
-    dexClassNode.visitAnnotation("Name", Visibility.BUILD);
-
-    ArrayList<DexClassNode> dexClassNodeList = new ArrayList<>();
-    dexClassNodeList.add(dexClassNode);
-    DexFileNode dexFileNode = new DexFileNode();
-    dexFileNode.clzs = dexClassNodeList;
-    String[] interfaceNames2 = new String[] {"Interface Names"};
-
-    DexClassNode dcv = new DexClassNode(1, "Class Name", "Super Class", interfaceNames2);
-    dcv.visitAnnotation("Name", Visibility.BUILD);
-
-    // Act
-    dexFileNode.accept(dcv);
-
-    // Assert
-    List<DexAnnotationNode> dexAnnotationNodeList = dcv.anns;
-    assertEquals(2, dexAnnotationNodeList.size());
-    DexAnnotationNode getResult = dexAnnotationNodeList.get(1);
-    assertEquals("Name", getResult.type);
-    assertEquals(Visibility.BUILD, getResult.visibility);
-    assertTrue(getResult.items.isEmpty());
-  }
-
-  /**
-   * Test {@link DexFileNode#accept(DexClassVisitor)} with {@code dcv}.
-   *
-   * <p>Method under test: {@link DexFileNode#accept(DexClassVisitor)}
-   */
-  @Test
-  @DisplayName("Test accept(DexClassVisitor) with 'dcv'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void DexFileNode.accept(DexClassVisitor)"})
-  void testAcceptWithDcv6() {
-    // Arrange
-    String[] interfaceNames = new String[] {"Interface Names"};
-
-    DexClassNode dexClassNode = new DexClassNode(1, "Class Name", "Super Class", interfaceNames);
-    Field field = new Field("Owner", "Name", "Type");
-    dexClassNode.visitField(1, field, Constant.Null);
-
-    ArrayList<DexClassNode> dexClassNodeList = new ArrayList<>();
-    dexClassNodeList.add(dexClassNode);
-    DexFileNode dexFileNode = new DexFileNode();
-    dexFileNode.clzs = dexClassNodeList;
-    String[] interfaceNames2 = new String[] {"Interface Names"};
-
-    DexClassNode dcv = new DexClassNode(1, "Class Name", "Super Class", interfaceNames2);
-    Field field2 = new Field("Owner", "Name", "Type");
-    dcv.visitField(1, field2, Constant.Null);
-
-    // Act
-    dexFileNode.accept(dcv);
-
-    // Assert
-    List<DexFieldNode> dexFieldNodeList = dcv.fields;
-    assertEquals(2, dexFieldNodeList.size());
-    DexFieldNode getResult = dexFieldNodeList.get(1);
-    assertNull(getResult.anns);
-    assertEquals(1, getResult.access);
-    assertSame(field, getResult.field);
-  }
-
-  /**
-   * Test {@link DexFileNode#accept(DexClassVisitor)} with {@code dcv}.
-   *
-   * <p>Method under test: {@link DexFileNode#accept(DexClassVisitor)}
-   */
-  @Test
-  @DisplayName("Test accept(DexClassVisitor) with 'dcv'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void DexFileNode.accept(DexClassVisitor)"})
-  void testAcceptWithDcv7() {
-    // Arrange
-    String[] interfaceNames = new String[] {"Interface Names"};
-
-    DexClassNode dexClassNode = new DexClassNode(1, "Class Name", "Super Class", interfaceNames);
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto);
-    dexClassNode.visitMethod(1, method);
-
-    ArrayList<DexClassNode> dexClassNodeList = new ArrayList<>();
-    dexClassNodeList.add(dexClassNode);
-    DexFileNode dexFileNode = new DexFileNode();
-    dexFileNode.clzs = dexClassNodeList;
-    String[] interfaceNames2 = new String[] {"Interface Names"};
-
-    DexClassNode dcv = new DexClassNode(1, "Class Name", "Super Class", interfaceNames2);
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method2 = new Method("Owner", "Name", proto2);
-    dcv.visitMethod(1, method2);
-
-    // Act
-    dexFileNode.accept(dcv);
-
-    // Assert
-    List<DexMethodNode> dexMethodNodeList = dcv.methods;
-    assertEquals(2, dexMethodNodeList.size());
-    DexMethodNode getResult = dexMethodNodeList.get(1);
-    assertNull(getResult.anns);
-    assertNull(getResult.parameterAnns);
-    assertNull(getResult.codeNode);
-    assertEquals(1, getResult.access);
-    assertSame(method, getResult.method);
   }
 
   /**
@@ -365,12 +224,9 @@ class DexFileNodeDiffblueTest {
    * <p>Method under test: {@link DexFileNode#accept(DexFileVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexFileVisitor) with 'dfv'; given DexFileNode (default constructor); when DexFileVisitor(); then DexFileNode (default constructor) clzs Empty")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexFileNode.accept(DexFileVisitor)"})
-  void testAcceptWithDfv_givenDexFileNode_whenDexFileVisitor_thenDexFileNodeClzsEmpty() {
+  public void testAcceptWithDfv_givenDexFileNode_whenDexFileVisitor_thenDexFileNodeClzsEmpty() {
     // Arrange
     DexFileNode dexFileNode = new DexFileNode();
 
@@ -392,23 +248,18 @@ class DexFileNodeDiffblueTest {
    * <p>Method under test: {@link DexFileNode#accept(DexFileVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexFileVisitor) with 'dfv'; then DexFileNode (default constructor) clzs first anns size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexFileNode.accept(DexFileVisitor)"})
-  void testAcceptWithDfv_thenDexFileNodeClzsFirstAnnsSizeIsOne() {
+  public void testAcceptWithDfv_thenDexFileNodeClzsFirstAnnsSizeIsOne() {
     // Arrange
-    String[] interfaceNames = new String[] {"Interface Names"};
-
-    DexClassNode dexClassNode = new DexClassNode(1, "Class Name", "Super Class", interfaceNames);
+    DexClassNode dexClassNode =
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"});
     dexClassNode.visitAnnotation("Name", Visibility.BUILD);
 
     ArrayList<DexClassNode> dexClassNodeList = new ArrayList<>();
     dexClassNodeList.add(dexClassNode);
-    String[] interfaceNames2 = new String[] {"Interface Names"};
-    DexClassNode dexClassNode2 = new DexClassNode(1, "Class Name", "Super Class", interfaceNames2);
-    dexClassNodeList.add(dexClassNode2);
+    dexClassNodeList.add(
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"}));
     DexFileNode dexFileNode = new DexFileNode();
     dexFileNode.clzs = dexClassNodeList;
     DexFileNode dfv = new DexFileNode();
@@ -438,24 +289,20 @@ class DexFileNodeDiffblueTest {
    * <p>Method under test: {@link DexFileNode#accept(DexFileVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexFileVisitor) with 'dfv'; then DexFileNode (default constructor) clzs first fields size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexFileNode.accept(DexFileVisitor)"})
-  void testAcceptWithDfv_thenDexFileNodeClzsFirstFieldsSizeIsOne() {
+  public void testAcceptWithDfv_thenDexFileNodeClzsFirstFieldsSizeIsOne() {
     // Arrange
-    String[] interfaceNames = new String[] {"Interface Names"};
-
-    DexClassNode dexClassNode = new DexClassNode(1, "Class Name", "Super Class", interfaceNames);
+    DexClassNode dexClassNode =
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"});
     Field field = new Field("Owner", "Name", "Type");
+
     dexClassNode.visitField(1, field, Constant.Null);
 
     ArrayList<DexClassNode> dexClassNodeList = new ArrayList<>();
     dexClassNodeList.add(dexClassNode);
-    String[] interfaceNames2 = new String[] {"Interface Names"};
-    DexClassNode dexClassNode2 = new DexClassNode(1, "Class Name", "Super Class", interfaceNames2);
-    dexClassNodeList.add(dexClassNode2);
+    dexClassNodeList.add(
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"}));
     DexFileNode dexFileNode = new DexFileNode();
     dexFileNode.clzs = dexClassNodeList;
     DexFileNode dfv = new DexFileNode();
@@ -485,26 +332,21 @@ class DexFileNodeDiffblueTest {
    * <p>Method under test: {@link DexFileNode#accept(DexFileVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexFileVisitor) with 'dfv'; then DexFileNode (default constructor) clzs first methods size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexFileNode.accept(DexFileVisitor)"})
-  void testAcceptWithDfv_thenDexFileNodeClzsFirstMethodsSizeIsOne() {
+  public void testAcceptWithDfv_thenDexFileNodeClzsFirstMethodsSizeIsOne() {
     // Arrange
-    String[] interfaceNames = new String[] {"Interface Names"};
+    DexClassNode dexClassNode =
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"});
+    Method method =
+        new Method("Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type"));
 
-    DexClassNode dexClassNode = new DexClassNode(1, "Class Name", "Super Class", interfaceNames);
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto);
     dexClassNode.visitMethod(1, method);
 
     ArrayList<DexClassNode> dexClassNodeList = new ArrayList<>();
     dexClassNodeList.add(dexClassNode);
-    String[] interfaceNames2 = new String[] {"Interface Names"};
-    DexClassNode dexClassNode2 = new DexClassNode(1, "Class Name", "Super Class", interfaceNames2);
-    dexClassNodeList.add(dexClassNode2);
+    dexClassNodeList.add(
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"}));
     DexFileNode dexFileNode = new DexFileNode();
     dexFileNode.clzs = dexClassNodeList;
     DexFileNode dfv = new DexFileNode();
@@ -518,8 +360,8 @@ class DexFileNodeDiffblueTest {
     List<DexMethodNode> dexMethodNodeList = dexClassNodeList2.get(0).methods;
     assertEquals(1, dexMethodNodeList.size());
     DexMethodNode getResult = dexMethodNodeList.get(0);
-    assertNull(getResult.anns);
     assertNull(getResult.parameterAnns);
+    assertNull(getResult.anns);
     assertNull(getResult.codeNode);
     assertEquals(1, getResult.access);
     assertSame(method, getResult.method);
@@ -536,23 +378,18 @@ class DexFileNodeDiffblueTest {
    * <p>Method under test: {@link DexFileNode#accept(DexFileVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexFileVisitor) with 'dfv'; then DexFileNode (default constructor) clzs first source is 'File'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexFileNode.accept(DexFileVisitor)"})
-  void testAcceptWithDfv_thenDexFileNodeClzsFirstSourceIsFile() {
+  public void testAcceptWithDfv_thenDexFileNodeClzsFirstSourceIsFile() {
     // Arrange
-    String[] interfaceNames = new String[] {"Interface Names"};
-
-    DexClassNode dexClassNode = new DexClassNode(1, "Class Name", "Super Class", interfaceNames);
+    DexClassNode dexClassNode =
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"});
     dexClassNode.visitSource("File");
 
     ArrayList<DexClassNode> dexClassNodeList = new ArrayList<>();
     dexClassNodeList.add(dexClassNode);
-    String[] interfaceNames2 = new String[] {"Interface Names"};
-    DexClassNode dexClassNode2 = new DexClassNode(1, "Class Name", "Super Class", interfaceNames2);
-    dexClassNodeList.add(dexClassNode2);
+    dexClassNodeList.add(
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"}));
     DexFileNode dexFileNode = new DexFileNode();
     dexFileNode.clzs = dexClassNodeList;
     DexFileNode dfv = new DexFileNode();
@@ -582,20 +419,15 @@ class DexFileNodeDiffblueTest {
    * <p>Method under test: {@link DexFileNode#accept(DexFileVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexFileVisitor) with 'dfv'; when DexFileNode (default constructor); then DexFileNode (default constructor) clzs first source is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexFileNode.accept(DexFileVisitor)"})
-  void testAcceptWithDfv_whenDexFileNode_thenDexFileNodeClzsFirstSourceIsNull() {
+  public void testAcceptWithDfv_whenDexFileNode_thenDexFileNodeClzsFirstSourceIsNull() {
     // Arrange
     ArrayList<DexClassNode> dexClassNodeList = new ArrayList<>();
-    String[] interfaceNames = new String[] {"Interface Names"};
-    DexClassNode dexClassNode = new DexClassNode(1, "Class Name", "Super Class", interfaceNames);
-    dexClassNodeList.add(dexClassNode);
-    String[] interfaceNames2 = new String[] {"Interface Names"};
-    DexClassNode dexClassNode2 = new DexClassNode(1, "Class Name", "Super Class", interfaceNames2);
-    dexClassNodeList.add(dexClassNode2);
+    dexClassNodeList.add(
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"}));
+    dexClassNodeList.add(
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"}));
     DexFileNode dexFileNode = new DexFileNode();
     dexFileNode.clzs = dexClassNodeList;
     DexFileNode dfv = new DexFileNode();
@@ -624,17 +456,13 @@ class DexFileNodeDiffblueTest {
    * <p>Method under test: {@link DexFileNode#accept(DexFileVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexFileVisitor) with 'dfv'; when DexFileVisitor(DexFileVisitor) with visitor is DexFileVisitor()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexFileNode.accept(DexFileVisitor)"})
-  void testAcceptWithDfv_whenDexFileVisitorWithVisitorIsDexFileVisitor() {
+  public void testAcceptWithDfv_whenDexFileVisitorWithVisitorIsDexFileVisitor() {
     // Arrange
     ArrayList<DexClassNode> dexClassNodeList = new ArrayList<>();
-    String[] interfaceNames = new String[] {"Interface Names"};
-    DexClassNode dexClassNode = new DexClassNode(1, "Class Name", "Super Class", interfaceNames);
-    dexClassNodeList.add(dexClassNode);
+    dexClassNodeList.add(
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"}));
     DexFileNode dexFileNode = new DexFileNode();
     dexFileNode.clzs = dexClassNodeList;
 
@@ -656,17 +484,13 @@ class DexFileNodeDiffblueTest {
    * <p>Method under test: {@link DexFileNode#accept(DexFileVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexFileVisitor) with 'dfv'; when DexFileVisitor(); then DexFileNode (default constructor) clzs size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexFileNode.accept(DexFileVisitor)"})
-  void testAcceptWithDfv_whenDexFileVisitor_thenDexFileNodeClzsSizeIsOne() {
+  public void testAcceptWithDfv_whenDexFileVisitor_thenDexFileNodeClzsSizeIsOne() {
     // Arrange
     ArrayList<DexClassNode> dexClassNodeList = new ArrayList<>();
-    String[] interfaceNames = new String[] {"Interface Names"};
-    DexClassNode dexClassNode = new DexClassNode(1, "Class Name", "Super Class", interfaceNames);
-    dexClassNodeList.add(dexClassNode);
+    dexClassNodeList.add(
+        new DexClassNode(1, "Class Name", "Super Class", new String[] {"Interface Names"}));
     DexFileNode dexFileNode = new DexFileNode();
     dexFileNode.clzs = dexClassNodeList;
 
@@ -683,12 +507,10 @@ class DexFileNodeDiffblueTest {
    * <p>Method under test: default or parameterless constructor of {@link DexFileNode}
    */
   @Test
-  @DisplayName("Test new DexFileNode (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexFileNode.<init>()"})
-  void testNewDexFileNode() {
+  public void testNewDexFileNode() {
     // Arrange, Act and Assert
-    assertTrue(new DexFileNode().clzs.isEmpty());
+    assertTrue((new DexFileNode()).clzs.isEmpty());
   }
 }

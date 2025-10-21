@@ -1,18 +1,17 @@
 package proguard.evaluation.util.jsonprinter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class InstructionRecordDiffblueTest {
+public class InstructionRecordDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -33,9 +32,7 @@ class InstructionRecordDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void InstructionRecord.<init>(int, String)",
     "List InstructionRecord.getFinalOriginInstructions()",
@@ -49,7 +46,7 @@ class InstructionRecordDiffblueTest {
     "void InstructionRecord.setFinalTargetInstructions(List)",
     "void InstructionRecord.setFinalVariablesBefore(List)"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     InstructionRecord actualInstructionRecord = new InstructionRecord(2, "Instruction");
     ArrayList<Integer> finalOriginInstructions = new ArrayList<>();
@@ -87,11 +84,9 @@ class InstructionRecordDiffblueTest {
    * <p>Method under test: {@link InstructionRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder InstructionRecord.toJson(StringBuilder)"})
-  void testToJson() {
+  public void testToJson() {
     // Arrange
     InstructionRecord instructionRecord = new InstructionRecord(2, "Instruction");
     instructionRecord.setFinalVariablesBefore(null);
@@ -116,11 +111,9 @@ class InstructionRecordDiffblueTest {
    * <p>Method under test: {@link InstructionRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder InstructionRecord.toJson(StringBuilder)"})
-  void testToJson2() {
+  public void testToJson2() {
     // Arrange
     InstructionRecord instructionRecord = new InstructionRecord(2, "Instruction");
     instructionRecord.setFinalVariablesBefore(null);
@@ -145,11 +138,9 @@ class InstructionRecordDiffblueTest {
    * <p>Method under test: {@link InstructionRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder InstructionRecord.toJson(StringBuilder)"})
-  void testToJson3() {
+  public void testToJson3() {
     // Arrange
     InstructionRecord instructionRecord = new InstructionRecord(2, "Instruction");
     instructionRecord.setFinalVariablesBefore(null);
@@ -174,14 +165,15 @@ class InstructionRecordDiffblueTest {
    * <p>Method under test: {@link InstructionRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder InstructionRecord.toJson(StringBuilder)"})
-  void testToJson4() {
+  public void testToJson4() {
     // Arrange
     InstructionRecord instructionRecord = new InstructionRecord(2, "Instruction");
     instructionRecord.setFinalVariablesBefore(new ArrayList<>());
+    instructionRecord.setFinalStackBefore(null);
+    instructionRecord.setFinalTargetInstructions(null);
+    instructionRecord.setFinalOriginInstructions(new ArrayList<>());
     StringBuilder builder = new StringBuilder("foo");
 
     // Act
@@ -189,7 +181,7 @@ class InstructionRecordDiffblueTest {
 
     // Assert
     assertEquals(
-        "foo{\"offset\":2,\"instruction\":\"Instruction\",\"finalVariablesBefore\":[]}",
+        "foo{\"offset\":2,\"instruction\":\"Instruction\",\"finalVariablesBefore\":[],\"finalOriginInstructions\":[]}",
         builder.toString());
     assertSame(builder, actualToJsonResult);
   }
@@ -200,11 +192,9 @@ class InstructionRecordDiffblueTest {
    * <p>Method under test: {@link InstructionRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder InstructionRecord.toJson(StringBuilder)"})
-  void testToJson5() {
+  public void testToJson5() {
     // Arrange
     ArrayList<Integer> finalOriginInstructions = new ArrayList<>();
     finalOriginInstructions.add(2);
@@ -232,11 +222,9 @@ class InstructionRecordDiffblueTest {
    * <p>Method under test: {@link InstructionRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder InstructionRecord.toJson(StringBuilder)"})
-  void testToJson6() {
+  public void testToJson6() {
     // Arrange
     ArrayList<Integer> finalOriginInstructions = new ArrayList<>();
     finalOriginInstructions.add(1);
@@ -270,12 +258,9 @@ class InstructionRecordDiffblueTest {
    * <p>Method under test: {@link InstructionRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName(
-      "Test toJson(StringBuilder); given ArrayList() add 'foo'; then StringBuilder(String) with 'foo' toString is a string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder InstructionRecord.toJson(StringBuilder)"})
-  void testToJson_givenArrayListAddFoo_thenStringBuilderWithFooToStringIsAString() {
+  public void testToJson_givenArrayListAddFoo_thenStringBuilderWithFooToStringIsAString() {
     // Arrange
     ArrayList<String> finalStackBefore = new ArrayList<>();
     finalStackBefore.add("foo");
@@ -327,12 +312,9 @@ class InstructionRecordDiffblueTest {
    * <p>Method under test: {@link InstructionRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName(
-      "Test toJson(StringBuilder); then StringBuilder(String) with 'foo' toString is 'foo{\"offset\":2,\"instruction\":\"Instruction\"}'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder InstructionRecord.toJson(StringBuilder)"})
-  void testToJson_thenStringBuilderWithFooToStringIsFooOffset2InstructionInstruction() {
+  public void testToJson_thenStringBuilderWithFooToStringIsFooOffset2InstructionInstruction() {
     // Arrange
     InstructionRecord instructionRecord = new InstructionRecord(2, "Instruction");
     StringBuilder builder = new StringBuilder("foo");

@@ -1,16 +1,15 @@
 package proguard.dexfile.ir.ts.an;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class SimpleLiveValueDiffblueTest {
+public class SimpleLiveValueDiffblueTest {
   /**
    * Test {@link SimpleLiveValue#toRsp()}.
    *
@@ -23,12 +22,9 @@ class SimpleLiveValueDiffblueTest {
    * <p>Method under test: {@link SimpleLiveValue#toRsp()}
    */
   @Test
-  @DisplayName(
-      "Test toRsp(); given SimpleLiveValue (default constructor) used is 'true'; then return 'x'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char SimpleLiveValue.toRsp()"})
-  void testToRsp_givenSimpleLiveValueUsedIsTrue_thenReturnX() {
+  public void testToRsp_givenSimpleLiveValueUsedIsTrue_thenReturnX() {
     // Arrange
     SimpleLiveValue simpleLiveValue = new SimpleLiveValue();
     simpleLiveValue.used = true;
@@ -48,13 +44,11 @@ class SimpleLiveValueDiffblueTest {
    * <p>Method under test: {@link SimpleLiveValue#toRsp()}
    */
   @Test
-  @DisplayName("Test toRsp(); given SimpleLiveValue (default constructor); then return '.'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"char SimpleLiveValue.toRsp()"})
-  void testToRsp_givenSimpleLiveValue_thenReturnDot() {
+  public void testToRsp_givenSimpleLiveValue_thenReturnDot() {
     // Arrange, Act and Assert
-    assertEquals('.', new SimpleLiveValue().toRsp());
+    assertEquals('.', (new SimpleLiveValue()).toRsp());
   }
 
   /**
@@ -63,11 +57,9 @@ class SimpleLiveValueDiffblueTest {
    * <p>Method under test: default or parameterless constructor of {@link SimpleLiveValue}
    */
   @Test
-  @DisplayName("Test new SimpleLiveValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void SimpleLiveValue.<init>()"})
-  void testNewSimpleLiveValue() {
+  public void testNewSimpleLiveValue() {
     // Arrange and Act
     SimpleLiveValue actualSimpleLiveValue = new SimpleLiveValue();
 

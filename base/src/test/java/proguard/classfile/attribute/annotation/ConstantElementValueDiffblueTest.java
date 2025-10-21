@@ -1,15 +1,14 @@
 package proguard.classfile.attribute.annotation;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ConstantElementValueDiffblueTest {
+public class ConstantElementValueDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -25,15 +24,13 @@ class ConstantElementValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters; when 'A'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ConstantElementValue.<init>(char)",
     "void ConstantElementValue.<init>(char, int, int)",
     "char ConstantElementValue.getTag()"
   })
-  void testGettersAndSetters_whenA() {
+  public void testGettersAndSetters_whenA() {
     // Arrange and Act
     ConstantElementValue actualConstantElementValue = new ConstantElementValue('A');
 
@@ -58,15 +55,13 @@ class ConstantElementValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters; when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ConstantElementValue.<init>(char)",
     "void ConstantElementValue.<init>(char, int, int)",
     "char ConstantElementValue.getTag()"
   })
-  void testGettersAndSetters_whenOne() {
+  public void testGettersAndSetters_whenOne() {
     // Arrange and Act
     ConstantElementValue actualConstantElementValue = new ConstantElementValue('A', 1, 1);
 

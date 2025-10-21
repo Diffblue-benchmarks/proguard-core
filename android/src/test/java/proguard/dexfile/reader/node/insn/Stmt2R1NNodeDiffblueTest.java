@@ -1,30 +1,27 @@
 package proguard.dexfile.reader.node.insn;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.reader.Op;
 import proguard.dexfile.reader.node.DexCodeNode;
 import proguard.dexfile.reader.visitors.DexCodeVisitor;
 
-class Stmt2R1NNodeDiffblueTest {
+public class Stmt2R1NNodeDiffblueTest {
   /**
    * Test {@link Stmt2R1NNode#Stmt2R1NNode(Op, int, int, int)}.
    *
    * <p>Method under test: {@link Stmt2R1NNode#Stmt2R1NNode(Op, int, int, int)}
    */
   @Test
-  @DisplayName("Test new Stmt2R1NNode(Op, int, int, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Stmt2R1NNode.<init>(Op, int, int, int)"})
-  void testNewStmt2R1NNode() {
+  public void testNewStmt2R1NNode() {
     // Arrange and Act
     Stmt2R1NNode actualStmt2R1NNode = new Stmt2R1NNode(Op.NOP, 1, 1, 1);
 
@@ -47,12 +44,9 @@ class Stmt2R1NNodeDiffblueTest {
    * <p>Method under test: {@link Stmt2R1NNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeNode(); then DexCodeNode() stmts size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Stmt2R1NNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
+  public void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
     // Arrange
     Stmt2R1NNode stmt2R1NNode = new Stmt2R1NNode(Op.NOP, 1, 1, 1);
     DexCodeNode cv = new DexCodeNode();

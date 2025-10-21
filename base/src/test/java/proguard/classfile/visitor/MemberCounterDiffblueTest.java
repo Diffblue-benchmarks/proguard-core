@@ -1,12 +1,11 @@
 package proguard.classfile.visitor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryField;
 import proguard.classfile.LibraryMethod;
@@ -14,25 +13,22 @@ import proguard.classfile.ProgramClass;
 import proguard.classfile.ProgramField;
 import proguard.classfile.ProgramMethod;
 
-class MemberCounterDiffblueTest {
+public class MemberCounterDiffblueTest {
   /**
    * Test {@link MemberCounter#visitLibraryField(LibraryClass, LibraryField)}.
    *
    * <p>Method under test: {@link MemberCounter#visitLibraryField(LibraryClass, LibraryField)}
    */
   @Test
-  @DisplayName("Test visitLibraryField(LibraryClass, LibraryField)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MemberCounter.visitLibraryField(LibraryClass, LibraryField)"})
-  void testVisitLibraryField() {
+  public void testVisitLibraryField() {
     // Arrange
     MemberCounter memberCounter = new MemberCounter();
     LibraryClass libraryClass = new LibraryClass();
-    LibraryField libraryField = new LibraryField(1, "Name", "Descriptor");
 
     // Act
-    memberCounter.visitLibraryField(libraryClass, libraryField);
+    memberCounter.visitLibraryField(libraryClass, new LibraryField(1, "Name", "Descriptor"));
 
     // Assert
     assertEquals(1, memberCounter.getCount());
@@ -44,18 +40,15 @@ class MemberCounterDiffblueTest {
    * <p>Method under test: {@link MemberCounter#visitLibraryMethod(LibraryClass, LibraryMethod)}
    */
   @Test
-  @DisplayName("Test visitLibraryMethod(LibraryClass, LibraryMethod)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MemberCounter.visitLibraryMethod(LibraryClass, LibraryMethod)"})
-  void testVisitLibraryMethod() {
+  public void testVisitLibraryMethod() {
     // Arrange
     MemberCounter memberCounter = new MemberCounter();
     LibraryClass libraryClass = new LibraryClass();
-    LibraryMethod libraryMethod = new LibraryMethod(1, "Name", "Descriptor");
 
     // Act
-    memberCounter.visitLibraryMethod(libraryClass, libraryMethod);
+    memberCounter.visitLibraryMethod(libraryClass, new LibraryMethod(1, "Name", "Descriptor"));
 
     // Assert
     assertEquals(1, memberCounter.getCount());
@@ -67,11 +60,9 @@ class MemberCounterDiffblueTest {
    * <p>Method under test: {@link MemberCounter#visitProgramField(ProgramClass, ProgramField)}
    */
   @Test
-  @DisplayName("Test visitProgramField(ProgramClass, ProgramField)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MemberCounter.visitProgramField(ProgramClass, ProgramField)"})
-  void testVisitProgramField() {
+  public void testVisitProgramField() {
     // Arrange
     MemberCounter memberCounter = new MemberCounter();
     ProgramClass programClass = new ProgramClass();
@@ -89,11 +80,9 @@ class MemberCounterDiffblueTest {
    * <p>Method under test: {@link MemberCounter#visitProgramMethod(ProgramClass, ProgramMethod)}
    */
   @Test
-  @DisplayName("Test visitProgramMethod(ProgramClass, ProgramMethod)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MemberCounter.visitProgramMethod(ProgramClass, ProgramMethod)"})
-  void testVisitProgramMethod() {
+  public void testVisitProgramMethod() {
     // Arrange
     MemberCounter memberCounter = new MemberCounter();
     ProgramClass programClass = new ProgramClass();
@@ -116,12 +105,10 @@ class MemberCounterDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MemberCounter.<init>()", "int MemberCounter.getCount()"})
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
-    assertEquals(0, new MemberCounter().getCount());
+    assertEquals(0, (new MemberCounter()).getCount());
   }
 }

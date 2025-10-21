@@ -1,10 +1,10 @@
 package proguard.io;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -12,11 +12,10 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ZipDataEntryDiffblueTest {
+public class ZipDataEntryDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -29,25 +28,23 @@ class ZipDataEntryDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ZipDataEntry.<init>(DataEntry, ZipEntry, ZipInputStream)",
     "DataEntry ZipDataEntry.getParent()",
     "String ZipDataEntry.toString()"
   })
-  void testGettersAndSetters() throws UnsupportedEncodingException {
+  public void testGettersAndSetters() throws UnsupportedEncodingException {
     // Arrange
     ClassPathDataEntry parent = new ClassPathDataEntry("Name");
     ZipEntry zipEntry = new ZipEntry("foo");
     ByteArrayInputStream byteArrayInputStream =
         new ByteArrayInputStream("AXAXAXAX".getBytes("UTF-8"));
-    ZipInputStream zipInputStream =
-        new ZipInputStream(byteArrayInputStream, Charset.forName("UTF-8"));
 
     // Act
-    ZipDataEntry actualZipDataEntry = new ZipDataEntry(parent, zipEntry, zipInputStream);
+    ZipDataEntry actualZipDataEntry =
+        new ZipDataEntry(
+            parent, zipEntry, new ZipInputStream(byteArrayInputStream, Charset.forName("UTF-8")));
     String actualToStringResult = actualZipDataEntry.toString();
 
     // Assert
@@ -66,24 +63,24 @@ class ZipDataEntryDiffblueTest {
    * <p>Method under test: {@link ZipDataEntry#getName()}
    */
   @Test
-  @DisplayName("Test getName(); given ZipEntry(String) with empty string; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ZipDataEntry.getName()"})
-  void testGetName_givenZipEntryWithEmptyString_thenReturnEmptyString()
+  public void testGetName_givenZipEntryWithEmptyString_thenReturnEmptyString()
       throws UnsupportedEncodingException {
     // Arrange
     ClassPathDataEntry parent = new ClassPathDataEntry("Name");
     ZipEntry zipEntry = new ZipEntry("");
     ByteArrayInputStream byteArrayInputStream =
         new ByteArrayInputStream("AXAXAXAX".getBytes("UTF-8"));
-    ZipInputStream zipInputStream =
-        new ZipInputStream(byteArrayInputStream, Charset.forName("UTF-8"));
-
-    ZipDataEntry zipDataEntry = new ZipDataEntry(parent, zipEntry, zipInputStream);
 
     // Act and Assert
-    assertEquals("", zipDataEntry.getName());
+    assertEquals(
+        "",
+        (new ZipDataEntry(
+                parent,
+                zipEntry,
+                new ZipInputStream(byteArrayInputStream, Charset.forName("UTF-8"))))
+            .getName());
   }
 
   /**
@@ -97,23 +94,23 @@ class ZipDataEntryDiffblueTest {
    * <p>Method under test: {@link ZipDataEntry#getName()}
    */
   @Test
-  @DisplayName("Test getName(); given ZipEntry(String) with 'foo'; then return 'foo'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ZipDataEntry.getName()"})
-  void testGetName_givenZipEntryWithFoo_thenReturnFoo() throws UnsupportedEncodingException {
+  public void testGetName_givenZipEntryWithFoo_thenReturnFoo() throws UnsupportedEncodingException {
     // Arrange
     ClassPathDataEntry parent = new ClassPathDataEntry("Name");
     ZipEntry zipEntry = new ZipEntry("foo");
     ByteArrayInputStream byteArrayInputStream =
         new ByteArrayInputStream("AXAXAXAX".getBytes("UTF-8"));
-    ZipInputStream zipInputStream =
-        new ZipInputStream(byteArrayInputStream, Charset.forName("UTF-8"));
-
-    ZipDataEntry zipDataEntry = new ZipDataEntry(parent, zipEntry, zipInputStream);
 
     // Act and Assert
-    assertEquals("foo", zipDataEntry.getName());
+    assertEquals(
+        "foo",
+        (new ZipDataEntry(
+                parent,
+                zipEntry,
+                new ZipInputStream(byteArrayInputStream, Charset.forName("UTF-8"))))
+            .getName());
   }
 
   /**
@@ -127,25 +124,24 @@ class ZipDataEntryDiffblueTest {
    * <p>Method under test: {@link ZipDataEntry#getOriginalName()}
    */
   @Test
-  @DisplayName(
-      "Test getOriginalName(); given ZipEntry(String) with empty string; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ZipDataEntry.getOriginalName()"})
-  void testGetOriginalName_givenZipEntryWithEmptyString_thenReturnEmptyString()
+  public void testGetOriginalName_givenZipEntryWithEmptyString_thenReturnEmptyString()
       throws UnsupportedEncodingException {
     // Arrange
     ClassPathDataEntry parent = new ClassPathDataEntry("Name");
     ZipEntry zipEntry = new ZipEntry("");
     ByteArrayInputStream byteArrayInputStream =
         new ByteArrayInputStream("AXAXAXAX".getBytes("UTF-8"));
-    ZipInputStream zipInputStream =
-        new ZipInputStream(byteArrayInputStream, Charset.forName("UTF-8"));
-
-    ZipDataEntry zipDataEntry = new ZipDataEntry(parent, zipEntry, zipInputStream);
 
     // Act and Assert
-    assertEquals("", zipDataEntry.getOriginalName());
+    assertEquals(
+        "",
+        (new ZipDataEntry(
+                parent,
+                zipEntry,
+                new ZipInputStream(byteArrayInputStream, Charset.forName("UTF-8"))))
+            .getOriginalName());
   }
 
   /**
@@ -159,24 +155,24 @@ class ZipDataEntryDiffblueTest {
    * <p>Method under test: {@link ZipDataEntry#getOriginalName()}
    */
   @Test
-  @DisplayName("Test getOriginalName(); given ZipEntry(String) with 'foo'; then return 'foo'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ZipDataEntry.getOriginalName()"})
-  void testGetOriginalName_givenZipEntryWithFoo_thenReturnFoo()
+  public void testGetOriginalName_givenZipEntryWithFoo_thenReturnFoo()
       throws UnsupportedEncodingException {
     // Arrange
     ClassPathDataEntry parent = new ClassPathDataEntry("Name");
     ZipEntry zipEntry = new ZipEntry("foo");
     ByteArrayInputStream byteArrayInputStream =
         new ByteArrayInputStream("AXAXAXAX".getBytes("UTF-8"));
-    ZipInputStream zipInputStream =
-        new ZipInputStream(byteArrayInputStream, Charset.forName("UTF-8"));
-
-    ZipDataEntry zipDataEntry = new ZipDataEntry(parent, zipEntry, zipInputStream);
 
     // Act and Assert
-    assertEquals("foo", zipDataEntry.getOriginalName());
+    assertEquals(
+        "foo",
+        (new ZipDataEntry(
+                parent,
+                zipEntry,
+                new ZipInputStream(byteArrayInputStream, Charset.forName("UTF-8"))))
+            .getOriginalName());
   }
 
   /**
@@ -190,23 +186,24 @@ class ZipDataEntryDiffblueTest {
    * <p>Method under test: {@link ZipDataEntry#getSize()}
    */
   @Test
-  @DisplayName("Test getSize(); given ZipEntry(String) with 'foo'; then return minus one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"long ZipDataEntry.getSize()"})
-  void testGetSize_givenZipEntryWithFoo_thenReturnMinusOne() throws UnsupportedEncodingException {
+  public void testGetSize_givenZipEntryWithFoo_thenReturnMinusOne()
+      throws UnsupportedEncodingException {
     // Arrange
     ClassPathDataEntry parent = new ClassPathDataEntry("Name");
     ZipEntry zipEntry = new ZipEntry("foo");
     ByteArrayInputStream byteArrayInputStream =
         new ByteArrayInputStream("AXAXAXAX".getBytes("UTF-8"));
-    ZipInputStream zipInputStream =
-        new ZipInputStream(byteArrayInputStream, Charset.forName("UTF-8"));
-
-    ZipDataEntry zipDataEntry = new ZipDataEntry(parent, zipEntry, zipInputStream);
 
     // Act and Assert
-    assertEquals(-1L, zipDataEntry.getSize());
+    assertEquals(
+        -1L,
+        (new ZipDataEntry(
+                parent,
+                zipEntry,
+                new ZipInputStream(byteArrayInputStream, Charset.forName("UTF-8"))))
+            .getSize());
   }
 
   /**
@@ -220,23 +217,23 @@ class ZipDataEntryDiffblueTest {
    * <p>Method under test: {@link ZipDataEntry#isDirectory()}
    */
   @Test
-  @DisplayName("Test isDirectory(); given ZipEntry(String) with 'foo'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ZipDataEntry.isDirectory()"})
-  void testIsDirectory_givenZipEntryWithFoo_thenReturnFalse() throws UnsupportedEncodingException {
+  public void testIsDirectory_givenZipEntryWithFoo_thenReturnFalse()
+      throws UnsupportedEncodingException {
     // Arrange
     ClassPathDataEntry parent = new ClassPathDataEntry("Name");
     ZipEntry zipEntry = new ZipEntry("foo");
     ByteArrayInputStream byteArrayInputStream =
         new ByteArrayInputStream("AXAXAXAX".getBytes("UTF-8"));
-    ZipInputStream zipInputStream =
-        new ZipInputStream(byteArrayInputStream, Charset.forName("UTF-8"));
-
-    ZipDataEntry zipDataEntry = new ZipDataEntry(parent, zipEntry, zipInputStream);
 
     // Act and Assert
-    assertFalse(zipDataEntry.isDirectory());
+    assertFalse(
+        (new ZipDataEntry(
+                parent,
+                zipEntry,
+                new ZipInputStream(byteArrayInputStream, Charset.forName("UTF-8"))))
+            .isDirectory());
   }
 
   /**
@@ -245,25 +242,21 @@ class ZipDataEntryDiffblueTest {
    * <p>Method under test: {@link ZipDataEntry#getInputStream()}
    */
   @Test
-  @DisplayName("Test getInputStream()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.io.InputStream ZipDataEntry.getInputStream()"})
-  void testGetInputStream() throws IOException {
+  public void testGetInputStream() throws IOException {
     // Arrange
     ClassPathDataEntry parent = new ClassPathDataEntry("Name");
     ZipEntry zipEntry = new ZipEntry("foo");
     ByteArrayInputStream byteArrayInputStream =
         new ByteArrayInputStream("AXAXAXAX".getBytes("UTF-8"));
-    ZipInputStream zipInputStream =
-        new ZipInputStream(byteArrayInputStream, Charset.forName("UTF-8"));
-
-    ZipDataEntry zipDataEntry = new ZipDataEntry(parent, zipEntry, zipInputStream);
 
     // Act
-    zipDataEntry.getInputStream();
+    (new ZipDataEntry(
+            parent, zipEntry, new ZipInputStream(byteArrayInputStream, Charset.forName("UTF-8"))))
+        .getInputStream();
 
     // Assert
-    assertEquals(51, new byte[51].length);
+    assertEquals(51, (new byte[51]).length);
   }
 }

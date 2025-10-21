@@ -1,28 +1,25 @@
 package proguard.evaluation.value.object;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class PreciseObjectDiffblueTest {
+public class PreciseObjectDiffblueTest {
   /**
    * Test {@link PreciseObject#PreciseObject(Object)}.
    *
    * <p>Method under test: {@link PreciseObject#PreciseObject(Object)}
    */
   @Test
-  @DisplayName("Test new PreciseObject(Object)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void PreciseObject.<init>(Object)"})
-  void testNewPreciseObject() {
+  public void testNewPreciseObject() {
     // Arrange and Act
     PreciseObject actualPreciseObject = new PreciseObject("Object");
 
@@ -49,9 +46,7 @@ class PreciseObjectDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "Object PreciseObject.getPreciseValue()",
     "String PreciseObject.getType()",
@@ -60,7 +55,7 @@ class PreciseObjectDiffblueTest {
     "boolean PreciseObject.isPrecise()",
     "String PreciseObject.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     PreciseObject preciseObject = new PreciseObject("Object");
 
@@ -96,18 +91,17 @@ class PreciseObjectDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean PreciseObject.equals(Object)", "int PreciseObject.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     PreciseObject preciseObject = new PreciseObject("Object");
     PreciseObject preciseObject2 = new PreciseObject("Object");
 
     // Act and Assert
     assertEquals(preciseObject, preciseObject2);
-    assertEquals(preciseObject.hashCode(), preciseObject2.hashCode());
+    int expectedHashCodeResult = preciseObject.hashCode();
+    assertEquals(expectedHashCodeResult, preciseObject2.hashCode());
   }
 
   /**
@@ -126,11 +120,9 @@ class PreciseObjectDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean PreciseObject.equals(Object)", "int PreciseObject.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     PreciseObject preciseObject = new PreciseObject("Object");
 
@@ -151,11 +143,9 @@ class PreciseObjectDiffblueTest {
    * <p>Method under test: {@link PreciseObject#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean PreciseObject.equals(Object)", "int PreciseObject.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     PreciseObject preciseObject = new PreciseObject(1);
 
@@ -174,11 +164,9 @@ class PreciseObjectDiffblueTest {
    * <p>Method under test: {@link PreciseObject#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean PreciseObject.equals(Object)", "int PreciseObject.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
     PreciseObject preciseObject = new PreciseObject(new PreciseObject("Object"));
 
@@ -197,11 +185,9 @@ class PreciseObjectDiffblueTest {
    * <p>Method under test: {@link PreciseObject#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean PreciseObject.equals(Object)", "int PreciseObject.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new PreciseObject("Object"), null);
   }
@@ -217,11 +203,9 @@ class PreciseObjectDiffblueTest {
    * <p>Method under test: {@link PreciseObject#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean PreciseObject.equals(Object)", "int PreciseObject.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new PreciseObject("Object"), "Different type to PreciseObject");
   }

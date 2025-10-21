@@ -1,16 +1,15 @@
 package proguard.dexfile.converter;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.expr.Constant;
 
-class DexFixDiffblueTest {
+public class DexFixDiffblueTest {
   /**
    * Test {@link DexFix#isPrimitiveZero(String, Object)}.
    *
@@ -22,11 +21,9 @@ class DexFixDiffblueTest {
    * <p>Method under test: {@link DexFix#isPrimitiveZero(String, Object)}
    */
   @Test
-  @DisplayName("Test isPrimitiveZero(String, Object); when 'Desc'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DexFix.isPrimitiveZero(String, Object)"})
-  void testIsPrimitiveZero_whenDesc_thenReturnTrue() {
+  public void testIsPrimitiveZero_whenDesc_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(DexFix.isPrimitiveZero("Desc", 0.0d));
   }
@@ -42,11 +39,9 @@ class DexFixDiffblueTest {
    * <p>Method under test: {@link DexFix#isPrimitiveZero(String, Object)}
    */
   @Test
-  @DisplayName("Test isPrimitiveZero(String, Object); when empty string; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DexFix.isPrimitiveZero(String, Object)"})
-  void testIsPrimitiveZero_whenEmptyString_thenReturnFalse() {
+  public void testIsPrimitiveZero_whenEmptyString_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(DexFix.isPrimitiveZero("", Constant.Null));
   }
@@ -62,11 +57,9 @@ class DexFixDiffblueTest {
    * <p>Method under test: {@link DexFix#isPrimitiveZero(String, Object)}
    */
   @Test
-  @DisplayName("Test isPrimitiveZero(String, Object); when 'null'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DexFix.isPrimitiveZero(String, Object)"})
-  void testIsPrimitiveZero_whenNull_thenReturnFalse() {
+  public void testIsPrimitiveZero_whenNull_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(DexFix.isPrimitiveZero(null, null));
   }
@@ -82,11 +75,9 @@ class DexFixDiffblueTest {
    * <p>Method under test: {@link DexFix#isPrimitiveZero(String, Object)}
    */
   @Test
-  @DisplayName("Test isPrimitiveZero(String, Object); when 'null'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DexFix.isPrimitiveZero(String, Object)"})
-  void testIsPrimitiveZero_whenNull_thenReturnFalse2() {
+  public void testIsPrimitiveZero_whenNull_thenReturnFalse2() {
     // Arrange, Act and Assert
     assertFalse(DexFix.isPrimitiveZero(null, 0));
   }
@@ -102,11 +93,9 @@ class DexFixDiffblueTest {
    * <p>Method under test: {@link DexFix#isPrimitiveZero(String, Object)}
    */
   @Test
-  @DisplayName("Test isPrimitiveZero(String, Object); when ten; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DexFix.isPrimitiveZero(String, Object)"})
-  void testIsPrimitiveZero_whenTen_thenReturnFalse() {
+  public void testIsPrimitiveZero_whenTen_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(DexFix.isPrimitiveZero("Desc", 10.0d));
   }
@@ -122,12 +111,9 @@ class DexFixDiffblueTest {
    * <p>Method under test: {@link DexFix#isPrimitiveZero(String, Object)}
    */
   @Test
-  @DisplayName(
-      "Test isPrimitiveZero(String, Object); when 'The characteristics of someone or something'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DexFix.isPrimitiveZero(String, Object)"})
-  void testIsPrimitiveZero_whenTheCharacteristicsOfSomeoneOrSomething_thenReturnFalse() {
+  public void testIsPrimitiveZero_whenTheCharacteristicsOfSomeoneOrSomething_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(
         DexFix.isPrimitiveZero("The characteristics of someone or something", Constant.Null));

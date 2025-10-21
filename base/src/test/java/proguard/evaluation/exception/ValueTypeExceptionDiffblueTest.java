@@ -1,32 +1,29 @@
 package proguard.evaluation.exception;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.evaluation.value.BasicValueFactory;
 import proguard.evaluation.value.DoubleValue;
 import proguard.evaluation.value.UnknownDoubleValue;
 import proguard.evaluation.value.Value;
 
-class ValueTypeExceptionDiffblueTest {
+public class ValueTypeExceptionDiffblueTest {
   /**
    * Test {@link ValueTypeException#ValueTypeException(String, Value)}.
    *
    * <p>Method under test: {@link ValueTypeException#ValueTypeException(String, Value)}
    */
   @Test
-  @DisplayName("Test new ValueTypeException(String, Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ValueTypeException.<init>(String, Value)"})
-  void testNewValueTypeException() {
+  public void testNewValueTypeException() {
     // Arrange
     DoubleValue actualType = BasicValueFactory.DOUBLE_VALUE;
 
@@ -63,14 +60,12 @@ class ValueTypeExceptionDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "Value ValueTypeException.getActualType()",
     "String ValueTypeException.getExceptedType()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     ValueTypeException valueTypeException =
         new ValueTypeException("Excepted Type", BasicValueFactory.DOUBLE_VALUE);

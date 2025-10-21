@@ -1,16 +1,15 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.evaluation.ParticularReferenceValueFactory;
 
-class IdentifiedIntegerValueDiffblueTest {
+public class IdentifiedIntegerValueDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -22,17 +21,15 @@ class IdentifiedIntegerValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void IdentifiedIntegerValue.<init>(ValueFactory, int)",
     "java.lang.String IdentifiedIntegerValue.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
     assertEquals(
-        "i1", new IdentifiedIntegerValue(new ParticularReferenceValueFactory(), 1).toString());
+        "i1", (new IdentifiedIntegerValue(new ParticularReferenceValueFactory(), 1)).toString());
   }
 
   /**
@@ -52,14 +49,12 @@ class IdentifiedIntegerValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean IdentifiedIntegerValue.equals(Object)",
     "int IdentifiedIntegerValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     IdentifiedIntegerValue identifiedIntegerValue =
         new IdentifiedIntegerValue(new ParticularReferenceValueFactory(), 1);
@@ -81,14 +76,12 @@ class IdentifiedIntegerValueDiffblueTest {
    * <p>Method under test: {@link IdentifiedIntegerValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean IdentifiedIntegerValue.equals(Object)",
     "int IdentifiedIntegerValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     IdentifiedIntegerValue identifiedIntegerValue =
         new IdentifiedIntegerValue(new ParticularReferenceValueFactory(), 1);
@@ -110,14 +103,12 @@ class IdentifiedIntegerValueDiffblueTest {
    * <p>Method under test: {@link IdentifiedIntegerValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean IdentifiedIntegerValue.equals(Object)",
     "int IdentifiedIntegerValue.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new IdentifiedIntegerValue(new ParticularReferenceValueFactory(), 1), null);
   }
@@ -133,14 +124,12 @@ class IdentifiedIntegerValueDiffblueTest {
    * <p>Method under test: {@link IdentifiedIntegerValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean IdentifiedIntegerValue.equals(Object)",
     "int IdentifiedIntegerValue.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
         new IdentifiedIntegerValue(new ParticularReferenceValueFactory(), 1),

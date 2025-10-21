@@ -1,15 +1,14 @@
 package proguard.evaluation.exception;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ExcessiveComplexityExceptionDiffblueTest {
+public class ExcessiveComplexityExceptionDiffblueTest {
   /**
    * Test {@link ExcessiveComplexityException#ExcessiveComplexityException(String)}.
    *
@@ -20,12 +19,9 @@ class ExcessiveComplexityExceptionDiffblueTest {
    * <p>Method under test: {@link ExcessiveComplexityException#ExcessiveComplexityException(String)}
    */
   @Test
-  @DisplayName(
-      "Test new ExcessiveComplexityException(String); then return LocalizedMessage is 'An error occurred'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ExcessiveComplexityException.<init>(String)"})
-  void testNewExcessiveComplexityException_thenReturnLocalizedMessageIsAnErrorOccurred() {
+  public void testNewExcessiveComplexityException_thenReturnLocalizedMessageIsAnErrorOccurred() {
     // Arrange and Act
     ExcessiveComplexityException actualExcessiveComplexityException =
         new ExcessiveComplexityException("An error occurred");
@@ -50,12 +46,9 @@ class ExcessiveComplexityExceptionDiffblueTest {
    * <p>Method under test: {@link ExcessiveComplexityException#ExcessiveComplexityException(String)}
    */
   @Test
-  @DisplayName(
-      "Test new ExcessiveComplexityException(String); when 'null'; then return LocalizedMessage is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ExcessiveComplexityException.<init>(String)"})
-  void testNewExcessiveComplexityException_whenNull_thenReturnLocalizedMessageIsNull() {
+  public void testNewExcessiveComplexityException_whenNull_thenReturnLocalizedMessageIsNull() {
     // Arrange and Act
     ExcessiveComplexityException actualExcessiveComplexityException =
         new ExcessiveComplexityException(null);

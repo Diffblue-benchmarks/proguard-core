@@ -1,15 +1,14 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class CompositeIntegerValueDiffblueTest {
+public class CompositeIntegerValueDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -21,21 +20,19 @@ class CompositeIntegerValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void CompositeIntegerValue.<init>(IntegerValue, byte, IntegerValue)",
     "java.lang.String CompositeIntegerValue.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
     assertEquals(
         "(bAb)",
-        new CompositeIntegerValue(
+        (new CompositeIntegerValue(
                 BasicRangeValueFactory.INTEGER_VALUE_BYTE,
                 (byte) 'A',
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+                BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .toString());
   }
 
@@ -56,14 +53,12 @@ class CompositeIntegerValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean CompositeIntegerValue.equals(Object)",
     "int CompositeIntegerValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     CompositeIntegerValue compositeIntegerValue =
         new CompositeIntegerValue(
@@ -78,7 +73,8 @@ class CompositeIntegerValueDiffblueTest {
 
     // Act and Assert
     assertEquals(compositeIntegerValue, compositeIntegerValue2);
-    assertEquals(compositeIntegerValue.hashCode(), compositeIntegerValue2.hashCode());
+    int expectedHashCodeResult = compositeIntegerValue.hashCode();
+    assertEquals(expectedHashCodeResult, compositeIntegerValue2.hashCode());
   }
 
   /**
@@ -98,14 +94,12 @@ class CompositeIntegerValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean CompositeIntegerValue.equals(Object)",
     "int CompositeIntegerValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     CompositeIntegerValue compositeIntegerValue =
         new CompositeIntegerValue(
@@ -130,14 +124,12 @@ class CompositeIntegerValueDiffblueTest {
    * <p>Method under test: {@link CompositeIntegerValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean CompositeIntegerValue.equals(Object)",
     "int CompositeIntegerValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     CompositeIntegerValue compositeIntegerValue =
         new CompositeIntegerValue(
@@ -165,14 +157,12 @@ class CompositeIntegerValueDiffblueTest {
    * <p>Method under test: {@link CompositeIntegerValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean CompositeIntegerValue.equals(Object)",
     "int CompositeIntegerValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
     CompositeIntegerValue compositeIntegerValue =
         new CompositeIntegerValue(
@@ -203,14 +193,12 @@ class CompositeIntegerValueDiffblueTest {
    * <p>Method under test: {@link CompositeIntegerValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean CompositeIntegerValue.equals(Object)",
     "int CompositeIntegerValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
     // Arrange
     CompositeIntegerValue compositeIntegerValue =
         new CompositeIntegerValue(
@@ -238,14 +226,12 @@ class CompositeIntegerValueDiffblueTest {
    * <p>Method under test: {@link CompositeIntegerValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean CompositeIntegerValue.equals(Object)",
     "int CompositeIntegerValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual4() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual4() {
     // Arrange
     CompositeIntegerValue compositeIntegerValue =
         new CompositeIntegerValue(
@@ -273,14 +259,12 @@ class CompositeIntegerValueDiffblueTest {
    * <p>Method under test: {@link CompositeIntegerValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean CompositeIntegerValue.equals(Object)",
     "int CompositeIntegerValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual5() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual5() {
     // Arrange
     CompositeIntegerValue compositeIntegerValue =
         new CompositeIntegerValue(
@@ -311,14 +295,12 @@ class CompositeIntegerValueDiffblueTest {
    * <p>Method under test: {@link CompositeIntegerValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean CompositeIntegerValue.equals(Object)",
     "int CompositeIntegerValue.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
         new CompositeIntegerValue(
@@ -339,14 +321,12 @@ class CompositeIntegerValueDiffblueTest {
    * <p>Method under test: {@link CompositeIntegerValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean CompositeIntegerValue.equals(Object)",
     "int CompositeIntegerValue.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
         new CompositeIntegerValue(

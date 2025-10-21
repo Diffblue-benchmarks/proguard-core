@@ -1,18 +1,15 @@
 package proguard.analysis.datastructure;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-import proguard.classfile.ClassSignature;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.FieldSignature;
 import proguard.classfile.LibraryClass;
@@ -22,97 +19,7 @@ import proguard.classfile.Member;
 import proguard.classfile.MethodSignature;
 import proguard.classfile.Signature;
 
-class CodeLocationDiffblueTest {
-  /**
-   * Test {@link CodeLocation#CodeLocation(Clazz, Member, int)}.
-   *
-   * <ul>
-   *   <li>Then {@link CodeLocation#signature} return {@link ClassSignature}.
-   * </ul>
-   *
-   * <p>Method under test: {@link CodeLocation#CodeLocation(Clazz, Member, int)}
-   */
-  @Test
-  @DisplayName("Test new CodeLocation(Clazz, Member, int); then signature return ClassSignature")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void CodeLocation.<init>(Clazz, Member, int)"})
-  void testNewCodeLocation_thenSignatureReturnClassSignature() {
-    // Arrange
-    LibraryClass clazz =
-        new LibraryClass(Location.UNKNOWN_LINE, "This Class Name", "Super Class Name");
-
-    // Act
-    CodeLocation actualCodeLocation = new CodeLocation(clazz, null, 2);
-
-    // Assert
-    Signature signature = actualCodeLocation.signature;
-    assertTrue(signature instanceof ClassSignature);
-    Clazz clazz2 = actualCodeLocation.clazz;
-    assertTrue(clazz2 instanceof LibraryClass);
-    assertEquals("", signature.getExternalPackageName());
-    assertEquals("", signature.getPackageName());
-    assertEquals("Super Class Name", clazz2.getSuperName());
-    assertEquals("This Class Name", actualCodeLocation.getExternalClassName());
-    assertEquals("This Class Name", actualCodeLocation.getName());
-    assertEquals("This Class Name", clazz2.getName());
-    assertEquals("This Class Name", signature.getClassName());
-    assertEquals("This Class Name", signature.getFqn());
-    assertEquals("This Class Name", signature.getPrettyFqn());
-    assertNull(actualCodeLocation.member);
-    assertEquals(0, ((LibraryClass) clazz2).fields.length);
-    assertEquals(0, ((LibraryClass) clazz2).interfaceNames.length);
-    assertEquals(0, ((LibraryClass) clazz2).methods.length);
-    assertFalse(signature.isIncomplete());
-    assertEquals(Location.UNKNOWN_LINE, clazz2.getAccessFlags());
-    assertSame(clazz.subClasses, ((LibraryClass) clazz2).subClasses);
-  }
-
-  /**
-   * Test {@link CodeLocation#CodeLocation(Clazz, Member, int, int)}.
-   *
-   * <ul>
-   *   <li>Then {@link CodeLocation#signature} return {@link ClassSignature}.
-   * </ul>
-   *
-   * <p>Method under test: {@link CodeLocation#CodeLocation(Clazz, Member, int, int)}
-   */
-  @Test
-  @DisplayName(
-      "Test new CodeLocation(Clazz, Member, int, int); then signature return ClassSignature")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void CodeLocation.<init>(Clazz, Member, int, int)"})
-  void testNewCodeLocation_thenSignatureReturnClassSignature2() {
-    // Arrange
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-
-    // Act
-    CodeLocation actualCodeLocation = new CodeLocation(clazz, null, 2, 2);
-
-    // Assert
-    Signature signature = actualCodeLocation.signature;
-    assertTrue(signature instanceof ClassSignature);
-    Clazz clazz2 = actualCodeLocation.clazz;
-    assertTrue(clazz2 instanceof LibraryClass);
-    assertEquals("", signature.getExternalPackageName());
-    assertEquals("", signature.getPackageName());
-    assertEquals("Super Class Name", clazz2.getSuperName());
-    assertEquals("This Class Name", actualCodeLocation.getExternalClassName());
-    assertEquals("This Class Name", actualCodeLocation.getName());
-    assertEquals("This Class Name", clazz2.getName());
-    assertEquals("This Class Name", signature.getClassName());
-    assertEquals("This Class Name", signature.getFqn());
-    assertEquals("This Class Name", signature.getPrettyFqn());
-    assertNull(actualCodeLocation.member);
-    assertEquals(0, ((LibraryClass) clazz2).fields.length);
-    assertEquals(0, ((LibraryClass) clazz2).interfaceNames.length);
-    assertEquals(0, ((LibraryClass) clazz2).methods.length);
-    assertEquals(1, clazz2.getAccessFlags());
-    assertFalse(signature.isIncomplete());
-    assertSame(clazz.subClasses, ((LibraryClass) clazz2).subClasses);
-  }
-
+public class CodeLocationDiffblueTest {
   /**
    * Test {@link CodeLocation#CodeLocation(Clazz, Member, int)}.
    *
@@ -123,33 +30,32 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#CodeLocation(Clazz, Member, int)}
    */
   @Test
-  @DisplayName("Test new CodeLocation(Clazz, Member, int); then signature return FieldSignature")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void CodeLocation.<init>(Clazz, Member, int)"})
-  void testNewCodeLocation_thenSignatureReturnFieldSignature() {
+  public void testNewCodeLocation_thenSignatureReturnFieldSignature() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
 
     // Act
-    CodeLocation actualCodeLocation = new CodeLocation(clazz, member, 2);
+    CodeLocation actualCodeLocation =
+        new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
 
     // Assert
     Signature signature = actualCodeLocation.signature;
     assertTrue(signature instanceof FieldSignature);
     assertTrue(actualCodeLocation.clazz instanceof LibraryClass);
-    Member member2 = actualCodeLocation.member;
-    assertTrue(member2 instanceof LibraryField);
+    Member member = actualCodeLocation.member;
+    assertTrue(member instanceof LibraryField);
     assertEquals("Descriptor", ((FieldSignature) signature).descriptor);
-    assertEquals("Descriptor", ((LibraryField) member2).descriptor);
+    assertEquals("Descriptor", ((LibraryField) member).descriptor);
     assertEquals("Lnull;Name", actualCodeLocation.getName());
     assertEquals("Lnull;Name", signature.getFqn());
     assertEquals("Name", actualCodeLocation.getMemberName());
     assertEquals("Name", ((FieldSignature) signature).memberName);
-    assertEquals("Name", ((LibraryField) member2).name);
-    assertNull(((LibraryField) member2).referencedClass);
-    assertEquals(1, member2.getAccessFlags());
+    assertEquals("Name", ((LibraryField) member).name);
+    assertNull(signature.getReferencedClass());
+    assertNull(((LibraryField) member).referencedClass);
+    assertEquals(1, member.getAccessFlags());
     assertTrue(signature.isIncomplete());
   }
 
@@ -163,34 +69,32 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#CodeLocation(Clazz, Member, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test new CodeLocation(Clazz, Member, int, int); then signature return FieldSignature")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void CodeLocation.<init>(Clazz, Member, int, int)"})
-  void testNewCodeLocation_thenSignatureReturnFieldSignature2() {
+  public void testNewCodeLocation_thenSignatureReturnFieldSignature2() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
 
     // Act
-    CodeLocation actualCodeLocation = new CodeLocation(clazz, member, 2, 2);
+    CodeLocation actualCodeLocation =
+        new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2, 2);
 
     // Assert
     Signature signature = actualCodeLocation.signature;
     assertTrue(signature instanceof FieldSignature);
     assertTrue(actualCodeLocation.clazz instanceof LibraryClass);
-    Member member2 = actualCodeLocation.member;
-    assertTrue(member2 instanceof LibraryField);
+    Member member = actualCodeLocation.member;
+    assertTrue(member instanceof LibraryField);
     assertEquals("Descriptor", ((FieldSignature) signature).descriptor);
-    assertEquals("Descriptor", ((LibraryField) member2).descriptor);
+    assertEquals("Descriptor", ((LibraryField) member).descriptor);
     assertEquals("Lnull;Name", actualCodeLocation.getName());
     assertEquals("Lnull;Name", signature.getFqn());
     assertEquals("Name", actualCodeLocation.getMemberName());
     assertEquals("Name", ((FieldSignature) signature).memberName);
-    assertEquals("Name", ((LibraryField) member2).name);
-    assertNull(((LibraryField) member2).referencedClass);
-    assertEquals(1, member2.getAccessFlags());
+    assertEquals("Name", ((LibraryField) member).name);
+    assertNull(signature.getReferencedClass());
+    assertNull(((LibraryField) member).referencedClass);
+    assertEquals(1, member.getAccessFlags());
     assertTrue(signature.isIncomplete());
   }
 
@@ -205,12 +109,9 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#CodeLocation(Clazz, Member, int)}
    */
   @Test
-  @DisplayName(
-      "Test new CodeLocation(Clazz, Member, int); when LibraryMethod(); then member return LibraryMethod")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void CodeLocation.<init>(Clazz, Member, int)"})
-  void testNewCodeLocation_whenLibraryMethod_thenMemberReturnLibraryMethod() {
+  public void testNewCodeLocation_whenLibraryMethod_thenMemberReturnLibraryMethod() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
 
@@ -226,15 +127,18 @@ class CodeLocationDiffblueTest {
     assertEquals("? ?.?(?)", signature.getPrettyFqn());
     assertEquals("L?;?null", actualCodeLocation.getName());
     assertEquals("L?;?null", signature.getFqn());
+    assertNull(((LibraryMethod) member).referencedClasses);
+    assertNull(actualCodeLocation.getMemberName());
     assertNull(((MethodSignature) signature).getMethodName());
     assertNull(((LibraryMethod) member).descriptor);
     assertNull(((LibraryMethod) member).name);
-    assertNull(((LibraryMethod) member).referencedClasses);
     assertNull(((MethodSignature) signature).getDescriptor());
     assertEquals(0, member.getAccessFlags());
     assertTrue(signature.isIncomplete());
-    assertSame(actualCodeLocation.clazz, signature.getReferencedClass());
-    assertSame(actualCodeLocation.member, ((MethodSignature) signature).getReferencedMethod());
+    Clazz expectedReferencedClass = actualCodeLocation.clazz;
+    assertSame(expectedReferencedClass, signature.getReferencedClass());
+    Member expectedReferencedMethod = actualCodeLocation.member;
+    assertSame(expectedReferencedMethod, ((MethodSignature) signature).getReferencedMethod());
   }
 
   /**
@@ -248,12 +152,9 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#CodeLocation(Clazz, Member, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test new CodeLocation(Clazz, Member, int, int); when LibraryMethod(); then member return LibraryMethod")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void CodeLocation.<init>(Clazz, Member, int, int)"})
-  void testNewCodeLocation_whenLibraryMethod_thenMemberReturnLibraryMethod2() {
+  public void testNewCodeLocation_whenLibraryMethod_thenMemberReturnLibraryMethod2() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
 
@@ -269,15 +170,18 @@ class CodeLocationDiffblueTest {
     assertEquals("? ?.?(?)", signature.getPrettyFqn());
     assertEquals("L?;?null", actualCodeLocation.getName());
     assertEquals("L?;?null", signature.getFqn());
+    assertNull(((LibraryMethod) member).referencedClasses);
+    assertNull(actualCodeLocation.getMemberName());
     assertNull(((MethodSignature) signature).getMethodName());
     assertNull(((LibraryMethod) member).descriptor);
     assertNull(((LibraryMethod) member).name);
-    assertNull(((LibraryMethod) member).referencedClasses);
     assertNull(((MethodSignature) signature).getDescriptor());
     assertEquals(0, member.getAccessFlags());
     assertTrue(signature.isIncomplete());
-    assertSame(actualCodeLocation.clazz, signature.getReferencedClass());
-    assertSame(actualCodeLocation.member, ((MethodSignature) signature).getReferencedMethod());
+    Clazz expectedReferencedClass = actualCodeLocation.clazz;
+    assertSame(expectedReferencedClass, signature.getReferencedClass());
+    Member expectedReferencedMethod = actualCodeLocation.member;
+    assertSame(expectedReferencedMethod, ((MethodSignature) signature).getReferencedMethod());
   }
 
   /**
@@ -290,19 +194,17 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#getExternalClassName()}
    */
   @Test
-  @DisplayName("Test getExternalClassName(); then return 'This Class Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String CodeLocation.getExternalClassName()"})
-  void testGetExternalClassName_thenReturnThisClassName() {
+  public void testGetExternalClassName_thenReturnThisClassName() {
     // Arrange
     LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation codeLocation = new CodeLocation(clazz, member, 2);
 
     // Act and Assert
-    assertEquals("This Class Name", codeLocation.getExternalClassName());
+    assertEquals(
+        "This Class Name",
+        (new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2))
+            .getExternalClassName());
   }
 
   /**
@@ -315,19 +217,16 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#getMemberName()}
    */
   @Test
-  @DisplayName("Test getMemberName(); then return 'Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String CodeLocation.getMemberName()"})
-  void testGetMemberName_thenReturnName() {
+  public void testGetMemberName_thenReturnName() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation codeLocation = new CodeLocation(clazz, member, 2);
 
     // Act and Assert
-    assertEquals("Name", codeLocation.getMemberName());
+    assertEquals(
+        "Name",
+        (new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2)).getMemberName());
   }
 
   /**
@@ -340,17 +239,13 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#getMemberName()}
    */
   @Test
-  @DisplayName("Test getMemberName(); then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String CodeLocation.getMemberName()"})
-  void testGetMemberName_thenReturnNull() {
-    // Arrange
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    CodeLocation codeLocation = new CodeLocation(clazz, null, 2);
-
-    // Act and Assert
-    assertNull(codeLocation.getMemberName());
+  public void testGetMemberName_thenReturnNull() {
+    // Arrange, Act and Assert
+    assertNull(
+        (new CodeLocation(new LibraryClass(1, "This Class Name", "Super Class Name"), null, 2))
+            .getMemberName());
   }
 
   /**
@@ -363,17 +258,14 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#getName()}
    */
   @Test
-  @DisplayName("Test getName(); then return 'L?;?null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String CodeLocation.getName()"})
-  void testGetName_thenReturnLNull() {
+  public void testGetName_thenReturnLNull() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    CodeLocation codeLocation = new CodeLocation(clazz, new LibraryMethod(), 2);
 
     // Act and Assert
-    assertEquals("L?;?null", codeLocation.getName());
+    assertEquals("L?;?null", (new CodeLocation(clazz, new LibraryMethod(), 2)).getName());
   }
 
   /**
@@ -386,17 +278,15 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#getName()}
    */
   @Test
-  @DisplayName("Test getName(); then return 'LThis Class Name;?null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String CodeLocation.getName()"})
-  void testGetName_thenReturnLThisClassNameNull() {
+  public void testGetName_thenReturnLThisClassNameNull() {
     // Arrange
     LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    CodeLocation codeLocation = new CodeLocation(clazz, new LibraryMethod(), 2);
 
     // Act and Assert
-    assertEquals("LThis Class Name;?null", codeLocation.getName());
+    assertEquals(
+        "LThis Class Name;?null", (new CodeLocation(clazz, new LibraryMethod(), 2)).getName());
   }
 
   /**
@@ -409,19 +299,16 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#getName()}
    */
   @Test
-  @DisplayName("Test getName(); then return 'Lnull;Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String CodeLocation.getName()"})
-  void testGetName_thenReturnLnullName() {
+  public void testGetName_thenReturnLnullName() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation codeLocation = new CodeLocation(clazz, member, 2);
 
     // Act and Assert
-    assertEquals("Lnull;Name", codeLocation.getName());
+    assertEquals(
+        "Lnull;Name",
+        (new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2)).getName());
   }
 
   /**
@@ -434,17 +321,14 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#getName()}
    */
   @Test
-  @DisplayName("Test getName(); then return 'This Class Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String CodeLocation.getName()"})
-  void testGetName_thenReturnThisClassName() {
-    // Arrange
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    CodeLocation codeLocation = new CodeLocation(clazz, null, 2);
-
-    // Act and Assert
-    assertEquals("This Class Name", codeLocation.getName());
+  public void testGetName_thenReturnThisClassName() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "This Class Name",
+        (new CodeLocation(new LibraryClass(1, "This Class Name", "Super Class Name"), null, 2))
+            .getName());
   }
 
   /**
@@ -453,19 +337,16 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#toString()}
    */
   @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String CodeLocation.toString()"})
-  void testToString() {
+  public void testToString() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation codeLocation = new CodeLocation(clazz, member, 2);
 
     // Act and Assert
-    assertEquals("Lnull;Name+0002 (line -1)", codeLocation.toString());
+    assertEquals(
+        "Lnull;Name+0002 (line -1)",
+        (new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2)).toString());
   }
 
   /**
@@ -484,24 +365,21 @@ class CodeLocationDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean CodeLocation.equals(Object)", "int CodeLocation.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation codeLocation = new CodeLocation(clazz, member, 2);
+    CodeLocation codeLocation =
+        new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
     LibraryClass clazz2 = new LibraryClass();
-    LibraryField member2 = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation codeLocation2 = new CodeLocation(clazz2, member2, 2);
+    CodeLocation codeLocation2 =
+        new CodeLocation(clazz2, new LibraryField(1, "Name", "Descriptor"), 2);
 
     // Act and Assert
     assertEquals(codeLocation, codeLocation2);
-    assertEquals(codeLocation.hashCode(), codeLocation2.hashCode());
+    int expectedHashCodeResult = codeLocation.hashCode();
+    assertEquals(expectedHashCodeResult, codeLocation2.hashCode());
   }
 
   /**
@@ -520,16 +398,13 @@ class CodeLocationDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean CodeLocation.equals(Object)", "int CodeLocation.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation codeLocation = new CodeLocation(clazz, member, 2);
+    CodeLocation codeLocation =
+        new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
 
     // Act and Assert
     assertEquals(codeLocation, codeLocation);
@@ -548,21 +423,19 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean CodeLocation.equals(Object)", "int CodeLocation.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
-    LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
+    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
 
-    CodeLocation codeLocation = new CodeLocation(clazz, member, 1);
+    CodeLocation codeLocation =
+        new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
     LibraryClass clazz2 = new LibraryClass();
-    LibraryField member2 = new LibraryField(1, "Name", "Descriptor");
 
     // Act and Assert
-    assertNotEquals(codeLocation, new CodeLocation(clazz2, member2, 2));
+    assertNotEquals(
+        codeLocation, new CodeLocation(clazz2, new LibraryField(1, "Name", "Descriptor"), 2));
   }
 
   /**
@@ -576,21 +449,18 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean CodeLocation.equals(Object)", "int CodeLocation.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation codeLocation = new CodeLocation(clazz, member, 2);
+    LibraryClass clazz = new LibraryClass();
+    CodeLocation codeLocation =
+        new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 1);
     LibraryClass clazz2 = new LibraryClass();
-    LibraryField member2 = new LibraryField(1, "Name", "Descriptor");
 
     // Act and Assert
-    assertNotEquals(codeLocation, new CodeLocation(clazz2, member2, 2));
+    assertNotEquals(
+        codeLocation, new CodeLocation(clazz2, new LibraryField(1, "Name", "Descriptor"), 2));
   }
 
   /**
@@ -604,17 +474,14 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean CodeLocation.equals(Object)", "int CodeLocation.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
 
     // Act and Assert
-    assertNotEquals(new CodeLocation(clazz, member, 2), null);
+    assertNotEquals(new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2), null);
   }
 
   /**
@@ -628,17 +495,16 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean CodeLocation.equals(Object)", "int CodeLocation.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
 
     // Act and Assert
-    assertNotEquals(new CodeLocation(clazz, member, 2), "Different type to CodeLocation");
+    assertNotEquals(
+        new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2),
+        "Different type to CodeLocation");
   }
 
   /**
@@ -647,27 +513,23 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#compareTo(Location)}
    */
   @Test
-  @DisplayName("Test compareTo(Location) with 'Location'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int CodeLocation.compareTo(Location)"})
-  void testCompareToWithLocation() {
+  public void testCompareToWithLocation() {
     // Arrange
     LibraryClass clazz =
         new LibraryClass(Location.UNKNOWN_LINE, "This Class Name", "Super Class Name");
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
 
-    CodeLocation codeLocation = new CodeLocation(clazz, member, 2);
+    CodeLocation codeLocation =
+        new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
     LibraryClass clazz2 = new LibraryClass();
-    LibraryField member2 = new LibraryField(Location.UNKNOWN_LINE, "Name", "Descriptor");
 
-    CodeLocation o = new CodeLocation(clazz2, member2, 2);
-
-    // Act
-    int actualCompareToResult = codeLocation.compareTo(o);
-
-    // Assert
-    assertEquals(-26, actualCompareToResult);
+    // Act and Assert
+    assertEquals(
+        -26,
+        codeLocation.compareTo(
+            new CodeLocation(
+                clazz2, new LibraryField(Location.UNKNOWN_LINE, "Name", "Descriptor"), 2)));
   }
 
   /**
@@ -676,26 +538,20 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#compareTo(Location)}
    */
   @Test
-  @DisplayName("Test compareTo(Location) with 'Location'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int CodeLocation.compareTo(Location)"})
-  void testCompareToWithLocation2() {
+  public void testCompareToWithLocation2() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "42", "Descriptor");
-
-    CodeLocation codeLocation = new CodeLocation(clazz, member, 2);
+    CodeLocation codeLocation = new CodeLocation(clazz, new LibraryField(1, "42", "Descriptor"), 2);
     LibraryClass clazz2 = new LibraryClass();
-    LibraryField member2 = new LibraryField(Location.UNKNOWN_LINE, "Name", "Descriptor");
 
-    CodeLocation o = new CodeLocation(clazz2, member2, 2);
-
-    // Act
-    int actualCompareToResult = codeLocation.compareTo(o);
-
-    // Assert
-    assertEquals(-26, actualCompareToResult);
+    // Act and Assert
+    assertEquals(
+        -26,
+        codeLocation.compareTo(
+            new CodeLocation(
+                clazz2, new LibraryField(Location.UNKNOWN_LINE, "Name", "Descriptor"), 2)));
   }
 
   /**
@@ -704,26 +560,20 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#compareTo(Location)}
    */
   @Test
-  @DisplayName("Test compareTo(Location) with 'Location'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int CodeLocation.compareTo(Location)"})
-  void testCompareToWithLocation3() {
+  public void testCompareToWithLocation3() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "42");
-
-    CodeLocation codeLocation = new CodeLocation(clazz, member, 2);
+    CodeLocation codeLocation = new CodeLocation(clazz, new LibraryField(1, "Name", "42"), 2);
     LibraryClass clazz2 = new LibraryClass();
-    LibraryField member2 = new LibraryField(Location.UNKNOWN_LINE, "Name", "Descriptor");
 
-    CodeLocation o = new CodeLocation(clazz2, member2, 2);
-
-    // Act
-    int actualCompareToResult = codeLocation.compareTo(o);
-
-    // Assert
-    assertEquals(0, actualCompareToResult);
+    // Act and Assert
+    assertEquals(
+        0,
+        codeLocation.compareTo(
+            new CodeLocation(
+                clazz2, new LibraryField(Location.UNKNOWN_LINE, "Name", "Descriptor"), 2)));
   }
 
   /**
@@ -732,24 +582,20 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#compareTo(Location)}
    */
   @Test
-  @DisplayName("Test compareTo(Location) with 'Location'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int CodeLocation.compareTo(Location)"})
-  void testCompareToWithLocation4() {
+  public void testCompareToWithLocation4() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
     CodeLocation codeLocation = new CodeLocation(clazz, new LibraryMethod(), 2);
     LibraryClass clazz2 = new LibraryClass();
-    LibraryField member = new LibraryField(Location.UNKNOWN_LINE, "Name", "Descriptor");
 
-    CodeLocation o = new CodeLocation(clazz2, member, 2);
-
-    // Act
-    int actualCompareToResult = codeLocation.compareTo(o);
-
-    // Assert
-    assertEquals(Location.UNKNOWN_LINE, actualCompareToResult);
+    // Act and Assert
+    assertEquals(
+        Location.UNKNOWN_LINE,
+        codeLocation.compareTo(
+            new CodeLocation(
+                clazz2, new LibraryField(Location.UNKNOWN_LINE, "Name", "Descriptor"), 2)));
   }
 
   /**
@@ -758,24 +604,19 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#compareTo(Location)}
    */
   @Test
-  @DisplayName("Test compareTo(Location) with 'Location'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int CodeLocation.compareTo(Location)"})
-  void testCompareToWithLocation5() {
+  public void testCompareToWithLocation5() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation codeLocation = new CodeLocation(clazz, member, 2);
+    CodeLocation codeLocation =
+        new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
     LibraryClass clazz2 = new LibraryClass();
-    CodeLocation o = new CodeLocation(clazz2, new LibraryMethod(), 2);
 
-    // Act
-    int actualCompareToResult = codeLocation.compareTo(o);
-
-    // Assert
-    assertEquals(Location.UNKNOWN_LINE, actualCompareToResult);
+    // Act and Assert
+    assertEquals(
+        Location.UNKNOWN_LINE,
+        codeLocation.compareTo(new CodeLocation(clazz2, new LibraryMethod(), 2)));
   }
 
   /**
@@ -788,26 +629,21 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#compareTo(Location)}
    */
   @Test
-  @DisplayName("Test compareTo(Location) with 'Location'; then return minus three")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int CodeLocation.compareTo(Location)"})
-  void testCompareToWithLocation_thenReturnMinusThree() {
+  public void testCompareToWithLocation_thenReturnMinusThree() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation codeLocation = new CodeLocation(clazz, member, 2);
+    CodeLocation codeLocation =
+        new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
     LibraryClass clazz2 = new LibraryClass();
-    LibraryField member2 = new LibraryField(Location.UNKNOWN_LINE, "Name", "Descriptor");
 
-    CodeLocation o = new CodeLocation(clazz2, member2, 2, 2);
-
-    // Act
-    int actualCompareToResult = codeLocation.compareTo(o);
-
-    // Assert
-    assertEquals(-3, actualCompareToResult);
+    // Act and Assert
+    assertEquals(
+        -3,
+        codeLocation.compareTo(
+            new CodeLocation(
+                clazz2, new LibraryField(Location.UNKNOWN_LINE, "Name", "Descriptor"), 2, 2)));
   }
 
   /**
@@ -820,26 +656,21 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#compareTo(Location)}
    */
   @Test
-  @DisplayName("Test compareTo(Location) with 'Location'; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int CodeLocation.compareTo(Location)"})
-  void testCompareToWithLocation_thenReturnZero() {
+  public void testCompareToWithLocation_thenReturnZero() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation codeLocation = new CodeLocation(clazz, member, 2);
+    CodeLocation codeLocation =
+        new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
     LibraryClass clazz2 = new LibraryClass();
-    LibraryField member2 = new LibraryField(Location.UNKNOWN_LINE, "Name", "Descriptor");
 
-    CodeLocation o = new CodeLocation(clazz2, member2, 2);
-
-    // Act
-    int actualCompareToResult = codeLocation.compareTo(o);
-
-    // Assert
-    assertEquals(0, actualCompareToResult);
+    // Act and Assert
+    assertEquals(
+        0,
+        codeLocation.compareTo(
+            new CodeLocation(
+                clazz2, new LibraryField(Location.UNKNOWN_LINE, "Name", "Descriptor"), 2)));
   }
 
   /**
@@ -853,22 +684,15 @@ class CodeLocationDiffblueTest {
    * <p>Method under test: {@link CodeLocation#compareTo(Location)}
    */
   @Test
-  @DisplayName(
-      "Test compareTo(Location) with 'Location'; when FileLocation(String, int) with filename is 'foo.txt' and line is two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int CodeLocation.compareTo(Location)"})
-  void testCompareToWithLocation_whenFileLocationWithFilenameIsFooTxtAndLineIsTwo() {
+  public void testCompareToWithLocation_whenFileLocationWithFilenameIsFooTxtAndLineIsTwo() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
+    CodeLocation codeLocation =
+        new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
 
-    CodeLocation codeLocation = new CodeLocation(clazz, member, 2);
-
-    // Act
-    int actualCompareToResult = codeLocation.compareTo(new FileLocation("foo.txt", 2));
-
-    // Assert
-    assertEquals(Location.UNKNOWN_LINE, actualCompareToResult);
+    // Act and Assert
+    assertEquals(Location.UNKNOWN_LINE, codeLocation.compareTo(new FileLocation("foo.txt", 2)));
   }
 }

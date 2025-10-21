@@ -1,14 +1,13 @@
 package proguard.analysis.cpa.jvm.witness;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertSame;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.analysis.cpa.defaults.HashMapAbstractState;
 import proguard.analysis.cpa.defaults.LatticeAbstractState;
 import proguard.analysis.cpa.jvm.cfa.nodes.JvmUnknownCfaNode;
@@ -17,7 +16,7 @@ import proguard.analysis.cpa.jvm.state.JvmAbstractState;
 import proguard.analysis.cpa.jvm.state.JvmFrameAbstractState;
 import proguard.analysis.cpa.jvm.state.heap.JvmForgetfulHeapAbstractState;
 
-class JvmStackLocationDiffblueTest {
+public class JvmStackLocationDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -30,15 +29,13 @@ class JvmStackLocationDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void JvmStackLocation.<init>(int)",
     "int JvmStackLocation.getIndex()",
     "String JvmStackLocation.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     JvmStackLocation actualJvmStackLocation = new JvmStackLocation(1);
     String actualToStringResult = actualJvmStackLocation.toString();
@@ -60,28 +57,26 @@ class JvmStackLocationDiffblueTest {
    * LatticeAbstractState)}
    */
   @Test
-  @DisplayName(
-      "Test extractValueOrDefault(JvmAbstractState, LatticeAbstractState); given JvmStackLocation(int) with index is one; then return UNKNOWN")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "LatticeAbstractState JvmStackLocation.extractValueOrDefault(JvmAbstractState, LatticeAbstractState)"
   })
-  void testExtractValueOrDefault_givenJvmStackLocationWithIndexIsOne_thenReturnUnknown() {
+  public void testExtractValueOrDefault_givenJvmStackLocationWithIndexIsOne_thenReturnUnknown() {
     // Arrange
     JvmStackLocation jvmStackLocation = new JvmStackLocation(1);
     JvmFrameAbstractState<ValueAbstractState> frame = new JvmFrameAbstractState<>();
     JvmForgetfulHeapAbstractState<ValueAbstractState> heap =
         new JvmForgetfulHeapAbstractState<>(ValueAbstractState.UNKNOWN);
 
-    JvmAbstractState<ValueAbstractState> jvmState =
-        new JvmAbstractState<>(
-            JvmUnknownCfaNode.INSTANCE, frame, heap, new HashMapAbstractState<>());
+    // Act
+    ValueAbstractState actualExtractValueOrDefaultResult =
+        jvmStackLocation.extractValueOrDefault(
+            new JvmAbstractState<>(
+                JvmUnknownCfaNode.INSTANCE, frame, heap, new HashMapAbstractState<>()),
+            ValueAbstractState.UNKNOWN);
 
-    // Act and Assert
-    assertSame(
-        ValueAbstractState.UNKNOWN,
-        jvmStackLocation.extractValueOrDefault(jvmState, ValueAbstractState.UNKNOWN));
+    // Assert
+    assertSame(actualExtractValueOrDefaultResult.UNKNOWN, actualExtractValueOrDefaultResult);
   }
 
   /**
@@ -100,18 +95,17 @@ class JvmStackLocationDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean JvmStackLocation.equals(Object)", "int JvmStackLocation.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     JvmStackLocation jvmStackLocation = new JvmStackLocation(1);
     JvmStackLocation jvmStackLocation2 = new JvmStackLocation(1);
 
     // Act and Assert
     assertEquals(jvmStackLocation, jvmStackLocation2);
-    assertEquals(jvmStackLocation.hashCode(), jvmStackLocation2.hashCode());
+    int expectedHashCodeResult = jvmStackLocation.hashCode();
+    assertEquals(expectedHashCodeResult, jvmStackLocation2.hashCode());
   }
 
   /**
@@ -130,11 +124,9 @@ class JvmStackLocationDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean JvmStackLocation.equals(Object)", "int JvmStackLocation.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     JvmStackLocation jvmStackLocation = new JvmStackLocation(1);
 
@@ -155,11 +147,9 @@ class JvmStackLocationDiffblueTest {
    * <p>Method under test: {@link JvmStackLocation#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean JvmStackLocation.equals(Object)", "int JvmStackLocation.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     JvmStackLocation jvmStackLocation = new JvmStackLocation(0);
 
@@ -178,11 +168,9 @@ class JvmStackLocationDiffblueTest {
    * <p>Method under test: {@link JvmStackLocation#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean JvmStackLocation.equals(Object)", "int JvmStackLocation.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new JvmStackLocation(1), null);
   }
@@ -198,11 +186,9 @@ class JvmStackLocationDiffblueTest {
    * <p>Method under test: {@link JvmStackLocation#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean JvmStackLocation.equals(Object)", "int JvmStackLocation.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new JvmStackLocation(1), "Different type to JvmStackLocation");
   }

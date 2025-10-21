@@ -1,13 +1,12 @@
 package proguard.classfile.attribute.annotation.target;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.Field;
 import proguard.classfile.LibraryClass;
@@ -19,20 +18,18 @@ import proguard.classfile.attribute.annotation.TypeAnnotation;
 import proguard.classfile.attribute.annotation.target.visitor.TargetInfoVisitor;
 import proguard.classfile.editor.CodeAttributeComposer;
 
-class TargetInfoDiffblueTest {
+public class TargetInfoDiffblueTest {
   /**
    * Test {@link TargetInfo#getTargetType()}.
    *
    * <p>Method under test: {@link TargetInfo#getTargetType()}
    */
   @Test
-  @DisplayName("Test getTargetType()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"byte TargetInfo.getTargetType()"})
-  void testGetTargetType() {
+  public void testGetTargetType() {
     // Arrange, Act and Assert
-    assertEquals('A', new CatchTargetInfo((byte) 'A').getTargetType());
+    assertEquals('A', (new CatchTargetInfo((byte) 'A')).getTargetType());
   }
 
   /**
@@ -43,16 +40,14 @@ class TargetInfoDiffblueTest {
    * TargetInfoVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(Clazz, Field, TypeAnnotation, TargetInfoVisitor) with 'clazz', 'field', 'typeAnnotation', 'targetInfoVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TargetInfo.accept(Clazz, Field, TypeAnnotation, TargetInfoVisitor)"})
-  void testAcceptWithClazzFieldTypeAnnotationTargetInfoVisitor() {
+  public void testAcceptWithClazzFieldTypeAnnotationTargetInfoVisitor() {
     // Arrange
     CatchTargetInfo catchTargetInfo = new CatchTargetInfo((byte) 'A');
     LibraryClass clazz = new LibraryClass();
     LibraryField field = new LibraryField(1, "Name", "Descriptor");
+
     TypeAnnotation typeAnnotation = new TypeAnnotation();
 
     // Act and Assert
@@ -70,18 +65,16 @@ class TargetInfoDiffblueTest {
    * TargetInfoVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(Clazz, Method, CodeAttribute, TypeAnnotation, TargetInfoVisitor) with 'clazz', 'method', 'codeAttribute', 'typeAnnotation', 'targetInfoVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void TargetInfo.accept(Clazz, Method, CodeAttribute, TypeAnnotation, TargetInfoVisitor)"
   })
-  void testAcceptWithClazzMethodCodeAttributeTypeAnnotationTargetInfoVisitor() {
+  public void testAcceptWithClazzMethodCodeAttributeTypeAnnotationTargetInfoVisitor() {
     // Arrange
     EmptyTargetInfo emptyTargetInfo = new EmptyTargetInfo((byte) 'A');
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
     TypeAnnotation typeAnnotation = new TypeAnnotation();
 
@@ -101,16 +94,14 @@ class TargetInfoDiffblueTest {
    * TargetInfoVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(Clazz, Method, TypeAnnotation, TargetInfoVisitor) with 'clazz', 'method', 'typeAnnotation', 'targetInfoVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TargetInfo.accept(Clazz, Method, TypeAnnotation, TargetInfoVisitor)"})
-  void testAcceptWithClazzMethodTypeAnnotationTargetInfoVisitor() {
+  public void testAcceptWithClazzMethodTypeAnnotationTargetInfoVisitor() {
     // Arrange
     CatchTargetInfo catchTargetInfo = new CatchTargetInfo((byte) 'A');
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     TypeAnnotation typeAnnotation = new TypeAnnotation();
 
     // Act and Assert

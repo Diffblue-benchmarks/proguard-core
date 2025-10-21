@@ -1,15 +1,14 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.kotlin.KotlinConstants;
 
-class ClassPoolFeatureNameFunctionDiffblueTest {
+public class ClassPoolFeatureNameFunctionDiffblueTest {
   /**
    * Test {@link ClassPoolFeatureNameFunction#transform(String)}.
    *
@@ -20,14 +19,12 @@ class ClassPoolFeatureNameFunctionDiffblueTest {
    * <p>Method under test: {@link ClassPoolFeatureNameFunction#transform(String)}
    */
   @Test
-  @DisplayName("Test transform(String); then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassPoolFeatureNameFunction.transform(String)"})
-  void testTransform_thenReturnNull() {
+  public void testTransform_thenReturnNull() {
     // Arrange, Act and Assert
     assertNull(
-        new ClassPoolFeatureNameFunction(KotlinConstants.dummyClassPool).transform("String"));
+        (new ClassPoolFeatureNameFunction(KotlinConstants.dummyClassPool)).transform("String"));
   }
 
   /**
@@ -41,12 +38,10 @@ class ClassPoolFeatureNameFunctionDiffblueTest {
    * <p>Method under test: {@link ClassPoolFeatureNameFunction#transform(String)}
    */
   @Test
-  @DisplayName("Test transform(String); when empty string; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassPoolFeatureNameFunction.transform(String)"})
-  void testTransform_whenEmptyString_thenReturnNull() {
+  public void testTransform_whenEmptyString_thenReturnNull() {
     // Arrange, Act and Assert
-    assertNull(new ClassPoolFeatureNameFunction(KotlinConstants.dummyClassPool).transform(""));
+    assertNull((new ClassPoolFeatureNameFunction(KotlinConstants.dummyClassPool)).transform(""));
   }
 }

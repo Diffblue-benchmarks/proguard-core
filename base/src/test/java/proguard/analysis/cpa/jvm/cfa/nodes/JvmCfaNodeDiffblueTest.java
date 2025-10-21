@@ -1,21 +1,20 @@
 package proguard.analysis.cpa.jvm.cfa.nodes;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.analysis.cpa.jvm.cfa.edges.JvmCallCfaEdge;
 import proguard.analysis.cpa.jvm.cfa.edges.JvmCfaEdge;
 import proguard.classfile.ClassConstants;
@@ -23,7 +22,7 @@ import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.MethodSignature;
 
-class JvmCfaNodeDiffblueTest {
+public class JvmCfaNodeDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -39,9 +38,7 @@ class JvmCfaNodeDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void JvmCfaNode.<init>(List, List, MethodSignature, int, Clazz)",
     "Clazz JvmCfaNode.getClazz()",
@@ -50,7 +47,7 @@ class JvmCfaNodeDiffblueTest {
     "int JvmCfaNode.getOffset()",
     "String JvmCfaNode.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     ArrayList<JvmCfaEdge> leavingEdges = new ArrayList<>();
     ArrayList<JvmCfaEdge> enteringEdges = new ArrayList<>();
@@ -83,11 +80,9 @@ class JvmCfaNodeDiffblueTest {
    * <p>Method under test: {@link JvmCfaNode#JvmCfaNode(MethodSignature, int, Clazz)}
    */
   @Test
-  @DisplayName("Test new JvmCfaNode(MethodSignature, int, Clazz)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void JvmCfaNode.<init>(MethodSignature, int, Clazz)"})
-  void testNewJvmCfaNode() {
+  public void testNewJvmCfaNode() {
     // Arrange
     MethodSignature signature = ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE;
     LibraryClass clazz = new LibraryClass();
@@ -134,11 +129,9 @@ class JvmCfaNodeDiffblueTest {
    * <p>Method under test: {@link JvmCfaNode#isEntryNode()}
    */
   @Test
-  @DisplayName("Test isEntryNode()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean JvmCfaNode.isEntryNode()"})
-  void testIsEntryNode() {
+  public void testIsEntryNode() {
     // Arrange, Act and Assert
     assertFalse(JvmUnknownCfaNode.INSTANCE.isEntryNode());
   }
@@ -149,11 +142,9 @@ class JvmCfaNodeDiffblueTest {
    * <p>Method under test: {@link JvmCfaNode#isExitNode()}
    */
   @Test
-  @DisplayName("Test isExitNode()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean JvmCfaNode.isExitNode()"})
-  void testIsExitNode() {
+  public void testIsExitNode() {
     // Arrange, Act and Assert
     assertFalse(JvmUnknownCfaNode.INSTANCE.isExitNode());
   }
@@ -164,17 +155,15 @@ class JvmCfaNodeDiffblueTest {
    * <p>Method under test: {@link JvmCfaNode#getSignature()}
    */
   @Test
-  @DisplayName("Test getSignature()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"MethodSignature JvmCfaNode.getSignature()"})
-  void testGetSignature() {
+  public void testGetSignature() {
     // Arrange, Act and Assert
     assertNull(JvmUnknownCfaNode.INSTANCE.getSignature());
   }
 
   /**
-   * Test {@link JvmCfaNode#equals(Object)}, and {@link JvmCfaNode#hashCode()}.
+   * Test {@link Object#equals(Object)}, and {@link JvmCfaNode#hashCode()}.
    *
    * <ul>
    *   <li>When other is equal.
@@ -189,22 +178,21 @@ class JvmCfaNodeDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int JvmCfaNode.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     JvmUnknownCfaNode jvmUnknownCfaNode = JvmUnknownCfaNode.INSTANCE;
     JvmUnknownCfaNode jvmUnknownCfaNode2 = JvmUnknownCfaNode.INSTANCE;
 
     // Act and Assert
     assertEquals(jvmUnknownCfaNode, jvmUnknownCfaNode2);
-    assertEquals(jvmUnknownCfaNode.hashCode(), jvmUnknownCfaNode2.hashCode());
+    int expectedHashCodeResult = jvmUnknownCfaNode.hashCode();
+    assertEquals(expectedHashCodeResult, jvmUnknownCfaNode2.hashCode());
   }
 
   /**
-   * Test {@link JvmCfaNode#equals(Object)}, and {@link JvmCfaNode#hashCode()}.
+   * Test {@link Object#equals(Object)}, and {@link JvmCfaNode#hashCode()}.
    *
    * <ul>
    *   <li>When other is same.
@@ -219,11 +207,9 @@ class JvmCfaNodeDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int JvmCfaNode.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     JvmUnknownCfaNode jvmUnknownCfaNode = JvmUnknownCfaNode.INSTANCE;
 
@@ -234,7 +220,7 @@ class JvmCfaNodeDiffblueTest {
   }
 
   /**
-   * Test {@link JvmCfaNode#equals(Object)}.
+   * Test {@link Object#equals(Object)}.
    *
    * <ul>
    *   <li>When other is different.
@@ -244,17 +230,15 @@ class JvmCfaNodeDiffblueTest {
    * <p>Method under test: {@link JvmCfaNode#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int JvmCfaNode.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(JvmUnknownCfaNode.INSTANCE, "42");
   }
 
   /**
-   * Test {@link JvmCfaNode#equals(Object)}.
+   * Test {@link Object#equals(Object)}.
    *
    * <ul>
    *   <li>When other is {@code null}.
@@ -264,17 +248,15 @@ class JvmCfaNodeDiffblueTest {
    * <p>Method under test: {@link JvmCfaNode#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int JvmCfaNode.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(JvmUnknownCfaNode.INSTANCE, null);
   }
 
   /**
-   * Test {@link JvmCfaNode#equals(Object)}.
+   * Test {@link Object#equals(Object)}.
    *
    * <ul>
    *   <li>When other is wrong type.
@@ -284,11 +266,9 @@ class JvmCfaNodeDiffblueTest {
    * <p>Method under test: {@link JvmCfaNode#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int JvmCfaNode.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(JvmUnknownCfaNode.INSTANCE, "Different type to JvmCfaNode");
   }

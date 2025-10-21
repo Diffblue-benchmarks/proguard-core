@@ -1,23 +1,22 @@
 package proguard.dexfile.reader.node.insn;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.reader.Method;
 import proguard.dexfile.reader.Op;
 import proguard.dexfile.reader.Proto;
 import proguard.dexfile.reader.node.DexCodeNode;
 import proguard.dexfile.reader.visitors.DexCodeVisitor;
 
-class MethodPolymorphicStmtNodeDiffblueTest {
+public class MethodPolymorphicStmtNodeDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -29,20 +28,18 @@ class MethodPolymorphicStmtNodeDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void MethodPolymorphicStmtNode.<init>(Op, int[], Method, Proto)",
     "Proto MethodPolymorphicStmtNode.getProto()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
+
     Method method = new Method("Owner", "Name", proto);
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
+
+    Proto proto2 = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     // Act
     MethodPolymorphicStmtNode actualMethodPolymorphicStmtNode =
@@ -71,18 +68,15 @@ class MethodPolymorphicStmtNodeDiffblueTest {
    * <p>Method under test: {@link MethodPolymorphicStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeNode(); then DexCodeNode() stmts size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MethodPolymorphicStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
+  public void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
+
     Method method = new Method("Owner", "Name", proto);
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
+
+    Proto proto2 = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     MethodPolymorphicStmtNode methodPolymorphicStmtNode =
         new MethodPolymorphicStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, method, proto2);
@@ -117,18 +111,15 @@ class MethodPolymorphicStmtNodeDiffblueTest {
    * <p>Method under test: {@link MethodPolymorphicStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeVisitor(DexCodeVisitor) with visitor is DexCodeNode(); then array length is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MethodPolymorphicStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeNode_thenArrayLengthIsOne() {
+  public void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeNode_thenArrayLengthIsOne() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
+
     Method method = new Method("Owner", "Name", proto);
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
+
+    Proto proto2 = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     MethodPolymorphicStmtNode methodPolymorphicStmtNode =
         new MethodPolymorphicStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, method, proto2);
@@ -155,18 +146,15 @@ class MethodPolymorphicStmtNodeDiffblueTest {
    * <p>Method under test: {@link MethodPolymorphicStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeVisitor(DexCodeVisitor) with visitor is DexCodeVisitor(); then array length is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MethodPolymorphicStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeVisitor_thenArrayLengthIsOne() {
+  public void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeVisitor_thenArrayLengthIsOne() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
+
     Method method = new Method("Owner", "Name", proto);
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
+
+    Proto proto2 = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     MethodPolymorphicStmtNode methodPolymorphicStmtNode =
         new MethodPolymorphicStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, method, proto2);
@@ -192,17 +180,15 @@ class MethodPolymorphicStmtNodeDiffblueTest {
    * <p>Method under test: {@link MethodPolymorphicStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName("Test accept(DexCodeVisitor); when DexCodeVisitor(); then array length is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MethodPolymorphicStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeVisitor_thenArrayLengthIsOne() {
+  public void testAccept_whenDexCodeVisitor_thenArrayLengthIsOne() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
+
     Method method = new Method("Owner", "Name", proto);
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
+
+    Proto proto2 = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     MethodPolymorphicStmtNode methodPolymorphicStmtNode =
         new MethodPolymorphicStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, method, proto2);

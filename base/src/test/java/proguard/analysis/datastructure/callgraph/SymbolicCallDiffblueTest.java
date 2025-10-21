@@ -1,18 +1,17 @@
 package proguard.analysis.datastructure.callgraph;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.analysis.datastructure.CodeLocation;
 import proguard.classfile.ClassConstants;
 import proguard.classfile.LibraryClass;
@@ -22,7 +21,7 @@ import proguard.classfile.MethodSignature;
 import proguard.classfile.instruction.BranchInstruction;
 import proguard.classfile.instruction.Instruction;
 
-class SymbolicCallDiffblueTest {
+public class SymbolicCallDiffblueTest {
   /**
    * Test {@link SymbolicCall#SymbolicCall(CodeLocation, MethodSignature, int, Instruction, boolean,
    * boolean)}.
@@ -31,19 +30,15 @@ class SymbolicCallDiffblueTest {
    * Instruction, boolean, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test new SymbolicCall(CodeLocation, MethodSignature, int, Instruction, boolean, boolean)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void SymbolicCall.<init>(CodeLocation, MethodSignature, int, Instruction, boolean, boolean)"
   })
-  void testNewSymbolicCall() {
+  public void testNewSymbolicCall() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
+    CodeLocation caller = new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
 
-    CodeLocation caller = new CodeLocation(clazz, member, 2);
     MethodSignature target = ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE;
 
     // Act
@@ -74,27 +69,23 @@ class SymbolicCallDiffblueTest {
    * <p>Method under test: {@link SymbolicCall#getTarget()}
    */
   @Test
-  @DisplayName("Test getTarget()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"MethodSignature SymbolicCall.getTarget()"})
-  void testGetTarget() {
+  public void testGetTarget() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation caller = new CodeLocation(clazz, member, 2);
-    SymbolicCall symbolicCall =
-        new SymbolicCall(
-            caller,
-            ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE,
-            1,
-            new BranchInstruction((byte) 'A', 1),
-            true,
-            true);
+    CodeLocation caller = new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
 
     // Act
-    MethodSignature actualTarget = symbolicCall.getTarget();
+    MethodSignature actualTarget =
+        (new SymbolicCall(
+                caller,
+                ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE,
+                1,
+                new BranchInstruction((byte) 'A', 1),
+                true,
+                true))
+            .getTarget();
 
     // Assert
     assertEquals("Class ClassLoader.findLoadedClass(String)", actualTarget.getPrettyFqn());
@@ -124,21 +115,23 @@ class SymbolicCallDiffblueTest {
    * <p>Method under test: {@link SymbolicCall#hasIncompleteTarget()}
    */
   @Test
-  @DisplayName("Test hasIncompleteTarget()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean SymbolicCall.hasIncompleteTarget()"})
-  void testHasIncompleteTarget() {
+  public void testHasIncompleteTarget() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation caller = new CodeLocation(clazz, member, 2);
-    SymbolicCall symbolicCall =
-        new SymbolicCall(caller, null, 1, new BranchInstruction((byte) 'A', 1), true, true);
+    CodeLocation caller = new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
 
     // Act and Assert
-    assertTrue(symbolicCall.hasIncompleteTarget());
+    assertTrue(
+        (new SymbolicCall(
+                caller,
+                MethodSignature.UNKNOWN,
+                1,
+                new BranchInstruction((byte) 'A', 1),
+                true,
+                true))
+            .hasIncompleteTarget());
   }
 
   /**
@@ -147,22 +140,17 @@ class SymbolicCallDiffblueTest {
    * <p>Method under test: {@link SymbolicCall#hasIncompleteTarget()}
    */
   @Test
-  @DisplayName("Test hasIncompleteTarget()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean SymbolicCall.hasIncompleteTarget()"})
-  void testHasIncompleteTarget2() {
+  public void testHasIncompleteTarget2() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation caller = new CodeLocation(clazz, member, 2);
-    SymbolicCall symbolicCall =
-        new SymbolicCall(
-            caller, MethodSignature.UNKNOWN, 1, new BranchInstruction((byte) 'A', 1), true, true);
+    CodeLocation caller = new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
 
     // Act and Assert
-    assertTrue(symbolicCall.hasIncompleteTarget());
+    assertTrue(
+        (new SymbolicCall(caller, null, 1, new BranchInstruction((byte) 'A', 1), true, true))
+            .hasIncompleteTarget());
   }
 
   /**
@@ -175,27 +163,23 @@ class SymbolicCallDiffblueTest {
    * <p>Method under test: {@link SymbolicCall#hasIncompleteTarget()}
    */
   @Test
-  @DisplayName("Test hasIncompleteTarget(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean SymbolicCall.hasIncompleteTarget()"})
-  void testHasIncompleteTarget_thenReturnFalse() {
+  public void testHasIncompleteTarget_thenReturnFalse() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation caller = new CodeLocation(clazz, member, 2);
-    SymbolicCall symbolicCall =
-        new SymbolicCall(
-            caller,
-            ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE,
-            1,
-            new BranchInstruction((byte) 'A', 1),
-            true,
-            true);
+    CodeLocation caller = new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
 
     // Act and Assert
-    assertFalse(symbolicCall.hasIncompleteTarget());
+    assertFalse(
+        (new SymbolicCall(
+                caller,
+                ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE,
+                1,
+                new BranchInstruction((byte) 'A', 1),
+                true,
+                true))
+            .hasIncompleteTarget());
   }
 
   /**
@@ -214,16 +198,13 @@ class SymbolicCallDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean SymbolicCall.equals(Object)", "int SymbolicCall.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
+    CodeLocation caller = new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
 
-    CodeLocation caller = new CodeLocation(clazz, member, 2);
     SymbolicCall symbolicCall =
         new SymbolicCall(
             caller,
@@ -233,9 +214,8 @@ class SymbolicCallDiffblueTest {
             true,
             true);
     LibraryClass clazz2 = new LibraryClass();
-    LibraryField member2 = new LibraryField(1, "Name", "Descriptor");
+    CodeLocation caller2 = new CodeLocation(clazz2, new LibraryField(1, "Name", "Descriptor"), 2);
 
-    CodeLocation caller2 = new CodeLocation(clazz2, member2, 2);
     SymbolicCall symbolicCall2 =
         new SymbolicCall(
             caller2,
@@ -247,7 +227,8 @@ class SymbolicCallDiffblueTest {
 
     // Act and Assert
     assertEquals(symbolicCall, symbolicCall2);
-    assertEquals(symbolicCall.hashCode(), symbolicCall2.hashCode());
+    int expectedHashCodeResult = symbolicCall.hashCode();
+    assertEquals(expectedHashCodeResult, symbolicCall2.hashCode());
   }
 
   /**
@@ -266,16 +247,13 @@ class SymbolicCallDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean SymbolicCall.equals(Object)", "int SymbolicCall.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
+    CodeLocation caller = new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
 
-    CodeLocation caller = new CodeLocation(clazz, member, 2);
     SymbolicCall symbolicCall =
         new SymbolicCall(
             caller,
@@ -302,16 +280,14 @@ class SymbolicCallDiffblueTest {
    * <p>Method under test: {@link SymbolicCall#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean SymbolicCall.equals(Object)", "int SymbolicCall.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
-    LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
+    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
 
-    CodeLocation caller = new CodeLocation(clazz, member, 1);
+    CodeLocation caller = new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
+
     SymbolicCall symbolicCall =
         new SymbolicCall(
             caller,
@@ -321,9 +297,7 @@ class SymbolicCallDiffblueTest {
             true,
             true);
     LibraryClass clazz2 = new LibraryClass();
-    LibraryField member2 = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation caller2 = new CodeLocation(clazz2, member2, 2);
+    CodeLocation caller2 = new CodeLocation(clazz2, new LibraryField(1, "Name", "Descriptor"), 2);
 
     // Act and Assert
     assertNotEquals(
@@ -348,16 +322,12 @@ class SymbolicCallDiffblueTest {
    * <p>Method under test: {@link SymbolicCall#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean SymbolicCall.equals(Object)", "int SymbolicCall.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation caller = new CodeLocation(clazz, member, 2);
+    CodeLocation caller = new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
 
     // Act and Assert
     assertNotEquals(
@@ -382,16 +352,12 @@ class SymbolicCallDiffblueTest {
    * <p>Method under test: {@link SymbolicCall#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean SymbolicCall.equals(Object)", "int SymbolicCall.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation caller = new CodeLocation(clazz, member, 2);
+    CodeLocation caller = new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
 
     // Act and Assert
     assertNotEquals(

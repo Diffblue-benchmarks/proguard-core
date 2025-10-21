@@ -1,14 +1,13 @@
 package proguard.dexfile.reader;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class DexTypeDiffblueTest {
+public class DexTypeDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -20,14 +19,12 @@ class DexTypeDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexType.<init>(String)", "String DexType.toString()"})
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
     assertEquals(
         "The characteristics of someone or something",
-        new DexType("The characteristics of someone or something").toString());
+        (new DexType("The characteristics of someone or something")).toString());
   }
 }

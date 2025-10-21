@@ -1,14 +1,13 @@
 package proguard.resources.file.visitor;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ResourceJavaReferenceCollectorDiffblueTest {
+public class ResourceJavaReferenceCollectorDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -20,15 +19,13 @@ class ResourceJavaReferenceCollectorDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ResourceJavaReferenceCollector.<init>()",
     "java.util.Set ResourceJavaReferenceCollector.getReferences()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
-    assertNull(new ResourceJavaReferenceCollector().getReferences());
+    assertNull((new ResourceJavaReferenceCollector()).getReferences());
   }
 }

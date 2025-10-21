@@ -1,31 +1,27 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class FloatValueDiffblueTest {
+public class FloatValueDiffblueTest {
   /**
    * Test {@link FloatValue#value()}.
    *
    * <p>Method under test: {@link FloatValue#value()}
    */
   @Test
-  @DisplayName("Test value()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"float FloatValue.value()"})
-  void testValue() {
+  public void testValue() {
     // Arrange, Act and Assert
-    assertEquals(0.0f, new UnknownFloatValue().value());
+    assertEquals(0.0f, (new UnknownFloatValue()).value(), 0.0f);
   }
 
   /**
@@ -38,21 +34,14 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#generalize(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(ParticularFloatValue) with 'ParticularFloatValue'; then return UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.generalize(ParticularFloatValue)"})
-  void testGeneralizeWithParticularFloatValue_thenReturnUnknownFloatValue() {
+  public void testGeneralizeWithParticularFloatValue_thenReturnUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    FloatValue actualGeneralizeResult =
-        unknownFloatValue.generalize(new ParticularFloatValue(10.0f));
-
-    // Assert
-    assertSame(unknownFloatValue, actualGeneralizeResult);
+    // Act and Assert
+    assertSame(unknownFloatValue, unknownFloatValue.generalize(new ParticularFloatValue(10.0f)));
   }
 
   /**
@@ -65,12 +54,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#generalize(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(ParticularFloatValue) with 'ParticularFloatValue'; then return UnknownFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.generalize(ParticularFloatValue)"})
-  void testGeneralizeWithParticularFloatValue_thenReturnUnknownFloatValue2() {
+  public void testGeneralizeWithParticularFloatValue_thenReturnUnknownFloatValue2() {
     // Arrange
     CompositeFloatValue compositeFloatValue =
         new CompositeFloatValue(
@@ -93,20 +79,16 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#generalize(SpecificFloatValue)}
    */
   @Test
-  @DisplayName("Test generalize(SpecificFloatValue) with 'SpecificFloatValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.generalize(SpecificFloatValue)"})
-  void testGeneralizeWithSpecificFloatValue() {
+  public void testGeneralizeWithSpecificFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    FloatValue actualGeneralizeResult =
-        unknownFloatValue.generalize((SpecificFloatValue) new ParticularFloatValue(10.0f));
-
-    // Assert
-    assertSame(unknownFloatValue, actualGeneralizeResult);
+    // Act and Assert
+    assertSame(
+        unknownFloatValue,
+        unknownFloatValue.generalize((SpecificFloatValue) new ParticularFloatValue(10.0f)));
   }
 
   /**
@@ -120,19 +102,14 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#generalize(Value)}
    */
   @Test
-  @DisplayName("Test generalize(Value) with 'Value'; given FLOAT_VALUE; then return UNKNOWN_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value FloatValue.generalize(Value)"})
-  void testGeneralizeWithValue_givenFloat_value_thenReturnUnknown_value() {
+  public void testGeneralizeWithValue_givenFloat_value_thenReturnUnknown_value() {
     // Arrange
     UnknownValue other = BasicValueFactory.UNKNOWN_VALUE;
 
-    // Act
-    Value actualGeneralizeResult = BasicValueFactory.FLOAT_VALUE.generalize(other);
-
-    // Assert
-    assertSame(other, actualGeneralizeResult);
+    // Act and Assert
+    assertSame(other, BasicValueFactory.FLOAT_VALUE.generalize(other));
   }
 
   /**
@@ -146,44 +123,15 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#generalize(Value)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(Value) with 'Value'; when FLOAT_VALUE; then return UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value FloatValue.generalize(Value)"})
-  void testGeneralizeWithValue_whenFloat_value_thenReturnUnknownFloatValue() {
+  public void testGeneralizeWithValue_whenFloat_value_thenReturnUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    Value actualGeneralizeResult =
-        unknownFloatValue.generalize((Value) BasicValueFactory.FLOAT_VALUE);
-
-    // Assert
-    assertSame(unknownFloatValue, actualGeneralizeResult);
-  }
-
-  /**
-   * Test {@link FloatValue#generalize(Value)} with {@code Value}.
-   *
-   * <ul>
-   *   <li>When {@link BasicRangeValueFactory#INTEGER_VALUE_BYTE}.
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link FloatValue#generalize(Value)}
-   */
-  @Test
-  @DisplayName(
-      "Test generalize(Value) with 'Value'; when INTEGER_VALUE_BYTE; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Value FloatValue.generalize(Value)"})
-  void testGeneralizeWithValue_whenInteger_value_byte_thenThrowIllegalArgumentException() {
-    // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> new UnknownFloatValue().generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
+    // Act and Assert
+    assertSame(
+        unknownFloatValue, unknownFloatValue.generalize((Value) BasicValueFactory.FLOAT_VALUE));
   }
 
   /**
@@ -196,12 +144,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#add(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test add(ParticularFloatValue) with 'ParticularFloatValue'; then return CompositeFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.add(ParticularFloatValue)"})
-  void testAddWithParticularFloatValue_thenReturnCompositeFloatValue() {
+  public void testAddWithParticularFloatValue_thenReturnCompositeFloatValue() {
     // Arrange
     CompositeFloatValue compositeFloatValue =
         new CompositeFloatValue(
@@ -227,12 +172,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#add(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test add(ParticularFloatValue) with 'ParticularFloatValue'; then return ParticularFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.add(ParticularFloatValue)"})
-  void testAddWithParticularFloatValue_thenReturnParticularFloatValue() {
+  public void testAddWithParticularFloatValue_thenReturnParticularFloatValue() {
     // Arrange
     ParticularFloatValue other = new ParticularFloatValue(10.0f);
 
@@ -254,20 +196,14 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#add(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test add(ParticularFloatValue) with 'ParticularFloatValue'; then return UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.add(ParticularFloatValue)"})
-  void testAddWithParticularFloatValue_thenReturnUnknownFloatValue() {
+  public void testAddWithParticularFloatValue_thenReturnUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    FloatValue actualAddResult = unknownFloatValue.add(new ParticularFloatValue(10.0f));
-
-    // Assert
-    assertSame(unknownFloatValue, actualAddResult);
+    // Act and Assert
+    assertSame(unknownFloatValue, unknownFloatValue.add(new ParticularFloatValue(10.0f)));
   }
 
   /**
@@ -281,12 +217,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#add(SpecificFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test add(SpecificFloatValue) with 'SpecificFloatValue'; given FLOAT_VALUE_0; then return CompositeFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.add(SpecificFloatValue)"})
-  void testAddWithSpecificFloatValue_givenFloat_value_0_thenReturnCompositeFloatValue() {
+  public void testAddWithSpecificFloatValue_givenFloat_value_0_thenReturnCompositeFloatValue() {
     // Arrange and Act
     FloatValue actualAddResult =
         ParticularValueFactory.FLOAT_VALUE_0.add(
@@ -310,21 +243,16 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#add(SpecificFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test add(SpecificFloatValue) with 'SpecificFloatValue'; given UnknownFloatValue (default constructor); then return UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.add(SpecificFloatValue)"})
-  void testAddWithSpecificFloatValue_givenUnknownFloatValue_thenReturnUnknownFloatValue() {
+  public void testAddWithSpecificFloatValue_givenUnknownFloatValue_thenReturnUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    FloatValue actualAddResult =
-        unknownFloatValue.add((SpecificFloatValue) new ParticularFloatValue(10.0f));
-
-    // Assert
-    assertSame(unknownFloatValue, actualAddResult);
+    // Act and Assert
+    assertSame(
+        unknownFloatValue,
+        unknownFloatValue.add((SpecificFloatValue) new ParticularFloatValue(10.0f)));
   }
 
   /**
@@ -337,12 +265,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#subtract(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(ParticularFloatValue) with 'ParticularFloatValue'; then return CompositeFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.subtract(ParticularFloatValue)"})
-  void testSubtractWithParticularFloatValue_thenReturnCompositeFloatValue() {
+  public void testSubtractWithParticularFloatValue_thenReturnCompositeFloatValue() {
     // Arrange
     CompositeFloatValue compositeFloatValue =
         new CompositeFloatValue(
@@ -368,19 +293,16 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#subtract(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(ParticularFloatValue) with 'ParticularFloatValue'; then return ParticularFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.subtract(ParticularFloatValue)"})
-  void testSubtractWithParticularFloatValue_thenReturnParticularFloatValue() {
+  public void testSubtractWithParticularFloatValue_thenReturnParticularFloatValue() {
     // Arrange and Act
     FloatValue actualSubtractResult =
         ParticularValueFactory.FLOAT_VALUE_0.subtract(new ParticularFloatValue(10.0f));
 
     // Assert
     assertTrue(actualSubtractResult instanceof ParticularFloatValue);
-    assertEquals(-10.0f, actualSubtractResult.value());
+    assertEquals(-10.0f, actualSubtractResult.value(), 0.0f);
     assertTrue(actualSubtractResult.isParticular());
     assertTrue(actualSubtractResult.isSpecific());
   }
@@ -395,20 +317,14 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#subtract(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(ParticularFloatValue) with 'ParticularFloatValue'; then return UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.subtract(ParticularFloatValue)"})
-  void testSubtractWithParticularFloatValue_thenReturnUnknownFloatValue() {
+  public void testSubtractWithParticularFloatValue_thenReturnUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    FloatValue actualSubtractResult = unknownFloatValue.subtract(new ParticularFloatValue(10.0f));
-
-    // Assert
-    assertSame(unknownFloatValue, actualSubtractResult);
+    // Act and Assert
+    assertSame(unknownFloatValue, unknownFloatValue.subtract(new ParticularFloatValue(10.0f)));
   }
 
   /**
@@ -421,12 +337,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#subtract(SpecificFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(SpecificFloatValue) with 'SpecificFloatValue'; then return CompositeFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.subtract(SpecificFloatValue)"})
-  void testSubtractWithSpecificFloatValue_thenReturnCompositeFloatValue() {
+  public void testSubtractWithSpecificFloatValue_thenReturnCompositeFloatValue() {
     // Arrange and Act
     FloatValue actualSubtractResult =
         ParticularValueFactory.FLOAT_VALUE_0.subtract(
@@ -449,21 +362,16 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#subtract(SpecificFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(SpecificFloatValue) with 'SpecificFloatValue'; then return UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.subtract(SpecificFloatValue)"})
-  void testSubtractWithSpecificFloatValue_thenReturnUnknownFloatValue() {
+  public void testSubtractWithSpecificFloatValue_thenReturnUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    FloatValue actualSubtractResult =
-        unknownFloatValue.subtract((SpecificFloatValue) new ParticularFloatValue(10.0f));
-
-    // Assert
-    assertSame(unknownFloatValue, actualSubtractResult);
+    // Act and Assert
+    assertSame(
+        unknownFloatValue,
+        unknownFloatValue.subtract((SpecificFloatValue) new ParticularFloatValue(10.0f)));
   }
 
   /**
@@ -476,12 +384,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#subtractFrom(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtractFrom(ParticularFloatValue) with 'ParticularFloatValue'; then return CompositeFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.subtractFrom(ParticularFloatValue)"})
-  void testSubtractFromWithParticularFloatValue_thenReturnCompositeFloatValue() {
+  public void testSubtractFromWithParticularFloatValue_thenReturnCompositeFloatValue() {
     // Arrange
     CompositeFloatValue compositeFloatValue =
         new CompositeFloatValue(
@@ -508,12 +413,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#subtractFrom(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtractFrom(ParticularFloatValue) with 'ParticularFloatValue'; then return ParticularFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.subtractFrom(ParticularFloatValue)"})
-  void testSubtractFromWithParticularFloatValue_thenReturnParticularFloatValue() {
+  public void testSubtractFromWithParticularFloatValue_thenReturnParticularFloatValue() {
     // Arrange
     ParticularFloatValue other = new ParticularFloatValue(10.0f);
 
@@ -535,21 +437,14 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#subtractFrom(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtractFrom(ParticularFloatValue) with 'ParticularFloatValue'; then return UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.subtractFrom(ParticularFloatValue)"})
-  void testSubtractFromWithParticularFloatValue_thenReturnUnknownFloatValue() {
+  public void testSubtractFromWithParticularFloatValue_thenReturnUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    FloatValue actualSubtractFromResult =
-        unknownFloatValue.subtractFrom(new ParticularFloatValue(10.0f));
-
-    // Assert
-    assertSame(unknownFloatValue, actualSubtractFromResult);
+    // Act and Assert
+    assertSame(unknownFloatValue, unknownFloatValue.subtractFrom(new ParticularFloatValue(10.0f)));
   }
 
   /**
@@ -562,12 +457,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#subtractFrom(SpecificFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtractFrom(SpecificFloatValue) with 'SpecificFloatValue'; then return CompositeFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.subtractFrom(SpecificFloatValue)"})
-  void testSubtractFromWithSpecificFloatValue_thenReturnCompositeFloatValue() {
+  public void testSubtractFromWithSpecificFloatValue_thenReturnCompositeFloatValue() {
     // Arrange and Act
     FloatValue actualSubtractFromResult =
         ParticularValueFactory.FLOAT_VALUE_0.subtractFrom(
@@ -590,21 +482,16 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#subtractFrom(SpecificFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtractFrom(SpecificFloatValue) with 'SpecificFloatValue'; then return UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.subtractFrom(SpecificFloatValue)"})
-  void testSubtractFromWithSpecificFloatValue_thenReturnUnknownFloatValue() {
+  public void testSubtractFromWithSpecificFloatValue_thenReturnUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    FloatValue actualSubtractFromResult =
-        unknownFloatValue.subtractFrom((SpecificFloatValue) new ParticularFloatValue(10.0f));
-
-    // Assert
-    assertSame(unknownFloatValue, actualSubtractFromResult);
+    // Act and Assert
+    assertSame(
+        unknownFloatValue,
+        unknownFloatValue.subtractFrom((SpecificFloatValue) new ParticularFloatValue(10.0f)));
   }
 
   /**
@@ -617,12 +504,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#multiply(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test multiply(ParticularFloatValue) with 'ParticularFloatValue'; then return CompositeFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.multiply(ParticularFloatValue)"})
-  void testMultiplyWithParticularFloatValue_thenReturnCompositeFloatValue() {
+  public void testMultiplyWithParticularFloatValue_thenReturnCompositeFloatValue() {
     // Arrange
     CompositeFloatValue compositeFloatValue =
         new CompositeFloatValue(
@@ -648,12 +532,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#multiply(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test multiply(ParticularFloatValue) with 'ParticularFloatValue'; then return ParticularFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.multiply(ParticularFloatValue)"})
-  void testMultiplyWithParticularFloatValue_thenReturnParticularFloatValue() {
+  public void testMultiplyWithParticularFloatValue_thenReturnParticularFloatValue() {
     // Arrange
     FloatValue floatValue = ParticularValueFactory.FLOAT_VALUE_0;
 
@@ -675,20 +556,14 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#multiply(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test multiply(ParticularFloatValue) with 'ParticularFloatValue'; then return UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.multiply(ParticularFloatValue)"})
-  void testMultiplyWithParticularFloatValue_thenReturnUnknownFloatValue() {
+  public void testMultiplyWithParticularFloatValue_thenReturnUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    FloatValue actualMultiplyResult = unknownFloatValue.multiply(new ParticularFloatValue(10.0f));
-
-    // Assert
-    assertSame(unknownFloatValue, actualMultiplyResult);
+    // Act and Assert
+    assertSame(unknownFloatValue, unknownFloatValue.multiply(new ParticularFloatValue(10.0f)));
   }
 
   /**
@@ -701,12 +576,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#multiply(SpecificFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test multiply(SpecificFloatValue) with 'SpecificFloatValue'; then return CompositeFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.multiply(SpecificFloatValue)"})
-  void testMultiplyWithSpecificFloatValue_thenReturnCompositeFloatValue() {
+  public void testMultiplyWithSpecificFloatValue_thenReturnCompositeFloatValue() {
     // Arrange and Act
     FloatValue actualMultiplyResult =
         ParticularValueFactory.FLOAT_VALUE_0.multiply(
@@ -729,21 +601,16 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#multiply(SpecificFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test multiply(SpecificFloatValue) with 'SpecificFloatValue'; then return UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.multiply(SpecificFloatValue)"})
-  void testMultiplyWithSpecificFloatValue_thenReturnUnknownFloatValue() {
+  public void testMultiplyWithSpecificFloatValue_thenReturnUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    FloatValue actualMultiplyResult =
-        unknownFloatValue.multiply((SpecificFloatValue) new ParticularFloatValue(10.0f));
-
-    // Assert
-    assertSame(unknownFloatValue, actualMultiplyResult);
+    // Act and Assert
+    assertSame(
+        unknownFloatValue,
+        unknownFloatValue.multiply((SpecificFloatValue) new ParticularFloatValue(10.0f)));
   }
 
   /**
@@ -756,12 +623,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#divide(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test divide(ParticularFloatValue) with 'ParticularFloatValue'; then return CompositeFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.divide(ParticularFloatValue)"})
-  void testDivideWithParticularFloatValue_thenReturnCompositeFloatValue() {
+  public void testDivideWithParticularFloatValue_thenReturnCompositeFloatValue() {
     // Arrange
     CompositeFloatValue compositeFloatValue =
         new CompositeFloatValue(
@@ -787,12 +651,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#divide(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test divide(ParticularFloatValue) with 'ParticularFloatValue'; then return ParticularFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.divide(ParticularFloatValue)"})
-  void testDivideWithParticularFloatValue_thenReturnParticularFloatValue() {
+  public void testDivideWithParticularFloatValue_thenReturnParticularFloatValue() {
     // Arrange
     FloatValue floatValue = ParticularValueFactory.FLOAT_VALUE_0;
 
@@ -814,20 +675,14 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#divide(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test divide(ParticularFloatValue) with 'ParticularFloatValue'; then return UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.divide(ParticularFloatValue)"})
-  void testDivideWithParticularFloatValue_thenReturnUnknownFloatValue() {
+  public void testDivideWithParticularFloatValue_thenReturnUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    FloatValue actualDivideResult = unknownFloatValue.divide(new ParticularFloatValue(10.0f));
-
-    // Assert
-    assertSame(unknownFloatValue, actualDivideResult);
+    // Act and Assert
+    assertSame(unknownFloatValue, unknownFloatValue.divide(new ParticularFloatValue(10.0f)));
   }
 
   /**
@@ -840,12 +695,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#divide(SpecificFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test divide(SpecificFloatValue) with 'SpecificFloatValue'; then return CompositeFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.divide(SpecificFloatValue)"})
-  void testDivideWithSpecificFloatValue_thenReturnCompositeFloatValue() {
+  public void testDivideWithSpecificFloatValue_thenReturnCompositeFloatValue() {
     // Arrange and Act
     FloatValue actualDivideResult =
         ParticularValueFactory.FLOAT_VALUE_0.divide(
@@ -868,21 +720,16 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#divide(SpecificFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test divide(SpecificFloatValue) with 'SpecificFloatValue'; then return UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.divide(SpecificFloatValue)"})
-  void testDivideWithSpecificFloatValue_thenReturnUnknownFloatValue() {
+  public void testDivideWithSpecificFloatValue_thenReturnUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    FloatValue actualDivideResult =
-        unknownFloatValue.divide((SpecificFloatValue) new ParticularFloatValue(10.0f));
-
-    // Assert
-    assertSame(unknownFloatValue, actualDivideResult);
+    // Act and Assert
+    assertSame(
+        unknownFloatValue,
+        unknownFloatValue.divide((SpecificFloatValue) new ParticularFloatValue(10.0f)));
   }
 
   /**
@@ -895,12 +742,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#divideOf(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test divideOf(ParticularFloatValue) with 'ParticularFloatValue'; then return CompositeFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.divideOf(ParticularFloatValue)"})
-  void testDivideOfWithParticularFloatValue_thenReturnCompositeFloatValue() {
+  public void testDivideOfWithParticularFloatValue_thenReturnCompositeFloatValue() {
     // Arrange
     CompositeFloatValue compositeFloatValue =
         new CompositeFloatValue(
@@ -926,12 +770,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#divideOf(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test divideOf(ParticularFloatValue) with 'ParticularFloatValue'; then return ParticularFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.divideOf(ParticularFloatValue)"})
-  void testDivideOfWithParticularFloatValue_thenReturnParticularFloatValue() {
+  public void testDivideOfWithParticularFloatValue_thenReturnParticularFloatValue() {
     // Arrange and Act
     FloatValue actualDivideOfResult =
         ParticularValueFactory.FLOAT_VALUE_0.divideOf(new ParticularFloatValue(10.0f));
@@ -940,7 +781,7 @@ class FloatValueDiffblueTest {
     assertTrue(actualDivideOfResult instanceof ParticularFloatValue);
     assertTrue(actualDivideOfResult.isParticular());
     assertTrue(actualDivideOfResult.isSpecific());
-    assertEquals(Float.POSITIVE_INFINITY, actualDivideOfResult.value());
+    assertEquals(Float.POSITIVE_INFINITY, actualDivideOfResult.value(), 0.0f);
   }
 
   /**
@@ -953,20 +794,14 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#divideOf(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test divideOf(ParticularFloatValue) with 'ParticularFloatValue'; then return UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.divideOf(ParticularFloatValue)"})
-  void testDivideOfWithParticularFloatValue_thenReturnUnknownFloatValue() {
+  public void testDivideOfWithParticularFloatValue_thenReturnUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    FloatValue actualDivideOfResult = unknownFloatValue.divideOf(new ParticularFloatValue(10.0f));
-
-    // Assert
-    assertSame(unknownFloatValue, actualDivideOfResult);
+    // Act and Assert
+    assertSame(unknownFloatValue, unknownFloatValue.divideOf(new ParticularFloatValue(10.0f)));
   }
 
   /**
@@ -979,12 +814,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#divideOf(SpecificFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test divideOf(SpecificFloatValue) with 'SpecificFloatValue'; then return CompositeFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.divideOf(SpecificFloatValue)"})
-  void testDivideOfWithSpecificFloatValue_thenReturnCompositeFloatValue() {
+  public void testDivideOfWithSpecificFloatValue_thenReturnCompositeFloatValue() {
     // Arrange and Act
     FloatValue actualDivideOfResult =
         ParticularValueFactory.FLOAT_VALUE_0.divideOf(
@@ -1007,21 +839,16 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#divideOf(SpecificFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test divideOf(SpecificFloatValue) with 'SpecificFloatValue'; then return UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.divideOf(SpecificFloatValue)"})
-  void testDivideOfWithSpecificFloatValue_thenReturnUnknownFloatValue() {
+  public void testDivideOfWithSpecificFloatValue_thenReturnUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    FloatValue actualDivideOfResult =
-        unknownFloatValue.divideOf((SpecificFloatValue) new ParticularFloatValue(10.0f));
-
-    // Assert
-    assertSame(unknownFloatValue, actualDivideOfResult);
+    // Act and Assert
+    assertSame(
+        unknownFloatValue,
+        unknownFloatValue.divideOf((SpecificFloatValue) new ParticularFloatValue(10.0f)));
   }
 
   /**
@@ -1034,12 +861,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#remainder(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainder(ParticularFloatValue) with 'ParticularFloatValue'; then return CompositeFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.remainder(ParticularFloatValue)"})
-  void testRemainderWithParticularFloatValue_thenReturnCompositeFloatValue() {
+  public void testRemainderWithParticularFloatValue_thenReturnCompositeFloatValue() {
     // Arrange
     CompositeFloatValue compositeFloatValue =
         new CompositeFloatValue(
@@ -1066,12 +890,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#remainder(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainder(ParticularFloatValue) with 'ParticularFloatValue'; then return ParticularFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.remainder(ParticularFloatValue)"})
-  void testRemainderWithParticularFloatValue_thenReturnParticularFloatValue() {
+  public void testRemainderWithParticularFloatValue_thenReturnParticularFloatValue() {
     // Arrange
     FloatValue floatValue = ParticularValueFactory.FLOAT_VALUE_0;
 
@@ -1093,20 +914,14 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#remainder(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainder(ParticularFloatValue) with 'ParticularFloatValue'; then return UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.remainder(ParticularFloatValue)"})
-  void testRemainderWithParticularFloatValue_thenReturnUnknownFloatValue() {
+  public void testRemainderWithParticularFloatValue_thenReturnUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    FloatValue actualRemainderResult = unknownFloatValue.remainder(new ParticularFloatValue(10.0f));
-
-    // Assert
-    assertSame(unknownFloatValue, actualRemainderResult);
+    // Act and Assert
+    assertSame(unknownFloatValue, unknownFloatValue.remainder(new ParticularFloatValue(10.0f)));
   }
 
   /**
@@ -1119,12 +934,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#remainder(SpecificFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainder(SpecificFloatValue) with 'SpecificFloatValue'; then return CompositeFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.remainder(SpecificFloatValue)"})
-  void testRemainderWithSpecificFloatValue_thenReturnCompositeFloatValue() {
+  public void testRemainderWithSpecificFloatValue_thenReturnCompositeFloatValue() {
     // Arrange and Act
     FloatValue actualRemainderResult =
         ParticularValueFactory.FLOAT_VALUE_0.remainder(
@@ -1147,21 +959,16 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#remainder(SpecificFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainder(SpecificFloatValue) with 'SpecificFloatValue'; then return UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.remainder(SpecificFloatValue)"})
-  void testRemainderWithSpecificFloatValue_thenReturnUnknownFloatValue() {
+  public void testRemainderWithSpecificFloatValue_thenReturnUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    FloatValue actualRemainderResult =
-        unknownFloatValue.remainder((SpecificFloatValue) new ParticularFloatValue(10.0f));
-
-    // Assert
-    assertSame(unknownFloatValue, actualRemainderResult);
+    // Act and Assert
+    assertSame(
+        unknownFloatValue,
+        unknownFloatValue.remainder((SpecificFloatValue) new ParticularFloatValue(10.0f)));
   }
 
   /**
@@ -1174,12 +981,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#remainderOf(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainderOf(ParticularFloatValue) with 'ParticularFloatValue'; then return CompositeFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.remainderOf(ParticularFloatValue)"})
-  void testRemainderOfWithParticularFloatValue_thenReturnCompositeFloatValue() {
+  public void testRemainderOfWithParticularFloatValue_thenReturnCompositeFloatValue() {
     // Arrange
     CompositeFloatValue compositeFloatValue =
         new CompositeFloatValue(
@@ -1206,12 +1010,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#remainderOf(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainderOf(ParticularFloatValue) with 'ParticularFloatValue'; then return ParticularFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.remainderOf(ParticularFloatValue)"})
-  void testRemainderOfWithParticularFloatValue_thenReturnParticularFloatValue() {
+  public void testRemainderOfWithParticularFloatValue_thenReturnParticularFloatValue() {
     // Arrange and Act
     FloatValue actualRemainderOfResult =
         ParticularValueFactory.FLOAT_VALUE_0.remainderOf(new ParticularFloatValue(10.0f));
@@ -1220,7 +1021,7 @@ class FloatValueDiffblueTest {
     assertTrue(actualRemainderOfResult instanceof ParticularFloatValue);
     assertTrue(actualRemainderOfResult.isParticular());
     assertTrue(actualRemainderOfResult.isSpecific());
-    assertEquals(Float.NaN, actualRemainderOfResult.value());
+    assertEquals(Float.NaN, actualRemainderOfResult.value(), 0.0f);
   }
 
   /**
@@ -1233,21 +1034,14 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#remainderOf(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainderOf(ParticularFloatValue) with 'ParticularFloatValue'; then return UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.remainderOf(ParticularFloatValue)"})
-  void testRemainderOfWithParticularFloatValue_thenReturnUnknownFloatValue() {
+  public void testRemainderOfWithParticularFloatValue_thenReturnUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    FloatValue actualRemainderOfResult =
-        unknownFloatValue.remainderOf(new ParticularFloatValue(10.0f));
-
-    // Assert
-    assertSame(unknownFloatValue, actualRemainderOfResult);
+    // Act and Assert
+    assertSame(unknownFloatValue, unknownFloatValue.remainderOf(new ParticularFloatValue(10.0f)));
   }
 
   /**
@@ -1260,12 +1054,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#remainderOf(SpecificFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainderOf(SpecificFloatValue) with 'SpecificFloatValue'; then return CompositeFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.remainderOf(SpecificFloatValue)"})
-  void testRemainderOfWithSpecificFloatValue_thenReturnCompositeFloatValue() {
+  public void testRemainderOfWithSpecificFloatValue_thenReturnCompositeFloatValue() {
     // Arrange and Act
     FloatValue actualRemainderOfResult =
         ParticularValueFactory.FLOAT_VALUE_0.remainderOf(
@@ -1288,21 +1079,16 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#remainderOf(SpecificFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainderOf(SpecificFloatValue) with 'SpecificFloatValue'; then return UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.remainderOf(SpecificFloatValue)"})
-  void testRemainderOfWithSpecificFloatValue_thenReturnUnknownFloatValue() {
+  public void testRemainderOfWithSpecificFloatValue_thenReturnUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    FloatValue actualRemainderOfResult =
-        unknownFloatValue.remainderOf((SpecificFloatValue) new ParticularFloatValue(10.0f));
-
-    // Assert
-    assertSame(unknownFloatValue, actualRemainderOfResult);
+    // Act and Assert
+    assertSame(
+        unknownFloatValue,
+        unknownFloatValue.remainderOf((SpecificFloatValue) new ParticularFloatValue(10.0f)));
   }
 
   /**
@@ -1311,11 +1097,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#compare(ParticularFloatValue)}
    */
   @Test
-  @DisplayName("Test compare(ParticularFloatValue) with 'ParticularFloatValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue FloatValue.compare(ParticularFloatValue)"})
-  void testCompareWithParticularFloatValue() {
+  public void testCompareWithParticularFloatValue() {
     // Arrange
     CompositeFloatValue compositeFloatValue =
         new CompositeFloatValue(
@@ -1341,12 +1125,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#compare(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test compare(ParticularFloatValue) with 'ParticularFloatValue'; given UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue FloatValue.compare(ParticularFloatValue)"})
-  void testCompareWithParticularFloatValue_givenUnknownFloatValue() {
+  public void testCompareWithParticularFloatValue_givenUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
@@ -1366,11 +1147,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#compare(SpecificFloatValue)}
    */
   @Test
-  @DisplayName("Test compare(SpecificFloatValue) with 'SpecificFloatValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue FloatValue.compare(SpecificFloatValue)"})
-  void testCompareWithSpecificFloatValue() {
+  public void testCompareWithSpecificFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
@@ -1391,15 +1170,13 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#compareReverse(FloatValue)}
    */
   @Test
-  @DisplayName("Test compareReverse(FloatValue) with 'FloatValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue FloatValue.compareReverse(FloatValue)"})
-  void testCompareReverseWithFloatValue() {
+  public void testCompareReverseWithFloatValue() {
     // Arrange and Act
     IntegerValue actualCompareReverseResult =
-        new CompositeFloatValue(
-                BasicValueFactory.FLOAT_VALUE, (byte) 'A', BasicValueFactory.FLOAT_VALUE)
+        (new CompositeFloatValue(
+                BasicValueFactory.FLOAT_VALUE, (byte) 'A', BasicValueFactory.FLOAT_VALUE))
             .compareReverse(BasicValueFactory.FLOAT_VALUE);
 
     // Assert
@@ -1419,11 +1196,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#compareReverse(FloatValue)}
    */
   @Test
-  @DisplayName("Test compareReverse(FloatValue) with 'FloatValue'; given FLOAT_VALUE_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue FloatValue.compareReverse(FloatValue)"})
-  void testCompareReverseWithFloatValue_givenFloat_value_0() {
+  public void testCompareReverseWithFloatValue_givenFloat_value_0() {
     // Arrange and Act
     IntegerValue actualCompareReverseResult =
         ParticularValueFactory.FLOAT_VALUE_0.compareReverse(BasicValueFactory.FLOAT_VALUE);
@@ -1445,15 +1220,12 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#compareReverse(FloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test compareReverse(FloatValue) with 'FloatValue'; given UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue FloatValue.compareReverse(FloatValue)"})
-  void testCompareReverseWithFloatValue_givenUnknownFloatValue() {
+  public void testCompareReverseWithFloatValue_givenUnknownFloatValue() {
     // Arrange and Act
     IntegerValue actualCompareReverseResult =
-        new UnknownFloatValue().compareReverse(BasicValueFactory.FLOAT_VALUE);
+        (new UnknownFloatValue()).compareReverse(BasicValueFactory.FLOAT_VALUE);
 
     // Assert
     assertTrue(actualCompareReverseResult instanceof UnknownIntegerValue);
@@ -1468,11 +1240,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#compareReverse(ParticularFloatValue)}
    */
   @Test
-  @DisplayName("Test compareReverse(ParticularFloatValue) with 'ParticularFloatValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue FloatValue.compareReverse(ParticularFloatValue)"})
-  void testCompareReverseWithParticularFloatValue() {
+  public void testCompareReverseWithParticularFloatValue() {
     // Arrange
     CompositeFloatValue compositeFloatValue =
         new CompositeFloatValue(
@@ -1499,12 +1269,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#compareReverse(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test compareReverse(ParticularFloatValue) with 'ParticularFloatValue'; given UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue FloatValue.compareReverse(ParticularFloatValue)"})
-  void testCompareReverseWithParticularFloatValue_givenUnknownFloatValue() {
+  public void testCompareReverseWithParticularFloatValue_givenUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
@@ -1529,12 +1296,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#compareReverse(ParticularFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test compareReverse(ParticularFloatValue) with 'ParticularFloatValue'; then return ParticularIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue FloatValue.compareReverse(ParticularFloatValue)"})
-  void testCompareReverseWithParticularFloatValue_thenReturnParticularIntegerValue() {
+  public void testCompareReverseWithParticularFloatValue_thenReturnParticularIntegerValue() {
     // Arrange and Act
     IntegerValue actualCompareReverseResult =
         ParticularValueFactory.FLOAT_VALUE_0.compareReverse(new ParticularFloatValue(10.0f));
@@ -1556,12 +1320,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#compareReverse(SpecificFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test compareReverse(SpecificFloatValue) with 'SpecificFloatValue'; given FLOAT_VALUE_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue FloatValue.compareReverse(SpecificFloatValue)"})
-  void testCompareReverseWithSpecificFloatValue_givenFloat_value_0() {
+  public void testCompareReverseWithSpecificFloatValue_givenFloat_value_0() {
     // Arrange and Act
     IntegerValue actualCompareReverseResult =
         ParticularValueFactory.FLOAT_VALUE_0.compareReverse(
@@ -1584,12 +1345,9 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#compareReverse(SpecificFloatValue)}
    */
   @Test
-  @DisplayName(
-      "Test compareReverse(SpecificFloatValue) with 'SpecificFloatValue'; given UnknownFloatValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue FloatValue.compareReverse(SpecificFloatValue)"})
-  void testCompareReverseWithSpecificFloatValue_givenUnknownFloatValue() {
+  public void testCompareReverseWithSpecificFloatValue_givenUnknownFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
@@ -1610,19 +1368,14 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#floatValue()}
    */
   @Test
-  @DisplayName("Test floatValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue FloatValue.floatValue()"})
-  void testFloatValue() {
+  public void testFloatValue() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
-    // Act
-    FloatValue actualFloatValueResult = unknownFloatValue.floatValue();
-
-    // Assert
-    assertSame(unknownFloatValue, actualFloatValueResult);
+    // Act and Assert
+    assertSame(unknownFloatValue, unknownFloatValue.floatValue());
   }
 
   /**
@@ -1631,13 +1384,11 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#computationalType()}
    */
   @Test
-  @DisplayName("Test computationalType()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int FloatValue.computationalType()"})
-  void testComputationalType() {
+  public void testComputationalType() {
     // Arrange, Act and Assert
-    assertEquals(3, new UnknownFloatValue().computationalType());
+    assertEquals(3, (new UnknownFloatValue()).computationalType());
   }
 
   /**
@@ -1646,12 +1397,10 @@ class FloatValueDiffblueTest {
    * <p>Method under test: {@link FloatValue#internalType()}
    */
   @Test
-  @DisplayName("Test internalType()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String FloatValue.internalType()"})
-  void testInternalType() {
+  public void testInternalType() {
     // Arrange, Act and Assert
-    assertEquals("F", new UnknownFloatValue().internalType());
+    assertEquals("F", (new UnknownFloatValue()).internalType());
   }
 }

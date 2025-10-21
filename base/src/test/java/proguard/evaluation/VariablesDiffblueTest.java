@@ -1,18 +1,17 @@
 package proguard.evaluation;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.evaluation.exception.VariableEmptySlotException;
 import proguard.evaluation.exception.VariableIndexOutOfBoundException;
 import proguard.evaluation.value.BasicValueFactory;
@@ -21,26 +20,21 @@ import proguard.evaluation.value.FloatValue;
 import proguard.evaluation.value.TopValue;
 import proguard.evaluation.value.Value;
 
-class VariablesDiffblueTest {
+public class VariablesDiffblueTest {
   /**
    * Test {@link Variables#Variables(Variables)}.
    *
    * <p>Method under test: {@link Variables#Variables(Variables)}
    */
   @Test
-  @DisplayName("Test new Variables(Variables)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Variables.<init>(Variables)"})
-  void testNewVariables() {
+  public void testNewVariables() {
     // Arrange
     Variables variables = new Variables(3);
 
-    // Act
-    Variables actualVariables = new Variables(variables);
-
-    // Assert
-    assertEquals(variables, actualVariables);
+    // Act and Assert
+    assertEquals(variables, new Variables(variables));
   }
 
   /**
@@ -54,11 +48,9 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#Variables(int)}
    */
   @Test
-  @DisplayName("Test new Variables(int); when three; then return first element is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Variables.<init>(int)"})
-  void testNewVariables_whenThree_thenReturnFirstElementIsNull() {
+  public void testNewVariables_whenThree_thenReturnFirstElementIsNull() {
     // Arrange and Act
     Variables actualVariables = new Variables(3);
 
@@ -82,12 +74,9 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#reset(int)}
    */
   @Test
-  @DisplayName(
-      "Test reset(int); given Variables(int) with size is one; then second element is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Variables.reset(int)"})
-  void testReset_givenVariablesWithSizeIsOne_thenSecondElementIsNull() {
+  public void testReset_givenVariablesWithSizeIsOne_thenSecondElementIsNull() {
     // Arrange
     Variables variables = new Variables(1);
 
@@ -113,12 +102,9 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#reset(int)}
    */
   @Test
-  @DisplayName(
-      "Test reset(int); given Variables(int) with size is three; then Variables(int) with size is three size is three")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Variables.reset(int)"})
-  void testReset_givenVariablesWithSizeIsThree_thenVariablesWithSizeIsThreeSizeIsThree() {
+  public void testReset_givenVariablesWithSizeIsThree_thenVariablesWithSizeIsThreeSizeIsThree() {
     // Arrange
     Variables variables = new Variables(3);
 
@@ -140,11 +126,9 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#reset(int)}
    */
   @Test
-  @DisplayName("Test reset(int); then TracedVariables(int) with size is three size is three")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Variables.reset(int)"})
-  void testReset_thenTracedVariablesWithSizeIsThreeSizeIsThree() {
+  public void testReset_thenTracedVariablesWithSizeIsThreeSizeIsThree() {
     // Arrange
     TracedVariables tracedVariables = new TracedVariables(3);
 
@@ -167,17 +151,57 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#initialize(Variables)}
    */
   @Test
-  @DisplayName(
-      "Test initialize(Variables); given Variables(int) with size is one; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Variables.initialize(Variables)"})
-  void testInitialize_givenVariablesWithSizeIsOne_thenThrowIllegalArgumentException() {
+  public void testInitialize_givenVariablesWithSizeIsOne_thenThrowIllegalArgumentException() {
     // Arrange
     Variables variables = new Variables(1);
 
     // Act and Assert
     assertThrows(IllegalArgumentException.class, () -> variables.initialize(new Variables(3)));
+  }
+
+  /**
+   * Test {@link Variables#generalize(Variables, boolean)}.
+   *
+   * <ul>
+   *   <li>Given {@link Variables#Variables(int)} with size is one.
+   *   <li>Then throw {@link IllegalArgumentException}.
+   * </ul>
+   *
+   * <p>Method under test: {@link Variables#generalize(Variables, boolean)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"boolean Variables.generalize(Variables, boolean)"})
+  public void testGeneralize_givenVariablesWithSizeIsOne_thenThrowIllegalArgumentException() {
+    // Arrange
+    Variables variables = new Variables(1);
+
+    // Act and Assert
+    assertThrows(
+        IllegalArgumentException.class, () -> variables.generalize(new Variables(3), true));
+  }
+
+  /**
+   * Test {@link Variables#generalize(Variables, boolean)}.
+   *
+   * <ul>
+   *   <li>Given {@link Variables#Variables(int)} with size is three.
+   *   <li>Then return {@code false}.
+   * </ul>
+   *
+   * <p>Method under test: {@link Variables#generalize(Variables, boolean)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"boolean Variables.generalize(Variables, boolean)"})
+  public void testGeneralize_givenVariablesWithSizeIsThree_thenReturnFalse() {
+    // Arrange
+    Variables variables = new Variables(3);
+
+    // Act and Assert
+    assertFalse(variables.generalize(new Variables(3), true));
   }
 
   /**
@@ -192,67 +216,14 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#generalize(Variables, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(Variables, boolean); given Variables(int) with size is three; when 'false'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Variables.generalize(Variables, boolean)"})
-  void testGeneralize_givenVariablesWithSizeIsThree_whenFalse_thenReturnFalse() {
+  public void testGeneralize_givenVariablesWithSizeIsThree_whenFalse_thenReturnFalse() {
     // Arrange
     Variables variables = new Variables(3);
 
     // Act and Assert
     assertFalse(variables.generalize(new Variables(3), false));
-  }
-
-  /**
-   * Test {@link Variables#generalize(Variables, boolean)}.
-   *
-   * <ul>
-   *   <li>Given {@link Variables#Variables(int)} with size is three.
-   *   <li>When {@code true}.
-   *   <li>Then return {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Variables#generalize(Variables, boolean)}
-   */
-  @Test
-  @DisplayName(
-      "Test generalize(Variables, boolean); given Variables(int) with size is three; when 'true'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean Variables.generalize(Variables, boolean)"})
-  void testGeneralize_givenVariablesWithSizeIsThree_whenTrue_thenReturnFalse() {
-    // Arrange
-    Variables variables = new Variables(3);
-
-    // Act and Assert
-    assertFalse(variables.generalize(new Variables(3), true));
-  }
-
-  /**
-   * Test {@link Variables#generalize(Variables, boolean)}.
-   *
-   * <ul>
-   *   <li>Given {@link Variables#Variables(int)} with size is zero.
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Variables#generalize(Variables, boolean)}
-   */
-  @Test
-  @DisplayName(
-      "Test generalize(Variables, boolean); given Variables(int) with size is zero; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean Variables.generalize(Variables, boolean)"})
-  void testGeneralize_givenVariablesWithSizeIsZero_thenThrowIllegalArgumentException() {
-    // Arrange
-    Variables variables = new Variables(0);
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class, () -> variables.generalize(new Variables(3), false));
   }
 
   /**
@@ -265,13 +236,11 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#getValue(int)}
    */
   @Test
-  @DisplayName("Test getValue(int); given Variables(int) with size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value Variables.getValue(int)"})
-  void testGetValue_givenVariablesWithSizeIsOne() {
+  public void testGetValue_givenVariablesWithSizeIsOne() {
     // Arrange, Act and Assert
-    assertThrows(VariableIndexOutOfBoundException.class, () -> new Variables(1).getValue(1));
+    assertThrows(VariableIndexOutOfBoundException.class, () -> (new Variables(1)).getValue(1));
   }
 
   /**
@@ -286,14 +255,11 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#getValue(int)}
    */
   @Test
-  @DisplayName(
-      "Test getValue(int); given Variables(int) with size is three; when one; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value Variables.getValue(int)"})
-  void testGetValue_givenVariablesWithSizeIsThree_whenOne_thenReturnNull() {
+  public void testGetValue_givenVariablesWithSizeIsThree_whenOne_thenReturnNull() {
     // Arrange, Act and Assert
-    assertNull(new Variables(3).getValue(1));
+    assertNull((new Variables(3)).getValue(1));
   }
 
   /**
@@ -307,15 +273,13 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#getValue(int)}
    */
   @Test
-  @DisplayName("Test getValue(int); when NONE; then throw VariableIndexOutOfBoundException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value Variables.getValue(int)"})
-  void testGetValue_whenNone_thenThrowVariableIndexOutOfBoundException() {
+  public void testGetValue_whenNone_thenThrowVariableIndexOutOfBoundException() {
     // Arrange, Act and Assert
     assertThrows(
         VariableIndexOutOfBoundException.class,
-        () -> new Variables(3).getValue(InitializationFinder.NONE));
+        () -> (new Variables(3)).getValue(InitializationFinder.NONE));
   }
 
   /**
@@ -329,11 +293,9 @@ class VariablesDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value[] Variables.getValues()", "int Variables.size()"})
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     Variables variables = new Variables(3);
 
@@ -349,42 +311,6 @@ class VariablesDiffblueTest {
    * Test {@link Variables#store(int, Value)}.
    *
    * <ul>
-   *   <li>Given {@link TracedVariables#TracedVariables(int)} with size is three ProducerValue is
-   *       {@link BasicValueFactory#FLOAT_VALUE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Variables#store(int, Value)}
-   */
-  @Test
-  @DisplayName(
-      "Test store(int, Value); given TracedVariables(int) with size is three ProducerValue is FLOAT_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void Variables.store(int, Value)"})
-  void testStore_givenTracedVariablesWithSizeIsThreeProducerValueIsFloat_value() {
-    // Arrange
-    TracedVariables tracedVariables = new TracedVariables(3);
-    tracedVariables.setProducerValue(BasicValueFactory.FLOAT_VALUE);
-    DoubleValue value = BasicValueFactory.DOUBLE_VALUE;
-
-    // Act
-    tracedVariables.store(1, value);
-
-    // Assert
-    Value[] values = tracedVariables.getValues();
-    Value value2 = values[2];
-    assertTrue(value2 instanceof TopValue);
-    assertEquals(3, values.length);
-    assertFalse(value2.isCategory2());
-    assertTrue(value2.isParticular());
-    assertTrue(value2.isSpecific());
-    assertSame(value, values[1]);
-  }
-
-  /**
-   * Test {@link Variables#store(int, Value)}.
-   *
-   * <ul>
    *   <li>Given {@link Variables#Variables(int)} with size is one.
    *   <li>Then throw {@link VariableIndexOutOfBoundException}.
    * </ul>
@@ -392,16 +318,13 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#store(int, Value)}
    */
   @Test
-  @DisplayName(
-      "Test store(int, Value); given Variables(int) with size is one; then throw VariableIndexOutOfBoundException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Variables.store(int, Value)"})
-  void testStore_givenVariablesWithSizeIsOne_thenThrowVariableIndexOutOfBoundException() {
+  public void testStore_givenVariablesWithSizeIsOne_thenThrowVariableIndexOutOfBoundException() {
     // Arrange, Act and Assert
     assertThrows(
         VariableIndexOutOfBoundException.class,
-        () -> new Variables(1).store(1, BasicValueFactory.DOUBLE_VALUE));
+        () -> (new Variables(1)).store(1, BasicValueFactory.DOUBLE_VALUE));
   }
 
   /**
@@ -416,12 +339,9 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#store(int, Value)}
    */
   @Test
-  @DisplayName(
-      "Test store(int, Value); given Variables(int) with size is three; when FLOAT_VALUE; then third element is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Variables.store(int, Value)"})
-  void testStore_givenVariablesWithSizeIsThree_whenFloat_value_thenThirdElementIsNull() {
+  public void testStore_givenVariablesWithSizeIsThree_whenFloat_value_thenThirdElementIsNull() {
     // Arrange
     Variables variables = new Variables(3);
     FloatValue value = BasicValueFactory.FLOAT_VALUE;
@@ -448,12 +368,9 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#store(int, Value)}
    */
   @Test
-  @DisplayName(
-      "Test store(int, Value); given Variables(int) with size is three; when one; then third element TopValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Variables.store(int, Value)"})
-  void testStore_givenVariablesWithSizeIsThree_whenOne_thenThirdElementTopValue() {
+  public void testStore_givenVariablesWithSizeIsThree_whenOne_thenThirdElementTopValue() {
     // Arrange
     Variables variables = new Variables(3);
     DoubleValue value = BasicValueFactory.DOUBLE_VALUE;
@@ -483,15 +400,13 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#store(int, Value)}
    */
   @Test
-  @DisplayName("Test store(int, Value); when NONE; then throw VariableIndexOutOfBoundException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Variables.store(int, Value)"})
-  void testStore_whenNone_thenThrowVariableIndexOutOfBoundException() {
+  public void testStore_whenNone_thenThrowVariableIndexOutOfBoundException() {
     // Arrange, Act and Assert
     assertThrows(
         VariableIndexOutOfBoundException.class,
-        () -> new Variables(3).store(InitializationFinder.NONE, BasicValueFactory.DOUBLE_VALUE));
+        () -> (new Variables(3)).store(InitializationFinder.NONE, BasicValueFactory.DOUBLE_VALUE));
   }
 
   /**
@@ -505,14 +420,11 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#load(int)}
    */
   @Test
-  @DisplayName(
-      "Test load(int); given Variables(int) with size is one; then throw VariableIndexOutOfBoundException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value Variables.load(int)"})
-  void testLoad_givenVariablesWithSizeIsOne_thenThrowVariableIndexOutOfBoundException() {
+  public void testLoad_givenVariablesWithSizeIsOne_thenThrowVariableIndexOutOfBoundException() {
     // Arrange, Act and Assert
-    assertThrows(VariableIndexOutOfBoundException.class, () -> new Variables(1).load(1));
+    assertThrows(VariableIndexOutOfBoundException.class, () -> (new Variables(1)).load(1));
   }
 
   /**
@@ -527,14 +439,11 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#load(int)}
    */
   @Test
-  @DisplayName(
-      "Test load(int); given Variables(int) with size is three; when one; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value Variables.load(int)"})
-  void testLoad_givenVariablesWithSizeIsThree_whenOne_thenReturnNull() {
+  public void testLoad_givenVariablesWithSizeIsThree_whenOne_thenReturnNull() {
     // Arrange, Act and Assert
-    assertNull(new Variables(3).load(1));
+    assertNull((new Variables(3)).load(1));
   }
 
   /**
@@ -548,15 +457,13 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#load(int)}
    */
   @Test
-  @DisplayName("Test load(int); when NONE; then throw VariableIndexOutOfBoundException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value Variables.load(int)"})
-  void testLoad_whenNone_thenThrowVariableIndexOutOfBoundException() {
+  public void testLoad_whenNone_thenThrowVariableIndexOutOfBoundException() {
     // Arrange, Act and Assert
     assertThrows(
         VariableIndexOutOfBoundException.class,
-        () -> new Variables(3).load(InitializationFinder.NONE));
+        () -> (new Variables(3)).load(InitializationFinder.NONE));
   }
 
   /**
@@ -570,14 +477,11 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#iload(int)}
    */
   @Test
-  @DisplayName(
-      "Test iload(int); given Variables(int) with size is one; then throw VariableIndexOutOfBoundException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"proguard.evaluation.value.IntegerValue Variables.iload(int)"})
-  void testIload_givenVariablesWithSizeIsOne_thenThrowVariableIndexOutOfBoundException() {
+  public void testIload_givenVariablesWithSizeIsOne_thenThrowVariableIndexOutOfBoundException() {
     // Arrange, Act and Assert
-    assertThrows(VariableIndexOutOfBoundException.class, () -> new Variables(1).iload(1));
+    assertThrows(VariableIndexOutOfBoundException.class, () -> (new Variables(1)).iload(1));
   }
 
   /**
@@ -591,14 +495,11 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#iload(int)}
    */
   @Test
-  @DisplayName(
-      "Test iload(int); given Variables(int) with size is three; then throw VariableEmptySlotException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"proguard.evaluation.value.IntegerValue Variables.iload(int)"})
-  void testIload_givenVariablesWithSizeIsThree_thenThrowVariableEmptySlotException() {
+  public void testIload_givenVariablesWithSizeIsThree_thenThrowVariableEmptySlotException() {
     // Arrange, Act and Assert
-    assertThrows(VariableEmptySlotException.class, () -> new Variables(3).iload(1));
+    assertThrows(VariableEmptySlotException.class, () -> (new Variables(3)).iload(1));
   }
 
   /**
@@ -612,15 +513,13 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#iload(int)}
    */
   @Test
-  @DisplayName("Test iload(int); when NONE; then throw VariableIndexOutOfBoundException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"proguard.evaluation.value.IntegerValue Variables.iload(int)"})
-  void testIload_whenNone_thenThrowVariableIndexOutOfBoundException() {
+  public void testIload_whenNone_thenThrowVariableIndexOutOfBoundException() {
     // Arrange, Act and Assert
     assertThrows(
         VariableIndexOutOfBoundException.class,
-        () -> new Variables(3).iload(InitializationFinder.NONE));
+        () -> (new Variables(3)).iload(InitializationFinder.NONE));
   }
 
   /**
@@ -634,14 +533,11 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#lload(int)}
    */
   @Test
-  @DisplayName(
-      "Test lload(int); given Variables(int) with size is one; then throw VariableIndexOutOfBoundException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"proguard.evaluation.value.LongValue Variables.lload(int)"})
-  void testLload_givenVariablesWithSizeIsOne_thenThrowVariableIndexOutOfBoundException() {
+  public void testLload_givenVariablesWithSizeIsOne_thenThrowVariableIndexOutOfBoundException() {
     // Arrange, Act and Assert
-    assertThrows(VariableIndexOutOfBoundException.class, () -> new Variables(1).lload(1));
+    assertThrows(VariableIndexOutOfBoundException.class, () -> (new Variables(1)).lload(1));
   }
 
   /**
@@ -655,14 +551,11 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#lload(int)}
    */
   @Test
-  @DisplayName(
-      "Test lload(int); given Variables(int) with size is three; then throw VariableEmptySlotException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"proguard.evaluation.value.LongValue Variables.lload(int)"})
-  void testLload_givenVariablesWithSizeIsThree_thenThrowVariableEmptySlotException() {
+  public void testLload_givenVariablesWithSizeIsThree_thenThrowVariableEmptySlotException() {
     // Arrange, Act and Assert
-    assertThrows(VariableEmptySlotException.class, () -> new Variables(3).lload(1));
+    assertThrows(VariableEmptySlotException.class, () -> (new Variables(3)).lload(1));
   }
 
   /**
@@ -676,15 +569,13 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#lload(int)}
    */
   @Test
-  @DisplayName("Test lload(int); when NONE; then throw VariableIndexOutOfBoundException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"proguard.evaluation.value.LongValue Variables.lload(int)"})
-  void testLload_whenNone_thenThrowVariableIndexOutOfBoundException() {
+  public void testLload_whenNone_thenThrowVariableIndexOutOfBoundException() {
     // Arrange, Act and Assert
     assertThrows(
         VariableIndexOutOfBoundException.class,
-        () -> new Variables(3).lload(InitializationFinder.NONE));
+        () -> (new Variables(3)).lload(InitializationFinder.NONE));
   }
 
   /**
@@ -698,14 +589,11 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#fload(int)}
    */
   @Test
-  @DisplayName(
-      "Test fload(int); given Variables(int) with size is one; then throw VariableIndexOutOfBoundException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue Variables.fload(int)"})
-  void testFload_givenVariablesWithSizeIsOne_thenThrowVariableIndexOutOfBoundException() {
+  public void testFload_givenVariablesWithSizeIsOne_thenThrowVariableIndexOutOfBoundException() {
     // Arrange, Act and Assert
-    assertThrows(VariableIndexOutOfBoundException.class, () -> new Variables(1).fload(1));
+    assertThrows(VariableIndexOutOfBoundException.class, () -> (new Variables(1)).fload(1));
   }
 
   /**
@@ -719,14 +607,11 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#fload(int)}
    */
   @Test
-  @DisplayName(
-      "Test fload(int); given Variables(int) with size is three; then throw VariableEmptySlotException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue Variables.fload(int)"})
-  void testFload_givenVariablesWithSizeIsThree_thenThrowVariableEmptySlotException() {
+  public void testFload_givenVariablesWithSizeIsThree_thenThrowVariableEmptySlotException() {
     // Arrange, Act and Assert
-    assertThrows(VariableEmptySlotException.class, () -> new Variables(3).fload(1));
+    assertThrows(VariableEmptySlotException.class, () -> (new Variables(3)).fload(1));
   }
 
   /**
@@ -740,15 +625,13 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#fload(int)}
    */
   @Test
-  @DisplayName("Test fload(int); when NONE; then throw VariableIndexOutOfBoundException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue Variables.fload(int)"})
-  void testFload_whenNone_thenThrowVariableIndexOutOfBoundException() {
+  public void testFload_whenNone_thenThrowVariableIndexOutOfBoundException() {
     // Arrange, Act and Assert
     assertThrows(
         VariableIndexOutOfBoundException.class,
-        () -> new Variables(3).fload(InitializationFinder.NONE));
+        () -> (new Variables(3)).fload(InitializationFinder.NONE));
   }
 
   /**
@@ -762,14 +645,11 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#dload(int)}
    */
   @Test
-  @DisplayName(
-      "Test dload(int); given Variables(int) with size is one; then throw VariableIndexOutOfBoundException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue Variables.dload(int)"})
-  void testDload_givenVariablesWithSizeIsOne_thenThrowVariableIndexOutOfBoundException() {
+  public void testDload_givenVariablesWithSizeIsOne_thenThrowVariableIndexOutOfBoundException() {
     // Arrange, Act and Assert
-    assertThrows(VariableIndexOutOfBoundException.class, () -> new Variables(1).dload(1));
+    assertThrows(VariableIndexOutOfBoundException.class, () -> (new Variables(1)).dload(1));
   }
 
   /**
@@ -783,14 +663,11 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#dload(int)}
    */
   @Test
-  @DisplayName(
-      "Test dload(int); given Variables(int) with size is three; then throw VariableEmptySlotException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue Variables.dload(int)"})
-  void testDload_givenVariablesWithSizeIsThree_thenThrowVariableEmptySlotException() {
+  public void testDload_givenVariablesWithSizeIsThree_thenThrowVariableEmptySlotException() {
     // Arrange, Act and Assert
-    assertThrows(VariableEmptySlotException.class, () -> new Variables(3).dload(1));
+    assertThrows(VariableEmptySlotException.class, () -> (new Variables(3)).dload(1));
   }
 
   /**
@@ -804,15 +681,13 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#dload(int)}
    */
   @Test
-  @DisplayName("Test dload(int); when NONE; then throw VariableIndexOutOfBoundException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue Variables.dload(int)"})
-  void testDload_whenNone_thenThrowVariableIndexOutOfBoundException() {
+  public void testDload_whenNone_thenThrowVariableIndexOutOfBoundException() {
     // Arrange, Act and Assert
     assertThrows(
         VariableIndexOutOfBoundException.class,
-        () -> new Variables(3).dload(InitializationFinder.NONE));
+        () -> (new Variables(3)).dload(InitializationFinder.NONE));
   }
 
   /**
@@ -826,14 +701,11 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#aload(int)}
    */
   @Test
-  @DisplayName(
-      "Test aload(int); given Variables(int) with size is one; then throw VariableIndexOutOfBoundException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"proguard.evaluation.value.ReferenceValue Variables.aload(int)"})
-  void testAload_givenVariablesWithSizeIsOne_thenThrowVariableIndexOutOfBoundException() {
+  public void testAload_givenVariablesWithSizeIsOne_thenThrowVariableIndexOutOfBoundException() {
     // Arrange, Act and Assert
-    assertThrows(VariableIndexOutOfBoundException.class, () -> new Variables(1).aload(1));
+    assertThrows(VariableIndexOutOfBoundException.class, () -> (new Variables(1)).aload(1));
   }
 
   /**
@@ -847,14 +719,11 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#aload(int)}
    */
   @Test
-  @DisplayName(
-      "Test aload(int); given Variables(int) with size is three; then throw VariableEmptySlotException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"proguard.evaluation.value.ReferenceValue Variables.aload(int)"})
-  void testAload_givenVariablesWithSizeIsThree_thenThrowVariableEmptySlotException() {
+  public void testAload_givenVariablesWithSizeIsThree_thenThrowVariableEmptySlotException() {
     // Arrange, Act and Assert
-    assertThrows(VariableEmptySlotException.class, () -> new Variables(3).aload(1));
+    assertThrows(VariableEmptySlotException.class, () -> (new Variables(3)).aload(1));
   }
 
   /**
@@ -868,15 +737,13 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#aload(int)}
    */
   @Test
-  @DisplayName("Test aload(int); when NONE; then throw VariableIndexOutOfBoundException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"proguard.evaluation.value.ReferenceValue Variables.aload(int)"})
-  void testAload_whenNone_thenThrowVariableIndexOutOfBoundException() {
+  public void testAload_whenNone_thenThrowVariableIndexOutOfBoundException() {
     // Arrange, Act and Assert
     assertThrows(
         VariableIndexOutOfBoundException.class,
-        () -> new Variables(3).aload(InitializationFinder.NONE));
+        () -> (new Variables(3)).aload(InitializationFinder.NONE));
   }
 
   /**
@@ -890,13 +757,11 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#oload(int)}
    */
   @Test
-  @DisplayName("Test oload(int); when '1001'; then throw VariableIndexOutOfBoundException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"proguard.evaluation.value.InstructionOffsetValue Variables.oload(int)"})
-  void testOload_when1001_thenThrowVariableIndexOutOfBoundException() {
+  public void testOload_when1001_thenThrowVariableIndexOutOfBoundException() {
     // Arrange, Act and Assert
-    assertThrows(VariableIndexOutOfBoundException.class, () -> new Variables(3).oload(1001));
+    assertThrows(VariableIndexOutOfBoundException.class, () -> (new Variables(3)).oload(1001));
   }
 
   /**
@@ -910,15 +775,13 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#oload(int)}
    */
   @Test
-  @DisplayName("Test oload(int); when NONE; then throw VariableIndexOutOfBoundException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"proguard.evaluation.value.InstructionOffsetValue Variables.oload(int)"})
-  void testOload_whenNone_thenThrowVariableIndexOutOfBoundException() {
+  public void testOload_whenNone_thenThrowVariableIndexOutOfBoundException() {
     // Arrange, Act and Assert
     assertThrows(
         VariableIndexOutOfBoundException.class,
-        () -> new Variables(3).oload(InitializationFinder.NONE));
+        () -> (new Variables(3)).oload(InitializationFinder.NONE));
   }
 
   /**
@@ -931,11 +794,9 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#replaceReferences(Value, Value)}
    */
   @Test
-  @DisplayName("Test replaceReferences(Value, Value); when DOUBLE_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Variables.replaceReferences(Value, Value)"})
-  void testReplaceReferences_whenDouble_value() {
+  public void testReplaceReferences_whenDouble_value() {
     // Arrange
     Variables variables = new Variables(3);
 
@@ -957,12 +818,9 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#replaceReferences(Value, Value)}
    */
   @Test
-  @DisplayName(
-      "Test replaceReferences(Value, Value); when 'null'; then first element is DOUBLE_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Variables.replaceReferences(Value, Value)"})
-  void testReplaceReferences_whenNull_thenFirstElementIsDouble_value() {
+  public void testReplaceReferences_whenNull_thenFirstElementIsDouble_value() {
     // Arrange
     Variables variables = new Variables(3);
     DoubleValue replacement = BasicValueFactory.DOUBLE_VALUE;
@@ -994,18 +852,17 @@ class VariablesDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Variables.equals(Object)", "int Variables.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     Variables variables = new Variables(3);
     Variables variables2 = new Variables(3);
 
     // Act and Assert
     assertEquals(variables, variables2);
-    assertEquals(variables.hashCode(), variables2.hashCode());
+    int expectedHashCodeResult = variables.hashCode();
+    assertEquals(expectedHashCodeResult, variables2.hashCode());
   }
 
   /**
@@ -1024,11 +881,9 @@ class VariablesDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Variables.equals(Object)", "int Variables.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     Variables variables = new Variables(3);
 
@@ -1049,11 +904,9 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Variables.equals(Object)", "int Variables.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     Variables variables = new Variables(1);
 
@@ -1072,11 +925,9 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Variables.equals(Object)", "int Variables.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new Variables(3), null);
   }
@@ -1092,11 +943,9 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Variables.equals(Object)", "int Variables.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new Variables(3), "Different type to Variables");
   }
@@ -1112,14 +961,11 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#toString()}
    */
   @Test
-  @DisplayName(
-      "Test toString(); given Variables(int) with size is three; then return '[empty][empty][empty]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String Variables.toString()"})
-  void testToString_givenVariablesWithSizeIsThree_thenReturnEmptyEmptyEmpty() {
+  public void testToString_givenVariablesWithSizeIsThree_thenReturnEmptyEmptyEmpty() {
     // Arrange, Act and Assert
-    assertEquals("[empty][empty][empty]", new Variables(3).toString());
+    assertEquals("[empty][empty][empty]", (new Variables(3)).toString());
   }
 
   /**
@@ -1132,12 +978,10 @@ class VariablesDiffblueTest {
    * <p>Method under test: {@link Variables#toString()}
    */
   @Test
-  @DisplayName("Test toString(); then return '[empty:empty][empty:empty][empty:empty]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String Variables.toString()"})
-  void testToString_thenReturnEmptyEmptyEmptyEmptyEmptyEmpty() {
+  public void testToString_thenReturnEmptyEmptyEmptyEmptyEmptyEmpty() {
     // Arrange, Act and Assert
-    assertEquals("[empty:empty][empty:empty][empty:empty]", new TracedVariables(3).toString());
+    assertEquals("[empty:empty][empty:empty][empty:empty]", (new TracedVariables(3)).toString());
   }
 }

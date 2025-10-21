@@ -1,42 +1,39 @@
 package proguard.dexfile.ir.stmt;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.LabelAndLocalMapper;
 import proguard.dexfile.ir.stmt.Stmt.ST;
 
-class ReturnVoidStmtDiffblueTest {
+public class ReturnVoidStmtDiffblueTest {
   /**
    * Test new {@link ReturnVoidStmt} (default constructor).
    *
    * <p>Method under test: default or parameterless constructor of {@link ReturnVoidStmt}
    */
   @Test
-  @DisplayName("Test new ReturnVoidStmt (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ReturnVoidStmt.<init>()"})
-  void testNewReturnVoidStmt() {
+  public void testNewReturnVoidStmt() {
     // Arrange and Act
     ReturnVoidStmt actualReturnVoidStmt = new ReturnVoidStmt();
 
     // Assert
+    assertNull(actualReturnVoidStmt.getOps());
     assertNull(actualReturnVoidStmt.frame);
     assertNull(actualReturnVoidStmt.exceptionHandlers);
     assertNull(actualReturnVoidStmt._cfg_froms);
     assertNull(actualReturnVoidStmt.getOp());
     assertNull(actualReturnVoidStmt.getOp1());
     assertNull(actualReturnVoidStmt.getOp2());
-    assertNull(actualReturnVoidStmt.getOps());
     assertNull(actualReturnVoidStmt.getNext());
     assertNull(actualReturnVoidStmt.getPre());
     assertNull(actualReturnVoidStmt._ts_default_next);
@@ -53,11 +50,9 @@ class ReturnVoidStmtDiffblueTest {
    * <p>Method under test: {@link ReturnVoidStmt#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName("Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Stmt ReturnVoidStmt.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper() {
+  public void testCloneWithLabelAndLocalMapper() {
     // Arrange
     ReturnVoidStmt nReturnVoidResult = Stmts.nReturnVoid();
 
@@ -66,13 +61,13 @@ class ReturnVoidStmtDiffblueTest {
 
     // Assert
     assertTrue(actualCloneResult instanceof ReturnVoidStmt);
+    assertNull(actualCloneResult.getOps());
     assertNull(((ReturnVoidStmt) actualCloneResult).frame);
     assertNull(((ReturnVoidStmt) actualCloneResult).exceptionHandlers);
     assertNull(((ReturnVoidStmt) actualCloneResult)._cfg_froms);
     assertNull(actualCloneResult.getOp());
     assertNull(actualCloneResult.getOp1());
     assertNull(actualCloneResult.getOp2());
-    assertNull(actualCloneResult.getOps());
     assertNull(actualCloneResult.getNext());
     assertNull(actualCloneResult.getPre());
     assertNull(((ReturnVoidStmt) actualCloneResult)._ts_default_next);
@@ -89,12 +84,10 @@ class ReturnVoidStmtDiffblueTest {
    * <p>Method under test: {@link ReturnVoidStmt#toString()}
    */
   @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String ReturnVoidStmt.toString()"})
-  void testToString() {
+  public void testToString() {
     // Arrange, Act and Assert
-    assertEquals("return", new ReturnVoidStmt().toString());
+    assertEquals("return", (new ReturnVoidStmt()).toString());
   }
 }

@@ -1,19 +1,18 @@
 package proguard.dexfile.reader.node;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.reader.DexLabel;
 import proguard.dexfile.reader.visitors.DexCodeVisitor;
 
-class TryCatchNodeDiffblueTest {
+public class TryCatchNodeDiffblueTest {
   /**
    * Test {@link TryCatchNode#TryCatchNode(DexLabel, DexLabel, DexLabel[], String[])}.
    *
@@ -21,20 +20,17 @@ class TryCatchNodeDiffblueTest {
    * String[])}
    */
   @Test
-  @DisplayName("Test new TryCatchNode(DexLabel, DexLabel, DexLabel[], String[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TryCatchNode.<init>(DexLabel, DexLabel, DexLabel[], String[])"})
-  void testNewTryCatchNode() {
+  public void testNewTryCatchNode() {
     // Arrange
     DexLabel start = new DexLabel();
     DexLabel end = new DexLabel();
     DexLabel dexLabel = new DexLabel();
-    DexLabel[] handler = new DexLabel[] {dexLabel};
-    String[] type = new String[] {"Type"};
 
     // Act
-    TryCatchNode actualTryCatchNode = new TryCatchNode(start, end, handler, type);
+    TryCatchNode actualTryCatchNode =
+        new TryCatchNode(start, end, new DexLabel[] {dexLabel}, new String[] {"Type"});
 
     // Assert
     DexLabel[] dexLabelArray = actualTryCatchNode.handler;
@@ -54,20 +50,15 @@ class TryCatchNodeDiffblueTest {
    * <p>Method under test: {@link TryCatchNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeNode(); then DexCodeNode() tryStmts size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TryCatchNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeNode_thenDexCodeNodeTryStmtsSizeIsOne() {
+  public void testAccept_whenDexCodeNode_thenDexCodeNodeTryStmtsSizeIsOne() {
     // Arrange
     DexLabel start = new DexLabel();
     DexLabel end = new DexLabel();
     DexLabel dexLabel = new DexLabel();
-    DexLabel[] handler = new DexLabel[] {dexLabel};
-    String[] type = new String[] {"Type"};
-
-    TryCatchNode tryCatchNode = new TryCatchNode(start, end, handler, type);
+    TryCatchNode tryCatchNode =
+        new TryCatchNode(start, end, new DexLabel[] {dexLabel}, new String[] {"Type"});
     DexCodeNode cv = new DexCodeNode();
 
     // Act
@@ -103,20 +94,15 @@ class TryCatchNodeDiffblueTest {
    * <p>Method under test: {@link TryCatchNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeVisitor(DexCodeVisitor) with visitor is DexCodeNode(); then array length is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TryCatchNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeNode_thenArrayLengthIsOne() {
+  public void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeNode_thenArrayLengthIsOne() {
     // Arrange
     DexLabel start = new DexLabel();
     DexLabel end = new DexLabel();
     DexLabel dexLabel = new DexLabel();
-    DexLabel[] handler = new DexLabel[] {dexLabel};
-    String[] type = new String[] {"Type"};
-
-    TryCatchNode tryCatchNode = new TryCatchNode(start, end, handler, type);
+    TryCatchNode tryCatchNode =
+        new TryCatchNode(start, end, new DexLabel[] {dexLabel}, new String[] {"Type"});
 
     // Act
     tryCatchNode.accept(new DexCodeVisitor(new DexCodeNode()));
@@ -139,20 +125,15 @@ class TryCatchNodeDiffblueTest {
    * <p>Method under test: {@link TryCatchNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeVisitor(DexCodeVisitor) with visitor is DexCodeVisitor(); then array length is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TryCatchNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeVisitor_thenArrayLengthIsOne() {
+  public void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeVisitor_thenArrayLengthIsOne() {
     // Arrange
     DexLabel start = new DexLabel();
     DexLabel end = new DexLabel();
     DexLabel dexLabel = new DexLabel();
-    DexLabel[] handler = new DexLabel[] {dexLabel};
-    String[] type = new String[] {"Type"};
-
-    TryCatchNode tryCatchNode = new TryCatchNode(start, end, handler, type);
+    TryCatchNode tryCatchNode =
+        new TryCatchNode(start, end, new DexLabel[] {dexLabel}, new String[] {"Type"});
 
     // Act
     tryCatchNode.accept(new DexCodeVisitor(new DexCodeVisitor()));
@@ -174,19 +155,15 @@ class TryCatchNodeDiffblueTest {
    * <p>Method under test: {@link TryCatchNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName("Test accept(DexCodeVisitor); when DexCodeVisitor(); then array length is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TryCatchNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeVisitor_thenArrayLengthIsOne() {
+  public void testAccept_whenDexCodeVisitor_thenArrayLengthIsOne() {
     // Arrange
     DexLabel start = new DexLabel();
     DexLabel end = new DexLabel();
     DexLabel dexLabel = new DexLabel();
-    DexLabel[] handler = new DexLabel[] {dexLabel};
-    String[] type = new String[] {"Type"};
-
-    TryCatchNode tryCatchNode = new TryCatchNode(start, end, handler, type);
+    TryCatchNode tryCatchNode =
+        new TryCatchNode(start, end, new DexLabel[] {dexLabel}, new String[] {"Type"});
 
     // Act
     tryCatchNode.accept(new DexCodeVisitor());

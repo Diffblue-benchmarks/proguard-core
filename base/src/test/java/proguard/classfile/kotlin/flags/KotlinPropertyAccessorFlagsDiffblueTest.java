@@ -1,15 +1,14 @@
 package proguard.classfile.kotlin.flags;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class KotlinPropertyAccessorFlagsDiffblueTest {
+public class KotlinPropertyAccessorFlagsDiffblueTest {
   /**
    * Test {@link KotlinPropertyAccessorFlags#KotlinPropertyAccessorFlags(KotlinVisibilityFlags,
    * KotlinModalityFlags)}.
@@ -19,13 +18,11 @@ class KotlinPropertyAccessorFlagsDiffblueTest {
    * KotlinModalityFlags)}
    */
   @Test
-  @DisplayName("Test new KotlinPropertyAccessorFlags(KotlinVisibilityFlags, KotlinModalityFlags)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void KotlinPropertyAccessorFlags.<init>(KotlinVisibilityFlags, KotlinModalityFlags)"
   })
-  void testNewKotlinPropertyAccessorFlags() {
+  public void testNewKotlinPropertyAccessorFlags() {
     // Arrange
     KotlinVisibilityFlags visibility = new KotlinVisibilityFlags();
     visibility.isInternal = true;

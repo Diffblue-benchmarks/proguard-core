@@ -1,21 +1,20 @@
 package proguard.classfile.kotlin.reflect;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryField;
 import proguard.classfile.Member;
 
-class JavaFieldReferenceInfoDiffblueTest {
+public class JavaFieldReferenceInfoDiffblueTest {
   /**
    * Test {@link JavaFieldReferenceInfo#JavaFieldReferenceInfo(Clazz, Clazz, Member)}.
    *
@@ -23,49 +22,46 @@ class JavaFieldReferenceInfoDiffblueTest {
    * Member)}
    */
   @Test
-  @DisplayName("Test new JavaFieldReferenceInfo(Clazz, Clazz, Member)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void JavaFieldReferenceInfo.<init>(Clazz, Clazz, Member)"})
-  void testNewJavaFieldReferenceInfo() {
+  public void testNewJavaFieldReferenceInfo() {
     // Arrange
     LibraryClass ownerClass = new LibraryClass();
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
 
     // Act
     JavaFieldReferenceInfo actualJavaFieldReferenceInfo =
-        new JavaFieldReferenceInfo(ownerClass, clazz, member);
+        new JavaFieldReferenceInfo(ownerClass, clazz, new LibraryField(1, "Name", "Descriptor"));
 
     // Assert
     Clazz clazz2 = actualJavaFieldReferenceInfo.clazz;
     assertTrue(clazz2 instanceof LibraryClass);
-    Member member2 = actualJavaFieldReferenceInfo.member;
-    assertTrue(member2 instanceof LibraryField);
-    assertEquals("Descriptor", ((LibraryField) member2).descriptor);
+    Member member = actualJavaFieldReferenceInfo.member;
+    assertTrue(member instanceof LibraryField);
+    assertEquals("Descriptor", ((LibraryField) member).descriptor);
     assertEquals("Name", actualJavaFieldReferenceInfo.getName());
-    assertEquals("Name", ((LibraryField) member2).name);
+    assertEquals("Name", ((LibraryField) member).name);
     assertEquals("getName()Descriptor", actualJavaFieldReferenceInfo.getSignature());
+    assertNull(((LibraryClass) clazz2).interfaceNames);
+    assertNull(((LibraryClass) clazz2).fields);
+    assertNull(((LibraryClass) clazz2).methods);
     assertNull(clazz2.getProcessingInfo());
-    assertNull(member2.getProcessingInfo());
+    assertNull(member.getProcessingInfo());
     assertNull(clazz2.getName());
     assertNull(clazz2.getSuperName());
     assertNull(clazz2.getFeatureName());
-    assertNull(((LibraryClass) clazz2).interfaceNames);
     assertNull(clazz2.getSuperClass());
-    assertNull(((LibraryField) member2).referencedClass);
-    assertNull(((LibraryClass) clazz2).fields);
-    assertNull(((LibraryClass) clazz2).methods);
+    assertNull(((LibraryField) member).referencedClass);
     assertNull(actualJavaFieldReferenceInfo.getOwner());
     assertNull(((LibraryClass) clazz2).kotlinMetadata);
     assertEquals(0, clazz2.getAccessFlags());
     assertEquals(0, clazz2.getInterfaceCount());
     assertEquals(0, clazz2.getProcessingFlags());
-    assertEquals(0, member2.getProcessingFlags());
+    assertEquals(0, member.getProcessingFlags());
     Clazz[] clazzArray = ((LibraryClass) clazz2).interfaceClasses;
     assertEquals(0, clazzArray.length);
     assertEquals(0, ((LibraryClass) clazz2).subClassCount);
-    assertEquals(1, member2.getAccessFlags());
+    assertEquals(1, member.getAccessFlags());
     assertTrue(clazz2.getExtraFeatureNames().isEmpty());
     Clazz[] clazzArray2 = clazz.subClasses;
     assertSame(clazzArray2, clazzArray);
@@ -82,21 +78,18 @@ class JavaFieldReferenceInfoDiffblueTest {
    * <p>Method under test: {@link JavaFieldReferenceInfo#getSignature()}
    */
   @Test
-  @DisplayName("Test getSignature(); then return '()Descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String JavaFieldReferenceInfo.getSignature()"})
-  void testGetSignature_thenReturnDescriptor() {
+  public void testGetSignature_thenReturnDescriptor() {
     // Arrange
     LibraryClass ownerClass = new LibraryClass();
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "", "Descriptor");
-
-    JavaFieldReferenceInfo javaFieldReferenceInfo =
-        new JavaFieldReferenceInfo(ownerClass, clazz, member);
 
     // Act and Assert
-    assertEquals("()Descriptor", javaFieldReferenceInfo.getSignature());
+    assertEquals(
+        "()Descriptor",
+        (new JavaFieldReferenceInfo(ownerClass, clazz, new LibraryField(1, "", "Descriptor")))
+            .getSignature());
   }
 
   /**
@@ -109,21 +102,18 @@ class JavaFieldReferenceInfoDiffblueTest {
    * <p>Method under test: {@link JavaFieldReferenceInfo#getSignature()}
    */
   @Test
-  @DisplayName("Test getSignature(); then return 'getIs()Descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String JavaFieldReferenceInfo.getSignature()"})
-  void testGetSignature_thenReturnGetIsDescriptor() {
+  public void testGetSignature_thenReturnGetIsDescriptor() {
     // Arrange
     LibraryClass ownerClass = new LibraryClass();
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "is", "Descriptor");
-
-    JavaFieldReferenceInfo javaFieldReferenceInfo =
-        new JavaFieldReferenceInfo(ownerClass, clazz, member);
 
     // Act and Assert
-    assertEquals("getIs()Descriptor", javaFieldReferenceInfo.getSignature());
+    assertEquals(
+        "getIs()Descriptor",
+        (new JavaFieldReferenceInfo(ownerClass, clazz, new LibraryField(1, "is", "Descriptor")))
+            .getSignature());
   }
 
   /**
@@ -136,20 +126,17 @@ class JavaFieldReferenceInfoDiffblueTest {
    * <p>Method under test: {@link JavaFieldReferenceInfo#getSignature()}
    */
   @Test
-  @DisplayName("Test getSignature(); then return 'getName()Descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String JavaFieldReferenceInfo.getSignature()"})
-  void testGetSignature_thenReturnGetNameDescriptor() {
+  public void testGetSignature_thenReturnGetNameDescriptor() {
     // Arrange
     LibraryClass ownerClass = new LibraryClass();
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    JavaFieldReferenceInfo javaFieldReferenceInfo =
-        new JavaFieldReferenceInfo(ownerClass, clazz, member);
 
     // Act and Assert
-    assertEquals("getName()Descriptor", javaFieldReferenceInfo.getSignature());
+    assertEquals(
+        "getName()Descriptor",
+        (new JavaFieldReferenceInfo(ownerClass, clazz, new LibraryField(1, "Name", "Descriptor")))
+            .getSignature());
   }
 }

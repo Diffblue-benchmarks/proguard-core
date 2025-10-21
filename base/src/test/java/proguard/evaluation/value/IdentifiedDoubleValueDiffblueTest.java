@@ -1,40 +1,35 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.evaluation.ParticularReferenceValueFactory;
 
-class IdentifiedDoubleValueDiffblueTest {
+public class IdentifiedDoubleValueDiffblueTest {
   /**
-   * Test {@link IdentifiedDoubleValue#IdentifiedDoubleValue(ValueFactory, int)}.
+   * Test getters and setters.
    *
-   * <p>Method under test: {@link IdentifiedDoubleValue#IdentifiedDoubleValue(ValueFactory, int)}
+   * <p>Methods under test:
+   *
+   * <ul>
+   *   <li>{@link IdentifiedDoubleValue#IdentifiedDoubleValue(ValueFactory, int)}
+   *   <li>{@link IdentifiedDoubleValue#toString()}
+   * </ul>
    */
   @Test
-  @DisplayName("Test new IdentifiedDoubleValue(ValueFactory, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void IdentifiedDoubleValue.<init>(ValueFactory, int)",
     "java.lang.String IdentifiedDoubleValue.toString()"
   })
-  void testNewIdentifiedDoubleValue() {
-    // Arrange and Act
-    IdentifiedDoubleValue actualIdentifiedDoubleValue =
-        new IdentifiedDoubleValue(new ParticularReferenceValueFactory(), 1);
-
-    // Assert
-    assertFalse(actualIdentifiedDoubleValue.isParticular());
-    assertTrue(actualIdentifiedDoubleValue.isCategory2());
-    assertTrue(actualIdentifiedDoubleValue.isSpecific());
+  public void testGettersAndSetters() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "d1", (new IdentifiedDoubleValue(new ParticularReferenceValueFactory(), 1)).toString());
   }
 
   /**
@@ -54,14 +49,12 @@ class IdentifiedDoubleValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean IdentifiedDoubleValue.equals(Object)",
     "int IdentifiedDoubleValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     IdentifiedDoubleValue identifiedDoubleValue =
         new IdentifiedDoubleValue(new ParticularReferenceValueFactory(), 1);
@@ -83,14 +76,12 @@ class IdentifiedDoubleValueDiffblueTest {
    * <p>Method under test: {@link IdentifiedDoubleValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean IdentifiedDoubleValue.equals(Object)",
     "int IdentifiedDoubleValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     IdentifiedDoubleValue identifiedDoubleValue =
         new IdentifiedDoubleValue(new ParticularReferenceValueFactory(), 1);
@@ -111,14 +102,12 @@ class IdentifiedDoubleValueDiffblueTest {
    * <p>Method under test: {@link IdentifiedDoubleValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean IdentifiedDoubleValue.equals(Object)",
     "int IdentifiedDoubleValue.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new IdentifiedDoubleValue(new ParticularReferenceValueFactory(), 1), null);
   }
@@ -134,14 +123,12 @@ class IdentifiedDoubleValueDiffblueTest {
    * <p>Method under test: {@link IdentifiedDoubleValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean IdentifiedDoubleValue.equals(Object)",
     "int IdentifiedDoubleValue.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
         new IdentifiedDoubleValue(new ParticularReferenceValueFactory(), 1),

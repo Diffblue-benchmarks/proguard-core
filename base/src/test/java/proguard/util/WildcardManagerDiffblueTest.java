@@ -1,29 +1,26 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class WildcardManagerDiffblueTest {
+public class WildcardManagerDiffblueTest {
   /**
    * Test {@link WildcardManager#WildcardManager(WildcardManager)}.
    *
    * <p>Method under test: {@link WildcardManager#WildcardManager(WildcardManager)}
    */
   @Test
-  @DisplayName("Test new WildcardManager(WildcardManager)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void WildcardManager.<init>(WildcardManager)"})
-  void testNewWildcardManager() {
+  public void testNewWildcardManager() {
     // Arrange, Act and Assert
     assertTrue(
-        new WildcardManager(new WildcardManager()).createMatchedStringFunction("Expression")
+        (new WildcardManager(new WildcardManager())).createMatchedStringFunction("Expression")
             instanceof ConstantStringFunction);
   }
 
@@ -35,13 +32,11 @@ class WildcardManagerDiffblueTest {
    * int, StringMatcher)}
    */
   @Test
-  @DisplayName("Test createVariableStringMatcher(char[], char[], int, int, StringMatcher)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "proguard.util.VariableStringMatcher WildcardManager.createVariableStringMatcher(char[], char[], int, int, StringMatcher)"
   })
-  void testCreateVariableStringMatcher() {
+  public void testCreateVariableStringMatcher() {
     // Arrange
     WildcardManager wildcardManager = new WildcardManager();
     char[] allowedCharacters = "A<A<".toCharArray();
@@ -62,14 +57,12 @@ class WildcardManagerDiffblueTest {
    * <p>Method under test: {@link WildcardManager#createMatchedStringFunction(String)}
    */
   @Test
-  @DisplayName("Test createMatchedStringFunction(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringFunction WildcardManager.createMatchedStringFunction(String)"})
-  void testCreateMatchedStringFunction() {
+  public void testCreateMatchedStringFunction() {
     // Arrange and Act
     StringFunction actualCreateMatchedStringFunctionResult =
-        new WildcardManager().createMatchedStringFunction("Expression");
+        (new WildcardManager()).createMatchedStringFunction("Expression");
     String actualTransformResult = actualCreateMatchedStringFunctionResult.transform("foo");
 
     // Assert
@@ -89,13 +82,11 @@ class WildcardManagerDiffblueTest {
    * <p>Method under test: {@link WildcardManager#wildCardIndex(String, int)}
    */
   @Test
-  @DisplayName("Test wildCardIndex(String, int); when 'Regular Expression'; then return minus one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int WildcardManager.wildCardIndex(String, int)"})
-  void testWildCardIndex_whenRegularExpression_thenReturnMinusOne()
+  public void testWildCardIndex_whenRegularExpression_thenReturnMinusOne()
       throws IllegalArgumentException {
     // Arrange, Act and Assert
-    assertEquals(-1, new WildcardManager().wildCardIndex("Regular Expression", 1));
+    assertEquals(-1, (new WildcardManager()).wildCardIndex("Regular Expression", 1));
   }
 }

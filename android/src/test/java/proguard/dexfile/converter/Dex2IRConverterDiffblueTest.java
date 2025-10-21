@@ -1,16 +1,15 @@
 package proguard.dexfile.converter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.converter.Dex2IRConverter.DvmValue;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.expr.Local;
@@ -18,7 +17,7 @@ import proguard.dexfile.ir.stmt.LabelStmt;
 import proguard.dexfile.ir.stmt.Stmt.ST;
 import proguard.dexfile.reader.DexLabel;
 
-class Dex2IRConverterDiffblueTest {
+public class Dex2IRConverterDiffblueTest {
   /**
    * Test DvmValue {@link DvmValue#DvmValue()}.
    *
@@ -29,11 +28,9 @@ class Dex2IRConverterDiffblueTest {
    * <p>Method under test: {@link DvmValue#DvmValue()}
    */
   @Test
-  @DisplayName("Test DvmValue new DvmValue(); then return otherParent is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DvmValue.<init>()", "void DvmValue.<init>(Local)"})
-  void testDvmValueNewDvmValue_thenReturnOtherParentIsNull() {
+  public void testDvmValueNewDvmValue_thenReturnOtherParentIsNull() {
     // Arrange and Act
     DvmValue actualDvmValue = new DvmValue();
 
@@ -54,19 +51,16 @@ class Dex2IRConverterDiffblueTest {
    * <p>Method under test: {@link DvmValue#DvmValue(Local)}
    */
   @Test
-  @DisplayName(
-      "Test DvmValue new DvmValue(Local); when Local(); then return local toString0 is 'a0'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DvmValue.<init>()", "void DvmValue.<init>(Local)"})
-  void testDvmValueNewDvmValue_whenLocal_thenReturnLocalToString0IsA0() {
+  public void testDvmValueNewDvmValue_whenLocal_thenReturnLocalToString0IsA0() {
     // Arrange, Act and Assert
-    Local local = new DvmValue(new Local()).local;
+    Local local = (new DvmValue(new Local())).local;
     assertEquals("a0", local.toString0());
+    assertNull(local.getOps());
     assertNull(local.getOp());
     assertNull(local.getOp1());
     assertNull(local.getOp2());
-    assertNull(local.getOps());
   }
 
   /**
@@ -80,11 +74,9 @@ class Dex2IRConverterDiffblueTest {
    * <p>Method under test: {@link Dex2IRConverter#sizeofType(String)}
    */
   @Test
-  @DisplayName("Test sizeofType(String); when 'foo'; then return one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int Dex2IRConverter.sizeofType(String)"})
-  void testSizeofType_whenFoo_thenReturnOne() {
+  public void testSizeofType_whenFoo_thenReturnOne() {
     // Arrange, Act and Assert
     assertEquals(1, Dex2IRConverter.sizeofType("foo"));
   }
@@ -100,11 +92,9 @@ class Dex2IRConverterDiffblueTest {
    * <p>Method under test: {@link Dex2IRConverter#methodArgCount(String[])}
    */
   @Test
-  @DisplayName("Test methodArgCount(String[]); when array of String with 'Args'; then return one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int Dex2IRConverter.methodArgCount(String[])"})
-  void testMethodArgCount_whenArrayOfStringWithArgs_thenReturnOne() {
+  public void testMethodArgCount_whenArrayOfStringWithArgs_thenReturnOne() {
     // Arrange, Act and Assert
     assertEquals(1, Dex2IRConverter.methodArgCount(new String[] {"Args"}));
   }
@@ -121,21 +111,15 @@ class Dex2IRConverterDiffblueTest {
    * <p>Method under test: {@link Dex2IRConverter#getLocal(DvmValue)}
    */
   @Test
-  @DisplayName(
-      "Test getLocal(DvmValue); when DvmValue(Local) with thiz is Local(); then return DvmValue(Local) with thiz is Local() local")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Local Dex2IRConverter.getLocal(DvmValue)"})
-  void testGetLocal_whenDvmValueWithThizIsLocal_thenReturnDvmValueWithThizIsLocalLocal() {
+  public void testGetLocal_whenDvmValueWithThizIsLocal_thenReturnDvmValueWithThizIsLocalLocal() {
     // Arrange
     Dex2IRConverter dex2IRConverter = new Dex2IRConverter();
     DvmValue value = new DvmValue(new Local());
 
-    // Act
-    Local actualLocal = dex2IRConverter.getLocal(value);
-
-    // Assert
-    assertSame(value.local, actualLocal);
+    // Act and Assert
+    assertSame(value.local, dex2IRConverter.getLocal(value));
   }
 
   /**
@@ -143,17 +127,15 @@ class Dex2IRConverterDiffblueTest {
    *
    * <ul>
    *   <li>When {@link DexLabel#DexLabel()}.
-   *   <li>Then return {@link LabelStmt#tag} is {@code null}.
+   *   <li>Then return Ops is {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link Dex2IRConverter#getLabel(DexLabel)}
    */
   @Test
-  @DisplayName("Test getLabel(DexLabel); when DexLabel(); then return tag is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LabelStmt Dex2IRConverter.getLabel(DexLabel)"})
-  void testGetLabel_whenDexLabel_thenReturnTagIsNull() {
+  public void testGetLabel_whenDexLabel_thenReturnOpsIsNull() {
     // Arrange
     Dex2IRConverter dex2IRConverter = new Dex2IRConverter();
 
@@ -161,6 +143,7 @@ class Dex2IRConverterDiffblueTest {
     LabelStmt actualLabel = dex2IRConverter.getLabel(new DexLabel());
 
     // Assert
+    assertNull(actualLabel.getOps());
     assertNull(actualLabel.tag);
     assertNull(actualLabel.frame);
     assertNull(actualLabel.phis);
@@ -169,7 +152,6 @@ class Dex2IRConverterDiffblueTest {
     assertNull(actualLabel.getOp());
     assertNull(actualLabel.getOp1());
     assertNull(actualLabel.getOp2());
-    assertNull(actualLabel.getOps());
     assertNull(actualLabel.getNext());
     assertNull(actualLabel.getPre());
     assertNull(actualLabel._ts_default_next);
@@ -187,11 +169,9 @@ class Dex2IRConverterDiffblueTest {
    * <p>Method under test: default or parameterless constructor of {@link Dex2IRConverter}
    */
   @Test
-  @DisplayName("Test new Dex2IRConverter (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Dex2IRConverter.<init>()"})
-  void testNewDex2IRConverter() {
+  public void testNewDex2IRConverter() {
     // Arrange and Act
     Dex2IRConverter actualDex2IRConverter = new Dex2IRConverter();
 

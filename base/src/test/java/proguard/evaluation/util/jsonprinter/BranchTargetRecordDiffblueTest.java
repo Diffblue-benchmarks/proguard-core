@@ -1,18 +1,17 @@
 package proguard.evaluation.util.jsonprinter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class BranchTargetRecordDiffblueTest {
+public class BranchTargetRecordDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -26,16 +25,14 @@ class BranchTargetRecordDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void BranchTargetRecord.<init>(List, List, int)",
     "int BranchTargetRecord.getStartOffset()",
     "List BranchTargetRecord.getStartStack()",
     "List BranchTargetRecord.getStartVariables()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     ArrayList<String> variables = new ArrayList<>();
     ArrayList<String> stack = new ArrayList<>();
@@ -60,11 +57,9 @@ class BranchTargetRecordDiffblueTest {
    * <p>Method under test: {@link BranchTargetRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder BranchTargetRecord.toJson(StringBuilder)"})
-  void testToJson() {
+  public void testToJson() {
     // Arrange
     ArrayList<String> variables = new ArrayList<>();
     BranchTargetRecord branchTargetRecord = new BranchTargetRecord(variables, new ArrayList<>(), 1);
@@ -82,64 +77,16 @@ class BranchTargetRecordDiffblueTest {
   /**
    * Test {@link BranchTargetRecord#toJson(StringBuilder)}.
    *
-   * <ul>
-   *   <li>Given {@link ArrayList#ArrayList()} add {@code Variables}.
-   *   <li>Then {@link StringBuilder#StringBuilder(String)} with {@code foo} toString is a string.
-   * </ul>
-   *
    * <p>Method under test: {@link BranchTargetRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName(
-      "Test toJson(StringBuilder); given ArrayList() add 'Variables'; then StringBuilder(String) with 'foo' toString is a string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder BranchTargetRecord.toJson(StringBuilder)"})
-  void testToJson_givenArrayListAddVariables_thenStringBuilderWithFooToStringIsAString() {
+  public void testToJson2() {
     // Arrange
     ArrayList<String> variables = new ArrayList<>();
-    variables.add("Variables");
-    variables.add("Variables");
-    variables.add("Variables");
-    variables.add("Variables");
-    variables.add("Variables");
-    variables.add("Variables");
-    variables.add("Variables");
-    variables.add("Variables");
-    variables.add("Variables");
-    variables.add("Variables");
-    variables.add("Variables");
-    variables.add("Variables");
-    variables.add("Variables");
-    variables.add("Variables");
-    variables.add("Variables");
-    variables.add("Variables");
-    variables.add("Variables");
-    variables.add("Variables");
-    variables.add("Variables");
-
-    ArrayList<String> stack = new ArrayList<>();
-    stack.add("Stack");
-    stack.add("Stack");
-    stack.add("Stack");
-    stack.add("Stack");
-    stack.add("Stack");
-    stack.add("Stack");
-    stack.add("Stack");
-    stack.add("Stack");
-    stack.add("Stack");
-    stack.add("Stack");
-    stack.add("Stack");
-    stack.add("Stack");
-    stack.add("Stack");
-    stack.add("Stack");
-    stack.add("Stack");
-    stack.add("Stack");
-    stack.add("Stack");
-    stack.add("Stack");
-    stack.add("Stack");
-
-    BranchTargetRecord branchTargetRecord = new BranchTargetRecord(variables, stack, 1);
+    variables.add("{");
+    BranchTargetRecord branchTargetRecord = new BranchTargetRecord(variables, new ArrayList<>(), 1);
     StringBuilder builder = new StringBuilder("foo");
 
     // Act
@@ -147,11 +94,32 @@ class BranchTargetRecordDiffblueTest {
 
     // Assert
     assertEquals(
-        "foo{\"startOffset\":1,\"startStack\":[\"Stack\",\"Stack\",\"Stack\",\"Stack\",\"Stack\",\"Stack\",\"Stack\",\"Stack\","
-            + "\"Stack\",\"Stack\",\"Stack\",\"Stack\",\"Stack\",\"Stack\",\"Stack\",\"Stack\",\"Stack\",\"Stack\",\"Stack\"],\"startVariables"
-            + "\":[\"Variables\",\"Variables\",\"Variables\",\"Variables\",\"Variables\",\"Variables\",\"Variables\",\"Variables\","
-            + "\"Variables\",\"Variables\",\"Variables\",\"Variables\",\"Variables\",\"Variables\",\"Variables\",\"Variables\","
-            + "\"Variables\",\"Variables\",\"Variables\"]}",
+        "foo{\"startOffset\":1,\"startStack\":[],\"startVariables\":[\"{\"]}", builder.toString());
+    assertSame(builder, actualToJsonResult);
+  }
+
+  /**
+   * Test {@link BranchTargetRecord#toJson(StringBuilder)}.
+   *
+   * <p>Method under test: {@link BranchTargetRecord#toJson(StringBuilder)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"StringBuilder BranchTargetRecord.toJson(StringBuilder)"})
+  public void testToJson3() {
+    // Arrange
+    ArrayList<String> variables = new ArrayList<>();
+    variables.add("startOffset");
+    variables.add("{");
+    BranchTargetRecord branchTargetRecord = new BranchTargetRecord(variables, new ArrayList<>(), 1);
+    StringBuilder builder = new StringBuilder("foo");
+
+    // Act
+    StringBuilder actualToJsonResult = branchTargetRecord.toJson(builder);
+
+    // Assert
+    assertEquals(
+        "foo{\"startOffset\":1,\"startStack\":[],\"startVariables\":[\"startOffset\",\"{\"]}",
         builder.toString());
     assertSame(builder, actualToJsonResult);
   }

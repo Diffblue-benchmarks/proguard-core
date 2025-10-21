@@ -1,15 +1,14 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class CompositeFloatValueDiffblueTest {
+public class CompositeFloatValueDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -21,19 +20,17 @@ class CompositeFloatValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void CompositeFloatValue.<init>(FloatValue, byte, FloatValue)",
     "java.lang.String CompositeFloatValue.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
     assertEquals(
         "(fAf)",
-        new CompositeFloatValue(
-                BasicValueFactory.FLOAT_VALUE, (byte) 'A', BasicValueFactory.FLOAT_VALUE)
+        (new CompositeFloatValue(
+                BasicValueFactory.FLOAT_VALUE, (byte) 'A', BasicValueFactory.FLOAT_VALUE))
             .toString());
   }
 
@@ -53,14 +50,12 @@ class CompositeFloatValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean CompositeFloatValue.equals(Object)",
     "int CompositeFloatValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     CompositeFloatValue compositeFloatValue =
         new CompositeFloatValue(
@@ -71,7 +66,8 @@ class CompositeFloatValueDiffblueTest {
 
     // Act and Assert
     assertEquals(compositeFloatValue, compositeFloatValue2);
-    assertEquals(compositeFloatValue.hashCode(), compositeFloatValue2.hashCode());
+    int expectedHashCodeResult = compositeFloatValue.hashCode();
+    assertEquals(expectedHashCodeResult, compositeFloatValue2.hashCode());
   }
 
   /**
@@ -90,14 +86,12 @@ class CompositeFloatValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean CompositeFloatValue.equals(Object)",
     "int CompositeFloatValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     CompositeFloatValue compositeFloatValue =
         new CompositeFloatValue(
@@ -120,14 +114,12 @@ class CompositeFloatValueDiffblueTest {
    * <p>Method under test: {@link CompositeFloatValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean CompositeFloatValue.equals(Object)",
     "int CompositeFloatValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     CompositeFloatValue compositeFloatValue =
         new CompositeFloatValue(
@@ -151,14 +143,12 @@ class CompositeFloatValueDiffblueTest {
    * <p>Method under test: {@link CompositeFloatValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean CompositeFloatValue.equals(Object)",
     "int CompositeFloatValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
     CompositeFloatValue compositeFloatValue =
         new CompositeFloatValue(
@@ -185,14 +175,12 @@ class CompositeFloatValueDiffblueTest {
    * <p>Method under test: {@link CompositeFloatValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean CompositeFloatValue.equals(Object)",
     "int CompositeFloatValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
     // Arrange
     CompositeFloatValue compositeFloatValue =
         new CompositeFloatValue(
@@ -216,14 +204,12 @@ class CompositeFloatValueDiffblueTest {
    * <p>Method under test: {@link CompositeFloatValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean CompositeFloatValue.equals(Object)",
     "int CompositeFloatValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual4() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual4() {
     // Arrange
     CompositeFloatValue compositeFloatValue =
         new CompositeFloatValue(
@@ -247,14 +233,12 @@ class CompositeFloatValueDiffblueTest {
    * <p>Method under test: {@link CompositeFloatValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean CompositeFloatValue.equals(Object)",
     "int CompositeFloatValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual5() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual5() {
     // Arrange
     CompositeFloatValue compositeFloatValue =
         new CompositeFloatValue(
@@ -281,14 +265,12 @@ class CompositeFloatValueDiffblueTest {
    * <p>Method under test: {@link CompositeFloatValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean CompositeFloatValue.equals(Object)",
     "int CompositeFloatValue.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
         new CompositeFloatValue(
@@ -307,14 +289,12 @@ class CompositeFloatValueDiffblueTest {
    * <p>Method under test: {@link CompositeFloatValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean CompositeFloatValue.equals(Object)",
     "int CompositeFloatValue.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
         new CompositeFloatValue(

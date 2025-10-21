@@ -1,27 +1,24 @@
 package proguard.dexfile.reader;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class OpDiffblueTest {
+public class OpDiffblueTest {
   /**
    * Test {@link Op#canBranch()}.
    *
    * <p>Method under test: {@link Op#canBranch()}
    */
   @Test
-  @DisplayName("Test canBranch()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Op.canBranch()"})
-  void testCanBranch() {
+  public void testCanBranch() {
     // Arrange, Act and Assert
     assertFalse(Op.NOP.canBranch());
   }
@@ -37,11 +34,9 @@ class OpDiffblueTest {
    * <p>Method under test: {@link Op#canContinue()}
    */
   @Test
-  @DisplayName("Test canContinue(); given 'NOP'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Op.canContinue()"})
-  void testCanContinue_givenNop_thenReturnTrue() {
+  public void testCanContinue_givenNop_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(Op.NOP.canContinue());
   }
@@ -57,11 +52,9 @@ class OpDiffblueTest {
    * <p>Method under test: {@link Op#canContinue()}
    */
   @Test
-  @DisplayName("Test canContinue(); given 'RETURN_VOID'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Op.canContinue()"})
-  void testCanContinue_givenReturnVoid_thenReturnFalse() {
+  public void testCanContinue_givenReturnVoid_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(Op.RETURN_VOID.canContinue());
   }
@@ -77,11 +70,9 @@ class OpDiffblueTest {
    * <p>Method under test: {@link Op#canReturn()}
    */
   @Test
-  @DisplayName("Test canReturn(); given 'NOP'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Op.canReturn()"})
-  void testCanReturn_givenNop_thenReturnFalse() {
+  public void testCanReturn_givenNop_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(Op.NOP.canReturn());
   }
@@ -97,11 +88,9 @@ class OpDiffblueTest {
    * <p>Method under test: {@link Op#canReturn()}
    */
   @Test
-  @DisplayName("Test canReturn(); given 'RETURN_VOID'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Op.canReturn()"})
-  void testCanReturn_givenReturnVoid_thenReturnTrue() {
+  public void testCanReturn_givenReturnVoid_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(Op.RETURN_VOID.canReturn());
   }
@@ -112,11 +101,9 @@ class OpDiffblueTest {
    * <p>Method under test: {@link Op#canSwitch()}
    */
   @Test
-  @DisplayName("Test canSwitch()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Op.canSwitch()"})
-  void testCanSwitch() {
+  public void testCanSwitch() {
     // Arrange, Act and Assert
     assertFalse(Op.NOP.canSwitch());
   }
@@ -127,11 +114,9 @@ class OpDiffblueTest {
    * <p>Method under test: {@link Op#canThrow()}
    */
   @Test
-  @DisplayName("Test canThrow()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Op.canThrow()"})
-  void testCanThrow() {
+  public void testCanThrow() {
     // Arrange, Act and Assert
     assertFalse(Op.NOP.canThrow());
   }
@@ -142,11 +127,9 @@ class OpDiffblueTest {
    * <p>Method under test: {@link Op#toString()}
    */
   @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String Op.toString()"})
-  void testToString() {
+  public void testToString() {
     // Arrange, Act and Assert
     assertEquals("nop", Op.valueOf("NOP").toString());
   }

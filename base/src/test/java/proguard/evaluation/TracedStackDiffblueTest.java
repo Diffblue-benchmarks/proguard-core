@@ -1,43 +1,37 @@
 package proguard.evaluation;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.evaluation.value.BasicValueFactory;
 import proguard.evaluation.value.DoubleValue;
 import proguard.evaluation.value.FloatValue;
 import proguard.evaluation.value.TopValue;
 import proguard.evaluation.value.Value;
 
-class TracedStackDiffblueTest {
+public class TracedStackDiffblueTest {
   /**
    * Test {@link TracedStack#TracedStack(TracedStack)}.
    *
    * <p>Method under test: {@link TracedStack#TracedStack(TracedStack)}
    */
   @Test
-  @DisplayName("Test new TracedStack(TracedStack)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TracedStack.<init>(TracedStack)"})
-  void testNewTracedStack() {
+  public void testNewTracedStack() {
     // Arrange
     TracedStack tracedStack = new TracedStack(3);
 
-    // Act
-    TracedStack actualTracedStack = new TracedStack(tracedStack);
-
-    // Assert
-    assertEquals(tracedStack, actualTracedStack);
+    // Act and Assert
+    assertEquals(tracedStack, new TracedStack(tracedStack));
   }
 
   /**
@@ -51,11 +45,9 @@ class TracedStackDiffblueTest {
    * <p>Method under test: {@link TracedStack#TracedStack(int)}
    */
   @Test
-  @DisplayName("Test new TracedStack(int); when three; then return first element is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TracedStack.<init>(int)"})
-  void testNewTracedStack_whenThree_thenReturnFirstElementIsNull() {
+  public void testNewTracedStack_whenThree_thenReturnFirstElementIsNull() {
     // Arrange and Act
     TracedStack actualTracedStack = new TracedStack(3);
 
@@ -80,14 +72,11 @@ class TracedStackDiffblueTest {
    * <p>Method under test: {@link TracedStack#getBottomProducerValue(int)}
    */
   @Test
-  @DisplayName(
-      "Test getBottomProducerValue(int); given TracedStack(int) with maxSize is three; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value TracedStack.getBottomProducerValue(int)"})
-  void testGetBottomProducerValue_givenTracedStackWithMaxSizeIsThree_thenReturnNull() {
+  public void testGetBottomProducerValue_givenTracedStackWithMaxSizeIsThree_thenReturnNull() {
     // Arrange, Act and Assert
-    assertNull(new TracedStack(3).getBottomProducerValue(1));
+    assertNull((new TracedStack(3)).getBottomProducerValue(1));
   }
 
   /**
@@ -100,13 +89,11 @@ class TracedStackDiffblueTest {
    * <p>Method under test: {@link TracedStack#getBottomActualProducerValue(int)}
    */
   @Test
-  @DisplayName("Test getBottomActualProducerValue(int); then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value TracedStack.getBottomActualProducerValue(int)"})
-  void testGetBottomActualProducerValue_thenReturnNull() {
+  public void testGetBottomActualProducerValue_thenReturnNull() {
     // Arrange, Act and Assert
-    assertNull(new TracedStack(3).getBottomActualProducerValue(1));
+    assertNull((new TracedStack(3)).getBottomActualProducerValue(1));
   }
 
   /**
@@ -120,13 +107,11 @@ class TracedStackDiffblueTest {
    * <p>Method under test: {@link TracedStack#getTopProducerValue(int)}
    */
   @Test
-  @DisplayName("Test getTopProducerValue(int); when NONE; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value TracedStack.getTopProducerValue(int)"})
-  void testGetTopProducerValue_whenNone_thenReturnNull() {
+  public void testGetTopProducerValue_whenNone_thenReturnNull() {
     // Arrange, Act and Assert
-    assertNull(new TracedStack(3).getTopProducerValue(InitializationFinder.NONE));
+    assertNull((new TracedStack(3)).getTopProducerValue(InitializationFinder.NONE));
   }
 
   /**
@@ -140,13 +125,11 @@ class TracedStackDiffblueTest {
    * <p>Method under test: {@link TracedStack#getTopActualProducerValue(int)}
    */
   @Test
-  @DisplayName("Test getTopActualProducerValue(int); when NONE; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value TracedStack.getTopActualProducerValue(int)"})
-  void testGetTopActualProducerValue_whenNone_thenReturnNull() {
+  public void testGetTopActualProducerValue_whenNone_thenReturnNull() {
     // Arrange, Act and Assert
-    assertNull(new TracedStack(3).getTopActualProducerValue(InitializationFinder.NONE));
+    assertNull((new TracedStack(3)).getTopActualProducerValue(InitializationFinder.NONE));
   }
 
   /**
@@ -160,12 +143,9 @@ class TracedStackDiffblueTest {
    * <p>Method under test: {@link TracedStack#reset(int)}
    */
   @Test
-  @DisplayName(
-      "Test reset(int); given TracedStack(int) with maxSize is one; then second element is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TracedStack.reset(int)"})
-  void testReset_givenTracedStackWithMaxSizeIsOne_thenSecondElementIsNull() {
+  public void testReset_givenTracedStackWithMaxSizeIsOne_thenSecondElementIsNull() {
     // Arrange
     TracedStack tracedStack = new TracedStack(1);
 
@@ -189,11 +169,9 @@ class TracedStackDiffblueTest {
    * <p>Method under test: {@link TracedStack#reset(int)}
    */
   @Test
-  @DisplayName("Test reset(int); given TracedStack(int) with maxSize is three")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TracedStack.reset(int)"})
-  void testReset_givenTracedStackWithMaxSizeIsThree() {
+  public void testReset_givenTracedStackWithMaxSizeIsThree() {
     // Arrange
     TracedStack tracedStack = new TracedStack(3);
 
@@ -215,12 +193,9 @@ class TracedStackDiffblueTest {
    * <p>Method under test: {@link TracedStack#copy(TracedStack)}
    */
   @Test
-  @DisplayName(
-      "Test copy(TracedStack) with 'TracedStack'; given TracedStack(int) with maxSize is one; then second element is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TracedStack.copy(TracedStack)"})
-  void testCopyWithTracedStack_givenTracedStackWithMaxSizeIsOne_thenSecondElementIsNull() {
+  public void testCopyWithTracedStack_givenTracedStackWithMaxSizeIsOne_thenSecondElementIsNull() {
     // Arrange
     TracedStack tracedStack = new TracedStack(1);
 
@@ -245,20 +220,14 @@ class TracedStackDiffblueTest {
    * <p>Method under test: {@link TracedStack#generalize(TracedStack)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(TracedStack) with 'TracedStack'; when TracedStack(int) with maxSize is three; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TracedStack.generalize(TracedStack)"})
-  void testGeneralizeWithTracedStack_whenTracedStackWithMaxSizeIsThree_thenReturnFalse() {
+  public void testGeneralizeWithTracedStack_whenTracedStackWithMaxSizeIsThree_thenReturnFalse() {
     // Arrange
     TracedStack tracedStack = new TracedStack(3);
 
-    // Act
-    boolean actualGeneralizeResult = tracedStack.generalize(new TracedStack(3));
-
-    // Assert
-    assertFalse(actualGeneralizeResult);
+    // Act and Assert
+    assertFalse(tracedStack.generalize(new TracedStack(3)));
   }
 
   /**
@@ -271,11 +240,9 @@ class TracedStackDiffblueTest {
    * <p>Method under test: {@link TracedStack#push(Value)}
    */
   @Test
-  @DisplayName("Test push(Value); then first element TopValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TracedStack.push(Value)"})
-  void testPush_thenFirstElementTopValue() {
+  public void testPush_thenFirstElementTopValue() {
     // Arrange
     TracedStack tracedStack = new TracedStack(3);
     tracedStack.setProducerValue(BasicValueFactory.FLOAT_VALUE);
@@ -301,18 +268,15 @@ class TracedStackDiffblueTest {
    * Test {@link TracedStack#push(Value)}.
    *
    * <ul>
-   *   <li>When {@link BasicValueFactory#FLOAT_VALUE}.
    *   <li>Then second element is {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link TracedStack#push(Value)}
    */
   @Test
-  @DisplayName("Test push(Value); when FLOAT_VALUE; then second element is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TracedStack.push(Value)"})
-  void testPush_whenFloat_value_thenSecondElementIsNull() {
+  public void testPush_thenSecondElementIsNull() {
     // Arrange
     TracedStack tracedStack = new TracedStack(3);
     tracedStack.setProducerValue(BasicValueFactory.DOUBLE_VALUE);
@@ -346,18 +310,17 @@ class TracedStackDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TracedStack.equals(Object)", "int TracedStack.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     TracedStack tracedStack = new TracedStack(3);
     TracedStack tracedStack2 = new TracedStack(3);
 
     // Act and Assert
     assertEquals(tracedStack, tracedStack2);
-    assertEquals(tracedStack.hashCode(), tracedStack2.hashCode());
+    int expectedHashCodeResult = tracedStack.hashCode();
+    assertEquals(expectedHashCodeResult, tracedStack2.hashCode());
   }
 
   /**
@@ -376,11 +339,9 @@ class TracedStackDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TracedStack.equals(Object)", "int TracedStack.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     TracedStack tracedStack = new TracedStack(3);
 
@@ -401,11 +362,9 @@ class TracedStackDiffblueTest {
    * <p>Method under test: {@link TracedStack#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TracedStack.equals(Object)", "int TracedStack.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new TracedStack(3), 1);
   }
@@ -421,11 +380,9 @@ class TracedStackDiffblueTest {
    * <p>Method under test: {@link TracedStack#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TracedStack.equals(Object)", "int TracedStack.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new TracedStack(3), null);
   }
@@ -441,11 +398,9 @@ class TracedStackDiffblueTest {
    * <p>Method under test: {@link TracedStack#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TracedStack.equals(Object)", "int TracedStack.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new TracedStack(3), "Different type to TracedStack");
   }
@@ -456,12 +411,10 @@ class TracedStackDiffblueTest {
    * <p>Method under test: {@link TracedStack#toString()}
    */
   @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String TracedStack.toString()"})
-  void testToString() {
+  public void testToString() {
     // Arrange, Act and Assert
-    assertEquals("", new TracedStack(3).toString());
+    assertEquals("", (new TracedStack(3)).toString());
   }
 }

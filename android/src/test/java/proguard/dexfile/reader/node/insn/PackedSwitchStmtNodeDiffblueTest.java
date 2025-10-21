@@ -1,21 +1,20 @@
 package proguard.dexfile.reader.node.insn;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.reader.DexLabel;
 import proguard.dexfile.reader.Op;
 import proguard.dexfile.reader.node.DexCodeNode;
 import proguard.dexfile.reader.visitors.DexCodeVisitor;
 
-class PackedSwitchStmtNodeDiffblueTest {
+public class PackedSwitchStmtNodeDiffblueTest {
   /**
    * Test {@link PackedSwitchStmtNode#PackedSwitchStmtNode(Op, int, int, DexLabel[])}.
    *
@@ -23,18 +22,15 @@ class PackedSwitchStmtNodeDiffblueTest {
    * DexLabel[])}
    */
   @Test
-  @DisplayName("Test new PackedSwitchStmtNode(Op, int, int, DexLabel[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void PackedSwitchStmtNode.<init>(Op, int, int, DexLabel[])"})
-  void testNewPackedSwitchStmtNode() {
+  public void testNewPackedSwitchStmtNode() {
     // Arrange
     DexLabel dexLabel = new DexLabel();
-    DexLabel[] labels = new DexLabel[] {dexLabel};
 
     // Act
     PackedSwitchStmtNode actualPackedSwitchStmtNode =
-        new PackedSwitchStmtNode(Op.NOP, 1, 1, labels);
+        new PackedSwitchStmtNode(Op.NOP, 1, 1, new DexLabel[] {dexLabel});
 
     // Assert
     assertEquals(0, actualPackedSwitchStmtNode.__index);
@@ -57,16 +53,13 @@ class PackedSwitchStmtNodeDiffblueTest {
    * <p>Method under test: {@link PackedSwitchStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeNode(); then DexCodeNode() stmts size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void PackedSwitchStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
+  public void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
     // Arrange
     DexLabel dexLabel = new DexLabel();
-    DexLabel[] labels = new DexLabel[] {dexLabel};
-    PackedSwitchStmtNode packedSwitchStmtNode = new PackedSwitchStmtNode(Op.NOP, 1, 1, labels);
+    PackedSwitchStmtNode packedSwitchStmtNode =
+        new PackedSwitchStmtNode(Op.NOP, 1, 1, new DexLabel[] {dexLabel});
     DexCodeNode cv = new DexCodeNode();
 
     // Act
@@ -102,16 +95,13 @@ class PackedSwitchStmtNodeDiffblueTest {
    * <p>Method under test: {@link PackedSwitchStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeVisitor(DexCodeVisitor) with visitor is DexCodeNode(); then array length is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void PackedSwitchStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeNode_thenArrayLengthIsOne() {
+  public void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeNode_thenArrayLengthIsOne() {
     // Arrange
     DexLabel dexLabel = new DexLabel();
-    DexLabel[] labels = new DexLabel[] {dexLabel};
-    PackedSwitchStmtNode packedSwitchStmtNode = new PackedSwitchStmtNode(Op.NOP, 1, 1, labels);
+    PackedSwitchStmtNode packedSwitchStmtNode =
+        new PackedSwitchStmtNode(Op.NOP, 1, 1, new DexLabel[] {dexLabel});
 
     // Act
     packedSwitchStmtNode.accept(new DexCodeVisitor(new DexCodeNode()));
@@ -134,16 +124,13 @@ class PackedSwitchStmtNodeDiffblueTest {
    * <p>Method under test: {@link PackedSwitchStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeVisitor(DexCodeVisitor) with visitor is DexCodeVisitor(); then array length is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void PackedSwitchStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeVisitor_thenArrayLengthIsOne() {
+  public void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeVisitor_thenArrayLengthIsOne() {
     // Arrange
     DexLabel dexLabel = new DexLabel();
-    DexLabel[] labels = new DexLabel[] {dexLabel};
-    PackedSwitchStmtNode packedSwitchStmtNode = new PackedSwitchStmtNode(Op.NOP, 1, 1, labels);
+    PackedSwitchStmtNode packedSwitchStmtNode =
+        new PackedSwitchStmtNode(Op.NOP, 1, 1, new DexLabel[] {dexLabel});
 
     // Act
     packedSwitchStmtNode.accept(new DexCodeVisitor(new DexCodeVisitor()));
@@ -165,15 +152,13 @@ class PackedSwitchStmtNodeDiffblueTest {
    * <p>Method under test: {@link PackedSwitchStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName("Test accept(DexCodeVisitor); when DexCodeVisitor(); then array length is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void PackedSwitchStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeVisitor_thenArrayLengthIsOne() {
+  public void testAccept_whenDexCodeVisitor_thenArrayLengthIsOne() {
     // Arrange
     DexLabel dexLabel = new DexLabel();
-    DexLabel[] labels = new DexLabel[] {dexLabel};
-    PackedSwitchStmtNode packedSwitchStmtNode = new PackedSwitchStmtNode(Op.NOP, 1, 1, labels);
+    PackedSwitchStmtNode packedSwitchStmtNode =
+        new PackedSwitchStmtNode(Op.NOP, 1, 1, new DexLabel[] {dexLabel});
 
     // Act
     packedSwitchStmtNode.accept(new DexCodeVisitor());

@@ -1,29 +1,26 @@
 package proguard.classfile.attribute;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class InnerClassesInfoDiffblueTest {
+public class InnerClassesInfoDiffblueTest {
   /**
    * Test {@link InnerClassesInfo#InnerClassesInfo()}.
    *
    * <p>Method under test: {@link InnerClassesInfo#InnerClassesInfo()}
    */
   @Test
-  @DisplayName("Test new InnerClassesInfo()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void InnerClassesInfo.<init>()",
     "void InnerClassesInfo.<init>(int, int, int, int)"
   })
-  void testNewInnerClassesInfo() {
+  public void testNewInnerClassesInfo() {
     // Arrange and Act
     InnerClassesInfo actualInnerClassesInfo = new InnerClassesInfo();
 
@@ -42,14 +39,12 @@ class InnerClassesInfoDiffblueTest {
    * <p>Method under test: {@link InnerClassesInfo#InnerClassesInfo(int, int, int, int)}
    */
   @Test
-  @DisplayName("Test new InnerClassesInfo(int, int, int, int); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void InnerClassesInfo.<init>()",
     "void InnerClassesInfo.<init>(int, int, int, int)"
   })
-  void testNewInnerClassesInfo_whenOne() {
+  public void testNewInnerClassesInfo_whenOne() {
     // Arrange and Act
     InnerClassesInfo actualInnerClassesInfo = new InnerClassesInfo(1, 1, 1, 1);
 

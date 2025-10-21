@@ -1,22 +1,21 @@
 package proguard.io;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ClassPathEntryDiffblueTest {
+public class ClassPathEntryDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -45,9 +44,7 @@ class ClassPathEntryDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters; when 'Feature Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ClassPathEntry.<init>(File, boolean)",
     "void ClassPathEntry.<init>(File, boolean, String)",
@@ -66,7 +63,7 @@ class ClassPathEntryDiffblueTest {
     "void ClassPathEntry.setFeatureName(String)",
     "void ClassPathEntry.setOutput(boolean)"
   })
-  void testGettersAndSetters_whenFeatureName() {
+  public void testGettersAndSetters_whenFeatureName() {
     // Arrange
     File file = Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile();
 
@@ -129,9 +126,7 @@ class ClassPathEntryDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters; when Property is 'java.io.tmpdir' is 'test.txt' toFile")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ClassPathEntry.<init>(File, boolean)",
     "void ClassPathEntry.<init>(File, boolean, String)",
@@ -150,7 +145,7 @@ class ClassPathEntryDiffblueTest {
     "void ClassPathEntry.setFeatureName(String)",
     "void ClassPathEntry.setOutput(boolean)"
   })
-  void testGettersAndSetters_whenPropertyIsJavaIoTmpdirIsTestTxtToFile() {
+  public void testGettersAndSetters_whenPropertyIsJavaIoTmpdirIsTestTxtToFile() {
     // Arrange
     File file = Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile();
 
@@ -191,17 +186,18 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#getName()}
    */
   @Test
-  @DisplayName("Test getName()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassPathEntry.getName()"})
-  void testGetName() {
-    // Arrange, Act and Assert
+  public void testGetName() {
+    // Arrange and Act
+    String actualName =
+        (new ClassPathEntry(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true))
+            .getName();
+
+    // Assert
     assertEquals(
-        Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toString(),
-        new ClassPathEntry(
-                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true)
-            .getName());
+        Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toString(), actualName);
   }
 
   /**
@@ -210,11 +206,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setFile(File)}
    */
   @Test
-  @DisplayName("Test setFile(File)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setFile(File)"})
-  void testSetFile() {
+  public void testSetFile() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -238,15 +232,13 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isDex()}
    */
   @Test
-  @DisplayName("Test isDex(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isDex()"})
-  void testIsDex_thenReturnFalse() {
+  public void testIsDex_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(
-        new ClassPathEntry(
-                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true)
+        (new ClassPathEntry(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true))
             .isDex());
   }
 
@@ -260,14 +252,12 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isDex()}
    */
   @Test
-  @DisplayName("Test isDex(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isDex()"})
-  void testIsDex_thenReturnTrue() {
+  public void testIsDex_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(
-        new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), ".dex").toFile(), true)
+        (new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), ".dex").toFile(), true))
             .isDex());
   }
 
@@ -277,14 +267,12 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isApk()}
    */
   @Test
-  @DisplayName("Test isApk()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isApk()"})
-  void testIsApk() {
+  public void testIsApk() {
     // Arrange, Act and Assert
     assertTrue(
-        new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), ".apk").toFile(), true)
+        (new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), ".apk").toFile(), true))
             .isApk());
   }
 
@@ -294,14 +282,12 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isApk()}
    */
   @Test
-  @DisplayName("Test isApk()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isApk()"})
-  void testIsApk2() {
+  public void testIsApk2() {
     // Arrange, Act and Assert
     assertTrue(
-        new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), ".ap_").toFile(), true)
+        (new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), ".ap_").toFile(), true))
             .isApk());
   }
 
@@ -315,15 +301,13 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isApk()}
    */
   @Test
-  @DisplayName("Test isApk(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isApk()"})
-  void testIsApk_thenReturnFalse() {
+  public void testIsApk_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(
-        new ClassPathEntry(
-                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true)
+        (new ClassPathEntry(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true))
             .isApk());
   }
 
@@ -337,15 +321,13 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isAab()}
    */
   @Test
-  @DisplayName("Test isAab(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isAab()"})
-  void testIsAab_thenReturnFalse() {
+  public void testIsAab_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(
-        new ClassPathEntry(
-                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true)
+        (new ClassPathEntry(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true))
             .isAab());
   }
 
@@ -359,14 +341,12 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isAab()}
    */
   @Test
-  @DisplayName("Test isAab(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isAab()"})
-  void testIsAab_thenReturnTrue() {
+  public void testIsAab_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(
-        new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), ".aab").toFile(), true)
+        (new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), ".aab").toFile(), true))
             .isAab());
   }
 
@@ -380,15 +360,13 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isJar()}
    */
   @Test
-  @DisplayName("Test isJar(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isJar()"})
-  void testIsJar_thenReturnFalse() {
+  public void testIsJar_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(
-        new ClassPathEntry(
-                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true)
+        (new ClassPathEntry(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true))
             .isJar());
   }
 
@@ -402,14 +380,12 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isJar()}
    */
   @Test
-  @DisplayName("Test isJar(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isJar()"})
-  void testIsJar_thenReturnTrue() {
+  public void testIsJar_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(
-        new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), ".jar").toFile(), true)
+        (new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), ".jar").toFile(), true))
             .isJar());
   }
 
@@ -423,15 +399,13 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isAar()}
    */
   @Test
-  @DisplayName("Test isAar(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isAar()"})
-  void testIsAar_thenReturnFalse() {
+  public void testIsAar_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(
-        new ClassPathEntry(
-                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true)
+        (new ClassPathEntry(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true))
             .isAar());
   }
 
@@ -445,14 +419,12 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isAar()}
    */
   @Test
-  @DisplayName("Test isAar(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isAar()"})
-  void testIsAar_thenReturnTrue() {
+  public void testIsAar_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(
-        new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), ".aar").toFile(), true)
+        (new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), ".aar").toFile(), true))
             .isAar());
   }
 
@@ -466,15 +438,13 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isWar()}
    */
   @Test
-  @DisplayName("Test isWar(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isWar()"})
-  void testIsWar_thenReturnFalse() {
+  public void testIsWar_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(
-        new ClassPathEntry(
-                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true)
+        (new ClassPathEntry(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true))
             .isWar());
   }
 
@@ -488,14 +458,12 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isWar()}
    */
   @Test
-  @DisplayName("Test isWar(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isWar()"})
-  void testIsWar_thenReturnTrue() {
+  public void testIsWar_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(
-        new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), ".war").toFile(), true)
+        (new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), ".war").toFile(), true))
             .isWar());
   }
 
@@ -509,15 +477,13 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isEar()}
    */
   @Test
-  @DisplayName("Test isEar(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isEar()"})
-  void testIsEar_thenReturnFalse() {
+  public void testIsEar_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(
-        new ClassPathEntry(
-                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true)
+        (new ClassPathEntry(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true))
             .isEar());
   }
 
@@ -531,14 +497,12 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isEar()}
    */
   @Test
-  @DisplayName("Test isEar(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isEar()"})
-  void testIsEar_thenReturnTrue() {
+  public void testIsEar_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(
-        new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), ".ear").toFile(), true)
+        (new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), ".ear").toFile(), true))
             .isEar());
   }
 
@@ -552,15 +516,13 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isJmod()}
    */
   @Test
-  @DisplayName("Test isJmod(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isJmod()"})
-  void testIsJmod_thenReturnFalse() {
+  public void testIsJmod_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(
-        new ClassPathEntry(
-                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true)
+        (new ClassPathEntry(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true))
             .isJmod());
   }
 
@@ -574,14 +536,13 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isJmod()}
    */
   @Test
-  @DisplayName("Test isJmod(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isJmod()"})
-  void testIsJmod_thenReturnTrue() {
+  public void testIsJmod_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(
-        new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), ".jmod").toFile(), true)
+        (new ClassPathEntry(
+                Paths.get(System.getProperty("java.io.tmpdir"), ".jmod").toFile(), true))
             .isJmod());
   }
 
@@ -595,15 +556,13 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isZip()}
    */
   @Test
-  @DisplayName("Test isZip(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isZip()"})
-  void testIsZip_thenReturnFalse() {
+  public void testIsZip_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(
-        new ClassPathEntry(
-                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true)
+        (new ClassPathEntry(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true))
             .isZip());
   }
 
@@ -617,14 +576,12 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isZip()}
    */
   @Test
-  @DisplayName("Test isZip(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isZip()"})
-  void testIsZip_thenReturnTrue() {
+  public void testIsZip_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(
-        new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), ".zip").toFile(), true)
+        (new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), ".zip").toFile(), true))
             .isZip());
   }
 
@@ -634,91 +591,13 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#isFiltered()}
    */
   @Test
-  @DisplayName("Test isFiltered()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPathEntry.isFiltered()"})
-  void testIsFiltered() {
-    // Arrange
-    ArrayList<String> filter = new ArrayList<>();
-    filter.add("foo");
-
-    ClassPathEntry classPathEntry =
-        new ClassPathEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
-    classPathEntry.setFilter(filter);
-
-    // Act and Assert
-    assertTrue(classPathEntry.isFiltered());
-  }
-
-  /**
-   * Test {@link ClassPathEntry#isFiltered()}.
-   *
-   * <p>Method under test: {@link ClassPathEntry#isFiltered()}
-   */
-  @Test
-  @DisplayName("Test isFiltered()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean ClassPathEntry.isFiltered()"})
-  void testIsFiltered2() {
-    // Arrange
-    ArrayList<String> filter = new ArrayList<>();
-    filter.add("foo");
-
-    ClassPathEntry classPathEntry =
-        new ClassPathEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
-    classPathEntry.setApkFilter(filter);
-
-    // Act and Assert
-    assertTrue(classPathEntry.isFiltered());
-  }
-
-  /**
-   * Test {@link ClassPathEntry#isFiltered()}.
-   *
-   * <p>Method under test: {@link ClassPathEntry#isFiltered()}
-   */
-  @Test
-  @DisplayName("Test isFiltered()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean ClassPathEntry.isFiltered()"})
-  void testIsFiltered3() {
-    // Arrange
-    ArrayList<String> filter = new ArrayList<>();
-    filter.add("foo");
-
-    ClassPathEntry classPathEntry =
-        new ClassPathEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
-    classPathEntry.setAabFilter(filter);
-
-    // Act and Assert
-    assertTrue(classPathEntry.isFiltered());
-  }
-
-  /**
-   * Test {@link ClassPathEntry#isFiltered()}.
-   *
-   * <ul>
-   *   <li>Then return {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassPathEntry#isFiltered()}
-   */
-  @Test
-  @DisplayName("Test isFiltered(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean ClassPathEntry.isFiltered()"})
-  void testIsFiltered_thenReturnFalse() {
+  public void testIsFiltered() {
     // Arrange, Act and Assert
     assertFalse(
-        new ClassPathEntry(
-                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true)
+        (new ClassPathEntry(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true))
             .isFiltered());
   }
 
@@ -728,11 +607,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setFilter(List)}
    */
   @Test
-  @DisplayName("Test setFilter(List)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setFilter(List)"})
-  void testSetFilter() {
+  public void testSetFilter() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -760,11 +637,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setFilter(List)}
    */
   @Test
-  @DisplayName("Test setFilter(List); given '42'; when ArrayList() add '42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setFilter(List)"})
-  void testSetFilter_given42_whenArrayListAdd42() {
+  public void testSetFilter_given42_whenArrayListAdd42() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -792,11 +667,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setFilter(List)}
    */
   @Test
-  @DisplayName("Test setFilter(List); when ArrayList()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setFilter(List)"})
-  void testSetFilter_whenArrayList() {
+  public void testSetFilter_whenArrayList() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -819,11 +692,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setFilter(List)}
    */
   @Test
-  @DisplayName("Test setFilter(List); when 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setFilter(List)"})
-  void testSetFilter_whenNull() {
+  public void testSetFilter_whenNull() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -842,11 +713,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setApkFilter(List)}
    */
   @Test
-  @DisplayName("Test setApkFilter(List)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setApkFilter(List)"})
-  void testSetApkFilter() {
+  public void testSetApkFilter() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -874,11 +743,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setApkFilter(List)}
    */
   @Test
-  @DisplayName("Test setApkFilter(List); given '42'; when ArrayList() add '42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setApkFilter(List)"})
-  void testSetApkFilter_given42_whenArrayListAdd42() {
+  public void testSetApkFilter_given42_whenArrayListAdd42() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -906,11 +773,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setApkFilter(List)}
    */
   @Test
-  @DisplayName("Test setApkFilter(List); when ArrayList()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setApkFilter(List)"})
-  void testSetApkFilter_whenArrayList() {
+  public void testSetApkFilter_whenArrayList() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -933,11 +798,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setApkFilter(List)}
    */
   @Test
-  @DisplayName("Test setApkFilter(List); when 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setApkFilter(List)"})
-  void testSetApkFilter_whenNull() {
+  public void testSetApkFilter_whenNull() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -956,11 +819,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setAabFilter(List)}
    */
   @Test
-  @DisplayName("Test setAabFilter(List)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setAabFilter(List)"})
-  void testSetAabFilter() {
+  public void testSetAabFilter() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -988,11 +849,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setAabFilter(List)}
    */
   @Test
-  @DisplayName("Test setAabFilter(List); given '42'; when ArrayList() add '42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setAabFilter(List)"})
-  void testSetAabFilter_given42_whenArrayListAdd42() {
+  public void testSetAabFilter_given42_whenArrayListAdd42() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1020,11 +879,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setAabFilter(List)}
    */
   @Test
-  @DisplayName("Test setAabFilter(List); when ArrayList()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setAabFilter(List)"})
-  void testSetAabFilter_whenArrayList() {
+  public void testSetAabFilter_whenArrayList() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1047,11 +904,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setAabFilter(List)}
    */
   @Test
-  @DisplayName("Test setAabFilter(List); when 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setAabFilter(List)"})
-  void testSetAabFilter_whenNull() {
+  public void testSetAabFilter_whenNull() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1070,11 +925,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setJarFilter(List)}
    */
   @Test
-  @DisplayName("Test setJarFilter(List)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setJarFilter(List)"})
-  void testSetJarFilter() {
+  public void testSetJarFilter() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1102,11 +955,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setJarFilter(List)}
    */
   @Test
-  @DisplayName("Test setJarFilter(List); given '42'; when ArrayList() add '42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setJarFilter(List)"})
-  void testSetJarFilter_given42_whenArrayListAdd42() {
+  public void testSetJarFilter_given42_whenArrayListAdd42() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1134,11 +985,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setJarFilter(List)}
    */
   @Test
-  @DisplayName("Test setJarFilter(List); when ArrayList()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setJarFilter(List)"})
-  void testSetJarFilter_whenArrayList() {
+  public void testSetJarFilter_whenArrayList() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1161,11 +1010,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setJarFilter(List)}
    */
   @Test
-  @DisplayName("Test setJarFilter(List); when 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setJarFilter(List)"})
-  void testSetJarFilter_whenNull() {
+  public void testSetJarFilter_whenNull() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1184,11 +1031,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setAarFilter(List)}
    */
   @Test
-  @DisplayName("Test setAarFilter(List)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setAarFilter(List)"})
-  void testSetAarFilter() {
+  public void testSetAarFilter() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1216,11 +1061,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setAarFilter(List)}
    */
   @Test
-  @DisplayName("Test setAarFilter(List); given '42'; when ArrayList() add '42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setAarFilter(List)"})
-  void testSetAarFilter_given42_whenArrayListAdd42() {
+  public void testSetAarFilter_given42_whenArrayListAdd42() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1248,11 +1091,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setAarFilter(List)}
    */
   @Test
-  @DisplayName("Test setAarFilter(List); when ArrayList()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setAarFilter(List)"})
-  void testSetAarFilter_whenArrayList() {
+  public void testSetAarFilter_whenArrayList() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1275,11 +1116,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setAarFilter(List)}
    */
   @Test
-  @DisplayName("Test setAarFilter(List); when 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setAarFilter(List)"})
-  void testSetAarFilter_whenNull() {
+  public void testSetAarFilter_whenNull() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1298,11 +1137,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setWarFilter(List)}
    */
   @Test
-  @DisplayName("Test setWarFilter(List)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setWarFilter(List)"})
-  void testSetWarFilter() {
+  public void testSetWarFilter() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1330,11 +1167,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setWarFilter(List)}
    */
   @Test
-  @DisplayName("Test setWarFilter(List); given '42'; when ArrayList() add '42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setWarFilter(List)"})
-  void testSetWarFilter_given42_whenArrayListAdd42() {
+  public void testSetWarFilter_given42_whenArrayListAdd42() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1362,11 +1197,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setWarFilter(List)}
    */
   @Test
-  @DisplayName("Test setWarFilter(List); when ArrayList()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setWarFilter(List)"})
-  void testSetWarFilter_whenArrayList() {
+  public void testSetWarFilter_whenArrayList() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1389,11 +1222,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setWarFilter(List)}
    */
   @Test
-  @DisplayName("Test setWarFilter(List); when 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setWarFilter(List)"})
-  void testSetWarFilter_whenNull() {
+  public void testSetWarFilter_whenNull() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1412,11 +1243,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setEarFilter(List)}
    */
   @Test
-  @DisplayName("Test setEarFilter(List)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setEarFilter(List)"})
-  void testSetEarFilter() {
+  public void testSetEarFilter() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1444,11 +1273,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setEarFilter(List)}
    */
   @Test
-  @DisplayName("Test setEarFilter(List); given '42'; when ArrayList() add '42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setEarFilter(List)"})
-  void testSetEarFilter_given42_whenArrayListAdd42() {
+  public void testSetEarFilter_given42_whenArrayListAdd42() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1476,11 +1303,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setEarFilter(List)}
    */
   @Test
-  @DisplayName("Test setEarFilter(List); when ArrayList()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setEarFilter(List)"})
-  void testSetEarFilter_whenArrayList() {
+  public void testSetEarFilter_whenArrayList() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1503,11 +1328,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setEarFilter(List)}
    */
   @Test
-  @DisplayName("Test setEarFilter(List); when 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setEarFilter(List)"})
-  void testSetEarFilter_whenNull() {
+  public void testSetEarFilter_whenNull() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1526,11 +1349,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setJmodFilter(List)}
    */
   @Test
-  @DisplayName("Test setJmodFilter(List)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setJmodFilter(List)"})
-  void testSetJmodFilter() {
+  public void testSetJmodFilter() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1558,11 +1379,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setJmodFilter(List)}
    */
   @Test
-  @DisplayName("Test setJmodFilter(List); given '42'; when ArrayList() add '42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setJmodFilter(List)"})
-  void testSetJmodFilter_given42_whenArrayListAdd42() {
+  public void testSetJmodFilter_given42_whenArrayListAdd42() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1590,11 +1409,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setJmodFilter(List)}
    */
   @Test
-  @DisplayName("Test setJmodFilter(List); when ArrayList()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setJmodFilter(List)"})
-  void testSetJmodFilter_whenArrayList() {
+  public void testSetJmodFilter_whenArrayList() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1617,11 +1434,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setJmodFilter(List)}
    */
   @Test
-  @DisplayName("Test setJmodFilter(List); when 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setJmodFilter(List)"})
-  void testSetJmodFilter_whenNull() {
+  public void testSetJmodFilter_whenNull() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1640,11 +1455,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setZipFilter(List)}
    */
   @Test
-  @DisplayName("Test setZipFilter(List)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setZipFilter(List)"})
-  void testSetZipFilter() {
+  public void testSetZipFilter() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1672,11 +1485,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setZipFilter(List)}
    */
   @Test
-  @DisplayName("Test setZipFilter(List); given '42'; when ArrayList() add '42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setZipFilter(List)"})
-  void testSetZipFilter_given42_whenArrayListAdd42() {
+  public void testSetZipFilter_given42_whenArrayListAdd42() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1704,11 +1515,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setZipFilter(List)}
    */
   @Test
-  @DisplayName("Test setZipFilter(List); when ArrayList()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setZipFilter(List)"})
-  void testSetZipFilter_whenArrayList() {
+  public void testSetZipFilter_whenArrayList() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1731,11 +1540,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#setZipFilter(List)}
    */
   @Test
-  @DisplayName("Test setZipFilter(List); when 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPathEntry.setZipFilter(List)"})
-  void testSetZipFilter_whenNull() {
+  public void testSetZipFilter_whenNull() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1754,11 +1561,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#toString()}
    */
   @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassPathEntry.toString()"})
-  void testToString() {
+  public void testToString() {
     // Arrange
     ArrayList<String> filter = new ArrayList<>();
     filter.add("foo");
@@ -1772,12 +1577,12 @@ class ClassPathEntryDiffblueTest {
     String actualToStringResult = classPathEntry.toString();
 
     // Assert
-    String expectedToStringResult =
+    assertEquals(
         String.join(
             "",
             Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toString(),
-            "(;;;;;;;;foo)");
-    assertEquals(expectedToStringResult, actualToStringResult);
+            "(;;;;;;;;foo)"),
+        actualToStringResult);
   }
 
   /**
@@ -1786,11 +1591,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#toString()}
    */
   @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassPathEntry.toString()"})
-  void testToString2() {
+  public void testToString2() {
     // Arrange
     ArrayList<String> filter = new ArrayList<>();
     filter.add(";");
@@ -1805,12 +1608,12 @@ class ClassPathEntryDiffblueTest {
     String actualToStringResult = classPathEntry.toString();
 
     // Assert
-    String expectedToStringResult =
+    assertEquals(
         String.join(
             "",
             Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toString(),
-            "(;;;;;;;;';',foo)");
-    assertEquals(expectedToStringResult, actualToStringResult);
+            "(;;;;;;;;';',foo)"),
+        actualToStringResult);
   }
 
   /**
@@ -1819,51 +1622,12 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#toString()}
    */
   @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassPathEntry.toString()"})
-  void testToString3() {
-    // Arrange
-    ArrayList<String> filter = new ArrayList<>();
-    filter.add(")");
-    filter.add(";");
-    filter.add("foo");
-
-    ClassPathEntry classPathEntry =
-        new ClassPathEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
-    classPathEntry.setFilter(filter);
-
-    // Act
-    String actualToStringResult = classPathEntry.toString();
-
-    // Assert
-    String expectedToStringResult =
-        String.join(
-            "",
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toString(),
-            "(;;;;;;;;')',';',foo)");
-    assertEquals(expectedToStringResult, actualToStringResult);
-  }
-
-  /**
-   * Test {@link ClassPathEntry#toString()}.
-   *
-   * <p>Method under test: {@link ClassPathEntry#toString()}
-   */
-  @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String ClassPathEntry.toString()"})
-  void testToString4() {
+  public void testToString3() {
     // Arrange
     ArrayList<String> filter = new ArrayList<>();
     filter.add("(");
-    filter.add(")");
-    filter.add(";");
-    filter.add("foo");
 
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -1874,12 +1638,12 @@ class ClassPathEntryDiffblueTest {
     String actualToStringResult = classPathEntry.toString();
 
     // Assert
-    String expectedToStringResult =
+    assertEquals(
         String.join(
             "",
             Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toString(),
-            "(;;;;;;;;'(',')',';',foo)");
-    assertEquals(expectedToStringResult, actualToStringResult);
+            "(;;;;;;;;'(')"),
+        actualToStringResult);
   }
 
   /**
@@ -1888,11 +1652,39 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#toString()}
    */
   @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassPathEntry.toString()"})
-  void testToString5() {
+  public void testToString4() {
+    // Arrange
+    ArrayList<String> filter = new ArrayList<>();
+    filter.add(")");
+
+    ClassPathEntry classPathEntry =
+        new ClassPathEntry(
+            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
+    classPathEntry.setFilter(filter);
+
+    // Act
+    String actualToStringResult = classPathEntry.toString();
+
+    // Assert
+    assertEquals(
+        String.join(
+            "",
+            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toString(),
+            "(;;;;;;;;')')"),
+        actualToStringResult);
+  }
+
+  /**
+   * Test {@link ClassPathEntry#toString()}.
+   *
+   * <p>Method under test: {@link ClassPathEntry#toString()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String ClassPathEntry.toString()"})
+  public void testToString5() {
     // Arrange
     ArrayList<String> filter = new ArrayList<>();
     filter.add("");
@@ -1906,12 +1698,12 @@ class ClassPathEntryDiffblueTest {
     String actualToStringResult = classPathEntry.toString();
 
     // Assert
-    String expectedToStringResult =
+    assertEquals(
         String.join(
             "",
             Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toString(),
-            "(;;;;;;;;'')");
-    assertEquals(expectedToStringResult, actualToStringResult);
+            "(;;;;;;;;'')"),
+        actualToStringResult);
   }
 
   /**
@@ -1920,11 +1712,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#toString()}
    */
   @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassPathEntry.toString()"})
-  void testToString6() {
+  public void testToString6() {
     // Arrange
     ArrayList<String> filter = new ArrayList<>();
     filter.add("foo");
@@ -1938,12 +1728,12 @@ class ClassPathEntryDiffblueTest {
     String actualToStringResult = classPathEntry.toString();
 
     // Assert
-    String expectedToStringResult =
+    assertEquals(
         String.join(
             "",
             Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toString(),
-            "(;;foo;;;;;;)");
-    assertEquals(expectedToStringResult, actualToStringResult);
+            "(;;foo;;;;;;)"),
+        actualToStringResult);
   }
 
   /**
@@ -1952,11 +1742,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#toString()}
    */
   @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassPathEntry.toString()"})
-  void testToString7() {
+  public void testToString7() {
     // Arrange
     ArrayList<String> filter = new ArrayList<>();
     filter.add("foo");
@@ -1970,12 +1758,12 @@ class ClassPathEntryDiffblueTest {
     String actualToStringResult = classPathEntry.toString();
 
     // Assert
-    String expectedToStringResult =
+    assertEquals(
         String.join(
             "",
             Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toString(),
-            "(;foo;;;;;;;)");
-    assertEquals(expectedToStringResult, actualToStringResult);
+            "(;foo;;;;;;;)"),
+        actualToStringResult);
   }
 
   /**
@@ -1984,11 +1772,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#toString()}
    */
   @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassPathEntry.toString()"})
-  void testToString8() {
+  public void testToString8() {
     // Arrange
     ArrayList<String> filter = new ArrayList<>();
     filter.add("foo");
@@ -2002,12 +1788,12 @@ class ClassPathEntryDiffblueTest {
     String actualToStringResult = classPathEntry.toString();
 
     // Assert
-    String expectedToStringResult =
+    assertEquals(
         String.join(
             "",
             Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toString(),
-            "(;;;;;;;foo;)");
-    assertEquals(expectedToStringResult, actualToStringResult);
+            "(;;;;;;;foo;)"),
+        actualToStringResult);
   }
 
   /**
@@ -2016,11 +1802,9 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#toString()}
    */
   @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassPathEntry.toString()"})
-  void testToString9() {
+  public void testToString9() {
     // Arrange
     ArrayList<String> filter = new ArrayList<>();
     filter.add("foo");
@@ -2034,76 +1818,12 @@ class ClassPathEntryDiffblueTest {
     String actualToStringResult = classPathEntry.toString();
 
     // Assert
-    String expectedToStringResult =
+    assertEquals(
         String.join(
             "",
             Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toString(),
-            "(foo;;;;;;;;)");
-    assertEquals(expectedToStringResult, actualToStringResult);
-  }
-
-  /**
-   * Test {@link ClassPathEntry#toString()}.
-   *
-   * <p>Method under test: {@link ClassPathEntry#toString()}
-   */
-  @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String ClassPathEntry.toString()"})
-  void testToString10() {
-    // Arrange
-    ArrayList<String> filter = new ArrayList<>();
-    filter.add("foo");
-
-    ClassPathEntry classPathEntry =
-        new ClassPathEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
-    classPathEntry.setWarFilter(filter);
-
-    // Act
-    String actualToStringResult = classPathEntry.toString();
-
-    // Assert
-    String expectedToStringResult =
-        String.join(
-            "",
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toString(),
-            "(;;;;;;foo;;)");
-    assertEquals(expectedToStringResult, actualToStringResult);
-  }
-
-  /**
-   * Test {@link ClassPathEntry#toString()}.
-   *
-   * <p>Method under test: {@link ClassPathEntry#toString()}
-   */
-  @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String ClassPathEntry.toString()"})
-  void testToString11() {
-    // Arrange
-    ArrayList<String> filter = new ArrayList<>();
-    filter.add("foo");
-
-    ClassPathEntry classPathEntry =
-        new ClassPathEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
-    classPathEntry.setEarFilter(filter);
-
-    // Act
-    String actualToStringResult = classPathEntry.toString();
-
-    // Assert
-    String expectedToStringResult =
-        String.join(
-            "",
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toString(),
-            "(;;;;;foo;;;)");
-    assertEquals(expectedToStringResult, actualToStringResult);
+            "(foo;;;;;;;;)"),
+        actualToStringResult);
   }
 
   /**
@@ -2117,17 +1837,18 @@ class ClassPathEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathEntry#toString()}
    */
   @Test
-  @DisplayName(
-      "Test toString(); then return Property is 'java.io.tmpdir' is array of String with 'test.txt' toString")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ClassPathEntry.toString()"})
-  void testToString_thenReturnPropertyIsJavaIoTmpdirIsArrayOfStringWithTestTxtToString() {
-    // Arrange, Act and Assert
+  public void testToString_thenReturnPropertyIsJavaIoTmpdirIsArrayOfStringWithTestTxtToString() {
+    // Arrange and Act
+    String actualToStringResult =
+        (new ClassPathEntry(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true))
+            .toString();
+
+    // Assert
     assertEquals(
         Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toString(),
-        new ClassPathEntry(
-                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true)
-            .toString());
+        actualToStringResult);
   }
 }

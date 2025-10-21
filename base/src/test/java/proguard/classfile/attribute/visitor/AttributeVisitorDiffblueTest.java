@@ -1,13 +1,12 @@
 package proguard.classfile.attribute.visitor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryMethod;
@@ -16,7 +15,7 @@ import proguard.classfile.attribute.Attribute;
 import proguard.classfile.attribute.BootstrapMethodsAttribute;
 import proguard.classfile.attribute.CodeAttribute;
 
-class AttributeVisitorDiffblueTest {
+public class AttributeVisitorDiffblueTest {
   /**
    * Test {@link AttributeVisitor#visitAnyAttribute(Clazz, Attribute)}.
    *
@@ -27,11 +26,9 @@ class AttributeVisitorDiffblueTest {
    * <p>Method under test: {@link AttributeVisitor#visitAnyAttribute(Clazz, Attribute)}
    */
   @Test
-  @DisplayName("Test visitAnyAttribute(Clazz, Attribute); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void AttributeVisitor.visitAnyAttribute(Clazz, Attribute)"})
-  void testVisitAnyAttribute_thenThrowUnsupportedOperationException() {
+  public void testVisitAnyAttribute_thenThrowUnsupportedOperationException() {
     // Arrange
     MultiAttributeVisitor multiAttributeVisitor = new MultiAttributeVisitor();
     LibraryClass clazz = new LibraryClass();
@@ -48,11 +45,9 @@ class AttributeVisitorDiffblueTest {
    * <p>Method under test: {@link AttributeVisitor#visitCodeAttribute(Clazz, Method, CodeAttribute)}
    */
   @Test
-  @DisplayName("Test visitCodeAttribute(Clazz, Method, CodeAttribute)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void AttributeVisitor.visitCodeAttribute(Clazz, Method, CodeAttribute)"})
-  void testVisitCodeAttribute() {
+  public void testVisitCodeAttribute() {
     // Arrange
     AttributeCounter attributeCounter = new AttributeCounter();
     LibraryClass clazz = new LibraryClass();

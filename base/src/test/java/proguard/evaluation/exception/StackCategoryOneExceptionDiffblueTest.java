@@ -1,18 +1,19 @@
 package proguard.evaluation.exception;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.evaluation.value.BasicValueFactory;
 import proguard.evaluation.value.DoubleValue;
+import proguard.evaluation.value.UnknownDoubleValue;
 import proguard.evaluation.value.Value;
 
-class StackCategoryOneExceptionDiffblueTest {
+public class StackCategoryOneExceptionDiffblueTest {
   /**
    * Test {@link StackCategoryOneException#StackCategoryOneException(Value, Throwable)}.
    *
@@ -20,11 +21,9 @@ class StackCategoryOneExceptionDiffblueTest {
    * Throwable)}
    */
   @Test
-  @DisplayName("Test new StackCategoryOneException(Value, Throwable)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void StackCategoryOneException.<init>(Value, Throwable)"})
-  void testNewStackCategoryOneException() {
+  public void testNewStackCategoryOneException() {
     // Arrange
     DoubleValue foundValue = BasicValueFactory.DOUBLE_VALUE;
     Throwable cause = new Throwable();
@@ -47,5 +46,21 @@ class StackCategoryOneExceptionDiffblueTest {
     assertEquals(1007, actualStackCategoryOneException.getComponentErrorId());
     assertSame(cause, actualStackCategoryOneException.getCause());
     assertSame(foundValue, actualStackCategoryOneException.getFoundValue());
+  }
+
+  /**
+   * Test {@link StackCategoryOneException#getFoundValue()}.
+   *
+   * <p>Method under test: {@link StackCategoryOneException#getFoundValue()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"Value StackCategoryOneException.getFoundValue()"})
+  public void testGetFoundValue() {
+    // Arrange, Act and Assert
+    assertTrue(
+        (new StackCategoryOneException(BasicValueFactory.DOUBLE_VALUE, new Throwable()))
+                .getFoundValue()
+            instanceof UnknownDoubleValue);
   }
 }

@@ -1,36 +1,30 @@
 package proguard.analysis.cpa.jvm.domain.memory;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-import proguard.analysis.cpa.defaults.HashMapAbstractState;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.analysis.cpa.defaults.LatticeAbstractState;
 import proguard.analysis.cpa.defaults.ProgramLocationDependentReachedSet;
-import proguard.analysis.cpa.defaults.SetAbstractState;
 import proguard.analysis.cpa.jvm.cfa.edges.JvmCfaEdge;
 import proguard.analysis.cpa.jvm.cfa.nodes.JvmCatchCfaNode;
 import proguard.analysis.cpa.jvm.cfa.nodes.JvmCfaNode;
 import proguard.analysis.cpa.jvm.cfa.nodes.JvmUnknownCfaNode;
 import proguard.analysis.cpa.jvm.domain.taint.JvmTaintAbstractState;
-import proguard.analysis.cpa.jvm.domain.taint.JvmTaintSource;
 import proguard.analysis.cpa.jvm.domain.value.ValueAbstractState;
-import proguard.analysis.cpa.jvm.state.JvmFrameAbstractState;
-import proguard.analysis.cpa.jvm.state.heap.JvmForgetfulHeapAbstractState;
 import proguard.analysis.cpa.jvm.witness.JvmLocalVariableLocation;
 import proguard.analysis.cpa.jvm.witness.JvmMemoryLocation;
 import proguard.classfile.ClassConstants;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.MethodSignature;
 
-class BamLocationDependentJvmMemoryLocationDiffblueTest {
+public class BamLocationDependentJvmMemoryLocationDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -52,9 +46,7 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters; when INSTANCE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void BamLocationDependentJvmMemoryLocation.<init>(JvmMemoryLocation)",
     "void BamLocationDependentJvmMemoryLocation.<init>(JvmMemoryLocation, JvmCfaNode, ProgramLocationDependentReachedSet)",
@@ -63,7 +55,7 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
     "void BamLocationDependentJvmMemoryLocation.setProgramLocation(JvmCfaNode)",
     "void BamLocationDependentJvmMemoryLocation.setSourceReachedSet(ProgramLocationDependentReachedSet)"
   })
-  void testGettersAndSetters_whenInstance() {
+  public void testGettersAndSetters_whenInstance() {
     // Arrange
     JvmLocalVariableLocation memoryLocation = new JvmLocalVariableLocation(1);
 
@@ -74,7 +66,8 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
                 memoryLocation,
                 JvmUnknownCfaNode.INSTANCE,
                 new ProgramLocationDependentReachedSet<>());
-    actualBamLocationDependentJvmMemoryLocation.setProgramLocation(JvmUnknownCfaNode.INSTANCE);
+    JvmUnknownCfaNode programLocation = JvmUnknownCfaNode.INSTANCE;
+    actualBamLocationDependentJvmMemoryLocation.setProgramLocation(programLocation);
     ProgramLocationDependentReachedSet<
             JvmCfaNode, JvmCfaEdge, JvmTaintAbstractState, MethodSignature>
         sourceReachedSet = new ProgramLocationDependentReachedSet<>();
@@ -87,9 +80,9 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
     assertEquals(1, ((JvmLocalVariableLocation) actualMemoryLocation).index);
     assertSame(sourceReachedSet, actualBamLocationDependentJvmMemoryLocation.getSourceReachedSet());
     assertSame(memoryLocation, actualMemoryLocation);
+    JvmUnknownCfaNode expectedProgramLocation = programLocation.INSTANCE;
     assertSame(
-        JvmUnknownCfaNode.INSTANCE,
-        actualBamLocationDependentJvmMemoryLocation.getProgramLocation());
+        expectedProgramLocation, actualBamLocationDependentJvmMemoryLocation.getProgramLocation());
   }
 
   /**
@@ -112,9 +105,7 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters; when JvmLocalVariableLocation(int) with index is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void BamLocationDependentJvmMemoryLocation.<init>(JvmMemoryLocation)",
     "void BamLocationDependentJvmMemoryLocation.<init>(JvmMemoryLocation, JvmCfaNode, ProgramLocationDependentReachedSet)",
@@ -123,7 +114,7 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
     "void BamLocationDependentJvmMemoryLocation.setProgramLocation(JvmCfaNode)",
     "void BamLocationDependentJvmMemoryLocation.setSourceReachedSet(ProgramLocationDependentReachedSet)"
   })
-  void testGettersAndSetters_whenJvmLocalVariableLocationWithIndexIsOne() {
+  public void testGettersAndSetters_whenJvmLocalVariableLocationWithIndexIsOne() {
     // Arrange
     JvmLocalVariableLocation memoryLocation = new JvmLocalVariableLocation(1);
 
@@ -131,7 +122,8 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
     BamLocationDependentJvmMemoryLocation<JvmTaintAbstractState>
         actualBamLocationDependentJvmMemoryLocation =
             new BamLocationDependentJvmMemoryLocation<>(memoryLocation);
-    actualBamLocationDependentJvmMemoryLocation.setProgramLocation(JvmUnknownCfaNode.INSTANCE);
+    JvmUnknownCfaNode programLocation = JvmUnknownCfaNode.INSTANCE;
+    actualBamLocationDependentJvmMemoryLocation.setProgramLocation(programLocation);
     ProgramLocationDependentReachedSet<
             JvmCfaNode, JvmCfaEdge, JvmTaintAbstractState, MethodSignature>
         sourceReachedSet = new ProgramLocationDependentReachedSet<>();
@@ -144,9 +136,9 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
     assertEquals(1, ((JvmLocalVariableLocation) actualMemoryLocation).index);
     assertSame(sourceReachedSet, actualBamLocationDependentJvmMemoryLocation.getSourceReachedSet());
     assertSame(memoryLocation, actualMemoryLocation);
+    JvmUnknownCfaNode expectedProgramLocation = programLocation.INSTANCE;
     assertSame(
-        JvmUnknownCfaNode.INSTANCE,
-        actualBamLocationDependentJvmMemoryLocation.getProgramLocation());
+        expectedProgramLocation, actualBamLocationDependentJvmMemoryLocation.getProgramLocation());
   }
 
   /**
@@ -155,24 +147,19 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
    * <p>Method under test: {@link BamLocationDependentJvmMemoryLocation#copy()}
    */
   @Test
-  @DisplayName("Test copy()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "BamLocationDependentJvmMemoryLocation BamLocationDependentJvmMemoryLocation.copy()"
   })
-  void testCopy() {
+  public void testCopy() {
     // Arrange
     BamLocationDependentJvmMemoryLocation<JvmTaintAbstractState>
         bamLocationDependentJvmMemoryLocation =
             new BamLocationDependentJvmMemoryLocation<>(new JvmLocalVariableLocation(1));
 
-    // Act
-    BamLocationDependentJvmMemoryLocation<JvmTaintAbstractState> actualCopyResult =
-        bamLocationDependentJvmMemoryLocation.copy();
-
-    // Assert
-    assertEquals(bamLocationDependentJvmMemoryLocation, actualCopyResult);
+    // Act and Assert
+    assertEquals(
+        bamLocationDependentJvmMemoryLocation, bamLocationDependentJvmMemoryLocation.copy());
   }
 
   /**
@@ -186,13 +173,11 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
    * BamLocationDependentJvmMemoryLocation#extractFirstValue(LatticeAbstractState)}
    */
   @Test
-  @DisplayName("Test extractFirstValue(LatticeAbstractState); then return UNKNOWN")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "LatticeAbstractState BamLocationDependentJvmMemoryLocation.extractFirstValue(LatticeAbstractState)"
   })
-  void testExtractFirstValue_thenReturnUnknown() {
+  public void testExtractFirstValue_thenReturnUnknown() {
     // Arrange
     JvmLocalVariableLocation memoryLocation = new JvmLocalVariableLocation(1);
     BamLocationDependentJvmMemoryLocation<JvmTaintAbstractState>
@@ -202,51 +187,12 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
                 JvmUnknownCfaNode.INSTANCE,
                 new ProgramLocationDependentReachedSet<>());
 
-    // Act and Assert
-    assertSame(
-        ValueAbstractState.UNKNOWN,
-        bamLocationDependentJvmMemoryLocation.extractFirstValue(ValueAbstractState.UNKNOWN));
-  }
+    // Act
+    ValueAbstractState actualExtractFirstValueResult =
+        bamLocationDependentJvmMemoryLocation.extractFirstValue(ValueAbstractState.UNKNOWN);
 
-  /**
-   * Test {@link BamLocationDependentJvmMemoryLocation#extractFirstValue(LatticeAbstractState)}.
-   *
-   * <ul>
-   *   <li>Then return {@link ValueAbstractState#UNKNOWN}.
-   * </ul>
-   *
-   * <p>Method under test: {@link
-   * BamLocationDependentJvmMemoryLocation#extractFirstValue(LatticeAbstractState)}
-   */
-  @Test
-  @DisplayName("Test extractFirstValue(LatticeAbstractState); then return UNKNOWN")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "LatticeAbstractState BamLocationDependentJvmMemoryLocation.extractFirstValue(LatticeAbstractState)"
-  })
-  void testExtractFirstValue_thenReturnUnknown2() {
-    // Arrange
-    ProgramLocationDependentReachedSet<
-            JvmCfaNode, JvmCfaEdge, JvmTaintAbstractState, MethodSignature>
-        sourceReachedSet = new ProgramLocationDependentReachedSet<>();
-    JvmFrameAbstractState<SetAbstractState<JvmTaintSource>> frame = new JvmFrameAbstractState<>();
-    JvmForgetfulHeapAbstractState<SetAbstractState<JvmTaintSource>> heap =
-        new JvmForgetfulHeapAbstractState<>(null);
-
-    JvmTaintAbstractState abstractState =
-        new JvmTaintAbstractState(
-            JvmUnknownCfaNode.INSTANCE, frame, heap, new HashMapAbstractState<>());
-    sourceReachedSet.add(abstractState);
-    BamLocationDependentJvmMemoryLocation<JvmTaintAbstractState>
-        bamLocationDependentJvmMemoryLocation =
-            new BamLocationDependentJvmMemoryLocation<>(
-                new JvmLocalVariableLocation(1), JvmUnknownCfaNode.INSTANCE, sourceReachedSet);
-
-    // Act and Assert
-    assertSame(
-        ValueAbstractState.UNKNOWN,
-        bamLocationDependentJvmMemoryLocation.extractFirstValue(ValueAbstractState.UNKNOWN));
+    // Assert
+    assertSame(actualExtractFirstValueResult.UNKNOWN, actualExtractFirstValueResult);
   }
 
   /**
@@ -255,11 +201,9 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
    * <p>Method under test: {@link BamLocationDependentJvmMemoryLocation#getProgramLocation()}
    */
   @Test
-  @DisplayName("Test getProgramLocation()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"JvmCfaNode BamLocationDependentJvmMemoryLocation.getProgramLocation()"})
-  void testGetProgramLocation() {
+  public void testGetProgramLocation() {
     // Arrange
     BamLocationDependentJvmMemoryLocation<JvmTaintAbstractState>
         bamLocationDependentJvmMemoryLocation =
@@ -286,14 +230,12 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean BamLocationDependentJvmMemoryLocation.equals(Object)",
     "int BamLocationDependentJvmMemoryLocation.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     BamLocationDependentJvmMemoryLocation<JvmTaintAbstractState>
         bamLocationDependentJvmMemoryLocation =
@@ -304,9 +246,8 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
 
     // Act and Assert
     assertEquals(bamLocationDependentJvmMemoryLocation, bamLocationDependentJvmMemoryLocation2);
-    assertEquals(
-        bamLocationDependentJvmMemoryLocation.hashCode(),
-        bamLocationDependentJvmMemoryLocation2.hashCode());
+    int expectedHashCodeResult = bamLocationDependentJvmMemoryLocation.hashCode();
+    assertEquals(expectedHashCodeResult, bamLocationDependentJvmMemoryLocation2.hashCode());
   }
 
   /**
@@ -326,14 +267,12 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean BamLocationDependentJvmMemoryLocation.equals(Object)",
     "int BamLocationDependentJvmMemoryLocation.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     BamLocationDependentJvmMemoryLocation<JvmTaintAbstractState>
         bamLocationDependentJvmMemoryLocation =
@@ -356,14 +295,12 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
    * <p>Method under test: {@link BamLocationDependentJvmMemoryLocation#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean BamLocationDependentJvmMemoryLocation.equals(Object)",
     "int BamLocationDependentJvmMemoryLocation.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     BamLocationDependentJvmMemoryLocation<JvmTaintAbstractState>
         bamLocationDependentJvmMemoryLocation =
@@ -386,14 +323,12 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
    * <p>Method under test: {@link BamLocationDependentJvmMemoryLocation#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean BamLocationDependentJvmMemoryLocation.equals(Object)",
     "int BamLocationDependentJvmMemoryLocation.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
     JvmLocalVariableLocation memoryLocation = new JvmLocalVariableLocation(1);
     BamLocationDependentJvmMemoryLocation<JvmTaintAbstractState>
@@ -420,14 +355,12 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
    * <p>Method under test: {@link BamLocationDependentJvmMemoryLocation#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean BamLocationDependentJvmMemoryLocation.equals(Object)",
     "int BamLocationDependentJvmMemoryLocation.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
     // Arrange
     BamLocationDependentJvmMemoryLocation<JvmTaintAbstractState>
         bamLocationDependentJvmMemoryLocation =
@@ -451,14 +384,12 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
    * <p>Method under test: {@link BamLocationDependentJvmMemoryLocation#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean BamLocationDependentJvmMemoryLocation.equals(Object)",
     "int BamLocationDependentJvmMemoryLocation.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange
     BamLocationDependentJvmMemoryLocation<JvmTaintAbstractState>
         bamLocationDependentJvmMemoryLocation =
@@ -479,14 +410,12 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
    * <p>Method under test: {@link BamLocationDependentJvmMemoryLocation#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean BamLocationDependentJvmMemoryLocation.equals(Object)",
     "int BamLocationDependentJvmMemoryLocation.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange
     BamLocationDependentJvmMemoryLocation<JvmTaintAbstractState>
         bamLocationDependentJvmMemoryLocation =
@@ -508,11 +437,9 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
    * <p>Method under test: {@link BamLocationDependentJvmMemoryLocation#toString()}
    */
   @Test
-  @DisplayName("Test toString(); then return a string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String BamLocationDependentJvmMemoryLocation.toString()"})
-  void testToString_thenReturnAString() {
+  public void testToString_thenReturnAString() {
     // Arrange
     BamLocationDependentJvmMemoryLocation<JvmTaintAbstractState>
         bamLocationDependentJvmMemoryLocation =
@@ -538,11 +465,9 @@ class BamLocationDependentJvmMemoryLocationDiffblueTest {
    * <p>Method under test: {@link BamLocationDependentJvmMemoryLocation#toString()}
    */
   @Test
-  @DisplayName("Test toString(); then return 'JvmLocalVariableLocation(1)'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String BamLocationDependentJvmMemoryLocation.toString()"})
-  void testToString_thenReturnJvmLocalVariableLocation1() {
+  public void testToString_thenReturnJvmLocalVariableLocation1() {
     // Arrange
     BamLocationDependentJvmMemoryLocation<JvmTaintAbstractState>
         bamLocationDependentJvmMemoryLocation =

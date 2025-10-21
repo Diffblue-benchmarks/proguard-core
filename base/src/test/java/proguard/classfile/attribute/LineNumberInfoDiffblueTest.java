@@ -1,14 +1,13 @@
 package proguard.classfile.attribute;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class LineNumberInfoDiffblueTest {
+public class LineNumberInfoDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -20,17 +19,15 @@ class LineNumberInfoDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void LineNumberInfo.<init>()",
     "void LineNumberInfo.<init>(int, int)",
     "java.lang.String LineNumberInfo.getSource()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
-    assertNull(new LineNumberInfo().getSource());
+    assertNull((new LineNumberInfo()).getSource());
   }
 
   /**
@@ -48,16 +45,14 @@ class LineNumberInfoDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters; when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void LineNumberInfo.<init>()",
     "void LineNumberInfo.<init>(int, int)",
     "java.lang.String LineNumberInfo.getSource()"
   })
-  void testGettersAndSetters_whenOne() {
+  public void testGettersAndSetters_whenOne() {
     // Arrange, Act and Assert
-    assertNull(new LineNumberInfo(1, 2).getSource());
+    assertNull((new LineNumberInfo(1, 2)).getSource());
   }
 }

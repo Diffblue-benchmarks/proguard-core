@@ -1,31 +1,28 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class StringUtilDiffblueTest {
+public class StringUtilDiffblueTest {
   /**
    * Test {@link StringUtil#getModifiedUtf8Length(String)}.
    *
    * <p>Method under test: {@link StringUtil#getModifiedUtf8Length(String)}
    */
   @Test
-  @DisplayName("Test getModifiedUtf8Length(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int StringUtil.getModifiedUtf8Length(String)"})
-  void testGetModifiedUtf8Length() {
+  public void testGetModifiedUtf8Length() {
     // Arrange, Act and Assert
     assertEquals(6, StringUtil.getModifiedUtf8Length("String"));
   }
@@ -36,13 +33,14 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#getModifiedUtf8Bytes(String)}
    */
   @Test
-  @DisplayName("Test getModifiedUtf8Bytes(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"byte[] StringUtil.getModifiedUtf8Bytes(String)"})
-  void testGetModifiedUtf8Bytes() throws UnsupportedEncodingException {
-    // Arrange, Act and Assert
-    assertArrayEquals("String".getBytes("UTF-8"), StringUtil.getModifiedUtf8Bytes("String"));
+  public void testGetModifiedUtf8Bytes() throws UnsupportedEncodingException {
+    // Arrange and Act
+    byte[] actualModifiedUtf8Bytes = StringUtil.getModifiedUtf8Bytes("String");
+
+    // Assert
+    assertArrayEquals("String".getBytes("UTF-8"), actualModifiedUtf8Bytes);
   }
 
   /**
@@ -52,12 +50,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#getString(byte[], int, int)}
    */
   @Test
-  @DisplayName(
-      "Test getString(byte[], int, int) with 'modifiedUtf8Bytes', 'startIndex', 'endIndex'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.getString(byte[], int, int)"})
-  void testGetStringWithModifiedUtf8BytesStartIndexEndIndex() {
+  public void testGetStringWithModifiedUtf8BytesStartIndexEndIndex() {
     // Arrange, Act and Assert
     assertEquals(
         "", StringUtil.getString(new byte[] {'A', -1, 'A', 'X', 'A', 'X', 'A', 'X'}, 1, 3));
@@ -74,12 +69,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#getString(byte[], int, int)}
    */
   @Test
-  @DisplayName(
-      "Test getString(byte[], int, int) with 'modifiedUtf8Bytes', 'startIndex', 'endIndex'; then return start of heading")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.getString(byte[], int, int)"})
-  void testGetStringWithModifiedUtf8BytesStartIndexEndIndex_thenReturnStartOfHeading() {
+  public void testGetStringWithModifiedUtf8BytesStartIndexEndIndex_thenReturnStartOfHeading() {
     // Arrange, Act and Assert
     assertEquals(
         "\u0001", StringUtil.getString(new byte[] {'A', -64, 'A', 'X', 'A', 'X', 'A', 'X'}, 1, 3));
@@ -96,12 +88,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#getString(byte[], int, int)}
    */
   @Test
-  @DisplayName(
-      "Test getString(byte[], int, int) with 'modifiedUtf8Bytes', 'startIndex', 'endIndex'; then return 'XA'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.getString(byte[], int, int)"})
-  void testGetStringWithModifiedUtf8BytesStartIndexEndIndex_thenReturnXa()
+  public void testGetStringWithModifiedUtf8BytesStartIndexEndIndex_thenReturnXa()
       throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     assertEquals("XA", StringUtil.getString("AXAXAXAX".getBytes("UTF-8"), 1, 3));
@@ -117,11 +106,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#getString(byte[])}
    */
   @Test
-  @DisplayName("Test getString(byte[]) with 'modifiedUtf8Bytes'; then return 'AXAXAX'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.getString(byte[])"})
-  void testGetStringWithModifiedUtf8Bytes_thenReturnAxaxax() {
+  public void testGetStringWithModifiedUtf8Bytes_thenReturnAxaxax() {
     // Arrange, Act and Assert
     assertEquals(
         "\u0018AXAXAX", StringUtil.getString(new byte[] {-64, 'X', 'A', 'X', 'A', 'X', 'A', 'X'}));
@@ -137,11 +124,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#getString(byte[])}
    */
   @Test
-  @DisplayName("Test getString(byte[]) with 'modifiedUtf8Bytes'; then return 'XAXAX'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.getString(byte[])"})
-  void testGetStringWithModifiedUtf8Bytes_thenReturnXaxax() {
+  public void testGetStringWithModifiedUtf8Bytes_thenReturnXaxax() {
     // Arrange, Act and Assert
     assertEquals(
         "XAXAX", StringUtil.getString(new byte[] {-1, 'X', 'A', 'X', 'A', 'X', 'A', 'X'}));
@@ -157,12 +142,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#getString(byte[])}
    */
   @Test
-  @DisplayName(
-      "Test getString(byte[]) with 'modifiedUtf8Bytes'; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.getString(byte[])"})
-  void testGetStringWithModifiedUtf8Bytes_thenThrowIllegalArgumentException() {
+  public void testGetStringWithModifiedUtf8Bytes_thenThrowIllegalArgumentException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -179,12 +161,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#getString(byte[])}
    */
   @Test
-  @DisplayName(
-      "Test getString(byte[]) with 'modifiedUtf8Bytes'; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.getString(byte[])"})
-  void testGetStringWithModifiedUtf8Bytes_thenThrowIllegalArgumentException2() {
+  public void testGetStringWithModifiedUtf8Bytes_thenThrowIllegalArgumentException2() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -201,12 +180,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#getString(byte[])}
    */
   @Test
-  @DisplayName(
-      "Test getString(byte[]) with 'modifiedUtf8Bytes'; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.getString(byte[])"})
-  void testGetStringWithModifiedUtf8Bytes_thenThrowIllegalArgumentException3() {
+  public void testGetStringWithModifiedUtf8Bytes_thenThrowIllegalArgumentException3() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalArgumentException.class,
@@ -224,12 +200,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#getString(byte[])}
    */
   @Test
-  @DisplayName(
-      "Test getString(byte[]) with 'modifiedUtf8Bytes'; when 'AXAXAXAX' Bytes is 'UTF-8'; then return 'AXAXAXAX'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.getString(byte[])"})
-  void testGetStringWithModifiedUtf8Bytes_whenAxaxaxaxBytesIsUtf8_thenReturnAxaxaxax()
+  public void testGetStringWithModifiedUtf8Bytes_whenAxaxaxaxBytesIsUtf8_thenReturnAxaxaxax()
       throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     assertEquals("AXAXAXAX", StringUtil.getString("AXAXAXAX".getBytes("UTF-8")));
@@ -246,17 +219,11 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#join(String, String[])}
    */
   @Test
-  @DisplayName(
-      "Test join(String, String[]); when 'Strings' and ']'; then return 'StringsSeparator]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.join(String, String[])"})
-  void testJoin_whenStringsAndRightSquareBracket_thenReturnStringsSeparator() {
-    // Arrange and Act
-    String actualJoinResult = StringUtil.join("Separator", "Strings", "]");
-
-    // Assert
-    assertEquals("StringsSeparator]", actualJoinResult);
+  public void testJoin_whenStringsAndRightSquareBracket_thenReturnStringsSeparator() {
+    // Arrange, Act and Assert
+    assertEquals("StringsSeparator]", StringUtil.join("Separator", "Strings", "]"));
   }
 
   /**
@@ -270,11 +237,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#join(String, String[])}
    */
   @Test
-  @DisplayName("Test join(String, String[]); when 'Strings'; then return 'Strings'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.join(String, String[])"})
-  void testJoin_whenStrings_thenReturnStrings() {
+  public void testJoin_whenStrings_thenReturnStrings() {
     // Arrange, Act and Assert
     assertEquals("Strings", StringUtil.join("Separator", "Strings"));
   }
@@ -290,18 +255,13 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#toHexString(byte[], String, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test toHexString(byte[], String, boolean) with 'bytes', 'separator', 'upperCase'; then return '4158415841584158'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.toHexString(byte[], String, boolean)"})
-  void testToHexStringWithBytesSeparatorUpperCase_thenReturn4158415841584158() {
-    // Arrange and Act
-    String actualToHexStringResult =
-        StringUtil.toHexString(new byte[] {'A', 'X', 'A', 'X', 'A', 'X', 'A', 'X'}, null, false);
-
-    // Assert
-    assertEquals("4158415841584158", actualToHexStringResult);
+  public void testToHexStringWithBytesSeparatorUpperCase_thenReturn4158415841584158() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "4158415841584158",
+        StringUtil.toHexString(new byte[] {'A', 'X', 'A', 'X', 'A', 'X', 'A', 'X'}, null, false));
   }
 
   /**
@@ -315,22 +275,15 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#toHexString(byte[], String, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test toHexString(byte[], String, boolean) with 'bytes', 'separator', 'upperCase'; when array of byte with fifteen and 'X'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.toHexString(byte[], String, boolean)"})
-  void testToHexStringWithBytesSeparatorUpperCase_whenArrayOfByteWithFifteenAndX() {
-    // Arrange and Act
-    String actualToHexStringResult =
-        StringUtil.toHexString(
-            new byte[] {15, 'X', 'A', 'X', 'A', 'X', 'A', 'X'}, "0123456789ABCDEF", true);
-
-    // Assert
+  public void testToHexStringWithBytesSeparatorUpperCase_whenArrayOfByteWithFifteenAndX() {
+    // Arrange, Act and Assert
     assertEquals(
         "0F0123456789ABCDEF580123456789ABCDEF410123456789ABCDEF580123456789ABCDEF410123456789ABCDEF5801234567"
             + "89ABCDEF410123456789ABCDEF58",
-        actualToHexStringResult);
+        StringUtil.toHexString(
+            new byte[] {15, 'X', 'A', 'X', 'A', 'X', 'A', 'X'}, "0123456789ABCDEF", true));
   }
 
   /**
@@ -344,22 +297,15 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#toHexString(byte[], String, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test toHexString(byte[], String, boolean) with 'bytes', 'separator', 'upperCase'; when array of byte with fifteen and 'X'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.toHexString(byte[], String, boolean)"})
-  void testToHexStringWithBytesSeparatorUpperCase_whenArrayOfByteWithFifteenAndX2() {
-    // Arrange and Act
-    String actualToHexStringResult =
-        StringUtil.toHexString(
-            new byte[] {15, 'X', 'A', 'X', 'A', 'X', 'A', 'X'}, "0123456789ABCDEF", false);
-
-    // Assert
+  public void testToHexStringWithBytesSeparatorUpperCase_whenArrayOfByteWithFifteenAndX2() {
+    // Arrange, Act and Assert
     assertEquals(
         "0f0123456789ABCDEF580123456789ABCDEF410123456789ABCDEF580123456789ABCDEF410123456789ABCDEF5801234567"
             + "89ABCDEF410123456789ABCDEF58",
-        actualToHexStringResult);
+        StringUtil.toHexString(
+            new byte[] {15, 'X', 'A', 'X', 'A', 'X', 'A', 'X'}, "0123456789ABCDEF", false));
   }
 
   /**
@@ -373,22 +319,15 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#toHexString(byte[], String, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test toHexString(byte[], String, boolean) with 'bytes', 'separator', 'upperCase'; when 'AXAXAXAX' Bytes is 'UTF-8'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.toHexString(byte[], String, boolean)"})
-  void testToHexStringWithBytesSeparatorUpperCase_whenAxaxaxaxBytesIsUtf8()
+  public void testToHexStringWithBytesSeparatorUpperCase_whenAxaxaxaxBytesIsUtf8()
       throws UnsupportedEncodingException {
-    // Arrange and Act
-    String actualToHexStringResult =
-        StringUtil.toHexString("AXAXAXAX".getBytes("UTF-8"), "0123456789ABCDEF", true);
-
-    // Assert
+    // Arrange, Act and Assert
     assertEquals(
         "410123456789ABCDEF580123456789ABCDEF410123456789ABCDEF580123456789ABCDEF410123456789ABCDEF5801234567"
             + "89ABCDEF410123456789ABCDEF58",
-        actualToHexStringResult);
+        StringUtil.toHexString("AXAXAXAX".getBytes("UTF-8"), "0123456789ABCDEF", true));
   }
 
   /**
@@ -403,17 +342,11 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#toHexString(byte[], String, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test toHexString(byte[], String, boolean) with 'bytes', 'separator', 'upperCase'; when 'null'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.toHexString(byte[], String, boolean)"})
-  void testToHexStringWithBytesSeparatorUpperCase_whenNull_thenReturnNull() {
-    // Arrange and Act
-    String actualToHexStringResult = StringUtil.toHexString(null, null, false);
-
-    // Assert
-    assertNull(actualToHexStringResult);
+  public void testToHexStringWithBytesSeparatorUpperCase_whenNull_thenReturnNull() {
+    // Arrange, Act and Assert
+    assertNull(StringUtil.toHexString(null, null, false));
   }
 
   /**
@@ -427,11 +360,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#toHexString(byte[])}
    */
   @Test
-  @DisplayName("Test toHexString(byte[]) with 'bytes'; when 'A'; then return '0F58415841584158'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.toHexString(byte[])"})
-  void testToHexStringWithBytes_whenA_thenReturn0f58415841584158() {
+  public void testToHexStringWithBytes_whenA_thenReturn0f58415841584158() {
     // Arrange, Act and Assert
     assertEquals(
         "0F58415841584158",
@@ -449,12 +380,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#toHexString(byte[])}
    */
   @Test
-  @DisplayName(
-      "Test toHexString(byte[]) with 'bytes'; when 'AXAXAXAX' Bytes is 'UTF-8'; then return '4158415841584158'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.toHexString(byte[])"})
-  void testToHexStringWithBytes_whenAxaxaxaxBytesIsUtf8_thenReturn4158415841584158()
+  public void testToHexStringWithBytes_whenAxaxaxaxBytesIsUtf8_thenReturn4158415841584158()
       throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     assertEquals("4158415841584158", StringUtil.toHexString("AXAXAXAX".getBytes("UTF-8")));
@@ -471,11 +399,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#toHexString(byte[])}
    */
   @Test
-  @DisplayName("Test toHexString(byte[]) with 'bytes'; when 'null'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.toHexString(byte[])"})
-  void testToHexStringWithBytes_whenNull_thenReturnNull() {
+  public void testToHexStringWithBytes_whenNull_thenReturnNull() {
     // Arrange, Act and Assert
     assertNull(StringUtil.toHexString(null));
   }
@@ -491,11 +417,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42\\\\b'; then return '\\n42\\\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42B_thenReturnN42B() {
+  public void testEscapeControlCharacters_when42B_thenReturnN42B() {
     // Arrange, Act and Assert
     assertEquals("\\n42\\\\b", StringUtil.escapeControlCharacters("\n42\\\\b"));
   }
@@ -511,11 +435,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42\\\\f'; then return '\\n42\\\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42F_thenReturnN42F() {
+  public void testEscapeControlCharacters_when42F_thenReturnN42F() {
     // Arrange, Act and Assert
     assertEquals("\\n42\\\\f", StringUtil.escapeControlCharacters("\n42\\\\f"));
   }
@@ -531,11 +453,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42Input'; then return '\\n42Input'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42Input_thenReturnN42Input() {
+  public void testEscapeControlCharacters_when42Input_thenReturnN42Input() {
     // Arrange, Act and Assert
     assertEquals("\\n42Input", StringUtil.escapeControlCharacters("\n42Input"));
   }
@@ -551,11 +471,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42\\\\n'; then return '\\n42\\\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42N_thenReturnN42N() {
+  public void testEscapeControlCharacters_when42N_thenReturnN42N() {
     // Arrange, Act and Assert
     assertEquals("\\n42\\\\n", StringUtil.escapeControlCharacters("\n42\\\\n"));
   }
@@ -571,11 +489,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42\\\\r'; then return '\\n42\\\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42R_thenReturnN42R() {
+  public void testEscapeControlCharacters_when42R_thenReturnN42R() {
     // Arrange, Act and Assert
     assertEquals("\\n42\\\\r", StringUtil.escapeControlCharacters("\n42\\\\r"));
   }
@@ -591,11 +507,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42\\\\t'; then return '\\n42\\\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42T_thenReturnN42T() {
+  public void testEscapeControlCharacters_when42T_thenReturnN42T() {
     // Arrange, Act and Assert
     assertEquals("\\n42\\\\t", StringUtil.escapeControlCharacters("\n42\\\\t"));
   }
@@ -611,11 +525,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '42\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturn42B() {
+  public void testEscapeControlCharacters_when42_thenReturn42B() {
     // Arrange, Act and Assert
     assertEquals("42\\b", StringUtil.escapeControlCharacters("42\b"));
   }
@@ -631,11 +543,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '42\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturn42F() {
+  public void testEscapeControlCharacters_when42_thenReturn42F() {
     // Arrange, Act and Assert
     assertEquals("42\\f", StringUtil.escapeControlCharacters("42\f"));
   }
@@ -651,11 +561,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '42\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturn42N() {
+  public void testEscapeControlCharacters_when42_thenReturn42N() {
     // Arrange, Act and Assert
     assertEquals("42\\n", StringUtil.escapeControlCharacters("42\n"));
   }
@@ -671,11 +579,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '42\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturn42R() {
+  public void testEscapeControlCharacters_when42_thenReturn42R() {
     // Arrange, Act and Assert
     assertEquals("42\\r", StringUtil.escapeControlCharacters("42\r"));
   }
@@ -691,11 +597,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '42\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturn42T() {
+  public void testEscapeControlCharacters_when42_thenReturn42T() {
     // Arrange, Act and Assert
     assertEquals("42\\t", StringUtil.escapeControlCharacters("42\t"));
   }
@@ -711,11 +615,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '\\b42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturnB42() {
+  public void testEscapeControlCharacters_when42_thenReturnB42() {
     // Arrange, Act and Assert
     assertEquals("\\b42", StringUtil.escapeControlCharacters("\b42"));
   }
@@ -731,11 +633,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '\\f42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturnF42() {
+  public void testEscapeControlCharacters_when42_thenReturnF42() {
     // Arrange, Act and Assert
     assertEquals("\\f42", StringUtil.escapeControlCharacters("\f42"));
   }
@@ -751,11 +651,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '\\n42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturnN42() {
+  public void testEscapeControlCharacters_when42_thenReturnN42() {
     // Arrange, Act and Assert
     assertEquals("\\n42", StringUtil.escapeControlCharacters("\n42"));
   }
@@ -771,11 +669,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '\\n42\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturnN42B() {
+  public void testEscapeControlCharacters_when42_thenReturnN42B() {
     // Arrange, Act and Assert
     assertEquals("\\n42\\b", StringUtil.escapeControlCharacters("\n42\b"));
   }
@@ -791,11 +687,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '\\n42\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturnN42F() {
+  public void testEscapeControlCharacters_when42_thenReturnN42F() {
     // Arrange, Act and Assert
     assertEquals("\\n42\\f", StringUtil.escapeControlCharacters("\n42\f"));
   }
@@ -811,11 +705,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '\\n42\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturnN42N() {
+  public void testEscapeControlCharacters_when42_thenReturnN42N() {
     // Arrange, Act and Assert
     assertEquals("\\n42\\n", StringUtil.escapeControlCharacters("\n42\n"));
   }
@@ -831,11 +723,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '\\n42\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturnN42R() {
+  public void testEscapeControlCharacters_when42_thenReturnN42R() {
     // Arrange, Act and Assert
     assertEquals("\\n42\\r", StringUtil.escapeControlCharacters("\n42\r"));
   }
@@ -851,11 +741,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '\\n42\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturnN42T() {
+  public void testEscapeControlCharacters_when42_thenReturnN42T() {
     // Arrange, Act and Assert
     assertEquals("\\n42\\t", StringUtil.escapeControlCharacters("\n42\t"));
   }
@@ -871,11 +759,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']42'; then return '\\n]42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturnN422() {
+  public void testEscapeControlCharacters_when42_thenReturnN422() {
     // Arrange, Act and Assert
     assertEquals("\\n]42", StringUtil.escapeControlCharacters("\n]42"));
   }
@@ -891,11 +777,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42]'; then return '\\n42]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturnN423() {
+  public void testEscapeControlCharacters_when42_thenReturnN423() {
     // Arrange, Act and Assert
     assertEquals("\\n42]", StringUtil.escapeControlCharacters("\n42]"));
   }
@@ -911,11 +795,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '\\n\\b42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturnNB42() {
+  public void testEscapeControlCharacters_when42_thenReturnNB42() {
     // Arrange, Act and Assert
     assertEquals("\\n\\b42", StringUtil.escapeControlCharacters("\n\b42"));
   }
@@ -931,11 +813,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '\\n\\f42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturnNF42() {
+  public void testEscapeControlCharacters_when42_thenReturnNF42() {
     // Arrange, Act and Assert
     assertEquals("\\n\\f42", StringUtil.escapeControlCharacters("\n\f42"));
   }
@@ -951,11 +831,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '\\n\\n42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturnNN42() {
+  public void testEscapeControlCharacters_when42_thenReturnNN42() {
     // Arrange, Act and Assert
     assertEquals("\\n\\n42", StringUtil.escapeControlCharacters("\n\n42"));
   }
@@ -971,11 +849,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '\\n\\r42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturnNR42() {
+  public void testEscapeControlCharacters_when42_thenReturnNR42() {
     // Arrange, Act and Assert
     assertEquals("\\n\\r42", StringUtil.escapeControlCharacters("\n\r42"));
   }
@@ -991,11 +867,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '\\n\\t42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturnNT42() {
+  public void testEscapeControlCharacters_when42_thenReturnNT42() {
     // Arrange, Act and Assert
     assertEquals("\\n\\t42", StringUtil.escapeControlCharacters("\n\t42"));
   }
@@ -1011,11 +885,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '\\r42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturnR42() {
+  public void testEscapeControlCharacters_when42_thenReturnR42() {
     // Arrange, Act and Assert
     assertEquals("\\r42", StringUtil.escapeControlCharacters("\r42"));
   }
@@ -1031,11 +903,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '42'; then return '\\t42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when42_thenReturnT42() {
+  public void testEscapeControlCharacters_when42_thenReturnT42() {
     // Arrange, Act and Assert
     assertEquals("\\t42", StringUtil.escapeControlCharacters("\t42"));
   }
@@ -1051,11 +921,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '4242'; then return '\\n4242'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_when4242_thenReturnN4242() {
+  public void testEscapeControlCharacters_when4242_thenReturnN4242() {
     // Arrange, Act and Assert
     assertEquals("\\n4242", StringUtil.escapeControlCharacters("\n4242"));
   }
@@ -1071,11 +939,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\b'; then return '\\b\\\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenB_thenReturnBB() {
+  public void testEscapeControlCharacters_whenB_thenReturnBB() {
     // Arrange, Act and Assert
     assertEquals("\\b\\\\b", StringUtil.escapeControlCharacters("\b\\\\b"));
   }
@@ -1091,11 +957,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\b'; then return '\\\\b\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenB_thenReturnBB2() {
+  public void testEscapeControlCharacters_whenB_thenReturnBB2() {
     // Arrange, Act and Assert
     assertEquals("\\\\b\\b", StringUtil.escapeControlCharacters("\\\\b\b"));
   }
@@ -1111,11 +975,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\b'; then return '\\\\b\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenB_thenReturnBF() {
+  public void testEscapeControlCharacters_whenB_thenReturnBF() {
     // Arrange, Act and Assert
     assertEquals("\\\\b\\f", StringUtil.escapeControlCharacters("\\\\b\f"));
   }
@@ -1131,11 +993,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\b'; then return '\\\\b\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenB_thenReturnBN() {
+  public void testEscapeControlCharacters_whenB_thenReturnBN() {
     // Arrange, Act and Assert
     assertEquals("\\\\b\\n", StringUtil.escapeControlCharacters("\\\\b\n"));
   }
@@ -1151,11 +1011,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\b'; then return '\\\\b\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenB_thenReturnBR() {
+  public void testEscapeControlCharacters_whenB_thenReturnBR() {
     // Arrange, Act and Assert
     assertEquals("\\\\b\\r", StringUtil.escapeControlCharacters("\\\\b\r"));
   }
@@ -1171,11 +1029,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\b'; then return '\\\\b\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenB_thenReturnBT() {
+  public void testEscapeControlCharacters_whenB_thenReturnBT() {
     // Arrange, Act and Assert
     assertEquals("\\\\b\\t", StringUtil.escapeControlCharacters("\\\\b\t"));
   }
@@ -1191,11 +1047,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\b'; then return '\\f\\\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenB_thenReturnFB() {
+  public void testEscapeControlCharacters_whenB_thenReturnFB() {
     // Arrange, Act and Assert
     assertEquals("\\f\\\\b", StringUtil.escapeControlCharacters("\f\\\\b"));
   }
@@ -1211,11 +1065,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\b'; then return '\\n\\\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenB_thenReturnNB() {
+  public void testEscapeControlCharacters_whenB_thenReturnNB() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\b", StringUtil.escapeControlCharacters("\n\\\\b"));
   }
@@ -1231,11 +1083,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']\\\\b'; then return '\\n]\\\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenB_thenReturnNB2() {
+  public void testEscapeControlCharacters_whenB_thenReturnNB2() {
     // Arrange, Act and Assert
     assertEquals("\\n]\\\\b", StringUtil.escapeControlCharacters("\n]\\\\b"));
   }
@@ -1251,11 +1101,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\b'; then return '\\n\\b\\\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenB_thenReturnNBB() {
+  public void testEscapeControlCharacters_whenB_thenReturnNBB() {
     // Arrange, Act and Assert
     assertEquals("\\n\\b\\\\b", StringUtil.escapeControlCharacters("\n\b\\\\b"));
   }
@@ -1271,11 +1119,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\b'; then return '\\n\\f\\\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenB_thenReturnNFB() {
+  public void testEscapeControlCharacters_whenB_thenReturnNFB() {
     // Arrange, Act and Assert
     assertEquals("\\n\\f\\\\b", StringUtil.escapeControlCharacters("\n\f\\\\b"));
   }
@@ -1291,11 +1137,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\b'; then return '\\n\\n\\\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenB_thenReturnNNB() {
+  public void testEscapeControlCharacters_whenB_thenReturnNNB() {
     // Arrange, Act and Assert
     assertEquals("\\n\\n\\\\b", StringUtil.escapeControlCharacters("\n\n\\\\b"));
   }
@@ -1311,11 +1155,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\b'; then return '\\n\\r\\\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenB_thenReturnNRB() {
+  public void testEscapeControlCharacters_whenB_thenReturnNRB() {
     // Arrange, Act and Assert
     assertEquals("\\n\\r\\\\b", StringUtil.escapeControlCharacters("\n\r\\\\b"));
   }
@@ -1331,11 +1173,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\b'; then return '\\n\\t\\\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenB_thenReturnNTB() {
+  public void testEscapeControlCharacters_whenB_thenReturnNTB() {
     // Arrange, Act and Assert
     assertEquals("\\n\\t\\\\b", StringUtil.escapeControlCharacters("\n\t\\\\b"));
   }
@@ -1351,11 +1191,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\b'; then return '\\r\\\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenB_thenReturnRB() {
+  public void testEscapeControlCharacters_whenB_thenReturnRB() {
     // Arrange, Act and Assert
     assertEquals("\\r\\\\b", StringUtil.escapeControlCharacters("\r\\\\b"));
   }
@@ -1371,11 +1209,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\b'; then return '\\t\\\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenB_thenReturnTB() {
+  public void testEscapeControlCharacters_whenB_thenReturnTB() {
     // Arrange, Act and Assert
     assertEquals("\\t\\\\b", StringUtil.escapeControlCharacters("\t\\\\b"));
   }
@@ -1391,12 +1227,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when backspace backspace; then return '\\b\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenBackspaceBackspace_thenReturnBB() {
+  public void testEscapeControlCharacters_whenBackspaceBackspace_thenReturnBB() {
     // Arrange, Act and Assert
     assertEquals("\\b\\b", StringUtil.escapeControlCharacters("\b\b"));
   }
@@ -1412,11 +1245,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when backspace cr; then return '\\b\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenBackspaceCr_thenReturnBR() {
+  public void testEscapeControlCharacters_whenBackspaceCr_thenReturnBR() {
     // Arrange, Act and Assert
     assertEquals("\\b\\r", StringUtil.escapeControlCharacters("\b\r"));
   }
@@ -1432,12 +1263,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when backspace form feed (ff); then return '\\b\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenBackspaceFormFeed_thenReturnBF() {
+  public void testEscapeControlCharacters_whenBackspaceFormFeed_thenReturnBF() {
     // Arrange, Act and Assert
     assertEquals("\\b\\f", StringUtil.escapeControlCharacters("\b\f"));
   }
@@ -1453,11 +1281,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when backspace lf; then return '\\b\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenBackspaceLf_thenReturnBN() {
+  public void testEscapeControlCharacters_whenBackspaceLf_thenReturnBN() {
     // Arrange, Act and Assert
     assertEquals("\\b\\n", StringUtil.escapeControlCharacters("\b\n"));
   }
@@ -1473,11 +1299,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when backspace tab; then return '\\b\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenBackspaceTab_thenReturnBT() {
+  public void testEscapeControlCharacters_whenBackspaceTab_thenReturnBT() {
     // Arrange, Act and Assert
     assertEquals("\\b\\t", StringUtil.escapeControlCharacters("\b\t"));
   }
@@ -1493,11 +1317,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when backspace; then return '\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenBackspace_thenReturnB() {
+  public void testEscapeControlCharacters_whenBackspace_thenReturnB() {
     // Arrange, Act and Assert
     assertEquals("\\b", StringUtil.escapeControlCharacters("\b"));
   }
@@ -1513,11 +1335,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when cr backspace; then return '\\r\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenCrBackspace_thenReturnRB() {
+  public void testEscapeControlCharacters_whenCrBackspace_thenReturnRB() {
     // Arrange, Act and Assert
     assertEquals("\\r\\b", StringUtil.escapeControlCharacters("\r\b"));
   }
@@ -1533,11 +1353,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when cr cr; then return '\\r\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenCrCr_thenReturnRR() {
+  public void testEscapeControlCharacters_whenCrCr_thenReturnRR() {
     // Arrange, Act and Assert
     assertEquals("\\r\\r", StringUtil.escapeControlCharacters("\r\r"));
   }
@@ -1553,11 +1371,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when cr form feed (ff); then return '\\r\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenCrFormFeed_thenReturnRF() {
+  public void testEscapeControlCharacters_whenCrFormFeed_thenReturnRF() {
     // Arrange, Act and Assert
     assertEquals("\\r\\f", StringUtil.escapeControlCharacters("\r\f"));
   }
@@ -1573,11 +1389,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when cr lf; then return '\\r\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenCrLf_thenReturnRN() {
+  public void testEscapeControlCharacters_whenCrLf_thenReturnRN() {
     // Arrange, Act and Assert
     assertEquals("\\r\\n", StringUtil.escapeControlCharacters("\r\n"));
   }
@@ -1593,11 +1407,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when cr tab; then return '\\r\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenCrTab_thenReturnRT() {
+  public void testEscapeControlCharacters_whenCrTab_thenReturnRT() {
     // Arrange, Act and Assert
     assertEquals("\\r\\t", StringUtil.escapeControlCharacters("\r\t"));
   }
@@ -1613,11 +1425,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when cr; then return '\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenCr_thenReturnR() {
+  public void testEscapeControlCharacters_whenCr_thenReturnR() {
     // Arrange, Act and Assert
     assertEquals("\\r", StringUtil.escapeControlCharacters("\r"));
   }
@@ -1633,11 +1443,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\f'; then return '\\b\\\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenF_thenReturnBF() {
+  public void testEscapeControlCharacters_whenF_thenReturnBF() {
     // Arrange, Act and Assert
     assertEquals("\\b\\\\f", StringUtil.escapeControlCharacters("\b\\\\f"));
   }
@@ -1653,11 +1461,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\f'; then return '\\\\f\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenF_thenReturnFB() {
+  public void testEscapeControlCharacters_whenF_thenReturnFB() {
     // Arrange, Act and Assert
     assertEquals("\\\\f\\b", StringUtil.escapeControlCharacters("\\\\f\b"));
   }
@@ -1673,11 +1479,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\f'; then return '\\f\\\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenF_thenReturnFF() {
+  public void testEscapeControlCharacters_whenF_thenReturnFF() {
     // Arrange, Act and Assert
     assertEquals("\\f\\\\f", StringUtil.escapeControlCharacters("\f\\\\f"));
   }
@@ -1693,11 +1497,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\f'; then return '\\\\f\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenF_thenReturnFF2() {
+  public void testEscapeControlCharacters_whenF_thenReturnFF2() {
     // Arrange, Act and Assert
     assertEquals("\\\\f\\f", StringUtil.escapeControlCharacters("\\\\f\f"));
   }
@@ -1713,11 +1515,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\f'; then return '\\\\f\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenF_thenReturnFN() {
+  public void testEscapeControlCharacters_whenF_thenReturnFN() {
     // Arrange, Act and Assert
     assertEquals("\\\\f\\n", StringUtil.escapeControlCharacters("\\\\f\n"));
   }
@@ -1733,11 +1533,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\f'; then return '\\\\f\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenF_thenReturnFR() {
+  public void testEscapeControlCharacters_whenF_thenReturnFR() {
     // Arrange, Act and Assert
     assertEquals("\\\\f\\r", StringUtil.escapeControlCharacters("\\\\f\r"));
   }
@@ -1753,11 +1551,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\f'; then return '\\\\f\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenF_thenReturnFT() {
+  public void testEscapeControlCharacters_whenF_thenReturnFT() {
     // Arrange, Act and Assert
     assertEquals("\\\\f\\t", StringUtil.escapeControlCharacters("\\\\f\t"));
   }
@@ -1773,11 +1569,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\f'; then return '\\n\\b\\\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenF_thenReturnNBF() {
+  public void testEscapeControlCharacters_whenF_thenReturnNBF() {
     // Arrange, Act and Assert
     assertEquals("\\n\\b\\\\f", StringUtil.escapeControlCharacters("\n\b\\\\f"));
   }
@@ -1793,11 +1587,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\f'; then return '\\n\\\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenF_thenReturnNF() {
+  public void testEscapeControlCharacters_whenF_thenReturnNF() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\f", StringUtil.escapeControlCharacters("\n\\\\f"));
   }
@@ -1813,11 +1605,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']\\\\f'; then return '\\n]\\\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenF_thenReturnNF2() {
+  public void testEscapeControlCharacters_whenF_thenReturnNF2() {
     // Arrange, Act and Assert
     assertEquals("\\n]\\\\f", StringUtil.escapeControlCharacters("\n]\\\\f"));
   }
@@ -1833,11 +1623,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\f'; then return '\\n\\f\\\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenF_thenReturnNFF() {
+  public void testEscapeControlCharacters_whenF_thenReturnNFF() {
     // Arrange, Act and Assert
     assertEquals("\\n\\f\\\\f", StringUtil.escapeControlCharacters("\n\f\\\\f"));
   }
@@ -1853,11 +1641,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\f'; then return '\\n\\n\\\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenF_thenReturnNNF() {
+  public void testEscapeControlCharacters_whenF_thenReturnNNF() {
     // Arrange, Act and Assert
     assertEquals("\\n\\n\\\\f", StringUtil.escapeControlCharacters("\n\n\\\\f"));
   }
@@ -1873,11 +1659,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\f'; then return '\\n\\r\\\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenF_thenReturnNRF() {
+  public void testEscapeControlCharacters_whenF_thenReturnNRF() {
     // Arrange, Act and Assert
     assertEquals("\\n\\r\\\\f", StringUtil.escapeControlCharacters("\n\r\\\\f"));
   }
@@ -1893,11 +1677,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\f'; then return '\\n\\t\\\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenF_thenReturnNTF() {
+  public void testEscapeControlCharacters_whenF_thenReturnNTF() {
     // Arrange, Act and Assert
     assertEquals("\\n\\t\\\\f", StringUtil.escapeControlCharacters("\n\t\\\\f"));
   }
@@ -1913,11 +1695,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\f'; then return '\\r\\\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenF_thenReturnRF() {
+  public void testEscapeControlCharacters_whenF_thenReturnRF() {
     // Arrange, Act and Assert
     assertEquals("\\r\\\\f", StringUtil.escapeControlCharacters("\r\\\\f"));
   }
@@ -1933,11 +1713,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\f'; then return '\\t\\\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenF_thenReturnTF() {
+  public void testEscapeControlCharacters_whenF_thenReturnTF() {
     // Arrange, Act and Assert
     assertEquals("\\t\\\\f", StringUtil.escapeControlCharacters("\t\\\\f"));
   }
@@ -1953,12 +1731,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when form feed (ff) backspace; then return '\\f\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenFormFeedBackspace_thenReturnFB() {
+  public void testEscapeControlCharacters_whenFormFeedBackspace_thenReturnFB() {
     // Arrange, Act and Assert
     assertEquals("\\f\\b", StringUtil.escapeControlCharacters("\f\b"));
   }
@@ -1974,11 +1749,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when form feed (ff) cr; then return '\\f\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenFormFeedCr_thenReturnFR() {
+  public void testEscapeControlCharacters_whenFormFeedCr_thenReturnFR() {
     // Arrange, Act and Assert
     assertEquals("\\f\\r", StringUtil.escapeControlCharacters("\f\r"));
   }
@@ -1994,12 +1767,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when form feed (ff) form feed (ff); then return '\\f\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenFormFeedFormFeed_thenReturnFF() {
+  public void testEscapeControlCharacters_whenFormFeedFormFeed_thenReturnFF() {
     // Arrange, Act and Assert
     assertEquals("\\f\\f", StringUtil.escapeControlCharacters("\f\f"));
   }
@@ -2015,11 +1785,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when form feed (ff) lf; then return '\\f\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenFormFeedLf_thenReturnFN() {
+  public void testEscapeControlCharacters_whenFormFeedLf_thenReturnFN() {
     // Arrange, Act and Assert
     assertEquals("\\f\\n", StringUtil.escapeControlCharacters("\f\n"));
   }
@@ -2035,12 +1803,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when form feed (ff) tab; then return '\\f\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenFormFeedTab_thenReturnFT() {
+  public void testEscapeControlCharacters_whenFormFeedTab_thenReturnFT() {
     // Arrange, Act and Assert
     assertEquals("\\f\\t", StringUtil.escapeControlCharacters("\f\t"));
   }
@@ -2056,11 +1821,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when form feed (ff); then return '\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenFormFeed_thenReturnF() {
+  public void testEscapeControlCharacters_whenFormFeed_thenReturnF() {
     // Arrange, Act and Assert
     assertEquals("\\f", StringUtil.escapeControlCharacters("\f"));
   }
@@ -2076,11 +1839,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input42'; then return '\\nInput42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput42_thenReturnNInput42() {
+  public void testEscapeControlCharacters_whenInput42_thenReturnNInput42() {
     // Arrange, Act and Assert
     assertEquals("\\nInput42", StringUtil.escapeControlCharacters("\nInput42"));
   }
@@ -2096,12 +1857,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when 'Input\\\\b'; then return '\\nInput\\\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInputB_thenReturnNInputB() {
+  public void testEscapeControlCharacters_whenInputB_thenReturnNInputB() {
     // Arrange, Act and Assert
     assertEquals("\\nInput\\\\b", StringUtil.escapeControlCharacters("\nInput\\\\b"));
   }
@@ -2117,12 +1875,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when 'Input\\\\f'; then return '\\nInput\\\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInputF_thenReturnNInputF() {
+  public void testEscapeControlCharacters_whenInputF_thenReturnNInputF() {
     // Arrange, Act and Assert
     assertEquals("\\nInput\\\\f", StringUtil.escapeControlCharacters("\nInput\\\\f"));
   }
@@ -2138,12 +1893,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when 'InputInput'; then return '\\nInputInput'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInputInput_thenReturnNInputInput() {
+  public void testEscapeControlCharacters_whenInputInput_thenReturnNInputInput() {
     // Arrange, Act and Assert
     assertEquals("\\nInputInput", StringUtil.escapeControlCharacters("\nInputInput"));
   }
@@ -2159,12 +1911,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when 'Input\\\\n'; then return '\\nInput\\\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInputN_thenReturnNInputN() {
+  public void testEscapeControlCharacters_whenInputN_thenReturnNInputN() {
     // Arrange, Act and Assert
     assertEquals("\\nInput\\\\n", StringUtil.escapeControlCharacters("\nInput\\\\n"));
   }
@@ -2180,12 +1929,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when 'Input\\\\r'; then return '\\nInput\\\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInputR_thenReturnNInputR() {
+  public void testEscapeControlCharacters_whenInputR_thenReturnNInputR() {
     // Arrange, Act and Assert
     assertEquals("\\nInput\\\\r", StringUtil.escapeControlCharacters("\nInput\\\\r"));
   }
@@ -2201,12 +1947,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when 'Input\\\\t'; then return '\\nInput\\\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInputT_thenReturnNInputT() {
+  public void testEscapeControlCharacters_whenInputT_thenReturnNInputT() {
     // Arrange, Act and Assert
     assertEquals("\\nInput\\\\t", StringUtil.escapeControlCharacters("\nInput\\\\t"));
   }
@@ -2222,11 +1965,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return '\\bInput'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnBInput() {
+  public void testEscapeControlCharacters_whenInput_thenReturnBInput() {
     // Arrange, Act and Assert
     assertEquals("\\bInput", StringUtil.escapeControlCharacters("\bInput"));
   }
@@ -2242,11 +1983,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return '\\fInput'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnFInput() {
+  public void testEscapeControlCharacters_whenInput_thenReturnFInput() {
     // Arrange, Act and Assert
     assertEquals("\\fInput", StringUtil.escapeControlCharacters("\fInput"));
   }
@@ -2262,11 +2001,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return 'Input'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnInput() {
+  public void testEscapeControlCharacters_whenInput_thenReturnInput() {
     // Arrange, Act and Assert
     assertEquals("Input", StringUtil.escapeControlCharacters("Input"));
   }
@@ -2282,11 +2019,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return 'Input\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnInputB() {
+  public void testEscapeControlCharacters_whenInput_thenReturnInputB() {
     // Arrange, Act and Assert
     assertEquals("Input\\b", StringUtil.escapeControlCharacters("Input\b"));
   }
@@ -2302,11 +2037,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return 'Input\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnInputF() {
+  public void testEscapeControlCharacters_whenInput_thenReturnInputF() {
     // Arrange, Act and Assert
     assertEquals("Input\\f", StringUtil.escapeControlCharacters("Input\f"));
   }
@@ -2322,11 +2055,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return 'Input\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnInputN() {
+  public void testEscapeControlCharacters_whenInput_thenReturnInputN() {
     // Arrange, Act and Assert
     assertEquals("Input\\n", StringUtil.escapeControlCharacters("Input\n"));
   }
@@ -2342,11 +2073,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return 'Input\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnInputR() {
+  public void testEscapeControlCharacters_whenInput_thenReturnInputR() {
     // Arrange, Act and Assert
     assertEquals("Input\\r", StringUtil.escapeControlCharacters("Input\r"));
   }
@@ -2362,11 +2091,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return 'Input\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnInputT() {
+  public void testEscapeControlCharacters_whenInput_thenReturnInputT() {
     // Arrange, Act and Assert
     assertEquals("Input\\t", StringUtil.escapeControlCharacters("Input\t"));
   }
@@ -2382,11 +2109,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return '\\n\\bInput'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnNBInput() {
+  public void testEscapeControlCharacters_whenInput_thenReturnNBInput() {
     // Arrange, Act and Assert
     assertEquals("\\n\\bInput", StringUtil.escapeControlCharacters("\n\bInput"));
   }
@@ -2402,11 +2127,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return '\\n\\fInput'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnNFInput() {
+  public void testEscapeControlCharacters_whenInput_thenReturnNFInput() {
     // Arrange, Act and Assert
     assertEquals("\\n\\fInput", StringUtil.escapeControlCharacters("\n\fInput"));
   }
@@ -2422,11 +2145,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return '\\nInput'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnNInput() {
+  public void testEscapeControlCharacters_whenInput_thenReturnNInput() {
     // Arrange, Act and Assert
     assertEquals("\\nInput", StringUtil.escapeControlCharacters("\nInput"));
   }
@@ -2442,11 +2163,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input]'; then return '\\nInput]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnNInput2() {
+  public void testEscapeControlCharacters_whenInput_thenReturnNInput2() {
     // Arrange, Act and Assert
     assertEquals("\\nInput]", StringUtil.escapeControlCharacters("\nInput]"));
   }
@@ -2462,11 +2181,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']Input'; then return '\\n]Input'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnNInput3() {
+  public void testEscapeControlCharacters_whenInput_thenReturnNInput3() {
     // Arrange, Act and Assert
     assertEquals("\\n]Input", StringUtil.escapeControlCharacters("\n]Input"));
   }
@@ -2482,11 +2199,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return '\\nInput\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnNInputB() {
+  public void testEscapeControlCharacters_whenInput_thenReturnNInputB() {
     // Arrange, Act and Assert
     assertEquals("\\nInput\\b", StringUtil.escapeControlCharacters("\nInput\b"));
   }
@@ -2502,11 +2217,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return '\\nInput\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnNInputF() {
+  public void testEscapeControlCharacters_whenInput_thenReturnNInputF() {
     // Arrange, Act and Assert
     assertEquals("\\nInput\\f", StringUtil.escapeControlCharacters("\nInput\f"));
   }
@@ -2522,11 +2235,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return '\\nInput\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnNInputN() {
+  public void testEscapeControlCharacters_whenInput_thenReturnNInputN() {
     // Arrange, Act and Assert
     assertEquals("\\nInput\\n", StringUtil.escapeControlCharacters("\nInput\n"));
   }
@@ -2542,11 +2253,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return '\\nInput\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnNInputR() {
+  public void testEscapeControlCharacters_whenInput_thenReturnNInputR() {
     // Arrange, Act and Assert
     assertEquals("\\nInput\\r", StringUtil.escapeControlCharacters("\nInput\r"));
   }
@@ -2562,11 +2271,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return '\\nInput\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnNInputT() {
+  public void testEscapeControlCharacters_whenInput_thenReturnNInputT() {
     // Arrange, Act and Assert
     assertEquals("\\nInput\\t", StringUtil.escapeControlCharacters("\nInput\t"));
   }
@@ -2582,11 +2289,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return '\\n\\nInput'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnNNInput() {
+  public void testEscapeControlCharacters_whenInput_thenReturnNNInput() {
     // Arrange, Act and Assert
     assertEquals("\\n\\nInput", StringUtil.escapeControlCharacters("\n\nInput"));
   }
@@ -2602,11 +2307,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return '\\n\\rInput'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnNRInput() {
+  public void testEscapeControlCharacters_whenInput_thenReturnNRInput() {
     // Arrange, Act and Assert
     assertEquals("\\n\\rInput", StringUtil.escapeControlCharacters("\n\rInput"));
   }
@@ -2622,11 +2325,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return '\\n\\tInput'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnNTInput() {
+  public void testEscapeControlCharacters_whenInput_thenReturnNTInput() {
     // Arrange, Act and Assert
     assertEquals("\\n\\tInput", StringUtil.escapeControlCharacters("\n\tInput"));
   }
@@ -2642,11 +2343,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return '\\rInput'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnRInput() {
+  public void testEscapeControlCharacters_whenInput_thenReturnRInput() {
     // Arrange, Act and Assert
     assertEquals("\\rInput", StringUtil.escapeControlCharacters("\rInput"));
   }
@@ -2662,11 +2361,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when 'Input'; then return '\\tInput'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenInput_thenReturnTInput() {
+  public void testEscapeControlCharacters_whenInput_thenReturnTInput() {
     // Arrange, Act and Assert
     assertEquals("\\tInput", StringUtil.escapeControlCharacters("\tInput"));
   }
@@ -2682,12 +2379,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when lf backspace backspace; then return '\\n\\b\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfBackspaceBackspace_thenReturnNBB() {
+  public void testEscapeControlCharacters_whenLfBackspaceBackspace_thenReturnNBB() {
     // Arrange, Act and Assert
     assertEquals("\\n\\b\\b", StringUtil.escapeControlCharacters("\n\b\b"));
   }
@@ -2703,12 +2397,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when lf backspace cr; then return '\\n\\b\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfBackspaceCr_thenReturnNBR() {
+  public void testEscapeControlCharacters_whenLfBackspaceCr_thenReturnNBR() {
     // Arrange, Act and Assert
     assertEquals("\\n\\b\\r", StringUtil.escapeControlCharacters("\n\b\r"));
   }
@@ -2724,12 +2415,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when lf backspace form feed (ff); then return '\\n\\b\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfBackspaceFormFeed_thenReturnNBF() {
+  public void testEscapeControlCharacters_whenLfBackspaceFormFeed_thenReturnNBF() {
     // Arrange, Act and Assert
     assertEquals("\\n\\b\\f", StringUtil.escapeControlCharacters("\n\b\f"));
   }
@@ -2745,12 +2433,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when lf backspace lf; then return '\\n\\b\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfBackspaceLf_thenReturnNBN() {
+  public void testEscapeControlCharacters_whenLfBackspaceLf_thenReturnNBN() {
     // Arrange, Act and Assert
     assertEquals("\\n\\b\\n", StringUtil.escapeControlCharacters("\n\b\n"));
   }
@@ -2766,12 +2451,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when lf backspace tab; then return '\\n\\b\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfBackspaceTab_thenReturnNBT() {
+  public void testEscapeControlCharacters_whenLfBackspaceTab_thenReturnNBT() {
     // Arrange, Act and Assert
     assertEquals("\\n\\b\\t", StringUtil.escapeControlCharacters("\n\b\t"));
   }
@@ -2787,11 +2469,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when lf backspace; then return '\\n\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfBackspace_thenReturnNB() {
+  public void testEscapeControlCharacters_whenLfBackspace_thenReturnNB() {
     // Arrange, Act and Assert
     assertEquals("\\n\\b", StringUtil.escapeControlCharacters("\n\b"));
   }
@@ -2807,12 +2487,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when lf cr backspace; then return '\\n\\r\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfCrBackspace_thenReturnNRB() {
+  public void testEscapeControlCharacters_whenLfCrBackspace_thenReturnNRB() {
     // Arrange, Act and Assert
     assertEquals("\\n\\r\\b", StringUtil.escapeControlCharacters("\n\r\b"));
   }
@@ -2828,11 +2505,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when lf cr cr; then return '\\n\\r\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfCrCr_thenReturnNRR() {
+  public void testEscapeControlCharacters_whenLfCrCr_thenReturnNRR() {
     // Arrange, Act and Assert
     assertEquals("\\n\\r\\r", StringUtil.escapeControlCharacters("\n\r\r"));
   }
@@ -2848,12 +2523,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when lf cr form feed (ff); then return '\\n\\r\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfCrFormFeed_thenReturnNRF() {
+  public void testEscapeControlCharacters_whenLfCrFormFeed_thenReturnNRF() {
     // Arrange, Act and Assert
     assertEquals("\\n\\r\\f", StringUtil.escapeControlCharacters("\n\r\f"));
   }
@@ -2869,11 +2541,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when lf cr lf; then return '\\n\\r\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfCrLf_thenReturnNRN() {
+  public void testEscapeControlCharacters_whenLfCrLf_thenReturnNRN() {
     // Arrange, Act and Assert
     assertEquals("\\n\\r\\n", StringUtil.escapeControlCharacters("\n\r\n"));
   }
@@ -2889,11 +2559,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when lf cr tab; then return '\\n\\r\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfCrTab_thenReturnNRT() {
+  public void testEscapeControlCharacters_whenLfCrTab_thenReturnNRT() {
     // Arrange, Act and Assert
     assertEquals("\\n\\r\\t", StringUtil.escapeControlCharacters("\n\r\t"));
   }
@@ -2909,11 +2577,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when lf cr; then return '\\n\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfCr_thenReturnNR() {
+  public void testEscapeControlCharacters_whenLfCr_thenReturnNR() {
     // Arrange, Act and Assert
     assertEquals("\\n\\r", StringUtil.escapeControlCharacters("\n\r"));
   }
@@ -2929,12 +2595,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when lf form feed (ff) backspace; then return '\\n\\f\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfFormFeedBackspace_thenReturnNFB() {
+  public void testEscapeControlCharacters_whenLfFormFeedBackspace_thenReturnNFB() {
     // Arrange, Act and Assert
     assertEquals("\\n\\f\\b", StringUtil.escapeControlCharacters("\n\f\b"));
   }
@@ -2950,12 +2613,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when lf form feed (ff) cr; then return '\\n\\f\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfFormFeedCr_thenReturnNFR() {
+  public void testEscapeControlCharacters_whenLfFormFeedCr_thenReturnNFR() {
     // Arrange, Act and Assert
     assertEquals("\\n\\f\\r", StringUtil.escapeControlCharacters("\n\f\r"));
   }
@@ -2971,12 +2631,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when lf form feed (ff) form feed (ff); then return '\\n\\f\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfFormFeedFormFeed_thenReturnNFF() {
+  public void testEscapeControlCharacters_whenLfFormFeedFormFeed_thenReturnNFF() {
     // Arrange, Act and Assert
     assertEquals("\\n\\f\\f", StringUtil.escapeControlCharacters("\n\f\f"));
   }
@@ -2992,12 +2649,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when lf form feed (ff) lf; then return '\\n\\f\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfFormFeedLf_thenReturnNFN() {
+  public void testEscapeControlCharacters_whenLfFormFeedLf_thenReturnNFN() {
     // Arrange, Act and Assert
     assertEquals("\\n\\f\\n", StringUtil.escapeControlCharacters("\n\f\n"));
   }
@@ -3013,12 +2667,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when lf form feed (ff) tab; then return '\\n\\f\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfFormFeedTab_thenReturnNFT() {
+  public void testEscapeControlCharacters_whenLfFormFeedTab_thenReturnNFT() {
     // Arrange, Act and Assert
     assertEquals("\\n\\f\\t", StringUtil.escapeControlCharacters("\n\f\t"));
   }
@@ -3034,11 +2685,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when lf form feed (ff); then return '\\n\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfFormFeed_thenReturnNF() {
+  public void testEscapeControlCharacters_whenLfFormFeed_thenReturnNF() {
     // Arrange, Act and Assert
     assertEquals("\\n\\f", StringUtil.escapeControlCharacters("\n\f"));
   }
@@ -3054,12 +2703,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when lf lf backspace; then return '\\n\\n\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfLfBackspace_thenReturnNNB() {
+  public void testEscapeControlCharacters_whenLfLfBackspace_thenReturnNNB() {
     // Arrange, Act and Assert
     assertEquals("\\n\\n\\b", StringUtil.escapeControlCharacters("\n\n\b"));
   }
@@ -3075,11 +2721,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when lf lf cr; then return '\\n\\n\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfLfCr_thenReturnNNR() {
+  public void testEscapeControlCharacters_whenLfLfCr_thenReturnNNR() {
     // Arrange, Act and Assert
     assertEquals("\\n\\n\\r", StringUtil.escapeControlCharacters("\n\n\r"));
   }
@@ -3095,12 +2739,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when lf lf form feed (ff); then return '\\n\\n\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfLfFormFeed_thenReturnNNF() {
+  public void testEscapeControlCharacters_whenLfLfFormFeed_thenReturnNNF() {
     // Arrange, Act and Assert
     assertEquals("\\n\\n\\f", StringUtil.escapeControlCharacters("\n\n\f"));
   }
@@ -3116,11 +2757,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when lf lf lf; then return '\\n\\n\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfLfLf_thenReturnNNN() {
+  public void testEscapeControlCharacters_whenLfLfLf_thenReturnNNN() {
     // Arrange, Act and Assert
     assertEquals("\\n\\n\\n", StringUtil.escapeControlCharacters("\n\n\n"));
   }
@@ -3136,11 +2775,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when lf lf tab; then return '\\n\\n\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfLfTab_thenReturnNNT() {
+  public void testEscapeControlCharacters_whenLfLfTab_thenReturnNNT() {
     // Arrange, Act and Assert
     assertEquals("\\n\\n\\t", StringUtil.escapeControlCharacters("\n\n\t"));
   }
@@ -3156,11 +2793,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when lf lf; then return '\\n\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfLf_thenReturnNN() {
+  public void testEscapeControlCharacters_whenLfLf_thenReturnNN() {
     // Arrange, Act and Assert
     assertEquals("\\n\\n", StringUtil.escapeControlCharacters("\n\n"));
   }
@@ -3176,12 +2811,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when lf tab backspace; then return '\\n\\t\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfTabBackspace_thenReturnNTB() {
+  public void testEscapeControlCharacters_whenLfTabBackspace_thenReturnNTB() {
     // Arrange, Act and Assert
     assertEquals("\\n\\t\\b", StringUtil.escapeControlCharacters("\n\t\b"));
   }
@@ -3197,11 +2829,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when lf tab cr; then return '\\n\\t\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfTabCr_thenReturnNTR() {
+  public void testEscapeControlCharacters_whenLfTabCr_thenReturnNTR() {
     // Arrange, Act and Assert
     assertEquals("\\n\\t\\r", StringUtil.escapeControlCharacters("\n\t\r"));
   }
@@ -3217,12 +2847,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when lf tab form feed (ff); then return '\\n\\t\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfTabFormFeed_thenReturnNTF() {
+  public void testEscapeControlCharacters_whenLfTabFormFeed_thenReturnNTF() {
     // Arrange, Act and Assert
     assertEquals("\\n\\t\\f", StringUtil.escapeControlCharacters("\n\t\f"));
   }
@@ -3238,11 +2865,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when lf tab lf; then return '\\n\\t\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfTabLf_thenReturnNTN() {
+  public void testEscapeControlCharacters_whenLfTabLf_thenReturnNTN() {
     // Arrange, Act and Assert
     assertEquals("\\n\\t\\n", StringUtil.escapeControlCharacters("\n\t\n"));
   }
@@ -3258,11 +2883,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when lf tab tab; then return '\\n\\t\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfTabTab_thenReturnNTT() {
+  public void testEscapeControlCharacters_whenLfTabTab_thenReturnNTT() {
     // Arrange, Act and Assert
     assertEquals("\\n\\t\\t", StringUtil.escapeControlCharacters("\n\t\t"));
   }
@@ -3278,11 +2901,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when lf tab; then return '\\n\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLfTab_thenReturnNT() {
+  public void testEscapeControlCharacters_whenLfTab_thenReturnNT() {
     // Arrange, Act and Assert
     assertEquals("\\n\\t", StringUtil.escapeControlCharacters("\n\t"));
   }
@@ -3298,11 +2919,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when lf; then return '\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenLf_thenReturnN() {
+  public void testEscapeControlCharacters_whenLf_thenReturnN() {
     // Arrange, Act and Assert
     assertEquals("\\n", StringUtil.escapeControlCharacters("\n"));
   }
@@ -3318,11 +2937,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n42'; then return '\\n\\\\n42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN42_thenReturnNN42() {
+  public void testEscapeControlCharacters_whenN42_thenReturnNN42() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\n42", StringUtil.escapeControlCharacters("\n\\\\n42"));
   }
@@ -3338,12 +2955,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when '\\\\n\\\\b'; then return '\\n\\\\n\\\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenNB_thenReturnNNB() {
+  public void testEscapeControlCharacters_whenNB_thenReturnNNB() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\n\\\\b", StringUtil.escapeControlCharacters("\n\\\\n\\\\b"));
   }
@@ -3359,12 +2973,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when '\\\\n\\\\f'; then return '\\n\\\\n\\\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenNF_thenReturnNNF() {
+  public void testEscapeControlCharacters_whenNF_thenReturnNNF() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\n\\\\f", StringUtil.escapeControlCharacters("\n\\\\n\\\\f"));
   }
@@ -3380,12 +2991,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when '\\\\nInput'; then return '\\n\\\\nInput'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenNInput_thenReturnNNInput() {
+  public void testEscapeControlCharacters_whenNInput_thenReturnNNInput() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\nInput", StringUtil.escapeControlCharacters("\n\\\\nInput"));
   }
@@ -3401,12 +3009,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when '\\\\n\\\\n'; then return '\\n\\\\n\\\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenNN_thenReturnNNN() {
+  public void testEscapeControlCharacters_whenNN_thenReturnNNN() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\n\\\\n", StringUtil.escapeControlCharacters("\n\\\\n\\\\n"));
   }
@@ -3422,12 +3027,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when '\\\\n\\\\r'; then return '\\n\\\\n\\\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenNR_thenReturnNNR() {
+  public void testEscapeControlCharacters_whenNR_thenReturnNNR() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\n\\\\r", StringUtil.escapeControlCharacters("\n\\\\n\\\\r"));
   }
@@ -3443,12 +3045,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when '\\\\n\\\\t'; then return '\\n\\\\n\\\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenNT_thenReturnNNT() {
+  public void testEscapeControlCharacters_whenNT_thenReturnNNT() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\n\\\\t", StringUtil.escapeControlCharacters("\n\\\\n\\\\t"));
   }
@@ -3464,11 +3063,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\b\\\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnBN() {
+  public void testEscapeControlCharacters_whenN_thenReturnBN() {
     // Arrange, Act and Assert
     assertEquals("\\b\\\\n", StringUtil.escapeControlCharacters("\b\\\\n"));
   }
@@ -3484,11 +3081,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\f\\\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnFN() {
+  public void testEscapeControlCharacters_whenN_thenReturnFN() {
     // Arrange, Act and Assert
     assertEquals("\\f\\\\n", StringUtil.escapeControlCharacters("\f\\\\n"));
   }
@@ -3504,11 +3099,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\\\n\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnNB() {
+  public void testEscapeControlCharacters_whenN_thenReturnNB() {
     // Arrange, Act and Assert
     assertEquals("\\\\n\\b", StringUtil.escapeControlCharacters("\\\\n\b"));
   }
@@ -3524,11 +3117,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\n\\b\\\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnNBN() {
+  public void testEscapeControlCharacters_whenN_thenReturnNBN() {
     // Arrange, Act and Assert
     assertEquals("\\n\\b\\\\n", StringUtil.escapeControlCharacters("\n\b\\\\n"));
   }
@@ -3544,11 +3135,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\\\n\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnNF() {
+  public void testEscapeControlCharacters_whenN_thenReturnNF() {
     // Arrange, Act and Assert
     assertEquals("\\\\n\\f", StringUtil.escapeControlCharacters("\\\\n\f"));
   }
@@ -3564,11 +3153,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\n\\f\\\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnNFN() {
+  public void testEscapeControlCharacters_whenN_thenReturnNFN() {
     // Arrange, Act and Assert
     assertEquals("\\n\\f\\\\n", StringUtil.escapeControlCharacters("\n\f\\\\n"));
   }
@@ -3584,11 +3171,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\n\\\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnNN() {
+  public void testEscapeControlCharacters_whenN_thenReturnNN() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\n", StringUtil.escapeControlCharacters("\n\\\\n"));
   }
@@ -3604,11 +3189,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\\\n\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnNN2() {
+  public void testEscapeControlCharacters_whenN_thenReturnNN2() {
     // Arrange, Act and Assert
     assertEquals("\\\\n\\n", StringUtil.escapeControlCharacters("\\\\n\n"));
   }
@@ -3624,11 +3207,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n]'; then return '\\n\\\\n]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnNN3() {
+  public void testEscapeControlCharacters_whenN_thenReturnNN3() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\n]", StringUtil.escapeControlCharacters("\n\\\\n]"));
   }
@@ -3644,11 +3225,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']\\\\n'; then return '\\n]\\\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnNN4() {
+  public void testEscapeControlCharacters_whenN_thenReturnNN4() {
     // Arrange, Act and Assert
     assertEquals("\\n]\\\\n", StringUtil.escapeControlCharacters("\n]\\\\n"));
   }
@@ -3664,11 +3243,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\n\\\\n\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnNNB() {
+  public void testEscapeControlCharacters_whenN_thenReturnNNB() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\n\\b", StringUtil.escapeControlCharacters("\n\\\\n\b"));
   }
@@ -3684,11 +3261,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\n\\\\n\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnNNF() {
+  public void testEscapeControlCharacters_whenN_thenReturnNNF() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\n\\f", StringUtil.escapeControlCharacters("\n\\\\n\f"));
   }
@@ -3704,11 +3279,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\n\\n\\\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnNNN() {
+  public void testEscapeControlCharacters_whenN_thenReturnNNN() {
     // Arrange, Act and Assert
     assertEquals("\\n\\n\\\\n", StringUtil.escapeControlCharacters("\n\n\\\\n"));
   }
@@ -3724,11 +3297,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\n\\\\n\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnNNN2() {
+  public void testEscapeControlCharacters_whenN_thenReturnNNN2() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\n\\n", StringUtil.escapeControlCharacters("\n\\\\n\n"));
   }
@@ -3744,11 +3315,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\n\\\\n\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnNNR() {
+  public void testEscapeControlCharacters_whenN_thenReturnNNR() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\n\\r", StringUtil.escapeControlCharacters("\n\\\\n\r"));
   }
@@ -3764,11 +3333,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\n\\\\n\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnNNT() {
+  public void testEscapeControlCharacters_whenN_thenReturnNNT() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\n\\t", StringUtil.escapeControlCharacters("\n\\\\n\t"));
   }
@@ -3784,11 +3351,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\\\n\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnNR() {
+  public void testEscapeControlCharacters_whenN_thenReturnNR() {
     // Arrange, Act and Assert
     assertEquals("\\\\n\\r", StringUtil.escapeControlCharacters("\\\\n\r"));
   }
@@ -3804,11 +3369,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\n\\r\\\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnNRN() {
+  public void testEscapeControlCharacters_whenN_thenReturnNRN() {
     // Arrange, Act and Assert
     assertEquals("\\n\\r\\\\n", StringUtil.escapeControlCharacters("\n\r\\\\n"));
   }
@@ -3824,11 +3387,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\\\n\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnNT() {
+  public void testEscapeControlCharacters_whenN_thenReturnNT() {
     // Arrange, Act and Assert
     assertEquals("\\\\n\\t", StringUtil.escapeControlCharacters("\\\\n\t"));
   }
@@ -3844,11 +3405,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\n\\t\\\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnNTN() {
+  public void testEscapeControlCharacters_whenN_thenReturnNTN() {
     // Arrange, Act and Assert
     assertEquals("\\n\\t\\\\n", StringUtil.escapeControlCharacters("\n\t\\\\n"));
   }
@@ -3864,11 +3423,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\r\\\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnRN() {
+  public void testEscapeControlCharacters_whenN_thenReturnRN() {
     // Arrange, Act and Assert
     assertEquals("\\r\\\\n", StringUtil.escapeControlCharacters("\r\\\\n"));
   }
@@ -3884,11 +3441,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\n'; then return '\\t\\\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenN_thenReturnTN() {
+  public void testEscapeControlCharacters_whenN_thenReturnTN() {
     // Arrange, Act and Assert
     assertEquals("\\t\\\\n", StringUtil.escapeControlCharacters("\t\\\\n"));
   }
@@ -3904,11 +3459,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r42'; then return '\\n\\\\r42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR42_thenReturnNR42() {
+  public void testEscapeControlCharacters_whenR42_thenReturnNR42() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\r42", StringUtil.escapeControlCharacters("\n\\\\r42"));
   }
@@ -3924,12 +3477,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when '\\\\r\\\\b'; then return '\\n\\\\r\\\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRB_thenReturnNRB() {
+  public void testEscapeControlCharacters_whenRB_thenReturnNRB() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\r\\\\b", StringUtil.escapeControlCharacters("\n\\\\r\\\\b"));
   }
@@ -3945,12 +3495,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when '\\\\r\\\\f'; then return '\\n\\\\r\\\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRF_thenReturnNRF() {
+  public void testEscapeControlCharacters_whenRF_thenReturnNRF() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\r\\\\f", StringUtil.escapeControlCharacters("\n\\\\r\\\\f"));
   }
@@ -3966,12 +3513,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when '\\\\rInput'; then return '\\n\\\\rInput'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRInput_thenReturnNRInput() {
+  public void testEscapeControlCharacters_whenRInput_thenReturnNRInput() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\rInput", StringUtil.escapeControlCharacters("\n\\\\rInput"));
   }
@@ -3987,12 +3531,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when '\\\\r\\\\n'; then return '\\n\\\\r\\\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRN_thenReturnNRN() {
+  public void testEscapeControlCharacters_whenRN_thenReturnNRN() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\r\\\\n", StringUtil.escapeControlCharacters("\n\\\\r\\\\n"));
   }
@@ -4008,12 +3549,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when '\\\\r\\\\r'; then return '\\n\\\\r\\\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRR_thenReturnNRR() {
+  public void testEscapeControlCharacters_whenRR_thenReturnNRR() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\r\\\\r", StringUtil.escapeControlCharacters("\n\\\\r\\\\r"));
   }
@@ -4029,12 +3567,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when '\\\\r\\\\t'; then return '\\n\\\\r\\\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRT_thenReturnNRT() {
+  public void testEscapeControlCharacters_whenRT_thenReturnNRT() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\r\\\\t", StringUtil.escapeControlCharacters("\n\\\\r\\\\t"));
   }
@@ -4050,11 +3585,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\b\\\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnBR() {
+  public void testEscapeControlCharacters_whenR_thenReturnBR() {
     // Arrange, Act and Assert
     assertEquals("\\b\\\\r", StringUtil.escapeControlCharacters("\b\\\\r"));
   }
@@ -4070,11 +3603,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\f\\\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnFR() {
+  public void testEscapeControlCharacters_whenR_thenReturnFR() {
     // Arrange, Act and Assert
     assertEquals("\\f\\\\r", StringUtil.escapeControlCharacters("\f\\\\r"));
   }
@@ -4090,11 +3621,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\n\\b\\\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnNBR() {
+  public void testEscapeControlCharacters_whenR_thenReturnNBR() {
     // Arrange, Act and Assert
     assertEquals("\\n\\b\\\\r", StringUtil.escapeControlCharacters("\n\b\\\\r"));
   }
@@ -4110,11 +3639,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\n\\f\\\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnNFR() {
+  public void testEscapeControlCharacters_whenR_thenReturnNFR() {
     // Arrange, Act and Assert
     assertEquals("\\n\\f\\\\r", StringUtil.escapeControlCharacters("\n\f\\\\r"));
   }
@@ -4130,11 +3657,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\n\\n\\\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnNNR() {
+  public void testEscapeControlCharacters_whenR_thenReturnNNR() {
     // Arrange, Act and Assert
     assertEquals("\\n\\n\\\\r", StringUtil.escapeControlCharacters("\n\n\\\\r"));
   }
@@ -4150,11 +3675,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\n\\\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnNR() {
+  public void testEscapeControlCharacters_whenR_thenReturnNR() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\r", StringUtil.escapeControlCharacters("\n\\\\r"));
   }
@@ -4170,11 +3693,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r]'; then return '\\n\\\\r]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnNR2() {
+  public void testEscapeControlCharacters_whenR_thenReturnNR2() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\r]", StringUtil.escapeControlCharacters("\n\\\\r]"));
   }
@@ -4190,11 +3711,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']\\\\r'; then return '\\n]\\\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnNR3() {
+  public void testEscapeControlCharacters_whenR_thenReturnNR3() {
     // Arrange, Act and Assert
     assertEquals("\\n]\\\\r", StringUtil.escapeControlCharacters("\n]\\\\r"));
   }
@@ -4210,11 +3729,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\n\\\\r\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnNRB() {
+  public void testEscapeControlCharacters_whenR_thenReturnNRB() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\r\\b", StringUtil.escapeControlCharacters("\n\\\\r\b"));
   }
@@ -4230,11 +3747,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\n\\\\r\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnNRF() {
+  public void testEscapeControlCharacters_whenR_thenReturnNRF() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\r\\f", StringUtil.escapeControlCharacters("\n\\\\r\f"));
   }
@@ -4250,11 +3765,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\n\\\\r\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnNRN() {
+  public void testEscapeControlCharacters_whenR_thenReturnNRN() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\r\\n", StringUtil.escapeControlCharacters("\n\\\\r\n"));
   }
@@ -4270,11 +3783,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\n\\r\\\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnNRR() {
+  public void testEscapeControlCharacters_whenR_thenReturnNRR() {
     // Arrange, Act and Assert
     assertEquals("\\n\\r\\\\r", StringUtil.escapeControlCharacters("\n\r\\\\r"));
   }
@@ -4290,11 +3801,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\n\\\\r\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnNRR2() {
+  public void testEscapeControlCharacters_whenR_thenReturnNRR2() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\r\\r", StringUtil.escapeControlCharacters("\n\\\\r\r"));
   }
@@ -4310,11 +3819,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\n\\\\r\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnNRT() {
+  public void testEscapeControlCharacters_whenR_thenReturnNRT() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\r\\t", StringUtil.escapeControlCharacters("\n\\\\r\t"));
   }
@@ -4330,11 +3837,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\n\\t\\\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnNTR() {
+  public void testEscapeControlCharacters_whenR_thenReturnNTR() {
     // Arrange, Act and Assert
     assertEquals("\\n\\t\\\\r", StringUtil.escapeControlCharacters("\n\t\\\\r"));
   }
@@ -4350,11 +3855,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\\\r\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnRB() {
+  public void testEscapeControlCharacters_whenR_thenReturnRB() {
     // Arrange, Act and Assert
     assertEquals("\\\\r\\b", StringUtil.escapeControlCharacters("\\\\r\b"));
   }
@@ -4370,11 +3873,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\\\r\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnRF() {
+  public void testEscapeControlCharacters_whenR_thenReturnRF() {
     // Arrange, Act and Assert
     assertEquals("\\\\r\\f", StringUtil.escapeControlCharacters("\\\\r\f"));
   }
@@ -4390,11 +3891,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\\\r\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnRN() {
+  public void testEscapeControlCharacters_whenR_thenReturnRN() {
     // Arrange, Act and Assert
     assertEquals("\\\\r\\n", StringUtil.escapeControlCharacters("\\\\r\n"));
   }
@@ -4410,11 +3909,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\r\\\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnRR() {
+  public void testEscapeControlCharacters_whenR_thenReturnRR() {
     // Arrange, Act and Assert
     assertEquals("\\r\\\\r", StringUtil.escapeControlCharacters("\r\\\\r"));
   }
@@ -4430,11 +3927,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\\\r\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnRR2() {
+  public void testEscapeControlCharacters_whenR_thenReturnRR2() {
     // Arrange, Act and Assert
     assertEquals("\\\\r\\r", StringUtil.escapeControlCharacters("\\\\r\r"));
   }
@@ -4450,11 +3945,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\\\r\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnRT() {
+  public void testEscapeControlCharacters_whenR_thenReturnRT() {
     // Arrange, Act and Assert
     assertEquals("\\\\r\\t", StringUtil.escapeControlCharacters("\\\\r\t"));
   }
@@ -4470,11 +3963,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\r'; then return '\\t\\\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenR_thenReturnTR() {
+  public void testEscapeControlCharacters_whenR_thenReturnTR() {
     // Arrange, Act and Assert
     assertEquals("\\t\\\\r", StringUtil.escapeControlCharacters("\t\\\\r"));
   }
@@ -4490,11 +3981,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']]'; then return '\\n]]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracketRightSquareBracket_thenReturnN() {
+  public void testEscapeControlCharacters_whenRightSquareBracketRightSquareBracket_thenReturnN() {
     // Arrange, Act and Assert
     assertEquals("\\n]]", StringUtil.escapeControlCharacters("\n]]"));
   }
@@ -4510,11 +3999,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return '\\b]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnB() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnB() {
     // Arrange, Act and Assert
     assertEquals("\\b]", StringUtil.escapeControlCharacters("\b]"));
   }
@@ -4530,11 +4017,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return ']\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnB2() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnB2() {
     // Arrange, Act and Assert
     assertEquals("]\\b", StringUtil.escapeControlCharacters("]\b"));
   }
@@ -4550,11 +4035,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return '\\f]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnF() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnF() {
     // Arrange, Act and Assert
     assertEquals("\\f]", StringUtil.escapeControlCharacters("\f]"));
   }
@@ -4570,11 +4053,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return ']\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnF2() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnF2() {
     // Arrange, Act and Assert
     assertEquals("]\\f", StringUtil.escapeControlCharacters("]\f"));
   }
@@ -4590,11 +4071,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return '\\n]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnN() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnN() {
     // Arrange, Act and Assert
     assertEquals("\\n]", StringUtil.escapeControlCharacters("\n]"));
   }
@@ -4610,11 +4089,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return ']\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnN2() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnN2() {
     // Arrange, Act and Assert
     assertEquals("]\\n", StringUtil.escapeControlCharacters("]\n"));
   }
@@ -4630,11 +4107,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return '\\n\\b]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNB() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNB() {
     // Arrange, Act and Assert
     assertEquals("\\n\\b]", StringUtil.escapeControlCharacters("\n\b]"));
   }
@@ -4650,11 +4125,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return '\\n]\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNB2() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNB2() {
     // Arrange, Act and Assert
     assertEquals("\\n]\\b", StringUtil.escapeControlCharacters("\n]\b"));
   }
@@ -4670,11 +4143,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return '\\n\\f]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNF() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNF() {
     // Arrange, Act and Assert
     assertEquals("\\n\\f]", StringUtil.escapeControlCharacters("\n\f]"));
   }
@@ -4690,11 +4161,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return '\\n]\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNF2() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNF2() {
     // Arrange, Act and Assert
     assertEquals("\\n]\\f", StringUtil.escapeControlCharacters("\n]\f"));
   }
@@ -4710,11 +4179,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return '\\n\\n]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNN() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNN() {
     // Arrange, Act and Assert
     assertEquals("\\n\\n]", StringUtil.escapeControlCharacters("\n\n]"));
   }
@@ -4730,11 +4197,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return '\\n]\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNN2() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNN2() {
     // Arrange, Act and Assert
     assertEquals("\\n]\\n", StringUtil.escapeControlCharacters("\n]\n"));
   }
@@ -4750,11 +4215,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return '\\n\\r]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNR() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNR() {
     // Arrange, Act and Assert
     assertEquals("\\n\\r]", StringUtil.escapeControlCharacters("\n\r]"));
   }
@@ -4770,11 +4233,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return '\\n]\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNR2() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNR2() {
     // Arrange, Act and Assert
     assertEquals("\\n]\\r", StringUtil.escapeControlCharacters("\n]\r"));
   }
@@ -4790,11 +4251,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return '\\n\\t]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNT() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNT() {
     // Arrange, Act and Assert
     assertEquals("\\n\\t]", StringUtil.escapeControlCharacters("\n\t]"));
   }
@@ -4810,11 +4269,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return '\\n]\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNT2() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnNT2() {
     // Arrange, Act and Assert
     assertEquals("\\n]\\t", StringUtil.escapeControlCharacters("\n]\t"));
   }
@@ -4830,11 +4287,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return '\\r]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnR() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnR() {
     // Arrange, Act and Assert
     assertEquals("\\r]", StringUtil.escapeControlCharacters("\r]"));
   }
@@ -4850,11 +4305,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return ']\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnR2() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnR2() {
     // Arrange, Act and Assert
     assertEquals("]\\r", StringUtil.escapeControlCharacters("]\r"));
   }
@@ -4870,11 +4323,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return '\\t]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnT() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnT() {
     // Arrange, Act and Assert
     assertEquals("\\t]", StringUtil.escapeControlCharacters("\t]"));
   }
@@ -4890,11 +4341,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']'; then return ']\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenRightSquareBracket_thenReturnT2() {
+  public void testEscapeControlCharacters_whenRightSquareBracket_thenReturnT2() {
     // Arrange, Act and Assert
     assertEquals("]\\t", StringUtil.escapeControlCharacters("]\t"));
   }
@@ -4910,11 +4359,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\t'; then return '\\b\\\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenT_thenReturnBT() {
+  public void testEscapeControlCharacters_whenT_thenReturnBT() {
     // Arrange, Act and Assert
     assertEquals("\\b\\\\t", StringUtil.escapeControlCharacters("\b\\\\t"));
   }
@@ -4930,11 +4377,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\t'; then return '\\f\\\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenT_thenReturnFT() {
+  public void testEscapeControlCharacters_whenT_thenReturnFT() {
     // Arrange, Act and Assert
     assertEquals("\\f\\\\t", StringUtil.escapeControlCharacters("\f\\\\t"));
   }
@@ -4950,11 +4395,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\t'; then return '\\n\\b\\\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenT_thenReturnNBT() {
+  public void testEscapeControlCharacters_whenT_thenReturnNBT() {
     // Arrange, Act and Assert
     assertEquals("\\n\\b\\\\t", StringUtil.escapeControlCharacters("\n\b\\\\t"));
   }
@@ -4970,11 +4413,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\t'; then return '\\n\\f\\\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenT_thenReturnNFT() {
+  public void testEscapeControlCharacters_whenT_thenReturnNFT() {
     // Arrange, Act and Assert
     assertEquals("\\n\\f\\\\t", StringUtil.escapeControlCharacters("\n\f\\\\t"));
   }
@@ -4990,11 +4431,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\t'; then return '\\n\\n\\\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenT_thenReturnNNT() {
+  public void testEscapeControlCharacters_whenT_thenReturnNNT() {
     // Arrange, Act and Assert
     assertEquals("\\n\\n\\\\t", StringUtil.escapeControlCharacters("\n\n\\\\t"));
   }
@@ -5010,11 +4449,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\t'; then return '\\n\\r\\\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenT_thenReturnNRT() {
+  public void testEscapeControlCharacters_whenT_thenReturnNRT() {
     // Arrange, Act and Assert
     assertEquals("\\n\\r\\\\t", StringUtil.escapeControlCharacters("\n\r\\\\t"));
   }
@@ -5030,11 +4467,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\t'; then return '\\n\\\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenT_thenReturnNT() {
+  public void testEscapeControlCharacters_whenT_thenReturnNT() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\t", StringUtil.escapeControlCharacters("\n\\\\t"));
   }
@@ -5050,11 +4485,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when ']\\\\t'; then return '\\n]\\\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenT_thenReturnNT2() {
+  public void testEscapeControlCharacters_whenT_thenReturnNT2() {
     // Arrange, Act and Assert
     assertEquals("\\n]\\\\t", StringUtil.escapeControlCharacters("\n]\\\\t"));
   }
@@ -5070,11 +4503,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\t'; then return '\\n\\\\t\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenT_thenReturnNTN() {
+  public void testEscapeControlCharacters_whenT_thenReturnNTN() {
     // Arrange, Act and Assert
     assertEquals("\\n\\\\t\\n", StringUtil.escapeControlCharacters("\n\\\\t\n"));
   }
@@ -5090,11 +4521,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\t'; then return '\\n\\t\\\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenT_thenReturnNTT() {
+  public void testEscapeControlCharacters_whenT_thenReturnNTT() {
     // Arrange, Act and Assert
     assertEquals("\\n\\t\\\\t", StringUtil.escapeControlCharacters("\n\t\\\\t"));
   }
@@ -5110,11 +4539,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\t'; then return '\\r\\\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenT_thenReturnRT() {
+  public void testEscapeControlCharacters_whenT_thenReturnRT() {
     // Arrange, Act and Assert
     assertEquals("\\r\\\\t", StringUtil.escapeControlCharacters("\r\\\\t"));
   }
@@ -5130,11 +4557,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\t'; then return '\\\\t\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenT_thenReturnTB() {
+  public void testEscapeControlCharacters_whenT_thenReturnTB() {
     // Arrange, Act and Assert
     assertEquals("\\\\t\\b", StringUtil.escapeControlCharacters("\\\\t\b"));
   }
@@ -5150,11 +4575,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\t'; then return '\\\\t\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenT_thenReturnTF() {
+  public void testEscapeControlCharacters_whenT_thenReturnTF() {
     // Arrange, Act and Assert
     assertEquals("\\\\t\\f", StringUtil.escapeControlCharacters("\\\\t\f"));
   }
@@ -5170,11 +4593,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\t'; then return '\\\\t\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenT_thenReturnTN() {
+  public void testEscapeControlCharacters_whenT_thenReturnTN() {
     // Arrange, Act and Assert
     assertEquals("\\\\t\\n", StringUtil.escapeControlCharacters("\\\\t\n"));
   }
@@ -5190,11 +4611,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\t'; then return '\\\\t\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenT_thenReturnTR() {
+  public void testEscapeControlCharacters_whenT_thenReturnTR() {
     // Arrange, Act and Assert
     assertEquals("\\\\t\\r", StringUtil.escapeControlCharacters("\\\\t\r"));
   }
@@ -5210,11 +4629,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\t'; then return '\\t\\\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenT_thenReturnTT() {
+  public void testEscapeControlCharacters_whenT_thenReturnTT() {
     // Arrange, Act and Assert
     assertEquals("\\t\\\\t", StringUtil.escapeControlCharacters("\t\\\\t"));
   }
@@ -5230,11 +4647,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when '\\\\t'; then return '\\\\t\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenT_thenReturnTT2() {
+  public void testEscapeControlCharacters_whenT_thenReturnTT2() {
     // Arrange, Act and Assert
     assertEquals("\\\\t\\t", StringUtil.escapeControlCharacters("\\\\t\t"));
   }
@@ -5250,11 +4665,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when tab backspace; then return '\\t\\b'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenTabBackspace_thenReturnTB() {
+  public void testEscapeControlCharacters_whenTabBackspace_thenReturnTB() {
     // Arrange, Act and Assert
     assertEquals("\\t\\b", StringUtil.escapeControlCharacters("\t\b"));
   }
@@ -5270,11 +4683,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when tab cr; then return '\\t\\r'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenTabCr_thenReturnTR() {
+  public void testEscapeControlCharacters_whenTabCr_thenReturnTR() {
     // Arrange, Act and Assert
     assertEquals("\\t\\r", StringUtil.escapeControlCharacters("\t\r"));
   }
@@ -5290,12 +4701,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName(
-      "Test escapeControlCharacters(String); when tab form feed (ff); then return '\\t\\f'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenTabFormFeed_thenReturnTF() {
+  public void testEscapeControlCharacters_whenTabFormFeed_thenReturnTF() {
     // Arrange, Act and Assert
     assertEquals("\\t\\f", StringUtil.escapeControlCharacters("\t\f"));
   }
@@ -5311,11 +4719,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when tab lf; then return '\\t\\n'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenTabLf_thenReturnTN() {
+  public void testEscapeControlCharacters_whenTabLf_thenReturnTN() {
     // Arrange, Act and Assert
     assertEquals("\\t\\n", StringUtil.escapeControlCharacters("\t\n"));
   }
@@ -5331,11 +4737,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when tab tab; then return '\\t\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenTabTab_thenReturnTT() {
+  public void testEscapeControlCharacters_whenTabTab_thenReturnTT() {
     // Arrange, Act and Assert
     assertEquals("\\t\\t", StringUtil.escapeControlCharacters("\t\t"));
   }
@@ -5351,11 +4755,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#escapeControlCharacters(String)}
    */
   @Test
-  @DisplayName("Test escapeControlCharacters(String); when tab; then return '\\t'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.escapeControlCharacters(String)"})
-  void testEscapeControlCharacters_whenTab_thenReturnT() {
+  public void testEscapeControlCharacters_whenTab_thenReturnT() {
     // Arrange, Act and Assert
     assertEquals("\\t", StringUtil.escapeControlCharacters("\t"));
   }
@@ -5372,12 +4774,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#listToString(List)}
    */
   @Test
-  @DisplayName(
-      "Test listToString(List); given ','; when ArrayList() add ','; then return '[\", \", \"[%s]\"]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.listToString(List)"})
-  void testListToString_givenComma_whenArrayListAddComma_thenReturnS() {
+  public void testListToString_givenComma_whenArrayListAddComma_thenReturnS() {
     // Arrange
     ArrayList<String> stringList = new ArrayList<>();
     stringList.add(", ");
@@ -5399,12 +4798,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#listToString(List)}
    */
   @Test
-  @DisplayName(
-      "Test listToString(List); given '[%s]'; when ArrayList() add '[%s]'; then return '[\"[%s]\"]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.listToString(List)"})
-  void testListToString_givenS_whenArrayListAddS_thenReturnS() {
+  public void testListToString_givenS_whenArrayListAddS_thenReturnS() {
     // Arrange
     ArrayList<String> stringList = new ArrayList<>();
     stringList.add("[%s]");
@@ -5424,11 +4820,9 @@ class StringUtilDiffblueTest {
    * <p>Method under test: {@link StringUtil#listToString(List)}
    */
   @Test
-  @DisplayName("Test listToString(List); when ArrayList(); then return '[]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String StringUtil.listToString(List)"})
-  void testListToString_whenArrayList_thenReturnLeftSquareBracketRightSquareBracket() {
+  public void testListToString_whenArrayList_thenReturnLeftSquareBracketRightSquareBracket() {
     // Arrange, Act and Assert
     assertEquals("[]", StringUtil.listToString(new ArrayList<>()));
   }

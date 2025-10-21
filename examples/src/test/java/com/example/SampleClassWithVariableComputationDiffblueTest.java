@@ -2,8 +2,7 @@ package com.example;
 
 import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ContributionFromDiffblue;
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -20,8 +19,7 @@ public class SampleClassWithVariableComputationDiffblueTest {
    * <p>Method under test: {@link SampleClassWithVariableComputation#getAnswer(int, int)}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SampleClassWithVariableComputation.getAnswer(int, int)"})
   public void testGetAnswer_whenOne_thenReturnFive() {
     // Arrange, Act and Assert
@@ -39,8 +37,7 @@ public class SampleClassWithVariableComputationDiffblueTest {
    * <p>Method under test: {@link SampleClassWithVariableComputation#getAnswer(int, int)}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SampleClassWithVariableComputation.getAnswer(int, int)"})
   public void testGetAnswer_whenThree_thenReturnNine() {
     // Arrange, Act and Assert
@@ -58,8 +55,7 @@ public class SampleClassWithVariableComputationDiffblueTest {
    * <p>Method under test: {@link SampleClassWithVariableComputation#getAnswer(int, int)}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SampleClassWithVariableComputation.getAnswer(int, int)"})
   public void testGetAnswer_whenTwo_thenReturnSeven() {
     // Arrange, Act and Assert
@@ -77,8 +73,7 @@ public class SampleClassWithVariableComputationDiffblueTest {
    * <p>Method under test: {@link SampleClassWithVariableComputation#getAnswer(int, int)}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SampleClassWithVariableComputation.getAnswer(int, int)"})
   public void testGetAnswer_whenZero_thenReturnThree() {
     // Arrange, Act and Assert

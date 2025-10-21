@@ -1,31 +1,28 @@
 package proguard.dexfile.ir.expr;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.LabelAndLocalMapper;
 import proguard.dexfile.ir.expr.Value.VT;
 
-class PhiExprDiffblueTest {
+public class PhiExprDiffblueTest {
   /**
    * Test {@link PhiExpr#PhiExpr(Value[])}.
    *
    * <p>Method under test: {@link PhiExpr#PhiExpr(Value[])}
    */
   @Test
-  @DisplayName("Test new PhiExpr(Value[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void PhiExpr.<init>(Value[])"})
-  void testNewPhiExpr() {
+  public void testNewPhiExpr() {
     // Arrange
     Value[] ops = new Value[] {new ArrayExpr()};
 
@@ -55,12 +52,9 @@ class PhiExprDiffblueTest {
    * <p>Method under test: {@link PhiExpr#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; given nNull; then return toString0 is 'φ(null)'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value PhiExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_givenNNull_thenReturnToString0IsNull() {
+  public void testCloneWithLabelAndLocalMapper_givenNNull_thenReturnToString0IsNull() {
     // Arrange
     Constant nNullResult = Exprs.nNull();
     PhiExpr nPhiResult = Exprs.nPhi(nNullResult);
@@ -90,16 +84,12 @@ class PhiExprDiffblueTest {
    * <p>Method under test: {@link PhiExpr#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then first element return CastExpr")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value PhiExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenFirstElementReturnCastExpr() {
+  public void testCloneWithLabelAndLocalMapper_thenFirstElementReturnCastExpr() {
     // Arrange
-    CastExpr nCastResult =
-        Exprs.nCast(Exprs.nNull(), "jane.doe@example.org", "alice.liddell@example.org");
-    PhiExpr nPhiResult = Exprs.nPhi(nCastResult);
+    PhiExpr nPhiResult =
+        Exprs.nPhi(Exprs.nCast(Exprs.nNull(), "jane.doe@example.org", "alice.liddell@example.org"));
 
     // Act
     Value actualCloneResult = nPhiResult.clone(new LabelAndLocalMapper());
@@ -127,16 +117,12 @@ class PhiExprDiffblueTest {
    * <p>Method under test: {@link PhiExpr#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then first element return FilledArrayExpr")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value PhiExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenFirstElementReturnFilledArrayExpr() {
+  public void testCloneWithLabelAndLocalMapper_thenFirstElementReturnFilledArrayExpr() {
     // Arrange
-    FilledArrayExpr nFilledArrayResult =
-        Exprs.nFilledArray("Element Type", new Value[] {Exprs.nNull()});
-    PhiExpr nPhiResult = Exprs.nPhi(nFilledArrayResult);
+    PhiExpr nPhiResult =
+        Exprs.nPhi(Exprs.nFilledArray("Element Type", new Value[] {Exprs.nNull()}));
 
     // Act
     Value actualCloneResult = nPhiResult.clone(new LabelAndLocalMapper());
@@ -166,11 +152,9 @@ class PhiExprDiffblueTest {
    * <p>Method under test: {@link PhiExpr#clone()}
    */
   @Test
-  @DisplayName("Test clone(); given nPhi; then return PhiExpr")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value PhiExpr.clone()"})
-  void testClone_givenNPhi_thenReturnPhiExpr() {
+  public void testClone_givenNPhi_thenReturnPhiExpr() {
     // Arrange and Act
     Value actualCloneResult = Exprs.nPhi().clone();
 
@@ -198,19 +182,15 @@ class PhiExprDiffblueTest {
    * <p>Method under test: {@link PhiExpr#toString0()}
    */
   @Test
-  @DisplayName(
-      "Test toString0(); given ArrayExpr() Op1 is ArrayExpr(); then return 'φ(null[null][null])'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String PhiExpr.toString0()"})
-  void testToString0_givenArrayExprOp1IsArrayExpr_thenReturnNullNullNull() {
+  public void testToString0_givenArrayExprOp1IsArrayExpr_thenReturnNullNullNull() {
     // Arrange
     ArrayExpr arrayExpr = new ArrayExpr();
     arrayExpr.setOp1(new ArrayExpr());
-    PhiExpr nPhiResult = Exprs.nPhi(arrayExpr);
 
     // Act and Assert
-    assertEquals("φ(null[null][null])", nPhiResult.toString0());
+    assertEquals("φ(null[null][null])", Exprs.nPhi(arrayExpr).toString0());
   }
 
   /**
@@ -224,16 +204,11 @@ class PhiExprDiffblueTest {
    * <p>Method under test: {@link PhiExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); given ArrayExpr(); then return 'φ(null[null])'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String PhiExpr.toString0()"})
-  void testToString0_givenArrayExpr_thenReturnNullNull() {
-    // Arrange
-    PhiExpr nPhiResult = Exprs.nPhi(new ArrayExpr());
-
-    // Act and Assert
-    assertEquals("φ(null[null])", nPhiResult.toString0());
+  public void testToString0_givenArrayExpr_thenReturnNullNull() {
+    // Arrange, Act and Assert
+    assertEquals("φ(null[null])", Exprs.nPhi(new ArrayExpr()).toString0());
   }
 
   /**
@@ -247,12 +222,9 @@ class PhiExprDiffblueTest {
    * <p>Method under test: {@link PhiExpr#toString0()}
    */
   @Test
-  @DisplayName(
-      "Test toString0(); given nPhi ArrayExpr() and ArrayExpr(); then return 'φ(null[null], null[null])'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String PhiExpr.toString0()"})
-  void testToString0_givenNPhiArrayExprAndArrayExpr_thenReturnNullNullNullNull() {
+  public void testToString0_givenNPhiArrayExprAndArrayExpr_thenReturnNullNullNullNull() {
     // Arrange
     ArrayExpr arrayExpr = new ArrayExpr();
 
@@ -270,16 +242,15 @@ class PhiExprDiffblueTest {
    * <p>Method under test: {@link PhiExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); then return 'φ(null[null][null[null]])'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String PhiExpr.toString0()"})
-  void testToString0_thenReturnNullNullNullNull() {
+  public void testToString0_thenReturnNullNullNullNull() {
     // Arrange
     ArrayExpr base = new ArrayExpr();
-    ArrayExpr nArrayResult = Exprs.nArray(base, new ArrayExpr(), "φ(");
 
     // Act and Assert
-    assertEquals("φ(null[null][null[null]])", Exprs.nPhi(nArrayResult).toString0());
+    assertEquals(
+        "φ(null[null][null[null]])",
+        Exprs.nPhi(Exprs.nArray(base, new ArrayExpr(), "φ(")).toString0());
   }
 }

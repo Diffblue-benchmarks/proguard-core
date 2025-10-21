@@ -1,18 +1,17 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class UnknownValueDiffblueTest {
+public class UnknownValueDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -25,15 +24,13 @@ class UnknownValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void UnknownValue.<init>()",
     "boolean UnknownValue.isCategory2()",
     "String UnknownValue.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     UnknownValue actualUnknownValue = new UnknownValue();
     String actualToStringResult = actualUnknownValue.toString();
@@ -49,20 +46,14 @@ class UnknownValueDiffblueTest {
    * <p>Method under test: {@link UnknownValue#generalize(Value)}
    */
   @Test
-  @DisplayName("Test generalize(Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value UnknownValue.generalize(Value)"})
-  void testGeneralize() {
+  public void testGeneralize() {
     // Arrange
     UnknownValue unknownValue = BasicValueFactory.UNKNOWN_VALUE;
 
-    // Act
-    Value actualGeneralizeResult =
-        unknownValue.generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
-
-    // Assert
-    assertSame(unknownValue, actualGeneralizeResult);
+    // Act and Assert
+    assertSame(unknownValue, unknownValue.generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
   }
 
   /**
@@ -71,11 +62,9 @@ class UnknownValueDiffblueTest {
    * <p>Method under test: {@link UnknownValue#computationalType()}
    */
   @Test
-  @DisplayName("Test computationalType()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int UnknownValue.computationalType()"})
-  void testComputationalType() {
+  public void testComputationalType() {
     // Arrange, Act and Assert
     assertEquals(Value.NEVER, BasicValueFactory.UNKNOWN_VALUE.computationalType());
   }
@@ -86,11 +75,9 @@ class UnknownValueDiffblueTest {
    * <p>Method under test: {@link UnknownValue#internalType()}
    */
   @Test
-  @DisplayName("Test internalType()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String UnknownValue.internalType()"})
-  void testInternalType() {
+  public void testInternalType() {
     // Arrange, Act and Assert
     assertNull(BasicValueFactory.UNKNOWN_VALUE.internalType());
   }
@@ -111,18 +98,17 @@ class UnknownValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean UnknownValue.equals(Object)", "int UnknownValue.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     UnknownValue unknownValue = BasicValueFactory.UNKNOWN_VALUE;
     UnknownValue unknownValue2 = BasicValueFactory.UNKNOWN_VALUE;
 
     // Act and Assert
     assertEquals(unknownValue, unknownValue2);
-    assertEquals(unknownValue.hashCode(), unknownValue2.hashCode());
+    int expectedHashCodeResult = unknownValue.hashCode();
+    assertEquals(expectedHashCodeResult, unknownValue2.hashCode());
   }
 
   /**
@@ -141,11 +127,9 @@ class UnknownValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean UnknownValue.equals(Object)", "int UnknownValue.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     UnknownValue unknownValue = BasicValueFactory.UNKNOWN_VALUE;
 
@@ -166,11 +150,9 @@ class UnknownValueDiffblueTest {
    * <p>Method under test: {@link UnknownValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean UnknownValue.equals(Object)", "int UnknownValue.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(BasicValueFactory.UNKNOWN_VALUE, 3);
   }
@@ -186,11 +168,9 @@ class UnknownValueDiffblueTest {
    * <p>Method under test: {@link UnknownValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean UnknownValue.equals(Object)", "int UnknownValue.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(BasicValueFactory.UNKNOWN_VALUE, null);
   }
@@ -206,11 +186,9 @@ class UnknownValueDiffblueTest {
    * <p>Method under test: {@link UnknownValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean UnknownValue.equals(Object)", "int UnknownValue.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(BasicValueFactory.UNKNOWN_VALUE, "Different type to UnknownValue");
   }

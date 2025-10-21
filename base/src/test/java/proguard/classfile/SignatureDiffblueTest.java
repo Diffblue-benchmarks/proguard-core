@@ -1,53 +1,17 @@
 package proguard.classfile;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class SignatureDiffblueTest {
-  /**
-   * Test {@link Signature#of(Clazz, Member)}.
-   *
-   * <ul>
-   *   <li>Then return {@link ClassSignature}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#of(Clazz, Member)}
-   */
-  @Test
-  @DisplayName("Test of(Clazz, Member); then return ClassSignature")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Signature Signature.of(Clazz, Member)"})
-  void testOf_thenReturnClassSignature() {
-    // Arrange
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-
-    // Act
-    Signature actualOfResult = Signature.of(clazz, null);
-
-    // Assert
-    assertTrue(actualOfResult instanceof ClassSignature);
-    assertEquals("", actualOfResult.getExternalPackageName());
-    assertEquals("", actualOfResult.getPackageName());
-    assertEquals("This Class Name", actualOfResult.getClassName());
-    assertEquals("This Class Name", actualOfResult.getFqn());
-    assertEquals("This Class Name", actualOfResult.getPrettyFqn());
-    assertEquals("This Class Name", ((ClassSignature) actualOfResult).fqn);
-    assertEquals("This Class Name", ((ClassSignature) actualOfResult).prettyFqn);
-    assertEquals(-2060103915, ((ClassSignature) actualOfResult).hashCode);
-    assertFalse(actualOfResult.isIncomplete());
-  }
-
+public class SignatureDiffblueTest {
   /**
    * Test {@link Signature#of(Clazz, Member)}.
    *
@@ -58,17 +22,14 @@ class SignatureDiffblueTest {
    * <p>Method under test: {@link Signature#of(Clazz, Member)}
    */
   @Test
-  @DisplayName("Test of(Clazz, Member); then return FieldSignature")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Signature Signature.of(Clazz, Member)"})
-  void testOf_thenReturnFieldSignature() {
+  public void testOf_thenReturnFieldSignature() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
 
     // Act
-    Signature actualOfResult = Signature.of(clazz, member);
+    Signature actualOfResult = Signature.of(clazz, new LibraryField(1, "Name", "Descriptor"));
 
     // Assert
     assertTrue(actualOfResult instanceof FieldSignature);
@@ -77,6 +38,7 @@ class SignatureDiffblueTest {
     assertEquals("Lnull;Name", ((FieldSignature) actualOfResult).fqn);
     assertEquals("Name", ((FieldSignature) actualOfResult).memberName);
     assertNull(((FieldSignature) actualOfResult).prettyFqn);
+    assertNull(actualOfResult.getReferencedClass());
     assertEquals(1320159907, ((FieldSignature) actualOfResult).hashCode);
     assertTrue(actualOfResult.isIncomplete());
   }
@@ -92,12 +54,9 @@ class SignatureDiffblueTest {
    * <p>Method under test: {@link Signature#of(Clazz, Member)}
    */
   @Test
-  @DisplayName(
-      "Test of(Clazz, Member); when LibraryMethod(); then ReferencedClass return LibraryClass")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Signature Signature.of(Clazz, Member)"})
-  void testOf_whenLibraryMethod_thenReferencedClassReturnLibraryClass() {
+  public void testOf_whenLibraryMethod_thenReferencedClassReturnLibraryClass() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
     LibraryMethod member = new LibraryMethod();
@@ -127,57 +86,21 @@ class SignatureDiffblueTest {
    * Test {@link Signature#computeIfAbsent(Clazz, Member)}.
    *
    * <ul>
-   *   <li>Then return {@link ClassSignature}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#computeIfAbsent(Clazz, Member)}
-   */
-  @Test
-  @DisplayName("Test computeIfAbsent(Clazz, Member); then return ClassSignature")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Signature Signature.computeIfAbsent(Clazz, Member)"})
-  void testComputeIfAbsent_thenReturnClassSignature() {
-    // Arrange
-    LibraryClass clazz = new LibraryClass(1, "This Class Name", "Super Class Name");
-
-    // Act
-    Signature actualComputeIfAbsentResult = Signature.computeIfAbsent(clazz, null);
-
-    // Assert
-    assertTrue(actualComputeIfAbsentResult instanceof ClassSignature);
-    assertEquals("", actualComputeIfAbsentResult.getExternalPackageName());
-    assertEquals("", actualComputeIfAbsentResult.getPackageName());
-    assertEquals("This Class Name", actualComputeIfAbsentResult.getClassName());
-    assertEquals("This Class Name", actualComputeIfAbsentResult.getFqn());
-    assertEquals("This Class Name", actualComputeIfAbsentResult.getPrettyFqn());
-    assertEquals("This Class Name", ((ClassSignature) actualComputeIfAbsentResult).fqn);
-    assertEquals("This Class Name", ((ClassSignature) actualComputeIfAbsentResult).prettyFqn);
-    assertEquals(-2060103915, ((ClassSignature) actualComputeIfAbsentResult).hashCode);
-    assertFalse(actualComputeIfAbsentResult.isIncomplete());
-  }
-
-  /**
-   * Test {@link Signature#computeIfAbsent(Clazz, Member)}.
-   *
-   * <ul>
    *   <li>Then return {@link FieldSignature}.
    * </ul>
    *
    * <p>Method under test: {@link Signature#computeIfAbsent(Clazz, Member)}
    */
   @Test
-  @DisplayName("Test computeIfAbsent(Clazz, Member); then return FieldSignature")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Signature Signature.computeIfAbsent(Clazz, Member)"})
-  void testComputeIfAbsent_thenReturnFieldSignature() {
+  public void testComputeIfAbsent_thenReturnFieldSignature() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
 
     // Act
-    Signature actualComputeIfAbsentResult = Signature.computeIfAbsent(clazz, member);
+    Signature actualComputeIfAbsentResult =
+        Signature.computeIfAbsent(clazz, new LibraryField(1, "Name", "Descriptor"));
 
     // Assert
     assertTrue(actualComputeIfAbsentResult instanceof FieldSignature);
@@ -186,6 +109,7 @@ class SignatureDiffblueTest {
     assertEquals("Lnull;Name", ((FieldSignature) actualComputeIfAbsentResult).fqn);
     assertEquals("Name", ((FieldSignature) actualComputeIfAbsentResult).memberName);
     assertNull(((FieldSignature) actualComputeIfAbsentResult).prettyFqn);
+    assertNull(actualComputeIfAbsentResult.getReferencedClass());
     assertEquals(1320159907, ((FieldSignature) actualComputeIfAbsentResult).hashCode);
     assertTrue(actualComputeIfAbsentResult.isIncomplete());
   }
@@ -201,12 +125,9 @@ class SignatureDiffblueTest {
    * <p>Method under test: {@link Signature#computeIfAbsent(Clazz, Member)}
    */
   @Test
-  @DisplayName(
-      "Test computeIfAbsent(Clazz, Member); when LibraryMethod(); then ReferencedClass return LibraryClass")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Signature Signature.computeIfAbsent(Clazz, Member)"})
-  void testComputeIfAbsent_whenLibraryMethod_thenReferencedClassReturnLibraryClass() {
+  public void testComputeIfAbsent_whenLibraryMethod_thenReferencedClassReturnLibraryClass() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
     LibraryMethod member = new LibraryMethod();
@@ -238,78 +159,11 @@ class SignatureDiffblueTest {
    * <p>Method under test: {@link Signature#getFqn()}
    */
   @Test
-  @DisplayName("Test getFqn()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.getFqn()"})
-  void testGetFqn() {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"java.lang.String Signature.getFqn()"})
+  public void testGetFqn() {
     // Arrange, Act and Assert
-    assertEquals(
-        "Ljava/lang/ClassLoader;findLoadedClass(Ljava/lang/String;)Ljava/lang/Class;",
-        ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE.getFqn());
-  }
-
-  /**
-   * Test {@link Signature#getFqn()}.
-   *
-   * <ul>
-   *   <li>Given {@link ClassSignature#ClassSignature(String)} with {@code Class Name}.
-   *   <li>Then return {@code Class Name}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#getFqn()}
-   */
-  @Test
-  @DisplayName(
-      "Test getFqn(); given ClassSignature(String) with 'Class Name'; then return 'Class Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.getFqn()"})
-  void testGetFqn_givenClassSignatureWithClassName_thenReturnClassName() {
-    // Arrange, Act and Assert
-    assertEquals("Class Name", new ClassSignature("Class Name").getFqn());
-  }
-
-  /**
-   * Test {@link Signature#getFqn()}.
-   *
-   * <ul>
-   *   <li>Given {@link MethodSignature#MethodSignature(String)} with className is {@code null}.
-   *   <li>Then return {@code L?;?null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#getFqn()}
-   */
-  @Test
-  @DisplayName(
-      "Test getFqn(); given MethodSignature(String) with className is 'null'; then return 'L?;?null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.getFqn()"})
-  void testGetFqn_givenMethodSignatureWithClassNameIsNull_thenReturnLNull() {
-    // Arrange, Act and Assert
-    assertEquals("L?;?null", new MethodSignature((String) null).getFqn());
-  }
-
-  /**
-   * Test {@link Signature#getFqn()}.
-   *
-   * <ul>
-   *   <li>Given {@link MethodSignature#MethodSignature(String)} with {@code Class Name}.
-   *   <li>Then return {@code LClass Name;?null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#getFqn()}
-   */
-  @Test
-  @DisplayName(
-      "Test getFqn(); given MethodSignature(String) with 'Class Name'; then return 'LClass Name;?null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.getFqn()"})
-  void testGetFqn_givenMethodSignatureWithClassName_thenReturnLClassNameNull() {
-    // Arrange, Act and Assert
-    assertEquals("LClass Name;?null", new MethodSignature("Class Name").getFqn());
+    assertEquals("Class Name", (new ClassSignature("Class Name")).getFqn());
   }
 
   /**
@@ -318,118 +172,11 @@ class SignatureDiffblueTest {
    * <p>Method under test: {@link Signature#getPrettyFqn()}
    */
   @Test
-  @DisplayName("Test getPrettyFqn()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.getPrettyFqn()"})
-  void testGetPrettyFqn() {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"java.lang.String Signature.getPrettyFqn()"})
+  public void testGetPrettyFqn() {
     // Arrange, Act and Assert
-    assertEquals("? ?.?(?)", new MethodSignature((String) null).getPrettyFqn());
-  }
-
-  /**
-   * Test {@link Signature#getPrettyFqn()}.
-   *
-   * <ul>
-   *   <li>Given {@link ClassSignature#ClassSignature(String)} with {@code Class Name}.
-   *   <li>Then return {@code Class Name}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#getPrettyFqn()}
-   */
-  @Test
-  @DisplayName(
-      "Test getPrettyFqn(); given ClassSignature(String) with 'Class Name'; then return 'Class Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.getPrettyFqn()"})
-  void testGetPrettyFqn_givenClassSignatureWithClassName_thenReturnClassName() {
-    // Arrange, Act and Assert
-    assertEquals("Class Name", new ClassSignature("Class Name").getPrettyFqn());
-  }
-
-  /**
-   * Test {@link Signature#getPrettyFqn()}.
-   *
-   * <ul>
-   *   <li>Given {@link ClassConstants#CLASS_GET_NAME_SIGNATURE}.
-   *   <li>Then return {@code String Class.getName()}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#getPrettyFqn()}
-   */
-  @Test
-  @DisplayName(
-      "Test getPrettyFqn(); given CLASS_GET_NAME_SIGNATURE; then return 'String Class.getName()'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.getPrettyFqn()"})
-  void testGetPrettyFqn_givenClass_get_name_signature_thenReturnStringClassGetName() {
-    // Arrange, Act and Assert
-    assertEquals("String Class.getName()", ClassConstants.CLASS_GET_NAME_SIGNATURE.getPrettyFqn());
-  }
-
-  /**
-   * Test {@link Signature#getPrettyFqn()}.
-   *
-   * <ul>
-   *   <li>Given {@link MethodSignature#MethodSignature(String)} with {@code Class Name}.
-   *   <li>Then return {@code ? Class Name.?(?)}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#getPrettyFqn()}
-   */
-  @Test
-  @DisplayName(
-      "Test getPrettyFqn(); given MethodSignature(String) with 'Class Name'; then return '? Class Name.?(?)'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.getPrettyFqn()"})
-  void testGetPrettyFqn_givenMethodSignatureWithClassName_thenReturnClassName() {
-    // Arrange, Act and Assert
-    assertEquals("? Class Name.?(?)", new MethodSignature("Class Name").getPrettyFqn());
-  }
-
-  /**
-   * Test {@link Signature#getPrettyFqn()}.
-   *
-   * <ul>
-   *   <li>Then return {@code Class Class.forName(String,boolean,ClassLoader)}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#getPrettyFqn()}
-   */
-  @Test
-  @DisplayName("Test getPrettyFqn(); then return 'Class Class.forName(String,boolean,ClassLoader)'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.getPrettyFqn()"})
-  void testGetPrettyFqn_thenReturnClassClassForNameStringBooleanClassLoader() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "Class Class.forName(String,boolean,ClassLoader)",
-        ClassConstants.CLASS_FOR_NAME_SIGNATURE2.getPrettyFqn());
-  }
-
-  /**
-   * Test {@link Signature#getPrettyFqn()}.
-   *
-   * <ul>
-   *   <li>Then return {@code Class ClassLoader.findLoadedClass(String)}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#getPrettyFqn()}
-   */
-  @Test
-  @DisplayName("Test getPrettyFqn(); then return 'Class ClassLoader.findLoadedClass(String)'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.getPrettyFqn()"})
-  void testGetPrettyFqn_thenReturnClassClassLoaderFindLoadedClassString() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "Class ClassLoader.findLoadedClass(String)",
-        ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE.getPrettyFqn());
+    assertEquals("Class Name", (new ClassSignature("Class Name")).getPrettyFqn());
   }
 
   /**
@@ -443,74 +190,32 @@ class SignatureDiffblueTest {
    * <p>Method under test: {@link Signature#getPackageName()}
    */
   @Test
-  @DisplayName(
-      "Test getPackageName(); given ClassSignature(String) with 'Class Name'; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.getPackageName()"})
-  void testGetPackageName_givenClassSignatureWithClassName_thenReturnEmptyString() {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"java.lang.String Signature.getPackageName()"})
+  public void testGetPackageName_givenClassSignatureWithClassName_thenReturnEmptyString() {
     // Arrange, Act and Assert
-    assertEquals("", new ClassSignature("Class Name").getPackageName());
+    assertEquals("", (new ClassSignature("Class Name")).getPackageName());
   }
 
   /**
    * Test {@link Signature#getPackageName()}.
    *
    * <ul>
-   *   <li>Given {@link MethodSignature#UNKNOWN}.
-   *   <li>Then return {@code ?}.
+   *   <li>Then return {@code proguard.classfile}.
    * </ul>
    *
    * <p>Method under test: {@link Signature#getPackageName()}
    */
   @Test
-  @DisplayName("Test getPackageName(); given UNKNOWN; then return '?'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.getPackageName()"})
-  void testGetPackageName_givenUnknown_thenReturnQuestionMark() {
-    // Arrange, Act and Assert
-    assertEquals("?", MethodSignature.UNKNOWN.getPackageName());
-  }
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"java.lang.String Signature.getPackageName()"})
+  public void testGetPackageName_thenReturnProguardClassfile() {
+    // Arrange
+    LibraryClass clazz = new LibraryClass();
+    clazz.thisClassName = "proguard.classfile.Clazz[]";
 
-  /**
-   * Test {@link Signature#getPackageName()}.
-   *
-   * <ul>
-   *   <li>Then return {@code java.lang}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#getPackageName()}
-   */
-  @Test
-  @DisplayName("Test getPackageName(); then return 'java.lang'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.getPackageName()"})
-  void testGetPackageName_thenReturnJavaLang() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "java.lang", ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE.getPackageName());
-  }
-
-  /**
-   * Test {@link Signature#getExternalPackageName()}.
-   *
-   * <ul>
-   *   <li>Given {@link MethodSignature#UNKNOWN}.
-   *   <li>Then return {@code ?}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#getExternalPackageName()}
-   */
-  @Test
-  @DisplayName("Test getExternalPackageName(); given UNKNOWN; then return '?'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.getExternalPackageName()"})
-  void testGetExternalPackageName_givenUnknown_thenReturnQuestionMark() {
-    // Arrange, Act and Assert
-    assertEquals("?", MethodSignature.UNKNOWN.getExternalPackageName());
+    // Act and Assert
+    assertEquals("proguard.classfile", (new ClassSignature(clazz)).getPackageName());
   }
 
   /**
@@ -523,34 +228,32 @@ class SignatureDiffblueTest {
    * <p>Method under test: {@link Signature#getExternalPackageName()}
    */
   @Test
-  @DisplayName("Test getExternalPackageName(); then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.getExternalPackageName()"})
-  void testGetExternalPackageName_thenReturnEmptyString() {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"java.lang.String Signature.getExternalPackageName()"})
+  public void testGetExternalPackageName_thenReturnEmptyString() {
     // Arrange, Act and Assert
-    assertEquals("", new ClassSignature("Class Name").getExternalPackageName());
+    assertEquals("", (new ClassSignature("Class Name")).getExternalPackageName());
   }
 
   /**
    * Test {@link Signature#getExternalPackageName()}.
    *
    * <ul>
-   *   <li>Then return {@code java.lang}.
+   *   <li>Then return {@code proguard.classfile}.
    * </ul>
    *
    * <p>Method under test: {@link Signature#getExternalPackageName()}
    */
   @Test
-  @DisplayName("Test getExternalPackageName(); then return 'java.lang'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.getExternalPackageName()"})
-  void testGetExternalPackageName_thenReturnJavaLang() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "java.lang",
-        ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE.getExternalPackageName());
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"java.lang.String Signature.getExternalPackageName()"})
+  public void testGetExternalPackageName_thenReturnProguardClassfile() {
+    // Arrange
+    LibraryClass clazz = new LibraryClass();
+    clazz.thisClassName = "proguard.classfile.Clazz[]";
+
+    // Act and Assert
+    assertEquals("proguard.classfile", (new ClassSignature(clazz)).getExternalPackageName());
   }
 
   /**
@@ -559,13 +262,11 @@ class SignatureDiffblueTest {
    * <p>Method under test: {@link Signature#getClassName()}
    */
   @Test
-  @DisplayName("Test getClassName()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.getClassName()"})
-  void testGetClassName() {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"java.lang.String Signature.getClassName()"})
+  public void testGetClassName() {
     // Arrange, Act and Assert
-    assertEquals("Class Name", new ClassSignature("Class Name").getClassName());
+    assertEquals("Class Name", (new ClassSignature("Class Name")).getClassName());
   }
 
   /**
@@ -574,13 +275,11 @@ class SignatureDiffblueTest {
    * <p>Method under test: {@link Signature#getReferencedClass()}
    */
   @Test
-  @DisplayName("Test getReferencedClass()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Clazz Signature.getReferencedClass()"})
-  void testGetReferencedClass() {
+  public void testGetReferencedClass() {
     // Arrange, Act and Assert
-    assertNull(new ClassSignature("Class Name").getReferencedClass());
+    assertNull((new ClassSignature("Class Name")).getReferencedClass());
   }
 
   /**
@@ -599,18 +298,17 @@ class SignatureDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Signature.equals(Object)", "int Signature.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     MethodSignature methodSignature = ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE;
     MethodSignature methodSignature2 = ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE;
 
     // Act and Assert
     assertEquals(methodSignature, methodSignature2);
-    assertEquals(methodSignature.hashCode(), methodSignature2.hashCode());
+    int expectedHashCodeResult = methodSignature.hashCode();
+    assertEquals(expectedHashCodeResult, methodSignature2.hashCode());
   }
 
   /**
@@ -629,11 +327,9 @@ class SignatureDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Signature.equals(Object)", "int Signature.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     MethodSignature methodSignature = ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE;
 
@@ -654,11 +350,9 @@ class SignatureDiffblueTest {
    * <p>Method under test: {@link Signature#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Signature.equals(Object)", "int Signature.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
         ClassConstants.CLASSLOADER_LOAD_CLASS_SIGNATURE,
@@ -676,11 +370,9 @@ class SignatureDiffblueTest {
    * <p>Method under test: {@link Signature#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Signature.equals(Object)", "int Signature.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, null);
   }
@@ -696,104 +388,12 @@ class SignatureDiffblueTest {
    * <p>Method under test: {@link Signature#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Signature.equals(Object)", "int Signature.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
         ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, "Different type to Signature");
-  }
-
-  /**
-   * Test {@link Signature#compareTo(Signature)} with {@code Signature}.
-   *
-   * <ul>
-   *   <li>Given {@link ClassSignature#ClassSignature(String)} with {@code Class Name}.
-   *   <li>Then return minus one.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#compareTo(Signature)}
-   */
-  @Test
-  @DisplayName(
-      "Test compareTo(Signature) with 'Signature'; given ClassSignature(String) with 'Class Name'; then return minus one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"int Signature.compareTo(Signature)"})
-  void testCompareToWithSignature_givenClassSignatureWithClassName_thenReturnMinusOne() {
-    // Arrange, Act and Assert
-    assertEquals(
-        -1,
-        new ClassSignature("Class Name")
-            .compareTo(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
-  }
-
-  /**
-   * Test {@link Signature#compareTo(Signature)} with {@code Signature}.
-   *
-   * <ul>
-   *   <li>Then return minus forty-three.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#compareTo(Signature)}
-   */
-  @Test
-  @DisplayName("Test compareTo(Signature) with 'Signature'; then return minus forty-three")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"int Signature.compareTo(Signature)"})
-  void testCompareToWithSignature_thenReturnMinusFortyThree() {
-    // Arrange, Act and Assert
-    assertEquals(
-        -43,
-        new MethodSignature((String) null)
-            .compareTo(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
-  }
-
-  /**
-   * Test {@link Signature#compareTo(Signature)} with {@code Signature}.
-   *
-   * <ul>
-   *   <li>Then return minus thirty-nine.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#compareTo(Signature)}
-   */
-  @Test
-  @DisplayName("Test compareTo(Signature) with 'Signature'; then return minus thirty-nine")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"int Signature.compareTo(Signature)"})
-  void testCompareToWithSignature_thenReturnMinusThirtyNine() {
-    // Arrange, Act and Assert
-    assertEquals(
-        -39,
-        new MethodSignature("Class Name")
-            .compareTo(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
-  }
-
-  /**
-   * Test {@link Signature#compareTo(Signature)} with {@code Signature}.
-   *
-   * <ul>
-   *   <li>Then return zero.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#compareTo(Signature)}
-   */
-  @Test
-  @DisplayName("Test compareTo(Signature) with 'Signature'; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"int Signature.compareTo(Signature)"})
-  void testCompareToWithSignature_thenReturnZero() {
-    // Arrange, Act and Assert
-    assertEquals(
-        0,
-        ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE.compareTo(
-            ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
   }
 
   /**
@@ -807,20 +407,34 @@ class SignatureDiffblueTest {
    * <p>Method under test: {@link Signature#compareTo(Signature)}
    */
   @Test
-  @DisplayName(
-      "Test compareTo(Signature) with 'Signature'; when ClassSignature(String) with 'Class Name'; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int Signature.compareTo(Signature)"})
-  void testCompareToWithSignature_whenClassSignatureWithClassName_thenReturnZero() {
+  public void testCompareToWithSignature_whenClassSignatureWithClassName_thenReturnZero() {
     // Arrange
     ClassSignature classSignature = new ClassSignature("Class Name");
 
-    // Act
-    int actualCompareToResult = classSignature.compareTo(new ClassSignature("Class Name"));
+    // Act and Assert
+    assertEquals(0, classSignature.compareTo(new ClassSignature("Class Name")));
+  }
 
-    // Assert
-    assertEquals(0, actualCompareToResult);
+  /**
+   * Test {@link Signature#compareTo(Signature)} with {@code Signature}.
+   *
+   * <ul>
+   *   <li>When {@link ClassConstants#CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE}.
+   * </ul>
+   *
+   * <p>Method under test: {@link Signature#compareTo(Signature)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"int Signature.compareTo(Signature)"})
+  public void testCompareToWithSignature_whenClassloader_find_loaded_class_signature() {
+    // Arrange, Act and Assert
+    assertEquals(
+        -1,
+        (new ClassSignature("Class Name"))
+            .compareTo(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
   }
 
   /**
@@ -834,13 +448,11 @@ class SignatureDiffblueTest {
    * <p>Method under test: {@link Signature#compareTo(Signature)}
    */
   @Test
-  @DisplayName("Test compareTo(Signature) with 'Signature'; when 'null'; then return minus one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int Signature.compareTo(Signature)"})
-  void testCompareToWithSignature_whenNull_thenReturnMinusOne() {
+  public void testCompareToWithSignature_whenNull_thenReturnMinusOne() {
     // Arrange, Act and Assert
-    assertEquals(-1, ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE.compareTo(null));
+    assertEquals(-1, (new ClassSignature("Class Name")).compareTo(null));
   }
 
   /**
@@ -849,77 +461,10 @@ class SignatureDiffblueTest {
    * <p>Method under test: {@link Signature#toString()}
    */
   @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.toString()"})
-  void testToString() {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"java.lang.String Signature.toString()"})
+  public void testToString() {
     // Arrange, Act and Assert
-    assertEquals(
-        "Ljava/lang/ClassLoader;findLoadedClass(Ljava/lang/String;)Ljava/lang/Class;",
-        ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE.toString());
-  }
-
-  /**
-   * Test {@link Signature#toString()}.
-   *
-   * <ul>
-   *   <li>Given {@link ClassSignature#ClassSignature(String)} with {@code Class Name}.
-   *   <li>Then return {@code Class Name}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#toString()}
-   */
-  @Test
-  @DisplayName(
-      "Test toString(); given ClassSignature(String) with 'Class Name'; then return 'Class Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.toString()"})
-  void testToString_givenClassSignatureWithClassName_thenReturnClassName() {
-    // Arrange, Act and Assert
-    assertEquals("Class Name", new ClassSignature("Class Name").toString());
-  }
-
-  /**
-   * Test {@link Signature#toString()}.
-   *
-   * <ul>
-   *   <li>Given {@link MethodSignature#MethodSignature(String)} with className is {@code null}.
-   *   <li>Then return {@code L?;?null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#toString()}
-   */
-  @Test
-  @DisplayName(
-      "Test toString(); given MethodSignature(String) with className is 'null'; then return 'L?;?null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.toString()"})
-  void testToString_givenMethodSignatureWithClassNameIsNull_thenReturnLNull() {
-    // Arrange, Act and Assert
-    assertEquals("L?;?null", new MethodSignature((String) null).toString());
-  }
-
-  /**
-   * Test {@link Signature#toString()}.
-   *
-   * <ul>
-   *   <li>Given {@link MethodSignature#MethodSignature(String)} with {@code Class Name}.
-   *   <li>Then return {@code LClass Name;?null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#toString()}
-   */
-  @Test
-  @DisplayName(
-      "Test toString(); given MethodSignature(String) with 'Class Name'; then return 'LClass Name;?null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String Signature.toString()"})
-  void testToString_givenMethodSignatureWithClassName_thenReturnLClassNameNull() {
-    // Arrange, Act and Assert
-    assertEquals("LClass Name;?null", new MethodSignature("Class Name").toString());
+    assertEquals("Class Name", (new ClassSignature("Class Name")).toString());
   }
 }

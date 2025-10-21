@@ -1,16 +1,15 @@
 package proguard.classfile.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class InternalTypeEnumerationDiffblueTest {
+public class InternalTypeEnumerationDiffblueTest {
   /**
    * Test {@link InternalTypeEnumeration#InternalTypeEnumeration(String)}.
    *
@@ -22,12 +21,9 @@ class InternalTypeEnumerationDiffblueTest {
    * <p>Method under test: {@link InternalTypeEnumeration#InternalTypeEnumeration(String)}
    */
   @Test
-  @DisplayName(
-      "Test new InternalTypeEnumeration(String); when 'Descriptor'; then return next is 'D'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void InternalTypeEnumeration.<init>(String)"})
-  void testNewInternalTypeEnumeration_whenDescriptor_thenReturnNextIsD() {
+  public void testNewInternalTypeEnumeration_whenDescriptor_thenReturnNextIsD() {
     // Arrange and Act
     InternalTypeEnumeration actualInternalTypeEnumeration =
         new InternalTypeEnumeration("Descriptor");
@@ -61,13 +57,11 @@ class InternalTypeEnumerationDiffblueTest {
    * <p>Method under test: {@link InternalTypeEnumeration#typeCount()}
    */
   @Test
-  @DisplayName("Test typeCount()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int InternalTypeEnumeration.typeCount()"})
-  void testTypeCount() {
+  public void testTypeCount() {
     // Arrange, Act and Assert
-    assertEquals(10, new InternalTypeEnumeration("Descriptor").typeCount());
+    assertEquals(10, (new InternalTypeEnumeration("Descriptor")).typeCount());
   }
 
   /**
@@ -76,13 +70,11 @@ class InternalTypeEnumerationDiffblueTest {
    * <p>Method under test: {@link InternalTypeEnumeration#typesSize()}
    */
   @Test
-  @DisplayName("Test typesSize()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int InternalTypeEnumeration.typesSize()"})
-  void testTypesSize() {
+  public void testTypesSize() {
     // Arrange, Act and Assert
-    assertEquals(11, new InternalTypeEnumeration("Descriptor").typesSize());
+    assertEquals(11, (new InternalTypeEnumeration("Descriptor")).typesSize());
   }
 
   /**
@@ -91,13 +83,11 @@ class InternalTypeEnumerationDiffblueTest {
    * <p>Method under test: {@link InternalTypeEnumeration#hasFormalTypeParameters()}
    */
   @Test
-  @DisplayName("Test hasFormalTypeParameters()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InternalTypeEnumeration.hasFormalTypeParameters()"})
-  void testHasFormalTypeParameters() {
+  public void testHasFormalTypeParameters() {
     // Arrange, Act and Assert
-    assertFalse(new InternalTypeEnumeration("Descriptor").hasFormalTypeParameters());
+    assertFalse((new InternalTypeEnumeration("Descriptor")).hasFormalTypeParameters());
   }
 
   /**
@@ -106,13 +96,11 @@ class InternalTypeEnumerationDiffblueTest {
    * <p>Method under test: {@link InternalTypeEnumeration#formalTypeParameters()}
    */
   @Test
-  @DisplayName("Test formalTypeParameters()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InternalTypeEnumeration.formalTypeParameters()"})
-  void testFormalTypeParameters() {
+  public void testFormalTypeParameters() {
     // Arrange, Act and Assert
-    assertEquals("", new InternalTypeEnumeration("Descriptor").formalTypeParameters());
+    assertEquals("", (new InternalTypeEnumeration("Descriptor")).formalTypeParameters());
   }
 
   /**
@@ -121,13 +109,11 @@ class InternalTypeEnumerationDiffblueTest {
    * <p>Method under test: {@link InternalTypeEnumeration#isMethodSignature()}
    */
   @Test
-  @DisplayName("Test isMethodSignature()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InternalTypeEnumeration.isMethodSignature()"})
-  void testIsMethodSignature() {
+  public void testIsMethodSignature() {
     // Arrange, Act and Assert
-    assertFalse(new InternalTypeEnumeration("Descriptor").isMethodSignature());
+    assertFalse((new InternalTypeEnumeration("Descriptor")).isMethodSignature());
   }
 
   /**
@@ -136,50 +122,11 @@ class InternalTypeEnumerationDiffblueTest {
    * <p>Method under test: {@link InternalTypeEnumeration#hasMoreTypes()}
    */
   @Test
-  @DisplayName("Test hasMoreTypes()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InternalTypeEnumeration.hasMoreTypes()"})
-  void testHasMoreTypes() {
+  public void testHasMoreTypes() {
     // Arrange, Act and Assert
-    assertTrue(new InternalTypeEnumeration("Descriptor").hasMoreTypes());
-  }
-
-  /**
-   * Test {@link InternalTypeEnumeration#nextType()}.
-   *
-   * <p>Method under test: {@link InternalTypeEnumeration#nextType()}
-   */
-  @Test
-  @DisplayName("Test nextType()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String InternalTypeEnumeration.nextType()"})
-  void testNextType() {
-    // Arrange
-    InternalTypeEnumeration internalTypeEnumeration = new InternalTypeEnumeration("Descriptor");
-
-    // Act and Assert
-    assertEquals("D", internalTypeEnumeration.nextType());
-    String actualNextResult = internalTypeEnumeration.next();
-    String actualNextResult2 = internalTypeEnumeration.next();
-    String actualNextResult3 = internalTypeEnumeration.next();
-    String actualNextResult4 = internalTypeEnumeration.next();
-    String actualNextResult5 = internalTypeEnumeration.next();
-    String actualNextResult6 = internalTypeEnumeration.next();
-    String actualNextResult7 = internalTypeEnumeration.next();
-    String actualNextResult8 = internalTypeEnumeration.next();
-    String actualNextResult9 = internalTypeEnumeration.next();
-    assertFalse(internalTypeEnumeration.hasNext());
-    assertEquals("e", actualNextResult);
-    assertEquals("s", actualNextResult2);
-    assertEquals("c", actualNextResult3);
-    assertEquals("r", actualNextResult4);
-    assertEquals("i", actualNextResult5);
-    assertEquals("p", actualNextResult6);
-    assertEquals("t", actualNextResult7);
-    assertEquals("o", actualNextResult8);
-    assertEquals("r", actualNextResult9);
+    assertTrue((new InternalTypeEnumeration("Descriptor")).hasMoreTypes());
   }
 
   /**
@@ -188,49 +135,10 @@ class InternalTypeEnumerationDiffblueTest {
    * <p>Method under test: {@link InternalTypeEnumeration#hasNext()}
    */
   @Test
-  @DisplayName("Test hasNext()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InternalTypeEnumeration.hasNext()"})
-  void testHasNext() {
+  public void testHasNext() {
     // Arrange, Act and Assert
-    assertTrue(new InternalTypeEnumeration("Descriptor").hasNext());
-  }
-
-  /**
-   * Test {@link InternalTypeEnumeration#next()}.
-   *
-   * <p>Method under test: {@link InternalTypeEnumeration#next()}
-   */
-  @Test
-  @DisplayName("Test next()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String InternalTypeEnumeration.next()"})
-  void testNext() {
-    // Arrange
-    InternalTypeEnumeration internalTypeEnumeration = new InternalTypeEnumeration("Descriptor");
-
-    // Act and Assert
-    assertEquals("D", internalTypeEnumeration.next());
-    String actualNextResult = internalTypeEnumeration.next();
-    String actualNextResult2 = internalTypeEnumeration.next();
-    String actualNextResult3 = internalTypeEnumeration.next();
-    String actualNextResult4 = internalTypeEnumeration.next();
-    String actualNextResult5 = internalTypeEnumeration.next();
-    String actualNextResult6 = internalTypeEnumeration.next();
-    String actualNextResult7 = internalTypeEnumeration.next();
-    String actualNextResult8 = internalTypeEnumeration.next();
-    String actualNextResult9 = internalTypeEnumeration.next();
-    assertFalse(internalTypeEnumeration.hasNext());
-    assertEquals("e", actualNextResult);
-    assertEquals("s", actualNextResult2);
-    assertEquals("c", actualNextResult3);
-    assertEquals("r", actualNextResult4);
-    assertEquals("i", actualNextResult5);
-    assertEquals("p", actualNextResult6);
-    assertEquals("t", actualNextResult7);
-    assertEquals("o", actualNextResult8);
-    assertEquals("r", actualNextResult9);
+    assertTrue((new InternalTypeEnumeration("Descriptor")).hasNext());
   }
 }

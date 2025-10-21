@@ -1,17 +1,16 @@
 package proguard.classfile.constant;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class FloatConstantDiffblueTest {
+public class FloatConstantDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -27,9 +26,7 @@ class FloatConstantDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void FloatConstant.<init>()",
     "void FloatConstant.<init>(float)",
@@ -39,7 +36,7 @@ class FloatConstantDiffblueTest {
     "void FloatConstant.setValue(float)",
     "String FloatConstant.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     FloatConstant actualFloatConstant = new FloatConstant();
     actualFloatConstant.setValue(10.0f);
@@ -52,7 +49,7 @@ class FloatConstantDiffblueTest {
     assertEquals("Float(10.0)", actualToStringResult);
     assertNull(actualFloatConstant.getProcessingInfo());
     assertEquals(0, actualFloatConstant.getProcessingFlags());
-    assertEquals(10.0f, actualValue);
+    assertEquals(10.0f, actualValue, 0.0f);
     assertEquals(4, actualTag);
     assertFalse(actualIsCategory2Result);
   }
@@ -76,9 +73,7 @@ class FloatConstantDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters; when ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void FloatConstant.<init>()",
     "void FloatConstant.<init>(float)",
@@ -88,7 +83,7 @@ class FloatConstantDiffblueTest {
     "void FloatConstant.setValue(float)",
     "String FloatConstant.toString()"
   })
-  void testGettersAndSetters_whenTen() {
+  public void testGettersAndSetters_whenTen() {
     // Arrange and Act
     FloatConstant actualFloatConstant = new FloatConstant(10.0f);
     actualFloatConstant.setValue(10.0f);
@@ -101,7 +96,7 @@ class FloatConstantDiffblueTest {
     assertEquals("Float(10.0)", actualToStringResult);
     assertNull(actualFloatConstant.getProcessingInfo());
     assertEquals(0, actualFloatConstant.getProcessingFlags());
-    assertEquals(10.0f, actualValue);
+    assertEquals(10.0f, actualValue, 0.0f);
     assertEquals(4, actualTag);
     assertFalse(actualIsCategory2Result);
   }
@@ -122,18 +117,17 @@ class FloatConstantDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FloatConstant.equals(Object)", "int FloatConstant.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     FloatConstant floatConstant = new FloatConstant(10.0f);
     FloatConstant floatConstant2 = new FloatConstant(10.0f);
 
     // Act and Assert
     assertEquals(floatConstant, floatConstant2);
-    assertEquals(floatConstant.hashCode(), floatConstant2.hashCode());
+    int expectedHashCodeResult = floatConstant.hashCode();
+    assertEquals(expectedHashCodeResult, floatConstant2.hashCode());
   }
 
   /**
@@ -152,11 +146,9 @@ class FloatConstantDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FloatConstant.equals(Object)", "int FloatConstant.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     FloatConstant floatConstant = new FloatConstant(10.0f);
 
@@ -177,11 +169,9 @@ class FloatConstantDiffblueTest {
    * <p>Method under test: {@link FloatConstant#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FloatConstant.equals(Object)", "int FloatConstant.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     FloatConstant floatConstant = new FloatConstant(0.5f);
 
@@ -200,11 +190,9 @@ class FloatConstantDiffblueTest {
    * <p>Method under test: {@link FloatConstant#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FloatConstant.equals(Object)", "int FloatConstant.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new FloatConstant(10.0f), null);
   }
@@ -220,11 +208,9 @@ class FloatConstantDiffblueTest {
    * <p>Method under test: {@link FloatConstant#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FloatConstant.equals(Object)", "int FloatConstant.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new FloatConstant(10.0f), "Different type to FloatConstant");
   }

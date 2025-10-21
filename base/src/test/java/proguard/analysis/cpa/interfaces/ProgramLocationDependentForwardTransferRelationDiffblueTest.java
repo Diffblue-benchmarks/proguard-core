@@ -1,13 +1,12 @@
 package proguard.analysis.cpa.interfaces;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.HashMap;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.analysis.cpa.defaults.HashMapAbstractState;
 import proguard.analysis.cpa.defaults.SetAbstractState;
 import proguard.analysis.cpa.jvm.cfa.nodes.JvmUnknownCfaNode;
@@ -17,7 +16,7 @@ import proguard.analysis.cpa.jvm.domain.taint.JvmTaintTransferRelation;
 import proguard.analysis.cpa.jvm.state.JvmFrameAbstractState;
 import proguard.analysis.cpa.jvm.state.heap.JvmForgetfulHeapAbstractState;
 
-class ProgramLocationDependentForwardTransferRelationDiffblueTest {
+public class ProgramLocationDependentForwardTransferRelationDiffblueTest {
   /**
    * Test {@link
    * ProgramLocationDependentForwardTransferRelation#getEdges(ProgramLocationDependent)}.
@@ -30,13 +29,11 @@ class ProgramLocationDependentForwardTransferRelationDiffblueTest {
    * ProgramLocationDependentForwardTransferRelation#getEdges(ProgramLocationDependent)}
    */
   @Test
-  @DisplayName("Test getEdges(ProgramLocationDependent); then return Empty")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "java.util.List ProgramLocationDependentForwardTransferRelation.getEdges(ProgramLocationDependent)"
   })
-  void testGetEdges_thenReturnEmpty() {
+  public void testGetEdges_thenReturnEmpty() {
     // Arrange
     JvmTaintTransferRelation jvmTaintTransferRelation =
         new JvmTaintTransferRelation(new HashMap<>());
@@ -44,11 +41,12 @@ class ProgramLocationDependentForwardTransferRelationDiffblueTest {
     JvmForgetfulHeapAbstractState<SetAbstractState<JvmTaintSource>> heap =
         new JvmForgetfulHeapAbstractState<>(null);
 
-    JvmTaintAbstractState state =
-        new JvmTaintAbstractState(
-            JvmUnknownCfaNode.INSTANCE, frame, heap, new HashMapAbstractState<>());
-
     // Act and Assert
-    assertTrue(jvmTaintTransferRelation.getEdges(state).isEmpty());
+    assertTrue(
+        jvmTaintTransferRelation
+            .getEdges(
+                new JvmTaintAbstractState(
+                    JvmUnknownCfaNode.INSTANCE, frame, heap, new HashMapAbstractState<>()))
+            .isEmpty());
   }
 }

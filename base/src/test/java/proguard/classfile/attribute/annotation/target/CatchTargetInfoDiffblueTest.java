@@ -1,14 +1,13 @@
 package proguard.classfile.attribute.annotation.target;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class CatchTargetInfoDiffblueTest {
+public class CatchTargetInfoDiffblueTest {
   /**
    * Test {@link CatchTargetInfo#CatchTargetInfo()}.
    *
@@ -19,19 +18,16 @@ class CatchTargetInfoDiffblueTest {
    * <p>Method under test: {@link CatchTargetInfo#CatchTargetInfo()}
    */
   @Test
-  @DisplayName(
-      "Test new CatchTargetInfo(); then return TargetType is TARGET_TYPE_PARAMETER_GENERIC_CLASS")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void CatchTargetInfo.<init>()",
     "void CatchTargetInfo.<init>(byte)",
     "void CatchTargetInfo.<init>(byte, int)"
   })
-  void testNewCatchTargetInfo_thenReturnTargetTypeIsTarget_type_parameter_generic_class() {
+  public void testNewCatchTargetInfo_thenReturnTargetTypeIsTarget_type_parameter_generic_class() {
     // Arrange, Act and Assert
     assertEquals(
-        TargetInfo.TARGET_TYPE_PARAMETER_GENERIC_CLASS, new CatchTargetInfo().getTargetType());
+        TargetInfo.TARGET_TYPE_PARAMETER_GENERIC_CLASS, (new CatchTargetInfo()).getTargetType());
   }
 
   /**
@@ -45,17 +41,15 @@ class CatchTargetInfoDiffblueTest {
    * <p>Method under test: {@link CatchTargetInfo#CatchTargetInfo(byte)}
    */
   @Test
-  @DisplayName("Test new CatchTargetInfo(byte); when 'A'; then return TargetType is 'A'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void CatchTargetInfo.<init>()",
     "void CatchTargetInfo.<init>(byte)",
     "void CatchTargetInfo.<init>(byte, int)"
   })
-  void testNewCatchTargetInfo_whenA_thenReturnTargetTypeIsA() {
+  public void testNewCatchTargetInfo_whenA_thenReturnTargetTypeIsA() {
     // Arrange, Act and Assert
-    assertEquals('A', new CatchTargetInfo((byte) 'A').getTargetType());
+    assertEquals('A', (new CatchTargetInfo((byte) 'A')).getTargetType());
   }
 
   /**
@@ -69,16 +63,14 @@ class CatchTargetInfoDiffblueTest {
    * <p>Method under test: {@link CatchTargetInfo#CatchTargetInfo(byte, int)}
    */
   @Test
-  @DisplayName("Test new CatchTargetInfo(byte, int); when one; then return TargetType is 'A'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void CatchTargetInfo.<init>()",
     "void CatchTargetInfo.<init>(byte)",
     "void CatchTargetInfo.<init>(byte, int)"
   })
-  void testNewCatchTargetInfo_whenOne_thenReturnTargetTypeIsA() {
+  public void testNewCatchTargetInfo_whenOne_thenReturnTargetTypeIsA() {
     // Arrange, Act and Assert
-    assertEquals('A', new CatchTargetInfo((byte) 'A', 1).getTargetType());
+    assertEquals('A', (new CatchTargetInfo((byte) 'A', 1)).getTargetType());
   }
 }

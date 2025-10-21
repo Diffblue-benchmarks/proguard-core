@@ -1,15 +1,14 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class EmptyStringMatcherDiffblueTest {
+public class EmptyStringMatcherDiffblueTest {
   /**
    * Test {@link EmptyStringMatcher#matches(String, int, int)} with {@code string}, {@code
    * beginOffset}, {@code endOffset}.
@@ -22,14 +21,11 @@ class EmptyStringMatcherDiffblueTest {
    * <p>Method under test: {@link EmptyStringMatcher#matches(String, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test matches(String, int, int) with 'string', 'beginOffset', 'endOffset'; when one; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean EmptyStringMatcher.matches(String, int, int)"})
-  void testMatchesWithStringBeginOffsetEndOffset_whenOne_thenReturnFalse() {
+  public void testMatchesWithStringBeginOffsetEndOffset_whenOne_thenReturnFalse() {
     // Arrange, Act and Assert
-    assertFalse(new EmptyStringMatcher().matches("String", 1, 3));
+    assertFalse((new EmptyStringMatcher()).matches("String", 1, 3));
   }
 
   /**
@@ -44,13 +40,10 @@ class EmptyStringMatcherDiffblueTest {
    * <p>Method under test: {@link EmptyStringMatcher#matches(String, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test matches(String, int, int) with 'string', 'beginOffset', 'endOffset'; when 'String'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean EmptyStringMatcher.matches(String, int, int)"})
-  void testMatchesWithStringBeginOffsetEndOffset_whenString_thenReturnTrue() {
+  public void testMatchesWithStringBeginOffsetEndOffset_whenString_thenReturnTrue() {
     // Arrange, Act and Assert
-    assertTrue(new EmptyStringMatcher().matches("String", 3, 3));
+    assertTrue((new EmptyStringMatcher()).matches("String", 3, 3));
   }
 }

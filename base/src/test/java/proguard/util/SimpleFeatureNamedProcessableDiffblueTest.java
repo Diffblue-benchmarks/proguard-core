@@ -1,18 +1,17 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.Set;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class SimpleFeatureNamedProcessableDiffblueTest {
+public class SimpleFeatureNamedProcessableDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -30,9 +29,7 @@ class SimpleFeatureNamedProcessableDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters; then return ProcessingInfo is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void SimpleFeatureNamedProcessable.<init>()",
     "void SimpleFeatureNamedProcessable.<init>(String, int, Object)",
@@ -40,7 +37,7 @@ class SimpleFeatureNamedProcessableDiffblueTest {
     "String SimpleFeatureNamedProcessable.getFeatureName()",
     "void SimpleFeatureNamedProcessable.setFeatureName(String)"
   })
-  void testGettersAndSetters_thenReturnProcessingInfoIsNull() {
+  public void testGettersAndSetters_thenReturnProcessingInfoIsNull() {
     // Arrange and Act
     SimpleFeatureNamedProcessable actualSimpleFeatureNamedProcessable =
         new SimpleFeatureNamedProcessable();
@@ -73,9 +70,7 @@ class SimpleFeatureNamedProcessableDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters; when 'Feature Name'; then return 'Processing Info'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void SimpleFeatureNamedProcessable.<init>()",
     "void SimpleFeatureNamedProcessable.<init>(String, int, Object)",
@@ -83,7 +78,7 @@ class SimpleFeatureNamedProcessableDiffblueTest {
     "String SimpleFeatureNamedProcessable.getFeatureName()",
     "void SimpleFeatureNamedProcessable.setFeatureName(String)"
   })
-  void testGettersAndSetters_whenFeatureName_thenReturnProcessingInfo() {
+  public void testGettersAndSetters_whenFeatureName_thenReturnProcessingInfo() {
     // Arrange and Act
     SimpleFeatureNamedProcessable actualSimpleFeatureNamedProcessable =
         new SimpleFeatureNamedProcessable("Feature Name", 1, "Processing Info");
@@ -104,11 +99,9 @@ class SimpleFeatureNamedProcessableDiffblueTest {
    * <p>Method under test: {@link SimpleFeatureNamedProcessable#addExtraFeatureName(String)}
    */
   @Test
-  @DisplayName("Test addExtraFeatureName(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void SimpleFeatureNamedProcessable.addExtraFeatureName(String)"})
-  void testAddExtraFeatureName() {
+  public void testAddExtraFeatureName() {
     // Arrange
     SimpleFeatureNamedProcessable simpleFeatureNamedProcessable =
         new SimpleFeatureNamedProcessable();
@@ -133,14 +126,11 @@ class SimpleFeatureNamedProcessableDiffblueTest {
    * <p>Method under test: {@link SimpleFeatureNamedProcessable#isInFeature(String)}
    */
   @Test
-  @DisplayName(
-      "Test isInFeature(String); given SimpleFeatureNamedProcessable(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean SimpleFeatureNamedProcessable.isInFeature(String)"})
-  void testIsInFeature_givenSimpleFeatureNamedProcessable_thenReturnFalse() {
+  public void testIsInFeature_givenSimpleFeatureNamedProcessable_thenReturnFalse() {
     // Arrange, Act and Assert
-    assertFalse(new SimpleFeatureNamedProcessable().isInFeature("Feature Name"));
+    assertFalse((new SimpleFeatureNamedProcessable()).isInFeature("Feature Name"));
   }
 
   /**
@@ -153,11 +143,9 @@ class SimpleFeatureNamedProcessableDiffblueTest {
    * <p>Method under test: {@link SimpleFeatureNamedProcessable#isInFeature(String)}
    */
   @Test
-  @DisplayName("Test isInFeature(String); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean SimpleFeatureNamedProcessable.isInFeature(String)"})
-  void testIsInFeature_thenReturnTrue() {
+  public void testIsInFeature_thenReturnTrue() {
     // Arrange
     SimpleFeatureNamedProcessable simpleFeatureNamedProcessable =
         new SimpleFeatureNamedProcessable();

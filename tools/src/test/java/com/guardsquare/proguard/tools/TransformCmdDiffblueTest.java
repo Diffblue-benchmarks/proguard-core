@@ -5,8 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ContributionFromDiffblue;
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import kotlinx.cli.ArgParser.OptionPrefixStyle;
 import org.junit.Test;
@@ -24,8 +23,7 @@ public class TransformCmdDiffblueTest {
    * <p>Method under test: {@link TransformCmd#getClassNameFilter()}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TransformCmd.getClassNameFilter()"})
   public void testGetClassNameFilter_givenTransformCmdClassNameFilterIsSet_thenReturnSet() {
     // Arrange
@@ -47,8 +45,7 @@ public class TransformCmdDiffblueTest {
    * <p>Method under test: {@link TransformCmd#getInput()}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TransformCmd.getInput()"})
   public void testGetInput_givenTransformCmdInputIsSet_thenReturnSet() {
     // Arrange
@@ -70,8 +67,7 @@ public class TransformCmdDiffblueTest {
    * <p>Method under test: {@link TransformCmd#getOutput()}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TransformCmd.getOutput()"})
   public void testGetOutput_givenTransformCmdOutputIsSet_thenReturnSet() {
     // Arrange
@@ -93,12 +89,11 @@ public class TransformCmdDiffblueTest {
    * <p>Method under test: {@link TransformCmd#getOutput()}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TransformCmd.getOutput()"})
   public void testGetOutput_givenTransformCmd_thenReturnNull() {
     // Arrange, Act and Assert
-    assertNull(new TransformCmd().getOutput());
+    assertNull((new TransformCmd()).getOutput());
   }
 
   /**
@@ -112,8 +107,7 @@ public class TransformCmdDiffblueTest {
    * <p>Method under test: {@link TransformCmd#getPrintClasses()}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TransformCmd.getPrintClasses()"})
   public void testGetPrintClasses_givenTransformCmdPrintClassesIsFalse_thenReturnFalse() {
     // Arrange
@@ -135,8 +129,7 @@ public class TransformCmdDiffblueTest {
    * <p>Method under test: {@link TransformCmd#getPrintClasses()}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TransformCmd.getPrintClasses()"})
   public void testGetPrintClasses_givenTransformCmdPrintClassesIsTrue_thenReturnTrue() {
     // Arrange
@@ -158,8 +151,7 @@ public class TransformCmdDiffblueTest {
    * <p>Method under test: {@link TransformCmd#getTransformer()}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TransformCmd.getTransformer()"})
   public void testGetTransformer_givenTransformCmdTransformerIsSet_thenReturnSet() {
     // Arrange
@@ -176,8 +168,7 @@ public class TransformCmdDiffblueTest {
    * <p>Method under test: default or parameterless constructor of {@link TransformCmd}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TransformCmd.<init>()"})
   public void testNewTransformCmd() {
     // Arrange and Act
@@ -201,18 +192,12 @@ public class TransformCmdDiffblueTest {
   /**
    * Test {@link TransformCmd#setClassNameFilter(String)}.
    *
-   * <ul>
-   *   <li>When {@code <set-?>}.
-   *   <li>Then {@link TransformCmd} (default constructor) ClassNameFilter is {@code <set-?>}.
-   * </ul>
-   *
    * <p>Method under test: {@link TransformCmd#setClassNameFilter(String)}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TransformCmd.setClassNameFilter(String)"})
-  public void testSetClassNameFilter_whenSet_thenTransformCmdClassNameFilterIsSet() {
+  public void testSetClassNameFilter() {
     // Arrange
     TransformCmd transformCmd = new TransformCmd();
 
@@ -226,18 +211,12 @@ public class TransformCmdDiffblueTest {
   /**
    * Test {@link TransformCmd#setInput(String)}.
    *
-   * <ul>
-   *   <li>When {@code <set-?>}.
-   *   <li>Then {@link TransformCmd} (default constructor) Input is {@code <set-?>}.
-   * </ul>
-   *
    * <p>Method under test: {@link TransformCmd#setInput(String)}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TransformCmd.setInput(String)"})
-  public void testSetInput_whenSet_thenTransformCmdInputIsSet() {
+  public void testSetInput() {
     // Arrange
     TransformCmd transformCmd = new TransformCmd();
 
@@ -251,43 +230,12 @@ public class TransformCmdDiffblueTest {
   /**
    * Test {@link TransformCmd#setOutput(String)}.
    *
-   * <ul>
-   *   <li>When {@code null}.
-   *   <li>Then {@link TransformCmd} (default constructor) Output is {@code null}.
-   * </ul>
-   *
    * <p>Method under test: {@link TransformCmd#setOutput(String)}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TransformCmd.setOutput(String)"})
-  public void testSetOutput_whenNull_thenTransformCmdOutputIsNull() {
-    // Arrange
-    TransformCmd transformCmd = new TransformCmd();
-
-    // Act
-    transformCmd.setOutput(null);
-
-    // Assert that nothing has changed
-    assertNull(transformCmd.getOutput());
-  }
-
-  /**
-   * Test {@link TransformCmd#setOutput(String)}.
-   *
-   * <ul>
-   *   <li>When {@code <set-?>}.
-   *   <li>Then {@link TransformCmd} (default constructor) Output is {@code <set-?>}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TransformCmd#setOutput(String)}
-   */
-  @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void TransformCmd.setOutput(String)"})
-  public void testSetOutput_whenSet_thenTransformCmdOutputIsSet() {
+  public void testSetOutput() {
     // Arrange
     TransformCmd transformCmd = new TransformCmd();
 
@@ -304,8 +252,7 @@ public class TransformCmdDiffblueTest {
    * <p>Method under test: {@link TransformCmd#setPrintClasses(boolean)}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TransformCmd.setPrintClasses(boolean)"})
   public void testSetPrintClasses() {
     // Arrange
@@ -321,18 +268,12 @@ public class TransformCmdDiffblueTest {
   /**
    * Test {@link TransformCmd#setTransformer(String)}.
    *
-   * <ul>
-   *   <li>When {@code <set-?>}.
-   *   <li>Then {@link TransformCmd} (default constructor) Transformer is {@code <set-?>}.
-   * </ul>
-   *
    * <p>Method under test: {@link TransformCmd#setTransformer(String)}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TransformCmd.setTransformer(String)"})
-  public void testSetTransformer_whenSet_thenTransformCmdTransformerIsSet() {
+  public void testSetTransformer() {
     // Arrange
     TransformCmd transformCmd = new TransformCmd();
 

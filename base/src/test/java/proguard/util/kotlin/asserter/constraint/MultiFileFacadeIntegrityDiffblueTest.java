@@ -1,25 +1,22 @@
 package proguard.util.kotlin.asserter.constraint;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class MultiFileFacadeIntegrityDiffblueTest {
+public class MultiFileFacadeIntegrityDiffblueTest {
   /**
    * Test new {@link MultiFileFacadeIntegrity} (default constructor).
    *
    * <p>Method under test: default or parameterless constructor of {@link MultiFileFacadeIntegrity}
    */
   @Test
-  @DisplayName("Test new MultiFileFacadeIntegrity (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MultiFileFacadeIntegrity.<init>()"})
-  void testNewMultiFileFacadeIntegrity() {
+  public void testNewMultiFileFacadeIntegrity() {
     // Arrange and Act
     MultiFileFacadeIntegrity actualMultiFileFacadeIntegrity = new MultiFileFacadeIntegrity();
 

@@ -1,15 +1,14 @@
 package proguard.classfile.kotlin.flags;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class KotlinClassFlagsDiffblueTest {
+public class KotlinClassFlagsDiffblueTest {
   /**
    * Test {@link KotlinClassFlags#KotlinClassFlags(KotlinVisibilityFlags, KotlinModalityFlags)}.
    *
@@ -17,11 +16,9 @@ class KotlinClassFlagsDiffblueTest {
    * KotlinModalityFlags)}
    */
   @Test
-  @DisplayName("Test new KotlinClassFlags(KotlinVisibilityFlags, KotlinModalityFlags)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void KotlinClassFlags.<init>(KotlinVisibilityFlags, KotlinModalityFlags)"})
-  void testNewKotlinClassFlags() {
+  public void testNewKotlinClassFlags() {
     // Arrange
     KotlinVisibilityFlags visibility = new KotlinVisibilityFlags();
     visibility.isInternal = true;

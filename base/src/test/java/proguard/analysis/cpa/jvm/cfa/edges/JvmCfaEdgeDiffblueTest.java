@@ -1,30 +1,27 @@
 package proguard.analysis.cpa.jvm.cfa.edges;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.analysis.cpa.jvm.cfa.nodes.JvmCfaNode;
 import proguard.analysis.cpa.jvm.cfa.nodes.JvmUnknownCfaNode;
 
-class JvmCfaEdgeDiffblueTest {
+public class JvmCfaEdgeDiffblueTest {
   /**
    * Test {@link JvmCfaEdge#getSource()}.
    *
    * <p>Method under test: {@link JvmCfaEdge#getSource()}
    */
   @Test
-  @DisplayName("Test getSource()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"JvmCfaNode JvmCfaEdge.getSource()"})
-  void testGetSource() {
+  public void testGetSource() {
     // Arrange, Act and Assert
-    assertNull(new JvmAssumeExceptionCfaEdge(true, 1).getSource());
+    assertNull((new JvmAssumeExceptionCfaEdge(true, 1)).getSource());
   }
 
   /**
@@ -33,13 +30,11 @@ class JvmCfaEdgeDiffblueTest {
    * <p>Method under test: {@link JvmCfaEdge#getTarget()}
    */
   @Test
-  @DisplayName("Test getTarget()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"JvmCfaNode JvmCfaEdge.getTarget()"})
-  void testGetTarget() {
+  public void testGetTarget() {
     // Arrange, Act and Assert
-    assertNull(new JvmAssumeExceptionCfaEdge(true, 1).getTarget());
+    assertNull((new JvmAssumeExceptionCfaEdge(true, 1)).getTarget());
   }
 
   /**
@@ -48,19 +43,19 @@ class JvmCfaEdgeDiffblueTest {
    * <p>Method under test: {@link JvmCfaEdge#setSource(JvmCfaNode)}
    */
   @Test
-  @DisplayName("Test setSource(JvmCfaNode)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void JvmCfaEdge.setSource(JvmCfaNode)"})
-  void testSetSource() {
+  public void testSetSource() {
     // Arrange
     JvmAssumeExceptionCfaEdge jvmAssumeExceptionCfaEdge = new JvmAssumeExceptionCfaEdge(true, 1);
+    JvmUnknownCfaNode source = JvmUnknownCfaNode.INSTANCE;
 
     // Act
-    jvmAssumeExceptionCfaEdge.setSource(JvmUnknownCfaNode.INSTANCE);
+    jvmAssumeExceptionCfaEdge.setSource(source);
 
     // Assert
-    assertSame(JvmUnknownCfaNode.INSTANCE, jvmAssumeExceptionCfaEdge.getSource());
+    JvmUnknownCfaNode expectedSource = source.INSTANCE;
+    assertSame(expectedSource, jvmAssumeExceptionCfaEdge.getSource());
   }
 
   /**
@@ -73,17 +68,13 @@ class JvmCfaEdgeDiffblueTest {
    * <p>Method under test: {@link JvmCfaEdge#targetSignature()}
    */
   @Test
-  @DisplayName("Test targetSignature(); then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"proguard.classfile.MethodSignature JvmCfaEdge.targetSignature()"})
-  void testTargetSignature_thenReturnNull() {
-    // Arrange
-    JvmAssumeExceptionCfaEdge jvmAssumeExceptionCfaEdge =
-        new JvmAssumeExceptionCfaEdge(
-            JvmUnknownCfaNode.INSTANCE, JvmUnknownCfaNode.INSTANCE, true, 1);
-
-    // Act and Assert
-    assertNull(jvmAssumeExceptionCfaEdge.targetSignature());
+  public void testTargetSignature_thenReturnNull() {
+    // Arrange, Act and Assert
+    assertNull(
+        (new JvmAssumeExceptionCfaEdge(
+                JvmUnknownCfaNode.INSTANCE, JvmUnknownCfaNode.INSTANCE, true, 1))
+            .targetSignature());
   }
 }

@@ -1,32 +1,29 @@
 package proguard.dexfile.reader.node.insn;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.expr.Constant;
 import proguard.dexfile.reader.Op;
 import proguard.dexfile.reader.node.DexCodeNode;
 import proguard.dexfile.reader.visitors.DexCodeVisitor;
 
-class FillArrayDataStmtNodeDiffblueTest {
+public class FillArrayDataStmtNodeDiffblueTest {
   /**
    * Test {@link FillArrayDataStmtNode#FillArrayDataStmtNode(Op, int, Object)}.
    *
    * <p>Method under test: {@link FillArrayDataStmtNode#FillArrayDataStmtNode(Op, int, Object)}
    */
   @Test
-  @DisplayName("Test new FillArrayDataStmtNode(Op, int, Object)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void FillArrayDataStmtNode.<init>(Op, int, Object)"})
-  void testNewFillArrayDataStmtNode() {
+  public void testNewFillArrayDataStmtNode() {
     // Arrange and Act
     FillArrayDataStmtNode actualFillArrayDataStmtNode =
         new FillArrayDataStmtNode(Op.NOP, 1, Constant.Null);
@@ -48,12 +45,9 @@ class FillArrayDataStmtNodeDiffblueTest {
    * <p>Method under test: {@link FillArrayDataStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeNode(); then DexCodeNode() stmts size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void FillArrayDataStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
+  public void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
     // Arrange
     FillArrayDataStmtNode fillArrayDataStmtNode =
         new FillArrayDataStmtNode(Op.NOP, 1, Constant.Null);

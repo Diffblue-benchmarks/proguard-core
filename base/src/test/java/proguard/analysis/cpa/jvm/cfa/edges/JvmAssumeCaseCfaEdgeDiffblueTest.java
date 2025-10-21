@@ -1,20 +1,19 @@
 package proguard.analysis.cpa.jvm.cfa.edges;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.analysis.cpa.jvm.cfa.nodes.JvmCfaNode;
 import proguard.analysis.cpa.jvm.cfa.nodes.JvmUnknownCfaNode;
 import proguard.classfile.attribute.CodeAttribute;
 
-class JvmAssumeCaseCfaEdgeDiffblueTest {
+public class JvmAssumeCaseCfaEdgeDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -26,14 +25,12 @@ class JvmAssumeCaseCfaEdgeDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void JvmAssumeCaseCfaEdge.<init>(CodeAttribute, int, int)",
     "int JvmAssumeCaseCfaEdge.getAssumedCase()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     CodeAttribute methodCode = new CodeAttribute(1);
 
@@ -60,28 +57,25 @@ class JvmAssumeCaseCfaEdgeDiffblueTest {
    * CodeAttribute, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test new JvmAssumeCaseCfaEdge(JvmCfaNode, JvmCfaNode, CodeAttribute, int, int); then Source return JvmUnknownCfaNode")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void JvmAssumeCaseCfaEdge.<init>(JvmCfaNode, JvmCfaNode, CodeAttribute, int, int)"
   })
-  void testNewJvmAssumeCaseCfaEdge_thenSourceReturnJvmUnknownCfaNode() {
+  public void testNewJvmAssumeCaseCfaEdge_thenSourceReturnJvmUnknownCfaNode() {
     // Arrange
+    JvmUnknownCfaNode target = JvmUnknownCfaNode.INSTANCE;
     CodeAttribute methodCode = new CodeAttribute(1);
 
     // Act
     JvmAssumeCaseCfaEdge actualJvmAssumeCaseCfaEdge =
-        new JvmAssumeCaseCfaEdge(
-            JvmUnknownCfaNode.INSTANCE, JvmUnknownCfaNode.INSTANCE, methodCode, 2, 1);
+        new JvmAssumeCaseCfaEdge(JvmUnknownCfaNode.INSTANCE, target, methodCode, 2, 1);
 
     // Assert
     JvmCfaNode source = actualJvmAssumeCaseCfaEdge.getSource();
     assertTrue(source instanceof JvmUnknownCfaNode);
     assertEquals(1, actualJvmAssumeCaseCfaEdge.getAssumedCase());
     assertSame(methodCode, actualJvmAssumeCaseCfaEdge.getMethodCode());
-    JvmUnknownCfaNode jvmUnknownCfaNode = JvmUnknownCfaNode.INSTANCE;
+    JvmUnknownCfaNode jvmUnknownCfaNode = target.INSTANCE;
     assertSame(jvmUnknownCfaNode, source);
     assertSame(jvmUnknownCfaNode, actualJvmAssumeCaseCfaEdge.getTarget());
   }

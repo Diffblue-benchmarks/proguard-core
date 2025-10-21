@@ -1,17 +1,16 @@
 package proguard.classfile.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import org.apache.logging.log4j.Logger;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.evaluation.value.object.model.reflective.ReflectiveModel;
 
-class WarningLoggerDiffblueTest {
+public class WarningLoggerDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -23,13 +22,11 @@ class WarningLoggerDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void WarningLogger.<init>(Logger)", "int WarningLogger.getWarningCount()"})
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
-    assertEquals(0, new WarningLogger(ReflectiveModel.log).getWarningCount());
+    assertEquals(0, (new WarningLogger(ReflectiveModel.log)).getWarningCount());
   }
 
   /**
@@ -39,11 +36,9 @@ class WarningLoggerDiffblueTest {
    * <p>Method under test: {@link WarningLogger#print(String, String, String)}
    */
   @Test
-  @DisplayName("Test print(String, String, String) with 'className', 'className2', 'message'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void WarningLogger.print(String, String, String)"})
-  void testPrintWithClassNameClassName2Message() {
+  public void testPrintWithClassNameClassName2Message() {
     // Arrange
     WarningLogger warningLogger = new WarningLogger(ReflectiveModel.log);
 
@@ -61,11 +56,9 @@ class WarningLoggerDiffblueTest {
    * <p>Method under test: {@link WarningLogger#print(String, String, String)}
    */
   @Test
-  @DisplayName("Test print(String, String, String) with 'className', 'className2', 'message'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void WarningLogger.print(String, String, String)"})
-  void testPrintWithClassNameClassName2Message2() {
+  public void testPrintWithClassNameClassName2Message2() {
     // Arrange
     WarningLogger warningLogger = new WarningLogger(ReflectiveModel.log, new ArrayList<>());
 
@@ -83,11 +76,9 @@ class WarningLoggerDiffblueTest {
    * <p>Method under test: {@link WarningLogger#print(String, String, String)}
    */
   @Test
-  @DisplayName("Test print(String, String, String) with 'className', 'className2', 'message'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void WarningLogger.print(String, String, String)"})
-  void testPrintWithClassNameClassName2Message3() {
+  public void testPrintWithClassNameClassName2Message3() {
     // Arrange
     ArrayList<String> classFilter = new ArrayList<>();
     classFilter.add("foo");
@@ -106,11 +97,9 @@ class WarningLoggerDiffblueTest {
    * <p>Method under test: {@link WarningLogger#print(String, String)}
    */
   @Test
-  @DisplayName("Test print(String, String) with 'className', 'message'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void WarningLogger.print(String, String)"})
-  void testPrintWithClassNameMessage() {
+  public void testPrintWithClassNameMessage() {
     // Arrange
     WarningLogger warningLogger = new WarningLogger(ReflectiveModel.log, new ArrayList<>());
 
@@ -127,11 +116,9 @@ class WarningLoggerDiffblueTest {
    * <p>Method under test: {@link WarningLogger#print(String, String)}
    */
   @Test
-  @DisplayName("Test print(String, String) with 'className', 'message'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void WarningLogger.print(String, String)"})
-  void testPrintWithClassNameMessage2() {
+  public void testPrintWithClassNameMessage2() {
     // Arrange
     ArrayList<String> classFilter = new ArrayList<>();
     classFilter.add("foo");
@@ -155,12 +142,9 @@ class WarningLoggerDiffblueTest {
    * <p>Method under test: {@link WarningLogger#print(String, String)}
    */
   @Test
-  @DisplayName(
-      "Test print(String, String) with 'className', 'message'; then WarningLogger(Logger) with logger is log WarningCount is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void WarningLogger.print(String, String)"})
-  void testPrintWithClassNameMessage_thenWarningLoggerWithLoggerIsLogWarningCountIsOne() {
+  public void testPrintWithClassNameMessage_thenWarningLoggerWithLoggerIsLogWarningCountIsOne() {
     // Arrange
     WarningLogger warningLogger = new WarningLogger(ReflectiveModel.log);
 

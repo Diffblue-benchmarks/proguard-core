@@ -1,30 +1,27 @@
 package proguard.dexfile.reader.node.insn;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.reader.Op;
 import proguard.dexfile.reader.node.DexCodeNode;
 import proguard.dexfile.reader.visitors.DexCodeVisitor;
 
-class Stmt3RNodeDiffblueTest {
+public class Stmt3RNodeDiffblueTest {
   /**
    * Test {@link Stmt3RNode#Stmt3RNode(Op, int, int, int)}.
    *
    * <p>Method under test: {@link Stmt3RNode#Stmt3RNode(Op, int, int, int)}
    */
   @Test
-  @DisplayName("Test new Stmt3RNode(Op, int, int, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Stmt3RNode.<init>(Op, int, int, int)"})
-  void testNewStmt3RNode() {
+  public void testNewStmt3RNode() {
     // Arrange and Act
     Stmt3RNode actualStmt3RNode = new Stmt3RNode(Op.NOP, 1, 1, 1);
 
@@ -47,12 +44,9 @@ class Stmt3RNodeDiffblueTest {
    * <p>Method under test: {@link Stmt3RNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeNode(); then DexCodeNode() stmts size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Stmt3RNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
+  public void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
     // Arrange
     Stmt3RNode stmt3RNode = new Stmt3RNode(Op.NOP, 1, 1, 1);
     DexCodeNode cv = new DexCodeNode();

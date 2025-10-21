@@ -1,39 +1,33 @@
 package proguard.classfile;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertSame;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class BasicMethodInfoDiffblueTest {
+public class BasicMethodInfoDiffblueTest {
   /**
    * Test {@link BasicMethodInfo#BasicMethodInfo(MethodInfo)}.
    *
    * <p>Method under test: {@link BasicMethodInfo#BasicMethodInfo(MethodInfo)}
    */
   @Test
-  @DisplayName("Test new BasicMethodInfo(MethodInfo)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void BasicMethodInfo.<init>(MethodInfo)"})
-  void testNewBasicMethodInfo() {
+  public void testNewBasicMethodInfo() {
     // Arrange
     BasicMethodInfo method =
         new BasicMethodInfo(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE);
 
-    // Act
-    BasicMethodInfo actualBasicMethodInfo = new BasicMethodInfo(method);
-
-    // Assert
-    assertEquals(method, actualBasicMethodInfo);
+    // Act and Assert
+    assertEquals(method, new BasicMethodInfo(method));
   }
 
   /**
@@ -46,12 +40,9 @@ class BasicMethodInfoDiffblueTest {
    * <p>Method under test: {@link BasicMethodInfo#BasicMethodInfo(MethodInfo)}
    */
   @Test
-  @DisplayName(
-      "Test new BasicMethodInfo(MethodInfo); then return Descriptor PrettyReturnType is 'Class'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void BasicMethodInfo.<init>(MethodInfo)"})
-  void testNewBasicMethodInfo_thenReturnDescriptorPrettyReturnTypeIsClass() {
+  public void testNewBasicMethodInfo_thenReturnDescriptorPrettyReturnTypeIsClass() {
     // Arrange and Act
     BasicMethodInfo actualBasicMethodInfo =
         new BasicMethodInfo(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE);
@@ -79,11 +70,9 @@ class BasicMethodInfoDiffblueTest {
    * <p>Method under test: {@link BasicMethodInfo#BasicMethodInfo(String, MethodDescriptor)}
    */
   @Test
-  @DisplayName("Test new BasicMethodInfo(String, MethodDescriptor); then return 'Method Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void BasicMethodInfo.<init>(String, MethodDescriptor)"})
-  void testNewBasicMethodInfo_thenReturnMethodName() {
+  public void testNewBasicMethodInfo_thenReturnMethodName() {
     // Arrange
     MethodDescriptor descriptor = new MethodDescriptor("Return Type", new ArrayList<>());
 
@@ -111,20 +100,19 @@ class BasicMethodInfoDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean BasicMethodInfo.equals(Object)", "int BasicMethodInfo.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
-    MethodDescriptor descriptor = new MethodDescriptor("Return Type", new ArrayList<>());
-    BasicMethodInfo basicMethodInfo = new BasicMethodInfo("Method Name", descriptor);
-    MethodDescriptor descriptor2 = new MethodDescriptor("Return Type", new ArrayList<>());
-    BasicMethodInfo basicMethodInfo2 = new BasicMethodInfo("Method Name", descriptor2);
+    BasicMethodInfo basicMethodInfo =
+        new BasicMethodInfo("Method Name", new MethodDescriptor("Return Type", new ArrayList<>()));
+    BasicMethodInfo basicMethodInfo2 =
+        new BasicMethodInfo("Method Name", new MethodDescriptor("Return Type", new ArrayList<>()));
 
     // Act and Assert
     assertEquals(basicMethodInfo, basicMethodInfo2);
-    assertEquals(basicMethodInfo.hashCode(), basicMethodInfo2.hashCode());
+    int expectedHashCodeResult = basicMethodInfo.hashCode();
+    assertEquals(expectedHashCodeResult, basicMethodInfo2.hashCode());
   }
 
   /**
@@ -138,20 +126,19 @@ class BasicMethodInfoDiffblueTest {
    * <p>Method under test: {@link BasicMethodInfo#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean BasicMethodInfo.equals(Object)", "int BasicMethodInfo.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
-    MethodDescriptor descriptor = new MethodDescriptor("Return Type", new ArrayList<>());
     BasicMethodInfo basicMethodInfo =
-        new BasicMethodInfo("proguard.classfile.BasicMethodInfo", descriptor);
-    MethodDescriptor descriptor2 = new MethodDescriptor("Return Type", new ArrayList<>());
-    BasicMethodInfo basicMethodInfo2 = new BasicMethodInfo("Method Name", descriptor2);
+        new BasicMethodInfo(
+            "proguard.classfile.BasicMethodInfo",
+            new MethodDescriptor("Return Type", new ArrayList<>()));
 
     // Act and Assert
-    assertNotEquals(basicMethodInfo, basicMethodInfo2);
+    assertNotEquals(
+        basicMethodInfo,
+        new BasicMethodInfo("Method Name", new MethodDescriptor("Return Type", new ArrayList<>())));
   }
 
   /**
@@ -165,20 +152,19 @@ class BasicMethodInfoDiffblueTest {
    * <p>Method under test: {@link BasicMethodInfo#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean BasicMethodInfo.equals(Object)", "int BasicMethodInfo.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
-    MethodDescriptor descriptor =
-        new MethodDescriptor("proguard.classfile.MethodDescriptor", new ArrayList<>());
-    BasicMethodInfo basicMethodInfo = new BasicMethodInfo("Method Name", descriptor);
-    MethodDescriptor descriptor2 = new MethodDescriptor("Return Type", new ArrayList<>());
-    BasicMethodInfo basicMethodInfo2 = new BasicMethodInfo("Method Name", descriptor2);
+    BasicMethodInfo basicMethodInfo =
+        new BasicMethodInfo(
+            "Method Name",
+            new MethodDescriptor("proguard.classfile.MethodDescriptor", new ArrayList<>()));
 
     // Act and Assert
-    assertNotEquals(basicMethodInfo, basicMethodInfo2);
+    assertNotEquals(
+        basicMethodInfo,
+        new BasicMethodInfo("Method Name", new MethodDescriptor("Return Type", new ArrayList<>())));
   }
 
   /**
@@ -192,16 +178,12 @@ class BasicMethodInfoDiffblueTest {
    * <p>Method under test: {@link BasicMethodInfo#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean BasicMethodInfo.equals(Object)", "int BasicMethodInfo.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
-    // Arrange
-    MethodDescriptor descriptor = new MethodDescriptor("Return Type", new ArrayList<>());
-    BasicMethodInfo basicMethodInfo = new BasicMethodInfo("Method Name", descriptor);
-
-    // Act and Assert
-    assertNotEquals(basicMethodInfo, 1);
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
+    // Arrange, Act and Assert
+    assertNotEquals(
+        new BasicMethodInfo("Method Name", new MethodDescriptor("Return Type", new ArrayList<>())),
+        1);
   }
 }

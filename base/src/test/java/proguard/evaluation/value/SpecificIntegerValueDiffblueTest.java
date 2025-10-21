@@ -1,18 +1,17 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class SpecificIntegerValueDiffblueTest {
+public class SpecificIntegerValueDiffblueTest {
   /**
    * Test {@link SpecificIntegerValue#negate()}.
    *
@@ -23,14 +22,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#negate()}
    */
   @Test
-  @DisplayName("Test negate(); then return NegatedIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.negate()"})
-  void testNegate_thenReturnNegatedIntegerValue() {
+  public void testNegate_thenReturnNegatedIntegerValue() {
     // Arrange and Act
     IntegerValue actualNegateResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).negate();
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).negate();
 
     // Assert
     assertTrue(actualNegateResult instanceof NegatedIntegerValue);
@@ -49,13 +46,11 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#negate()}
    */
   @Test
-  @DisplayName("Test negate(); then return ParticularIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.negate()"})
-  void testNegate_thenReturnParticularIntegerValue() {
+  public void testNegate_thenReturnParticularIntegerValue() {
     // Arrange and Act
-    IntegerValue actualNegateResult = new ParticularIntegerValue(42).negate();
+    IntegerValue actualNegateResult = (new ParticularIntegerValue(42)).negate();
 
     // Assert
     assertTrue(actualNegateResult instanceof ParticularIntegerValue);
@@ -68,21 +63,15 @@ class SpecificIntegerValueDiffblueTest {
   /**
    * Test {@link SpecificIntegerValue#convertToByte()}.
    *
-   * <ul>
-   *   <li>Then return {@link ConvertedByteValue}.
-   * </ul>
-   *
    * <p>Method under test: {@link SpecificIntegerValue#convertToByte()}
    */
   @Test
-  @DisplayName("Test convertToByte(); then return ConvertedByteValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.convertToByte()"})
-  void testConvertToByte_thenReturnConvertedByteValue() {
+  public void testConvertToByte() {
     // Arrange and Act
     IntegerValue actualConvertToByteResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).convertToByte();
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).convertToByte();
 
     // Assert
     assertTrue(actualConvertToByteResult instanceof ConvertedByteValue);
@@ -92,50 +81,17 @@ class SpecificIntegerValueDiffblueTest {
   }
 
   /**
-   * Test {@link SpecificIntegerValue#convertToByte()}.
-   *
-   * <ul>
-   *   <li>Then return {@link ParticularIntegerValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificIntegerValue#convertToByte()}
-   */
-  @Test
-  @DisplayName("Test convertToByte(); then return ParticularIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"IntegerValue SpecificIntegerValue.convertToByte()"})
-  void testConvertToByte_thenReturnParticularIntegerValue() {
-    // Arrange and Act
-    IntegerValue actualConvertToByteResult =
-        new ParticularIntegerValue(Integer.MIN_VALUE).convertToByte();
-
-    // Assert
-    assertTrue(actualConvertToByteResult instanceof ParticularIntegerValue);
-    assertEquals(0, actualConvertToByteResult.value());
-    assertFalse(actualConvertToByteResult.isCategory2());
-    assertTrue(actualConvertToByteResult.isParticular());
-    assertTrue(actualConvertToByteResult.isSpecific());
-  }
-
-  /**
    * Test {@link SpecificIntegerValue#convertToCharacter()}.
-   *
-   * <ul>
-   *   <li>Then return {@link ConvertedCharacterValue}.
-   * </ul>
    *
    * <p>Method under test: {@link SpecificIntegerValue#convertToCharacter()}
    */
   @Test
-  @DisplayName("Test convertToCharacter(); then return ConvertedCharacterValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.convertToCharacter()"})
-  void testConvertToCharacter_thenReturnConvertedCharacterValue() {
+  public void testConvertToCharacter() {
     // Arrange and Act
     IntegerValue actualConvertToCharacterResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).convertToCharacter();
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).convertToCharacter();
 
     // Assert
     assertTrue(actualConvertToCharacterResult instanceof ConvertedCharacterValue);
@@ -145,82 +101,22 @@ class SpecificIntegerValueDiffblueTest {
   }
 
   /**
-   * Test {@link SpecificIntegerValue#convertToCharacter()}.
-   *
-   * <ul>
-   *   <li>Then return {@link ParticularIntegerValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificIntegerValue#convertToCharacter()}
-   */
-  @Test
-  @DisplayName("Test convertToCharacter(); then return ParticularIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"IntegerValue SpecificIntegerValue.convertToCharacter()"})
-  void testConvertToCharacter_thenReturnParticularIntegerValue() {
-    // Arrange and Act
-    IntegerValue actualConvertToCharacterResult =
-        new ParticularIntegerValue(Value.NEVER).convertToCharacter();
-
-    // Assert
-    assertTrue(actualConvertToCharacterResult instanceof ParticularIntegerValue);
-    assertEquals(65535, actualConvertToCharacterResult.value());
-    assertFalse(actualConvertToCharacterResult.isCategory2());
-    assertTrue(actualConvertToCharacterResult.isParticular());
-    assertTrue(actualConvertToCharacterResult.isSpecific());
-  }
-
-  /**
    * Test {@link SpecificIntegerValue#convertToShort()}.
-   *
-   * <ul>
-   *   <li>Then return {@link ConvertedShortValue}.
-   * </ul>
    *
    * <p>Method under test: {@link SpecificIntegerValue#convertToShort()}
    */
   @Test
-  @DisplayName("Test convertToShort(); then return ConvertedShortValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.convertToShort()"})
-  void testConvertToShort_thenReturnConvertedShortValue() {
+  public void testConvertToShort() {
     // Arrange and Act
     IntegerValue actualConvertToShortResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).convertToShort();
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).convertToShort();
 
     // Assert
     assertTrue(actualConvertToShortResult instanceof ConvertedShortValue);
     assertFalse(actualConvertToShortResult.isCategory2());
     assertFalse(actualConvertToShortResult.isParticular());
-    assertTrue(actualConvertToShortResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificIntegerValue#convertToShort()}.
-   *
-   * <ul>
-   *   <li>Then return {@link ParticularIntegerValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificIntegerValue#convertToShort()}
-   */
-  @Test
-  @DisplayName("Test convertToShort(); then return ParticularIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"IntegerValue SpecificIntegerValue.convertToShort()"})
-  void testConvertToShort_thenReturnParticularIntegerValue() {
-    // Arrange and Act
-    IntegerValue actualConvertToShortResult =
-        new ParticularIntegerValue(Integer.MIN_VALUE).convertToShort();
-
-    // Assert
-    assertTrue(actualConvertToShortResult instanceof ParticularIntegerValue);
-    assertEquals(0, actualConvertToShortResult.value());
-    assertFalse(actualConvertToShortResult.isCategory2());
-    assertTrue(actualConvertToShortResult.isParticular());
     assertTrue(actualConvertToShortResult.isSpecific());
   }
 
@@ -234,14 +130,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#convertToLong()}
    */
   @Test
-  @DisplayName("Test convertToLong(); then return ConvertedLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificIntegerValue.convertToLong()"})
-  void testConvertToLong_thenReturnConvertedLongValue() {
+  public void testConvertToLong_thenReturnConvertedLongValue() {
     // Arrange and Act
     LongValue actualConvertToLongResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).convertToLong();
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).convertToLong();
 
     // Assert
     assertTrue(actualConvertToLongResult instanceof ConvertedLongValue);
@@ -260,13 +154,11 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#convertToLong()}
    */
   @Test
-  @DisplayName("Test convertToLong(); then return ParticularLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificIntegerValue.convertToLong()"})
-  void testConvertToLong_thenReturnParticularLongValue() {
+  public void testConvertToLong_thenReturnParticularLongValue() {
     // Arrange and Act
-    LongValue actualConvertToLongResult = new ParticularIntegerValue(42).convertToLong();
+    LongValue actualConvertToLongResult = (new ParticularIntegerValue(42)).convertToLong();
 
     // Assert
     assertTrue(actualConvertToLongResult instanceof ParticularLongValue);
@@ -286,14 +178,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#convertToFloat()}
    */
   @Test
-  @DisplayName("Test convertToFloat(); then return ConvertedFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue SpecificIntegerValue.convertToFloat()"})
-  void testConvertToFloat_thenReturnConvertedFloatValue() {
+  public void testConvertToFloat_thenReturnConvertedFloatValue() {
     // Arrange and Act
     FloatValue actualConvertToFloatResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).convertToFloat();
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).convertToFloat();
 
     // Assert
     assertTrue(actualConvertToFloatResult instanceof ConvertedFloatValue);
@@ -312,17 +202,15 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#convertToFloat()}
    */
   @Test
-  @DisplayName("Test convertToFloat(); then return ParticularFloatValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue SpecificIntegerValue.convertToFloat()"})
-  void testConvertToFloat_thenReturnParticularFloatValue() {
+  public void testConvertToFloat_thenReturnParticularFloatValue() {
     // Arrange and Act
-    FloatValue actualConvertToFloatResult = new ParticularIntegerValue(42).convertToFloat();
+    FloatValue actualConvertToFloatResult = (new ParticularIntegerValue(42)).convertToFloat();
 
     // Assert
     assertTrue(actualConvertToFloatResult instanceof ParticularFloatValue);
-    assertEquals(42.0f, actualConvertToFloatResult.value());
+    assertEquals(42.0f, actualConvertToFloatResult.value(), 0.0f);
     assertFalse(actualConvertToFloatResult.isCategory2());
     assertTrue(actualConvertToFloatResult.isParticular());
     assertTrue(actualConvertToFloatResult.isSpecific());
@@ -338,14 +226,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#convertToDouble()}
    */
   @Test
-  @DisplayName("Test convertToDouble(); then return ConvertedDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificIntegerValue.convertToDouble()"})
-  void testConvertToDouble_thenReturnConvertedDoubleValue() {
+  public void testConvertToDouble_thenReturnConvertedDoubleValue() {
     // Arrange and Act
     DoubleValue actualConvertToDoubleResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).convertToDouble();
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).convertToDouble();
 
     // Assert
     assertTrue(actualConvertToDoubleResult instanceof ConvertedDoubleValue);
@@ -364,17 +250,15 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#convertToDouble()}
    */
   @Test
-  @DisplayName("Test convertToDouble(); then return ParticularDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue SpecificIntegerValue.convertToDouble()"})
-  void testConvertToDouble_thenReturnParticularDoubleValue() {
+  public void testConvertToDouble_thenReturnParticularDoubleValue() {
     // Arrange and Act
-    DoubleValue actualConvertToDoubleResult = new ParticularIntegerValue(42).convertToDouble();
+    DoubleValue actualConvertToDoubleResult = (new ParticularIntegerValue(42)).convertToDouble();
 
     // Assert
     assertTrue(actualConvertToDoubleResult instanceof ParticularDoubleValue);
-    assertEquals(42.0d, actualConvertToDoubleResult.value());
+    assertEquals(42.0d, actualConvertToDoubleResult.value(), 0.0);
     assertTrue(actualConvertToDoubleResult.isCategory2());
     assertTrue(actualConvertToDoubleResult.isParticular());
     assertTrue(actualConvertToDoubleResult.isSpecific());
@@ -391,12 +275,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#generalize(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(IntegerValue) with 'IntegerValue'; given ConvertedByteValue(IntegerValue) with value is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.generalize(IntegerValue)"})
-  void testGeneralizeWithIntegerValue_givenConvertedByteValueWithValueIsNull() {
+  public void testGeneralizeWithIntegerValue_givenConvertedByteValueWithValueIsNull() {
     // Arrange
     ConvertedByteValue convertedByteValue = new ConvertedByteValue(null);
 
@@ -422,11 +303,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#generalize(IntegerValue)}
    */
   @Test
-  @DisplayName("Test generalize(IntegerValue) with 'IntegerValue'; then return ConvertedByteValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.generalize(IntegerValue)"})
-  void testGeneralizeWithIntegerValue_thenReturnConvertedByteValue() {
+  public void testGeneralizeWithIntegerValue_thenReturnConvertedByteValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -445,6 +324,31 @@ class SpecificIntegerValueDiffblueTest {
    * Test {@link SpecificIntegerValue#generalize(IntegerValue)} with {@code IntegerValue}.
    *
    * <ul>
+   *   <li>Then return {@link RangeIntegerValue}.
+   * </ul>
+   *
+   * <p>Method under test: {@link SpecificIntegerValue#generalize(IntegerValue)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"IntegerValue SpecificIntegerValue.generalize(IntegerValue)"})
+  public void testGeneralizeWithIntegerValue_thenReturnRangeIntegerValue() {
+    // Arrange and Act
+    IntegerValue actualGeneralizeResult =
+        (new ParticularIntegerValue(Integer.MIN_VALUE))
+            .generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+
+    // Assert
+    assertTrue(actualGeneralizeResult instanceof RangeIntegerValue);
+    assertFalse(actualGeneralizeResult.isCategory2());
+    assertFalse(actualGeneralizeResult.isParticular());
+    assertFalse(actualGeneralizeResult.isSpecific());
+  }
+
+  /**
+   * Test {@link SpecificIntegerValue#generalize(IntegerValue)} with {@code IntegerValue}.
+   *
+   * <ul>
    *   <li>When {@link ConvertedByteValue#ConvertedByteValue(IntegerValue)} with value is {@link
    *       ParticularValueFactory#INTEGER_VALUE_0}.
    * </ul>
@@ -452,12 +356,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#generalize(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(IntegerValue) with 'IntegerValue'; when ConvertedByteValue(IntegerValue) with value is INTEGER_VALUE_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.generalize(IntegerValue)"})
-  void testGeneralizeWithIntegerValue_whenConvertedByteValueWithValueIsInteger_value_0() {
+  public void testGeneralizeWithIntegerValue_whenConvertedByteValueWithValueIsInteger_value_0() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -485,15 +386,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#generalize(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0; then return UnknownIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.generalize(IntegerValue)"})
-  void testGeneralizeWithIntegerValue_whenInteger_value_0_thenReturnUnknownIntegerValue() {
+  public void testGeneralizeWithIntegerValue_whenInteger_value_0_thenReturnUnknownIntegerValue() {
     // Arrange and Act
     IntegerValue actualGeneralizeResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .generalize(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -513,14 +411,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#generalize(IntegerValue)}
    */
   @Test
-  @DisplayName("Test generalize(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_BYTE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.generalize(IntegerValue)"})
-  void testGeneralizeWithIntegerValue_whenInteger_value_byte() {
+  public void testGeneralizeWithIntegerValue_whenInteger_value_byte() {
     // Arrange and Act
     IntegerValue actualGeneralizeResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
@@ -541,21 +437,16 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#generalize(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return INTEGER_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.generalize(IntegerValue)"})
-  void testGeneralizeWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
+  public void testGeneralizeWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
     // Arrange
     IntegerValue other = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    IntegerValue actualGeneralizeResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).generalize(other);
-
-    // Assert
-    assertSame(other, actualGeneralizeResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).generalize(other));
   }
 
   /**
@@ -568,12 +459,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#generalize(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(RangeIntegerValue) with 'RangeIntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.generalize(RangeIntegerValue)"})
-  void testGeneralizeWithRangeIntegerValue_thenReturnRangeIntegerValue() {
+  public void testGeneralizeWithRangeIntegerValue_thenReturnRangeIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -598,12 +486,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#generalize(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(RangeIntegerValue) with 'RangeIntegerValue'; then return UnknownIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.generalize(RangeIntegerValue)"})
-  void testGeneralizeWithRangeIntegerValue_thenReturnUnknownIntegerValue() {
+  public void testGeneralizeWithRangeIntegerValue_thenReturnUnknownIntegerValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -626,20 +511,16 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#generalize(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test generalize(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.generalize(SpecificIntegerValue)"})
-  void testGeneralizeWithSpecificIntegerValue() {
+  public void testGeneralizeWithSpecificIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
-    // Act
-    IntegerValue actualGeneralizeResult =
-        particularIntegerValue.generalize((SpecificIntegerValue) new ParticularIntegerValue(42));
-
-    // Assert
-    assertSame(particularIntegerValue, actualGeneralizeResult);
+    // Act and Assert
+    assertSame(
+        particularIntegerValue,
+        particularIntegerValue.generalize((SpecificIntegerValue) new ParticularIntegerValue(42)));
   }
 
   /**
@@ -649,11 +530,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#generalize(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test generalize(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.generalize(SpecificIntegerValue)"})
-  void testGeneralizeWithSpecificIntegerValue2() {
+  public void testGeneralizeWithSpecificIntegerValue2() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -674,6 +553,34 @@ class SpecificIntegerValueDiffblueTest {
    * SpecificIntegerValue}.
    *
    * <ul>
+   *   <li>Given {@link ParticularIntegerValue#ParticularIntegerValue(int)} with value is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link SpecificIntegerValue#generalize(SpecificIntegerValue)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"IntegerValue SpecificIntegerValue.generalize(SpecificIntegerValue)"})
+  public void testGeneralizeWithSpecificIntegerValue_givenParticularIntegerValueWithValueIsOne() {
+    // Arrange
+    ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(1);
+
+    // Act
+    IntegerValue actualGeneralizeResult =
+        particularIntegerValue.generalize((SpecificIntegerValue) new ParticularIntegerValue(42));
+
+    // Assert
+    assertTrue(actualGeneralizeResult instanceof UnknownIntegerValue);
+    assertFalse(actualGeneralizeResult.isCategory2());
+    assertFalse(actualGeneralizeResult.isParticular());
+    assertFalse(actualGeneralizeResult.isSpecific());
+  }
+
+  /**
+   * Test {@link SpecificIntegerValue#generalize(SpecificIntegerValue)} with {@code
+   * SpecificIntegerValue}.
+   *
+   * <ul>
    *   <li>When {@code null}.
    *   <li>Then return {@link UnknownIntegerValue}.
    * </ul>
@@ -681,15 +588,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#generalize(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(SpecificIntegerValue) with 'SpecificIntegerValue'; when 'null'; then return UnknownIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.generalize(SpecificIntegerValue)"})
-  void testGeneralizeWithSpecificIntegerValue_whenNull_thenReturnUnknownIntegerValue() {
+  public void testGeneralizeWithSpecificIntegerValue_whenNull_thenReturnUnknownIntegerValue() {
     // Arrange and Act
     IntegerValue actualGeneralizeResult =
-        new ParticularIntegerValue(42).generalize((SpecificIntegerValue) null);
+        (new ParticularIntegerValue(42)).generalize((SpecificIntegerValue) null);
 
     // Assert
     assertTrue(actualGeneralizeResult instanceof UnknownIntegerValue);
@@ -708,14 +612,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#add(IntegerValue)}
    */
   @Test
-  @DisplayName("Test add(IntegerValue) with 'IntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.add(IntegerValue)"})
-  void testAddWithIntegerValue_thenReturnRangeIntegerValue() {
+  public void testAddWithIntegerValue_thenReturnRangeIntegerValue() {
     // Arrange and Act
     IntegerValue actualAddResult =
-        new ParticularIntegerValue(42).add(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+        (new ParticularIntegerValue(42)).add(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
     assertTrue(actualAddResult instanceof RangeIntegerValue);
@@ -735,15 +637,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#add(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test add(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.add(IntegerValue)"})
-  void testAddWithIntegerValue_whenInteger_value_0_thenReturnCompositeIntegerValue() {
+  public void testAddWithIntegerValue_whenInteger_value_0_thenReturnCompositeIntegerValue() {
     // Arrange and Act
     IntegerValue actualAddResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .add(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -764,15 +663,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#add(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test add(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_BYTE; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.add(IntegerValue)"})
-  void testAddWithIntegerValue_whenInteger_value_byte_thenReturnCompositeIntegerValue() {
+  public void testAddWithIntegerValue_whenInteger_value_byte_thenReturnCompositeIntegerValue() {
     // Arrange and Act
     IntegerValue actualAddResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .add(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
@@ -793,21 +689,15 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#add(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test add(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return INTEGER_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.add(IntegerValue)"})
-  void testAddWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
+  public void testAddWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
     // Arrange
     IntegerValue other = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    IntegerValue actualAddResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).add(other);
-
-    // Assert
-    assertSame(other, actualAddResult);
+    // Act and Assert
+    assertSame(
+        other, (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).add(other));
   }
 
   /**
@@ -820,12 +710,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#add(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test add(RangeIntegerValue) with 'RangeIntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.add(RangeIntegerValue)"})
-  void testAddWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
+  public void testAddWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -850,12 +737,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#add(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test add(RangeIntegerValue) with 'RangeIntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.add(RangeIntegerValue)"})
-  void testAddWithRangeIntegerValue_thenReturnRangeIntegerValue() {
+  public void testAddWithRangeIntegerValue_thenReturnRangeIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -875,11 +759,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#add(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test add(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.add(SpecificIntegerValue)"})
-  void testAddWithSpecificIntegerValue() {
+  public void testAddWithSpecificIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -905,12 +787,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtract(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(IntegerValue) with 'IntegerValue'; given ConvertedByteValue(IntegerValue) with value is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtract(IntegerValue)"})
-  void testSubtractWithIntegerValue_givenConvertedByteValueWithValueIsNull() {
+  public void testSubtractWithIntegerValue_givenConvertedByteValueWithValueIsNull() {
     // Arrange
     ConvertedByteValue convertedByteValue = new ConvertedByteValue(null);
 
@@ -936,12 +815,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtract(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(IntegerValue) with 'IntegerValue'; then return ParticularIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtract(IntegerValue)"})
-  void testSubtractWithIntegerValue_thenReturnParticularIntegerValue() {
+  public void testSubtractWithIntegerValue_thenReturnParticularIntegerValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -968,14 +844,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtract(IntegerValue)}
    */
   @Test
-  @DisplayName("Test subtract(IntegerValue) with 'IntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtract(IntegerValue)"})
-  void testSubtractWithIntegerValue_thenReturnRangeIntegerValue() {
+  public void testSubtractWithIntegerValue_thenReturnRangeIntegerValue() {
     // Arrange and Act
     IntegerValue actualSubtractResult =
-        new ParticularIntegerValue(42).subtract(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+        (new ParticularIntegerValue(42)).subtract(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
     assertTrue(actualSubtractResult instanceof RangeIntegerValue);
@@ -995,12 +869,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtract(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(IntegerValue) with 'IntegerValue'; when ConvertedByteValue(IntegerValue) with value is INTEGER_VALUE_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtract(IntegerValue)"})
-  void testSubtractWithIntegerValue_whenConvertedByteValueWithValueIsInteger_value_0() {
+  public void testSubtractWithIntegerValue_whenConvertedByteValueWithValueIsInteger_value_0() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -1028,15 +899,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtract(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtract(IntegerValue)"})
-  void testSubtractWithIntegerValue_whenInteger_value_0_thenReturnCompositeIntegerValue() {
+  public void testSubtractWithIntegerValue_whenInteger_value_0_thenReturnCompositeIntegerValue() {
     // Arrange and Act
     IntegerValue actualSubtractResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .subtract(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -1056,14 +924,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtract(IntegerValue)}
    */
   @Test
-  @DisplayName("Test subtract(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_BYTE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtract(IntegerValue)"})
-  void testSubtractWithIntegerValue_whenInteger_value_byte() {
+  public void testSubtractWithIntegerValue_whenInteger_value_byte() {
     // Arrange and Act
     IntegerValue actualSubtractResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .subtract(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
@@ -1084,21 +950,15 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtract(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return INTEGER_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtract(IntegerValue)"})
-  void testSubtractWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
+  public void testSubtractWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
     // Arrange
     IntegerValue other = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    IntegerValue actualSubtractResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).subtract(other);
-
-    // Assert
-    assertSame(other, actualSubtractResult);
+    // Act and Assert
+    assertSame(
+        other, (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).subtract(other));
   }
 
   /**
@@ -1111,12 +971,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtract(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(RangeIntegerValue) with 'RangeIntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtract(RangeIntegerValue)"})
-  void testSubtractWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
+  public void testSubtractWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -1141,12 +998,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtract(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(RangeIntegerValue) with 'RangeIntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtract(RangeIntegerValue)"})
-  void testSubtractWithRangeIntegerValue_thenReturnRangeIntegerValue() {
+  public void testSubtractWithRangeIntegerValue_thenReturnRangeIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -1168,11 +1022,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtract(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test subtract(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtract(SpecificIntegerValue)"})
-  void testSubtractWithSpecificIntegerValue() {
+  public void testSubtractWithSpecificIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -1193,18 +1045,43 @@ class SpecificIntegerValueDiffblueTest {
    * SpecificIntegerValue}.
    *
    * <ul>
+   *   <li>Given {@link ParticularIntegerValue#ParticularIntegerValue(int)} with value is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link SpecificIntegerValue#subtract(SpecificIntegerValue)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtract(SpecificIntegerValue)"})
+  public void testSubtractWithSpecificIntegerValue_givenParticularIntegerValueWithValueIsOne() {
+    // Arrange
+    ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(1);
+
+    // Act
+    IntegerValue actualSubtractResult =
+        particularIntegerValue.subtract((SpecificIntegerValue) new ParticularIntegerValue(42));
+
+    // Assert
+    assertTrue(actualSubtractResult instanceof CompositeIntegerValue);
+    assertFalse(actualSubtractResult.isCategory2());
+    assertFalse(actualSubtractResult.isParticular());
+    assertTrue(actualSubtractResult.isSpecific());
+  }
+
+  /**
+   * Test {@link SpecificIntegerValue#subtract(SpecificIntegerValue)} with {@code
+   * SpecificIntegerValue}.
+   *
+   * <ul>
    *   <li>Then return {@link ParticularIntegerValue}.
    * </ul>
    *
    * <p>Method under test: {@link SpecificIntegerValue#subtract(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(SpecificIntegerValue) with 'SpecificIntegerValue'; then return ParticularIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtract(SpecificIntegerValue)"})
-  void testSubtractWithSpecificIntegerValue_thenReturnParticularIntegerValue() {
+  public void testSubtractWithSpecificIntegerValue_thenReturnParticularIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -1232,15 +1109,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtract(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtract(SpecificIntegerValue) with 'SpecificIntegerValue'; when 'null'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtract(SpecificIntegerValue)"})
-  void testSubtractWithSpecificIntegerValue_whenNull_thenReturnCompositeIntegerValue() {
+  public void testSubtractWithSpecificIntegerValue_whenNull_thenReturnCompositeIntegerValue() {
     // Arrange and Act
     IntegerValue actualSubtractResult =
-        new ParticularIntegerValue(42).subtract((SpecificIntegerValue) null);
+        (new ParticularIntegerValue(42)).subtract((SpecificIntegerValue) null);
 
     // Assert
     assertTrue(actualSubtractResult instanceof CompositeIntegerValue);
@@ -1255,11 +1129,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtractFrom(IntegerValue)}
    */
   @Test
-  @DisplayName("Test subtractFrom(IntegerValue) with 'IntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtractFrom(IntegerValue)"})
-  void testSubtractFromWithIntegerValue() {
+  public void testSubtractFromWithIntegerValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -1287,12 +1159,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtractFrom(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtractFrom(IntegerValue) with 'IntegerValue'; given ConvertedByteValue(IntegerValue) with value is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtractFrom(IntegerValue)"})
-  void testSubtractFromWithIntegerValue_givenConvertedByteValueWithValueIsNull() {
+  public void testSubtractFromWithIntegerValue_givenConvertedByteValueWithValueIsNull() {
     // Arrange
     ConvertedByteValue convertedByteValue = new ConvertedByteValue(null);
 
@@ -1318,12 +1187,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtractFrom(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtractFrom(IntegerValue) with 'IntegerValue'; then return ParticularIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtractFrom(IntegerValue)"})
-  void testSubtractFromWithIntegerValue_thenReturnParticularIntegerValue() {
+  public void testSubtractFromWithIntegerValue_thenReturnParticularIntegerValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -1350,14 +1216,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtractFrom(IntegerValue)}
    */
   @Test
-  @DisplayName("Test subtractFrom(IntegerValue) with 'IntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtractFrom(IntegerValue)"})
-  void testSubtractFromWithIntegerValue_thenReturnRangeIntegerValue() {
+  public void testSubtractFromWithIntegerValue_thenReturnRangeIntegerValue() {
     // Arrange and Act
     IntegerValue actualSubtractFromResult =
-        new ParticularIntegerValue(42).subtractFrom(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+        (new ParticularIntegerValue(42)).subtractFrom(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
     assertTrue(actualSubtractFromResult instanceof RangeIntegerValue);
@@ -1376,14 +1240,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtractFrom(IntegerValue)}
    */
   @Test
-  @DisplayName("Test subtractFrom(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtractFrom(IntegerValue)"})
-  void testSubtractFromWithIntegerValue_whenInteger_value_0() {
+  public void testSubtractFromWithIntegerValue_whenInteger_value_0() {
     // Arrange and Act
     IntegerValue actualSubtractFromResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .subtractFrom(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -1403,14 +1265,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtractFrom(IntegerValue)}
    */
   @Test
-  @DisplayName("Test subtractFrom(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_BYTE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtractFrom(IntegerValue)"})
-  void testSubtractFromWithIntegerValue_whenInteger_value_byte() {
+  public void testSubtractFromWithIntegerValue_whenInteger_value_byte() {
     // Arrange and Act
     IntegerValue actualSubtractFromResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .subtractFrom(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
@@ -1431,21 +1291,16 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtractFrom(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtractFrom(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return INTEGER_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtractFrom(IntegerValue)"})
-  void testSubtractFromWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
+  public void testSubtractFromWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
     // Arrange
     IntegerValue other = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    IntegerValue actualSubtractFromResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).subtractFrom(other);
-
-    // Assert
-    assertSame(other, actualSubtractFromResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).subtractFrom(other));
   }
 
   /**
@@ -1459,12 +1314,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtractFrom(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtractFrom(RangeIntegerValue) with 'RangeIntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtractFrom(RangeIntegerValue)"})
-  void testSubtractFromWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
+  public void testSubtractFromWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -1491,12 +1343,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtractFrom(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtractFrom(RangeIntegerValue) with 'RangeIntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtractFrom(RangeIntegerValue)"})
-  void testSubtractFromWithRangeIntegerValue_thenReturnRangeIntegerValue() {
+  public void testSubtractFromWithRangeIntegerValue_thenReturnRangeIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -1518,11 +1367,33 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtractFrom(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test subtractFrom(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtractFrom(SpecificIntegerValue)"})
-  void testSubtractFromWithSpecificIntegerValue() {
+  public void testSubtractFromWithSpecificIntegerValue() {
+    // Arrange
+    ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(1);
+
+    // Act
+    IntegerValue actualSubtractFromResult =
+        particularIntegerValue.subtractFrom((SpecificIntegerValue) new ParticularIntegerValue(42));
+
+    // Assert
+    assertTrue(actualSubtractFromResult instanceof CompositeIntegerValue);
+    assertFalse(actualSubtractFromResult.isCategory2());
+    assertFalse(actualSubtractFromResult.isParticular());
+    assertTrue(actualSubtractFromResult.isSpecific());
+  }
+
+  /**
+   * Test {@link SpecificIntegerValue#subtractFrom(SpecificIntegerValue)} with {@code
+   * SpecificIntegerValue}.
+   *
+   * <p>Method under test: {@link SpecificIntegerValue#subtractFrom(SpecificIntegerValue)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtractFrom(SpecificIntegerValue)"})
+  public void testSubtractFromWithSpecificIntegerValue2() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -1549,12 +1420,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtractFrom(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test subtractFrom(SpecificIntegerValue) with 'SpecificIntegerValue'; then return ParticularIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtractFrom(SpecificIntegerValue)"})
-  void testSubtractFromWithSpecificIntegerValue_thenReturnParticularIntegerValue() {
+  public void testSubtractFromWithSpecificIntegerValue_thenReturnParticularIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -1581,14 +1449,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#subtractFrom(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test subtractFrom(SpecificIntegerValue) with 'SpecificIntegerValue'; when 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.subtractFrom(SpecificIntegerValue)"})
-  void testSubtractFromWithSpecificIntegerValue_whenNull() {
+  public void testSubtractFromWithSpecificIntegerValue_whenNull() {
     // Arrange and Act
     IntegerValue actualSubtractFromResult =
-        new ParticularIntegerValue(42).subtractFrom((SpecificIntegerValue) null);
+        (new ParticularIntegerValue(42)).subtractFrom((SpecificIntegerValue) null);
 
     // Assert
     assertTrue(actualSubtractFromResult instanceof CompositeIntegerValue);
@@ -1607,14 +1473,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#multiply(IntegerValue)}
    */
   @Test
-  @DisplayName("Test multiply(IntegerValue) with 'IntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.multiply(IntegerValue)"})
-  void testMultiplyWithIntegerValue_thenReturnCompositeIntegerValue() {
+  public void testMultiplyWithIntegerValue_thenReturnCompositeIntegerValue() {
     // Arrange and Act
     IntegerValue actualMultiplyResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .multiply(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
@@ -1634,14 +1498,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#multiply(IntegerValue)}
    */
   @Test
-  @DisplayName("Test multiply(IntegerValue) with 'IntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.multiply(IntegerValue)"})
-  void testMultiplyWithIntegerValue_thenReturnRangeIntegerValue() {
+  public void testMultiplyWithIntegerValue_thenReturnRangeIntegerValue() {
     // Arrange and Act
     IntegerValue actualMultiplyResult =
-        new ParticularIntegerValue(42).multiply(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+        (new ParticularIntegerValue(42)).multiply(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
     assertTrue(actualMultiplyResult instanceof RangeIntegerValue);
@@ -1661,15 +1523,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#multiply(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test multiply(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.multiply(IntegerValue)"})
-  void testMultiplyWithIntegerValue_whenInteger_value_0_thenReturnCompositeIntegerValue() {
+  public void testMultiplyWithIntegerValue_whenInteger_value_0_thenReturnCompositeIntegerValue() {
     // Arrange and Act
     IntegerValue actualMultiplyResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .multiply(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -1690,21 +1549,15 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#multiply(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test multiply(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return INTEGER_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.multiply(IntegerValue)"})
-  void testMultiplyWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
+  public void testMultiplyWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
     // Arrange
     IntegerValue other = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    IntegerValue actualMultiplyResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).multiply(other);
-
-    // Assert
-    assertSame(other, actualMultiplyResult);
+    // Act and Assert
+    assertSame(
+        other, (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).multiply(other));
   }
 
   /**
@@ -1717,12 +1570,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#multiply(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test multiply(RangeIntegerValue) with 'RangeIntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.multiply(RangeIntegerValue)"})
-  void testMultiplyWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
+  public void testMultiplyWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -1747,12 +1597,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#multiply(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test multiply(RangeIntegerValue) with 'RangeIntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.multiply(RangeIntegerValue)"})
-  void testMultiplyWithRangeIntegerValue_thenReturnRangeIntegerValue() {
+  public void testMultiplyWithRangeIntegerValue_thenReturnRangeIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -1774,11 +1621,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#multiply(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test multiply(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.multiply(SpecificIntegerValue)"})
-  void testMultiplyWithSpecificIntegerValue() {
+  public void testMultiplyWithSpecificIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -1804,16 +1649,13 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#divide(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test divide(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.divide(IntegerValue)"})
-  void testDivideWithIntegerValue_whenInteger_value_0_thenReturnCompositeIntegerValue()
+  public void testDivideWithIntegerValue_whenInteger_value_0_thenReturnCompositeIntegerValue()
       throws ArithmeticException {
     // Arrange and Act
     IntegerValue actualDivideResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .divide(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -1833,14 +1675,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#divide(IntegerValue)}
    */
   @Test
-  @DisplayName("Test divide(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_BYTE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.divide(IntegerValue)"})
-  void testDivideWithIntegerValue_whenInteger_value_byte() throws ArithmeticException {
+  public void testDivideWithIntegerValue_whenInteger_value_byte() throws ArithmeticException {
     // Arrange and Act
     IntegerValue actualDivideResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .divide(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
@@ -1861,22 +1701,16 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#divide(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test divide(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return INTEGER_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.divide(IntegerValue)"})
-  void testDivideWithIntegerValue_whenInteger_value_thenReturnInteger_value()
+  public void testDivideWithIntegerValue_whenInteger_value_thenReturnInteger_value()
       throws ArithmeticException {
     // Arrange
     IntegerValue other = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    IntegerValue actualDivideResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).divide(other);
-
-    // Assert
-    assertSame(other, actualDivideResult);
+    // Act and Assert
+    assertSame(
+        other, (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).divide(other));
   }
 
   /**
@@ -1889,12 +1723,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#divide(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test divide(RangeIntegerValue) with 'RangeIntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.divide(RangeIntegerValue)"})
-  void testDivideWithRangeIntegerValue_thenReturnCompositeIntegerValue()
+  public void testDivideWithRangeIntegerValue_thenReturnCompositeIntegerValue()
       throws ArithmeticException {
     // Arrange
     ConvertedByteValue convertedByteValue =
@@ -1920,12 +1751,10 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#divide(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test divide(RangeIntegerValue) with 'RangeIntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.divide(RangeIntegerValue)"})
-  void testDivideWithRangeIntegerValue_thenReturnRangeIntegerValue() throws ArithmeticException {
+  public void testDivideWithRangeIntegerValue_thenReturnRangeIntegerValue()
+      throws ArithmeticException {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -1946,11 +1775,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#divide(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test divide(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.divide(SpecificIntegerValue)"})
-  void testDivideWithSpecificIntegerValue() throws ArithmeticException {
+  public void testDivideWithSpecificIntegerValue() throws ArithmeticException {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -1975,14 +1802,13 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#divideOf(IntegerValue)}
    */
   @Test
-  @DisplayName("Test divideOf(IntegerValue) with 'IntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.divideOf(IntegerValue)"})
-  void testDivideOfWithIntegerValue_thenReturnCompositeIntegerValue() throws ArithmeticException {
+  public void testDivideOfWithIntegerValue_thenReturnCompositeIntegerValue()
+      throws ArithmeticException {
     // Arrange and Act
     IntegerValue actualDivideOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .divideOf(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
@@ -2002,14 +1828,13 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#divideOf(IntegerValue)}
    */
   @Test
-  @DisplayName("Test divideOf(IntegerValue) with 'IntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.divideOf(IntegerValue)"})
-  void testDivideOfWithIntegerValue_thenReturnRangeIntegerValue() throws ArithmeticException {
+  public void testDivideOfWithIntegerValue_thenReturnRangeIntegerValue()
+      throws ArithmeticException {
     // Arrange and Act
     IntegerValue actualDivideOfResult =
-        new ParticularIntegerValue(42).divideOf(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+        (new ParticularIntegerValue(42)).divideOf(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
     assertTrue(actualDivideOfResult instanceof RangeIntegerValue);
@@ -2029,16 +1854,13 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#divideOf(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test divideOf(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.divideOf(IntegerValue)"})
-  void testDivideOfWithIntegerValue_whenInteger_value_0_thenReturnCompositeIntegerValue()
+  public void testDivideOfWithIntegerValue_whenInteger_value_0_thenReturnCompositeIntegerValue()
       throws ArithmeticException {
     // Arrange and Act
     IntegerValue actualDivideOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .divideOf(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -2059,22 +1881,16 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#divideOf(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test divideOf(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return INTEGER_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.divideOf(IntegerValue)"})
-  void testDivideOfWithIntegerValue_whenInteger_value_thenReturnInteger_value()
+  public void testDivideOfWithIntegerValue_whenInteger_value_thenReturnInteger_value()
       throws ArithmeticException {
     // Arrange
     IntegerValue other = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    IntegerValue actualDivideOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).divideOf(other);
-
-    // Assert
-    assertSame(other, actualDivideOfResult);
+    // Act and Assert
+    assertSame(
+        other, (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).divideOf(other));
   }
 
   /**
@@ -2087,12 +1903,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#divideOf(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test divideOf(RangeIntegerValue) with 'RangeIntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.divideOf(RangeIntegerValue)"})
-  void testDivideOfWithRangeIntegerValue_thenReturnCompositeIntegerValue()
+  public void testDivideOfWithRangeIntegerValue_thenReturnCompositeIntegerValue()
       throws ArithmeticException {
     // Arrange
     ConvertedByteValue convertedByteValue =
@@ -2118,12 +1931,10 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#divideOf(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test divideOf(RangeIntegerValue) with 'RangeIntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.divideOf(RangeIntegerValue)"})
-  void testDivideOfWithRangeIntegerValue_thenReturnRangeIntegerValue() throws ArithmeticException {
+  public void testDivideOfWithRangeIntegerValue_thenReturnRangeIntegerValue()
+      throws ArithmeticException {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -2145,11 +1956,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#divideOf(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test divideOf(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.divideOf(SpecificIntegerValue)"})
-  void testDivideOfWithSpecificIntegerValue() throws ArithmeticException {
+  public void testDivideOfWithSpecificIntegerValue() throws ArithmeticException {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -2174,14 +1983,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#remainder(IntegerValue)}
    */
   @Test
-  @DisplayName("Test remainder(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.remainder(IntegerValue)"})
-  void testRemainderWithIntegerValue_whenInteger_value_0() throws ArithmeticException {
+  public void testRemainderWithIntegerValue_whenInteger_value_0() throws ArithmeticException {
     // Arrange and Act
     IntegerValue actualRemainderResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .remainder(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -2201,14 +2008,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#remainder(IntegerValue)}
    */
   @Test
-  @DisplayName("Test remainder(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_BYTE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.remainder(IntegerValue)"})
-  void testRemainderWithIntegerValue_whenInteger_value_byte() throws ArithmeticException {
+  public void testRemainderWithIntegerValue_whenInteger_value_byte() throws ArithmeticException {
     // Arrange and Act
     IntegerValue actualRemainderResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .remainder(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
@@ -2229,22 +2034,17 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#remainder(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainder(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return INTEGER_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.remainder(IntegerValue)"})
-  void testRemainderWithIntegerValue_whenInteger_value_thenReturnInteger_value()
+  public void testRemainderWithIntegerValue_whenInteger_value_thenReturnInteger_value()
       throws ArithmeticException {
     // Arrange
     IntegerValue other = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    IntegerValue actualRemainderResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).remainder(other);
-
-    // Assert
-    assertSame(other, actualRemainderResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).remainder(other));
   }
 
   /**
@@ -2257,12 +2057,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#remainder(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainder(RangeIntegerValue) with 'RangeIntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.remainder(RangeIntegerValue)"})
-  void testRemainderWithRangeIntegerValue_thenReturnCompositeIntegerValue()
+  public void testRemainderWithRangeIntegerValue_thenReturnCompositeIntegerValue()
       throws ArithmeticException {
     // Arrange
     ConvertedByteValue convertedByteValue =
@@ -2288,12 +2085,10 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#remainder(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainder(RangeIntegerValue) with 'RangeIntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.remainder(RangeIntegerValue)"})
-  void testRemainderWithRangeIntegerValue_thenReturnRangeIntegerValue() throws ArithmeticException {
+  public void testRemainderWithRangeIntegerValue_thenReturnRangeIntegerValue()
+      throws ArithmeticException {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -2315,11 +2110,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#remainder(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test remainder(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.remainder(SpecificIntegerValue)"})
-  void testRemainderWithSpecificIntegerValue() throws ArithmeticException {
+  public void testRemainderWithSpecificIntegerValue() throws ArithmeticException {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -2344,14 +2137,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#remainderOf(IntegerValue)}
    */
   @Test
-  @DisplayName("Test remainderOf(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.remainderOf(IntegerValue)"})
-  void testRemainderOfWithIntegerValue_whenInteger_value_0() throws ArithmeticException {
+  public void testRemainderOfWithIntegerValue_whenInteger_value_0() throws ArithmeticException {
     // Arrange and Act
     IntegerValue actualRemainderOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .remainderOf(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -2371,14 +2162,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#remainderOf(IntegerValue)}
    */
   @Test
-  @DisplayName("Test remainderOf(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_BYTE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.remainderOf(IntegerValue)"})
-  void testRemainderOfWithIntegerValue_whenInteger_value_byte() throws ArithmeticException {
+  public void testRemainderOfWithIntegerValue_whenInteger_value_byte() throws ArithmeticException {
     // Arrange and Act
     IntegerValue actualRemainderOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .remainderOf(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
@@ -2399,42 +2188,29 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#remainderOf(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainderOf(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return INTEGER_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.remainderOf(IntegerValue)"})
-  void testRemainderOfWithIntegerValue_whenInteger_value_thenReturnInteger_value()
+  public void testRemainderOfWithIntegerValue_whenInteger_value_thenReturnInteger_value()
       throws ArithmeticException {
     // Arrange
     IntegerValue other = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    IntegerValue actualRemainderOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).remainderOf(other);
-
-    // Assert
-    assertSame(other, actualRemainderOfResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).remainderOf(other));
   }
 
   /**
    * Test {@link SpecificIntegerValue#remainderOf(RangeIntegerValue)} with {@code
    * RangeIntegerValue}.
    *
-   * <ul>
-   *   <li>Then return {@link CompositeIntegerValue}.
-   * </ul>
-   *
    * <p>Method under test: {@link SpecificIntegerValue#remainderOf(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test remainderOf(RangeIntegerValue) with 'RangeIntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.remainderOf(RangeIntegerValue)"})
-  void testRemainderOfWithRangeIntegerValue_thenReturnCompositeIntegerValue()
-      throws ArithmeticException {
+  public void testRemainderOfWithRangeIntegerValue() throws ArithmeticException {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -2451,49 +2227,15 @@ class SpecificIntegerValueDiffblueTest {
   }
 
   /**
-   * Test {@link SpecificIntegerValue#remainderOf(RangeIntegerValue)} with {@code
-   * RangeIntegerValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link RangeIntegerValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificIntegerValue#remainderOf(RangeIntegerValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test remainderOf(RangeIntegerValue) with 'RangeIntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"IntegerValue SpecificIntegerValue.remainderOf(RangeIntegerValue)"})
-  void testRemainderOfWithRangeIntegerValue_thenReturnRangeIntegerValue()
-      throws ArithmeticException {
-    // Arrange
-    ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(1);
-
-    // Act
-    IntegerValue actualRemainderOfResult =
-        particularIntegerValue.remainderOf(new RangeIntegerValue(1, 3));
-
-    // Assert
-    assertTrue(actualRemainderOfResult instanceof RangeIntegerValue);
-    assertFalse(actualRemainderOfResult.isCategory2());
-    assertFalse(actualRemainderOfResult.isSpecific());
-    assertTrue(actualRemainderOfResult.isParticular());
-  }
-
-  /**
    * Test {@link SpecificIntegerValue#remainderOf(SpecificIntegerValue)} with {@code
    * SpecificIntegerValue}.
    *
    * <p>Method under test: {@link SpecificIntegerValue#remainderOf(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test remainderOf(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.remainderOf(SpecificIntegerValue)"})
-  void testRemainderOfWithSpecificIntegerValue() throws ArithmeticException {
+  public void testRemainderOfWithSpecificIntegerValue() throws ArithmeticException {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -2518,14 +2260,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftLeft(IntegerValue)}
    */
   @Test
-  @DisplayName("Test shiftLeft(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftLeft(IntegerValue)"})
-  void testShiftLeftWithIntegerValue_whenInteger_value_0() {
+  public void testShiftLeftWithIntegerValue_whenInteger_value_0() {
     // Arrange and Act
     IntegerValue actualShiftLeftResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .shiftLeft(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -2545,14 +2285,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftLeft(IntegerValue)}
    */
   @Test
-  @DisplayName("Test shiftLeft(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_BYTE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftLeft(IntegerValue)"})
-  void testShiftLeftWithIntegerValue_whenInteger_value_byte() {
+  public void testShiftLeftWithIntegerValue_whenInteger_value_byte() {
     // Arrange and Act
     IntegerValue actualShiftLeftResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .shiftLeft(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
@@ -2573,21 +2311,16 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftLeft(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftLeft(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return INTEGER_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftLeft(IntegerValue)"})
-  void testShiftLeftWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
+  public void testShiftLeftWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
     // Arrange
     IntegerValue other = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    IntegerValue actualShiftLeftResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).shiftLeft(other);
-
-    // Assert
-    assertSame(other, actualShiftLeftResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).shiftLeft(other));
   }
 
   /**
@@ -2600,12 +2333,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftLeft(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftLeft(RangeIntegerValue) with 'RangeIntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftLeft(RangeIntegerValue)"})
-  void testShiftLeftWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
+  public void testShiftLeftWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -2630,12 +2360,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftLeft(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftLeft(RangeIntegerValue) with 'RangeIntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftLeft(RangeIntegerValue)"})
-  void testShiftLeftWithRangeIntegerValue_thenReturnRangeIntegerValue() {
+  public void testShiftLeftWithRangeIntegerValue_thenReturnRangeIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -2657,11 +2384,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftLeft(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test shiftLeft(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftLeft(SpecificIntegerValue)"})
-  void testShiftLeftWithSpecificIntegerValue() {
+  public void testShiftLeftWithSpecificIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -2680,22 +2405,19 @@ class SpecificIntegerValueDiffblueTest {
    * Test {@link SpecificIntegerValue#shiftLeftOf(IntegerValue)} with {@code IntegerValue}.
    *
    * <ul>
-   *   <li>Then return {@link CompositeIntegerValue}.
+   *   <li>When {@link ParticularValueFactory#INTEGER_VALUE_0}.
    * </ul>
    *
    * <p>Method under test: {@link SpecificIntegerValue#shiftLeftOf(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftLeftOf(IntegerValue) with 'IntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftLeftOf(IntegerValue)"})
-  void testShiftLeftOfWithIntegerValue_thenReturnCompositeIntegerValue() {
+  public void testShiftLeftOfWithIntegerValue_whenInteger_value_0() {
     // Arrange and Act
     IntegerValue actualShiftLeftOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
-            .shiftLeftOf(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
+            .shiftLeftOf(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
     assertTrue(actualShiftLeftOfResult instanceof CompositeIntegerValue);
@@ -2708,47 +2430,19 @@ class SpecificIntegerValueDiffblueTest {
    * Test {@link SpecificIntegerValue#shiftLeftOf(IntegerValue)} with {@code IntegerValue}.
    *
    * <ul>
-   *   <li>Then return {@link RangeIntegerValue}.
+   *   <li>When {@link BasicRangeValueFactory#INTEGER_VALUE_BYTE}.
    * </ul>
    *
    * <p>Method under test: {@link SpecificIntegerValue#shiftLeftOf(IntegerValue)}
    */
   @Test
-  @DisplayName("Test shiftLeftOf(IntegerValue) with 'IntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftLeftOf(IntegerValue)"})
-  void testShiftLeftOfWithIntegerValue_thenReturnRangeIntegerValue() {
+  public void testShiftLeftOfWithIntegerValue_whenInteger_value_byte() {
     // Arrange and Act
     IntegerValue actualShiftLeftOfResult =
-        new ParticularIntegerValue(1).shiftLeftOf(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
-
-    // Assert
-    assertTrue(actualShiftLeftOfResult instanceof RangeIntegerValue);
-    assertFalse(actualShiftLeftOfResult.isCategory2());
-    assertFalse(actualShiftLeftOfResult.isParticular());
-    assertFalse(actualShiftLeftOfResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificIntegerValue#shiftLeftOf(IntegerValue)} with {@code IntegerValue}.
-   *
-   * <ul>
-   *   <li>When {@link ParticularValueFactory#INTEGER_VALUE_0}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificIntegerValue#shiftLeftOf(IntegerValue)}
-   */
-  @Test
-  @DisplayName("Test shiftLeftOf(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftLeftOf(IntegerValue)"})
-  void testShiftLeftOfWithIntegerValue_whenInteger_value_0() {
-    // Arrange and Act
-    IntegerValue actualShiftLeftOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
-            .shiftLeftOf(ParticularValueFactory.INTEGER_VALUE_0);
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
+            .shiftLeftOf(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
     assertTrue(actualShiftLeftOfResult instanceof CompositeIntegerValue);
@@ -2768,21 +2462,16 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftLeftOf(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftLeftOf(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return INTEGER_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftLeftOf(IntegerValue)"})
-  void testShiftLeftOfWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
+  public void testShiftLeftOfWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
     // Arrange
     IntegerValue other = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    IntegerValue actualShiftLeftOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).shiftLeftOf(other);
-
-    // Assert
-    assertSame(other, actualShiftLeftOfResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).shiftLeftOf(other));
   }
 
   /**
@@ -2791,11 +2480,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftLeftOf(LongValue)}
    */
   @Test
-  @DisplayName("Test shiftLeftOf(LongValue) with 'LongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificIntegerValue.shiftLeftOf(LongValue)"})
-  void testShiftLeftOfWithLongValue() {
+  public void testShiftLeftOfWithLongValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -2826,20 +2513,14 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftLeftOf(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftLeftOf(LongValue) with 'LongValue'; given ParticularIntegerValue(int) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificIntegerValue.shiftLeftOf(LongValue)"})
-  void testShiftLeftOfWithLongValue_givenParticularIntegerValueWithValueIsFortyTwo() {
+  public void testShiftLeftOfWithLongValue_givenParticularIntegerValueWithValueIsFortyTwo() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualShiftLeftOfResult = new ParticularIntegerValue(42).shiftLeftOf(other);
-
-    // Assert
-    assertSame(other, actualShiftLeftOfResult);
+    // Act and Assert
+    assertSame(other, (new ParticularIntegerValue(42)).shiftLeftOf(other));
   }
 
   /**
@@ -2853,15 +2534,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftLeftOf(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftLeftOf(LongValue) with 'LongValue'; when LONG_VALUE_0; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificIntegerValue.shiftLeftOf(LongValue)"})
-  void testShiftLeftOfWithLongValue_whenLong_value_0_thenReturnCompositeLongValue() {
+  public void testShiftLeftOfWithLongValue_whenLong_value_0_thenReturnCompositeLongValue() {
     // Arrange and Act
     LongValue actualShiftLeftOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .shiftLeftOf(ParticularValueFactory.LONG_VALUE_0);
 
     // Assert
@@ -2882,40 +2560,28 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftLeftOf(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftLeftOf(LongValue) with 'LongValue'; when LONG_VALUE; then return LONG_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificIntegerValue.shiftLeftOf(LongValue)"})
-  void testShiftLeftOfWithLongValue_whenLong_value_thenReturnLong_value() {
+  public void testShiftLeftOfWithLongValue_whenLong_value_thenReturnLong_value() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualShiftLeftOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).shiftLeftOf(other);
-
-    // Assert
-    assertSame(other, actualShiftLeftOfResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).shiftLeftOf(other));
   }
 
   /**
    * Test {@link SpecificIntegerValue#shiftLeftOf(RangeIntegerValue)} with {@code
    * RangeIntegerValue}.
    *
-   * <ul>
-   *   <li>Then return {@link CompositeIntegerValue}.
-   * </ul>
-   *
    * <p>Method under test: {@link SpecificIntegerValue#shiftLeftOf(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftLeftOf(RangeIntegerValue) with 'RangeIntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftLeftOf(RangeIntegerValue)"})
-  void testShiftLeftOfWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
+  public void testShiftLeftOfWithRangeIntegerValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -2932,48 +2598,15 @@ class SpecificIntegerValueDiffblueTest {
   }
 
   /**
-   * Test {@link SpecificIntegerValue#shiftLeftOf(RangeIntegerValue)} with {@code
-   * RangeIntegerValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link RangeIntegerValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificIntegerValue#shiftLeftOf(RangeIntegerValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test shiftLeftOf(RangeIntegerValue) with 'RangeIntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftLeftOf(RangeIntegerValue)"})
-  void testShiftLeftOfWithRangeIntegerValue_thenReturnRangeIntegerValue() {
-    // Arrange
-    ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(1);
-
-    // Act
-    IntegerValue actualShiftLeftOfResult =
-        particularIntegerValue.shiftLeftOf(new RangeIntegerValue(1, 3));
-
-    // Assert
-    assertTrue(actualShiftLeftOfResult instanceof RangeIntegerValue);
-    assertFalse(actualShiftLeftOfResult.isCategory2());
-    assertFalse(actualShiftLeftOfResult.isParticular());
-    assertFalse(actualShiftLeftOfResult.isSpecific());
-  }
-
-  /**
    * Test {@link SpecificIntegerValue#shiftLeftOf(SpecificIntegerValue)} with {@code
    * SpecificIntegerValue}.
    *
    * <p>Method under test: {@link SpecificIntegerValue#shiftLeftOf(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test shiftLeftOf(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftLeftOf(SpecificIntegerValue)"})
-  void testShiftLeftOfWithSpecificIntegerValue() {
+  public void testShiftLeftOfWithSpecificIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -2995,11 +2628,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftLeftOf(SpecificLongValue)}
    */
   @Test
-  @DisplayName("Test shiftLeftOf(SpecificLongValue) with 'SpecificLongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificIntegerValue.shiftLeftOf(SpecificLongValue)"})
-  void testShiftLeftOfWithSpecificLongValue() {
+  public void testShiftLeftOfWithSpecificLongValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -3024,14 +2655,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftRight(IntegerValue)}
    */
   @Test
-  @DisplayName("Test shiftRight(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftRight(IntegerValue)"})
-  void testShiftRightWithIntegerValue_whenInteger_value_0() {
+  public void testShiftRightWithIntegerValue_whenInteger_value_0() {
     // Arrange and Act
     IntegerValue actualShiftRightResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .shiftRight(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -3051,14 +2680,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftRight(IntegerValue)}
    */
   @Test
-  @DisplayName("Test shiftRight(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_BYTE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftRight(IntegerValue)"})
-  void testShiftRightWithIntegerValue_whenInteger_value_byte() {
+  public void testShiftRightWithIntegerValue_whenInteger_value_byte() {
     // Arrange and Act
     IntegerValue actualShiftRightResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .shiftRight(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
@@ -3079,21 +2706,16 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftRight(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftRight(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return INTEGER_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftRight(IntegerValue)"})
-  void testShiftRightWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
+  public void testShiftRightWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
     // Arrange
     IntegerValue other = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    IntegerValue actualShiftRightResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).shiftRight(other);
-
-    // Assert
-    assertSame(other, actualShiftRightResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).shiftRight(other));
   }
 
   /**
@@ -3106,12 +2728,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftRight(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftRight(RangeIntegerValue) with 'RangeIntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftRight(RangeIntegerValue)"})
-  void testShiftRightWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
+  public void testShiftRightWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -3137,12 +2756,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftRight(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftRight(RangeIntegerValue) with 'RangeIntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftRight(RangeIntegerValue)"})
-  void testShiftRightWithRangeIntegerValue_thenReturnRangeIntegerValue() {
+  public void testShiftRightWithRangeIntegerValue_thenReturnRangeIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -3164,11 +2780,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftRight(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test shiftRight(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftRight(SpecificIntegerValue)"})
-  void testShiftRightWithSpecificIntegerValue() {
+  public void testShiftRightWithSpecificIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -3193,15 +2807,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftRightOf(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftRightOf(IntegerValue) with 'IntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftRightOf(IntegerValue)"})
-  void testShiftRightOfWithIntegerValue_thenReturnCompositeIntegerValue() {
+  public void testShiftRightOfWithIntegerValue_thenReturnCompositeIntegerValue() {
     // Arrange and Act
     IntegerValue actualShiftRightOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .shiftRightOf(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
@@ -3221,14 +2832,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftRightOf(IntegerValue)}
    */
   @Test
-  @DisplayName("Test shiftRightOf(IntegerValue) with 'IntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftRightOf(IntegerValue)"})
-  void testShiftRightOfWithIntegerValue_thenReturnRangeIntegerValue() {
+  public void testShiftRightOfWithIntegerValue_thenReturnRangeIntegerValue() {
     // Arrange and Act
     IntegerValue actualShiftRightOfResult =
-        new ParticularIntegerValue(42).shiftRightOf(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+        (new ParticularIntegerValue(42)).shiftRightOf(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
     assertTrue(actualShiftRightOfResult instanceof RangeIntegerValue);
@@ -3247,14 +2856,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftRightOf(IntegerValue)}
    */
   @Test
-  @DisplayName("Test shiftRightOf(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftRightOf(IntegerValue)"})
-  void testShiftRightOfWithIntegerValue_whenInteger_value_0() {
+  public void testShiftRightOfWithIntegerValue_whenInteger_value_0() {
     // Arrange and Act
     IntegerValue actualShiftRightOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .shiftRightOf(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -3275,21 +2882,16 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftRightOf(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftRightOf(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return INTEGER_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftRightOf(IntegerValue)"})
-  void testShiftRightOfWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
+  public void testShiftRightOfWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
     // Arrange
     IntegerValue other = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    IntegerValue actualShiftRightOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).shiftRightOf(other);
-
-    // Assert
-    assertSame(other, actualShiftRightOfResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).shiftRightOf(other));
   }
 
   /**
@@ -3298,11 +2900,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftRightOf(LongValue)}
    */
   @Test
-  @DisplayName("Test shiftRightOf(LongValue) with 'LongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificIntegerValue.shiftRightOf(LongValue)"})
-  void testShiftRightOfWithLongValue() {
+  public void testShiftRightOfWithLongValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -3333,20 +2933,14 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftRightOf(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftRightOf(LongValue) with 'LongValue'; given ParticularIntegerValue(int) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificIntegerValue.shiftRightOf(LongValue)"})
-  void testShiftRightOfWithLongValue_givenParticularIntegerValueWithValueIsFortyTwo() {
+  public void testShiftRightOfWithLongValue_givenParticularIntegerValueWithValueIsFortyTwo() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualShiftRightOfResult = new ParticularIntegerValue(42).shiftRightOf(other);
-
-    // Assert
-    assertSame(other, actualShiftRightOfResult);
+    // Act and Assert
+    assertSame(other, (new ParticularIntegerValue(42)).shiftRightOf(other));
   }
 
   /**
@@ -3360,15 +2954,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftRightOf(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftRightOf(LongValue) with 'LongValue'; when LONG_VALUE_0; then return CompositeLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificIntegerValue.shiftRightOf(LongValue)"})
-  void testShiftRightOfWithLongValue_whenLong_value_0_thenReturnCompositeLongValue() {
+  public void testShiftRightOfWithLongValue_whenLong_value_0_thenReturnCompositeLongValue() {
     // Arrange and Act
     LongValue actualShiftRightOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .shiftRightOf(ParticularValueFactory.LONG_VALUE_0);
 
     // Assert
@@ -3389,21 +2980,16 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftRightOf(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftRightOf(LongValue) with 'LongValue'; when LONG_VALUE; then return LONG_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificIntegerValue.shiftRightOf(LongValue)"})
-  void testShiftRightOfWithLongValue_whenLong_value_thenReturnLong_value() {
+  public void testShiftRightOfWithLongValue_whenLong_value_thenReturnLong_value() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualShiftRightOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).shiftRightOf(other);
-
-    // Assert
-    assertSame(other, actualShiftRightOfResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).shiftRightOf(other));
   }
 
   /**
@@ -3417,12 +3003,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftRightOf(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftRightOf(RangeIntegerValue) with 'RangeIntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftRightOf(RangeIntegerValue)"})
-  void testShiftRightOfWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
+  public void testShiftRightOfWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -3449,12 +3032,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftRightOf(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test shiftRightOf(RangeIntegerValue) with 'RangeIntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftRightOf(RangeIntegerValue)"})
-  void testShiftRightOfWithRangeIntegerValue_thenReturnRangeIntegerValue() {
+  public void testShiftRightOfWithRangeIntegerValue_thenReturnRangeIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -3476,11 +3056,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftRightOf(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test shiftRightOf(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.shiftRightOf(SpecificIntegerValue)"})
-  void testShiftRightOfWithSpecificIntegerValue() {
+  public void testShiftRightOfWithSpecificIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -3502,11 +3080,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#shiftRightOf(SpecificLongValue)}
    */
   @Test
-  @DisplayName("Test shiftRightOf(SpecificLongValue) with 'SpecificLongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificIntegerValue.shiftRightOf(SpecificLongValue)"})
-  void testShiftRightOfWithSpecificLongValue() {
+  public void testShiftRightOfWithSpecificLongValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -3531,14 +3107,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#unsignedShiftRight(IntegerValue)}
    */
   @Test
-  @DisplayName("Test unsignedShiftRight(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.unsignedShiftRight(IntegerValue)"})
-  void testUnsignedShiftRightWithIntegerValue_whenInteger_value_0() {
+  public void testUnsignedShiftRightWithIntegerValue_whenInteger_value_0() {
     // Arrange and Act
     IntegerValue actualUnsignedShiftRightResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .unsignedShiftRight(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -3558,14 +3132,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#unsignedShiftRight(IntegerValue)}
    */
   @Test
-  @DisplayName("Test unsignedShiftRight(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_BYTE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.unsignedShiftRight(IntegerValue)"})
-  void testUnsignedShiftRightWithIntegerValue_whenInteger_value_byte() {
+  public void testUnsignedShiftRightWithIntegerValue_whenInteger_value_byte() {
     // Arrange and Act
     IntegerValue actualUnsignedShiftRightResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .unsignedShiftRight(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
@@ -3586,21 +3158,17 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#unsignedShiftRight(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test unsignedShiftRight(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return INTEGER_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.unsignedShiftRight(IntegerValue)"})
-  void testUnsignedShiftRightWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
+  public void testUnsignedShiftRightWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
     // Arrange
     IntegerValue other = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    IntegerValue actualUnsignedShiftRightResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).unsignedShiftRight(other);
-
-    // Assert
-    assertSame(other, actualUnsignedShiftRightResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
+            .unsignedShiftRight(other));
   }
 
   /**
@@ -3614,12 +3182,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#unsignedShiftRight(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test unsignedShiftRight(RangeIntegerValue) with 'RangeIntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.unsignedShiftRight(RangeIntegerValue)"})
-  void testUnsignedShiftRightWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
+  public void testUnsignedShiftRightWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -3646,12 +3211,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#unsignedShiftRight(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test unsignedShiftRight(RangeIntegerValue) with 'RangeIntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.unsignedShiftRight(RangeIntegerValue)"})
-  void testUnsignedShiftRightWithRangeIntegerValue_thenReturnRangeIntegerValue() {
+  public void testUnsignedShiftRightWithRangeIntegerValue_thenReturnRangeIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -3673,11 +3235,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#unsignedShiftRight(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test unsignedShiftRight(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.unsignedShiftRight(SpecificIntegerValue)"})
-  void testUnsignedShiftRightWithSpecificIntegerValue() {
+  public void testUnsignedShiftRightWithSpecificIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -3703,15 +3263,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#unsignedShiftRightOf(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test unsignedShiftRightOf(IntegerValue) with 'IntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.unsignedShiftRightOf(IntegerValue)"})
-  void testUnsignedShiftRightOfWithIntegerValue_thenReturnCompositeIntegerValue() {
+  public void testUnsignedShiftRightOfWithIntegerValue_thenReturnCompositeIntegerValue() {
     // Arrange and Act
     IntegerValue actualUnsignedShiftRightOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .unsignedShiftRightOf(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
@@ -3731,22 +3288,17 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#unsignedShiftRightOf(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test unsignedShiftRightOf(IntegerValue) with 'IntegerValue'; then return INTEGER_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.unsignedShiftRightOf(IntegerValue)"})
-  void testUnsignedShiftRightOfWithIntegerValue_thenReturnInteger_value() {
+  public void testUnsignedShiftRightOfWithIntegerValue_thenReturnInteger_value() {
     // Arrange
     IntegerValue other = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    IntegerValue actualUnsignedShiftRightOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
-            .unsignedShiftRightOf(other);
-
-    // Assert
-    assertSame(other, actualUnsignedShiftRightOfResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
+            .unsignedShiftRightOf(other));
   }
 
   /**
@@ -3759,15 +3311,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#unsignedShiftRightOf(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test unsignedShiftRightOf(IntegerValue) with 'IntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.unsignedShiftRightOf(IntegerValue)"})
-  void testUnsignedShiftRightOfWithIntegerValue_thenReturnRangeIntegerValue() {
+  public void testUnsignedShiftRightOfWithIntegerValue_thenReturnRangeIntegerValue() {
     // Arrange and Act
     IntegerValue actualUnsignedShiftRightOfResult =
-        new ParticularIntegerValue(42)
+        (new ParticularIntegerValue(42))
             .unsignedShiftRightOf(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
@@ -3787,14 +3336,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#unsignedShiftRightOf(IntegerValue)}
    */
   @Test
-  @DisplayName("Test unsignedShiftRightOf(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.unsignedShiftRightOf(IntegerValue)"})
-  void testUnsignedShiftRightOfWithIntegerValue_whenInteger_value_0() {
+  public void testUnsignedShiftRightOfWithIntegerValue_whenInteger_value_0() {
     // Arrange and Act
     IntegerValue actualUnsignedShiftRightOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .unsignedShiftRightOf(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -3810,20 +3357,14 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#unsignedShiftRightOf(LongValue)}
    */
   @Test
-  @DisplayName("Test unsignedShiftRightOf(LongValue) with 'LongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificIntegerValue.unsignedShiftRightOf(LongValue)"})
-  void testUnsignedShiftRightOfWithLongValue() {
+  public void testUnsignedShiftRightOfWithLongValue() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualUnsignedShiftRightOfResult =
-        new ParticularIntegerValue(42).unsignedShiftRightOf(other);
-
-    // Assert
-    assertSame(other, actualUnsignedShiftRightOfResult);
+    // Act and Assert
+    assertSame(other, (new ParticularIntegerValue(42)).unsignedShiftRightOf(other));
   }
 
   /**
@@ -3832,11 +3373,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#unsignedShiftRightOf(LongValue)}
    */
   @Test
-  @DisplayName("Test unsignedShiftRightOf(LongValue) with 'LongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificIntegerValue.unsignedShiftRightOf(LongValue)"})
-  void testUnsignedShiftRightOfWithLongValue2() {
+  public void testUnsignedShiftRightOfWithLongValue2() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -3867,14 +3406,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#unsignedShiftRightOf(LongValue)}
    */
   @Test
-  @DisplayName("Test unsignedShiftRightOf(LongValue) with 'LongValue'; when LONG_VALUE_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificIntegerValue.unsignedShiftRightOf(LongValue)"})
-  void testUnsignedShiftRightOfWithLongValue_whenLong_value_0() {
+  public void testUnsignedShiftRightOfWithLongValue_whenLong_value_0() {
     // Arrange and Act
     LongValue actualUnsignedShiftRightOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .unsignedShiftRightOf(ParticularValueFactory.LONG_VALUE_0);
 
     // Assert
@@ -3895,22 +3432,17 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#unsignedShiftRightOf(LongValue)}
    */
   @Test
-  @DisplayName(
-      "Test unsignedShiftRightOf(LongValue) with 'LongValue'; when LONG_VALUE; then return LONG_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificIntegerValue.unsignedShiftRightOf(LongValue)"})
-  void testUnsignedShiftRightOfWithLongValue_whenLong_value_thenReturnLong_value() {
+  public void testUnsignedShiftRightOfWithLongValue_whenLong_value_thenReturnLong_value() {
     // Arrange
     LongValue other = BasicValueFactory.LONG_VALUE;
 
-    // Act
-    LongValue actualUnsignedShiftRightOfResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
-            .unsignedShiftRightOf(other);
-
-    // Assert
-    assertSame(other, actualUnsignedShiftRightOfResult);
+    // Act and Assert
+    assertSame(
+        other,
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
+            .unsignedShiftRightOf(other));
   }
 
   /**
@@ -3924,12 +3456,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#unsignedShiftRightOf(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test unsignedShiftRightOf(RangeIntegerValue) with 'RangeIntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.unsignedShiftRightOf(RangeIntegerValue)"})
-  void testUnsignedShiftRightOfWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
+  public void testUnsignedShiftRightOfWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -3956,12 +3485,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#unsignedShiftRightOf(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test unsignedShiftRightOf(RangeIntegerValue) with 'RangeIntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.unsignedShiftRightOf(RangeIntegerValue)"})
-  void testUnsignedShiftRightOfWithRangeIntegerValue_thenReturnRangeIntegerValue() {
+  public void testUnsignedShiftRightOfWithRangeIntegerValue_thenReturnRangeIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -3983,13 +3509,11 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#unsignedShiftRightOf(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test unsignedShiftRightOf(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "IntegerValue SpecificIntegerValue.unsignedShiftRightOf(SpecificIntegerValue)"
   })
-  void testUnsignedShiftRightOfWithSpecificIntegerValue() {
+  public void testUnsignedShiftRightOfWithSpecificIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -4012,11 +3536,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#unsignedShiftRightOf(SpecificLongValue)}
    */
   @Test
-  @DisplayName("Test unsignedShiftRightOf(SpecificLongValue) with 'SpecificLongValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue SpecificIntegerValue.unsignedShiftRightOf(SpecificLongValue)"})
-  void testUnsignedShiftRightOfWithSpecificLongValue() {
+  public void testUnsignedShiftRightOfWithSpecificLongValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -4043,12 +3565,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#and(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test and(IntegerValue) with 'IntegerValue'; given ConvertedByteValue(IntegerValue) with value is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.and(IntegerValue)"})
-  void testAndWithIntegerValue_givenConvertedByteValueWithValueIsNull() {
+  public void testAndWithIntegerValue_givenConvertedByteValueWithValueIsNull() {
     // Arrange
     ConvertedByteValue convertedByteValue = new ConvertedByteValue(null);
 
@@ -4074,11 +3593,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#and(IntegerValue)}
    */
   @Test
-  @DisplayName("Test and(IntegerValue) with 'IntegerValue'; then return ConvertedByteValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.and(IntegerValue)"})
-  void testAndWithIntegerValue_thenReturnConvertedByteValue() {
+  public void testAndWithIntegerValue_thenReturnConvertedByteValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -4103,14 +3620,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#and(IntegerValue)}
    */
   @Test
-  @DisplayName("Test and(IntegerValue) with 'IntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.and(IntegerValue)"})
-  void testAndWithIntegerValue_thenReturnRangeIntegerValue() {
+  public void testAndWithIntegerValue_thenReturnRangeIntegerValue() {
     // Arrange and Act
     IntegerValue actualAndResult =
-        new ParticularIntegerValue(42).and(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+        (new ParticularIntegerValue(42)).and(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
     assertTrue(actualAndResult instanceof RangeIntegerValue);
@@ -4130,12 +3645,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#and(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test and(IntegerValue) with 'IntegerValue'; when ConvertedByteValue(IntegerValue) with value is INTEGER_VALUE_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.and(IntegerValue)"})
-  void testAndWithIntegerValue_whenConvertedByteValueWithValueIsInteger_value_0() {
+  public void testAndWithIntegerValue_whenConvertedByteValueWithValueIsInteger_value_0() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -4163,15 +3675,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#and(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test and(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.and(IntegerValue)"})
-  void testAndWithIntegerValue_whenInteger_value_0_thenReturnCompositeIntegerValue() {
+  public void testAndWithIntegerValue_whenInteger_value_0_thenReturnCompositeIntegerValue() {
     // Arrange and Act
     IntegerValue actualAndResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .and(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -4192,15 +3701,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#and(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test and(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_BYTE; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.and(IntegerValue)"})
-  void testAndWithIntegerValue_whenInteger_value_byte_thenReturnCompositeIntegerValue() {
+  public void testAndWithIntegerValue_whenInteger_value_byte_thenReturnCompositeIntegerValue() {
     // Arrange and Act
     IntegerValue actualAndResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .and(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
@@ -4221,21 +3727,15 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#and(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test and(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return INTEGER_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.and(IntegerValue)"})
-  void testAndWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
+  public void testAndWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
     // Arrange
     IntegerValue other = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    IntegerValue actualAndResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).and(other);
-
-    // Assert
-    assertSame(other, actualAndResult);
+    // Act and Assert
+    assertSame(
+        other, (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).and(other));
   }
 
   /**
@@ -4248,12 +3748,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#and(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test and(RangeIntegerValue) with 'RangeIntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.and(RangeIntegerValue)"})
-  void testAndWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
+  public void testAndWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -4278,12 +3775,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#and(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test and(RangeIntegerValue) with 'RangeIntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.and(RangeIntegerValue)"})
-  void testAndWithRangeIntegerValue_thenReturnRangeIntegerValue() {
+  public void testAndWithRangeIntegerValue_thenReturnRangeIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -4303,20 +3797,16 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#and(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test and(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.and(SpecificIntegerValue)"})
-  void testAndWithSpecificIntegerValue() {
+  public void testAndWithSpecificIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
-    // Act
-    IntegerValue actualAndResult =
-        particularIntegerValue.and((SpecificIntegerValue) new ParticularIntegerValue(42));
-
-    // Assert
-    assertSame(particularIntegerValue, actualAndResult);
+    // Act and Assert
+    assertSame(
+        particularIntegerValue,
+        particularIntegerValue.and((SpecificIntegerValue) new ParticularIntegerValue(42)));
   }
 
   /**
@@ -4325,11 +3815,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#and(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test and(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.and(SpecificIntegerValue)"})
-  void testAndWithSpecificIntegerValue2() {
+  public void testAndWithSpecificIntegerValue2() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -4349,6 +3837,33 @@ class SpecificIntegerValueDiffblueTest {
    * Test {@link SpecificIntegerValue#and(SpecificIntegerValue)} with {@code SpecificIntegerValue}.
    *
    * <ul>
+   *   <li>Given {@link ParticularIntegerValue#ParticularIntegerValue(int)} with value is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link SpecificIntegerValue#and(SpecificIntegerValue)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"IntegerValue SpecificIntegerValue.and(SpecificIntegerValue)"})
+  public void testAndWithSpecificIntegerValue_givenParticularIntegerValueWithValueIsOne() {
+    // Arrange
+    ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(1);
+
+    // Act
+    IntegerValue actualAndResult =
+        particularIntegerValue.and((SpecificIntegerValue) new ParticularIntegerValue(42));
+
+    // Assert
+    assertTrue(actualAndResult instanceof CompositeIntegerValue);
+    assertFalse(actualAndResult.isCategory2());
+    assertFalse(actualAndResult.isParticular());
+    assertTrue(actualAndResult.isSpecific());
+  }
+
+  /**
+   * Test {@link SpecificIntegerValue#and(SpecificIntegerValue)} with {@code SpecificIntegerValue}.
+   *
+   * <ul>
    *   <li>When {@code null}.
    *   <li>Then return {@link CompositeIntegerValue}.
    * </ul>
@@ -4356,14 +3871,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#and(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test and(SpecificIntegerValue) with 'SpecificIntegerValue'; when 'null'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.and(SpecificIntegerValue)"})
-  void testAndWithSpecificIntegerValue_whenNull_thenReturnCompositeIntegerValue() {
+  public void testAndWithSpecificIntegerValue_whenNull_thenReturnCompositeIntegerValue() {
     // Arrange and Act
-    IntegerValue actualAndResult = new ParticularIntegerValue(42).and((SpecificIntegerValue) null);
+    IntegerValue actualAndResult =
+        (new ParticularIntegerValue(42)).and((SpecificIntegerValue) null);
 
     // Assert
     assertTrue(actualAndResult instanceof CompositeIntegerValue);
@@ -4383,12 +3896,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#or(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test or(IntegerValue) with 'IntegerValue'; given ConvertedByteValue(IntegerValue) with value is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.or(IntegerValue)"})
-  void testOrWithIntegerValue_givenConvertedByteValueWithValueIsNull() {
+  public void testOrWithIntegerValue_givenConvertedByteValueWithValueIsNull() {
     // Arrange
     ConvertedByteValue convertedByteValue = new ConvertedByteValue(null);
 
@@ -4414,11 +3924,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#or(IntegerValue)}
    */
   @Test
-  @DisplayName("Test or(IntegerValue) with 'IntegerValue'; then return ConvertedByteValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.or(IntegerValue)"})
-  void testOrWithIntegerValue_thenReturnConvertedByteValue() {
+  public void testOrWithIntegerValue_thenReturnConvertedByteValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -4437,6 +3945,31 @@ class SpecificIntegerValueDiffblueTest {
    * Test {@link SpecificIntegerValue#or(IntegerValue)} with {@code IntegerValue}.
    *
    * <ul>
+   *   <li>Then return {@link RangeIntegerValue}.
+   * </ul>
+   *
+   * <p>Method under test: {@link SpecificIntegerValue#or(IntegerValue)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"IntegerValue SpecificIntegerValue.or(IntegerValue)"})
+  public void testOrWithIntegerValue_thenReturnRangeIntegerValue() {
+    // Arrange and Act
+    IntegerValue actualOrResult =
+        (new ParticularIntegerValue(Integer.MIN_VALUE))
+            .or(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+
+    // Assert
+    assertTrue(actualOrResult instanceof RangeIntegerValue);
+    assertFalse(actualOrResult.isCategory2());
+    assertFalse(actualOrResult.isParticular());
+    assertFalse(actualOrResult.isSpecific());
+  }
+
+  /**
+   * Test {@link SpecificIntegerValue#or(IntegerValue)} with {@code IntegerValue}.
+   *
+   * <ul>
    *   <li>When {@link ConvertedByteValue#ConvertedByteValue(IntegerValue)} with value is {@link
    *       ParticularValueFactory#INTEGER_VALUE_0}.
    * </ul>
@@ -4444,12 +3977,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#or(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test or(IntegerValue) with 'IntegerValue'; when ConvertedByteValue(IntegerValue) with value is INTEGER_VALUE_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.or(IntegerValue)"})
-  void testOrWithIntegerValue_whenConvertedByteValueWithValueIsInteger_value_0() {
+  public void testOrWithIntegerValue_whenConvertedByteValueWithValueIsInteger_value_0() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -4477,15 +4007,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#or(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test or(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.or(IntegerValue)"})
-  void testOrWithIntegerValue_whenInteger_value_0_thenReturnCompositeIntegerValue() {
+  public void testOrWithIntegerValue_whenInteger_value_0_thenReturnCompositeIntegerValue() {
     // Arrange and Act
     IntegerValue actualOrResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .or(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -4506,15 +4033,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#or(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test or(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_BYTE; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.or(IntegerValue)"})
-  void testOrWithIntegerValue_whenInteger_value_byte_thenReturnCompositeIntegerValue() {
+  public void testOrWithIntegerValue_whenInteger_value_byte_thenReturnCompositeIntegerValue() {
     // Arrange and Act
     IntegerValue actualOrResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .or(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
@@ -4535,39 +4059,26 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#or(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test or(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return INTEGER_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.or(IntegerValue)"})
-  void testOrWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
+  public void testOrWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
     // Arrange
     IntegerValue other = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    IntegerValue actualOrResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).or(other);
-
-    // Assert
-    assertSame(other, actualOrResult);
+    // Act and Assert
+    assertSame(
+        other, (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).or(other));
   }
 
   /**
    * Test {@link SpecificIntegerValue#or(RangeIntegerValue)} with {@code RangeIntegerValue}.
    *
-   * <ul>
-   *   <li>Then return {@link CompositeIntegerValue}.
-   * </ul>
-   *
    * <p>Method under test: {@link SpecificIntegerValue#or(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test or(RangeIntegerValue) with 'RangeIntegerValue'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.or(RangeIntegerValue)"})
-  void testOrWithRangeIntegerValue_thenReturnCompositeIntegerValue() {
+  public void testOrWithRangeIntegerValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -4583,53 +4094,21 @@ class SpecificIntegerValueDiffblueTest {
   }
 
   /**
-   * Test {@link SpecificIntegerValue#or(RangeIntegerValue)} with {@code RangeIntegerValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link RangeIntegerValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificIntegerValue#or(RangeIntegerValue)}
-   */
-  @Test
-  @DisplayName("Test or(RangeIntegerValue) with 'RangeIntegerValue'; then return RangeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"IntegerValue SpecificIntegerValue.or(RangeIntegerValue)"})
-  void testOrWithRangeIntegerValue_thenReturnRangeIntegerValue() {
-    // Arrange
-    ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(Integer.MIN_VALUE);
-
-    // Act
-    IntegerValue actualOrResult = particularIntegerValue.or(new RangeIntegerValue(1, 3));
-
-    // Assert
-    assertTrue(actualOrResult instanceof RangeIntegerValue);
-    assertFalse(actualOrResult.isCategory2());
-    assertFalse(actualOrResult.isParticular());
-    assertFalse(actualOrResult.isSpecific());
-  }
-
-  /**
    * Test {@link SpecificIntegerValue#or(SpecificIntegerValue)} with {@code SpecificIntegerValue}.
    *
    * <p>Method under test: {@link SpecificIntegerValue#or(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test or(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.or(SpecificIntegerValue)"})
-  void testOrWithSpecificIntegerValue() {
+  public void testOrWithSpecificIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
-    // Act
-    IntegerValue actualOrResult =
-        particularIntegerValue.or((SpecificIntegerValue) new ParticularIntegerValue(42));
-
-    // Assert
-    assertSame(particularIntegerValue, actualOrResult);
+    // Act and Assert
+    assertSame(
+        particularIntegerValue,
+        particularIntegerValue.or((SpecificIntegerValue) new ParticularIntegerValue(42)));
   }
 
   /**
@@ -4638,11 +4117,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#or(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test or(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.or(SpecificIntegerValue)"})
-  void testOrWithSpecificIntegerValue2() {
+  public void testOrWithSpecificIntegerValue2() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -4662,6 +4139,33 @@ class SpecificIntegerValueDiffblueTest {
    * Test {@link SpecificIntegerValue#or(SpecificIntegerValue)} with {@code SpecificIntegerValue}.
    *
    * <ul>
+   *   <li>Given {@link ParticularIntegerValue#ParticularIntegerValue(int)} with value is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link SpecificIntegerValue#or(SpecificIntegerValue)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"IntegerValue SpecificIntegerValue.or(SpecificIntegerValue)"})
+  public void testOrWithSpecificIntegerValue_givenParticularIntegerValueWithValueIsOne() {
+    // Arrange
+    ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(1);
+
+    // Act
+    IntegerValue actualOrResult =
+        particularIntegerValue.or((SpecificIntegerValue) new ParticularIntegerValue(42));
+
+    // Assert
+    assertTrue(actualOrResult instanceof CompositeIntegerValue);
+    assertFalse(actualOrResult.isCategory2());
+    assertFalse(actualOrResult.isParticular());
+    assertTrue(actualOrResult.isSpecific());
+  }
+
+  /**
+   * Test {@link SpecificIntegerValue#or(SpecificIntegerValue)} with {@code SpecificIntegerValue}.
+   *
+   * <ul>
    *   <li>When {@code null}.
    *   <li>Then return {@link CompositeIntegerValue}.
    * </ul>
@@ -4669,14 +4173,11 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#or(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test or(SpecificIntegerValue) with 'SpecificIntegerValue'; when 'null'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.or(SpecificIntegerValue)"})
-  void testOrWithSpecificIntegerValue_whenNull_thenReturnCompositeIntegerValue() {
+  public void testOrWithSpecificIntegerValue_whenNull_thenReturnCompositeIntegerValue() {
     // Arrange and Act
-    IntegerValue actualOrResult = new ParticularIntegerValue(42).or((SpecificIntegerValue) null);
+    IntegerValue actualOrResult = (new ParticularIntegerValue(42)).or((SpecificIntegerValue) null);
 
     // Assert
     assertTrue(actualOrResult instanceof CompositeIntegerValue);
@@ -4696,12 +4197,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#xor(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test xor(IntegerValue) with 'IntegerValue'; given ConvertedByteValue(IntegerValue) with value is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.xor(IntegerValue)"})
-  void testXorWithIntegerValue_givenConvertedByteValueWithValueIsNull() {
+  public void testXorWithIntegerValue_givenConvertedByteValueWithValueIsNull() {
     // Arrange
     ConvertedByteValue convertedByteValue = new ConvertedByteValue(null);
 
@@ -4727,11 +4225,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#xor(IntegerValue)}
    */
   @Test
-  @DisplayName("Test xor(IntegerValue) with 'IntegerValue'; then return ParticularIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.xor(IntegerValue)"})
-  void testXorWithIntegerValue_thenReturnParticularIntegerValue() {
+  public void testXorWithIntegerValue_thenReturnParticularIntegerValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -4760,12 +4256,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#xor(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test xor(IntegerValue) with 'IntegerValue'; when ConvertedByteValue(IntegerValue) with value is INTEGER_VALUE_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.xor(IntegerValue)"})
-  void testXorWithIntegerValue_whenConvertedByteValueWithValueIsInteger_value_0() {
+  public void testXorWithIntegerValue_whenConvertedByteValueWithValueIsInteger_value_0() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -4793,15 +4286,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#xor(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test xor(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.xor(IntegerValue)"})
-  void testXorWithIntegerValue_whenInteger_value_0_thenReturnCompositeIntegerValue() {
+  public void testXorWithIntegerValue_whenInteger_value_0_thenReturnCompositeIntegerValue() {
     // Arrange and Act
     IntegerValue actualXorResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .xor(ParticularValueFactory.INTEGER_VALUE_0);
 
     // Assert
@@ -4822,15 +4312,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#xor(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test xor(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_BYTE; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.xor(IntegerValue)"})
-  void testXorWithIntegerValue_whenInteger_value_byte_thenReturnCompositeIntegerValue() {
+  public void testXorWithIntegerValue_whenInteger_value_byte_thenReturnCompositeIntegerValue() {
     // Arrange and Act
     IntegerValue actualXorResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .xor(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
@@ -4851,21 +4338,15 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#xor(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test xor(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return INTEGER_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.xor(IntegerValue)"})
-  void testXorWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
+  public void testXorWithIntegerValue_whenInteger_value_thenReturnInteger_value() {
     // Arrange
     IntegerValue other = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    IntegerValue actualXorResult =
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).xor(other);
-
-    // Assert
-    assertSame(other, actualXorResult);
+    // Act and Assert
+    assertSame(
+        other, (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).xor(other));
   }
 
   /**
@@ -4874,11 +4355,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#xor(RangeIntegerValue)}
    */
   @Test
-  @DisplayName("Test xor(RangeIntegerValue) with 'RangeIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.xor(RangeIntegerValue)"})
-  void testXorWithRangeIntegerValue() {
+  public void testXorWithRangeIntegerValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -4899,11 +4378,9 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#xor(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test xor(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.xor(SpecificIntegerValue)"})
-  void testXorWithSpecificIntegerValue() {
+  public void testXorWithSpecificIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -4923,18 +4400,42 @@ class SpecificIntegerValueDiffblueTest {
    * Test {@link SpecificIntegerValue#xor(SpecificIntegerValue)} with {@code SpecificIntegerValue}.
    *
    * <ul>
+   *   <li>Given {@link ParticularIntegerValue#ParticularIntegerValue(int)} with value is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link SpecificIntegerValue#xor(SpecificIntegerValue)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"IntegerValue SpecificIntegerValue.xor(SpecificIntegerValue)"})
+  public void testXorWithSpecificIntegerValue_givenParticularIntegerValueWithValueIsOne() {
+    // Arrange
+    ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(1);
+
+    // Act
+    IntegerValue actualXorResult =
+        particularIntegerValue.xor((SpecificIntegerValue) new ParticularIntegerValue(42));
+
+    // Assert
+    assertTrue(actualXorResult instanceof CompositeIntegerValue);
+    assertFalse(actualXorResult.isCategory2());
+    assertFalse(actualXorResult.isParticular());
+    assertTrue(actualXorResult.isSpecific());
+  }
+
+  /**
+   * Test {@link SpecificIntegerValue#xor(SpecificIntegerValue)} with {@code SpecificIntegerValue}.
+   *
+   * <ul>
    *   <li>Then return {@link ParticularIntegerValue}.
    * </ul>
    *
    * <p>Method under test: {@link SpecificIntegerValue#xor(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test xor(SpecificIntegerValue) with 'SpecificIntegerValue'; then return ParticularIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.xor(SpecificIntegerValue)"})
-  void testXorWithSpecificIntegerValue_thenReturnParticularIntegerValue() {
+  public void testXorWithSpecificIntegerValue_thenReturnParticularIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -4961,14 +4462,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#xor(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test xor(SpecificIntegerValue) with 'SpecificIntegerValue'; when 'null'; then return CompositeIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue SpecificIntegerValue.xor(SpecificIntegerValue)"})
-  void testXorWithSpecificIntegerValue_whenNull_thenReturnCompositeIntegerValue() {
+  public void testXorWithSpecificIntegerValue_whenNull_thenReturnCompositeIntegerValue() {
     // Arrange and Act
-    IntegerValue actualXorResult = new ParticularIntegerValue(42).xor((SpecificIntegerValue) null);
+    IntegerValue actualXorResult =
+        (new ParticularIntegerValue(42)).xor((SpecificIntegerValue) null);
 
     // Assert
     assertTrue(actualXorResult instanceof CompositeIntegerValue);
@@ -4988,22 +4487,17 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#equal(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test equal(IntegerValue) with 'IntegerValue'; given ConvertedByteValue(IntegerValue) with value is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.equal(IntegerValue)"})
-  void testEqualWithIntegerValue_givenConvertedByteValueWithValueIsNull() {
+  public void testEqualWithIntegerValue_givenConvertedByteValueWithValueIsNull() {
     // Arrange
     ConvertedByteValue convertedByteValue = new ConvertedByteValue(null);
 
-    // Act
-    int actualEqualResult =
+    // Act and Assert
+    assertEquals(
+        0,
         convertedByteValue.equal(
-            (IntegerValue) new ConvertedByteValue(ParticularValueFactory.INTEGER_VALUE_0));
-
-    // Assert
-    assertEquals(0, actualEqualResult);
+            (IntegerValue) new ConvertedByteValue(ParticularValueFactory.INTEGER_VALUE_0)));
   }
 
   /**
@@ -5016,22 +4510,18 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#equal(IntegerValue)}
    */
   @Test
-  @DisplayName("Test equal(IntegerValue) with 'IntegerValue'; then return one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.equal(IntegerValue)"})
-  void testEqualWithIntegerValue_thenReturnOne() {
+  public void testEqualWithIntegerValue_thenReturnOne() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
-    // Act
-    int actualEqualResult =
+    // Act and Assert
+    assertEquals(
+        1,
         convertedByteValue.equal(
-            (IntegerValue) new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
-
-    // Assert
-    assertEquals(1, actualEqualResult);
+            (IntegerValue) new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
   }
 
   /**
@@ -5045,23 +4535,18 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#equal(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test equal(IntegerValue) with 'IntegerValue'; when ConvertedByteValue(IntegerValue) with value is INTEGER_VALUE_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.equal(IntegerValue)"})
-  void testEqualWithIntegerValue_whenConvertedByteValueWithValueIsInteger_value_0() {
+  public void testEqualWithIntegerValue_whenConvertedByteValueWithValueIsInteger_value_0() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
-    // Act
-    int actualEqualResult =
+    // Act and Assert
+    assertEquals(
+        0,
         convertedByteValue.equal(
-            (IntegerValue) new ConvertedByteValue(ParticularValueFactory.INTEGER_VALUE_0));
-
-    // Assert
-    assertEquals(0, actualEqualResult);
+            (IntegerValue) new ConvertedByteValue(ParticularValueFactory.INTEGER_VALUE_0)));
   }
 
   /**
@@ -5075,16 +4560,13 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#equal(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test equal(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.equal(IntegerValue)"})
-  void testEqualWithIntegerValue_whenInteger_value_0_thenReturnZero() {
+  public void testEqualWithIntegerValue_whenInteger_value_0_thenReturnZero() {
     // Arrange, Act and Assert
     assertEquals(
         0,
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .equal(ParticularValueFactory.INTEGER_VALUE_0));
   }
 
@@ -5099,16 +4581,13 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#equal(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test equal(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_BYTE; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.equal(IntegerValue)"})
-  void testEqualWithIntegerValue_whenInteger_value_byte_thenReturnZero() {
+  public void testEqualWithIntegerValue_whenInteger_value_byte_thenReturnZero() {
     // Arrange, Act and Assert
     assertEquals(
         0,
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .equal(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
   }
 
@@ -5123,15 +4602,13 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#equal(IntegerValue)}
    */
   @Test
-  @DisplayName("Test equal(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.equal(IntegerValue)"})
-  void testEqualWithIntegerValue_whenInteger_value_thenReturnZero() {
+  public void testEqualWithIntegerValue_whenInteger_value_thenReturnZero() {
     // Arrange, Act and Assert
     assertEquals(
         0,
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .equal(BasicValueFactory.INTEGER_VALUE));
   }
 
@@ -5141,20 +4618,15 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#equal(RangeIntegerValue)}
    */
   @Test
-  @DisplayName("Test equal(RangeIntegerValue) with 'RangeIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.equal(RangeIntegerValue)"})
-  void testEqualWithRangeIntegerValue() {
+  public void testEqualWithRangeIntegerValue() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
-    // Act
-    int actualEqualResult = convertedByteValue.equal(new RangeIntegerValue(1, 3));
-
-    // Assert
-    assertEquals(0, actualEqualResult);
+    // Act and Assert
+    assertEquals(0, convertedByteValue.equal(new RangeIntegerValue(1, 3)));
   }
 
   /**
@@ -5164,21 +4636,39 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#equal(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test equal(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.equal(SpecificIntegerValue)"})
-  void testEqualWithSpecificIntegerValue() {
+  public void testEqualWithSpecificIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
-    // Act
-    int actualEqualResult =
+    // Act and Assert
+    assertEquals(
+        0,
         particularIntegerValue.equal(
-            new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
+            new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
+  }
 
-    // Assert
-    assertEquals(0, actualEqualResult);
+  /**
+   * Test {@link SpecificIntegerValue#equal(SpecificIntegerValue)} with {@code
+   * SpecificIntegerValue}.
+   *
+   * <ul>
+   *   <li>Given {@link ParticularIntegerValue#ParticularIntegerValue(int)} with value is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link SpecificIntegerValue#equal(SpecificIntegerValue)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"int SpecificIntegerValue.equal(SpecificIntegerValue)"})
+  public void testEqualWithSpecificIntegerValue_givenParticularIntegerValueWithValueIsOne() {
+    // Arrange
+    ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(1);
+
+    // Act and Assert
+    assertEquals(
+        0, particularIntegerValue.equal((SpecificIntegerValue) new ParticularIntegerValue(42)));
   }
 
   /**
@@ -5192,20 +4682,15 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#equal(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test equal(SpecificIntegerValue) with 'SpecificIntegerValue'; then return one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.equal(SpecificIntegerValue)"})
-  void testEqualWithSpecificIntegerValue_thenReturnOne() {
+  public void testEqualWithSpecificIntegerValue_thenReturnOne() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
-    // Act
-    int actualEqualResult =
-        particularIntegerValue.equal((SpecificIntegerValue) new ParticularIntegerValue(42));
-
-    // Assert
-    assertEquals(1, actualEqualResult);
+    // Act and Assert
+    assertEquals(
+        1, particularIntegerValue.equal((SpecificIntegerValue) new ParticularIntegerValue(42)));
   }
 
   /**
@@ -5220,14 +4705,11 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#equal(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test equal(SpecificIntegerValue) with 'SpecificIntegerValue'; when 'null'; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.equal(SpecificIntegerValue)"})
-  void testEqualWithSpecificIntegerValue_whenNull_thenReturnZero() {
+  public void testEqualWithSpecificIntegerValue_whenNull_thenReturnZero() {
     // Arrange, Act and Assert
-    assertEquals(0, new ParticularIntegerValue(42).equal((SpecificIntegerValue) null));
+    assertEquals(0, (new ParticularIntegerValue(42)).equal((SpecificIntegerValue) null));
   }
 
   /**
@@ -5241,22 +4723,17 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThan(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test lessThan(IntegerValue) with 'IntegerValue'; given ConvertedByteValue(IntegerValue) with value is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThan(IntegerValue)"})
-  void testLessThanWithIntegerValue_givenConvertedByteValueWithValueIsNull() {
+  public void testLessThanWithIntegerValue_givenConvertedByteValueWithValueIsNull() {
     // Arrange
     ConvertedByteValue convertedByteValue = new ConvertedByteValue(null);
 
-    // Act
-    int actualLessThanResult =
+    // Act and Assert
+    assertEquals(
+        0,
         convertedByteValue.lessThan(
-            (IntegerValue) new ConvertedByteValue(ParticularValueFactory.INTEGER_VALUE_0));
-
-    // Assert
-    assertEquals(0, actualLessThanResult);
+            (IntegerValue) new ConvertedByteValue(ParticularValueFactory.INTEGER_VALUE_0)));
   }
 
   /**
@@ -5269,15 +4746,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThan(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test lessThan(IntegerValue) with 'IntegerValue'; given ParticularIntegerValue(int) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThan(IntegerValue)"})
-  void testLessThanWithIntegerValue_givenParticularIntegerValueWithValueIsFortyTwo() {
+  public void testLessThanWithIntegerValue_givenParticularIntegerValueWithValueIsFortyTwo() {
     // Arrange, Act and Assert
     assertEquals(
-        0, new ParticularIntegerValue(42).lessThan(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
+        0, (new ParticularIntegerValue(42)).lessThan(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
   }
 
   /**
@@ -5290,22 +4764,18 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThan(IntegerValue)}
    */
   @Test
-  @DisplayName("Test lessThan(IntegerValue) with 'IntegerValue'; then return NEVER")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThan(IntegerValue)"})
-  void testLessThanWithIntegerValue_thenReturnNever() {
+  public void testLessThanWithIntegerValue_thenReturnNever() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
-    // Act
-    int actualLessThanResult =
+    // Act and Assert
+    assertEquals(
+        Value.NEVER,
         convertedByteValue.lessThan(
-            (IntegerValue) new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
-
-    // Assert
-    assertEquals(Value.NEVER, actualLessThanResult);
+            (IntegerValue) new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
   }
 
   /**
@@ -5319,23 +4789,18 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThan(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test lessThan(IntegerValue) with 'IntegerValue'; when ConvertedByteValue(IntegerValue) with value is INTEGER_VALUE_0")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThan(IntegerValue)"})
-  void testLessThanWithIntegerValue_whenConvertedByteValueWithValueIsInteger_value_0() {
+  public void testLessThanWithIntegerValue_whenConvertedByteValueWithValueIsInteger_value_0() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
-    // Act
-    int actualLessThanResult =
+    // Act and Assert
+    assertEquals(
+        0,
         convertedByteValue.lessThan(
-            (IntegerValue) new ConvertedByteValue(ParticularValueFactory.INTEGER_VALUE_0));
-
-    // Assert
-    assertEquals(0, actualLessThanResult);
+            (IntegerValue) new ConvertedByteValue(ParticularValueFactory.INTEGER_VALUE_0)));
   }
 
   /**
@@ -5349,16 +4814,13 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThan(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test lessThan(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThan(IntegerValue)"})
-  void testLessThanWithIntegerValue_whenInteger_value_0_thenReturnZero() {
+  public void testLessThanWithIntegerValue_whenInteger_value_0_thenReturnZero() {
     // Arrange, Act and Assert
     assertEquals(
         0,
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .lessThan(ParticularValueFactory.INTEGER_VALUE_0));
   }
 
@@ -5373,16 +4835,13 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThan(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test lessThan(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_BYTE; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThan(IntegerValue)"})
-  void testLessThanWithIntegerValue_whenInteger_value_byte_thenReturnZero() {
+  public void testLessThanWithIntegerValue_whenInteger_value_byte_thenReturnZero() {
     // Arrange, Act and Assert
     assertEquals(
         0,
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .lessThan(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
   }
 
@@ -5397,16 +4856,13 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThan(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test lessThan(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThan(IntegerValue)"})
-  void testLessThanWithIntegerValue_whenInteger_value_thenReturnZero() {
+  public void testLessThanWithIntegerValue_whenInteger_value_thenReturnZero() {
     // Arrange, Act and Assert
     assertEquals(
         0,
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .lessThan(BasicValueFactory.INTEGER_VALUE));
   }
 
@@ -5420,19 +4876,14 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThan(RangeIntegerValue)}
    */
   @Test
-  @DisplayName("Test lessThan(RangeIntegerValue) with 'RangeIntegerValue'; then return NEVER")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThan(RangeIntegerValue)"})
-  void testLessThanWithRangeIntegerValue_thenReturnNever() {
+  public void testLessThanWithRangeIntegerValue_thenReturnNever() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
-    // Act
-    int actualLessThanResult = particularIntegerValue.lessThan(new RangeIntegerValue(1, 3));
-
-    // Assert
-    assertEquals(Value.NEVER, actualLessThanResult);
+    // Act and Assert
+    assertEquals(Value.NEVER, particularIntegerValue.lessThan(new RangeIntegerValue(1, 3)));
   }
 
   /**
@@ -5445,20 +4896,15 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThan(RangeIntegerValue)}
    */
   @Test
-  @DisplayName("Test lessThan(RangeIntegerValue) with 'RangeIntegerValue'; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThan(RangeIntegerValue)"})
-  void testLessThanWithRangeIntegerValue_thenReturnZero() {
+  public void testLessThanWithRangeIntegerValue_thenReturnZero() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
-    // Act
-    int actualLessThanResult = convertedByteValue.lessThan(new RangeIntegerValue(1, 3));
-
-    // Assert
-    assertEquals(0, actualLessThanResult);
+    // Act and Assert
+    assertEquals(0, convertedByteValue.lessThan(new RangeIntegerValue(1, 3)));
   }
 
   /**
@@ -5468,21 +4914,39 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThan(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test lessThan(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThan(SpecificIntegerValue)"})
-  void testLessThanWithSpecificIntegerValue() {
+  public void testLessThanWithSpecificIntegerValue() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
-    // Act
-    int actualLessThanResult =
+    // Act and Assert
+    assertEquals(
+        0,
         particularIntegerValue.lessThan(
-            new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
+            new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
+  }
 
-    // Assert
-    assertEquals(0, actualLessThanResult);
+  /**
+   * Test {@link SpecificIntegerValue#lessThan(SpecificIntegerValue)} with {@code
+   * SpecificIntegerValue}.
+   *
+   * <ul>
+   *   <li>Given {@link ParticularIntegerValue#ParticularIntegerValue(int)} with value is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link SpecificIntegerValue#lessThan(SpecificIntegerValue)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"int SpecificIntegerValue.lessThan(SpecificIntegerValue)"})
+  public void testLessThanWithSpecificIntegerValue_givenParticularIntegerValueWithValueIsOne() {
+    // Arrange
+    ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(1);
+
+    // Act and Assert
+    assertEquals(
+        0, particularIntegerValue.lessThan((SpecificIntegerValue) new ParticularIntegerValue(42)));
   }
 
   /**
@@ -5496,20 +4960,16 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThan(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test lessThan(SpecificIntegerValue) with 'SpecificIntegerValue'; then return NEVER")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThan(SpecificIntegerValue)"})
-  void testLessThanWithSpecificIntegerValue_thenReturnNever() {
+  public void testLessThanWithSpecificIntegerValue_thenReturnNever() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
-    // Act
-    int actualLessThanResult =
-        particularIntegerValue.lessThan((SpecificIntegerValue) new ParticularIntegerValue(42));
-
-    // Assert
-    assertEquals(Value.NEVER, actualLessThanResult);
+    // Act and Assert
+    assertEquals(
+        Value.NEVER,
+        particularIntegerValue.lessThan((SpecificIntegerValue) new ParticularIntegerValue(42)));
   }
 
   /**
@@ -5524,14 +4984,11 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThan(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test lessThan(SpecificIntegerValue) with 'SpecificIntegerValue'; when 'null'; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThan(SpecificIntegerValue)"})
-  void testLessThanWithSpecificIntegerValue_whenNull_thenReturnZero() {
+  public void testLessThanWithSpecificIntegerValue_whenNull_thenReturnZero() {
     // Arrange, Act and Assert
-    assertEquals(0, new ParticularIntegerValue(42).lessThan((SpecificIntegerValue) null));
+    assertEquals(0, (new ParticularIntegerValue(42)).lessThan((SpecificIntegerValue) null));
   }
 
   /**
@@ -5540,15 +4997,14 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThanOrEqual(IntegerValue)}
    */
   @Test
-  @DisplayName("Test lessThanOrEqual(IntegerValue) with 'IntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThanOrEqual(IntegerValue)"})
-  void testLessThanOrEqualWithIntegerValue() {
+  public void testLessThanOrEqualWithIntegerValue() {
     // Arrange, Act and Assert
     assertEquals(
         0,
-        new ParticularIntegerValue(42).lessThanOrEqual(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
+        (new ParticularIntegerValue(42))
+            .lessThanOrEqual(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
   }
 
   /**
@@ -5557,22 +5013,18 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThanOrEqual(IntegerValue)}
    */
   @Test
-  @DisplayName("Test lessThanOrEqual(IntegerValue) with 'IntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThanOrEqual(IntegerValue)"})
-  void testLessThanOrEqualWithIntegerValue2() {
+  public void testLessThanOrEqualWithIntegerValue2() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
-    // Act
-    int actualLessThanOrEqualResult =
+    // Act and Assert
+    assertEquals(
+        0,
         convertedByteValue.lessThanOrEqual(
-            (IntegerValue) new ConvertedByteValue(ParticularValueFactory.INTEGER_VALUE_0));
-
-    // Assert
-    assertEquals(0, actualLessThanOrEqualResult);
+            (IntegerValue) new ConvertedByteValue(ParticularValueFactory.INTEGER_VALUE_0)));
   }
 
   /**
@@ -5586,22 +5038,17 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThanOrEqual(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test lessThanOrEqual(IntegerValue) with 'IntegerValue'; given ConvertedByteValue(IntegerValue) with value is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThanOrEqual(IntegerValue)"})
-  void testLessThanOrEqualWithIntegerValue_givenConvertedByteValueWithValueIsNull() {
+  public void testLessThanOrEqualWithIntegerValue_givenConvertedByteValueWithValueIsNull() {
     // Arrange
     ConvertedByteValue convertedByteValue = new ConvertedByteValue(null);
 
-    // Act
-    int actualLessThanOrEqualResult =
+    // Act and Assert
+    assertEquals(
+        0,
         convertedByteValue.lessThanOrEqual(
-            (IntegerValue) new ConvertedByteValue(ParticularValueFactory.INTEGER_VALUE_0));
-
-    // Assert
-    assertEquals(0, actualLessThanOrEqualResult);
+            (IntegerValue) new ConvertedByteValue(ParticularValueFactory.INTEGER_VALUE_0)));
   }
 
   /**
@@ -5614,22 +5061,18 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThanOrEqual(IntegerValue)}
    */
   @Test
-  @DisplayName("Test lessThanOrEqual(IntegerValue) with 'IntegerValue'; then return one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThanOrEqual(IntegerValue)"})
-  void testLessThanOrEqualWithIntegerValue_thenReturnOne() {
+  public void testLessThanOrEqualWithIntegerValue_thenReturnOne() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
-    // Act
-    int actualLessThanOrEqualResult =
+    // Act and Assert
+    assertEquals(
+        1,
         convertedByteValue.lessThanOrEqual(
-            (IntegerValue) new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
-
-    // Assert
-    assertEquals(1, actualLessThanOrEqualResult);
+            (IntegerValue) new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
   }
 
   /**
@@ -5643,16 +5086,13 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThanOrEqual(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test lessThanOrEqual(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_0; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThanOrEqual(IntegerValue)"})
-  void testLessThanOrEqualWithIntegerValue_whenInteger_value_0_thenReturnZero() {
+  public void testLessThanOrEqualWithIntegerValue_whenInteger_value_0_thenReturnZero() {
     // Arrange, Act and Assert
     assertEquals(
         0,
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .lessThanOrEqual(ParticularValueFactory.INTEGER_VALUE_0));
   }
 
@@ -5667,16 +5107,13 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThanOrEqual(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test lessThanOrEqual(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE_BYTE; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThanOrEqual(IntegerValue)"})
-  void testLessThanOrEqualWithIntegerValue_whenInteger_value_byte_thenReturnZero() {
+  public void testLessThanOrEqualWithIntegerValue_whenInteger_value_byte_thenReturnZero() {
     // Arrange, Act and Assert
     assertEquals(
         0,
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .lessThanOrEqual(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
   }
 
@@ -5691,16 +5128,13 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThanOrEqual(IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test lessThanOrEqual(IntegerValue) with 'IntegerValue'; when INTEGER_VALUE; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThanOrEqual(IntegerValue)"})
-  void testLessThanOrEqualWithIntegerValue_whenInteger_value_thenReturnZero() {
+  public void testLessThanOrEqualWithIntegerValue_whenInteger_value_thenReturnZero() {
     // Arrange, Act and Assert
     assertEquals(
         0,
-        new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)
+        (new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .lessThanOrEqual(BasicValueFactory.INTEGER_VALUE));
   }
 
@@ -5715,21 +5149,14 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThanOrEqual(RangeIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test lessThanOrEqual(RangeIntegerValue) with 'RangeIntegerValue'; then return NEVER")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThanOrEqual(RangeIntegerValue)"})
-  void testLessThanOrEqualWithRangeIntegerValue_thenReturnNever() {
+  public void testLessThanOrEqualWithRangeIntegerValue_thenReturnNever() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
-    // Act
-    int actualLessThanOrEqualResult =
-        particularIntegerValue.lessThanOrEqual(new RangeIntegerValue(1, 3));
-
-    // Assert
-    assertEquals(Value.NEVER, actualLessThanOrEqualResult);
+    // Act and Assert
+    assertEquals(Value.NEVER, particularIntegerValue.lessThanOrEqual(new RangeIntegerValue(1, 3)));
   }
 
   /**
@@ -5743,21 +5170,15 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThanOrEqual(RangeIntegerValue)}
    */
   @Test
-  @DisplayName("Test lessThanOrEqual(RangeIntegerValue) with 'RangeIntegerValue'; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThanOrEqual(RangeIntegerValue)"})
-  void testLessThanOrEqualWithRangeIntegerValue_thenReturnZero() {
+  public void testLessThanOrEqualWithRangeIntegerValue_thenReturnZero() {
     // Arrange
     ConvertedByteValue convertedByteValue =
         new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
-    // Act
-    int actualLessThanOrEqualResult =
-        convertedByteValue.lessThanOrEqual(new RangeIntegerValue(1, 3));
-
-    // Assert
-    assertEquals(0, actualLessThanOrEqualResult);
+    // Act and Assert
+    assertEquals(0, convertedByteValue.lessThanOrEqual(new RangeIntegerValue(1, 3)));
   }
 
   /**
@@ -5767,21 +5188,37 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThanOrEqual(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName("Test lessThanOrEqual(SpecificIntegerValue) with 'SpecificIntegerValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThanOrEqual(SpecificIntegerValue)"})
-  void testLessThanOrEqualWithSpecificIntegerValue() {
+  public void testLessThanOrEqualWithSpecificIntegerValue() {
+    // Arrange
+    ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(1);
+
+    // Act and Assert
+    assertEquals(
+        0,
+        particularIntegerValue.lessThanOrEqual(
+            (SpecificIntegerValue) new ParticularIntegerValue(42)));
+  }
+
+  /**
+   * Test {@link SpecificIntegerValue#lessThanOrEqual(SpecificIntegerValue)} with {@code
+   * SpecificIntegerValue}.
+   *
+   * <p>Method under test: {@link SpecificIntegerValue#lessThanOrEqual(SpecificIntegerValue)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"int SpecificIntegerValue.lessThanOrEqual(SpecificIntegerValue)"})
+  public void testLessThanOrEqualWithSpecificIntegerValue2() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
-    // Act
-    int actualLessThanOrEqualResult =
+    // Act and Assert
+    assertEquals(
+        0,
         particularIntegerValue.lessThanOrEqual(
-            new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
-
-    // Assert
-    assertEquals(0, actualLessThanOrEqualResult);
+            new ConvertedByteValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
   }
 
   /**
@@ -5795,22 +5232,17 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThanOrEqual(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test lessThanOrEqual(SpecificIntegerValue) with 'SpecificIntegerValue'; then return one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThanOrEqual(SpecificIntegerValue)"})
-  void testLessThanOrEqualWithSpecificIntegerValue_thenReturnOne() {
+  public void testLessThanOrEqualWithSpecificIntegerValue_thenReturnOne() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
-    // Act
-    int actualLessThanOrEqualResult =
+    // Act and Assert
+    assertEquals(
+        1,
         particularIntegerValue.lessThanOrEqual(
-            (SpecificIntegerValue) new ParticularIntegerValue(42));
-
-    // Assert
-    assertEquals(1, actualLessThanOrEqualResult);
+            (SpecificIntegerValue) new ParticularIntegerValue(42)));
   }
 
   /**
@@ -5825,14 +5257,11 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#lessThanOrEqual(SpecificIntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test lessThanOrEqual(SpecificIntegerValue) with 'SpecificIntegerValue'; when 'null'; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SpecificIntegerValue.lessThanOrEqual(SpecificIntegerValue)"})
-  void testLessThanOrEqualWithSpecificIntegerValue_whenNull_thenReturnZero() {
+  public void testLessThanOrEqualWithSpecificIntegerValue_whenNull_thenReturnZero() {
     // Arrange, Act and Assert
-    assertEquals(0, new ParticularIntegerValue(42).lessThanOrEqual((SpecificIntegerValue) null));
+    assertEquals(0, (new ParticularIntegerValue(42)).lessThanOrEqual((SpecificIntegerValue) null));
   }
 
   /**
@@ -5841,13 +5270,11 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#isSpecific()}
    */
   @Test
-  @DisplayName("Test isSpecific()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean SpecificIntegerValue.isSpecific()"})
-  void testIsSpecific() {
+  public void testIsSpecific() {
     // Arrange, Act and Assert
-    assertTrue(new ParticularIntegerValue(42).isSpecific());
+    assertTrue((new ParticularIntegerValue(42)).isSpecific());
   }
 
   /**
@@ -5861,21 +5288,20 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SpecificIntegerValue.equals(Object)",
     "int SpecificIntegerValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
     ParticularIntegerValue particularIntegerValue2 = new ParticularIntegerValue(42);
 
     // Act and Assert
     assertEquals(particularIntegerValue, particularIntegerValue2);
-    assertEquals(particularIntegerValue.hashCode(), particularIntegerValue2.hashCode());
+    int expectedHashCodeResult = particularIntegerValue.hashCode();
+    assertEquals(expectedHashCodeResult, particularIntegerValue2.hashCode());
   }
 
   /**
@@ -5889,14 +5315,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SpecificIntegerValue.equals(Object)",
     "int SpecificIntegerValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(42);
 
@@ -5917,14 +5341,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SpecificIntegerValue.equals(Object)",
     "int SpecificIntegerValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     ParticularIntegerValue particularIntegerValue = new ParticularIntegerValue(1);
 
@@ -5943,14 +5365,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SpecificIntegerValue.equals(Object)",
     "int SpecificIntegerValue.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new ParticularIntegerValue(42), null);
   }
@@ -5966,14 +5386,12 @@ class SpecificIntegerValueDiffblueTest {
    * <p>Method under test: {@link SpecificIntegerValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean SpecificIntegerValue.equals(Object)",
     "int SpecificIntegerValue.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new ParticularIntegerValue(42), "Different type to SpecificIntegerValue");
   }

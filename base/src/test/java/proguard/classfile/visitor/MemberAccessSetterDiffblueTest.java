@@ -1,17 +1,16 @@
 package proguard.classfile.visitor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.ProgramClass;
 import proguard.classfile.ProgramField;
 import proguard.classfile.ProgramMethod;
 
-class MemberAccessSetterDiffblueTest {
+public class MemberAccessSetterDiffblueTest {
   /**
    * Test {@link MemberAccessSetter#visitProgramField(ProgramClass, ProgramField)}.
    *
@@ -22,12 +21,9 @@ class MemberAccessSetterDiffblueTest {
    * <p>Method under test: {@link MemberAccessSetter#visitProgramField(ProgramClass, ProgramField)}
    */
   @Test
-  @DisplayName(
-      "Test visitProgramField(ProgramClass, ProgramField); then ProgramField() AccessFlags is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MemberAccessSetter.visitProgramField(ProgramClass, ProgramField)"})
-  void testVisitProgramField_thenProgramFieldAccessFlagsIsOne() {
+  public void testVisitProgramField_thenProgramFieldAccessFlagsIsOne() {
     // Arrange
     MemberAccessSetter memberAccessSetter = new MemberAccessSetter(1);
     ProgramClass programClass = new ProgramClass();
@@ -50,12 +46,9 @@ class MemberAccessSetterDiffblueTest {
    * <p>Method under test: {@link MemberAccessSetter#visitProgramField(ProgramClass, ProgramField)}
    */
   @Test
-  @DisplayName(
-      "Test visitProgramField(ProgramClass, ProgramField); then ProgramField() AccessFlags is two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MemberAccessSetter.visitProgramField(ProgramClass, ProgramField)"})
-  void testVisitProgramField_thenProgramFieldAccessFlagsIsTwo() {
+  public void testVisitProgramField_thenProgramFieldAccessFlagsIsTwo() {
     // Arrange
     MemberAccessSetter memberAccessSetter = new MemberAccessSetter(2);
     ProgramClass programClass = new ProgramClass();
@@ -79,12 +72,9 @@ class MemberAccessSetterDiffblueTest {
    * ProgramMethod)}
    */
   @Test
-  @DisplayName(
-      "Test visitProgramMethod(ProgramClass, ProgramMethod); then ProgramMethod() AccessFlags is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MemberAccessSetter.visitProgramMethod(ProgramClass, ProgramMethod)"})
-  void testVisitProgramMethod_thenProgramMethodAccessFlagsIsOne() {
+  public void testVisitProgramMethod_thenProgramMethodAccessFlagsIsOne() {
     // Arrange
     MemberAccessSetter memberAccessSetter = new MemberAccessSetter(1);
     ProgramClass programClass = new ProgramClass();
@@ -108,12 +98,9 @@ class MemberAccessSetterDiffblueTest {
    * ProgramMethod)}
    */
   @Test
-  @DisplayName(
-      "Test visitProgramMethod(ProgramClass, ProgramMethod); then ProgramMethod() AccessFlags is two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MemberAccessSetter.visitProgramMethod(ProgramClass, ProgramMethod)"})
-  void testVisitProgramMethod_thenProgramMethodAccessFlagsIsTwo() {
+  public void testVisitProgramMethod_thenProgramMethodAccessFlagsIsTwo() {
     // Arrange
     MemberAccessSetter memberAccessSetter = new MemberAccessSetter(2);
     ProgramClass programClass = new ProgramClass();

@@ -1,34 +1,32 @@
 package proguard.dexfile.ir.stmt;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.LabelAndLocalMapper;
 import proguard.dexfile.ir.stmt.Stmt.ST;
 
-class LabelStmtDiffblueTest {
+public class LabelStmtDiffblueTest {
   /**
    * Test new {@link LabelStmt} (default constructor).
    *
    * <p>Method under test: default or parameterless constructor of {@link LabelStmt}
    */
   @Test
-  @DisplayName("Test new LabelStmt (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void LabelStmt.<init>()"})
-  void testNewLabelStmt() {
+  public void testNewLabelStmt() {
     // Arrange and Act
     LabelStmt actualLabelStmt = new LabelStmt();
 
     // Assert
+    assertNull(actualLabelStmt.getOps());
     assertNull(actualLabelStmt.tag);
     assertNull(actualLabelStmt.frame);
     assertNull(actualLabelStmt.displayName);
@@ -38,7 +36,6 @@ class LabelStmtDiffblueTest {
     assertNull(actualLabelStmt.getOp());
     assertNull(actualLabelStmt.getOp1());
     assertNull(actualLabelStmt.getOp2());
-    assertNull(actualLabelStmt.getOps());
     assertNull(actualLabelStmt.getNext());
     assertNull(actualLabelStmt.getPre());
     assertNull(actualLabelStmt._ts_default_next);
@@ -55,18 +52,15 @@ class LabelStmtDiffblueTest {
    *
    * <ul>
    *   <li>When {@link LabelAndLocalMapper} (default constructor).
-   *   <li>Then return {@link LabelStmt#tag} is {@code null}.
+   *   <li>Then return Ops is {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link LabelStmt#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; when LabelAndLocalMapper (default constructor); then return tag is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LabelStmt LabelStmt.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_whenLabelAndLocalMapper_thenReturnTagIsNull() {
+  public void testCloneWithLabelAndLocalMapper_whenLabelAndLocalMapper_thenReturnOpsIsNull() {
     // Arrange
     LabelStmt nLabelResult = Stmts.nLabel();
 
@@ -74,6 +68,7 @@ class LabelStmtDiffblueTest {
     LabelStmt actualCloneResult = nLabelResult.clone(new LabelAndLocalMapper());
 
     // Assert
+    assertNull(actualCloneResult.getOps());
     assertNull(actualCloneResult.tag);
     assertNull(actualCloneResult.frame);
     assertNull(actualCloneResult.displayName);
@@ -83,7 +78,6 @@ class LabelStmtDiffblueTest {
     assertNull(actualCloneResult.getOp());
     assertNull(actualCloneResult.getOp1());
     assertNull(actualCloneResult.getOp2());
-    assertNull(actualCloneResult.getOps());
     assertNull(actualCloneResult.getNext());
     assertNull(actualCloneResult.getPre());
     assertNull(actualCloneResult._ts_default_next);
@@ -106,11 +100,9 @@ class LabelStmtDiffblueTest {
    * <p>Method under test: {@link LabelStmt#getDisplayName()}
    */
   @Test
-  @DisplayName("Test getDisplayName(); given nLabel displayName is 'foo'; then return 'foo'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String LabelStmt.getDisplayName()"})
-  void testGetDisplayName_givenNLabelDisplayNameIsFoo_thenReturnFoo() {
+  public void testGetDisplayName_givenNLabelDisplayNameIsFoo_thenReturnFoo() {
     // Arrange
     LabelStmt nLabelResult = Stmts.nLabel();
     nLabelResult.displayName = "foo";
@@ -130,11 +122,9 @@ class LabelStmtDiffblueTest {
    * <p>Method under test: {@link LabelStmt#toString()}
    */
   @Test
-  @DisplayName("Test toString(); given nLabel displayName is 'foo'; then return 'foo: // line 0'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String LabelStmt.toString()"})
-  void testToString_givenNLabelDisplayNameIsFoo_thenReturnFooLine0() {
+  public void testToString_givenNLabelDisplayNameIsFoo_thenReturnFooLine0() {
     // Arrange
     LabelStmt nLabelResult = Stmts.nLabel();
     nLabelResult.phis = null;

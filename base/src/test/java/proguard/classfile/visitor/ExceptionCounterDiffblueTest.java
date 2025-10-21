@@ -1,12 +1,11 @@
 package proguard.classfile.visitor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryMethod;
@@ -14,7 +13,7 @@ import proguard.classfile.Method;
 import proguard.classfile.attribute.CodeAttribute;
 import proguard.classfile.attribute.ExceptionInfo;
 
-class ExceptionCounterDiffblueTest {
+public class ExceptionCounterDiffblueTest {
   /**
    * Test {@link ExceptionCounter#visitExceptionInfo(Clazz, Method, CodeAttribute, ExceptionInfo)}.
    *
@@ -22,22 +21,21 @@ class ExceptionCounterDiffblueTest {
    * ExceptionInfo)}
    */
   @Test
-  @DisplayName("Test visitExceptionInfo(Clazz, Method, CodeAttribute, ExceptionInfo)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ExceptionCounter.visitExceptionInfo(Clazz, Method, CodeAttribute, ExceptionInfo)"
   })
-  void testVisitExceptionInfo() {
+  public void testVisitExceptionInfo() {
     // Arrange
     ExceptionCounter exceptionCounter = new ExceptionCounter();
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
-    ExceptionInfo exceptionInfo = new ExceptionInfo(1, 3, 1, 1);
 
     // Act
-    exceptionCounter.visitExceptionInfo(clazz, method, codeAttribute, exceptionInfo);
+    exceptionCounter.visitExceptionInfo(
+        clazz, method, codeAttribute, new ExceptionInfo(1, 3, 1, 1));
 
     // Assert
     assertEquals(1, exceptionCounter.getCount());
@@ -54,12 +52,10 @@ class ExceptionCounterDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ExceptionCounter.<init>()", "int ExceptionCounter.getCount()"})
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
-    assertEquals(0, new ExceptionCounter().getCount());
+    assertEquals(0, (new ExceptionCounter()).getCount());
   }
 }

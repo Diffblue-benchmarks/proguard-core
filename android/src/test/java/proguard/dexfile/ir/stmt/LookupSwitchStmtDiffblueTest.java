@@ -1,17 +1,16 @@
 package proguard.dexfile.ir.stmt;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.LabelAndLocalMapper;
 import proguard.dexfile.ir.expr.ArrayExpr;
@@ -22,7 +21,7 @@ import proguard.dexfile.ir.expr.Value;
 import proguard.dexfile.ir.expr.Value.VT;
 import proguard.dexfile.ir.stmt.Stmt.ST;
 
-class LookupSwitchStmtDiffblueTest {
+public class LookupSwitchStmtDiffblueTest {
   /**
    * Test {@link LookupSwitchStmt#LookupSwitchStmt(Value, int[], LabelStmt[], LabelStmt)}.
    *
@@ -30,28 +29,26 @@ class LookupSwitchStmtDiffblueTest {
    * LabelStmt)}
    */
   @Test
-  @DisplayName("Test new LookupSwitchStmt(Value, int[], LabelStmt[], LabelStmt)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void LookupSwitchStmt.<init>(Value, int[], LabelStmt[], LabelStmt)"})
-  void testNewLookupSwitchStmt() {
+  public void testNewLookupSwitchStmt() {
     // Arrange
     ArrayExpr key = new ArrayExpr();
-    LabelStmt[] targets = new LabelStmt[] {Stmts.nLabel()};
 
     // Act
     LookupSwitchStmt actualLookupSwitchStmt =
-        new LookupSwitchStmt(key, new int[] {42, 1, 42, 1}, targets, Stmts.nLabel());
+        new LookupSwitchStmt(
+            key, new int[] {42, 1, 42, 1}, new LabelStmt[] {Stmts.nLabel()}, Stmts.nLabel());
 
     // Assert
     Value op = actualLookupSwitchStmt.getOp();
     assertTrue(op instanceof ArrayExpr);
+    assertNull(actualLookupSwitchStmt.getOps());
     assertNull(actualLookupSwitchStmt.frame);
     assertNull(actualLookupSwitchStmt.exceptionHandlers);
     assertNull(actualLookupSwitchStmt._cfg_froms);
     assertNull(actualLookupSwitchStmt.getOp1());
     assertNull(actualLookupSwitchStmt.getOp2());
-    assertNull(actualLookupSwitchStmt.getOps());
     assertNull(actualLookupSwitchStmt.getNext());
     assertNull(actualLookupSwitchStmt.getPre());
     assertNull(actualLookupSwitchStmt._ts_default_next);
@@ -75,12 +72,9 @@ class LookupSwitchStmtDiffblueTest {
    * <p>Method under test: {@link LookupSwitchStmt#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then Op return Constant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Stmt LookupSwitchStmt.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenOpReturnConstant() {
+  public void testCloneWithLabelAndLocalMapper_thenOpReturnConstant() {
     // Arrange
     Constant key = Exprs.nNull();
     LookupSwitchStmt nLookupSwitchResult =
@@ -110,11 +104,9 @@ class LookupSwitchStmtDiffblueTest {
    * <p>Method under test: {@link LookupSwitchStmt#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName("Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then Op return Local")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Stmt LookupSwitchStmt.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenOpReturnLocal() {
+  public void testCloneWithLabelAndLocalMapper_thenOpReturnLocal() {
     // Arrange
     Local key = new Local();
     LookupSwitchStmt nLookupSwitchResult =

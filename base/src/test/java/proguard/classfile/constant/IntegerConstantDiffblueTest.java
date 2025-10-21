@@ -1,17 +1,16 @@
 package proguard.classfile.constant;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class IntegerConstantDiffblueTest {
+public class IntegerConstantDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -27,9 +26,7 @@ class IntegerConstantDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void IntegerConstant.<init>()",
     "void IntegerConstant.<init>(int)",
@@ -39,7 +36,7 @@ class IntegerConstantDiffblueTest {
     "void IntegerConstant.setValue(int)",
     "String IntegerConstant.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     IntegerConstant actualIntegerConstant = new IntegerConstant();
     actualIntegerConstant.setValue(42);
@@ -76,9 +73,7 @@ class IntegerConstantDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters; when forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void IntegerConstant.<init>()",
     "void IntegerConstant.<init>(int)",
@@ -88,7 +83,7 @@ class IntegerConstantDiffblueTest {
     "void IntegerConstant.setValue(int)",
     "String IntegerConstant.toString()"
   })
-  void testGettersAndSetters_whenFortyTwo() {
+  public void testGettersAndSetters_whenFortyTwo() {
     // Arrange and Act
     IntegerConstant actualIntegerConstant = new IntegerConstant(42);
     actualIntegerConstant.setValue(42);
@@ -122,18 +117,17 @@ class IntegerConstantDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean IntegerConstant.equals(Object)", "int IntegerConstant.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     IntegerConstant integerConstant = new IntegerConstant(42);
     IntegerConstant integerConstant2 = new IntegerConstant(42);
 
     // Act and Assert
     assertEquals(integerConstant, integerConstant2);
-    assertEquals(integerConstant.hashCode(), integerConstant2.hashCode());
+    int expectedHashCodeResult = integerConstant.hashCode();
+    assertEquals(expectedHashCodeResult, integerConstant2.hashCode());
   }
 
   /**
@@ -152,11 +146,9 @@ class IntegerConstantDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean IntegerConstant.equals(Object)", "int IntegerConstant.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     IntegerConstant integerConstant = new IntegerConstant(42);
 
@@ -177,11 +169,9 @@ class IntegerConstantDiffblueTest {
    * <p>Method under test: {@link IntegerConstant#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean IntegerConstant.equals(Object)", "int IntegerConstant.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     IntegerConstant integerConstant = new IntegerConstant(1);
 
@@ -200,11 +190,9 @@ class IntegerConstantDiffblueTest {
    * <p>Method under test: {@link IntegerConstant#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean IntegerConstant.equals(Object)", "int IntegerConstant.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new IntegerConstant(42), null);
   }
@@ -220,11 +208,9 @@ class IntegerConstantDiffblueTest {
    * <p>Method under test: {@link IntegerConstant#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean IntegerConstant.equals(Object)", "int IntegerConstant.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new IntegerConstant(42), "Different type to IntegerConstant");
   }

@@ -1,28 +1,25 @@
 package proguard.classfile.attribute.preverification;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class StackMapFrameDiffblueTest {
+public class StackMapFrameDiffblueTest {
   /**
    * Test {@link StackMapFrame#getOffsetDelta()}.
    *
    * <p>Method under test: {@link StackMapFrame#getOffsetDelta()}
    */
   @Test
-  @DisplayName("Test getOffsetDelta()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int StackMapFrame.getOffsetDelta()"})
-  void testGetOffsetDelta() {
+  public void testGetOffsetDelta() {
     // Arrange, Act and Assert
-    assertEquals(0, new FullFrame().getOffsetDelta());
+    assertEquals(0, (new FullFrame()).getOffsetDelta());
   }
 
   /**
@@ -36,18 +33,17 @@ class StackMapFrameDiffblueTest {
    * <p>Method under test: {@link StackMapFrame#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean StackMapFrame.equals(Object)", "int StackMapFrame.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     FullFrame fullFrame = new FullFrame();
     FullFrame fullFrame2 = new FullFrame();
 
     // Act and Assert
     assertEquals(fullFrame, fullFrame2);
-    assertEquals(fullFrame.hashCode(), fullFrame2.hashCode());
+    int expectedHashCodeResult = fullFrame.hashCode();
+    assertEquals(expectedHashCodeResult, fullFrame2.hashCode());
   }
 
   /**
@@ -61,11 +57,9 @@ class StackMapFrameDiffblueTest {
    * <p>Method under test: {@link StackMapFrame#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean StackMapFrame.equals(Object)", "int StackMapFrame.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     FullFrame fullFrame = new FullFrame();
 
@@ -86,16 +80,15 @@ class StackMapFrameDiffblueTest {
    * <p>Method under test: {@link StackMapFrame#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean StackMapFrame.equals(Object)", "int StackMapFrame.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
-    VerificationType[] variables = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-    VerificationType[] stack = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-
-    FullFrame fullFrame = new FullFrame(2, variables, stack);
+    FullFrame fullFrame =
+        new FullFrame(
+            2,
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE},
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE});
 
     // Act and Assert
     assertNotEquals(fullFrame, new FullFrame());
@@ -112,11 +105,9 @@ class StackMapFrameDiffblueTest {
    * <p>Method under test: {@link StackMapFrame#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean StackMapFrame.equals(Object)", "int StackMapFrame.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new FullFrame(), null);
   }
@@ -132,11 +123,9 @@ class StackMapFrameDiffblueTest {
    * <p>Method under test: {@link StackMapFrame#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean StackMapFrame.equals(Object)", "int StackMapFrame.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new FullFrame(), "Different type to StackMapFrame");
   }
@@ -147,12 +136,10 @@ class StackMapFrameDiffblueTest {
    * <p>Method under test: {@link StackMapFrame#toString()}
    */
   @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String StackMapFrame.toString()"})
-  void testToString() {
+  public void testToString() {
     // Arrange, Act and Assert
-    assertEquals("[0] Var: , Stack: ", new FullFrame().toString());
+    assertEquals("[0] Var: , Stack: ", (new FullFrame()).toString());
   }
 }

@@ -1,30 +1,27 @@
 package proguard.io;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.nio.file.Paths;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ClassPathDiffblueTest {
+public class ClassPathDiffblueTest {
   /**
    * Test {@link ClassPath#ClassPath(ClassPathEntry[])}.
    *
    * <p>Method under test: {@link ClassPath#ClassPath(ClassPathEntry[])}
    */
   @Test
-  @DisplayName("Test new ClassPath(ClassPathEntry[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPath.<init>(ClassPathEntry[])"})
-  void testNewClassPath() {
+  public void testNewClassPath() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -51,18 +48,15 @@ class ClassPathDiffblueTest {
    * <p>Method under test: {@link ClassPath#hasOutput()}
    */
   @Test
-  @DisplayName("Test hasOutput(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPath.hasOutput()"})
-  void testHasOutput_thenReturnFalse() {
-    // Arrange
-    ClassPathEntry classPathEntry =
-        new ClassPathEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), false);
-
-    // Act and Assert
-    assertFalse(new ClassPath(classPathEntry).hasOutput());
+  public void testHasOutput_thenReturnFalse() {
+    // Arrange, Act and Assert
+    assertFalse(
+        (new ClassPath(
+                new ClassPathEntry(
+                    Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), false)))
+            .hasOutput());
   }
 
   /**
@@ -75,18 +69,15 @@ class ClassPathDiffblueTest {
    * <p>Method under test: {@link ClassPath#hasOutput()}
    */
   @Test
-  @DisplayName("Test hasOutput(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPath.hasOutput()"})
-  void testHasOutput_thenReturnTrue() {
-    // Arrange
-    ClassPathEntry classPathEntry =
-        new ClassPathEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
-
-    // Act and Assert
-    assertTrue(new ClassPath(classPathEntry).hasOutput());
+  public void testHasOutput_thenReturnTrue() {
+    // Arrange, Act and Assert
+    assertTrue(
+        (new ClassPath(
+                new ClassPathEntry(
+                    Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true)))
+            .hasOutput());
   }
 
   /**
@@ -95,11 +86,9 @@ class ClassPathDiffblueTest {
    * <p>Method under test: {@link ClassPath#getClassPathEntries()}
    */
   @Test
-  @DisplayName("Test getClassPathEntries()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"List ClassPath.getClassPathEntries()"})
-  void testGetClassPathEntries() {
+  public void testGetClassPathEntries() {
     // Arrange
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
@@ -107,7 +96,7 @@ class ClassPathDiffblueTest {
 
     // Act
     List<ClassPathEntry> actualClassPathEntries =
-        new ClassPath(classPathEntry).getClassPathEntries();
+        (new ClassPath(classPathEntry)).getClassPathEntries();
 
     // Assert
     assertEquals(1, actualClassPathEntries.size());
@@ -120,16 +109,14 @@ class ClassPathDiffblueTest {
    * <p>Method under test: {@link ClassPath#clear()}
    */
   @Test
-  @DisplayName("Test clear()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPath.clear()"})
-  void testClear() {
+  public void testClear() {
     // Arrange
-    ClassPathEntry classPathEntry =
-        new ClassPathEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
-    ClassPath classPath = new ClassPath(classPathEntry);
+    ClassPath classPath =
+        new ClassPath(
+            new ClassPathEntry(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true));
 
     // Act
     classPath.clear();
@@ -146,29 +133,27 @@ class ClassPathDiffblueTest {
    * <p>Method under test: {@link ClassPath#add(ClassPathEntry)}
    */
   @Test
-  @DisplayName("Test add(ClassPathEntry) with 'classPathEntry'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPath.add(ClassPathEntry)"})
-  void testAddWithClassPathEntry() {
+  public void testAddWithClassPathEntry() {
     // Arrange
+    ClassPath classPath =
+        new ClassPath(
+            new ClassPathEntry(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true));
     ClassPathEntry classPathEntry =
-        new ClassPathEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
-    ClassPath classPath = new ClassPath(classPathEntry);
-    ClassPathEntry classPathEntry2 =
         new ClassPathEntry(
             Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
 
     // Act
-    boolean actualAddResult = classPath.add(classPathEntry2);
+    boolean actualAddResult = classPath.add(classPathEntry);
 
     // Assert
     List<ClassPathEntry> classPathEntries = classPath.getClassPathEntries();
     assertEquals(2, classPathEntries.size());
     assertEquals(2, classPath.size());
     assertTrue(actualAddResult);
-    assertSame(classPathEntry2, classPathEntries.get(1));
+    assertSame(classPathEntry, classPathEntries.get(1));
   }
 
   /**
@@ -177,28 +162,26 @@ class ClassPathDiffblueTest {
    * <p>Method under test: {@link ClassPath#add(int, ClassPathEntry)}
    */
   @Test
-  @DisplayName("Test add(int, ClassPathEntry) with 'index', 'classPathEntry'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassPath.add(int, ClassPathEntry)"})
-  void testAddWithIndexClassPathEntry() {
+  public void testAddWithIndexClassPathEntry() {
     // Arrange
+    ClassPath classPath =
+        new ClassPath(
+            new ClassPathEntry(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true));
     ClassPathEntry classPathEntry =
-        new ClassPathEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
-    ClassPath classPath = new ClassPath(classPathEntry);
-    ClassPathEntry classPathEntry2 =
         new ClassPathEntry(
             Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
 
     // Act
-    classPath.add(1, classPathEntry2);
+    classPath.add(1, classPathEntry);
 
     // Assert
     List<ClassPathEntry> classPathEntries = classPath.getClassPathEntries();
     assertEquals(2, classPathEntries.size());
     assertEquals(2, classPath.size());
-    assertSame(classPathEntry2, classPathEntries.get(1));
+    assertSame(classPathEntry, classPathEntries.get(1));
   }
 
   /**
@@ -211,16 +194,14 @@ class ClassPathDiffblueTest {
    * <p>Method under test: {@link ClassPath#addAll(ClassPath)}
    */
   @Test
-  @DisplayName("Test addAll(ClassPath); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPath.addAll(ClassPath)"})
-  void testAddAll_thenReturnFalse() {
+  public void testAddAll_thenReturnFalse() {
     // Arrange
-    ClassPathEntry classPathEntry =
-        new ClassPathEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
-    ClassPath classPath = new ClassPath(classPathEntry);
+    ClassPath classPath =
+        new ClassPath(
+            new ClassPathEntry(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true));
     new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
 
     // Act and Assert
@@ -237,25 +218,21 @@ class ClassPathDiffblueTest {
    * <p>Method under test: {@link ClassPath#addAll(ClassPath)}
    */
   @Test
-  @DisplayName("Test addAll(ClassPath); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPath.addAll(ClassPath)"})
-  void testAddAll_thenReturnTrue() {
+  public void testAddAll_thenReturnTrue() {
     // Arrange
-    ClassPathEntry classPathEntry =
-        new ClassPathEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
-    ClassPath classPath = new ClassPath(classPathEntry);
-    ClassPathEntry classPathEntry2 =
-        new ClassPathEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
+    ClassPath classPath =
+        new ClassPath(
+            new ClassPathEntry(
+                Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true));
 
-    // Act
-    boolean actualAddAllResult = classPath.addAll(new ClassPath(classPathEntry2));
-
-    // Assert
-    assertTrue(actualAddAllResult);
+    // Act and Assert
+    assertTrue(
+        classPath.addAll(
+            new ClassPath(
+                new ClassPathEntry(
+                    Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true))));
   }
 
   /**
@@ -264,53 +241,45 @@ class ClassPathDiffblueTest {
    * <p>Method under test: {@link ClassPath#get(int)}
    */
   @Test
-  @DisplayName("Test get(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassPathEntry ClassPath.get(int)"})
-  void testGet() {
+  public void testGet() {
     // Arrange
+    new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
+
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
             Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
 
-    ClassPath classPath = new ClassPath(classPathEntry);
     ClassPathEntry classPathEntry2 =
         new ClassPathEntry(
             Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
-    classPath.add(1, classPathEntry2);
 
     // Act and Assert
-    assertSame(classPathEntry2, classPath.get(1));
+    assertSame(classPathEntry2, (new ClassPath(classPathEntry, classPathEntry2)).get(1));
   }
 
   /**
    * Test {@link ClassPath#remove(int)}.
    *
-   * <ul>
-   *   <li>Then {@link ClassPath#ClassPath(ClassPathEntry[])} with entries is {@link
-   *       ClassPathEntry#ClassPathEntry(File, boolean)} ClassPathEntries size is one.
-   * </ul>
-   *
    * <p>Method under test: {@link ClassPath#remove(int)}
    */
   @Test
-  @DisplayName(
-      "Test remove(int); then ClassPath(ClassPathEntry[]) with entries is ClassPathEntry(File, boolean) ClassPathEntries size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassPathEntry ClassPath.remove(int)"})
-  void testRemove_thenClassPathWithEntriesIsClassPathEntryClassPathEntriesSizeIsOne() {
+  public void testRemove() {
     // Arrange
+    new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
+
     ClassPathEntry classPathEntry =
         new ClassPathEntry(
             Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
 
-    ClassPath classPath = new ClassPath(classPathEntry);
     ClassPathEntry classPathEntry2 =
         new ClassPathEntry(
             Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
-    classPath.add(1, classPathEntry2);
+
+    ClassPath classPath = new ClassPath(classPathEntry, classPathEntry2);
 
     // Act
     ClassPathEntry actualRemoveResult = classPath.remove(1);
@@ -331,18 +300,15 @@ class ClassPathDiffblueTest {
    * <p>Method under test: {@link ClassPath#isEmpty()}
    */
   @Test
-  @DisplayName("Test isEmpty(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPath.isEmpty()"})
-  void testIsEmpty_thenReturnFalse() {
-    // Arrange
-    ClassPathEntry classPathEntry =
-        new ClassPathEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
-
-    // Act and Assert
-    assertFalse(new ClassPath(classPathEntry).isEmpty());
+  public void testIsEmpty_thenReturnFalse() {
+    // Arrange, Act and Assert
+    assertFalse(
+        (new ClassPath(
+                new ClassPathEntry(
+                    Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true)))
+            .isEmpty());
   }
 
   /**
@@ -355,16 +321,14 @@ class ClassPathDiffblueTest {
    * <p>Method under test: {@link ClassPath#isEmpty()}
    */
   @Test
-  @DisplayName("Test isEmpty(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ClassPath.isEmpty()"})
-  void testIsEmpty_thenReturnTrue() {
+  public void testIsEmpty_thenReturnTrue() {
     // Arrange
     new ClassPathEntry(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
 
     // Act and Assert
-    assertTrue(new ClassPath().isEmpty());
+    assertTrue((new ClassPath()).isEmpty());
   }
 
   /**
@@ -373,17 +337,15 @@ class ClassPathDiffblueTest {
    * <p>Method under test: {@link ClassPath#size()}
    */
   @Test
-  @DisplayName("Test size()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int ClassPath.size()"})
-  void testSize() {
-    // Arrange
-    ClassPathEntry classPathEntry =
-        new ClassPathEntry(
-            Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true);
-
-    // Act and Assert
-    assertEquals(1, new ClassPath(classPathEntry).size());
+  public void testSize() {
+    // Arrange, Act and Assert
+    assertEquals(
+        1,
+        (new ClassPath(
+                new ClassPathEntry(
+                    Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile(), true)))
+            .size());
   }
 }

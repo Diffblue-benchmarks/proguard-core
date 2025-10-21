@@ -1,14 +1,13 @@
 package proguard.classfile.attribute.preverification;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryMethod;
@@ -18,7 +17,7 @@ import proguard.classfile.attribute.preverification.visitor.StackMapFrameVisitor
 import proguard.classfile.editor.ConstantPoolRemapper;
 import proguard.classfile.visitor.ProcessingInfoSetter;
 
-class FullFrameDiffblueTest {
+public class FullFrameDiffblueTest {
   /**
    * Test {@link FullFrame#FullFrame()}.
    *
@@ -29,14 +28,12 @@ class FullFrameDiffblueTest {
    * <p>Method under test: {@link FullFrame#FullFrame()}
    */
   @Test
-  @DisplayName("Test new FullFrame(); then return OffsetDelta is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void FullFrame.<init>()",
     "void FullFrame.<init>(int, int, VerificationType[], int, VerificationType[])"
   })
-  void testNewFullFrame_thenReturnOffsetDeltaIsZero() {
+  public void testNewFullFrame_thenReturnOffsetDeltaIsZero() {
     // Arrange and Act
     FullFrame actualFullFrame = new FullFrame();
 
@@ -58,21 +55,20 @@ class FullFrameDiffblueTest {
    * VerificationType[])}
    */
   @Test
-  @DisplayName(
-      "Test new FullFrame(int, int, VerificationType[], int, VerificationType[]); when two; then return OffsetDelta is two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void FullFrame.<init>()",
     "void FullFrame.<init>(int, int, VerificationType[], int, VerificationType[])"
   })
-  void testNewFullFrame_whenTwo_thenReturnOffsetDeltaIsTwo() {
-    // Arrange
-    VerificationType[] variables = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-    VerificationType[] stack = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-
-    // Act
-    FullFrame actualFullFrame = new FullFrame(2, 3, variables, 3, stack);
+  public void testNewFullFrame_whenTwo_thenReturnOffsetDeltaIsTwo() {
+    // Arrange and Act
+    FullFrame actualFullFrame =
+        new FullFrame(
+            2,
+            3,
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE},
+            3,
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE});
 
     // Assert
     assertNull(actualFullFrame.getProcessingInfo());
@@ -86,13 +82,11 @@ class FullFrameDiffblueTest {
    * <p>Method under test: {@link FullFrame#getTag()}
    */
   @Test
-  @DisplayName("Test getTag()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int FullFrame.getTag()"})
-  void testGetTag() {
+  public void testGetTag() {
     // Arrange, Act and Assert
-    assertEquals(StackMapFrame.FULL_FRAME, new FullFrame().getTag());
+    assertEquals(StackMapFrame.FULL_FRAME, (new FullFrame()).getTag());
   }
 
   /**
@@ -102,20 +96,20 @@ class FullFrameDiffblueTest {
    * StackMapFrameVisitor)}
    */
   @Test
-  @DisplayName("Test accept(Clazz, Method, CodeAttribute, int, StackMapFrameVisitor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void FullFrame.accept(Clazz, Method, CodeAttribute, int, StackMapFrameVisitor)"
   })
-  void testAccept() {
+  public void testAccept() {
     // Arrange
-    VerificationType[] variables = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-    VerificationType[] stack = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-
-    FullFrame fullFrame = new FullFrame(2, variables, stack);
+    FullFrame fullFrame =
+        new FullFrame(
+            2,
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE},
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act
@@ -137,18 +131,16 @@ class FullFrameDiffblueTest {
    * StackMapFrameVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(Clazz, Method, CodeAttribute, int, StackMapFrameVisitor); given FullFrame(); then FullFrame() ProcessingInfo is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void FullFrame.accept(Clazz, Method, CodeAttribute, int, StackMapFrameVisitor)"
   })
-  void testAccept_givenFullFrame_thenFullFrameProcessingInfoIsNull() {
+  public void testAccept_givenFullFrame_thenFullFrameProcessingInfoIsNull() {
     // Arrange
     FullFrame fullFrame = new FullFrame();
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act
@@ -169,18 +161,16 @@ class FullFrameDiffblueTest {
    * StackMapFrameVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(Clazz, Method, CodeAttribute, int, StackMapFrameVisitor); then FullFrame() ProcessingInfo is 'Processing Info'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void FullFrame.accept(Clazz, Method, CodeAttribute, int, StackMapFrameVisitor)"
   })
-  void testAccept_thenFullFrameProcessingInfoIsProcessingInfo() {
+  public void testAccept_thenFullFrameProcessingInfoIsProcessingInfo() {
     // Arrange
     FullFrame fullFrame = new FullFrame();
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act
@@ -206,18 +196,17 @@ class FullFrameDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FullFrame.equals(Object)", "int FullFrame.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     FullFrame fullFrame = new FullFrame();
     FullFrame fullFrame2 = new FullFrame();
 
     // Act and Assert
     assertEquals(fullFrame, fullFrame2);
-    assertEquals(fullFrame.hashCode(), fullFrame2.hashCode());
+    int expectedHashCodeResult = fullFrame.hashCode();
+    assertEquals(expectedHashCodeResult, fullFrame2.hashCode());
   }
 
   /**
@@ -236,24 +225,25 @@ class FullFrameDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FullFrame.equals(Object)", "int FullFrame.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual2() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual2() {
     // Arrange
-    VerificationType[] variables = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-    VerificationType[] stack = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-
-    FullFrame fullFrame = new FullFrame(2, variables, stack);
-    VerificationType[] variables2 = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-    VerificationType[] stack2 = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-
-    FullFrame fullFrame2 = new FullFrame(2, variables2, stack2);
+    FullFrame fullFrame =
+        new FullFrame(
+            2,
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE},
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE});
+    FullFrame fullFrame2 =
+        new FullFrame(
+            2,
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE},
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE});
 
     // Act and Assert
     assertEquals(fullFrame, fullFrame2);
-    assertEquals(fullFrame.hashCode(), fullFrame2.hashCode());
+    int expectedHashCodeResult = fullFrame.hashCode();
+    assertEquals(expectedHashCodeResult, fullFrame2.hashCode());
   }
 
   /**
@@ -272,11 +262,9 @@ class FullFrameDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FullFrame.equals(Object)", "int FullFrame.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     FullFrame fullFrame = new FullFrame();
 
@@ -297,16 +285,15 @@ class FullFrameDiffblueTest {
    * <p>Method under test: {@link FullFrame#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FullFrame.equals(Object)", "int FullFrame.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
-    VerificationType[] variables = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-    VerificationType[] stack = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-
-    FullFrame fullFrame = new FullFrame(2, variables, stack);
+    FullFrame fullFrame =
+        new FullFrame(
+            2,
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE},
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE});
 
     // Act and Assert
     assertNotEquals(fullFrame, new FullFrame());
@@ -323,16 +310,15 @@ class FullFrameDiffblueTest {
    * <p>Method under test: {@link FullFrame#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FullFrame.equals(Object)", "int FullFrame.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
-    VerificationType[] variables = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-    VerificationType[] stack = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-
-    FullFrame fullFrame = new FullFrame(0, variables, stack);
+    FullFrame fullFrame =
+        new FullFrame(
+            0,
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE},
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE});
 
     // Act and Assert
     assertNotEquals(fullFrame, new FullFrame());
@@ -349,19 +335,18 @@ class FullFrameDiffblueTest {
    * <p>Method under test: {@link FullFrame#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FullFrame.equals(Object)", "int FullFrame.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
     // Arrange
-    VerificationType[] variables = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-    FullFrame fullFrame = new FullFrame(2, variables, new VerificationType[] {});
-    VerificationType[] variables2 = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-    VerificationType[] stack = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
+    FullFrame fullFrame =
+        new FullFrame(
+            0,
+            new VerificationType[] {},
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE});
 
     // Act and Assert
-    assertNotEquals(fullFrame, new FullFrame(2, variables2, stack));
+    assertNotEquals(fullFrame, new FullFrame());
   }
 
   /**
@@ -375,21 +360,23 @@ class FullFrameDiffblueTest {
    * <p>Method under test: {@link FullFrame#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FullFrame.equals(Object)", "int FullFrame.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual4() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual4() {
     // Arrange
-    VerificationType[] variables = new VerificationType[] {VerificationTypeFactory.FLOAT_TYPE};
-    VerificationType[] stack = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-
-    FullFrame fullFrame = new FullFrame(2, variables, stack);
-    VerificationType[] variables2 = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-    VerificationType[] stack2 = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
+    FullFrame fullFrame =
+        new FullFrame(
+            2,
+            new VerificationType[] {VerificationTypeFactory.FLOAT_TYPE},
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE});
 
     // Act and Assert
-    assertNotEquals(fullFrame, new FullFrame(2, variables2, stack2));
+    assertNotEquals(
+        fullFrame,
+        new FullFrame(
+            2,
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE},
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE}));
   }
 
   /**
@@ -403,21 +390,23 @@ class FullFrameDiffblueTest {
    * <p>Method under test: {@link FullFrame#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FullFrame.equals(Object)", "int FullFrame.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual5() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual5() {
     // Arrange
-    VerificationType[] variables = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-    VerificationType[] stack = new VerificationType[] {VerificationTypeFactory.FLOAT_TYPE};
-
-    FullFrame fullFrame = new FullFrame(2, variables, stack);
-    VerificationType[] variables2 = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-    VerificationType[] stack2 = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
+    FullFrame fullFrame =
+        new FullFrame(
+            2,
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE},
+            new VerificationType[] {VerificationTypeFactory.FLOAT_TYPE});
 
     // Act and Assert
-    assertNotEquals(fullFrame, new FullFrame(2, variables2, stack2));
+    assertNotEquals(
+        fullFrame,
+        new FullFrame(
+            2,
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE},
+            new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE}));
   }
 
   /**
@@ -431,11 +420,9 @@ class FullFrameDiffblueTest {
    * <p>Method under test: {@link FullFrame#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FullFrame.equals(Object)", "int FullFrame.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new FullFrame(), null);
   }
@@ -451,11 +438,9 @@ class FullFrameDiffblueTest {
    * <p>Method under test: {@link FullFrame#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FullFrame.equals(Object)", "int FullFrame.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new FullFrame(), "Different type to FullFrame");
   }
@@ -471,66 +456,33 @@ class FullFrameDiffblueTest {
    * <p>Method under test: {@link FullFrame#toString()}
    */
   @Test
-  @DisplayName("Test toString(); given FullFrame(); then return '[0] Var: , Stack:'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String FullFrame.toString()"})
-  void testToString_givenFullFrame_thenReturn0VarStack() {
+  public void testToString_givenFullFrame_thenReturn0VarStack() {
     // Arrange, Act and Assert
-    assertEquals("[0] Var: , Stack: ", new FullFrame().toString());
+    assertEquals("[0] Var: , Stack: ", (new FullFrame()).toString());
   }
 
   /**
    * Test {@link FullFrame#toString()}.
    *
    * <ul>
-   *   <li>Then return {@code [2] Var: [d], Stack:}.
+   *   <li>Then return {@code [2] Var: [d], Stack: [d]}.
    * </ul>
    *
    * <p>Method under test: {@link FullFrame#toString()}
    */
   @Test
-  @DisplayName("Test toString(); then return '[2] Var: [d], Stack:'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String FullFrame.toString()"})
-  void testToString_thenReturn2VarDStack() {
-    // Arrange
-    VerificationType[] variables = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-    VerificationType[] stack = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-
-    FullFrame fullFrame = new FullFrame(2, variables, stack);
-    fullFrame.variablesCount = 1;
-    fullFrame.stackCount = 0;
-
-    // Act and Assert
-    assertEquals("[2] Var: [d], Stack: ", fullFrame.toString());
-  }
-
-  /**
-   * Test {@link FullFrame#toString()}.
-   *
-   * <ul>
-   *   <li>Then return {@code [2] Var: , Stack: [d]}.
-   * </ul>
-   *
-   * <p>Method under test: {@link FullFrame#toString()}
-   */
-  @Test
-  @DisplayName("Test toString(); then return '[2] Var: , Stack: [d]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"java.lang.String FullFrame.toString()"})
-  void testToString_thenReturn2VarStackD() {
-    // Arrange
-    VerificationType[] variables = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-    VerificationType[] stack = new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE};
-
-    FullFrame fullFrame = new FullFrame(2, variables, stack);
-    fullFrame.variablesCount = 0;
-    fullFrame.stackCount = 1;
-
-    // Act and Assert
-    assertEquals("[2] Var: , Stack: [d]", fullFrame.toString());
+  public void testToString_thenReturn2VarDStackD() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "[2] Var: [d], Stack: [d]",
+        (new FullFrame(
+                2,
+                new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE},
+                new VerificationType[] {VerificationTypeFactory.DOUBLE_TYPE}))
+            .toString());
   }
 }

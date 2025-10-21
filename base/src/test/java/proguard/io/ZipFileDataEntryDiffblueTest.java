@@ -1,16 +1,15 @@
 package proguard.io;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.zip.ZipEntry;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ZipFileDataEntryDiffblueTest {
+public class ZipFileDataEntryDiffblueTest {
   /**
    * Test {@link ZipFileDataEntry#getName()}.
    *
@@ -22,17 +21,14 @@ class ZipFileDataEntryDiffblueTest {
    * <p>Method under test: {@link ZipFileDataEntry#getName()}
    */
   @Test
-  @DisplayName("Test getName(); given ZipEntry(String) with empty string; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String ZipFileDataEntry.getName()"})
-  void testGetName_givenZipEntryWithEmptyString_thenReturnEmptyString() {
+  public void testGetName_givenZipEntryWithEmptyString_thenReturnEmptyString() {
     // Arrange
     ClassPathDataEntry parent = new ClassPathDataEntry("Name");
-    ZipFileDataEntry zipFileDataEntry = new ZipFileDataEntry(parent, new ZipEntry(""), null);
 
     // Act and Assert
-    assertEquals("", zipFileDataEntry.getName());
+    assertEquals("", (new ZipFileDataEntry(parent, new ZipEntry(""), null)).getName());
   }
 
   /**
@@ -46,17 +42,14 @@ class ZipFileDataEntryDiffblueTest {
    * <p>Method under test: {@link ZipFileDataEntry#getName()}
    */
   @Test
-  @DisplayName("Test getName(); given ZipEntry(String) with 'foo'; then return 'foo'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String ZipFileDataEntry.getName()"})
-  void testGetName_givenZipEntryWithFoo_thenReturnFoo() {
+  public void testGetName_givenZipEntryWithFoo_thenReturnFoo() {
     // Arrange
     ClassPathDataEntry parent = new ClassPathDataEntry("Name");
-    ZipFileDataEntry zipFileDataEntry = new ZipFileDataEntry(parent, new ZipEntry("foo"), null);
 
     // Act and Assert
-    assertEquals("foo", zipFileDataEntry.getName());
+    assertEquals("foo", (new ZipFileDataEntry(parent, new ZipEntry("foo"), null)).getName());
   }
 
   /**
@@ -70,18 +63,14 @@ class ZipFileDataEntryDiffblueTest {
    * <p>Method under test: {@link ZipFileDataEntry#getOriginalName()}
    */
   @Test
-  @DisplayName(
-      "Test getOriginalName(); given ZipEntry(String) with empty string; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String ZipFileDataEntry.getOriginalName()"})
-  void testGetOriginalName_givenZipEntryWithEmptyString_thenReturnEmptyString() {
+  public void testGetOriginalName_givenZipEntryWithEmptyString_thenReturnEmptyString() {
     // Arrange
     ClassPathDataEntry parent = new ClassPathDataEntry("Name");
-    ZipFileDataEntry zipFileDataEntry = new ZipFileDataEntry(parent, new ZipEntry(""), null);
 
     // Act and Assert
-    assertEquals("", zipFileDataEntry.getOriginalName());
+    assertEquals("", (new ZipFileDataEntry(parent, new ZipEntry(""), null)).getOriginalName());
   }
 
   /**
@@ -95,17 +84,15 @@ class ZipFileDataEntryDiffblueTest {
    * <p>Method under test: {@link ZipFileDataEntry#getOriginalName()}
    */
   @Test
-  @DisplayName("Test getOriginalName(); given ZipEntry(String) with 'foo'; then return 'foo'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String ZipFileDataEntry.getOriginalName()"})
-  void testGetOriginalName_givenZipEntryWithFoo_thenReturnFoo() {
+  public void testGetOriginalName_givenZipEntryWithFoo_thenReturnFoo() {
     // Arrange
     ClassPathDataEntry parent = new ClassPathDataEntry("Name");
-    ZipFileDataEntry zipFileDataEntry = new ZipFileDataEntry(parent, new ZipEntry("foo"), null);
 
     // Act and Assert
-    assertEquals("foo", zipFileDataEntry.getOriginalName());
+    assertEquals(
+        "foo", (new ZipFileDataEntry(parent, new ZipEntry("foo"), null)).getOriginalName());
   }
 
   /**
@@ -118,17 +105,14 @@ class ZipFileDataEntryDiffblueTest {
    * <p>Method under test: {@link ZipFileDataEntry#getSize()}
    */
   @Test
-  @DisplayName("Test getSize(); then return minus one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"long ZipFileDataEntry.getSize()"})
-  void testGetSize_thenReturnMinusOne() {
+  public void testGetSize_thenReturnMinusOne() {
     // Arrange
     ClassPathDataEntry parent = new ClassPathDataEntry("Name");
-    ZipFileDataEntry zipFileDataEntry = new ZipFileDataEntry(parent, new ZipEntry("foo"), null);
 
     // Act and Assert
-    assertEquals(-1L, zipFileDataEntry.getSize());
+    assertEquals(-1L, (new ZipFileDataEntry(parent, new ZipEntry("foo"), null)).getSize());
   }
 
   /**
@@ -141,16 +125,13 @@ class ZipFileDataEntryDiffblueTest {
    * <p>Method under test: {@link ZipFileDataEntry#isDirectory()}
    */
   @Test
-  @DisplayName("Test isDirectory(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ZipFileDataEntry.isDirectory()"})
-  void testIsDirectory_thenReturnFalse() {
+  public void testIsDirectory_thenReturnFalse() {
     // Arrange
     ClassPathDataEntry parent = new ClassPathDataEntry("Name");
-    ZipFileDataEntry zipFileDataEntry = new ZipFileDataEntry(parent, new ZipEntry("foo"), null);
 
     // Act and Assert
-    assertFalse(zipFileDataEntry.isDirectory());
+    assertFalse((new ZipFileDataEntry(parent, new ZipEntry("foo"), null)).isDirectory());
   }
 }

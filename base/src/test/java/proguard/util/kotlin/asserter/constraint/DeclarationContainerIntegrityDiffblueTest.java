@@ -1,14 +1,13 @@
 package proguard.util.kotlin.asserter.constraint;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class DeclarationContainerIntegrityDiffblueTest {
+public class DeclarationContainerIntegrityDiffblueTest {
   /**
    * Test new {@link DeclarationContainerIntegrity} (default constructor).
    *
@@ -16,11 +15,9 @@ class DeclarationContainerIntegrityDiffblueTest {
    * DeclarationContainerIntegrity}
    */
   @Test
-  @DisplayName("Test new DeclarationContainerIntegrity (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DeclarationContainerIntegrity.<init>()"})
-  void testNewDeclarationContainerIntegrity() {
+  public void testNewDeclarationContainerIntegrity() {
     // Arrange and Act
     DeclarationContainerIntegrity actualDeclarationContainerIntegrity =
         new DeclarationContainerIntegrity();

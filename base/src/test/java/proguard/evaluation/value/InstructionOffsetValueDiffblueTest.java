@@ -1,30 +1,26 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class InstructionOffsetValueDiffblueTest {
+public class InstructionOffsetValueDiffblueTest {
   /**
    * Test {@link InstructionOffsetValue#InstructionOffsetValue(int)}.
    *
    * <p>Method under test: {@link InstructionOffsetValue#InstructionOffsetValue(int)}
    */
   @Test
-  @DisplayName("Test new InstructionOffsetValue(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void InstructionOffsetValue.<init>(int)"})
-  void testNewInstructionOffsetValue() {
+  public void testNewInstructionOffsetValue() {
     // Arrange and Act
     InstructionOffsetValue actualInstructionOffsetValue = new InstructionOffsetValue(42);
 
@@ -40,11 +36,9 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#InstructionOffsetValue(int[])}
    */
   @Test
-  @DisplayName("Test new InstructionOffsetValue(int[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void InstructionOffsetValue.<init>(int[])"})
-  void testNewInstructionOffsetValue2() {
+  public void testNewInstructionOffsetValue2() {
     // Arrange and Act
     InstructionOffsetValue actualInstructionOffsetValue =
         new InstructionOffsetValue(new int[] {42, 1, 42, 1});
@@ -61,11 +55,9 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#instructionOffsetCount()}
    */
   @Test
-  @DisplayName("Test instructionOffsetCount()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int InstructionOffsetValue.instructionOffsetCount()"})
-  void testInstructionOffsetCount() {
+  public void testInstructionOffsetCount() {
     // Arrange, Act and Assert
     assertEquals(0, InstructionOffsetValue.EMPTY_VALUE.instructionOffsetCount());
   }
@@ -80,17 +72,11 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#instructionOffset(int)}
    */
   @Test
-  @DisplayName("Test instructionOffset(int); then return one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int InstructionOffsetValue.instructionOffset(int)"})
-  void testInstructionOffset_thenReturnOne() {
-    // Arrange
-    InstructionOffsetValue instructionOffsetValue =
-        new InstructionOffsetValue(new int[] {42, 1, 42, 1});
-
-    // Act and Assert
-    assertEquals(1, instructionOffsetValue.instructionOffset(1));
+  public void testInstructionOffset_thenReturnOne() {
+    // Arrange, Act and Assert
+    assertEquals(1, (new InstructionOffsetValue(new int[] {42, 1, 42, 1})).instructionOffset(1));
   }
 
   /**
@@ -104,11 +90,9 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#contains(int)}
    */
   @Test
-  @DisplayName("Test contains(int); given EMPTY_VALUE; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionOffsetValue.contains(int)"})
-  void testContains_givenEmpty_value_thenReturnFalse() {
+  public void testContains_givenEmpty_value_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(InstructionOffsetValue.EMPTY_VALUE.contains(42));
   }
@@ -124,14 +108,11 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#contains(int)}
    */
   @Test
-  @DisplayName(
-      "Test contains(int); given InstructionOffsetValue(int) with value is forty-two; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionOffsetValue.contains(int)"})
-  void testContains_givenInstructionOffsetValueWithValueIsFortyTwo_thenReturnTrue() {
+  public void testContains_givenInstructionOffsetValueWithValueIsFortyTwo_thenReturnTrue() {
     // Arrange, Act and Assert
-    assertTrue(new InstructionOffsetValue(42).contains(42));
+    assertTrue((new InstructionOffsetValue(42)).contains(42));
   }
 
   /**
@@ -145,14 +126,11 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#contains(int)}
    */
   @Test
-  @DisplayName(
-      "Test contains(int); given InstructionOffsetValue(int) with value is one; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionOffsetValue.contains(int)"})
-  void testContains_givenInstructionOffsetValueWithValueIsOne_thenReturnFalse() {
+  public void testContains_givenInstructionOffsetValueWithValueIsOne_thenReturnFalse() {
     // Arrange, Act and Assert
-    assertFalse(new InstructionOffsetValue(1).contains(42));
+    assertFalse((new InstructionOffsetValue(1)).contains(42));
   }
 
   /**
@@ -161,17 +139,14 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#minimumValue()}
    */
   @Test
-  @DisplayName("Test minimumValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int InstructionOffsetValue.minimumValue()"})
-  void testMinimumValue() {
-    // Arrange
-    InstructionOffsetValue instructionOffsetValue =
-        new InstructionOffsetValue(new int[] {42, Integer.MAX_VALUE, 42, Integer.MAX_VALUE});
-
-    // Act and Assert
-    assertEquals(42, instructionOffsetValue.minimumValue());
+  public void testMinimumValue() {
+    // Arrange, Act and Assert
+    assertEquals(
+        42,
+        (new InstructionOffsetValue(new int[] {42, Integer.MAX_VALUE, 42, Integer.MAX_VALUE}))
+            .minimumValue());
   }
 
   /**
@@ -185,11 +160,9 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#minimumValue()}
    */
   @Test
-  @DisplayName("Test minimumValue(); given EMPTY_VALUE; then return MAX_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int InstructionOffsetValue.minimumValue()"})
-  void testMinimumValue_givenEmpty_value_thenReturnMax_value() {
+  public void testMinimumValue_givenEmpty_value_thenReturnMax_value() {
     // Arrange, Act and Assert
     assertEquals(Integer.MAX_VALUE, InstructionOffsetValue.EMPTY_VALUE.minimumValue());
   }
@@ -204,13 +177,11 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#minimumValue()}
    */
   @Test
-  @DisplayName("Test minimumValue(); given InstructionOffsetValue(int) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int InstructionOffsetValue.minimumValue()"})
-  void testMinimumValue_givenInstructionOffsetValueWithValueIsFortyTwo() {
+  public void testMinimumValue_givenInstructionOffsetValueWithValueIsFortyTwo() {
     // Arrange, Act and Assert
-    assertEquals(42, new InstructionOffsetValue(42).minimumValue());
+    assertEquals(42, (new InstructionOffsetValue(42)).minimumValue());
   }
 
   /**
@@ -219,17 +190,14 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#maximumValue()}
    */
   @Test
-  @DisplayName("Test maximumValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int InstructionOffsetValue.maximumValue()"})
-  void testMaximumValue() {
-    // Arrange
-    InstructionOffsetValue instructionOffsetValue =
-        new InstructionOffsetValue(new int[] {42, Integer.MIN_VALUE, 42, Integer.MIN_VALUE});
-
-    // Act and Assert
-    assertEquals(42, instructionOffsetValue.maximumValue());
+  public void testMaximumValue() {
+    // Arrange, Act and Assert
+    assertEquals(
+        42,
+        (new InstructionOffsetValue(new int[] {42, Integer.MIN_VALUE, 42, Integer.MIN_VALUE}))
+            .maximumValue());
   }
 
   /**
@@ -243,11 +211,9 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#maximumValue()}
    */
   @Test
-  @DisplayName("Test maximumValue(); given EMPTY_VALUE; then return MIN_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int InstructionOffsetValue.maximumValue()"})
-  void testMaximumValue_givenEmpty_value_thenReturnMin_value() {
+  public void testMaximumValue_givenEmpty_value_thenReturnMin_value() {
     // Arrange, Act and Assert
     assertEquals(Integer.MIN_VALUE, InstructionOffsetValue.EMPTY_VALUE.maximumValue());
   }
@@ -262,13 +228,11 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#maximumValue()}
    */
   @Test
-  @DisplayName("Test maximumValue(); given InstructionOffsetValue(int) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int InstructionOffsetValue.maximumValue()"})
-  void testMaximumValue_givenInstructionOffsetValueWithValueIsFortyTwo() {
+  public void testMaximumValue_givenInstructionOffsetValueWithValueIsFortyTwo() {
     // Arrange, Act and Assert
-    assertEquals(42, new InstructionOffsetValue(42).maximumValue());
+    assertEquals(42, (new InstructionOffsetValue(42)).maximumValue());
   }
 
   /**
@@ -281,17 +245,11 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#isMethodParameter(int)}
    */
   @Test
-  @DisplayName("Test isMethodParameter(int); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionOffsetValue.isMethodParameter(int)"})
-  void testIsMethodParameter_thenReturnFalse() {
-    // Arrange
-    InstructionOffsetValue instructionOffsetValue =
-        new InstructionOffsetValue(new int[] {42, 1, 42, 1});
-
-    // Act and Assert
-    assertFalse(instructionOffsetValue.isMethodParameter(1));
+  public void testIsMethodParameter_thenReturnFalse() {
+    // Arrange, Act and Assert
+    assertFalse((new InstructionOffsetValue(new int[] {42, 1, 42, 1})).isMethodParameter(1));
   }
 
   /**
@@ -304,27 +262,13 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#isMethodParameter(int)}
    */
   @Test
-  @DisplayName("Test isMethodParameter(int); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionOffsetValue.isMethodParameter(int)"})
-  void testIsMethodParameter_thenReturnTrue() {
-    // Arrange
-    InstructionOffsetValue instructionOffsetValue =
-        new InstructionOffsetValue(
-            new int[] {
-              42,
-              InstructionOffsetValue.METHOD_PARAMETER,
-              42,
-              InstructionOffsetValue.METHOD_PARAMETER,
-              42,
-              InstructionOffsetValue.METHOD_PARAMETER,
-              42,
-              InstructionOffsetValue.METHOD_PARAMETER
-            });
-
-    // Act and Assert
-    assertTrue(instructionOffsetValue.isMethodParameter(1));
+  public void testIsMethodParameter_thenReturnTrue() {
+    // Arrange, Act and Assert
+    assertTrue(
+        (new InstructionOffsetValue(new int[] {42, InstructionOffsetValue.METHOD_PARAMETER, 42, 1}))
+            .isMethodParameter(1));
   }
 
   /**
@@ -337,17 +281,11 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#methodParameter(int)}
    */
   @Test
-  @DisplayName("Test methodParameter(int); then return one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int InstructionOffsetValue.methodParameter(int)"})
-  void testMethodParameter_thenReturnOne() {
-    // Arrange
-    InstructionOffsetValue instructionOffsetValue =
-        new InstructionOffsetValue(new int[] {42, 1, 42, 1});
-
-    // Act and Assert
-    assertEquals(1, instructionOffsetValue.methodParameter(1));
+  public void testMethodParameter_thenReturnOne() {
+    // Arrange, Act and Assert
+    assertEquals(1, (new InstructionOffsetValue(new int[] {42, 1, 42, 1})).methodParameter(1));
   }
 
   /**
@@ -360,17 +298,11 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#isMethodReturnValue(int)}
    */
   @Test
-  @DisplayName("Test isMethodReturnValue(int); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionOffsetValue.isMethodReturnValue(int)"})
-  void testIsMethodReturnValue_thenReturnFalse() {
-    // Arrange
-    InstructionOffsetValue instructionOffsetValue =
-        new InstructionOffsetValue(new int[] {42, 1, 42, 1});
-
-    // Act and Assert
-    assertFalse(instructionOffsetValue.isMethodReturnValue(1));
+  public void testIsMethodReturnValue_thenReturnFalse() {
+    // Arrange, Act and Assert
+    assertFalse((new InstructionOffsetValue(new int[] {42, 1, 42, 1})).isMethodReturnValue(1));
   }
 
   /**
@@ -383,27 +315,14 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#isMethodReturnValue(int)}
    */
   @Test
-  @DisplayName("Test isMethodReturnValue(int); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionOffsetValue.isMethodReturnValue(int)"})
-  void testIsMethodReturnValue_thenReturnTrue() {
-    // Arrange
-    InstructionOffsetValue instructionOffsetValue =
-        new InstructionOffsetValue(
-            new int[] {
-              42,
-              InstructionOffsetValue.METHOD_RETURN_VALUE,
-              42,
-              InstructionOffsetValue.METHOD_RETURN_VALUE,
-              42,
-              InstructionOffsetValue.METHOD_RETURN_VALUE,
-              42,
-              InstructionOffsetValue.METHOD_RETURN_VALUE
-            });
-
-    // Act and Assert
-    assertTrue(instructionOffsetValue.isMethodReturnValue(1));
+  public void testIsMethodReturnValue_thenReturnTrue() {
+    // Arrange, Act and Assert
+    assertTrue(
+        (new InstructionOffsetValue(
+                new int[] {42, InstructionOffsetValue.METHOD_RETURN_VALUE, 42, 1}))
+            .isMethodReturnValue(1));
   }
 
   /**
@@ -416,17 +335,11 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#isFieldValue(int)}
    */
   @Test
-  @DisplayName("Test isFieldValue(int); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionOffsetValue.isFieldValue(int)"})
-  void testIsFieldValue_thenReturnFalse() {
-    // Arrange
-    InstructionOffsetValue instructionOffsetValue =
-        new InstructionOffsetValue(new int[] {42, 1, 42, 1});
-
-    // Act and Assert
-    assertFalse(instructionOffsetValue.isFieldValue(1));
+  public void testIsFieldValue_thenReturnFalse() {
+    // Arrange, Act and Assert
+    assertFalse((new InstructionOffsetValue(new int[] {42, 1, 42, 1})).isFieldValue(1));
   }
 
   /**
@@ -439,27 +352,13 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#isFieldValue(int)}
    */
   @Test
-  @DisplayName("Test isFieldValue(int); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionOffsetValue.isFieldValue(int)"})
-  void testIsFieldValue_thenReturnTrue() {
-    // Arrange
-    InstructionOffsetValue instructionOffsetValue =
-        new InstructionOffsetValue(
-            new int[] {
-              42,
-              InstructionOffsetValue.FIELD_VALUE,
-              42,
-              InstructionOffsetValue.FIELD_VALUE,
-              42,
-              InstructionOffsetValue.FIELD_VALUE,
-              42,
-              InstructionOffsetValue.FIELD_VALUE
-            });
-
-    // Act and Assert
-    assertTrue(instructionOffsetValue.isFieldValue(1));
+  public void testIsFieldValue_thenReturnTrue() {
+    // Arrange, Act and Assert
+    assertTrue(
+        (new InstructionOffsetValue(new int[] {42, InstructionOffsetValue.FIELD_VALUE, 42, 1}))
+            .isFieldValue(1));
   }
 
   /**
@@ -472,17 +371,11 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#isNewinstance(int)}
    */
   @Test
-  @DisplayName("Test isNewinstance(int); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionOffsetValue.isNewinstance(int)"})
-  void testIsNewinstance_thenReturnFalse() {
-    // Arrange
-    InstructionOffsetValue instructionOffsetValue =
-        new InstructionOffsetValue(new int[] {42, 1, 42, 1});
-
-    // Act and Assert
-    assertFalse(instructionOffsetValue.isNewinstance(1));
+  public void testIsNewinstance_thenReturnFalse() {
+    // Arrange, Act and Assert
+    assertFalse((new InstructionOffsetValue(new int[] {42, 1, 42, 1})).isNewinstance(1));
   }
 
   /**
@@ -495,27 +388,13 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#isNewinstance(int)}
    */
   @Test
-  @DisplayName("Test isNewinstance(int); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionOffsetValue.isNewinstance(int)"})
-  void testIsNewinstance_thenReturnTrue() {
-    // Arrange
-    InstructionOffsetValue instructionOffsetValue =
-        new InstructionOffsetValue(
-            new int[] {
-              42,
-              InstructionOffsetValue.NEW_INSTANCE,
-              42,
-              InstructionOffsetValue.NEW_INSTANCE,
-              42,
-              InstructionOffsetValue.NEW_INSTANCE,
-              42,
-              InstructionOffsetValue.NEW_INSTANCE
-            });
-
-    // Act and Assert
-    assertTrue(instructionOffsetValue.isNewinstance(1));
+  public void testIsNewinstance_thenReturnTrue() {
+    // Arrange, Act and Assert
+    assertTrue(
+        (new InstructionOffsetValue(new int[] {42, InstructionOffsetValue.NEW_INSTANCE, 42, 1}))
+            .isNewinstance(1));
   }
 
   /**
@@ -528,17 +407,11 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#isCast(int)}
    */
   @Test
-  @DisplayName("Test isCast(int); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionOffsetValue.isCast(int)"})
-  void testIsCast_thenReturnFalse() {
-    // Arrange
-    InstructionOffsetValue instructionOffsetValue =
-        new InstructionOffsetValue(new int[] {42, 1, 42, 1});
-
-    // Act and Assert
-    assertFalse(instructionOffsetValue.isCast(1));
+  public void testIsCast_thenReturnFalse() {
+    // Arrange, Act and Assert
+    assertFalse((new InstructionOffsetValue(new int[] {42, 1, 42, 1})).isCast(1));
   }
 
   /**
@@ -551,27 +424,12 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#isCast(int)}
    */
   @Test
-  @DisplayName("Test isCast(int); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionOffsetValue.isCast(int)"})
-  void testIsCast_thenReturnTrue() {
-    // Arrange
-    InstructionOffsetValue instructionOffsetValue =
-        new InstructionOffsetValue(
-            new int[] {
-              42,
-              InstructionOffsetValue.CAST,
-              42,
-              InstructionOffsetValue.CAST,
-              42,
-              InstructionOffsetValue.CAST,
-              42,
-              InstructionOffsetValue.CAST
-            });
-
-    // Act and Assert
-    assertTrue(instructionOffsetValue.isCast(1));
+  public void testIsCast_thenReturnTrue() {
+    // Arrange, Act and Assert
+    assertTrue(
+        (new InstructionOffsetValue(new int[] {42, InstructionOffsetValue.CAST, 42, 1})).isCast(1));
   }
 
   /**
@@ -584,17 +442,11 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#isExceptionHandler(int)}
    */
   @Test
-  @DisplayName("Test isExceptionHandler(int); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionOffsetValue.isExceptionHandler(int)"})
-  void testIsExceptionHandler_thenReturnFalse() {
-    // Arrange
-    InstructionOffsetValue instructionOffsetValue =
-        new InstructionOffsetValue(new int[] {42, 1, 42, 1});
-
-    // Act and Assert
-    assertFalse(instructionOffsetValue.isExceptionHandler(1));
+  public void testIsExceptionHandler_thenReturnFalse() {
+    // Arrange, Act and Assert
+    assertFalse((new InstructionOffsetValue(new int[] {42, 1, 42, 1})).isExceptionHandler(1));
   }
 
   /**
@@ -607,27 +459,14 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#isExceptionHandler(int)}
    */
   @Test
-  @DisplayName("Test isExceptionHandler(int); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean InstructionOffsetValue.isExceptionHandler(int)"})
-  void testIsExceptionHandler_thenReturnTrue() {
-    // Arrange
-    InstructionOffsetValue instructionOffsetValue =
-        new InstructionOffsetValue(
-            new int[] {
-              42,
-              InstructionOffsetValue.EXCEPTION_HANDLER,
-              42,
-              InstructionOffsetValue.EXCEPTION_HANDLER,
-              42,
-              InstructionOffsetValue.EXCEPTION_HANDLER,
-              42,
-              InstructionOffsetValue.EXCEPTION_HANDLER
-            });
-
-    // Act and Assert
-    assertTrue(instructionOffsetValue.isExceptionHandler(1));
+  public void testIsExceptionHandler_thenReturnTrue() {
+    // Arrange, Act and Assert
+    assertTrue(
+        (new InstructionOffsetValue(
+                new int[] {42, InstructionOffsetValue.EXCEPTION_HANDLER, 42, 1}))
+            .isExceptionHandler(1));
   }
 
   /**
@@ -641,11 +480,9 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#add(int)}
    */
   @Test
-  @DisplayName("Test add(int); given EMPTY_VALUE; then return not Category2")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionOffsetValue InstructionOffsetValue.add(int)"})
-  void testAdd_givenEmpty_value_thenReturnNotCategory2() {
+  public void testAdd_givenEmpty_value_thenReturnNotCategory2() {
     // Arrange and Act
     InstructionOffsetValue actualAddResult = InstructionOffsetValue.EMPTY_VALUE.add(42);
 
@@ -666,14 +503,11 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#add(int)}
    */
   @Test
-  @DisplayName(
-      "Test add(int); given InstructionOffsetValue(int) with value is one; then return not Category2")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionOffsetValue InstructionOffsetValue.add(int)"})
-  void testAdd_givenInstructionOffsetValueWithValueIsOne_thenReturnNotCategory2() {
+  public void testAdd_givenInstructionOffsetValueWithValueIsOne_thenReturnNotCategory2() {
     // Arrange and Act
-    InstructionOffsetValue actualAddResult = new InstructionOffsetValue(1).add(42);
+    InstructionOffsetValue actualAddResult = (new InstructionOffsetValue(1)).add(42);
 
     // Assert
     assertFalse(actualAddResult.isCategory2());
@@ -692,19 +526,14 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#add(int)}
    */
   @Test
-  @DisplayName("Test add(int); then return InstructionOffsetValue(int) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionOffsetValue InstructionOffsetValue.add(int)"})
-  void testAdd_thenReturnInstructionOffsetValueWithValueIsFortyTwo() {
+  public void testAdd_thenReturnInstructionOffsetValueWithValueIsFortyTwo() {
     // Arrange
     InstructionOffsetValue instructionOffsetValue = new InstructionOffsetValue(42);
 
-    // Act
-    InstructionOffsetValue actualAddResult = instructionOffsetValue.add(42);
-
-    // Assert
-    assertSame(instructionOffsetValue, actualAddResult);
+    // Act and Assert
+    assertSame(instructionOffsetValue, instructionOffsetValue.add(42));
   }
 
   /**
@@ -718,13 +547,14 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#remove(int)}
    */
   @Test
-  @DisplayName("Test remove(int); given EMPTY_VALUE; then return EMPTY_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionOffsetValue InstructionOffsetValue.remove(int)"})
-  void testRemove_givenEmpty_value_thenReturnEmpty_value() {
-    // Arrange, Act and Assert
-    assertSame(InstructionOffsetValue.EMPTY_VALUE, InstructionOffsetValue.EMPTY_VALUE.remove(42));
+  public void testRemove_givenEmpty_value_thenReturnEmpty_value() {
+    // Arrange and Act
+    InstructionOffsetValue actualRemoveResult = InstructionOffsetValue.EMPTY_VALUE.remove(42);
+
+    // Assert
+    assertSame(actualRemoveResult.EMPTY_VALUE, actualRemoveResult);
   }
 
   /**
@@ -738,14 +568,14 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#remove(int)}
    */
   @Test
-  @DisplayName(
-      "Test remove(int); given InstructionOffsetValue(int) with value is forty-two; then return EMPTY_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionOffsetValue InstructionOffsetValue.remove(int)"})
-  void testRemove_givenInstructionOffsetValueWithValueIsFortyTwo_thenReturnEmpty_value() {
-    // Arrange, Act and Assert
-    assertEquals(InstructionOffsetValue.EMPTY_VALUE, new InstructionOffsetValue(42).remove(42));
+  public void testRemove_givenInstructionOffsetValueWithValueIsFortyTwo_thenReturnEmpty_value() {
+    // Arrange and Act
+    InstructionOffsetValue actualRemoveResult = (new InstructionOffsetValue(42)).remove(42);
+
+    // Assert
+    assertEquals(actualRemoveResult.EMPTY_VALUE, actualRemoveResult);
   }
 
   /**
@@ -758,19 +588,14 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#remove(int)}
    */
   @Test
-  @DisplayName("Test remove(int); then return InstructionOffsetValue(int) with value is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionOffsetValue InstructionOffsetValue.remove(int)"})
-  void testRemove_thenReturnInstructionOffsetValueWithValueIsOne() {
+  public void testRemove_thenReturnInstructionOffsetValueWithValueIsOne() {
     // Arrange
     InstructionOffsetValue instructionOffsetValue = new InstructionOffsetValue(1);
 
-    // Act
-    InstructionOffsetValue actualRemoveResult = instructionOffsetValue.remove(42);
-
-    // Assert
-    assertSame(instructionOffsetValue, actualRemoveResult);
+    // Act and Assert
+    assertSame(instructionOffsetValue, instructionOffsetValue.remove(42));
   }
 
   /**
@@ -780,22 +605,18 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#generalize(InstructionOffsetValue)}
    */
   @Test
-  @DisplayName("Test generalize(InstructionOffsetValue) with 'InstructionOffsetValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionOffsetValue InstructionOffsetValue.generalize(InstructionOffsetValue)"
   })
-  void testGeneralizeWithInstructionOffsetValue() {
+  public void testGeneralizeWithInstructionOffsetValue() {
     // Arrange
     InstructionOffsetValue instructionOffsetValue = new InstructionOffsetValue(42);
 
-    // Act
-    InstructionOffsetValue actualGeneralizeResult =
-        instructionOffsetValue.generalize(InstructionOffsetValue.EMPTY_VALUE);
-
-    // Assert
-    assertSame(instructionOffsetValue, actualGeneralizeResult);
+    // Act and Assert
+    assertSame(
+        instructionOffsetValue,
+        instructionOffsetValue.generalize(InstructionOffsetValue.EMPTY_VALUE));
   }
 
   /**
@@ -805,22 +626,17 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#generalize(InstructionOffsetValue)}
    */
   @Test
-  @DisplayName("Test generalize(InstructionOffsetValue) with 'InstructionOffsetValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionOffsetValue InstructionOffsetValue.generalize(InstructionOffsetValue)"
   })
-  void testGeneralizeWithInstructionOffsetValue2() {
+  public void testGeneralizeWithInstructionOffsetValue2() {
     // Arrange
     InstructionOffsetValue instructionOffsetValue = new InstructionOffsetValue(42);
     InstructionOffsetValue other = new InstructionOffsetValue(42);
 
-    // Act
-    InstructionOffsetValue actualGeneralizeResult = instructionOffsetValue.generalize(other);
-
-    // Assert
-    assertSame(other, actualGeneralizeResult);
+    // Act and Assert
+    assertSame(other, instructionOffsetValue.generalize(other));
   }
 
   /**
@@ -830,13 +646,11 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#generalize(InstructionOffsetValue)}
    */
   @Test
-  @DisplayName("Test generalize(InstructionOffsetValue) with 'InstructionOffsetValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionOffsetValue InstructionOffsetValue.generalize(InstructionOffsetValue)"
   })
-  void testGeneralizeWithInstructionOffsetValue3() {
+  public void testGeneralizeWithInstructionOffsetValue3() {
     // Arrange
     InstructionOffsetValue instructionOffsetValue = new InstructionOffsetValue(1);
 
@@ -857,23 +671,18 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#generalize(InstructionOffsetValue)}
    */
   @Test
-  @DisplayName("Test generalize(InstructionOffsetValue) with 'InstructionOffsetValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionOffsetValue InstructionOffsetValue.generalize(InstructionOffsetValue)"
   })
-  void testGeneralizeWithInstructionOffsetValue4() {
+  public void testGeneralizeWithInstructionOffsetValue4() {
     // Arrange
     InstructionOffsetValue instructionOffsetValue =
         new InstructionOffsetValue(new int[] {42, 1, 42, 42});
 
-    // Act
-    InstructionOffsetValue actualGeneralizeResult =
-        instructionOffsetValue.generalize(new InstructionOffsetValue(42));
-
-    // Assert
-    assertSame(instructionOffsetValue, actualGeneralizeResult);
+    // Act and Assert
+    assertSame(
+        instructionOffsetValue, instructionOffsetValue.generalize(new InstructionOffsetValue(42)));
   }
 
   /**
@@ -888,18 +697,17 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#generalize(InstructionOffsetValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(InstructionOffsetValue) with 'InstructionOffsetValue'; given EMPTY_VALUE; then return EMPTY_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionOffsetValue InstructionOffsetValue.generalize(InstructionOffsetValue)"
   })
-  void testGeneralizeWithInstructionOffsetValue_givenEmpty_value_thenReturnEmpty_value() {
-    // Arrange, Act and Assert
-    assertSame(
-        InstructionOffsetValue.EMPTY_VALUE,
-        InstructionOffsetValue.EMPTY_VALUE.generalize(InstructionOffsetValue.EMPTY_VALUE));
+  public void testGeneralizeWithInstructionOffsetValue_givenEmpty_value_thenReturnEmpty_value() {
+    // Arrange and Act
+    InstructionOffsetValue actualGeneralizeResult =
+        InstructionOffsetValue.EMPTY_VALUE.generalize(InstructionOffsetValue.EMPTY_VALUE);
+
+    // Assert
+    assertSame(actualGeneralizeResult.EMPTY_VALUE, actualGeneralizeResult);
   }
 
   /**
@@ -913,14 +721,11 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#generalize(InstructionOffsetValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(InstructionOffsetValue) with 'InstructionOffsetValue'; then return not Category2")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionOffsetValue InstructionOffsetValue.generalize(InstructionOffsetValue)"
   })
-  void testGeneralizeWithInstructionOffsetValue_thenReturnNotCategory2() {
+  public void testGeneralizeWithInstructionOffsetValue_thenReturnNotCategory2() {
     // Arrange
     InstructionOffsetValue instructionOffsetValue =
         new InstructionOffsetValue(new int[] {42, 1, 42, 1});
@@ -933,30 +738,6 @@ class InstructionOffsetValueDiffblueTest {
     assertFalse(actualGeneralizeResult.isCategory2());
     assertTrue(actualGeneralizeResult.isParticular());
     assertTrue(actualGeneralizeResult.isSpecific());
-  }
-
-  /**
-   * Test {@link InstructionOffsetValue#generalize(Value)} with {@code Value}.
-   *
-   * <p>Method under test: {@link InstructionOffsetValue#generalize(Value)}
-   */
-  @Test
-  @DisplayName("Test generalize(Value) with 'Value'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Value InstructionOffsetValue.generalize(Value)"})
-  void testGeneralizeWithValue() {
-    // Arrange
-    InstructionOffsetValue instructionOffsetValue =
-        new InstructionOffsetValue(new int[] {42, 1, 42, 1});
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            instructionOffsetValue.generalize(
-                new ComparisonValue(
-                    InstructionOffsetValue.EMPTY_VALUE, InstructionOffsetValue.EMPTY_VALUE)));
   }
 
   /**
@@ -971,12 +752,9 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#generalize(Value)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(Value) with 'Value'; given EMPTY_VALUE; when EMPTY_VALUE; then return EMPTY_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value InstructionOffsetValue.generalize(Value)"})
-  void testGeneralizeWithValue_givenEmpty_value_whenEmpty_value_thenReturnEmpty_value() {
+  public void testGeneralizeWithValue_givenEmpty_value_whenEmpty_value_thenReturnEmpty_value() {
     // Arrange and Act
     Value actualGeneralizeResult =
         InstructionOffsetValue.EMPTY_VALUE.generalize((Value) InstructionOffsetValue.EMPTY_VALUE);
@@ -997,46 +775,16 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#generalize(Value)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(Value) with 'Value'; then return InstructionOffsetValue(int) with value is forty-two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value InstructionOffsetValue.generalize(Value)"})
-  void testGeneralizeWithValue_thenReturnInstructionOffsetValueWithValueIsFortyTwo() {
+  public void testGeneralizeWithValue_thenReturnInstructionOffsetValueWithValueIsFortyTwo() {
     // Arrange
     InstructionOffsetValue instructionOffsetValue = new InstructionOffsetValue(42);
 
-    // Act
-    Value actualGeneralizeResult =
-        instructionOffsetValue.generalize((Value) InstructionOffsetValue.EMPTY_VALUE);
-
-    // Assert
-    assertSame(instructionOffsetValue, actualGeneralizeResult);
-  }
-
-  /**
-   * Test {@link InstructionOffsetValue#generalize(Value)} with {@code Value}.
-   *
-   * <ul>
-   *   <li>When {@link BasicRangeValueFactory#INTEGER_VALUE_BYTE}.
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionOffsetValue#generalize(Value)}
-   */
-  @Test
-  @DisplayName(
-      "Test generalize(Value) with 'Value'; when INTEGER_VALUE_BYTE; then throw IllegalArgumentException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Value InstructionOffsetValue.generalize(Value)"})
-  void testGeneralizeWithValue_whenInteger_value_byte_thenThrowIllegalArgumentException() {
-    // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            InstructionOffsetValue.EMPTY_VALUE.generalize(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE));
+    // Act and Assert
+    assertSame(
+        instructionOffsetValue,
+        instructionOffsetValue.generalize((Value) InstructionOffsetValue.EMPTY_VALUE));
   }
 
   /**
@@ -1050,19 +798,14 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#generalize(Value)}
    */
   @Test
-  @DisplayName("Test generalize(Value) with 'Value'; when UNKNOWN_VALUE; then return UNKNOWN_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value InstructionOffsetValue.generalize(Value)"})
-  void testGeneralizeWithValue_whenUnknown_value_thenReturnUnknown_value() {
+  public void testGeneralizeWithValue_whenUnknown_value_thenReturnUnknown_value() {
     // Arrange
     UnknownValue other = BasicValueFactory.UNKNOWN_VALUE;
 
-    // Act
-    Value actualGeneralizeResult = InstructionOffsetValue.EMPTY_VALUE.generalize(other);
-
-    // Assert
-    assertSame(other, actualGeneralizeResult);
+    // Act and Assert
+    assertSame(other, InstructionOffsetValue.EMPTY_VALUE.generalize(other));
   }
 
   /**
@@ -1071,15 +814,15 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#instructionOffsetValue()}
    */
   @Test
-  @DisplayName("Test instructionOffsetValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InstructionOffsetValue InstructionOffsetValue.instructionOffsetValue()"})
-  void testInstructionOffsetValue() {
-    // Arrange, Act and Assert
-    assertSame(
-        InstructionOffsetValue.EMPTY_VALUE,
-        InstructionOffsetValue.EMPTY_VALUE.instructionOffsetValue());
+  public void testInstructionOffsetValue() {
+    // Arrange and Act
+    InstructionOffsetValue actualInstructionOffsetValueResult =
+        InstructionOffsetValue.EMPTY_VALUE.instructionOffsetValue();
+
+    // Assert
+    assertSame(actualInstructionOffsetValueResult.EMPTY_VALUE, actualInstructionOffsetValueResult);
   }
 
   /**
@@ -1093,14 +836,12 @@ class InstructionOffsetValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean InstructionOffsetValue.isParticular()",
     "boolean InstructionOffsetValue.isSpecific()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     InstructionOffsetValue instructionOffsetValue = new InstructionOffsetValue(42);
 
@@ -1118,11 +859,9 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#computationalType()}
    */
   @Test
-  @DisplayName("Test computationalType()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int InstructionOffsetValue.computationalType()"})
-  void testComputationalType() {
+  public void testComputationalType() {
     // Arrange, Act and Assert
     assertEquals(6, InstructionOffsetValue.EMPTY_VALUE.computationalType());
   }
@@ -1133,11 +872,9 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#internalType()}
    */
   @Test
-  @DisplayName("Test internalType()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String InstructionOffsetValue.internalType()"})
-  void testInternalType() {
+  public void testInternalType() {
     // Arrange, Act and Assert
     assertEquals("I", InstructionOffsetValue.EMPTY_VALUE.internalType());
   }
@@ -1159,21 +896,20 @@ class InstructionOffsetValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean InstructionOffsetValue.equals(Object)",
     "int InstructionOffsetValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     InstructionOffsetValue instructionOffsetValue = InstructionOffsetValue.EMPTY_VALUE;
     InstructionOffsetValue instructionOffsetValue2 = InstructionOffsetValue.EMPTY_VALUE;
 
     // Act and Assert
     assertEquals(instructionOffsetValue, instructionOffsetValue2);
-    assertEquals(instructionOffsetValue.hashCode(), instructionOffsetValue2.hashCode());
+    int expectedHashCodeResult = instructionOffsetValue.hashCode();
+    assertEquals(expectedHashCodeResult, instructionOffsetValue2.hashCode());
   }
 
   /**
@@ -1193,21 +929,20 @@ class InstructionOffsetValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean InstructionOffsetValue.equals(Object)",
     "int InstructionOffsetValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual2() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual2() {
     // Arrange
     InstructionOffsetValue instructionOffsetValue = new InstructionOffsetValue(42);
     InstructionOffsetValue instructionOffsetValue2 = new InstructionOffsetValue(42);
 
     // Act and Assert
     assertEquals(instructionOffsetValue, instructionOffsetValue2);
-    assertEquals(instructionOffsetValue.hashCode(), instructionOffsetValue2.hashCode());
+    int expectedHashCodeResult = instructionOffsetValue.hashCode();
+    assertEquals(expectedHashCodeResult, instructionOffsetValue2.hashCode());
   }
 
   /**
@@ -1227,14 +962,12 @@ class InstructionOffsetValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean InstructionOffsetValue.equals(Object)",
     "int InstructionOffsetValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     InstructionOffsetValue instructionOffsetValue = InstructionOffsetValue.EMPTY_VALUE;
 
@@ -1255,14 +988,12 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean InstructionOffsetValue.equals(Object)",
     "int InstructionOffsetValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new InstructionOffsetValue(42), InstructionOffsetValue.EMPTY_VALUE);
   }
@@ -1278,14 +1009,12 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean InstructionOffsetValue.equals(Object)",
     "int InstructionOffsetValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
     InstructionOffsetValue instructionOffsetValue = new InstructionOffsetValue(1);
 
@@ -1304,14 +1033,12 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean InstructionOffsetValue.equals(Object)",
     "int InstructionOffsetValue.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(InstructionOffsetValue.EMPTY_VALUE, null);
   }
@@ -1327,14 +1054,12 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean InstructionOffsetValue.equals(Object)",
     "int InstructionOffsetValue.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(InstructionOffsetValue.EMPTY_VALUE, "Different type to InstructionOffsetValue");
   }
@@ -1350,11 +1075,9 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#toString()}
    */
   @Test
-  @DisplayName("Test toString(); given EMPTY_VALUE; then return ':'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String InstructionOffsetValue.toString()"})
-  void testToString_givenEmpty_value_thenReturnColon() {
+  public void testToString_givenEmpty_value_thenReturnColon() {
     // Arrange, Act and Assert
     assertEquals(":", InstructionOffsetValue.EMPTY_VALUE.toString());
   }
@@ -1371,14 +1094,11 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#toString()}
    */
   @Test
-  @DisplayName(
-      "Test toString(); given InstructionOffsetValue(int) with value is CAST; then return 'C0:'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String InstructionOffsetValue.toString()"})
-  void testToString_givenInstructionOffsetValueWithValueIsCast_thenReturnC0() {
+  public void testToString_givenInstructionOffsetValueWithValueIsCast_thenReturnC0() {
     // Arrange, Act and Assert
-    assertEquals("C0:", new InstructionOffsetValue(InstructionOffsetValue.CAST).toString());
+    assertEquals("C0:", (new InstructionOffsetValue(InstructionOffsetValue.CAST)).toString());
   }
 
   /**
@@ -1393,14 +1113,12 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#toString()}
    */
   @Test
-  @DisplayName(
-      "Test toString(); given InstructionOffsetValue(int) with value is FIELD_VALUE; then return 'F0:'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String InstructionOffsetValue.toString()"})
-  void testToString_givenInstructionOffsetValueWithValueIsField_value_thenReturnF0() {
+  public void testToString_givenInstructionOffsetValueWithValueIsField_value_thenReturnF0() {
     // Arrange, Act and Assert
-    assertEquals("F0:", new InstructionOffsetValue(InstructionOffsetValue.FIELD_VALUE).toString());
+    assertEquals(
+        "F0:", (new InstructionOffsetValue(InstructionOffsetValue.FIELD_VALUE)).toString());
   }
 
   /**
@@ -1414,14 +1132,11 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#toString()}
    */
   @Test
-  @DisplayName(
-      "Test toString(); given InstructionOffsetValue(int) with value is forty-two; then return '42:'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String InstructionOffsetValue.toString()"})
-  void testToString_givenInstructionOffsetValueWithValueIsFortyTwo_thenReturn42() {
+  public void testToString_givenInstructionOffsetValueWithValueIsFortyTwo_thenReturn42() {
     // Arrange, Act and Assert
-    assertEquals("42:", new InstructionOffsetValue(42).toString());
+    assertEquals("42:", (new InstructionOffsetValue(42)).toString());
   }
 
   /**
@@ -1436,15 +1151,12 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#toString()}
    */
   @Test
-  @DisplayName(
-      "Test toString(); given InstructionOffsetValue(int) with value is METHOD_PARAMETER; then return 'P0:'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String InstructionOffsetValue.toString()"})
-  void testToString_givenInstructionOffsetValueWithValueIsMethod_parameter_thenReturnP0() {
+  public void testToString_givenInstructionOffsetValueWithValueIsMethod_parameter_thenReturnP0() {
     // Arrange, Act and Assert
     assertEquals(
-        "P0:", new InstructionOffsetValue(InstructionOffsetValue.METHOD_PARAMETER).toString());
+        "P0:", (new InstructionOffsetValue(InstructionOffsetValue.METHOD_PARAMETER)).toString());
   }
 
   /**
@@ -1459,14 +1171,11 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#toString()}
    */
   @Test
-  @DisplayName(
-      "Test toString(); given InstructionOffsetValue(int) with value is NEVER; then return '-1:'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String InstructionOffsetValue.toString()"})
-  void testToString_givenInstructionOffsetValueWithValueIsNever_thenReturn1() {
+  public void testToString_givenInstructionOffsetValueWithValueIsNever_thenReturn1() {
     // Arrange, Act and Assert
-    assertEquals("-1:", new InstructionOffsetValue(Value.NEVER).toString());
+    assertEquals("-1:", (new InstructionOffsetValue(Value.NEVER)).toString());
   }
 
   /**
@@ -1481,14 +1190,12 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#toString()}
    */
   @Test
-  @DisplayName(
-      "Test toString(); given InstructionOffsetValue(int) with value is NEW_INSTANCE; then return 'N0:'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String InstructionOffsetValue.toString()"})
-  void testToString_givenInstructionOffsetValueWithValueIsNew_instance_thenReturnN0() {
+  public void testToString_givenInstructionOffsetValueWithValueIsNew_instance_thenReturnN0() {
     // Arrange, Act and Assert
-    assertEquals("N0:", new InstructionOffsetValue(InstructionOffsetValue.NEW_INSTANCE).toString());
+    assertEquals(
+        "N0:", (new InstructionOffsetValue(InstructionOffsetValue.NEW_INSTANCE)).toString());
   }
 
   /**
@@ -1501,17 +1208,12 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#toString()}
    */
   @Test
-  @DisplayName("Test toString(); then return '42,58,42,58:'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String InstructionOffsetValue.toString()"})
-  void testToString_thenReturn42584258() {
-    // Arrange
-    InstructionOffsetValue instructionOffsetValue =
-        new InstructionOffsetValue(new int[] {42, 58, 42, 58});
-
-    // Act and Assert
-    assertEquals("42,58,42,58:", instructionOffsetValue.toString());
+  public void testToString_thenReturn42584258() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "42,58,42,58:", (new InstructionOffsetValue(new int[] {42, 58, 42, 58})).toString());
   }
 
   /**
@@ -1524,14 +1226,12 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#toString()}
    */
   @Test
-  @DisplayName("Test toString(); then return 'E0:'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String InstructionOffsetValue.toString()"})
-  void testToString_thenReturnE0() {
+  public void testToString_thenReturnE0() {
     // Arrange, Act and Assert
     assertEquals(
-        "E0:", new InstructionOffsetValue(InstructionOffsetValue.EXCEPTION_HANDLER).toString());
+        "E0:", (new InstructionOffsetValue(InstructionOffsetValue.EXCEPTION_HANDLER)).toString());
   }
 
   /**
@@ -1544,13 +1244,11 @@ class InstructionOffsetValueDiffblueTest {
    * <p>Method under test: {@link InstructionOffsetValue#toString()}
    */
   @Test
-  @DisplayName("Test toString(); then return 'M0:'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String InstructionOffsetValue.toString()"})
-  void testToString_thenReturnM0() {
+  public void testToString_thenReturnM0() {
     // Arrange, Act and Assert
     assertEquals(
-        "M0:", new InstructionOffsetValue(InstructionOffsetValue.METHOD_RETURN_VALUE).toString());
+        "M0:", (new InstructionOffsetValue(InstructionOffsetValue.METHOD_RETURN_VALUE)).toString());
   }
 }

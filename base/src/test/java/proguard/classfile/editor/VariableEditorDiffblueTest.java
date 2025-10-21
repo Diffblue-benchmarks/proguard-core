@@ -1,15 +1,14 @@
 package proguard.classfile.editor;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class VariableEditorDiffblueTest {
+public class VariableEditorDiffblueTest {
   /**
    * Test {@link VariableEditor#isDeleted(int)}.
    *
@@ -22,12 +21,9 @@ class VariableEditorDiffblueTest {
    * <p>Method under test: {@link VariableEditor#isDeleted(int)}
    */
   @Test
-  @DisplayName(
-      "Test isDeleted(int); given VariableEditor (default constructor) deleteVariable one; when one; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean VariableEditor.isDeleted(int)"})
-  void testIsDeleted_givenVariableEditorDeleteVariableOne_whenOne_thenReturnTrue() {
+  public void testIsDeleted_givenVariableEditorDeleteVariableOne_whenOne_thenReturnTrue() {
     // Arrange
     VariableEditor variableEditor = new VariableEditor();
     variableEditor.deleteVariable(1);
@@ -48,14 +44,11 @@ class VariableEditorDiffblueTest {
    * <p>Method under test: {@link VariableEditor#isDeleted(int)}
    */
   @Test
-  @DisplayName(
-      "Test isDeleted(int); given VariableEditor (default constructor); when one; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean VariableEditor.isDeleted(int)"})
-  void testIsDeleted_givenVariableEditor_whenOne_thenReturnFalse() {
+  public void testIsDeleted_givenVariableEditor_whenOne_thenReturnFalse() {
     // Arrange, Act and Assert
-    assertFalse(new VariableEditor().isDeleted(1));
+    assertFalse((new VariableEditor()).isDeleted(1));
   }
 
   /**
@@ -64,12 +57,10 @@ class VariableEditorDiffblueTest {
    * <p>Method under test: default or parameterless constructor of {@link VariableEditor}
    */
   @Test
-  @DisplayName("Test new VariableEditor (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableEditor.<init>()"})
-  void testNewVariableEditor() {
+  public void testNewVariableEditor() {
     // Arrange, Act and Assert
-    assertFalse(new VariableEditor().isDeleted(1));
+    assertFalse((new VariableEditor()).isDeleted(1));
   }
 }

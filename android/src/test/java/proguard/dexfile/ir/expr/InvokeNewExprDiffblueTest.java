@@ -1,21 +1,20 @@
 package proguard.dexfile.ir.expr;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.LabelAndLocalMapper;
 import proguard.dexfile.ir.expr.Value.VT;
 import proguard.dexfile.reader.Proto;
 
-class InvokeNewExprDiffblueTest {
+public class InvokeNewExprDiffblueTest {
   /**
    * Test {@link InvokeNewExpr#InvokeNewExpr(VT, Value[], String, String, String[], String)}.
    *
@@ -23,11 +22,9 @@ class InvokeNewExprDiffblueTest {
    * String)}
    */
   @Test
-  @DisplayName("Test new InvokeNewExpr(VT, Value[], String, String, String[], String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void InvokeNewExpr.<init>(VT, Value[], String, String, String[], String)"})
-  void testNewInvokeNewExpr() {
+  public void testNewInvokeNewExpr() {
     // Arrange
     Value[] args = new Value[] {new ArrayExpr()};
     String[] argumentTypes = new String[] {"Argument Types"};
@@ -63,13 +60,11 @@ class InvokeNewExprDiffblueTest {
    * String, String)}
    */
   @Test
-  @DisplayName("Test new InvokeNewExpr(VT, Value[], String, String, String[], String, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void InvokeNewExpr.<init>(VT, Value[], String, String, String[], String, String)"
   })
-  void testNewInvokeNewExpr2() {
+  public void testNewInvokeNewExpr2() {
     // Arrange
     Value[] args = new Value[] {new ArrayExpr()};
     String[] argumentTypes = new String[] {"Argument Types"};
@@ -104,20 +99,20 @@ class InvokeNewExprDiffblueTest {
    * <p>Method under test: {@link InvokeNewExpr#getClassName()}
    */
   @Test
-  @DisplayName("Test getClassName()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokeNewExpr.getClassName()"})
-  void testGetClassName() {
-    // Arrange
-    Value[] args = new Value[] {new ArrayExpr()};
-    String[] argumentTypes = new String[] {"Argument Types"};
-
-    InvokeNewExpr invokeNewExpr =
-        new InvokeNewExpr(VT.ADD, args, "Owner Type", "Method Name", argumentTypes, "Owner");
-
-    // Act and Assert
-    assertEquals("Owner", invokeNewExpr.getClassName());
+  public void testGetClassName() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "Owner",
+        (new InvokeNewExpr(
+                VT.ADD,
+                new Value[] {new ArrayExpr()},
+                "Owner Type",
+                "Method Name",
+                new String[] {"Argument Types"},
+                "Owner"))
+            .getClassName());
   }
 
   /**
@@ -126,29 +121,30 @@ class InvokeNewExprDiffblueTest {
    * <p>Method under test: {@link InvokeNewExpr#clone()}
    */
   @Test
-  @DisplayName("Test clone()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr InvokeNewExpr.clone()"})
-  void testClone() {
+  public void testClone() {
     // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {Exprs.nNull()}, new String[] {"Argment Types"}, "Owner");
     InvokeExpr nInvokeInterfaceResult =
         Exprs.nInvokeInterface(
-            new Value[] {nInvokeNewResult},
+            new Value[] {
+              Exprs.nInvokeNew(new Value[] {Exprs.nNull()}, new String[] {"Argment Types"}, "Owner")
+            },
             "Owner",
             "Name",
             new String[] {"Argment Types"},
             "Return Type");
-    Value[] args = new Value[] {nInvokeInterfaceResult};
-    String[] argumentTypes = new String[] {"Argument Types"};
-
-    InvokeNewExpr invokeNewExpr =
-        new InvokeNewExpr(VT.ADD, args, "Owner Type", "Method Name", argumentTypes, "Owner");
 
     // Act
-    InvokeExpr actualCloneResult = invokeNewExpr.clone();
+    InvokeExpr actualCloneResult =
+        (new InvokeNewExpr(
+                VT.ADD,
+                new Value[] {nInvokeInterfaceResult},
+                "Owner Type",
+                "Method Name",
+                new String[] {"Argument Types"},
+                "Owner"))
+            .clone();
 
     // Assert
     Value[] ops = actualCloneResult.getOps();
@@ -170,26 +166,27 @@ class InvokeNewExprDiffblueTest {
    * <p>Method under test: {@link InvokeNewExpr#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName("Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr InvokeNewExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper() {
+  public void testCloneWithLabelAndLocalMapper() {
     // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {Exprs.nNull()}, new String[] {"Argment Types"}, "Owner");
     InvokeExpr nInvokeInterfaceResult =
         Exprs.nInvokeInterface(
-            new Value[] {nInvokeNewResult},
+            new Value[] {
+              Exprs.nInvokeNew(new Value[] {Exprs.nNull()}, new String[] {"Argment Types"}, "Owner")
+            },
             "Owner",
             "Name",
             new String[] {"Argment Types"},
             "Return Type");
-    Value[] args = new Value[] {nInvokeInterfaceResult};
-    String[] argumentTypes = new String[] {"Argument Types"};
-
     InvokeNewExpr invokeNewExpr =
-        new InvokeNewExpr(VT.ADD, args, "Owner Type", "Method Name", argumentTypes, "Owner");
+        new InvokeNewExpr(
+            VT.ADD,
+            new Value[] {nInvokeInterfaceResult},
+            "Owner Type",
+            "Method Name",
+            new String[] {"Argument Types"},
+            "Owner");
 
     // Act
     InvokeExpr actualCloneResult = invokeNewExpr.clone(new LabelAndLocalMapper());
@@ -218,19 +215,19 @@ class InvokeNewExprDiffblueTest {
    * <p>Method under test: {@link InvokeNewExpr#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then first element return Constant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr InvokeNewExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenFirstElementReturnConstant() {
+  public void testCloneWithLabelAndLocalMapper_thenFirstElementReturnConstant() {
     // Arrange
     Constant nNullResult = Exprs.nNull();
-    Value[] args = new Value[] {nNullResult};
-    String[] argumentTypes = new String[] {"Argument Types"};
-
     InvokeNewExpr invokeNewExpr =
-        new InvokeNewExpr(VT.ADD, args, "Owner Type", "Method Name", argumentTypes, "Owner");
+        new InvokeNewExpr(
+            VT.ADD,
+            new Value[] {nNullResult},
+            "Owner Type",
+            "Method Name",
+            new String[] {"Argument Types"},
+            "Owner");
 
     // Act
     InvokeExpr actualCloneResult = invokeNewExpr.clone(new LabelAndLocalMapper());
@@ -260,20 +257,20 @@ class InvokeNewExprDiffblueTest {
    * <p>Method under test: {@link InvokeNewExpr#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then return first element Name is '<init>'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr InvokeNewExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenReturnFirstElementNameIsInit() {
+  public void testCloneWithLabelAndLocalMapper_thenReturnFirstElementNameIsInit() {
     // Arrange
     InvokeExpr nInvokeNewResult =
         Exprs.nInvokeNew(new Value[] {Exprs.nNull()}, new String[] {"Argment Types"}, "Owner");
-    Value[] args = new Value[] {nInvokeNewResult};
-    String[] argumentTypes = new String[] {"Argument Types"};
-
     InvokeNewExpr invokeNewExpr =
-        new InvokeNewExpr(VT.ADD, args, "Owner Type", "Method Name", argumentTypes, "Owner");
+        new InvokeNewExpr(
+            VT.ADD,
+            new Value[] {nInvokeNewResult},
+            "Owner Type",
+            "Method Name",
+            new String[] {"Argument Types"},
+            "Owner");
 
     // Act
     InvokeExpr actualCloneResult = invokeNewExpr.clone(new LabelAndLocalMapper());
@@ -303,12 +300,9 @@ class InvokeNewExprDiffblueTest {
    * <p>Method under test: {@link InvokeNewExpr#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then return first element toString0 is 'null.Name()'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr InvokeNewExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenReturnFirstElementToString0IsNullName() {
+  public void testCloneWithLabelAndLocalMapper_thenReturnFirstElementToString0IsNullName() {
     // Arrange
     InvokeExpr nInvokeInterfaceResult =
         Exprs.nInvokeInterface(
@@ -317,11 +311,14 @@ class InvokeNewExprDiffblueTest {
             "Name",
             new String[] {"Argment Types"},
             "Return Type");
-    Value[] args = new Value[] {nInvokeInterfaceResult};
-    String[] argumentTypes = new String[] {"Argument Types"};
-
     InvokeNewExpr invokeNewExpr =
-        new InvokeNewExpr(VT.ADD, args, "Owner Type", "Method Name", argumentTypes, "Owner");
+        new InvokeNewExpr(
+            VT.ADD,
+            new Value[] {nInvokeInterfaceResult},
+            "Owner Type",
+            "Method Name",
+            new String[] {"Argument Types"},
+            "Owner");
 
     // Act
     InvokeExpr actualCloneResult = invokeNewExpr.clone(new LabelAndLocalMapper());
@@ -340,59 +337,6 @@ class InvokeNewExprDiffblueTest {
   }
 
   /**
-   * Test {@link InvokeNewExpr#clone(LabelAndLocalMapper)} with {@code LabelAndLocalMapper}.
-   *
-   * <ul>
-   *   <li>Then return first element toString0 is {@code null.Name().Name()}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeNewExpr#clone(LabelAndLocalMapper)}
-   */
-  @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then return first element toString0 is 'null.Name().Name()'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InvokeExpr InvokeNewExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenReturnFirstElementToString0IsNullNameName() {
-    // Arrange
-    InvokeExpr nInvokeInterfaceResult =
-        Exprs.nInvokeInterface(
-            new Value[] {Exprs.nNull()},
-            "Owner",
-            "Name",
-            new String[] {"Argment Types"},
-            "Return Type");
-    InvokeExpr nInvokeInterfaceResult2 =
-        Exprs.nInvokeInterface(
-            new Value[] {nInvokeInterfaceResult},
-            "Owner",
-            "Name",
-            new String[] {"Argment Types"},
-            "Return Type");
-    Value[] args = new Value[] {nInvokeInterfaceResult2};
-    String[] argumentTypes = new String[] {"Argument Types"};
-
-    InvokeNewExpr invokeNewExpr =
-        new InvokeNewExpr(VT.ADD, args, "Owner Type", "Method Name", argumentTypes, "Owner");
-
-    // Act
-    InvokeExpr actualCloneResult = invokeNewExpr.clone(new LabelAndLocalMapper());
-
-    // Assert
-    Value[] ops = actualCloneResult.getOps();
-    Value value = ops[0];
-    assertTrue(value instanceof InvokeExpr);
-    assertTrue(actualCloneResult instanceof InvokeNewExpr);
-    assertEquals("null.Name().Name()", value.toString0());
-    assertEquals("null.Name().Name().Method Name()", actualCloneResult.toString0());
-    assertEquals(1, ops.length);
-    Proto expectedProto = actualCloneResult.getProto();
-    assertSame(expectedProto, ((InvokeNewExpr) actualCloneResult).method.getProto());
-    assertSame(nInvokeInterfaceResult2.method, ((InvokeExpr) value).method);
-  }
-
-  /**
    * Test {@link InvokeNewExpr#clone()}.
    *
    * <ul>
@@ -402,21 +346,22 @@ class InvokeNewExprDiffblueTest {
    * <p>Method under test: {@link InvokeNewExpr#clone()}
    */
   @Test
-  @DisplayName("Test clone(); then first element return Constant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr InvokeNewExpr.clone()"})
-  void testClone_thenFirstElementReturnConstant() {
+  public void testClone_thenFirstElementReturnConstant() {
     // Arrange
     Constant nNullResult = Exprs.nNull();
-    Value[] args = new Value[] {nNullResult};
-    String[] argumentTypes = new String[] {"Argument Types"};
-
-    InvokeNewExpr invokeNewExpr =
-        new InvokeNewExpr(VT.ADD, args, "Owner Type", "Method Name", argumentTypes, "Owner");
 
     // Act
-    InvokeExpr actualCloneResult = invokeNewExpr.clone();
+    InvokeExpr actualCloneResult =
+        (new InvokeNewExpr(
+                VT.ADD,
+                new Value[] {nNullResult},
+                "Owner Type",
+                "Method Name",
+                new String[] {"Argument Types"},
+                "Owner"))
+            .clone();
 
     // Assert
     Value[] ops = actualCloneResult.getOps();
@@ -443,22 +388,23 @@ class InvokeNewExprDiffblueTest {
    * <p>Method under test: {@link InvokeNewExpr#clone()}
    */
   @Test
-  @DisplayName("Test clone(); then return first element Name is '<init>'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr InvokeNewExpr.clone()"})
-  void testClone_thenReturnFirstElementNameIsInit() {
+  public void testClone_thenReturnFirstElementNameIsInit() {
     // Arrange
     InvokeExpr nInvokeNewResult =
         Exprs.nInvokeNew(new Value[] {Exprs.nNull()}, new String[] {"Argment Types"}, "Owner");
-    Value[] args = new Value[] {nInvokeNewResult};
-    String[] argumentTypes = new String[] {"Argument Types"};
-
-    InvokeNewExpr invokeNewExpr =
-        new InvokeNewExpr(VT.ADD, args, "Owner Type", "Method Name", argumentTypes, "Owner");
 
     // Act
-    InvokeExpr actualCloneResult = invokeNewExpr.clone();
+    InvokeExpr actualCloneResult =
+        (new InvokeNewExpr(
+                VT.ADD,
+                new Value[] {nInvokeNewResult},
+                "Owner Type",
+                "Method Name",
+                new String[] {"Argument Types"},
+                "Owner"))
+            .clone();
 
     // Assert
     assertTrue(actualCloneResult instanceof InvokeNewExpr);
@@ -485,11 +431,9 @@ class InvokeNewExprDiffblueTest {
    * <p>Method under test: {@link InvokeNewExpr#clone()}
    */
   @Test
-  @DisplayName("Test clone(); then return first element toString0 is 'null.Name()'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr InvokeNewExpr.clone()"})
-  void testClone_thenReturnFirstElementToString0IsNullName() {
+  public void testClone_thenReturnFirstElementToString0IsNullName() {
     // Arrange
     InvokeExpr nInvokeInterfaceResult =
         Exprs.nInvokeInterface(
@@ -498,14 +442,17 @@ class InvokeNewExprDiffblueTest {
             "Name",
             new String[] {"Argment Types"},
             "Return Type");
-    Value[] args = new Value[] {nInvokeInterfaceResult};
-    String[] argumentTypes = new String[] {"Argument Types"};
-
-    InvokeNewExpr invokeNewExpr =
-        new InvokeNewExpr(VT.ADD, args, "Owner Type", "Method Name", argumentTypes, "Owner");
 
     // Act
-    InvokeExpr actualCloneResult = invokeNewExpr.clone();
+    InvokeExpr actualCloneResult =
+        (new InvokeNewExpr(
+                VT.ADD,
+                new Value[] {nInvokeInterfaceResult},
+                "Owner Type",
+                "Method Name",
+                new String[] {"Argument Types"},
+                "Owner"))
+            .clone();
 
     // Assert
     Value[] ops = actualCloneResult.getOps();
@@ -518,57 +465,5 @@ class InvokeNewExprDiffblueTest {
     Proto expectedProto = actualCloneResult.getProto();
     assertSame(expectedProto, ((InvokeNewExpr) actualCloneResult).method.getProto());
     assertSame(nInvokeInterfaceResult.method, ((InvokeExpr) value).method);
-  }
-
-  /**
-   * Test {@link InvokeNewExpr#clone()}.
-   *
-   * <ul>
-   *   <li>Then return first element toString0 is {@code null.Name().Name()}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeNewExpr#clone()}
-   */
-  @Test
-  @DisplayName("Test clone(); then return first element toString0 is 'null.Name().Name()'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InvokeExpr InvokeNewExpr.clone()"})
-  void testClone_thenReturnFirstElementToString0IsNullNameName() {
-    // Arrange
-    InvokeExpr nInvokeInterfaceResult =
-        Exprs.nInvokeInterface(
-            new Value[] {Exprs.nNull()},
-            "Owner",
-            "Name",
-            new String[] {"Argment Types"},
-            "Return Type");
-    InvokeExpr nInvokeInterfaceResult2 =
-        Exprs.nInvokeInterface(
-            new Value[] {nInvokeInterfaceResult},
-            "Owner",
-            "Name",
-            new String[] {"Argment Types"},
-            "Return Type");
-    Value[] args = new Value[] {nInvokeInterfaceResult2};
-    String[] argumentTypes = new String[] {"Argument Types"};
-
-    InvokeNewExpr invokeNewExpr =
-        new InvokeNewExpr(VT.ADD, args, "Owner Type", "Method Name", argumentTypes, "Owner");
-
-    // Act
-    InvokeExpr actualCloneResult = invokeNewExpr.clone();
-
-    // Assert
-    Value[] ops = actualCloneResult.getOps();
-    Value value = ops[0];
-    assertTrue(value instanceof InvokeExpr);
-    assertTrue(actualCloneResult instanceof InvokeNewExpr);
-    assertEquals("null.Name().Name()", value.toString0());
-    assertEquals("null.Name().Name().Method Name()", actualCloneResult.toString0());
-    assertEquals(1, ops.length);
-    Proto expectedProto = actualCloneResult.getProto();
-    assertSame(expectedProto, ((InvokeNewExpr) actualCloneResult).method.getProto());
-    assertSame(nInvokeInterfaceResult2.method, ((InvokeExpr) value).method);
   }
 }

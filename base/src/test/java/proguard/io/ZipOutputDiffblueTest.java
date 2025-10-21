@@ -1,20 +1,19 @@
 package proguard.io;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.io.ZipOutput.LargeDataOutputStream;
 
-class ZipOutputDiffblueTest {
+public class ZipOutputDiffblueTest {
   /**
    * Test LargeDataOutputStream getters and setters.
    *
@@ -26,17 +25,15 @@ class ZipOutputDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test LargeDataOutputStream getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void LargeDataOutputStream.<init>(OutputStream)",
     "long LargeDataOutputStream.getLongSize()"
   })
-  void testLargeDataOutputStreamGettersAndSetters() {
+  public void testLargeDataOutputStreamGettersAndSetters() {
     // Arrange and Act
     LargeDataOutputStream actualLargeDataOutputStream =
-        new LargeDataOutputStream(new ByteArrayOutputStream());
+        new LargeDataOutputStream(new ByteArrayOutputStream(1));
     long actualLongSize = actualLargeDataOutputStream.getLongSize();
 
     // Assert
@@ -50,14 +47,12 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link LargeDataOutputStream#write(byte[])}
    */
   @Test
-  @DisplayName("Test LargeDataOutputStream write(byte[]) with 'byte[]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void LargeDataOutputStream.write(byte[])"})
-  void testLargeDataOutputStreamWriteWithByte() throws IOException {
+  public void testLargeDataOutputStreamWriteWithByte() throws IOException {
     // Arrange
     LargeDataOutputStream largeDataOutputStream =
-        new LargeDataOutputStream(new ByteArrayOutputStream());
+        new LargeDataOutputStream(new ByteArrayOutputStream(1));
 
     // Act
     largeDataOutputStream.write("AXAXAXAX".getBytes("UTF-8"));
@@ -73,14 +68,12 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link LargeDataOutputStream#write(int)}
    */
   @Test
-  @DisplayName("Test LargeDataOutputStream write(int) with 'int'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void LargeDataOutputStream.write(int)"})
-  void testLargeDataOutputStreamWriteWithInt() throws IOException {
+  public void testLargeDataOutputStreamWriteWithInt() throws IOException {
     // Arrange
     LargeDataOutputStream largeDataOutputStream =
-        new LargeDataOutputStream(new ByteArrayOutputStream());
+        new LargeDataOutputStream(new ByteArrayOutputStream(1));
 
     // Act
     largeDataOutputStream.write(19088743);
@@ -96,13 +89,11 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link ZipOutput#ZipOutput(OutputStream)}
    */
   @Test
-  @DisplayName("Test new ZipOutput(OutputStream)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.<init>(OutputStream)"})
-  void testNewZipOutput() {
+  public void testNewZipOutput() {
     // Arrange and Act
-    ZipOutput actualZipOutput = new ZipOutput(new ByteArrayOutputStream());
+    ZipOutput actualZipOutput = new ZipOutput(new ByteArrayOutputStream(1));
 
     // Assert
     LargeDataOutputStream largeDataOutputStream = actualZipOutput.outputStream;
@@ -117,13 +108,11 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link ZipOutput#ZipOutput(OutputStream, int)}
    */
   @Test
-  @DisplayName("Test new ZipOutput(OutputStream, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.<init>(OutputStream, int)"})
-  void testNewZipOutput2() {
+  public void testNewZipOutput2() {
     // Arrange and Act
-    ZipOutput actualZipOutput = new ZipOutput(new ByteArrayOutputStream(), 1);
+    ZipOutput actualZipOutput = new ZipOutput(new ByteArrayOutputStream(1), 1);
 
     // Assert
     LargeDataOutputStream largeDataOutputStream = actualZipOutput.outputStream;
@@ -138,13 +127,11 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link ZipOutput#ZipOutput(OutputStream, int, boolean, String)}
    */
   @Test
-  @DisplayName("Test new ZipOutput(OutputStream, int, boolean, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.<init>(OutputStream, int, boolean, String)"})
-  void testNewZipOutput3() {
+  public void testNewZipOutput3() {
     // Arrange and Act
-    ZipOutput actualZipOutput = new ZipOutput(new ByteArrayOutputStream(), 1, true, "Comment");
+    ZipOutput actualZipOutput = new ZipOutput(new ByteArrayOutputStream(1), 1, true, "Comment");
 
     // Assert
     LargeDataOutputStream largeDataOutputStream = actualZipOutput.outputStream;
@@ -159,13 +146,11 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link ZipOutput#ZipOutput(OutputStream, boolean)}
    */
   @Test
-  @DisplayName("Test new ZipOutput(OutputStream, boolean)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.<init>(OutputStream, boolean)"})
-  void testNewZipOutput4() {
+  public void testNewZipOutput4() {
     // Arrange and Act
-    ZipOutput actualZipOutput = new ZipOutput(new ByteArrayOutputStream(), true);
+    ZipOutput actualZipOutput = new ZipOutput(new ByteArrayOutputStream(1), true);
 
     // Assert
     LargeDataOutputStream largeDataOutputStream = actualZipOutput.outputStream;
@@ -180,13 +165,11 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link ZipOutput#ZipOutput(OutputStream, boolean, int)}
    */
   @Test
-  @DisplayName("Test new ZipOutput(OutputStream, boolean, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.<init>(OutputStream, boolean, int)"})
-  void testNewZipOutput5() {
+  public void testNewZipOutput5() {
     // Arrange and Act
-    ZipOutput actualZipOutput = new ZipOutput(new ByteArrayOutputStream(), true, 1);
+    ZipOutput actualZipOutput = new ZipOutput(new ByteArrayOutputStream(1), true, 1);
 
     // Assert
     LargeDataOutputStream largeDataOutputStream = actualZipOutput.outputStream;
@@ -198,23 +181,14 @@ class ZipOutputDiffblueTest {
   /**
    * Test {@link ZipOutput#ZipOutput(OutputStream, byte[], int, boolean)}.
    *
-   * <ul>
-   *   <li>Then {@link ByteArrayOutputStream#ByteArrayOutputStream()} toByteArray is {@code
-   *       AXAXAXAX} Bytes is {@code UTF-8}.
-   * </ul>
-   *
    * <p>Method under test: {@link ZipOutput#ZipOutput(OutputStream, byte[], int, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test new ZipOutput(OutputStream, byte[], int, boolean); then ByteArrayOutputStream() toByteArray is 'AXAXAXAX' Bytes is 'UTF-8'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.<init>(OutputStream, byte[], int, boolean)"})
-  void testNewZipOutput_thenByteArrayOutputStreamToByteArrayIsAxaxaxaxBytesIsUtf8()
-      throws IOException {
+  public void testNewZipOutput6() throws IOException {
     // Arrange
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream(1);
 
     // Act
     ZipOutput actualZipOutput = new ZipOutput(outputStream, "AXAXAXAX".getBytes("UTF-8"), 1, true);
@@ -231,23 +205,14 @@ class ZipOutputDiffblueTest {
   /**
    * Test {@link ZipOutput#ZipOutput(OutputStream, byte[], int, boolean, String)}.
    *
-   * <ul>
-   *   <li>Then {@link ByteArrayOutputStream#ByteArrayOutputStream()} toByteArray is {@code
-   *       AXAXAXAX} Bytes is {@code UTF-8}.
-   * </ul>
-   *
    * <p>Method under test: {@link ZipOutput#ZipOutput(OutputStream, byte[], int, boolean, String)}
    */
   @Test
-  @DisplayName(
-      "Test new ZipOutput(OutputStream, byte[], int, boolean, String); then ByteArrayOutputStream() toByteArray is 'AXAXAXAX' Bytes is 'UTF-8'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.<init>(OutputStream, byte[], int, boolean, String)"})
-  void testNewZipOutput_thenByteArrayOutputStreamToByteArrayIsAxaxaxaxBytesIsUtf82()
-      throws IOException {
+  public void testNewZipOutput7() throws IOException {
     // Arrange
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream(1);
 
     // Act
     ZipOutput actualZipOutput =
@@ -266,22 +231,19 @@ class ZipOutputDiffblueTest {
    * Test {@link ZipOutput#ZipOutput(OutputStream, byte[], int, boolean)}.
    *
    * <ul>
-   *   <li>Then {@link ByteArrayOutputStream#ByteArrayOutputStream()} toByteArray is empty array of
-   *       {@code byte}.
+   *   <li>Then {@link ByteArrayOutputStream#ByteArrayOutputStream(int)} with one toByteArray is
+   *       empty array of {@code byte}.
    * </ul>
    *
    * <p>Method under test: {@link ZipOutput#ZipOutput(OutputStream, byte[], int, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test new ZipOutput(OutputStream, byte[], int, boolean); then ByteArrayOutputStream() toByteArray is empty array of byte")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.<init>(OutputStream, byte[], int, boolean)"})
-  void testNewZipOutput_thenByteArrayOutputStreamToByteArrayIsEmptyArrayOfByte()
+  public void testNewZipOutput_thenByteArrayOutputStreamWithOneToByteArrayIsEmptyArrayOfByte()
       throws IOException {
     // Arrange
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream(1);
 
     // Act
     ZipOutput actualZipOutput = new ZipOutput(outputStream, null, 1, true);
@@ -298,22 +260,19 @@ class ZipOutputDiffblueTest {
    * Test {@link ZipOutput#ZipOutput(OutputStream, byte[], int, boolean, String)}.
    *
    * <ul>
-   *   <li>Then {@link ByteArrayOutputStream#ByteArrayOutputStream()} toByteArray is empty array of
-   *       {@code byte}.
+   *   <li>Then {@link ByteArrayOutputStream#ByteArrayOutputStream(int)} with one toByteArray is
+   *       empty array of {@code byte}.
    * </ul>
    *
    * <p>Method under test: {@link ZipOutput#ZipOutput(OutputStream, byte[], int, boolean, String)}
    */
   @Test
-  @DisplayName(
-      "Test new ZipOutput(OutputStream, byte[], int, boolean, String); then ByteArrayOutputStream() toByteArray is empty array of byte")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.<init>(OutputStream, byte[], int, boolean, String)"})
-  void testNewZipOutput_thenByteArrayOutputStreamToByteArrayIsEmptyArrayOfByte2()
+  public void testNewZipOutput_thenByteArrayOutputStreamWithOneToByteArrayIsEmptyArrayOfByte2()
       throws IOException {
     // Arrange
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream(1);
 
     // Act
     ZipOutput actualZipOutput = new ZipOutput(outputStream, null, 1, true, "Comment");
@@ -332,13 +291,11 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link ZipOutput#close()}
    */
   @Test
-  @DisplayName("Test close()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.close()"})
-  void testClose() throws IOException {
+  public void testClose() throws IOException {
     // Arrange
-    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream(), true);
+    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream(101010256), true);
 
     // Act
     zipOutput.close();
@@ -353,13 +310,11 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link ZipOutput#close(long)}
    */
   @Test
-  @DisplayName("Test close(long) with 'long'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.close(long)"})
-  void testCloseWithLong() throws IOException {
+  public void testCloseWithLong() throws IOException {
     // Arrange
-    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream());
+    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream(1));
 
     // Act
     zipOutput.close(1L);
@@ -374,13 +329,11 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link ZipOutput#close(long)}
    */
   @Test
-  @DisplayName("Test close(long) with 'long'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.close(long)"})
-  void testCloseWithLong2() throws IOException {
+  public void testCloseWithLong2() throws IOException {
     // Arrange
-    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream(), true);
+    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream(101010256), true);
 
     // Act
     zipOutput.close(1L);
@@ -394,22 +347,19 @@ class ZipOutputDiffblueTest {
    *
    * <ul>
    *   <li>Then {@link ZipOutput#ZipOutput(OutputStream)} with outputStream is {@link
-   *       ByteArrayOutputStream#ByteArrayOutputStream()} {@link ZipOutput#outputStream} is {@code
-   *       null}.
+   *       ByteArrayOutputStream#ByteArrayOutputStream(int)} {@link ZipOutput#outputStream} is
+   *       {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link ZipOutput#close()}
    */
   @Test
-  @DisplayName(
-      "Test close(); then ZipOutput(OutputStream) with outputStream is ByteArrayOutputStream() outputStream is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.close()"})
-  void testClose_thenZipOutputWithOutputStreamIsByteArrayOutputStreamOutputStreamIsNull()
+  public void testClose_thenZipOutputWithOutputStreamIsByteArrayOutputStreamOutputStreamIsNull()
       throws IOException {
     // Arrange
-    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream());
+    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream(1));
 
     // Act
     zipOutput.close();
@@ -424,13 +374,11 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link ZipOutput#size()}
    */
   @Test
-  @DisplayName("Test size()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"long ZipOutput.size()"})
-  void testSize() {
+  public void testSize() {
     // Arrange, Act and Assert
-    assertEquals(0L, new ZipOutput(new ByteArrayOutputStream()).size());
+    assertEquals(0L, (new ZipOutput(new ByteArrayOutputStream(1))).size());
   }
 
   /**
@@ -439,13 +387,11 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link ZipOutput#writeStartOfCentralDirectory()}
    */
   @Test
-  @DisplayName("Test writeStartOfCentralDirectory()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"long ZipOutput.writeStartOfCentralDirectory()"})
-  void testWriteStartOfCentralDirectory() {
+  public void testWriteStartOfCentralDirectory() {
     // Arrange, Act and Assert
-    assertEquals(0L, new ZipOutput(new ByteArrayOutputStream()).writeStartOfCentralDirectory());
+    assertEquals(0L, (new ZipOutput(new ByteArrayOutputStream(1))).writeStartOfCentralDirectory());
   }
 
   /**
@@ -454,13 +400,12 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link ZipOutput#writeEntriesOfCentralDirectory()}
    */
   @Test
-  @DisplayName("Test writeEntriesOfCentralDirectory()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"long ZipOutput.writeEntriesOfCentralDirectory()"})
-  void testWriteEntriesOfCentralDirectory() throws IOException {
+  public void testWriteEntriesOfCentralDirectory() throws IOException {
     // Arrange, Act and Assert
-    assertEquals(0L, new ZipOutput(new ByteArrayOutputStream()).writeEntriesOfCentralDirectory());
+    assertEquals(
+        0L, (new ZipOutput(new ByteArrayOutputStream(1))).writeEntriesOfCentralDirectory());
   }
 
   /**
@@ -469,13 +414,11 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link ZipOutput#writeEndOfCentralDirectory(long, long)}
    */
   @Test
-  @DisplayName("Test writeEndOfCentralDirectory(long, long)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.writeEndOfCentralDirectory(long, long)"})
-  void testWriteEndOfCentralDirectory() throws IOException {
+  public void testWriteEndOfCentralDirectory() throws IOException {
     // Arrange
-    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream());
+    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream(1));
 
     // Act
     zipOutput.writeEndOfCentralDirectory(81985529216486895L, 3L);
@@ -493,13 +436,11 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link ZipOutput#writeEndOfCentralDirectory(long, long)}
    */
   @Test
-  @DisplayName("Test writeEndOfCentralDirectory(long, long)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.writeEndOfCentralDirectory(long, long)"})
-  void testWriteEndOfCentralDirectory2() throws IOException {
+  public void testWriteEndOfCentralDirectory2() throws IOException {
     // Arrange
-    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream(), true);
+    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream(101010256), true);
 
     // Act
     zipOutput.writeEndOfCentralDirectory(81985529216486895L, 3L);
@@ -517,13 +458,11 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link ZipOutput#writeZip64EndOfCentralDirectory(long, long)}
    */
   @Test
-  @DisplayName("Test writeZip64EndOfCentralDirectory(long, long)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.writeZip64EndOfCentralDirectory(long, long)"})
-  void testWriteZip64EndOfCentralDirectory() throws IOException {
+  public void testWriteZip64EndOfCentralDirectory() throws IOException {
     // Arrange
-    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream());
+    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream(1));
 
     // Act
     zipOutput.writeZip64EndOfCentralDirectory(81985529216486895L, 3L);
@@ -541,13 +480,11 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link ZipOutput#writeZip64EndOfCentralDirectoryLocator(long)}
    */
   @Test
-  @DisplayName("Test writeZip64EndOfCentralDirectoryLocator(long)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.writeZip64EndOfCentralDirectoryLocator(long)"})
-  void testWriteZip64EndOfCentralDirectoryLocator() throws IOException {
+  public void testWriteZip64EndOfCentralDirectoryLocator() throws IOException {
     // Arrange
-    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream());
+    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream(1));
 
     // Act
     zipOutput.writeZip64EndOfCentralDirectoryLocator(81985529216486895L);
@@ -565,13 +502,11 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link ZipOutput#writeShort(int)}
    */
   @Test
-  @DisplayName("Test writeShort(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.writeShort(int)"})
-  void testWriteShort() throws IOException {
+  public void testWriteShort() throws IOException {
     // Arrange
-    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream());
+    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream(1));
 
     // Act
     zipOutput.writeShort(42);
@@ -589,13 +524,11 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link ZipOutput#writeInt(int)}
    */
   @Test
-  @DisplayName("Test writeInt(int) with 'int'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.writeInt(int)"})
-  void testWriteIntWithInt() throws IOException {
+  public void testWriteIntWithInt() throws IOException {
     // Arrange
-    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream());
+    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream(1));
 
     // Act
     zipOutput.writeInt(42);
@@ -613,13 +546,11 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link ZipOutput#writeInt(long)}
    */
   @Test
-  @DisplayName("Test writeInt(long) with 'long'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.writeInt(long)"})
-  void testWriteIntWithLong() throws IOException {
+  public void testWriteIntWithLong() throws IOException {
     // Arrange
-    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream());
+    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream(1));
 
     // Act
     zipOutput.writeInt(42L);
@@ -637,13 +568,11 @@ class ZipOutputDiffblueTest {
    * <p>Method under test: {@link ZipOutput#writeLong(long)}
    */
   @Test
-  @DisplayName("Test writeLong(long)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ZipOutput.writeLong(long)"})
-  void testWriteLong() throws IOException {
+  public void testWriteLong() throws IOException {
     // Arrange
-    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream());
+    ZipOutput zipOutput = new ZipOutput(new ByteArrayOutputStream(1));
 
     // Act
     zipOutput.writeLong(42L);

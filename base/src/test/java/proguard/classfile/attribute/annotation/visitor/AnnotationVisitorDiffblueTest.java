@@ -1,25 +1,25 @@
 package proguard.classfile.attribute.annotation.visitor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.Field;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryField;
 import proguard.classfile.LibraryMethod;
+import proguard.classfile.Member;
 import proguard.classfile.Method;
 import proguard.classfile.attribute.CodeAttribute;
 import proguard.classfile.attribute.annotation.Annotation;
 import proguard.classfile.editor.AttributeSorter;
 import proguard.classfile.editor.ConstantPoolRemapper;
 
-class AnnotationVisitorDiffblueTest {
+public class AnnotationVisitorDiffblueTest {
   /**
    * Test {@link AnnotationVisitor#visitAnnotation(Clazz, Annotation)} with {@code clazz}, {@code
    * annotation}.
@@ -31,12 +31,9 @@ class AnnotationVisitorDiffblueTest {
    * <p>Method under test: {@link AnnotationVisitor#visitAnnotation(Clazz, Annotation)}
    */
   @Test
-  @DisplayName(
-      "Test visitAnnotation(Clazz, Annotation) with 'clazz', 'annotation'; then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void AnnotationVisitor.visitAnnotation(Clazz, Annotation)"})
-  void testVisitAnnotationWithClazzAnnotation_thenThrowUnsupportedOperationException() {
+  public void testVisitAnnotationWithClazzAnnotation_thenThrowUnsupportedOperationException() {
     // Arrange
     AnnotationToAnnotatedMemberVisitor annotationToAnnotatedMemberVisitor =
         new AnnotationToAnnotatedMemberVisitor(new AttributeSorter());
@@ -59,17 +56,15 @@ class AnnotationVisitorDiffblueTest {
    * <p>Method under test: {@link AnnotationVisitor#visitAnnotation(Clazz, Field, Annotation)}
    */
   @Test
-  @DisplayName(
-      "Test visitAnnotation(Clazz, Field, Annotation) with 'clazz', 'field', 'annotation'; then Annotation() u2typeIndex is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void AnnotationVisitor.visitAnnotation(Clazz, Field, Annotation)"})
-  void testVisitAnnotationWithClazzFieldAnnotation_thenAnnotationU2typeIndexIsOne() {
+  public void testVisitAnnotationWithClazzFieldAnnotation_thenAnnotationU2typeIndexIsOne() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
     constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryField field = new LibraryField(1, "Name", "Descriptor");
+
     Annotation annotation = new Annotation();
 
     // Act
@@ -77,6 +72,28 @@ class AnnotationVisitorDiffblueTest {
 
     // Assert
     assertEquals(1, annotation.u2typeIndex);
+  }
+
+  /**
+   * Test {@link AnnotationVisitor#visitAnnotation(Clazz, Member, Annotation)} with {@code clazz},
+   * {@code member}, {@code annotation}.
+   *
+   * <p>Method under test: {@link AnnotationVisitor#visitAnnotation(Clazz, Member, Annotation)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"void AnnotationVisitor.visitAnnotation(Clazz, Member, Annotation)"})
+  public void testVisitAnnotationWithClazzMemberAnnotation() {
+    // Arrange
+    MultiAnnotationVisitor multiAnnotationVisitor =
+        new MultiAnnotationVisitor(new AnnotationToAnnotatedMemberVisitor(new AttributeSorter()));
+    LibraryClass clazz = new LibraryClass();
+    LibraryField member = new LibraryField(1, "Name", "Descriptor");
+
+    // Act and Assert
+    assertThrows(
+        UnsupportedOperationException.class,
+        () -> multiAnnotationVisitor.visitAnnotation(clazz, (Member) member, new Annotation()));
   }
 
   /**
@@ -90,17 +107,15 @@ class AnnotationVisitorDiffblueTest {
    * <p>Method under test: {@link AnnotationVisitor#visitAnnotation(Clazz, Method, Annotation)}
    */
   @Test
-  @DisplayName(
-      "Test visitAnnotation(Clazz, Method, Annotation) with 'clazz', 'method', 'annotation'; then Annotation() u2typeIndex is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void AnnotationVisitor.visitAnnotation(Clazz, Method, Annotation)"})
-  void testVisitAnnotationWithClazzMethodAnnotation_thenAnnotationU2typeIndexIsOne() {
+  public void testVisitAnnotationWithClazzMethodAnnotation_thenAnnotationU2typeIndexIsOne() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
     constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     Annotation annotation = new Annotation();
 
     // Act
@@ -118,19 +133,17 @@ class AnnotationVisitorDiffblueTest {
    * Annotation)}
    */
   @Test
-  @DisplayName(
-      "Test visitAnnotation(Clazz, Method, CodeAttribute, Annotation) with 'clazz', 'method', 'codeAttribute', 'annotation'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void AnnotationVisitor.visitAnnotation(Clazz, Method, CodeAttribute, Annotation)"
   })
-  void testVisitAnnotationWithClazzMethodCodeAttributeAnnotation() {
+  public void testVisitAnnotationWithClazzMethodCodeAttributeAnnotation() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
     constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
     Annotation annotation = new Annotation();
 
@@ -148,17 +161,15 @@ class AnnotationVisitorDiffblueTest {
    * <p>Method under test: {@link AnnotationVisitor#visitAnnotation(Clazz, Method, int, Annotation)}
    */
   @Test
-  @DisplayName(
-      "Test visitAnnotation(Clazz, Method, int, Annotation) with 'clazz', 'method', 'parameterIndex', 'annotation'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void AnnotationVisitor.visitAnnotation(Clazz, Method, int, Annotation)"})
-  void testVisitAnnotationWithClazzMethodParameterIndexAnnotation() {
+  public void testVisitAnnotationWithClazzMethodParameterIndexAnnotation() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
     constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     Annotation annotation = new Annotation();
 
     // Act

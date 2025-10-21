@@ -1,17 +1,16 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class NegatedLongValueDiffblueTest {
+public class NegatedLongValueDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -23,16 +22,14 @@ class NegatedLongValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void NegatedLongValue.<init>(LongValue)",
     "java.lang.String NegatedLongValue.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
-    assertEquals("-l", new NegatedLongValue(BasicValueFactory.LONG_VALUE).toString());
+    assertEquals("-l", (new NegatedLongValue(BasicValueFactory.LONG_VALUE)).toString());
   }
 
   /**
@@ -41,13 +38,11 @@ class NegatedLongValueDiffblueTest {
    * <p>Method under test: {@link NegatedLongValue#negate()}
    */
   @Test
-  @DisplayName("Test negate()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue NegatedLongValue.negate()"})
-  void testNegate() {
+  public void testNegate() {
     // Arrange and Act
-    LongValue actualNegateResult = new NegatedLongValue(BasicValueFactory.LONG_VALUE).negate();
+    LongValue actualNegateResult = (new NegatedLongValue(BasicValueFactory.LONG_VALUE)).negate();
 
     // Assert
     assertTrue(actualNegateResult instanceof UnknownLongValue);
@@ -72,18 +67,17 @@ class NegatedLongValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean NegatedLongValue.equals(Object)", "int NegatedLongValue.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     NegatedLongValue negatedLongValue = new NegatedLongValue(BasicValueFactory.LONG_VALUE);
     NegatedLongValue negatedLongValue2 = new NegatedLongValue(BasicValueFactory.LONG_VALUE);
 
     // Act and Assert
     assertEquals(negatedLongValue, negatedLongValue2);
-    assertEquals(negatedLongValue.hashCode(), negatedLongValue2.hashCode());
+    int expectedHashCodeResult = negatedLongValue.hashCode();
+    assertEquals(expectedHashCodeResult, negatedLongValue2.hashCode());
   }
 
   /**
@@ -102,11 +96,9 @@ class NegatedLongValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean NegatedLongValue.equals(Object)", "int NegatedLongValue.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     NegatedLongValue negatedLongValue = new NegatedLongValue(BasicValueFactory.LONG_VALUE);
 
@@ -127,11 +119,9 @@ class NegatedLongValueDiffblueTest {
    * <p>Method under test: {@link NegatedLongValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean NegatedLongValue.equals(Object)", "int NegatedLongValue.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     NegatedLongValue negatedLongValue = new NegatedLongValue(ParticularValueFactory.LONG_VALUE_0);
 
@@ -150,11 +140,9 @@ class NegatedLongValueDiffblueTest {
    * <p>Method under test: {@link NegatedLongValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean NegatedLongValue.equals(Object)", "int NegatedLongValue.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
     NegatedLongValue negatedLongValue =
         new NegatedLongValue(new NegatedLongValue(BasicValueFactory.LONG_VALUE));
@@ -174,11 +162,9 @@ class NegatedLongValueDiffblueTest {
    * <p>Method under test: {@link NegatedLongValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean NegatedLongValue.equals(Object)", "int NegatedLongValue.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new NegatedLongValue(BasicValueFactory.LONG_VALUE), null);
   }
@@ -194,11 +180,9 @@ class NegatedLongValueDiffblueTest {
    * <p>Method under test: {@link NegatedLongValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean NegatedLongValue.equals(Object)", "int NegatedLongValue.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
         new NegatedLongValue(BasicValueFactory.LONG_VALUE), "Different type to NegatedLongValue");

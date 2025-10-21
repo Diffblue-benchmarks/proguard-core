@@ -1,16 +1,15 @@
 package proguard.dexfile.ir.stmt;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.LabelAndLocalMapper;
 import proguard.dexfile.ir.expr.ArrayExpr;
@@ -21,7 +20,7 @@ import proguard.dexfile.ir.expr.Value;
 import proguard.dexfile.ir.expr.Value.VT;
 import proguard.dexfile.ir.stmt.Stmt.ST;
 
-class IfStmtDiffblueTest {
+public class IfStmtDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -34,15 +33,13 @@ class IfStmtDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "LabelStmt IfStmt.getTarget()",
     "void IfStmt.setTarget(LabelStmt)",
     "java.lang.String IfStmt.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     ArrayExpr condition = new ArrayExpr();
     IfStmt ifStmt = new IfStmt(ST.LOCAL_START, condition, Stmts.nLabel());
@@ -62,11 +59,9 @@ class IfStmtDiffblueTest {
    * <p>Method under test: {@link IfStmt#IfStmt(ST, Value, LabelStmt)}
    */
   @Test
-  @DisplayName("Test new IfStmt(ST, Value, LabelStmt)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void IfStmt.<init>(ST, Value, LabelStmt)"})
-  void testNewIfStmt() {
+  public void testNewIfStmt() {
     // Arrange
     ArrayExpr condition = new ArrayExpr();
     LabelStmt target = Stmts.nLabel();
@@ -77,12 +72,12 @@ class IfStmtDiffblueTest {
     // Assert
     Value op = actualIfStmt.getOp();
     assertTrue(op instanceof ArrayExpr);
+    assertNull(actualIfStmt.getOps());
     assertNull(actualIfStmt.frame);
     assertNull(actualIfStmt.exceptionHandlers);
     assertNull(actualIfStmt._cfg_froms);
     assertNull(actualIfStmt.getOp1());
     assertNull(actualIfStmt.getOp2());
-    assertNull(actualIfStmt.getOps());
     assertNull(actualIfStmt.getNext());
     assertNull(actualIfStmt.getPre());
     assertNull(actualIfStmt._ts_default_next);
@@ -106,12 +101,9 @@ class IfStmtDiffblueTest {
    * <p>Method under test: {@link IfStmt#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; given nIf Local() and nLabel; then Op return Local")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Stmt IfStmt.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_givenNIfLocalAndNLabel_thenOpReturnLocal() {
+  public void testCloneWithLabelAndLocalMapper_givenNIfLocalAndNLabel_thenOpReturnLocal() {
     // Arrange
     Local a = new Local();
     IfStmt nIfResult = Stmts.nIf(a, Stmts.nLabel());
@@ -141,12 +133,9 @@ class IfStmtDiffblueTest {
    * <p>Method under test: {@link IfStmt#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; given nIf nNull and nLabel; then Op return Constant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Stmt IfStmt.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_givenNIfNNullAndNLabel_thenOpReturnConstant() {
+  public void testCloneWithLabelAndLocalMapper_givenNIfNNullAndNLabel_thenOpReturnConstant() {
     // Arrange
     Constant a = Exprs.nNull();
     IfStmt nIfResult = Stmts.nIf(a, Stmts.nLabel());

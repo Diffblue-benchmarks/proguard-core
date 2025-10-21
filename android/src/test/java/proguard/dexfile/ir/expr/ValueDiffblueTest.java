@@ -1,16 +1,15 @@
 package proguard.dexfile.ir.expr;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.LabelAndLocalMapper;
 import proguard.dexfile.ir.expr.Value.E1Expr;
@@ -18,27 +17,22 @@ import proguard.dexfile.ir.expr.Value.E2Expr;
 import proguard.dexfile.ir.expr.Value.EnExpr;
 import proguard.dexfile.ir.expr.Value.VT;
 
-class ValueDiffblueTest {
+public class ValueDiffblueTest {
   /**
    * Test E1Expr {@link E1Expr#getOp()}.
    *
    * <p>Method under test: {@link E1Expr#getOp()}
    */
   @Test
-  @DisplayName("Test E1Expr getOp()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value E1Expr.getOp()"})
-  void testE1ExprGetOp() {
+  public void testE1ExprGetOp() {
     // Arrange
     CastExpr nCastResult =
         Exprs.nCast(new ArrayExpr(), "jane.doe@example.org", "alice.liddell@example.org");
 
-    // Act
-    Value actualOp = nCastResult.getOp();
-
-    // Assert
-    assertSame(nCastResult.op, actualOp);
+    // Act and Assert
+    assertSame(nCastResult.op, nCastResult.getOp());
   }
 
   /**
@@ -47,11 +41,9 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link E1Expr#releaseMemory()}
    */
   @Test
-  @DisplayName("Test E1Expr releaseMemory()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void E1Expr.releaseMemory()"})
-  void testE1ExprReleaseMemory() {
+  public void testE1ExprReleaseMemory() {
     // Arrange
     CastExpr nCastResult =
         Exprs.nCast(new ArrayExpr(), "jane.doe@example.org", "alice.liddell@example.org");
@@ -72,13 +64,11 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link E2Expr#getOp1()}
    */
   @Test
-  @DisplayName("Test E2Expr getOp1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value E2Expr.getOp1()"})
-  void testE2ExprGetOp1() {
+  public void testE2ExprGetOp1() {
     // Arrange, Act and Assert
-    assertNull(new ArrayExpr().getOp1());
+    assertNull((new ArrayExpr()).getOp1());
   }
 
   /**
@@ -87,13 +77,11 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link E2Expr#getOp2()}
    */
   @Test
-  @DisplayName("Test E2Expr getOp2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value E2Expr.getOp2()"})
-  void testE2ExprGetOp2() {
+  public void testE2ExprGetOp2() {
     // Arrange, Act and Assert
-    assertNull(new ArrayExpr().getOp2());
+    assertNull((new ArrayExpr()).getOp2());
   }
 
   /**
@@ -106,16 +94,12 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link EnExpr#cloneOps(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test EnExpr cloneOps(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then first element return CastExpr")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value[] EnExpr.cloneOps(LabelAndLocalMapper)"})
-  void testEnExprCloneOpsWithLabelAndLocalMapper_thenFirstElementReturnCastExpr() {
+  public void testEnExprCloneOpsWithLabelAndLocalMapper_thenFirstElementReturnCastExpr() {
     // Arrange
-    CastExpr nCastResult =
-        Exprs.nCast(Exprs.nNull(), "jane.doe@example.org", "alice.liddell@example.org");
-    PhiExpr nPhiResult = Exprs.nPhi(nCastResult);
+    PhiExpr nPhiResult =
+        Exprs.nPhi(Exprs.nCast(Exprs.nNull(), "jane.doe@example.org", "alice.liddell@example.org"));
 
     // Act
     Value[] actualCloneOpsResult = nPhiResult.cloneOps(new LabelAndLocalMapper());
@@ -141,16 +125,12 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link EnExpr#cloneOps(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test EnExpr cloneOps(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then first element return FilledArrayExpr")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value[] EnExpr.cloneOps(LabelAndLocalMapper)"})
-  void testEnExprCloneOpsWithLabelAndLocalMapper_thenFirstElementReturnFilledArrayExpr() {
+  public void testEnExprCloneOpsWithLabelAndLocalMapper_thenFirstElementReturnFilledArrayExpr() {
     // Arrange
-    FilledArrayExpr nFilledArrayResult =
-        Exprs.nFilledArray("Element Type", new Value[] {Exprs.nNull()});
-    PhiExpr nPhiResult = Exprs.nPhi(nFilledArrayResult);
+    PhiExpr nPhiResult =
+        Exprs.nPhi(Exprs.nFilledArray("Element Type", new Value[] {Exprs.nNull()}));
 
     // Act
     Value[] actualCloneOpsResult = nPhiResult.cloneOps(new LabelAndLocalMapper());
@@ -177,12 +157,9 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link EnExpr#cloneOps(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test EnExpr cloneOps(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then return first element et is 'E0'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value[] EnExpr.cloneOps(LabelAndLocalMapper)"})
-  void testEnExprCloneOpsWithLabelAndLocalMapper_thenReturnFirstElementEtIsE0() {
+  public void testEnExprCloneOpsWithLabelAndLocalMapper_thenReturnFirstElementEtIsE0() {
     // Arrange
     Constant nNullResult = Exprs.nNull();
     PhiExpr nPhiResult = Exprs.nPhi(nNullResult);
@@ -210,11 +187,9 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link EnExpr#cloneOps()}
    */
   @Test
-  @DisplayName("Test EnExpr cloneOps(); given nPhi; then return array length is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value[] EnExpr.cloneOps()"})
-  void testEnExprCloneOps_givenNPhi_thenReturnArrayLengthIsZero() {
+  public void testEnExprCloneOps_givenNPhi_thenReturnArrayLengthIsZero() {
     // Arrange, Act and Assert
     assertEquals(0, Exprs.nPhi().cloneOps().length);
   }
@@ -225,19 +200,14 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link EnExpr#getOps()}
    */
   @Test
-  @DisplayName("Test EnExpr getOps()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value[] EnExpr.getOps()"})
-  void testEnExprGetOps() {
+  public void testEnExprGetOps() {
     // Arrange
     PhiExpr nPhiResult = Exprs.nPhi(new ArrayExpr());
 
-    // Act
-    Value[] actualOps = nPhiResult.getOps();
-
-    // Assert
-    assertSame(nPhiResult.ops, actualOps);
+    // Act and Assert
+    assertSame(nPhiResult.ops, nPhiResult.getOps());
   }
 
   /**
@@ -246,11 +216,9 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link EnExpr#releaseMemory()}
    */
   @Test
-  @DisplayName("Test EnExpr releaseMemory()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void EnExpr.releaseMemory()"})
-  void testEnExprReleaseMemory() {
+  public void testEnExprReleaseMemory() {
     // Arrange
     PhiExpr nPhiResult = Exprs.nPhi(new ArrayExpr());
 
@@ -267,11 +235,9 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link EnExpr#setOps(Value[])}
    */
   @Test
-  @DisplayName("Test EnExpr setOps(Value[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void EnExpr.setOps(Value[])"})
-  void testEnExprSetOps() {
+  public void testEnExprSetOps() {
     // Arrange
     PhiExpr nPhiResult = Exprs.nPhi(new ArrayExpr());
     Value[] ops = new Value[] {new ArrayExpr()};
@@ -289,13 +255,11 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#getOp()}
    */
   @Test
-  @DisplayName("Test getOp()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value Value.getOp()"})
-  void testGetOp() {
+  public void testGetOp() {
     // Arrange, Act and Assert
-    assertNull(new ArrayExpr().getOp());
+    assertNull((new ArrayExpr()).getOp());
   }
 
   /**
@@ -304,13 +268,11 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#getOp1()}
    */
   @Test
-  @DisplayName("Test getOp1()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value Value.getOp1()"})
-  void testGetOp1() {
+  public void testGetOp1() {
     // Arrange, Act and Assert
-    assertNull(new Local().getOp1());
+    assertNull((new Local()).getOp1());
   }
 
   /**
@@ -319,13 +281,11 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#getOp2()}
    */
   @Test
-  @DisplayName("Test getOp2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value Value.getOp2()"})
-  void testGetOp2() {
+  public void testGetOp2() {
     // Arrange, Act and Assert
-    assertNull(new Local().getOp2());
+    assertNull((new Local()).getOp2());
   }
 
   /**
@@ -334,13 +294,11 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#getOps()}
    */
   @Test
-  @DisplayName("Test getOps()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value[] Value.getOps()"})
-  void testGetOps() {
+  public void testGetOps() {
     // Arrange, Act and Assert
-    assertNull(new ArrayExpr().getOps());
+    assertNull((new ArrayExpr()).getOps());
   }
 
   /**
@@ -354,12 +312,9 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#toString()}
    */
   @Test
-  @DisplayName(
-      "Test toString(); given ArrayExpr() Op1 is ArrayExpr(); then return 'null[null][null]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String Value.toString()"})
-  void testToString_givenArrayExprOp1IsArrayExpr_thenReturnNullNullNull() {
+  public void testToString_givenArrayExprOp1IsArrayExpr_thenReturnNullNullNull() {
     // Arrange
     ArrayExpr arrayExpr = new ArrayExpr();
     arrayExpr.setOp1(new ArrayExpr());
@@ -379,13 +334,11 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#toString()}
    */
   @Test
-  @DisplayName("Test toString(); given ArrayExpr(); then return 'null[null]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String Value.toString()"})
-  void testToString_givenArrayExpr_thenReturnNullNull() {
+  public void testToString_givenArrayExpr_thenReturnNullNull() {
     // Arrange, Act and Assert
-    assertEquals("null[null]", new ArrayExpr().toString());
+    assertEquals("null[null]", (new ArrayExpr()).toString());
   }
 
   /**
@@ -398,17 +351,14 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#toString()}
    */
   @Test
-  @DisplayName("Test toString(); then return 'null[null][null[null]]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String Value.toString()"})
-  void testToString_thenReturnNullNullNullNull() {
+  public void testToString_thenReturnNullNullNullNull() {
     // Arrange
     ArrayExpr base = new ArrayExpr();
-    ArrayExpr nArrayResult = Exprs.nArray(base, new ArrayExpr(), "[");
 
     // Act and Assert
-    assertEquals("null[null][null[null]]", nArrayResult.toString());
+    assertEquals("null[null][null[null]]", Exprs.nArray(base, new ArrayExpr(), "[").toString());
   }
 
   /**
@@ -417,19 +367,14 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link Value#trim()}
    */
   @Test
-  @DisplayName("Test trim()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value Value.trim()"})
-  void testTrim() {
+  public void testTrim() {
     // Arrange
     ArrayExpr arrayExpr = new ArrayExpr();
 
-    // Act
-    Value actualTrimResult = arrayExpr.trim();
-
-    // Assert
-    assertSame(arrayExpr, actualTrimResult);
+    // Act and Assert
+    assertSame(arrayExpr, arrayExpr.trim());
   }
 
   /**
@@ -443,11 +388,9 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link VT#canThrow()}
    */
   @Test
-  @DisplayName("Test VT canThrow(); given 'ADD'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean VT.canThrow()"})
-  void testVTCanThrow_givenAdd_thenReturnFalse() {
+  public void testVTCanThrow_givenAdd_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(VT.ADD.canThrow());
   }
@@ -463,11 +406,9 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link VT#canThrow()}
    */
   @Test
-  @DisplayName("Test VT canThrow(); given 'ARRAY'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean VT.canThrow()"})
-  void testVTCanThrow_givenArray_thenReturnTrue() {
+  public void testVTCanThrow_givenArray_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(VT.ARRAY.canThrow());
   }
@@ -483,11 +424,9 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link VT#mayThrow()}
    */
   @Test
-  @DisplayName("Test VT mayThrow(); given 'ADD'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean VT.mayThrow()"})
-  void testVTMayThrow_givenAdd_thenReturnTrue() {
+  public void testVTMayThrow_givenAdd_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(VT.ADD.mayThrow());
   }
@@ -503,11 +442,9 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link VT#mayThrow()}
    */
   @Test
-  @DisplayName("Test VT mayThrow(); given 'ARRAY'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean VT.mayThrow()"})
-  void testVTMayThrow_givenArray_thenReturnFalse() {
+  public void testVTMayThrow_givenArray_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(VT.ARRAY.mayThrow());
   }
@@ -523,11 +460,9 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link VT#toString()}
    */
   @Test
-  @DisplayName("Test VT toString(); given 'ADD'; then return '+'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String VT.toString()"})
-  void testVTToString_givenAdd_thenReturnPlusSign() {
+  public void testVTToString_givenAdd_thenReturnPlusSign() {
     // Arrange, Act and Assert
     assertEquals("+", VT.ADD.toString());
   }
@@ -543,11 +478,9 @@ class ValueDiffblueTest {
    * <p>Method under test: {@link VT#toString()}
    */
   @Test
-  @DisplayName("Test VT toString(); given 'ARRAY'; then return 'ARRAY'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String VT.toString()"})
-  void testVTToString_givenArray_thenReturnArray() {
+  public void testVTToString_givenArray_thenReturnArray() {
     // Arrange, Act and Assert
     assertEquals("ARRAY", VT.ARRAY.toString());
   }

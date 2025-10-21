@@ -1,36 +1,37 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 
-class PrimitiveTypedReferenceValueFactoryDiffblueTest {
+public class PrimitiveTypedReferenceValueFactoryDiffblueTest {
   /**
    * Test {@link PrimitiveTypedReferenceValueFactory#createReferenceValueNull()}.
    *
    * <p>Method under test: {@link PrimitiveTypedReferenceValueFactory#createReferenceValueNull()}
    */
   @Test
-  @DisplayName("Test createReferenceValueNull()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue PrimitiveTypedReferenceValueFactory.createReferenceValueNull()"
   })
-  void testCreateReferenceValueNull() {
-    // Arrange, Act and Assert
+  public void testCreateReferenceValueNull() {
+    // Arrange
+    PrimitiveTypedReferenceValueFactory primitiveTypedReferenceValueFactory =
+        new PrimitiveTypedReferenceValueFactory();
+
+    // Act and Assert
     assertSame(
-        PrimitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL,
-        new PrimitiveTypedReferenceValueFactory().createReferenceValueNull());
+        primitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL,
+        primitiveTypedReferenceValueFactory.createReferenceValueNull());
   }
 
   /**
@@ -41,21 +42,18 @@ class PrimitiveTypedReferenceValueFactoryDiffblueTest {
    * Clazz, boolean, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValue(String, Clazz, boolean, boolean) with 'String', 'Clazz', 'boolean', 'boolean'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue PrimitiveTypedReferenceValueFactory.createReferenceValue(String, Clazz, boolean, boolean)"
   })
-  void testCreateReferenceValueWithStringClazzBooleanBoolean() {
+  public void testCreateReferenceValueWithStringClazzBooleanBoolean() {
     // Arrange
     PrimitiveTypedReferenceValueFactory primitiveTypedReferenceValueFactory =
         new PrimitiveTypedReferenceValueFactory();
 
     // Act and Assert
     assertSame(
-        PrimitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL,
+        primitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL,
         primitiveTypedReferenceValueFactory.createReferenceValue(
             null, new LibraryClass(), true, true));
   }
@@ -72,21 +70,18 @@ class PrimitiveTypedReferenceValueFactoryDiffblueTest {
    * Clazz, boolean, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValue(String, Clazz, boolean, boolean) with 'String', 'Clazz', 'boolean', 'boolean'; when empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue PrimitiveTypedReferenceValueFactory.createReferenceValue(String, Clazz, boolean, boolean)"
   })
-  void testCreateReferenceValueWithStringClazzBooleanBoolean_whenEmptyString() {
+  public void testCreateReferenceValueWithStringClazzBooleanBoolean_whenEmptyString() {
     // Arrange
     PrimitiveTypedReferenceValueFactory primitiveTypedReferenceValueFactory =
         new PrimitiveTypedReferenceValueFactory();
 
     // Act and Assert
     assertSame(
-        BasicValueFactory.REFERENCE_VALUE,
+        primitiveTypedReferenceValueFactory.REFERENCE_VALUE,
         primitiveTypedReferenceValueFactory.createReferenceValue(
             "", new LibraryClass(), true, true));
   }
@@ -103,21 +98,18 @@ class PrimitiveTypedReferenceValueFactoryDiffblueTest {
    * Clazz, boolean, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test createReferenceValue(String, Clazz, boolean, boolean) with 'String', 'Clazz', 'boolean', 'boolean'; when 'Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue PrimitiveTypedReferenceValueFactory.createReferenceValue(String, Clazz, boolean, boolean)"
   })
-  void testCreateReferenceValueWithStringClazzBooleanBoolean_whenType() {
+  public void testCreateReferenceValueWithStringClazzBooleanBoolean_whenType() {
     // Arrange
     PrimitiveTypedReferenceValueFactory primitiveTypedReferenceValueFactory =
         new PrimitiveTypedReferenceValueFactory();
 
     // Act and Assert
     assertSame(
-        BasicValueFactory.REFERENCE_VALUE,
+        primitiveTypedReferenceValueFactory.REFERENCE_VALUE,
         primitiveTypedReferenceValueFactory.createReferenceValue(
             "Type", new LibraryClass(), true, true));
   }
@@ -130,14 +122,11 @@ class PrimitiveTypedReferenceValueFactoryDiffblueTest {
    * PrimitiveTypedReferenceValueFactory#createArrayReferenceValue(String, Clazz, IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue) with 'type', 'referencedClass', 'arrayLength'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue PrimitiveTypedReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue)"
   })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength() {
+  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength() {
     // Arrange
     PrimitiveTypedReferenceValueFactory primitiveTypedReferenceValueFactory =
         new PrimitiveTypedReferenceValueFactory();
@@ -175,28 +164,21 @@ class PrimitiveTypedReferenceValueFactoryDiffblueTest {
    * PrimitiveTypedReferenceValueFactory#createArrayReferenceValue(String, Clazz, IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue) with 'type', 'referencedClass', 'arrayLength'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue PrimitiveTypedReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue)"
   })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength2() {
+  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength2() {
     // Arrange
     PrimitiveTypedReferenceValueFactory primitiveTypedReferenceValueFactory =
         new PrimitiveTypedReferenceValueFactory();
     IntegerValue arrayLength = BasicValueFactory.INTEGER_VALUE;
 
-    // Act
-    ReferenceValue actualCreateArrayReferenceValueResult =
-        primitiveTypedReferenceValueFactory.createArrayReferenceValue(
-            null, new LibraryClass(), arrayLength);
-
-    // Assert
-    assertSame(arrayLength, primitiveTypedReferenceValueFactory.createIntegerValue());
+    // Act and Assert
     assertSame(
-        PrimitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL,
-        actualCreateArrayReferenceValueResult);
+        primitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL,
+        primitiveTypedReferenceValueFactory.createArrayReferenceValue(
+            null, new LibraryClass(), arrayLength));
+    assertSame(arrayLength, primitiveTypedReferenceValueFactory.createIntegerValue());
   }
 }

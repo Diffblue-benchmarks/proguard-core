@@ -1,20 +1,19 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.ProgramClass;
 import proguard.classfile.kotlin.KotlinConstants;
 
-class BasicHierarchyProviderDiffblueTest {
+public class BasicHierarchyProviderDiffblueTest {
   /**
    * Test {@link BasicHierarchyProvider#getClazz(String)}.
    *
@@ -25,14 +24,12 @@ class BasicHierarchyProviderDiffblueTest {
    * <p>Method under test: {@link BasicHierarchyProvider#getClazz(String)}
    */
   @Test
-  @DisplayName("Test getClazz(String); then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Clazz BasicHierarchyProvider.getClazz(String)"})
-  void testGetClazz_thenReturnNull() {
+  public void testGetClazz_thenReturnNull() {
     // Arrange, Act and Assert
     assertNull(
-        new BasicHierarchyProvider(KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool)
+        (new BasicHierarchyProvider(KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool))
             .getClazz("Class Name"));
   }
 
@@ -47,14 +44,12 @@ class BasicHierarchyProviderDiffblueTest {
    * <p>Method under test: {@link BasicHierarchyProvider#getClazz(String)}
    */
   @Test
-  @DisplayName("Test getClazz(String); when empty string; then return ProgramClass")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Clazz BasicHierarchyProvider.getClazz(String)"})
-  void testGetClazz_whenEmptyString_thenReturnProgramClass() {
+  public void testGetClazz_whenEmptyString_thenReturnProgramClass() {
     // Arrange and Act
     Clazz actualClazz =
-        new BasicHierarchyProvider(KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool)
+        (new BasicHierarchyProvider(KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool))
             .getClazz("");
 
     // Assert
@@ -96,14 +91,12 @@ class BasicHierarchyProviderDiffblueTest {
    * <p>Method under test: {@link BasicHierarchyProvider#getSubClasses(String)}
    */
   @Test
-  @DisplayName("Test getSubClasses(String); then return Empty")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.util.Set BasicHierarchyProvider.getSubClasses(String)"})
-  void testGetSubClasses_thenReturnEmpty() {
+  public void testGetSubClasses_thenReturnEmpty() {
     // Arrange, Act and Assert
     assertTrue(
-        new BasicHierarchyProvider(KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool)
+        (new BasicHierarchyProvider(KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool))
             .getSubClasses("Class Name")
             .isEmpty());
   }
@@ -119,14 +112,12 @@ class BasicHierarchyProviderDiffblueTest {
    * <p>Method under test: {@link BasicHierarchyProvider#getSubClasses(String)}
    */
   @Test
-  @DisplayName("Test getSubClasses(String); when empty string; then return Empty")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.util.Set BasicHierarchyProvider.getSubClasses(String)"})
-  void testGetSubClasses_whenEmptyString_thenReturnEmpty() {
+  public void testGetSubClasses_whenEmptyString_thenReturnEmpty() {
     // Arrange, Act and Assert
     assertTrue(
-        new BasicHierarchyProvider(KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool)
+        (new BasicHierarchyProvider(KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool))
             .getSubClasses("")
             .isEmpty());
   }

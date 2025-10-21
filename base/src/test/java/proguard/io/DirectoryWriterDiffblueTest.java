@@ -1,17 +1,16 @@
 package proguard.io;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.IOException;
 import java.nio.file.Paths;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class DirectoryWriterDiffblueTest {
+public class DirectoryWriterDiffblueTest {
   /**
    * Test {@link DirectoryWriter#createDirectory(DataEntry)}.
    *
@@ -23,23 +22,16 @@ class DirectoryWriterDiffblueTest {
    * <p>Method under test: {@link DirectoryWriter#createDirectory(DataEntry)}
    */
   @Test
-  @DisplayName(
-      "Test createDirectory(DataEntry); when ClassPathDataEntry(String) with name is empty string; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DirectoryWriter.createDirectory(DataEntry)"})
-  void testCreateDirectory_whenClassPathDataEntryWithNameIsEmptyString_thenReturnTrue()
+  public void testCreateDirectory_whenClassPathDataEntryWithNameIsEmptyString_thenReturnTrue()
       throws IOException {
     // Arrange
     DirectoryWriter directoryWriter =
         new DirectoryWriter(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());
 
-    // Act
-    boolean actualCreateDirectoryResult =
-        directoryWriter.createDirectory(new ClassPathDataEntry(""));
-
-    // Assert
-    assertTrue(actualCreateDirectoryResult);
+    // Act and Assert
+    assertTrue(directoryWriter.createDirectory(new ClassPathDataEntry("")));
   }
 
   /**
@@ -53,12 +45,9 @@ class DirectoryWriterDiffblueTest {
    * <p>Method under test: {@link DirectoryWriter#sameOutputStream(DataEntry, DataEntry)}
    */
   @Test
-  @DisplayName(
-      "Test sameOutputStream(DataEntry, DataEntry); when ClassPathDataEntry(String) with name is '.class'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DirectoryWriter.sameOutputStream(DataEntry, DataEntry)"})
-  void testSameOutputStream_whenClassPathDataEntryWithNameIsClass_thenReturnFalse()
+  public void testSameOutputStream_whenClassPathDataEntryWithNameIsClass_thenReturnFalse()
       throws IOException {
     // Arrange
     DirectoryWriter directoryWriter =
@@ -80,12 +69,10 @@ class DirectoryWriterDiffblueTest {
    * <p>Method under test: {@link DirectoryWriter#sameOutputStream(DataEntry, DataEntry)}
    */
   @Test
-  @DisplayName(
-      "Test sameOutputStream(DataEntry, DataEntry); when ClassPathDataEntry(String) with 'Name'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DirectoryWriter.sameOutputStream(DataEntry, DataEntry)"})
-  void testSameOutputStream_whenClassPathDataEntryWithName_thenReturnTrue() throws IOException {
+  public void testSameOutputStream_whenClassPathDataEntryWithName_thenReturnTrue()
+      throws IOException {
     // Arrange
     DirectoryWriter directoryWriter =
         new DirectoryWriter(Paths.get(System.getProperty("java.io.tmpdir"), "test.txt").toFile());

@@ -1,17 +1,16 @@
 package proguard.evaluation.value.object;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.evaluation.value.BasicValueFactory;
@@ -21,7 +20,7 @@ import proguard.evaluation.value.object.model.ArrayModel;
 import proguard.evaluation.value.object.model.ClassLoaderModel;
 import proguard.evaluation.value.object.model.Model;
 
-class AnalyzedObjectFactoryDiffblueTest {
+public class AnalyzedObjectFactoryDiffblueTest {
   /**
    * Test {@link AnalyzedObjectFactory#create(Object, String, Clazz)}.
    *
@@ -33,11 +32,9 @@ class AnalyzedObjectFactoryDiffblueTest {
    * <p>Method under test: {@link AnalyzedObjectFactory#create(Object, String, Clazz)}
    */
   @Test
-  @DisplayName("Test create(Object, String, Clazz); when 'null'; then return NullObject")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"AnalyzedObject AnalyzedObjectFactory.create(Object, String, Clazz)"})
-  void testCreate_whenNull_thenReturnNullObject() {
+  public void testCreate_whenNull_thenReturnNullObject() {
     // Arrange and Act
     AnalyzedObject actualCreateResult = AnalyzedObjectFactory.create(null, null, null);
 
@@ -62,11 +59,9 @@ class AnalyzedObjectFactoryDiffblueTest {
    * <p>Method under test: {@link AnalyzedObjectFactory#create(Object, String, Clazz)}
    */
   @Test
-  @DisplayName("Test create(Object, String, Clazz); when 'null'; then throw IllegalStateException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"AnalyzedObject AnalyzedObjectFactory.create(Object, String, Clazz)"})
-  void testCreate_whenNull_thenThrowIllegalStateException() {
+  public void testCreate_whenNull_thenThrowIllegalStateException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalStateException.class,
@@ -84,11 +79,9 @@ class AnalyzedObjectFactoryDiffblueTest {
    * <p>Method under test: {@link AnalyzedObjectFactory#create(Object, String, Clazz)}
    */
   @Test
-  @DisplayName("Test create(Object, String, Clazz); when 'Type'; then throw IllegalStateException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"AnalyzedObject AnalyzedObjectFactory.create(Object, String, Clazz)"})
-  void testCreate_whenType_thenThrowIllegalStateException() {
+  public void testCreate_whenType_thenThrowIllegalStateException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalStateException.class,
@@ -106,11 +99,9 @@ class AnalyzedObjectFactoryDiffblueTest {
    * <p>Method under test: {@link AnalyzedObjectFactory#create(Object, String, Clazz)}
    */
   @Test
-  @DisplayName("Test create(Object, String, Clazz); when 'Type'; then throw IllegalStateException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"AnalyzedObject AnalyzedObjectFactory.create(Object, String, Clazz)"})
-  void testCreate_whenType_thenThrowIllegalStateException2() {
+  public void testCreate_whenType_thenThrowIllegalStateException2() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalStateException.class,
@@ -128,11 +119,9 @@ class AnalyzedObjectFactoryDiffblueTest {
    * <p>Method under test: {@link AnalyzedObjectFactory#create(Object, String, Clazz)}
    */
   @Test
-  @DisplayName("Test create(Object, String, Clazz); when 'Value'; then throw IllegalStateException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"AnalyzedObject AnalyzedObjectFactory.create(Object, String, Clazz)"})
-  void testCreate_whenValue_thenThrowIllegalStateException() {
+  public void testCreate_whenValue_thenThrowIllegalStateException() {
     // Arrange, Act and Assert
     assertThrows(
         IllegalStateException.class,
@@ -143,24 +132,20 @@ class AnalyzedObjectFactoryDiffblueTest {
    * Test {@link AnalyzedObjectFactory#createPrecise(Object)}.
    *
    * <ul>
+   *   <li>When {@link ClassLoaderModel} (default constructor).
    *   <li>Then throw {@link IllegalStateException}.
    * </ul>
    *
    * <p>Method under test: {@link AnalyzedObjectFactory#createPrecise(Object)}
    */
   @Test
-  @DisplayName("Test createPrecise(Object); then throw IllegalStateException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"AnalyzedObject AnalyzedObjectFactory.createPrecise(Object)"})
-  void testCreatePrecise_thenThrowIllegalStateException() {
-    // Arrange
-    Value[] values = new Value[] {BasicValueFactory.DOUBLE_VALUE};
-    ArrayModel arrayModel = new ArrayModel(values, "'value' can't be null");
-
-    // Act and Assert
+  public void testCreatePrecise_whenClassLoaderModel_thenThrowIllegalStateException() {
+    // Arrange, Act and Assert
     assertThrows(
-        IllegalStateException.class, () -> AnalyzedObjectFactory.createPrecise(arrayModel));
+        IllegalStateException.class,
+        () -> AnalyzedObjectFactory.createPrecise(new ClassLoaderModel()));
   }
 
   /**
@@ -174,11 +159,9 @@ class AnalyzedObjectFactoryDiffblueTest {
    * <p>Method under test: {@link AnalyzedObjectFactory#createPrecise(Object)}
    */
   @Test
-  @DisplayName("Test createPrecise(Object); when 'Value'; then return PreciseObject")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"AnalyzedObject AnalyzedObjectFactory.createPrecise(Object)"})
-  void testCreatePrecise_whenValue_thenReturnPreciseObject() {
+  public void testCreatePrecise_whenValue_thenReturnPreciseObject() {
     // Arrange and Act
     AnalyzedObject actualCreatePreciseResult = AnalyzedObjectFactory.createPrecise("Value");
 
@@ -201,14 +184,11 @@ class AnalyzedObjectFactoryDiffblueTest {
    * <p>Method under test: {@link AnalyzedObjectFactory#createModeled(Model)}
    */
   @Test
-  @DisplayName("Test createModeled(Model); then return ArrayObject")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"AnalyzedObject AnalyzedObjectFactory.createModeled(Model)"})
-  void testCreateModeled_thenReturnArrayObject() {
+  public void testCreateModeled_thenReturnArrayObject() {
     // Arrange
-    Value[] values = new Value[] {BasicValueFactory.DOUBLE_VALUE};
-    ArrayModel value = new ArrayModel(values, "Type");
+    ArrayModel value = new ArrayModel(new Value[] {BasicValueFactory.DOUBLE_VALUE}, "Type");
 
     // Act
     AnalyzedObject actualCreateModeledResult = AnalyzedObjectFactory.createModeled(value);
@@ -234,12 +214,9 @@ class AnalyzedObjectFactoryDiffblueTest {
    * <p>Method under test: {@link AnalyzedObjectFactory#createModeled(Model)}
    */
   @Test
-  @DisplayName(
-      "Test createModeled(Model); when ClassLoaderModel (default constructor); then return ModeledObject")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"AnalyzedObject AnalyzedObjectFactory.createModeled(Model)"})
-  void testCreateModeled_whenClassLoaderModel_thenReturnModeledObject() {
+  public void testCreateModeled_whenClassLoaderModel_thenReturnModeledObject() {
     // Arrange
     ClassLoaderModel value = new ClassLoaderModel();
 
@@ -265,11 +242,9 @@ class AnalyzedObjectFactoryDiffblueTest {
    * <p>Method under test: {@link AnalyzedObjectFactory#createNullOfType(String)}
    */
   @Test
-  @DisplayName("Test createNullOfType(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"AnalyzedObject AnalyzedObjectFactory.createNullOfType(String)"})
-  void testCreateNullOfType() {
+  public void testCreateNullOfType() {
     // Arrange and Act
     AnalyzedObject actualCreateNullOfTypeResult = AnalyzedObjectFactory.createNullOfType("Type");
 
@@ -289,11 +264,9 @@ class AnalyzedObjectFactoryDiffblueTest {
    * <p>Method under test: {@link AnalyzedObjectFactory#createNull()}
    */
   @Test
-  @DisplayName("Test createNull()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"AnalyzedObject AnalyzedObjectFactory.createNull()"})
-  void testCreateNull() {
+  public void testCreateNull() {
     // Arrange and Act
     AnalyzedObject actualCreateNullResult = AnalyzedObjectFactory.createNull();
 
@@ -313,11 +286,9 @@ class AnalyzedObjectFactoryDiffblueTest {
    * <p>Method under test: {@link AnalyzedObjectFactory#createDetailedArray(Value[], String)}
    */
   @Test
-  @DisplayName("Test createDetailedArray(Value[], String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"AnalyzedObject AnalyzedObjectFactory.createDetailedArray(Value[], String)"})
-  void testCreateDetailedArray() {
+  public void testCreateDetailedArray() {
     // Arrange and Act
     AnalyzedObject actualCreateDetailedArrayResult =
         AnalyzedObjectFactory.createDetailedArray(

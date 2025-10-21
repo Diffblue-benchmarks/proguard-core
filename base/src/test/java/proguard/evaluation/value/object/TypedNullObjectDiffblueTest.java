@@ -1,18 +1,17 @@
 package proguard.evaluation.value.object;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class TypedNullObjectDiffblueTest {
+public class TypedNullObjectDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -29,9 +28,7 @@ class TypedNullObjectDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void TypedNullObject.<init>(String)",
     "Object TypedNullObject.getPreciseValue()",
@@ -41,7 +38,7 @@ class TypedNullObjectDiffblueTest {
     "boolean TypedNullObject.isPrecise()",
     "String TypedNullObject.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     TypedNullObject actualTypedNullObject = new TypedNullObject("Type");
     String actualToStringResult = actualTypedNullObject.toString();
@@ -75,18 +72,17 @@ class TypedNullObjectDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TypedNullObject.equals(Object)", "int TypedNullObject.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     TypedNullObject typedNullObject = new TypedNullObject("Type");
     TypedNullObject typedNullObject2 = new TypedNullObject("Type");
 
     // Act and Assert
     assertEquals(typedNullObject, typedNullObject2);
-    assertEquals(typedNullObject.hashCode(), typedNullObject2.hashCode());
+    int expectedHashCodeResult = typedNullObject.hashCode();
+    assertEquals(expectedHashCodeResult, typedNullObject2.hashCode());
   }
 
   /**
@@ -105,11 +101,9 @@ class TypedNullObjectDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TypedNullObject.equals(Object)", "int TypedNullObject.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     TypedNullObject typedNullObject = new TypedNullObject("Type");
 
@@ -130,11 +124,9 @@ class TypedNullObjectDiffblueTest {
    * <p>Method under test: {@link TypedNullObject#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TypedNullObject.equals(Object)", "int TypedNullObject.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     TypedNullObject typedNullObject =
         new TypedNullObject("proguard.evaluation.value.object.TypedNullObject");
@@ -154,11 +146,9 @@ class TypedNullObjectDiffblueTest {
    * <p>Method under test: {@link TypedNullObject#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TypedNullObject.equals(Object)", "int TypedNullObject.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new TypedNullObject("Type"), null);
   }
@@ -174,11 +164,9 @@ class TypedNullObjectDiffblueTest {
    * <p>Method under test: {@link TypedNullObject#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TypedNullObject.equals(Object)", "int TypedNullObject.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new TypedNullObject("Type"), "Different type to TypedNullObject");
   }

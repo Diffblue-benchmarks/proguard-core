@@ -1,29 +1,26 @@
 package proguard.classfile;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class FieldSignatureDiffblueTest {
+public class FieldSignatureDiffblueTest {
   /**
    * Test {@link FieldSignature#FieldSignature(String, String, String)}.
    *
    * <p>Method under test: {@link FieldSignature#FieldSignature(String, String, String)}
    */
   @Test
-  @DisplayName("Test new FieldSignature(String, String, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void FieldSignature.<init>(String, String, String)"})
-  void testNewFieldSignature() {
+  public void testNewFieldSignature() {
     // Arrange and Act
     FieldSignature actualFieldSignature =
         new FieldSignature("Clazz Name", "Member Name", "Descriptor");
@@ -48,17 +45,15 @@ class FieldSignatureDiffblueTest {
    * <p>Method under test: {@link FieldSignature#FieldSignature(Clazz, Field)}
    */
   @Test
-  @DisplayName("Test new FieldSignature(Clazz, Field)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void FieldSignature.<init>(Clazz, Field)"})
-  void testNewFieldSignature2() {
+  public void testNewFieldSignature2() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField field = new LibraryField(1, "Name", "Descriptor");
 
     // Act
-    FieldSignature actualFieldSignature = new FieldSignature(clazz, field);
+    FieldSignature actualFieldSignature =
+        new FieldSignature(clazz, new LibraryField(1, "Name", "Descriptor"));
 
     // Assert
     assertEquals("?", actualFieldSignature.getExternalPackageName());
@@ -80,16 +75,11 @@ class FieldSignatureDiffblueTest {
    * <p>Method under test: {@link FieldSignature#isIncomplete()}
    */
   @Test
-  @DisplayName("Test isIncomplete()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FieldSignature.isIncomplete()"})
-  void testIsIncomplete() {
-    // Arrange
-    FieldSignature fieldSignature = new FieldSignature(null, "Member Name", "Descriptor");
-
-    // Act and Assert
-    assertTrue(fieldSignature.isIncomplete());
+  public void testIsIncomplete() {
+    // Arrange, Act and Assert
+    assertTrue((new FieldSignature(null, "Member Name", "Descriptor")).isIncomplete());
   }
 
   /**
@@ -98,16 +88,11 @@ class FieldSignatureDiffblueTest {
    * <p>Method under test: {@link FieldSignature#isIncomplete()}
    */
   @Test
-  @DisplayName("Test isIncomplete()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FieldSignature.isIncomplete()"})
-  void testIsIncomplete2() {
-    // Arrange
-    FieldSignature fieldSignature = new FieldSignature("Clazz Name", null, "Descriptor");
-
-    // Act and Assert
-    assertTrue(fieldSignature.isIncomplete());
+  public void testIsIncomplete2() {
+    // Arrange, Act and Assert
+    assertTrue((new FieldSignature("Clazz Name", null, "Descriptor")).isIncomplete());
   }
 
   /**
@@ -116,16 +101,11 @@ class FieldSignatureDiffblueTest {
    * <p>Method under test: {@link FieldSignature#isIncomplete()}
    */
   @Test
-  @DisplayName("Test isIncomplete()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FieldSignature.isIncomplete()"})
-  void testIsIncomplete3() {
-    // Arrange
-    FieldSignature fieldSignature = new FieldSignature("Clazz Name", "Member Name", null);
-
-    // Act and Assert
-    assertTrue(fieldSignature.isIncomplete());
+  public void testIsIncomplete3() {
+    // Arrange, Act and Assert
+    assertTrue((new FieldSignature("Clazz Name", "Member Name", null)).isIncomplete());
   }
 
   /**
@@ -138,16 +118,11 @@ class FieldSignatureDiffblueTest {
    * <p>Method under test: {@link FieldSignature#isIncomplete()}
    */
   @Test
-  @DisplayName("Test isIncomplete(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FieldSignature.isIncomplete()"})
-  void testIsIncomplete_thenReturnFalse() {
-    // Arrange
-    FieldSignature fieldSignature = new FieldSignature("Clazz Name", "Member Name", "Descriptor");
-
-    // Act and Assert
-    assertFalse(fieldSignature.isIncomplete());
+  public void testIsIncomplete_thenReturnFalse() {
+    // Arrange, Act and Assert
+    assertFalse((new FieldSignature("Clazz Name", "Member Name", "Descriptor")).isIncomplete());
   }
 
   /**
@@ -156,16 +131,13 @@ class FieldSignatureDiffblueTest {
    * <p>Method under test: {@link FieldSignature#calculateFqn()}
    */
   @Test
-  @DisplayName("Test calculateFqn()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String FieldSignature.calculateFqn()"})
-  void testCalculateFqn() {
-    // Arrange
-    FieldSignature fieldSignature = new FieldSignature("Clazz Name", "Member Name", "Descriptor");
-
-    // Act and Assert
-    assertEquals("LClazz Name;Member Name", fieldSignature.calculateFqn());
+  public void testCalculateFqn() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "LClazz Name;Member Name",
+        (new FieldSignature("Clazz Name", "Member Name", "Descriptor")).calculateFqn());
   }
 
   /**
@@ -178,16 +150,13 @@ class FieldSignatureDiffblueTest {
    * <p>Method under test: {@link FieldSignature#calculatePrettyFqn()}
    */
   @Test
-  @DisplayName("Test calculatePrettyFqn(); then return 'null Clazz Name.Member Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String FieldSignature.calculatePrettyFqn()"})
-  void testCalculatePrettyFqn_thenReturnNullClazzNameMemberName() {
-    // Arrange
-    FieldSignature fieldSignature = new FieldSignature("Clazz Name", "Member Name", null);
-
-    // Act and Assert
-    assertEquals("null Clazz Name.Member Name", fieldSignature.calculatePrettyFqn());
+  public void testCalculatePrettyFqn_thenReturnNullClazzNameMemberName() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "null Clazz Name.Member Name",
+        (new FieldSignature("Clazz Name", "Member Name", null)).calculatePrettyFqn());
   }
 
   /**
@@ -200,16 +169,12 @@ class FieldSignatureDiffblueTest {
    * <p>Method under test: {@link FieldSignature#calculatePrettyFqn()}
    */
   @Test
-  @DisplayName("Test calculatePrettyFqn(); then return 'null ?.Member Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String FieldSignature.calculatePrettyFqn()"})
-  void testCalculatePrettyFqn_thenReturnNullMemberName() {
-    // Arrange
-    FieldSignature fieldSignature = new FieldSignature(null, "Member Name", null);
-
-    // Act and Assert
-    assertEquals("null ?.Member Name", fieldSignature.calculatePrettyFqn());
+  public void testCalculatePrettyFqn_thenReturnNullMemberName() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "null ?.Member Name", (new FieldSignature(null, "Member Name", null)).calculatePrettyFqn());
   }
 
   /**
@@ -222,19 +187,15 @@ class FieldSignatureDiffblueTest {
    * <p>Method under test: {@link FieldSignature#computeIfAbsent(Clazz, Field)}
    */
   @Test
-  @DisplayName(
-      "Test computeIfAbsent(Clazz, Field) with 'clazz', 'field'; then return ExternalPackageName is '?'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FieldSignature FieldSignature.computeIfAbsent(Clazz, Field)"})
-  void testComputeIfAbsentWithClazzField_thenReturnExternalPackageNameIsQuestionMark() {
+  public void testComputeIfAbsentWithClazzField_thenReturnExternalPackageNameIsQuestionMark() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField field = new LibraryField(1, "Name", "Descriptor");
 
     // Act
     FieldSignature actualComputeIfAbsentResult =
-        FieldSignature.computeIfAbsent(clazz, (Field) field);
+        FieldSignature.computeIfAbsent(clazz, (Field) new LibraryField(1, "Name", "Descriptor"));
 
     // Assert
     assertEquals("?", actualComputeIfAbsentResult.getExternalPackageName());
@@ -251,7 +212,7 @@ class FieldSignatureDiffblueTest {
   }
 
   /**
-   * Test {@link FieldSignature#equals(Object)}, and {@link FieldSignature#hashCode()}.
+   * Test {@link FieldSignature#equals(Object)}, and {@link Signature#hashCode()}.
    *
    * <ul>
    *   <li>When other is equal.
@@ -261,22 +222,21 @@ class FieldSignatureDiffblueTest {
    * <p>Method under test: {@link FieldSignature#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FieldSignature.equals(Object)"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     FieldSignature fieldSignature = new FieldSignature("Clazz Name", "Member Name", "Descriptor");
     FieldSignature fieldSignature2 = new FieldSignature("Clazz Name", "Member Name", "Descriptor");
 
     // Act and Assert
     assertEquals(fieldSignature, fieldSignature2);
-    assertEquals(fieldSignature.hashCode(), fieldSignature2.hashCode());
+    int expectedHashCodeResult = fieldSignature.hashCode();
+    assertEquals(expectedHashCodeResult, fieldSignature2.hashCode());
   }
 
   /**
-   * Test {@link FieldSignature#equals(Object)}, and {@link FieldSignature#hashCode()}.
+   * Test {@link FieldSignature#equals(Object)}, and {@link Signature#hashCode()}.
    *
    * <ul>
    *   <li>When other is same.
@@ -286,11 +246,9 @@ class FieldSignatureDiffblueTest {
    * <p>Method under test: {@link FieldSignature#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FieldSignature.equals(Object)"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     FieldSignature fieldSignature = new FieldSignature("Clazz Name", "Member Name", "Descriptor");
 
@@ -311,11 +269,9 @@ class FieldSignatureDiffblueTest {
    * <p>Method under test: {@link FieldSignature#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FieldSignature.equals(Object)"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     FieldSignature fieldSignature = new FieldSignature(null, "Member Name", "Descriptor");
 
@@ -334,11 +290,9 @@ class FieldSignatureDiffblueTest {
    * <p>Method under test: {@link FieldSignature#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FieldSignature.equals(Object)"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
     FieldSignature fieldSignature = new FieldSignature("Clazz Name", null, "Descriptor");
 
@@ -357,11 +311,9 @@ class FieldSignatureDiffblueTest {
    * <p>Method under test: {@link FieldSignature#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FieldSignature.equals(Object)"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
     // Arrange
     FieldSignature fieldSignature = new FieldSignature("Clazz Name", "Member Name", null);
 
@@ -380,11 +332,9 @@ class FieldSignatureDiffblueTest {
    * <p>Method under test: {@link FieldSignature#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FieldSignature.equals(Object)"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new FieldSignature("Clazz Name", "Member Name", "Descriptor"), null);
   }
@@ -400,11 +350,9 @@ class FieldSignatureDiffblueTest {
    * <p>Method under test: {@link FieldSignature#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean FieldSignature.equals(Object)"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
         new FieldSignature("Clazz Name", "Member Name", "Descriptor"),

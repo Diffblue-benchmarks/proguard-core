@@ -1,14 +1,13 @@
 package proguard.classfile.attribute.annotation.target;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class LocalVariableTargetElementDiffblueTest {
+public class LocalVariableTargetElementDiffblueTest {
   /**
    * Test {@link LocalVariableTargetElement#LocalVariableTargetElement()}.
    *
@@ -19,14 +18,12 @@ class LocalVariableTargetElementDiffblueTest {
    * <p>Method under test: {@link LocalVariableTargetElement#LocalVariableTargetElement()}
    */
   @Test
-  @DisplayName("Test new LocalVariableTargetElement(); then return u2index is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void LocalVariableTargetElement.<init>()",
     "void LocalVariableTargetElement.<init>(int, int, int)"
   })
-  void testNewLocalVariableTargetElement_thenReturnU2indexIsZero() {
+  public void testNewLocalVariableTargetElement_thenReturnU2indexIsZero() {
     // Arrange and Act
     LocalVariableTargetElement actualLocalVariableTargetElement = new LocalVariableTargetElement();
 
@@ -48,15 +45,12 @@ class LocalVariableTargetElementDiffblueTest {
    * int)}
    */
   @Test
-  @DisplayName(
-      "Test new LocalVariableTargetElement(int, int, int); when one; then return u2index is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void LocalVariableTargetElement.<init>()",
     "void LocalVariableTargetElement.<init>(int, int, int)"
   })
-  void testNewLocalVariableTargetElement_whenOne_thenReturnU2indexIsOne() {
+  public void testNewLocalVariableTargetElement_whenOne_thenReturnU2indexIsOne() {
     // Arrange and Act
     LocalVariableTargetElement actualLocalVariableTargetElement =
         new LocalVariableTargetElement(1, 3, 1);

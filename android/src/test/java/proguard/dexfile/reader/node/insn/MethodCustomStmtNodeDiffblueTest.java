@@ -1,17 +1,16 @@
 package proguard.dexfile.reader.node.insn;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.expr.Constant;
 import proguard.dexfile.reader.Field;
 import proguard.dexfile.reader.MethodHandle;
@@ -20,7 +19,7 @@ import proguard.dexfile.reader.Proto;
 import proguard.dexfile.reader.node.DexCodeNode;
 import proguard.dexfile.reader.visitors.DexCodeVisitor;
 
-class MethodCustomStmtNodeDiffblueTest {
+public class MethodCustomStmtNodeDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -33,24 +32,26 @@ class MethodCustomStmtNodeDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void MethodCustomStmtNode.<init>(Op, int[], String, Proto, MethodHandle, Object[])",
     "Proto MethodCustomStmtNode.getProto()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
+
     Field field = new Field("Owner", "Name", "Type");
-    MethodHandle bsm = new MethodHandle(1, field);
-    Object[] bsmArgs = new Object[] {Constant.Null};
 
     // Act
     MethodCustomStmtNode actualMethodCustomStmtNode =
-        new MethodCustomStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, "Name", proto, bsm, bsmArgs);
+        new MethodCustomStmtNode(
+            Op.NOP,
+            new int[] {1, -1, 1, -1},
+            "Name",
+            proto,
+            new MethodHandle(1, field),
+            new Object[] {Constant.Null});
     Proto actualProto = actualMethodCustomStmtNode.getProto();
 
     // Assert
@@ -72,21 +73,22 @@ class MethodCustomStmtNodeDiffblueTest {
    * <p>Method under test: {@link MethodCustomStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeNode(); then DexCodeNode() stmts size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MethodCustomStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
+  public void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
+
     Field field = new Field("Owner", "Name", "Type");
-    MethodHandle bsm = new MethodHandle(1, field);
-    Object[] bsmArgs = new Object[] {Constant.Null};
 
     MethodCustomStmtNode methodCustomStmtNode =
-        new MethodCustomStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, "Name", proto, bsm, bsmArgs);
+        new MethodCustomStmtNode(
+            Op.NOP,
+            new int[] {1, -1, 1, -1},
+            "Name",
+            proto,
+            new MethodHandle(1, field),
+            new Object[] {Constant.Null});
     DexCodeNode cv = new DexCodeNode();
 
     // Act
@@ -121,20 +123,22 @@ class MethodCustomStmtNodeDiffblueTest {
    * <p>Method under test: {@link MethodCustomStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName("Test accept(DexCodeVisitor); when DexCodeVisitor()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MethodCustomStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeVisitor() {
+  public void testAccept_whenDexCodeVisitor() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
+
     Field field = new Field("Owner", "Name", "Type");
-    MethodHandle bsm = new MethodHandle(1, field);
-    Object[] bsmArgs = new Object[] {Constant.Null};
 
     MethodCustomStmtNode methodCustomStmtNode =
-        new MethodCustomStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, "Name", proto, bsm, bsmArgs);
+        new MethodCustomStmtNode(
+            Op.NOP,
+            new int[] {1, -1, 1, -1},
+            "Name",
+            proto,
+            new MethodHandle(1, field),
+            new Object[] {Constant.Null});
 
     // Act
     methodCustomStmtNode.accept(new DexCodeVisitor());
@@ -155,21 +159,22 @@ class MethodCustomStmtNodeDiffblueTest {
    * <p>Method under test: {@link MethodCustomStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeVisitor(DexCodeVisitor) with visitor is DexCodeNode()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MethodCustomStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeNode() {
+  public void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeNode() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
+
     Field field = new Field("Owner", "Name", "Type");
-    MethodHandle bsm = new MethodHandle(1, field);
-    Object[] bsmArgs = new Object[] {Constant.Null};
 
     MethodCustomStmtNode methodCustomStmtNode =
-        new MethodCustomStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, "Name", proto, bsm, bsmArgs);
+        new MethodCustomStmtNode(
+            Op.NOP,
+            new int[] {1, -1, 1, -1},
+            "Name",
+            proto,
+            new MethodHandle(1, field),
+            new Object[] {Constant.Null});
 
     // Act
     methodCustomStmtNode.accept(new DexCodeVisitor(new DexCodeNode()));
@@ -190,21 +195,22 @@ class MethodCustomStmtNodeDiffblueTest {
    * <p>Method under test: {@link MethodCustomStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeVisitor(DexCodeVisitor) with visitor is DexCodeVisitor()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MethodCustomStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeVisitor() {
+  public void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeVisitor() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
+
     Field field = new Field("Owner", "Name", "Type");
-    MethodHandle bsm = new MethodHandle(1, field);
-    Object[] bsmArgs = new Object[] {Constant.Null};
 
     MethodCustomStmtNode methodCustomStmtNode =
-        new MethodCustomStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, "Name", proto, bsm, bsmArgs);
+        new MethodCustomStmtNode(
+            Op.NOP,
+            new int[] {1, -1, 1, -1},
+            "Name",
+            proto,
+            new MethodHandle(1, field),
+            new Object[] {Constant.Null});
 
     // Act
     methodCustomStmtNode.accept(new DexCodeVisitor(new DexCodeVisitor()));

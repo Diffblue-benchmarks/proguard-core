@@ -1,14 +1,13 @@
 package proguard.io;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class RenamedDataEntryDiffblueTest {
+public class RenamedDataEntryDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -21,15 +20,13 @@ class RenamedDataEntryDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void RenamedDataEntry.<init>(DataEntry, String)",
     "String RenamedDataEntry.getName()",
     "String RenamedDataEntry.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     RenamedDataEntry actualRenamedDataEntry =
         new RenamedDataEntry(new ClassPathDataEntry("Name"), "Name");

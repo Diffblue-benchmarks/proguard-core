@@ -1,27 +1,24 @@
 package proguard.analysis.cpa.defaults;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class DepthFirstWaitlistDiffblueTest {
+public class DepthFirstWaitlistDiffblueTest {
   /**
    * Test new {@link DepthFirstWaitlist} (default constructor).
    *
    * <p>Method under test: default or parameterless constructor of {@link DepthFirstWaitlist}
    */
   @Test
-  @DisplayName("Test new DepthFirstWaitlist (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DepthFirstWaitlist.<init>()"})
-  void testNewDepthFirstWaitlist() {
+  public void testNewDepthFirstWaitlist() {
     // Arrange and Act
     DepthFirstWaitlist actualDepthFirstWaitlist = new DepthFirstWaitlist();
 

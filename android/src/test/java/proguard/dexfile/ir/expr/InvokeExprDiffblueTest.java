@@ -1,34 +1,31 @@
 package proguard.dexfile.ir.expr;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.LabelAndLocalMapper;
 import proguard.dexfile.ir.expr.Value.VT;
 import proguard.dexfile.reader.Method;
 import proguard.dexfile.reader.Proto;
 
-class InvokeExprDiffblueTest {
+public class InvokeExprDiffblueTest {
   /**
    * Test {@link InvokeExpr#releaseMemory()}.
    *
    * <p>Method under test: {@link InvokeExpr#releaseMemory()}
    */
   @Test
-  @DisplayName("Test releaseMemory()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void InvokeExpr.releaseMemory()"})
-  void testReleaseMemory() {
+  public void testReleaseMemory() {
     // Arrange
     InvokeExpr nInvokeNewResult =
         Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner");
@@ -38,11 +35,11 @@ class InvokeExprDiffblueTest {
 
     // Assert
     assertTrue(nInvokeNewResult instanceof InvokeNewExpr);
+    assertNull(nInvokeNewResult.getArgs());
+    assertNull(nInvokeNewResult.getOps());
     assertNull(nInvokeNewResult.getName());
     assertNull(nInvokeNewResult.getOwner());
     assertNull(nInvokeNewResult.getRet());
-    assertNull(nInvokeNewResult.getArgs());
-    assertNull(nInvokeNewResult.getOps());
     assertNull(((InvokeNewExpr) nInvokeNewResult).method);
     assertNull(nInvokeNewResult.getProto());
   }
@@ -57,17 +54,13 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#getProto()}
    */
   @Test
-  @DisplayName("Test getProto(); then return Desc is '(Argment Types)Owner'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Proto InvokeExpr.getProto()"})
-  void testGetProto_thenReturnDescIsArgmentTypesOwner() {
-    // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner");
-
-    // Act
-    Proto actualProto = nInvokeNewResult.getProto();
+  public void testGetProto_thenReturnDescIsArgmentTypesOwner() {
+    // Arrange and Act
+    Proto actualProto =
+        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner")
+            .getProto();
 
     // Assert
     assertEquals("(Argment Types)Owner", actualProto.getDesc());
@@ -85,17 +78,16 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#getProto()}
    */
   @Test
-  @DisplayName("Test getProto(); then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Proto InvokeExpr.getProto()"})
-  void testGetProto_thenReturnNull() {
+  public void testGetProto_thenReturnNull() {
     // Arrange
-    Value[] args = new Value[] {new ArrayExpr()};
-    InvokeExpr invokeExpr = new InvokeExpr(VT.ADD, args, null);
+    InvokeExpr nInvokeNewResult =
+        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner");
+    nInvokeNewResult.method = null;
 
     // Act and Assert
-    assertNull(invokeExpr.getProto());
+    assertNull(nInvokeNewResult.getProto());
   }
 
   /**
@@ -105,11 +97,9 @@ class InvokeExprDiffblueTest {
    * String)}
    */
   @Test
-  @DisplayName("Test new InvokeExpr(VT, Value[], String, String, String[], String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void InvokeExpr.<init>(VT, Value[], String, String, String[], String)"})
-  void testNewInvokeExpr() {
+  public void testNewInvokeExpr() {
     // Arrange
     Value[] args = new Value[] {new ArrayExpr()};
     String[] argmentTypes = new String[] {"Argment Types"};
@@ -142,19 +132,15 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#InvokeExpr(VT, Value[], Method)}
    */
   @Test
-  @DisplayName("Test new InvokeExpr(VT, Value[], Method)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void InvokeExpr.<init>(VT, Value[], Method)"})
-  void testNewInvokeExpr2() {
+  public void testNewInvokeExpr2() {
     // Arrange
     Value[] args = new Value[] {new ArrayExpr()};
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     // Act
-    InvokeExpr actualInvokeExpr = new InvokeExpr(VT.ADD, args, method);
+    InvokeExpr actualInvokeExpr = new InvokeExpr(VT.ADD, args, new Method("Owner", "Name", proto));
 
     // Assert
     assertEquals("Name", actualInvokeExpr.getName());
@@ -181,11 +167,9 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName("Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr InvokeExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper() {
+  public void testCloneWithLabelAndLocalMapper() {
     // Arrange
     InvokeExpr nInvokeNewResult =
         Exprs.nInvokeNew(new Value[] {Exprs.nNull()}, new String[] {"Argment Types"}, "Owner");
@@ -209,12 +193,9 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then first element return FilledArrayExpr")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr InvokeExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenFirstElementReturnFilledArrayExpr() {
+  public void testCloneWithLabelAndLocalMapper_thenFirstElementReturnFilledArrayExpr() {
     // Arrange
     InvokeExpr nInvokeNewResult =
         Exprs.nInvokeNew(
@@ -247,12 +228,9 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then first element return InvokeExpr")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr InvokeExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenFirstElementReturnInvokeExpr() {
+  public void testCloneWithLabelAndLocalMapper_thenFirstElementReturnInvokeExpr() {
     // Arrange
     InvokeExpr nInvokeInterfaceResult =
         Exprs.nInvokeInterface(
@@ -295,12 +273,9 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then return method Desc is '(Argment Types)Return Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr InvokeExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenReturnMethodDescIsArgmentTypesReturnType() {
+  public void testCloneWithLabelAndLocalMapper_thenReturnMethodDescIsArgmentTypesReturnType() {
     // Arrange
     InvokeExpr nInvokeInterfaceResult =
         Exprs.nInvokeInterface(
@@ -338,18 +313,16 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#clone()}
    */
   @Test
-  @DisplayName("Test clone(); then first element return Constant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr InvokeExpr.clone()"})
-  void testClone_thenFirstElementReturnConstant() {
+  public void testClone_thenFirstElementReturnConstant() {
     // Arrange
     Constant nNullResult = Exprs.nNull();
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {nNullResult}, new String[] {"Argment Types"}, "Owner");
 
     // Act
-    InvokeExpr actualCloneResult = nInvokeNewResult.clone();
+    InvokeExpr actualCloneResult =
+        Exprs.nInvokeNew(new Value[] {nNullResult}, new String[] {"Argment Types"}, "Owner")
+            .clone();
 
     // Assert
     Value[] ops = actualCloneResult.getOps();
@@ -375,20 +348,16 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#clone()}
    */
   @Test
-  @DisplayName("Test clone(); then first element return FilledArrayExpr")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr InvokeExpr.clone()"})
-  void testClone_thenFirstElementReturnFilledArrayExpr() {
-    // Arrange
-    InvokeExpr nInvokeNewResult =
+  public void testClone_thenFirstElementReturnFilledArrayExpr() {
+    // Arrange and Act
+    InvokeExpr actualCloneResult =
         Exprs.nInvokeNew(
-            new Value[] {Exprs.nFilledArray("Element Type", new Value[] {Exprs.nNull()})},
-            new String[] {"Argment Types"},
-            "Owner");
-
-    // Act
-    InvokeExpr actualCloneResult = nInvokeNewResult.clone();
+                new Value[] {Exprs.nFilledArray("Element Type", new Value[] {Exprs.nNull()})},
+                new String[] {"Argment Types"},
+                "Owner")
+            .clone();
 
     // Assert
     Value[] ops = actualCloneResult.getOps();
@@ -412,11 +381,9 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#clone()}
    */
   @Test
-  @DisplayName("Test clone(); then first element return InvokeExpr")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr InvokeExpr.clone()"})
-  void testClone_thenFirstElementReturnInvokeExpr() {
+  public void testClone_thenFirstElementReturnInvokeExpr() {
     // Arrange
     InvokeExpr nInvokeInterfaceResult =
         Exprs.nInvokeInterface(
@@ -425,12 +392,12 @@ class InvokeExprDiffblueTest {
             "Name",
             new String[] {"Argment Types"},
             "Return Type");
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(
-            new Value[] {nInvokeInterfaceResult}, new String[] {"Argment Types"}, "Owner");
 
     // Act
-    InvokeExpr actualCloneResult = nInvokeNewResult.clone();
+    InvokeExpr actualCloneResult =
+        Exprs.nInvokeNew(
+                new Value[] {nInvokeInterfaceResult}, new String[] {"Argment Types"}, "Owner")
+            .clone();
 
     // Assert
     Value[] ops = actualCloneResult.getOps();
@@ -459,22 +426,18 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#clone()}
    */
   @Test
-  @DisplayName("Test clone(); then return method Desc is '(Argment Types)Return Type'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr InvokeExpr.clone()"})
-  void testClone_thenReturnMethodDescIsArgmentTypesReturnType() {
-    // Arrange
-    InvokeExpr nInvokeInterfaceResult =
+  public void testClone_thenReturnMethodDescIsArgmentTypesReturnType() {
+    // Arrange and Act
+    InvokeExpr actualCloneResult =
         Exprs.nInvokeInterface(
-            new Value[] {Exprs.nNull()},
-            "Owner",
-            "Name",
-            new String[] {"Argment Types"},
-            "Return Type");
-
-    // Act
-    InvokeExpr actualCloneResult = nInvokeInterfaceResult.clone();
+                new Value[] {Exprs.nNull()},
+                "Owner",
+                "Name",
+                new String[] {"Argment Types"},
+                "Return Type")
+            .clone();
 
     // Assert
     Method method = actualCloneResult.method;
@@ -497,20 +460,14 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  void testToString0() {
-    // Arrange
-    Value[] args = new Value[] {new ArrayExpr()};
-    String[] argumentTypes = new String[] {"new "};
-
-    InvokeNewExpr invokeNewExpr =
-        new InvokeNewExpr(VT.ADD, args, "new ", "new ", argumentTypes, "new ");
-
-    // Act and Assert
-    assertEquals("null[null].new ()", invokeNewExpr.toString0());
+  public void testToString0() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "new (null[null])",
+        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, null)
+            .toString0());
   }
 
   /**
@@ -523,40 +480,77 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); then return 'new double(null[null])'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  void testToString0_thenReturnNewDoubleNullNull() {
-    // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "D");
-
-    // Act and Assert
-    assertEquals("new double(null[null])", nInvokeNewResult.toString0());
+  public void testToString0_thenReturnNewDoubleNullNull() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "new double(null[null])",
+        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "D")
+            .toString0());
   }
 
   /**
    * Test {@link InvokeExpr#toString0()}.
    *
    * <ul>
-   *   <li>Then return {@code new (null[null])}.
+   *   <li>Then return {@code new float(null[null])}.
    * </ul>
    *
    * <p>Method under test: {@link InvokeExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); then return 'new (null[null])'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  void testToString0_thenReturnNewNullNull() {
-    // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, null);
+  public void testToString0_thenReturnNewFloatNullNull() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "new float(null[null])",
+        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "F")
+            .toString0());
+  }
 
-    // Act and Assert
-    assertEquals("new (null[null])", nInvokeNewResult.toString0());
+  /**
+   * Test {@link InvokeExpr#toString0()}.
+   *
+   * <ul>
+   *   <li>Then return {@code new int(null[null])}.
+   * </ul>
+   *
+   * <p>Method under test: {@link InvokeExpr#toString0()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String InvokeExpr.toString0()"})
+  public void testToString0_thenReturnNewIntNullNull() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "new int(null[null])",
+        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "I")
+            .toString0());
+  }
+
+  /**
+   * Test {@link InvokeExpr#toString0()}.
+   *
+   * <ul>
+   *   <li>Then return {@code new ((()null[null]))}.
+   * </ul>
+   *
+   * <p>Method under test: {@link InvokeExpr#toString0()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String InvokeExpr.toString0()"})
+  public void testToString0_thenReturnNewNullNull() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "new ((()null[null]))",
+        Exprs.nInvokeNew(
+                new Value[] {Exprs.nCast(new ArrayExpr(), "jane.doe@example.org", "")},
+                new String[] {"Argment Types"},
+                null)
+            .toString0());
   }
 
   /**
@@ -569,209 +563,46 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); then return 'new [](null[null]).new ()'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  void testToString0_thenReturnNewNullNullNew() {
-    // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"new "}, "[");
-    Value[] args = new Value[] {nInvokeNewResult};
-    String[] argumentTypes = new String[] {"new "};
-
-    InvokeNewExpr invokeNewExpr =
-        new InvokeNewExpr(VT.ADD, args, "new ", "new ", argumentTypes, "new ");
-
-    // Act and Assert
-    assertEquals("new [](null[null]).new ()", invokeNewExpr.toString0());
+  public void testToString0_thenReturnNewNullNullNew() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "new [](null[null]).new ()",
+        (new InvokeNewExpr(
+                VT.ADD,
+                new Value[] {
+                  Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"new "}, "[")
+                },
+                "new ",
+                "new ",
+                new String[] {"new "},
+                "new "))
+            .toString0());
   }
 
   /**
    * Test {@link InvokeExpr#toString0()}.
    *
    * <ul>
-   *   <li>Then return {@code null[null].new (new [][]{null[null]})}.
+   *   <li>Then return {@code new (null[null],null[null])}.
    * </ul>
    *
    * <p>Method under test: {@link InvokeExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); then return 'null[null].new (new [][]{null[null]})'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  void testToString0_thenReturnNullNullNewNewNullNull() {
+  public void testToString0_thenReturnNewNullNullNullNull() {
     // Arrange
     ArrayExpr arrayExpr = new ArrayExpr();
-    String[] argumentTypes = new String[] {"new "};
-    InvokeNewExpr invokeNewExpr =
-        new InvokeNewExpr(
-            VT.ADD,
-            new Value[] {arrayExpr, Exprs.nFilledArray("[", new Value[] {new ArrayExpr()})},
-            "new ",
-            "new ",
-            argumentTypes,
-            "new ");
 
     // Act and Assert
-    assertEquals("null[null].new (new [][]{null[null]})", invokeNewExpr.toString0());
-  }
-
-  /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <ul>
-   *   <li>Then return {@code null[null].new (new [](null[null]))}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
-   */
-  @Test
-  @DisplayName("Test toString0(); then return 'null[null].new (new [](null[null]))'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  void testToString0_thenReturnNullNullNewNewNullNull2() {
-    // Arrange
-    ArrayExpr arrayExpr = new ArrayExpr();
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"new "}, "[");
-    String[] argumentTypes = new String[] {"new "};
-    InvokeNewExpr invokeNewExpr =
-        new InvokeNewExpr(
-            VT.ADD,
-            new Value[] {arrayExpr, nInvokeNewResult},
-            "new ",
-            "new ",
-            argumentTypes,
-            "new ");
-
-    // Act and Assert
-    assertEquals("null[null].new (new [](null[null]))", invokeNewExpr.toString0());
-  }
-
-  /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <ul>
-   *   <li>Then return {@code null[null].new (([])new [](null[null]))}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
-   */
-  @Test
-  @DisplayName("Test toString0(); then return 'null[null].new (([])new [](null[null]))'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  void testToString0_thenReturnNullNullNewNewNullNull3() {
-    // Arrange
-    ArrayExpr arrayExpr = new ArrayExpr();
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"new "}, "[");
-    Proto proto = new Proto(new String[] {"[", "]"}, "new ");
-    String[] parameterTypes = new String[] {"new "};
-    Proto proto2 = new Proto(parameterTypes, "new ");
-    Method method = new Method("new ", "new ", proto2);
-
-    InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(new Value[] {arrayExpr, nInvokeNewResult}, proto, method);
-
-    // Act and Assert
-    assertEquals("null[null].new (([])new [](null[null]))", nInvokePolymorphicResult.toString0());
-  }
-
-  /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <ul>
-   *   <li>Then return {@code null[null].new (null[null])}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
-   */
-  @Test
-  @DisplayName("Test toString0(); then return 'null[null].new (null[null])'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  void testToString0_thenReturnNullNullNewNullNull() {
-    // Arrange
-    ArrayExpr arrayExpr = new ArrayExpr();
-    String[] argumentTypes = new String[] {"new "};
-    InvokeNewExpr invokeNewExpr =
-        new InvokeNewExpr(
-            VT.ADD,
-            new Value[] {arrayExpr, new ArrayExpr()},
-            "new ",
-            "new ",
-            argumentTypes,
-            "new ");
-
-    // Act and Assert
-    assertEquals("null[null].new (null[null])", invokeNewExpr.toString0());
-  }
-
-  /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <ul>
-   *   <li>Then return {@code null[null].new (([])null[null])}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
-   */
-  @Test
-  @DisplayName("Test toString0(); then return 'null[null].new (([])null[null])'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  void testToString0_thenReturnNullNullNewNullNull2() {
-    // Arrange
-    ArrayExpr arrayExpr = new ArrayExpr();
-    Proto proto = new Proto(new String[] {"[", "]"}, "new ");
-    String[] parameterTypes = new String[] {"new "};
-    Proto proto2 = new Proto(parameterTypes, "new ");
-    Method method = new Method("new ", "new ", proto2);
-
-    InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(new Value[] {arrayExpr, new ArrayExpr()}, proto, method);
-
-    // Act and Assert
-    assertEquals("null[null].new (([])null[null])", nInvokePolymorphicResult.toString0());
-  }
-
-  /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <ul>
-   *   <li>Then return {@code null[null].new (null[null],null[null])}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
-   */
-  @Test
-  @DisplayName("Test toString0(); then return 'null[null].new (null[null],null[null])'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  void testToString0_thenReturnNullNullNewNullNullNullNull() {
-    // Arrange
-    ArrayExpr arrayExpr = new ArrayExpr();
-    ArrayExpr arrayExpr2 = new ArrayExpr();
-    String[] argumentTypes = new String[] {"new "};
-    InvokeNewExpr invokeNewExpr =
-        new InvokeNewExpr(
-            VT.ADD,
-            new Value[] {arrayExpr, arrayExpr2, new ArrayExpr()},
-            "new ",
-            "new ",
-            argumentTypes,
-            "new ");
-
-    // Act and Assert
-    assertEquals("null[null].new (null[null],null[null])", invokeNewExpr.toString0());
+    assertEquals(
+        "new (null[null],null[null])",
+        Exprs.nInvokeNew(
+                new Value[] {arrayExpr, new ArrayExpr()}, new String[] {"Argment Types"}, null)
+            .toString0());
   }
 
   /**
@@ -780,23 +611,14 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  void testToString02() {
-    // Arrange
-    String[] parameterTypes = new String[] {"new "};
-    Proto proto = new Proto(parameterTypes, "new ");
-    String[] parameterTypes2 = new String[] {"new "};
-    Proto proto2 = new Proto(parameterTypes2, "new ");
-    Method method = new Method("new ", "new ", proto2);
-
-    InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(new Value[] {new ArrayExpr()}, proto, method);
-
-    // Act and Assert
-    assertEquals("null[null].new ()", nInvokePolymorphicResult.toString0());
+  public void testToString02() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "new (null[null])",
+        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "")
+            .toString0());
   }
 
   /**
@@ -805,20 +627,20 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  void testToString03() {
-    // Arrange
-    Value[] args = new Value[] {Exprs.nFilledArray("[", new Value[] {new ArrayExpr()})};
-    String[] argumentTypes = new String[] {"new "};
-
-    InvokeNewExpr invokeNewExpr =
-        new InvokeNewExpr(VT.ADD, args, "new ", "new ", argumentTypes, "new ");
-
-    // Act and Assert
-    assertEquals("new [][]{null[null]}.new ()", invokeNewExpr.toString0());
+  public void testToString03() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "null[null].new ()",
+        (new InvokeNewExpr(
+                VT.ADD,
+                new Value[] {new ArrayExpr()},
+                "new ",
+                "new ",
+                new String[] {"new "},
+                "new "))
+            .toString0());
   }
 
   /**
@@ -827,24 +649,64 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  void testToString04() {
+  public void testToString04() {
     // Arrange
-    String[] parameterTypes = new String[] {"new "};
-    Proto proto = new Proto(parameterTypes, "new ");
-    String[] parameterTypes2 = new String[] {"new "};
-    Proto proto2 = new Proto(parameterTypes2, "new ");
-    Method method = new Method("new ", "new ", proto2);
+    Proto proto = new Proto(new String[] {"new "}, "new ");
 
-    InvokePolymorphicExpr nInvokePolymorphicResult =
+    // Act and Assert
+    assertEquals(
+        "null[null].new ()",
         Exprs.nInvokePolymorphic(
-            new Value[] {Exprs.nFilledArray("[", new Value[] {new ArrayExpr()})}, proto, method);
+                new Value[] {new ArrayExpr()},
+                proto,
+                new Method("new ", "new ", new Proto(new String[] {"new "}, "new ")))
+            .toString0());
+  }
+
+  /**
+   * Test {@link InvokeExpr#toString0()}.
+   *
+   * <p>Method under test: {@link InvokeExpr#toString0()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String InvokeExpr.toString0()"})
+  public void testToString05() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "new [][]{null[null]}.new ()",
+        (new InvokeNewExpr(
+                VT.ADD,
+                new Value[] {Exprs.nFilledArray("[", new Value[] {new ArrayExpr()})},
+                "new ",
+                "new ",
+                new String[] {"new "},
+                "new "))
+            .toString0());
+  }
+
+  /**
+   * Test {@link InvokeExpr#toString0()}.
+   *
+   * <p>Method under test: {@link InvokeExpr#toString0()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String InvokeExpr.toString0()"})
+  public void testToString06() {
+    // Arrange
+    Proto proto = new Proto(new String[] {"new "}, "new ");
 
     // Act and Assert
-    assertEquals("new [][]{null[null]}.new ()", nInvokePolymorphicResult.toString0());
+    assertEquals(
+        "new [][]{null[null]}.new ()",
+        Exprs.nInvokePolymorphic(
+                new Value[] {Exprs.nFilledArray("[", new Value[] {new ArrayExpr()})},
+                proto,
+                new Method("new ", "new ", new Proto(new String[] {"new "}, "new ")))
+            .toString0());
   }
 
   /**
@@ -857,17 +719,16 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#getOwner()}
    */
   @Test
-  @DisplayName("Test getOwner(); then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokeExpr.getOwner()"})
-  void testGetOwner_thenReturnNull() {
+  public void testGetOwner_thenReturnNull() {
     // Arrange
-    Value[] args = new Value[] {new ArrayExpr()};
-    InvokeExpr invokeExpr = new InvokeExpr(VT.ADD, args, null);
+    InvokeExpr nInvokeNewResult =
+        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner");
+    nInvokeNewResult.method = null;
 
     // Act and Assert
-    assertNull(invokeExpr.getOwner());
+    assertNull(nInvokeNewResult.getOwner());
   }
 
   /**
@@ -880,17 +741,14 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#getOwner()}
    */
   @Test
-  @DisplayName("Test getOwner(); then return 'Owner'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokeExpr.getOwner()"})
-  void testGetOwner_thenReturnOwner() {
-    // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner");
-
-    // Act and Assert
-    assertEquals("Owner", nInvokeNewResult.getOwner());
+  public void testGetOwner_thenReturnOwner() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "Owner",
+        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner")
+            .getOwner());
   }
 
   /**
@@ -903,17 +761,16 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#getRet()}
    */
   @Test
-  @DisplayName("Test getRet(); then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokeExpr.getRet()"})
-  void testGetRet_thenReturnNull() {
+  public void testGetRet_thenReturnNull() {
     // Arrange
-    Value[] args = new Value[] {new ArrayExpr()};
-    InvokeExpr invokeExpr = new InvokeExpr(VT.ADD, args, null);
+    InvokeExpr nInvokeNewResult =
+        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner");
+    nInvokeNewResult.method = null;
 
     // Act and Assert
-    assertNull(invokeExpr.getRet());
+    assertNull(nInvokeNewResult.getRet());
   }
 
   /**
@@ -926,17 +783,14 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#getRet()}
    */
   @Test
-  @DisplayName("Test getRet(); then return 'Owner'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokeExpr.getRet()"})
-  void testGetRet_thenReturnOwner() {
-    // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner");
-
-    // Act and Assert
-    assertEquals("Owner", nInvokeNewResult.getRet());
+  public void testGetRet_thenReturnOwner() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "Owner",
+        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner")
+            .getRet());
   }
 
   /**
@@ -949,17 +803,14 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#getName()}
    */
   @Test
-  @DisplayName("Test getName(); then return '<init>'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokeExpr.getName()"})
-  void testGetName_thenReturnInit() {
-    // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner");
-
-    // Act and Assert
-    assertEquals("<init>", nInvokeNewResult.getName());
+  public void testGetName_thenReturnInit() {
+    // Arrange, Act and Assert
+    assertEquals(
+        "<init>",
+        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner")
+            .getName());
   }
 
   /**
@@ -972,17 +823,16 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#getName()}
    */
   @Test
-  @DisplayName("Test getName(); then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String InvokeExpr.getName()"})
-  void testGetName_thenReturnNull() {
+  public void testGetName_thenReturnNull() {
     // Arrange
-    Value[] args = new Value[] {new ArrayExpr()};
-    InvokeExpr invokeExpr = new InvokeExpr(VT.ADD, args, null);
+    InvokeExpr nInvokeNewResult =
+        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner");
+    nInvokeNewResult.method = null;
 
     // Act and Assert
-    assertNull(invokeExpr.getName());
+    assertNull(nInvokeNewResult.getName());
   }
 
   /**
@@ -995,17 +845,14 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#getArgs()}
    */
   @Test
-  @DisplayName("Test getArgs(); then return array of String with 'Argment Types'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String[] InvokeExpr.getArgs()"})
-  void testGetArgs_thenReturnArrayOfStringWithArgmentTypes() {
-    // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner");
-
-    // Act and Assert
-    assertArrayEquals(new String[] {"Argment Types"}, nInvokeNewResult.getArgs());
+  public void testGetArgs_thenReturnArrayOfStringWithArgmentTypes() {
+    // Arrange, Act and Assert
+    assertArrayEquals(
+        new String[] {"Argment Types"},
+        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner")
+            .getArgs());
   }
 
   /**
@@ -1018,16 +865,15 @@ class InvokeExprDiffblueTest {
    * <p>Method under test: {@link InvokeExpr#getArgs()}
    */
   @Test
-  @DisplayName("Test getArgs(); then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String[] InvokeExpr.getArgs()"})
-  void testGetArgs_thenReturnNull() {
+  public void testGetArgs_thenReturnNull() {
     // Arrange
-    Value[] args = new Value[] {new ArrayExpr()};
-    InvokeExpr invokeExpr = new InvokeExpr(VT.ADD, args, null);
+    InvokeExpr nInvokeNewResult =
+        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner");
+    nInvokeNewResult.method = null;
 
     // Act and Assert
-    assertNull(invokeExpr.getArgs());
+    assertNull(nInvokeNewResult.getArgs());
   }
 }

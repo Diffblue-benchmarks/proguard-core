@@ -1,15 +1,14 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ListMatcherDiffblueTest {
+public class ListMatcherDiffblueTest {
   /**
    * Test {@link ListMatcher#matches(String, int, int)} with {@code string}, {@code beginOffset},
    * {@code endOffset}.
@@ -17,13 +16,11 @@ class ListMatcherDiffblueTest {
    * <p>Method under test: {@link ListMatcher#matches(String, int, int)}
    */
   @Test
-  @DisplayName("Test matches(String, int, int) with 'string', 'beginOffset', 'endOffset'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ListMatcher.matches(String, int, int)"})
-  void testMatchesWithStringBeginOffsetEndOffset() {
+  public void testMatchesWithStringBeginOffsetEndOffset() {
     // Arrange, Act and Assert
-    assertFalse(new ListMatcher(new EmptyStringMatcher()).matches("String", 1, 3));
+    assertFalse((new ListMatcher(new EmptyStringMatcher())).matches("String", 1, 3));
   }
 
   /**
@@ -33,17 +30,12 @@ class ListMatcherDiffblueTest {
    * <p>Method under test: {@link ListMatcher#matches(String, int, int)}
    */
   @Test
-  @DisplayName("Test matches(String, int, int) with 'string', 'beginOffset', 'endOffset'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ListMatcher.matches(String, int, int)"})
-  void testMatchesWithStringBeginOffsetEndOffset2() {
-    // Arrange
-    StringMatcher[] matchers = new StringMatcher[] {new EmptyStringMatcher()};
-    ListMatcher listMatcher = new ListMatcher(matchers, new boolean[] {true, false, true, false});
-
-    // Act and Assert
-    assertFalse(listMatcher.matches("String", 1, 3));
+  public void testMatchesWithStringBeginOffsetEndOffset2() {
+    // Arrange, Act and Assert
+    assertFalse(
+        (new ListMatcher(new ListMatcher(new EmptyStringMatcher()))).matches("String", 1, 3));
   }
 
   /**
@@ -53,17 +45,15 @@ class ListMatcherDiffblueTest {
    * <p>Method under test: {@link ListMatcher#matches(String, int, int)}
    */
   @Test
-  @DisplayName("Test matches(String, int, int) with 'string', 'beginOffset', 'endOffset'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ListMatcher.matches(String, int, int)"})
-  void testMatchesWithStringBeginOffsetEndOffset3() {
-    // Arrange
-    StringMatcher[] matchers = new StringMatcher[] {new ConstantMatcher(true)};
-    ListMatcher listMatcher = new ListMatcher(matchers, new boolean[] {true, false, true, false});
-
-    // Act and Assert
-    assertFalse(listMatcher.matches("String", 1, 3));
+  public void testMatchesWithStringBeginOffsetEndOffset3() {
+    // Arrange, Act and Assert
+    assertFalse(
+        (new ListMatcher(
+                new StringMatcher[] {new EmptyStringMatcher()},
+                new boolean[] {true, false, true, false}))
+            .matches("String", 1, 3));
   }
 
   /**
@@ -73,17 +63,15 @@ class ListMatcherDiffblueTest {
    * <p>Method under test: {@link ListMatcher#matches(String, int, int)}
    */
   @Test
-  @DisplayName("Test matches(String, int, int) with 'string', 'beginOffset', 'endOffset'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ListMatcher.matches(String, int, int)"})
-  void testMatchesWithStringBeginOffsetEndOffset4() {
-    // Arrange
-    StringMatcher[] matchers = new StringMatcher[] {new ListMatcher(new EmptyStringMatcher())};
-    ListMatcher listMatcher = new ListMatcher(matchers, new boolean[] {true, false, true, false});
-
-    // Act and Assert
-    assertFalse(listMatcher.matches("String", 1, 3));
+  public void testMatchesWithStringBeginOffsetEndOffset4() {
+    // Arrange, Act and Assert
+    assertFalse(
+        (new ListMatcher(
+                new StringMatcher[] {new ConstantMatcher(true)},
+                new boolean[] {true, false, true, false}))
+            .matches("String", 1, 3));
   }
 
   /**
@@ -93,17 +81,15 @@ class ListMatcherDiffblueTest {
    * <p>Method under test: {@link ListMatcher#matches(String, int, int)}
    */
   @Test
-  @DisplayName("Test matches(String, int, int) with 'string', 'beginOffset', 'endOffset'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ListMatcher.matches(String, int, int)"})
-  void testMatchesWithStringBeginOffsetEndOffset5() {
-    // Arrange
-    StringMatcher[] matchers = new StringMatcher[] {new EmptyStringMatcher()};
-    ListMatcher listMatcher = new ListMatcher(matchers, new boolean[] {true, false, true, true});
-
-    // Act and Assert
-    assertTrue(listMatcher.matches("String", 1, 3));
+  public void testMatchesWithStringBeginOffsetEndOffset5() {
+    // Arrange, Act and Assert
+    assertTrue(
+        (new ListMatcher(
+                new StringMatcher[] {new EmptyStringMatcher()},
+                new boolean[] {true, false, true, true}))
+            .matches("String", 1, 3));
   }
 
   /**
@@ -113,17 +99,15 @@ class ListMatcherDiffblueTest {
    * <p>Method under test: {@link ListMatcher#matches(String, int, int)}
    */
   @Test
-  @DisplayName("Test matches(String, int, int) with 'string', 'beginOffset', 'endOffset'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ListMatcher.matches(String, int, int)"})
-  void testMatchesWithStringBeginOffsetEndOffset6() {
-    // Arrange
-    StringMatcher[] matchers = new StringMatcher[] {new ConstantMatcher(true)};
-    ListMatcher listMatcher = new ListMatcher(matchers, new boolean[] {false, false, true, false});
-
-    // Act and Assert
-    assertTrue(listMatcher.matches("String", 1, 3));
+  public void testMatchesWithStringBeginOffsetEndOffset6() {
+    // Arrange, Act and Assert
+    assertTrue(
+        (new ListMatcher(
+                new StringMatcher[] {new ConstantMatcher(true)},
+                new boolean[] {false, false, true, false}))
+            .matches("String", 1, 3));
   }
 
   /**
@@ -137,13 +121,10 @@ class ListMatcherDiffblueTest {
    * <p>Method under test: {@link ListMatcher#matches(String, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test matches(String, int, int) with 'string', 'beginOffset', 'endOffset'; given ConstantMatcher(boolean) with matches is 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean ListMatcher.matches(String, int, int)"})
-  void testMatchesWithStringBeginOffsetEndOffset_givenConstantMatcherWithMatchesIsTrue() {
+  public void testMatchesWithStringBeginOffsetEndOffset_givenConstantMatcherWithMatchesIsTrue() {
     // Arrange, Act and Assert
-    assertTrue(new ListMatcher(new ConstantMatcher(true)).matches("String", 1, 3));
+    assertTrue((new ListMatcher(new ConstantMatcher(true))).matches("String", 1, 3));
   }
 }

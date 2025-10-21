@@ -1,31 +1,28 @@
 package proguard.analysis.cpa.domain.taint;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.HashSet;
 import java.util.Set;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.ClassConstants;
 import proguard.classfile.Signature;
 
-class TaintSourceDiffblueTest {
+public class TaintSourceDiffblueTest {
   /**
    * Test {@link TaintSource#TaintSource(Signature, boolean, boolean, Set, Set)}.
    *
    * <p>Method under test: {@link TaintSource#TaintSource(Signature, boolean, boolean, Set, Set)}
    */
   @Test
-  @DisplayName("Test new TaintSource(Signature, boolean, boolean, Set, Set)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TaintSource.<init>(Signature, boolean, boolean, Set, Set)"})
-  void testNewTaintSource() {
+  public void testNewTaintSource() {
     // Arrange
     HashSet<Integer> taintsArgs = new HashSet<>();
 
@@ -59,11 +56,9 @@ class TaintSourceDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TaintSource.equals(Object)", "int TaintSource.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     HashSet<Integer> taintsArgs = new HashSet<>();
     TaintSource taintSource =
@@ -84,7 +79,8 @@ class TaintSourceDiffblueTest {
 
     // Act and Assert
     assertEquals(taintSource, taintSource2);
-    assertEquals(taintSource.hashCode(), taintSource2.hashCode());
+    int expectedHashCodeResult = taintSource.hashCode();
+    assertEquals(expectedHashCodeResult, taintSource2.hashCode());
   }
 
   /**
@@ -103,11 +99,9 @@ class TaintSourceDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TaintSource.equals(Object)", "int TaintSource.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     HashSet<Integer> taintsArgs = new HashSet<>();
     TaintSource taintSource =
@@ -135,11 +129,9 @@ class TaintSourceDiffblueTest {
    * <p>Method under test: {@link TaintSource#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TaintSource.equals(Object)", "int TaintSource.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     HashSet<Integer> taintsArgs = new HashSet<>();
     TaintSource taintSource =
@@ -173,11 +165,9 @@ class TaintSourceDiffblueTest {
    * <p>Method under test: {@link TaintSource#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TaintSource.equals(Object)", "int TaintSource.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
     HashSet<Integer> taintsArgs = new HashSet<>();
     TaintSource taintSource =
@@ -211,11 +201,9 @@ class TaintSourceDiffblueTest {
    * <p>Method under test: {@link TaintSource#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TaintSource.equals(Object)", "int TaintSource.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
     // Arrange
     HashSet<Integer> taintsArgs = new HashSet<>();
     TaintSource taintSource =
@@ -249,11 +237,9 @@ class TaintSourceDiffblueTest {
    * <p>Method under test: {@link TaintSource#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TaintSource.equals(Object)", "int TaintSource.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual4() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual4() {
     // Arrange
     HashSet<Integer> taintsArgs = new HashSet<>();
     taintsArgs.add(2);
@@ -288,11 +274,9 @@ class TaintSourceDiffblueTest {
    * <p>Method under test: {@link TaintSource#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TaintSource.equals(Object)", "int TaintSource.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual5() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual5() {
     // Arrange
     HashSet<String> taintsGlobals = new HashSet<>();
     taintsGlobals.add("foo");
@@ -327,11 +311,9 @@ class TaintSourceDiffblueTest {
    * <p>Method under test: {@link TaintSource#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TaintSource.equals(Object)", "int TaintSource.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange
     HashSet<Integer> taintsArgs = new HashSet<>();
 
@@ -357,11 +339,9 @@ class TaintSourceDiffblueTest {
    * <p>Method under test: {@link TaintSource#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TaintSource.equals(Object)", "int TaintSource.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange
     HashSet<Integer> taintsArgs = new HashSet<>();
 
@@ -382,23 +362,72 @@ class TaintSourceDiffblueTest {
    * <p>Method under test: {@link TaintSource#toString()}
    */
   @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TaintSource.toString()"})
-  void testToString() {
+  public void testToString() {
     // Arrange
     HashSet<Integer> taintsArgs = new HashSet<>();
 
     // Act and Assert
     assertEquals(
-        "[TaintSource] Ljava/lang/ClassLoader;findLoadedClass(Ljava/lang/String;)Ljava/lang/Class;",
-        new TaintSource(
+        "[TaintSource] Ljava/lang/ClassLoader;findLoadedClass(Ljava/lang/String;)Ljava/lang/Class;, taints this,"
+            + " taints return",
+        (new TaintSource(
+                ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE,
+                true,
+                true,
+                taintsArgs,
+                new HashSet<>()))
+            .toString());
+  }
+
+  /**
+   * Test {@link TaintSource#toString()}.
+   *
+   * <p>Method under test: {@link TaintSource#toString()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String TaintSource.toString()"})
+  public void testToString2() {
+    // Arrange
+    HashSet<Integer> taintsArgs = new HashSet<>();
+
+    // Act and Assert
+    assertEquals(
+        "[TaintSource] Ljava/lang/ClassLoader;findLoadedClass(Ljava/lang/String;)Ljava/lang/Class;, taints"
+            + " return",
+        (new TaintSource(
                 ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE,
                 false,
+                true,
+                taintsArgs,
+                new HashSet<>()))
+            .toString());
+  }
+
+  /**
+   * Test {@link TaintSource#toString()}.
+   *
+   * <p>Method under test: {@link TaintSource#toString()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String TaintSource.toString()"})
+  public void testToString3() {
+    // Arrange
+    HashSet<Integer> taintsArgs = new HashSet<>();
+
+    // Act and Assert
+    assertEquals(
+        "[TaintSource] Ljava/lang/ClassLoader;findLoadedClass(Ljava/lang/String;)Ljava/lang/Class;,"
+            + " taints this",
+        (new TaintSource(
+                ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE,
+                true,
                 false,
                 taintsArgs,
-                new HashSet<>())
+                new HashSet<>()))
             .toString());
   }
 
@@ -407,17 +436,14 @@ class TaintSourceDiffblueTest {
    *
    * <ul>
    *   <li>Given {@link HashSet#HashSet()} add {@code [TaintSource]}.
-   *   <li>Then return a string.
    * </ul>
    *
    * <p>Method under test: {@link TaintSource#toString()}
    */
   @Test
-  @DisplayName("Test toString(); given HashSet() add '[TaintSource]'; then return a string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TaintSource.toString()"})
-  void testToString_givenHashSetAddTaintSource_thenReturnAString() {
+  public void testToString_givenHashSetAddTaintSource() {
     // Arrange
     HashSet<String> taintsGlobals = new HashSet<>();
     taintsGlobals.add("[TaintSource] ");
@@ -426,12 +452,12 @@ class TaintSourceDiffblueTest {
     assertEquals(
         "[TaintSource] Ljava/lang/ClassLoader;findLoadedClass(Ljava/lang/String;)Ljava/lang/Class;, taints this,"
             + " taints return, taints globals ([TaintSource] )",
-        new TaintSource(
+        (new TaintSource(
                 ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE,
                 true,
                 true,
                 new HashSet<>(),
-                taintsGlobals)
+                taintsGlobals))
             .toString());
   }
 
@@ -440,17 +466,14 @@ class TaintSourceDiffblueTest {
    *
    * <ul>
    *   <li>Given {@link HashSet#HashSet()} add two.
-   *   <li>Then return a string.
    * </ul>
    *
    * <p>Method under test: {@link TaintSource#toString()}
    */
   @Test
-  @DisplayName("Test toString(); given HashSet() add two; then return a string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TaintSource.toString()"})
-  void testToString_givenHashSetAddTwo_thenReturnAString() {
+  public void testToString_givenHashSetAddTwo() {
     // Arrange
     HashSet<Integer> taintsArgs = new HashSet<>();
     taintsArgs.add(2);
@@ -459,43 +482,12 @@ class TaintSourceDiffblueTest {
     assertEquals(
         "[TaintSource] Ljava/lang/ClassLoader;findLoadedClass(Ljava/lang/String;)Ljava/lang/Class;, taints this,"
             + " taints return, taints args (2)",
-        new TaintSource(
+        (new TaintSource(
                 ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE,
                 true,
                 true,
                 taintsArgs,
-                new HashSet<>())
-            .toString());
-  }
-
-  /**
-   * Test {@link TaintSource#toString()}.
-   *
-   * <ul>
-   *   <li>Then return a string.
-   * </ul>
-   *
-   * <p>Method under test: {@link TaintSource#toString()}
-   */
-  @Test
-  @DisplayName("Test toString(); then return a string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String TaintSource.toString()"})
-  void testToString_thenReturnAString() {
-    // Arrange
-    HashSet<Integer> taintsArgs = new HashSet<>();
-
-    // Act and Assert
-    assertEquals(
-        "[TaintSource] Ljava/lang/ClassLoader;findLoadedClass(Ljava/lang/String;)Ljava/lang/Class;, taints this,"
-            + " taints return",
-        new TaintSource(
-                ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE,
-                true,
-                true,
-                taintsArgs,
-                new HashSet<>())
+                new HashSet<>()))
             .toString());
   }
 }

@@ -1,26 +1,23 @@
 package proguard.classfile.attribute.module;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ExportsInfoDiffblueTest {
+public class ExportsInfoDiffblueTest {
   /**
    * Test {@link ExportsInfo#ExportsInfo()}.
    *
    * <p>Method under test: {@link ExportsInfo#ExportsInfo()}
    */
   @Test
-  @DisplayName("Test new ExportsInfo()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ExportsInfo.<init>()", "void ExportsInfo.<init>(int, int, int, int[])"})
-  void testNewExportsInfo() {
+  public void testNewExportsInfo() {
     // Arrange and Act
     ExportsInfo actualExportsInfo = new ExportsInfo();
 
@@ -39,11 +36,9 @@ class ExportsInfoDiffblueTest {
    * <p>Method under test: {@link ExportsInfo#ExportsInfo(int, int, int, int[])}
    */
   @Test
-  @DisplayName("Test new ExportsInfo(int, int, int, int[]); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ExportsInfo.<init>()", "void ExportsInfo.<init>(int, int, int, int[])"})
-  void testNewExportsInfo_whenOne() {
+  public void testNewExportsInfo_whenOne() {
     // Arrange and Act
     ExportsInfo actualExportsInfo = new ExportsInfo(1, 1, 3, new int[] {1, 0, 1, 0});
 

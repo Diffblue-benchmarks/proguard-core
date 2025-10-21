@@ -1,15 +1,14 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class NameParserDiffblueTest {
+public class NameParserDiffblueTest {
   /**
    * Test {@link NameParser#parse(String)}.
    *
@@ -21,15 +20,12 @@ class NameParserDiffblueTest {
    * <p>Method under test: {@link NameParser#parse(String)}
    */
   @Test
-  @DisplayName(
-      "Test parse(String); given NameParser(WildcardManager) with wildcardManager is WildcardManager()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringMatcher NameParser.parse(String)"})
-  void testParse_givenNameParserWithWildcardManagerIsWildcardManager() {
+  public void testParse_givenNameParserWithWildcardManagerIsWildcardManager() {
     // Arrange and Act
     StringMatcher actualParseResult =
-        new NameParser(new WildcardManager()).parse("Regular Expression");
+        (new NameParser(new WildcardManager())).parse("Regular Expression");
 
     // Assert
     assertTrue(actualParseResult instanceof FixedStringMatcher);
@@ -48,14 +44,11 @@ class NameParserDiffblueTest {
    * <p>Method under test: {@link NameParser#parse(String)}
    */
   @Test
-  @DisplayName(
-      "Test parse(String); given NameParser(); when empty string; then return EmptyStringMatcher")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringMatcher NameParser.parse(String)"})
-  void testParse_givenNameParser_whenEmptyString_thenReturnEmptyStringMatcher() {
+  public void testParse_givenNameParser_whenEmptyString_thenReturnEmptyStringMatcher() {
     // Arrange and Act
-    StringMatcher actualParseResult = new NameParser().parse("");
+    StringMatcher actualParseResult = (new NameParser()).parse("");
 
     // Assert
     assertTrue(actualParseResult instanceof EmptyStringMatcher);
@@ -74,14 +67,11 @@ class NameParserDiffblueTest {
    * <p>Method under test: {@link NameParser#parse(String)}
    */
   @Test
-  @DisplayName(
-      "Test parse(String); given NameParser(); when 'Regular Expression'; then return FixedStringMatcher")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringMatcher NameParser.parse(String)"})
-  void testParse_givenNameParser_whenRegularExpression_thenReturnFixedStringMatcher() {
+  public void testParse_givenNameParser_whenRegularExpression_thenReturnFixedStringMatcher() {
     // Arrange and Act
-    StringMatcher actualParseResult = new NameParser().parse("Regular Expression");
+    StringMatcher actualParseResult = (new NameParser()).parse("Regular Expression");
 
     // Assert
     assertTrue(actualParseResult instanceof FixedStringMatcher);

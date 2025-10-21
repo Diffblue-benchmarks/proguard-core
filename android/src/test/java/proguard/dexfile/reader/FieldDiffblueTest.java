@@ -1,14 +1,13 @@
 package proguard.dexfile.reader;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class FieldDiffblueTest {
+public class FieldDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -23,9 +22,7 @@ class FieldDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void Field.<init>(String, String, String)",
     "String Field.getName()",
@@ -33,7 +30,7 @@ class FieldDiffblueTest {
     "String Field.getType()",
     "String Field.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     Field actualField = new Field("Owner", "Name", "Type");
     String actualToStringResult = actualField.toString();

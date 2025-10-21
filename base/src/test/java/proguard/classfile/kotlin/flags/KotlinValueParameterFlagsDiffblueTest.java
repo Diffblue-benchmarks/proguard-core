@@ -1,25 +1,22 @@
 package proguard.classfile.kotlin.flags;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.Assert.assertFalse;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class KotlinValueParameterFlagsDiffblueTest {
+public class KotlinValueParameterFlagsDiffblueTest {
   /**
    * Test new {@link KotlinValueParameterFlags} (default constructor).
    *
    * <p>Method under test: default or parameterless constructor of {@link KotlinValueParameterFlags}
    */
   @Test
-  @DisplayName("Test new KotlinValueParameterFlags (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void KotlinValueParameterFlags.<init>()"})
-  void testNewKotlinValueParameterFlags() {
+  public void testNewKotlinValueParameterFlags() {
     // Arrange and Act
     KotlinValueParameterFlags actualKotlinValueParameterFlags = new KotlinValueParameterFlags();
 

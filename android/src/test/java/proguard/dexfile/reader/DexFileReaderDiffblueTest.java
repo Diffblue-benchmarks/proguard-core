@@ -1,31 +1,28 @@
 package proguard.dexfile.reader;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.expr.Constant;
 import proguard.dexfile.reader.DexFileReader.BadOpException;
 
-class DexFileReaderDiffblueTest {
+public class DexFileReaderDiffblueTest {
   /**
    * Test BadOpException {@link BadOpException#BadOpException(String, Object[])}.
    *
    * <p>Method under test: {@link BadOpException#BadOpException(String, Object[])}
    */
   @Test
-  @DisplayName("Test BadOpException new BadOpException(String, Object[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void BadOpException.<init>(String, Object[])"})
-  void testBadOpExceptionNewBadOpException() {
+  public void testBadOpExceptionNewBadOpException() {
     // Arrange and Act
     BadOpException actualBadOpException = new BadOpException("Fmt", Constant.Null);
 
@@ -42,11 +39,9 @@ class DexFileReaderDiffblueTest {
    * <p>Method under test: {@link DexFileReader#DexFileReader(byte[])}
    */
   @Test
-  @DisplayName("Test new DexFileReader(byte[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexFileReader.<init>(byte[])"})
-  void testNewDexFileReader() throws UnsupportedEncodingException {
+  public void testNewDexFileReader() throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     assertThrows(DexException.class, () -> new DexFileReader("AXAXAXAX".getBytes("UTF-8")));
   }
@@ -62,12 +57,9 @@ class DexFileReaderDiffblueTest {
    * <p>Method under test: {@link DexFileReader#DexFileReader(ByteBuffer)}
    */
   @Test
-  @DisplayName(
-      "Test new DexFileReader(ByteBuffer); when wrap 'AXAXAXAX' Bytes is 'UTF-8'; then throw DexException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexFileReader.<init>(ByteBuffer)"})
-  void testNewDexFileReader_whenWrapAxaxaxaxBytesIsUtf8_thenThrowDexException()
+  public void testNewDexFileReader_whenWrapAxaxaxaxBytesIsUtf8_thenThrowDexException()
       throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     assertThrows(
@@ -85,12 +77,9 @@ class DexFileReaderDiffblueTest {
    * <p>Method under test: {@link DexFileReader#DexFileReader(ByteBuffer, int)}
    */
   @Test
-  @DisplayName(
-      "Test new DexFileReader(ByteBuffer, int); when wrap 'AXAXAXAX' Bytes is 'UTF-8'; then throw DexException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexFileReader.<init>(ByteBuffer, int)"})
-  void testNewDexFileReader_whenWrapAxaxaxaxBytesIsUtf8_thenThrowDexException2()
+  public void testNewDexFileReader_whenWrapAxaxaxaxBytesIsUtf8_thenThrowDexException2()
       throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     assertThrows(
@@ -109,11 +98,10 @@ class DexFileReaderDiffblueTest {
    * <p>Method under test: {@link DexFileReader#sshort(byte[], int)}
    */
   @Test
-  @DisplayName("Test sshort(byte[], int); when 'AXAXAXAX' Bytes is 'UTF-8'; then return '22593'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int DexFileReader.sshort(byte[], int)"})
-  void testSshort_whenAxaxaxaxBytesIsUtf8_thenReturn22593() throws UnsupportedEncodingException {
+  public void testSshort_whenAxaxaxaxBytesIsUtf8_thenReturn22593()
+      throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     assertEquals(22593, DexFileReader.sshort("AXAXAXAX".getBytes("UTF-8"), 2));
   }
@@ -129,11 +117,10 @@ class DexFileReaderDiffblueTest {
    * <p>Method under test: {@link DexFileReader#ushort(byte[], int)}
    */
   @Test
-  @DisplayName("Test ushort(byte[], int); when 'AXAXAXAX' Bytes is 'UTF-8'; then return '22593'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int DexFileReader.ushort(byte[], int)"})
-  void testUshort_whenAxaxaxaxBytesIsUtf8_thenReturn22593() throws UnsupportedEncodingException {
+  public void testUshort_whenAxaxaxaxBytesIsUtf8_thenReturn22593()
+      throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     assertEquals(22593, DexFileReader.ushort("AXAXAXAX".getBytes("UTF-8"), 2));
   }
@@ -149,11 +136,10 @@ class DexFileReaderDiffblueTest {
    * <p>Method under test: {@link DexFileReader#sint(byte[], int)}
    */
   @Test
-  @DisplayName("Test sint(byte[], int); when 'AXAXAXAX' Bytes is 'UTF-8'; then return '1480677441'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int DexFileReader.sint(byte[], int)"})
-  void testSint_whenAxaxaxaxBytesIsUtf8_thenReturn1480677441() throws UnsupportedEncodingException {
+  public void testSint_whenAxaxaxaxBytesIsUtf8_thenReturn1480677441()
+      throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     assertEquals(1480677441, DexFileReader.sint("AXAXAXAX".getBytes("UTF-8"), 2));
   }
@@ -169,11 +155,10 @@ class DexFileReaderDiffblueTest {
    * <p>Method under test: {@link DexFileReader#uint(byte[], int)}
    */
   @Test
-  @DisplayName("Test uint(byte[], int); when 'AXAXAXAX' Bytes is 'UTF-8'; then return '1480677441'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int DexFileReader.uint(byte[], int)"})
-  void testUint_whenAxaxaxaxBytesIsUtf8_thenReturn1480677441() throws UnsupportedEncodingException {
+  public void testUint_whenAxaxaxaxBytesIsUtf8_thenReturn1480677441()
+      throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     assertEquals(1480677441, DexFileReader.uint("AXAXAXAX".getBytes("UTF-8"), 2));
   }
@@ -189,11 +174,10 @@ class DexFileReaderDiffblueTest {
    * <p>Method under test: {@link DexFileReader#ubyte(byte[], int)}
    */
   @Test
-  @DisplayName("Test ubyte(byte[], int); when 'AXAXAXAX' Bytes is 'UTF-8'; then return sixty-five")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int DexFileReader.ubyte(byte[], int)"})
-  void testUbyte_whenAxaxaxaxBytesIsUtf8_thenReturnSixtyFive() throws UnsupportedEncodingException {
+  public void testUbyte_whenAxaxaxaxBytesIsUtf8_thenReturnSixtyFive()
+      throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     assertEquals(65, DexFileReader.ubyte("AXAXAXAX".getBytes("UTF-8"), 2));
   }
@@ -209,11 +193,10 @@ class DexFileReaderDiffblueTest {
    * <p>Method under test: {@link DexFileReader#sbyte(byte[], int)}
    */
   @Test
-  @DisplayName("Test sbyte(byte[], int); when 'AXAXAXAX' Bytes is 'UTF-8'; then return sixty-five")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int DexFileReader.sbyte(byte[], int)"})
-  void testSbyte_whenAxaxaxaxBytesIsUtf8_thenReturnSixtyFive() throws UnsupportedEncodingException {
+  public void testSbyte_whenAxaxaxaxBytesIsUtf8_thenReturnSixtyFive()
+      throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     assertEquals(65, DexFileReader.sbyte("AXAXAXAX".getBytes("UTF-8"), 2));
   }
@@ -228,12 +211,9 @@ class DexFileReaderDiffblueTest {
    * <p>Method under test: {@link DexFileReader#readULeb128i(ByteBuffer)}
    */
   @Test
-  @DisplayName(
-      "Test readULeb128i(ByteBuffer); then wrap 'AXAXAXAX' Bytes is 'UTF-8' position is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int DexFileReader.readULeb128i(ByteBuffer)"})
-  void testReadULeb128i_thenWrapAxaxaxaxBytesIsUtf8PositionIsOne()
+  public void testReadULeb128i_thenWrapAxaxaxaxBytesIsUtf8PositionIsOne()
       throws UnsupportedEncodingException {
     // Arrange
     ByteBuffer in = ByteBuffer.wrap("AXAXAXAX".getBytes("UTF-8"));
@@ -257,11 +237,9 @@ class DexFileReaderDiffblueTest {
    * <p>Method under test: {@link DexFileReader#readULeb128i(ByteBuffer)}
    */
   @Test
-  @DisplayName("Test readULeb128i(ByteBuffer); when 'A'; then return '11264'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int DexFileReader.readULeb128i(ByteBuffer)"})
-  void testReadULeb128i_whenA_thenReturn11264() {
+  public void testReadULeb128i_whenA_thenReturn11264() {
     // Arrange
     ByteBuffer in = ByteBuffer.wrap(new byte[] {Byte.MIN_VALUE, 'X', 'A', 'X', 'A', 'X', 'A', 'X'});
 
@@ -280,12 +258,9 @@ class DexFileReaderDiffblueTest {
    * <p>Method under test: {@link DexFileReader#readLeb128i(ByteBuffer)}
    */
   @Test
-  @DisplayName(
-      "Test readLeb128i(ByteBuffer); then wrap array of byte with one and 'X' position is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int DexFileReader.readLeb128i(ByteBuffer)"})
-  void testReadLeb128i_thenWrapArrayOfByteWithOneAndXPositionIsOne() {
+  public void testReadLeb128i_thenWrapArrayOfByteWithOneAndXPositionIsOne() {
     // Arrange
     ByteBuffer in = ByteBuffer.wrap(new byte[] {1, 'X', 'A', 'X', 'A', 'X', 'A', 'X'});
 
@@ -308,12 +283,9 @@ class DexFileReaderDiffblueTest {
    * <p>Method under test: {@link DexFileReader#readLeb128i(ByteBuffer)}
    */
   @Test
-  @DisplayName(
-      "Test readLeb128i(ByteBuffer); when wrap array of byte with MIN_VALUE and 'X'; then return '-5120'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int DexFileReader.readLeb128i(ByteBuffer)"})
-  void testReadLeb128i_whenWrapArrayOfByteWithMin_valueAndX_thenReturn5120() {
+  public void testReadLeb128i_whenWrapArrayOfByteWithMin_valueAndX_thenReturn5120() {
     // Arrange
     ByteBuffer in = ByteBuffer.wrap(new byte[] {Byte.MIN_VALUE, 'X', 'A', 'X', 'A', 'X', 'A', 'X'});
 
@@ -333,12 +305,9 @@ class DexFileReaderDiffblueTest {
    * <p>Method under test: {@link DexFileReader#readLeb128i(ByteBuffer)}
    */
   @Test
-  @DisplayName(
-      "Test readLeb128i(ByteBuffer); when wrap 'AXAXAXAX' Bytes is 'UTF-8'; then return minus sixty-three")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int DexFileReader.readLeb128i(ByteBuffer)"})
-  void testReadLeb128i_whenWrapAxaxaxaxBytesIsUtf8_thenReturnMinusSixtyThree()
+  public void testReadLeb128i_whenWrapAxaxaxaxBytesIsUtf8_thenReturnMinusSixtyThree()
       throws UnsupportedEncodingException {
     // Arrange
     ByteBuffer in = ByteBuffer.wrap("AXAXAXAX".getBytes("UTF-8"));

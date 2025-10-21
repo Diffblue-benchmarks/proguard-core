@@ -1,17 +1,16 @@
 package proguard.classfile.constant;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class DoubleConstantDiffblueTest {
+public class DoubleConstantDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -26,9 +25,7 @@ class DoubleConstantDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void DoubleConstant.<init>()",
     "void DoubleConstant.<init>(double)",
@@ -37,7 +34,7 @@ class DoubleConstantDiffblueTest {
     "void DoubleConstant.setValue(double)",
     "String DoubleConstant.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     DoubleConstant actualDoubleConstant = new DoubleConstant();
     actualDoubleConstant.setValue(10.0d);
@@ -49,7 +46,7 @@ class DoubleConstantDiffblueTest {
     assertEquals("Double(10.0)", actualToStringResult);
     assertNull(actualDoubleConstant.getProcessingInfo());
     assertEquals(0, actualDoubleConstant.getProcessingFlags());
-    assertEquals(10.0d, actualValue);
+    assertEquals(10.0d, actualValue, 0.0);
     assertTrue(actualIsCategory2Result);
   }
 
@@ -71,9 +68,7 @@ class DoubleConstantDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters; when ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void DoubleConstant.<init>()",
     "void DoubleConstant.<init>(double)",
@@ -82,7 +77,7 @@ class DoubleConstantDiffblueTest {
     "void DoubleConstant.setValue(double)",
     "String DoubleConstant.toString()"
   })
-  void testGettersAndSetters_whenTen() {
+  public void testGettersAndSetters_whenTen() {
     // Arrange and Act
     DoubleConstant actualDoubleConstant = new DoubleConstant(10.0d);
     actualDoubleConstant.setValue(10.0d);
@@ -94,7 +89,7 @@ class DoubleConstantDiffblueTest {
     assertEquals("Double(10.0)", actualToStringResult);
     assertNull(actualDoubleConstant.getProcessingInfo());
     assertEquals(0, actualDoubleConstant.getProcessingFlags());
-    assertEquals(10.0d, actualValue);
+    assertEquals(10.0d, actualValue, 0.0);
     assertTrue(actualIsCategory2Result);
   }
 
@@ -104,13 +99,11 @@ class DoubleConstantDiffblueTest {
    * <p>Method under test: {@link DoubleConstant#getTag()}
    */
   @Test
-  @DisplayName("Test getTag()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int DoubleConstant.getTag()"})
-  void testGetTag() {
+  public void testGetTag() {
     // Arrange, Act and Assert
-    assertEquals(6, new DoubleConstant(10.0d).getTag());
+    assertEquals(6, (new DoubleConstant(10.0d)).getTag());
   }
 
   /**
@@ -129,18 +122,17 @@ class DoubleConstantDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DoubleConstant.equals(Object)", "int DoubleConstant.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
     DoubleConstant doubleConstant2 = new DoubleConstant(10.0d);
 
     // Act and Assert
     assertEquals(doubleConstant, doubleConstant2);
-    assertEquals(doubleConstant.hashCode(), doubleConstant2.hashCode());
+    int expectedHashCodeResult = doubleConstant.hashCode();
+    assertEquals(expectedHashCodeResult, doubleConstant2.hashCode());
   }
 
   /**
@@ -159,11 +151,9 @@ class DoubleConstantDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DoubleConstant.equals(Object)", "int DoubleConstant.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
 
@@ -184,11 +174,9 @@ class DoubleConstantDiffblueTest {
    * <p>Method under test: {@link DoubleConstant#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DoubleConstant.equals(Object)", "int DoubleConstant.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     DoubleConstant doubleConstant = new DoubleConstant(0.5d);
 
@@ -207,11 +195,9 @@ class DoubleConstantDiffblueTest {
    * <p>Method under test: {@link DoubleConstant#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DoubleConstant.equals(Object)", "int DoubleConstant.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new DoubleConstant(10.0d), null);
   }
@@ -227,11 +213,9 @@ class DoubleConstantDiffblueTest {
    * <p>Method under test: {@link DoubleConstant#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DoubleConstant.equals(Object)", "int DoubleConstant.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new DoubleConstant(10.0d), "Different type to DoubleConstant");
   }

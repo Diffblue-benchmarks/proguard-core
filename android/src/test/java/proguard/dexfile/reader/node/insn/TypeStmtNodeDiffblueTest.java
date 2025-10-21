@@ -1,30 +1,27 @@
 package proguard.dexfile.reader.node.insn;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.reader.Op;
 import proguard.dexfile.reader.node.DexCodeNode;
 import proguard.dexfile.reader.visitors.DexCodeVisitor;
 
-class TypeStmtNodeDiffblueTest {
+public class TypeStmtNodeDiffblueTest {
   /**
    * Test {@link TypeStmtNode#TypeStmtNode(Op, int, int, String)}.
    *
    * <p>Method under test: {@link TypeStmtNode#TypeStmtNode(Op, int, int, String)}
    */
   @Test
-  @DisplayName("Test new TypeStmtNode(Op, int, int, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TypeStmtNode.<init>(Op, int, int, String)"})
-  void testNewTypeStmtNode() {
+  public void testNewTypeStmtNode() {
     // Arrange and Act
     TypeStmtNode actualTypeStmtNode = new TypeStmtNode(Op.NOP, 1, 1, "Type");
 
@@ -47,12 +44,9 @@ class TypeStmtNodeDiffblueTest {
    * <p>Method under test: {@link TypeStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeNode(); then DexCodeNode() stmts size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TypeStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
+  public void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
     // Arrange
     TypeStmtNode typeStmtNode = new TypeStmtNode(Op.NOP, 1, 1, "Type");
     DexCodeNode cv = new DexCodeNode();

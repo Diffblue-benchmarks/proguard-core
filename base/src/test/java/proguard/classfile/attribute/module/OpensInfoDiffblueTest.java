@@ -1,26 +1,23 @@
 package proguard.classfile.attribute.module;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class OpensInfoDiffblueTest {
+public class OpensInfoDiffblueTest {
   /**
    * Test {@link OpensInfo#OpensInfo()}.
    *
    * <p>Method under test: {@link OpensInfo#OpensInfo()}
    */
   @Test
-  @DisplayName("Test new OpensInfo()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void OpensInfo.<init>()", "void OpensInfo.<init>(int, int, int, int[])"})
-  void testNewOpensInfo() {
+  public void testNewOpensInfo() {
     // Arrange and Act
     OpensInfo actualOpensInfo = new OpensInfo();
 
@@ -39,11 +36,9 @@ class OpensInfoDiffblueTest {
    * <p>Method under test: {@link OpensInfo#OpensInfo(int, int, int, int[])}
    */
   @Test
-  @DisplayName("Test new OpensInfo(int, int, int, int[]); when one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void OpensInfo.<init>()", "void OpensInfo.<init>(int, int, int, int[])"})
-  void testNewOpensInfo_whenOne() {
+  public void testNewOpensInfo_whenOne() {
     // Arrange and Act
     OpensInfo actualOpensInfo = new OpensInfo(1, 1, 3, new int[] {1, 0, 1, 0});
 

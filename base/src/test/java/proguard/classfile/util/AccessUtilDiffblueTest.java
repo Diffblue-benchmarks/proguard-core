@@ -1,16 +1,15 @@
 package proguard.classfile.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class AccessUtilDiffblueTest {
+public class AccessUtilDiffblueTest {
   /**
    * Test {@link AccessUtil#accessLevel(int)}.
    *
@@ -22,11 +21,9 @@ class AccessUtilDiffblueTest {
    * <p>Method under test: {@link AccessUtil#accessLevel(int)}
    */
   @Test
-  @DisplayName("Test accessLevel(int); when four; then return two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int AccessUtil.accessLevel(int)"})
-  void testAccessLevel_whenFour_thenReturnTwo() {
+  public void testAccessLevel_whenFour_thenReturnTwo() {
     // Arrange, Act and Assert
     assertEquals(2, AccessUtil.accessLevel(4));
   }
@@ -42,11 +39,9 @@ class AccessUtilDiffblueTest {
    * <p>Method under test: {@link AccessUtil#accessLevel(int)}
    */
   @Test
-  @DisplayName("Test accessLevel(int); when one; then return three")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int AccessUtil.accessLevel(int)"})
-  void testAccessLevel_whenOne_thenReturnThree() {
+  public void testAccessLevel_whenOne_thenReturnThree() {
     // Arrange, Act and Assert
     assertEquals(3, AccessUtil.accessLevel(1));
   }
@@ -62,11 +57,9 @@ class AccessUtilDiffblueTest {
    * <p>Method under test: {@link AccessUtil#accessLevel(int)}
    */
   @Test
-  @DisplayName("Test accessLevel(int); when seven; then return one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int AccessUtil.accessLevel(int)"})
-  void testAccessLevel_whenSeven_thenReturnOne() {
+  public void testAccessLevel_whenSeven_thenReturnOne() {
     // Arrange, Act and Assert
     assertEquals(1, AccessUtil.accessLevel(7));
   }
@@ -82,11 +75,9 @@ class AccessUtilDiffblueTest {
    * <p>Method under test: {@link AccessUtil#accessLevel(int)}
    */
   @Test
-  @DisplayName("Test accessLevel(int); when two; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int AccessUtil.accessLevel(int)"})
-  void testAccessLevel_whenTwo_thenReturnZero() {
+  public void testAccessLevel_whenTwo_thenReturnZero() {
     // Arrange, Act and Assert
     assertEquals(0, AccessUtil.accessLevel(2));
   }
@@ -102,11 +93,9 @@ class AccessUtilDiffblueTest {
    * <p>Method under test: {@link AccessUtil#accessFlags(int)}
    */
   @Test
-  @DisplayName("Test accessFlags(int); when one; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int AccessUtil.accessFlags(int)"})
-  void testAccessFlags_whenOne_thenReturnZero() {
+  public void testAccessFlags_whenOne_thenReturnZero() {
     // Arrange, Act and Assert
     assertEquals(0, AccessUtil.accessFlags(1));
   }
@@ -122,11 +111,9 @@ class AccessUtilDiffblueTest {
    * <p>Method under test: {@link AccessUtil#accessFlags(int)}
    */
   @Test
-  @DisplayName("Test accessFlags(int); when three; then return one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int AccessUtil.accessFlags(int)"})
-  void testAccessFlags_whenThree_thenReturnOne() {
+  public void testAccessFlags_whenThree_thenReturnOne() {
     // Arrange, Act and Assert
     assertEquals(1, AccessUtil.accessFlags(3));
   }
@@ -142,11 +129,9 @@ class AccessUtilDiffblueTest {
    * <p>Method under test: {@link AccessUtil#accessFlags(int)}
    */
   @Test
-  @DisplayName("Test accessFlags(int); when two; then return four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int AccessUtil.accessFlags(int)"})
-  void testAccessFlags_whenTwo_thenReturnFour() {
+  public void testAccessFlags_whenTwo_thenReturnFour() {
     // Arrange, Act and Assert
     assertEquals(4, AccessUtil.accessFlags(2));
   }
@@ -162,11 +147,9 @@ class AccessUtilDiffblueTest {
    * <p>Method under test: {@link AccessUtil#accessFlags(int)}
    */
   @Test
-  @DisplayName("Test accessFlags(int); when zero; then return two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int AccessUtil.accessFlags(int)"})
-  void testAccessFlags_whenZero_thenReturnTwo() {
+  public void testAccessFlags_whenZero_thenReturnTwo() {
     // Arrange, Act and Assert
     assertEquals(2, AccessUtil.accessFlags(0));
   }
@@ -182,11 +165,9 @@ class AccessUtilDiffblueTest {
    * <p>Method under test: {@link AccessUtil#replaceAccessFlags(int, int)}
    */
   @Test
-  @DisplayName("Test replaceAccessFlags(int, int); when minus eight; then return minus five")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int AccessUtil.replaceAccessFlags(int, int)"})
-  void testReplaceAccessFlags_whenMinusEight_thenReturnMinusFive() {
+  public void testReplaceAccessFlags_whenMinusEight_thenReturnMinusFive() {
     // Arrange, Act and Assert
     assertEquals(-5, AccessUtil.replaceAccessFlags(-8, 3));
   }
@@ -202,11 +183,9 @@ class AccessUtilDiffblueTest {
    * <p>Method under test: {@link AccessUtil#replaceAccessFlags(int, int)}
    */
   @Test
-  @DisplayName("Test replaceAccessFlags(int, int); when seven; then return three")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int AccessUtil.replaceAccessFlags(int, int)"})
-  void testReplaceAccessFlags_whenSeven_thenReturnThree() {
+  public void testReplaceAccessFlags_whenSeven_thenReturnThree() {
     // Arrange, Act and Assert
     assertEquals(3, AccessUtil.replaceAccessFlags(7, 3));
   }
@@ -222,11 +201,9 @@ class AccessUtilDiffblueTest {
    * <p>Method under test: {@link AccessUtil#replaceAccessFlags(int, int)}
    */
   @Test
-  @DisplayName("Test replaceAccessFlags(int, int); when three; then return three")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int AccessUtil.replaceAccessFlags(int, int)"})
-  void testReplaceAccessFlags_whenThree_thenReturnThree() {
+  public void testReplaceAccessFlags_whenThree_thenReturnThree() {
     // Arrange, Act and Assert
     assertEquals(3, AccessUtil.replaceAccessFlags(3, 3));
   }
@@ -242,11 +219,9 @@ class AccessUtilDiffblueTest {
    * <p>Method under test: {@link AccessUtil#replaceAccessFlags(int, int)}
    */
   @Test
-  @DisplayName("Test replaceAccessFlags(int, int); when two; then return two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int AccessUtil.replaceAccessFlags(int, int)"})
-  void testReplaceAccessFlags_whenTwo_thenReturnTwo() {
+  public void testReplaceAccessFlags_whenTwo_thenReturnTwo() {
     // Arrange, Act and Assert
     assertEquals(2, AccessUtil.replaceAccessFlags(3, 2));
   }
@@ -262,11 +237,9 @@ class AccessUtilDiffblueTest {
    * <p>Method under test: {@link AccessUtil#accepted(int, int, int)}
    */
   @Test
-  @DisplayName("Test accepted(int, int, int); when minus eight; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AccessUtil.accepted(int, int, int)"})
-  void testAccepted_whenMinusEight_thenReturnFalse() {
+  public void testAccepted_whenMinusEight_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(AccessUtil.accepted(-8, 1, 1));
   }
@@ -282,11 +255,9 @@ class AccessUtilDiffblueTest {
    * <p>Method under test: {@link AccessUtil#accepted(int, int, int)}
    */
   @Test
-  @DisplayName("Test accepted(int, int, int); when minus eight; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AccessUtil.accepted(int, int, int)"})
-  void testAccepted_whenMinusEight_thenReturnFalse2() {
+  public void testAccepted_whenMinusEight_thenReturnFalse2() {
     // Arrange, Act and Assert
     assertFalse(AccessUtil.accepted(1, -8, 1));
   }
@@ -302,11 +273,9 @@ class AccessUtilDiffblueTest {
    * <p>Method under test: {@link AccessUtil#accepted(int, int, int)}
    */
   @Test
-  @DisplayName("Test accepted(int, int, int); when minus eight; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AccessUtil.accepted(int, int, int)"})
-  void testAccepted_whenMinusEight_thenReturnTrue() {
+  public void testAccepted_whenMinusEight_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(AccessUtil.accepted(1, 1, -8));
   }
@@ -322,11 +291,9 @@ class AccessUtilDiffblueTest {
    * <p>Method under test: {@link AccessUtil#accepted(int, int, int)}
    */
   @Test
-  @DisplayName("Test accepted(int, int, int); when minus eight; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AccessUtil.accepted(int, int, int)"})
-  void testAccepted_whenMinusEight_thenReturnTrue2() {
+  public void testAccepted_whenMinusEight_thenReturnTrue2() {
     // Arrange, Act and Assert
     assertTrue(AccessUtil.accepted(-8, -8, 1));
   }
@@ -342,11 +309,9 @@ class AccessUtilDiffblueTest {
    * <p>Method under test: {@link AccessUtil#accepted(int, int, int)}
    */
   @Test
-  @DisplayName("Test accepted(int, int, int); when one; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AccessUtil.accepted(int, int, int)"})
-  void testAccepted_whenOne_thenReturnFalse() {
+  public void testAccepted_whenOne_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(AccessUtil.accepted(1, 1, 1));
   }

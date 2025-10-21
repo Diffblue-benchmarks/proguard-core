@@ -1,18 +1,17 @@
 package proguard.evaluation.util.jsonprinter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class InstructionEvaluationRecordDiffblueTest {
+public class InstructionEvaluationRecordDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -35,9 +34,7 @@ class InstructionEvaluationRecordDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void InstructionEvaluationRecord.<init>(Boolean, Boolean, Integer, String, Integer, List, List)",
     "int InstructionEvaluationRecord.getEvaluationCount()",
@@ -52,7 +49,7 @@ class InstructionEvaluationRecordDiffblueTest {
     "void InstructionEvaluationRecord.setJsrBlockEvaluations(List)",
     "void InstructionEvaluationRecord.setUpdatedEvaluationStack(List)"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     ArrayList<String> variablesBefore = new ArrayList<>();
     ArrayList<String> stackBefore = new ArrayList<>();
@@ -95,215 +92,6 @@ class InstructionEvaluationRecordDiffblueTest {
 
   /**
    * Test {@link InstructionEvaluationRecord#toJson(StringBuilder)}.
-   *
-   * <p>Method under test: {@link InstructionEvaluationRecord#toJson(StringBuilder)}
-   */
-  @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"StringBuilder InstructionEvaluationRecord.toJson(StringBuilder)"})
-  void testToJson() {
-    // Arrange
-    ArrayList<String> variablesBefore = new ArrayList<>();
-    InstructionEvaluationRecord instructionEvaluationRecord =
-        new InstructionEvaluationRecord(
-            true, true, 3, "Instruction", 1, variablesBefore, new ArrayList<>());
-    StringBuilder builder = new StringBuilder("foo");
-
-    // Act
-    StringBuilder actualToJsonResult = instructionEvaluationRecord.toJson(builder);
-
-    // Assert
-    assertEquals(
-        "foo{\"skipEvaluation\":true,\"isGeneralization\":true,\"evaluationCount\":3,\"instruction\":\"Instruction\","
-            + "\"instructionOffset\":1,\"variablesBefore\":[],\"stackBefore\":[]}",
-        builder.toString());
-    assertSame(builder, actualToJsonResult);
-  }
-
-  /**
-   * Test {@link InstructionEvaluationRecord#toJson(StringBuilder)}.
-   *
-   * <p>Method under test: {@link InstructionEvaluationRecord#toJson(StringBuilder)}
-   */
-  @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"StringBuilder InstructionEvaluationRecord.toJson(StringBuilder)"})
-  void testToJson2() {
-    // Arrange
-    ArrayList<String> variablesBefore = new ArrayList<>();
-
-    InstructionEvaluationRecord instructionEvaluationRecord =
-        new InstructionEvaluationRecord(
-            true, true, 3, "Instruction", 1, variablesBefore, new ArrayList<>());
-    instructionEvaluationRecord.setUpdatedEvaluationStack(new ArrayList<>());
-    StringBuilder builder = new StringBuilder("foo");
-
-    // Act
-    StringBuilder actualToJsonResult = instructionEvaluationRecord.toJson(builder);
-
-    // Assert
-    assertEquals(
-        "foo{\"skipEvaluation\":true,\"isGeneralization\":true,\"evaluationCount\":3,\"instruction\":\"Instruction\","
-            + "\"instructionOffset\":1,\"variablesBefore\":[],\"stackBefore\":[],\"updatedEvaluationStack\":[]}",
-        builder.toString());
-    assertSame(builder, actualToJsonResult);
-  }
-
-  /**
-   * Test {@link InstructionEvaluationRecord#toJson(StringBuilder)}.
-   *
-   * <p>Method under test: {@link InstructionEvaluationRecord#toJson(StringBuilder)}
-   */
-  @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"StringBuilder InstructionEvaluationRecord.toJson(StringBuilder)"})
-  void testToJson3() {
-    // Arrange
-    ArrayList<String> variablesBefore = new ArrayList<>();
-
-    InstructionEvaluationRecord instructionEvaluationRecord =
-        new InstructionEvaluationRecord(
-            true, true, 3, "Instruction", 1, variablesBefore, new ArrayList<>());
-    instructionEvaluationRecord.setJsrBlockEvaluations(new ArrayList<>());
-    StringBuilder builder = new StringBuilder("foo");
-
-    // Act
-    StringBuilder actualToJsonResult = instructionEvaluationRecord.toJson(builder);
-
-    // Assert
-    assertEquals(
-        "foo{\"skipEvaluation\":true,\"isGeneralization\":true,\"evaluationCount\":3,\"instruction\":\"Instruction\","
-            + "\"instructionOffset\":1,\"variablesBefore\":[],\"stackBefore\":[],\"jsrBlockEvaluations\":[]}",
-        builder.toString());
-    assertSame(builder, actualToJsonResult);
-  }
-
-  /**
-   * Test {@link InstructionEvaluationRecord#toJson(StringBuilder)}.
-   *
-   * <p>Method under test: {@link InstructionEvaluationRecord#toJson(StringBuilder)}
-   */
-  @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"StringBuilder InstructionEvaluationRecord.toJson(StringBuilder)"})
-  void testToJson4() {
-    // Arrange
-    ArrayList<BranchTargetRecord> updatedEvaluationStack = new ArrayList<>();
-    ArrayList<String> variables = new ArrayList<>();
-    BranchTargetRecord branchTargetRecord = new BranchTargetRecord(variables, new ArrayList<>(), 1);
-    updatedEvaluationStack.add(branchTargetRecord);
-    ArrayList<String> variablesBefore = new ArrayList<>();
-
-    InstructionEvaluationRecord instructionEvaluationRecord =
-        new InstructionEvaluationRecord(
-            true, true, 3, "Instruction", 1, variablesBefore, new ArrayList<>());
-    instructionEvaluationRecord.setUpdatedEvaluationStack(updatedEvaluationStack);
-    StringBuilder builder = new StringBuilder("foo");
-
-    // Act
-    StringBuilder actualToJsonResult = instructionEvaluationRecord.toJson(builder);
-
-    // Assert
-    assertEquals(
-        "foo{\"skipEvaluation\":true,\"isGeneralization\":true,\"evaluationCount\":3,\"instruction\":\"Instruction\","
-            + "\"instructionOffset\":1,\"variablesBefore\":[],\"stackBefore\":[],\"updatedEvaluationStack\":[{\"startOffset\""
-            + ":1,\"startStack\":[],\"startVariables\":[]}]}",
-        builder.toString());
-    assertSame(builder, actualToJsonResult);
-  }
-
-  /**
-   * Test {@link InstructionEvaluationRecord#toJson(StringBuilder)}.
-   *
-   * <p>Method under test: {@link InstructionEvaluationRecord#toJson(StringBuilder)}
-   */
-  @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"StringBuilder InstructionEvaluationRecord.toJson(StringBuilder)"})
-  void testToJson5() {
-    // Arrange
-    ArrayList<BranchTargetRecord> updatedEvaluationStack = new ArrayList<>();
-    ArrayList<String> variables = new ArrayList<>();
-    BranchTargetRecord branchTargetRecord = new BranchTargetRecord(variables, new ArrayList<>(), 1);
-    updatedEvaluationStack.add(branchTargetRecord);
-    ArrayList<String> variables2 = new ArrayList<>();
-    BranchTargetRecord branchTargetRecord2 =
-        new BranchTargetRecord(variables2, new ArrayList<>(), 1);
-    updatedEvaluationStack.add(branchTargetRecord2);
-    ArrayList<String> variablesBefore = new ArrayList<>();
-
-    InstructionEvaluationRecord instructionEvaluationRecord =
-        new InstructionEvaluationRecord(
-            true, true, 3, "Instruction", 1, variablesBefore, new ArrayList<>());
-    instructionEvaluationRecord.setUpdatedEvaluationStack(updatedEvaluationStack);
-    StringBuilder builder = new StringBuilder("foo");
-
-    // Act
-    StringBuilder actualToJsonResult = instructionEvaluationRecord.toJson(builder);
-
-    // Assert
-    assertEquals(
-        "foo{\"skipEvaluation\":true,\"isGeneralization\":true,\"evaluationCount\":3,\"instruction\":\"Instruction\","
-            + "\"instructionOffset\":1,\"variablesBefore\":[],\"stackBefore\":[],\"updatedEvaluationStack\":[{\"startOffset\""
-            + ":1,\"startStack\":[],\"startVariables\":[]},{\"startOffset\":1,\"startStack\":[],\"startVariables\":[]}]}",
-        builder.toString());
-    assertSame(builder, actualToJsonResult);
-  }
-
-  /**
-   * Test {@link InstructionEvaluationRecord#toJson(StringBuilder)}.
-   *
-   * <p>Method under test: {@link InstructionEvaluationRecord#toJson(StringBuilder)}
-   */
-  @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"StringBuilder InstructionEvaluationRecord.toJson(StringBuilder)"})
-  void testToJson6() {
-    // Arrange
-    ArrayList<InstructionBlockEvaluationRecord> jsrBlockEvaluations = new ArrayList<>();
-    ArrayList<String> startVariables = new ArrayList<>();
-    ArrayList<String> startStack = new ArrayList<>();
-    ExceptionHandlerRecord exceptionHandlerInfo = new ExceptionHandlerRecord(1, 1, 1, "{");
-
-    InstructionBlockEvaluationRecord instructionBlockEvaluationRecord =
-        new InstructionBlockEvaluationRecord(
-            startVariables, startStack, 1, exceptionHandlerInfo, new ArrayList<>());
-    jsrBlockEvaluations.add(instructionBlockEvaluationRecord);
-    ArrayList<String> variablesBefore = new ArrayList<>();
-
-    InstructionEvaluationRecord instructionEvaluationRecord =
-        new InstructionEvaluationRecord(
-            true, true, 3, "Instruction", 1, variablesBefore, new ArrayList<>());
-    instructionEvaluationRecord.setJsrBlockEvaluations(jsrBlockEvaluations);
-    StringBuilder builder = new StringBuilder("foo");
-
-    // Act
-    StringBuilder actualToJsonResult = instructionEvaluationRecord.toJson(builder);
-
-    // Assert
-    assertEquals(
-        "foo{\"skipEvaluation\":true,\"isGeneralization\":true,\"evaluationCount\":3,\"instruction\":\"Instruction\","
-            + "\"instructionOffset\":1,\"variablesBefore\":[],\"stackBefore\":[],\"jsrBlockEvaluations\":[{\"startOffset\":1,"
-            + "\"evaluations\":[],\"branchEvaluationStack\":[],\"exceptionHandlerInfo\":{\"catchStartOffset\":1,\"catchEndOffset"
-            + "\":1,\"handlerStartOffset\":1,\"catchType\":\"{\"},\"startVariables\":[],\"startStack\":[]}]}",
-        builder.toString());
-    assertSame(builder, actualToJsonResult);
-  }
-
-  /**
-   * Test {@link InstructionEvaluationRecord#toJson(StringBuilder)}.
    * <ul>
    *   <li>Given {@link ArrayList#ArrayList()} add {@code {}.</li>
    * </ul>
@@ -311,11 +99,9 @@ class InstructionEvaluationRecordDiffblueTest {
    * Method under test: {@link InstructionEvaluationRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder); given ArrayList() add '{'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder InstructionEvaluationRecord.toJson(StringBuilder)"})
-  void testToJson_givenArrayListAddLeftCurlyBracket() {
+  public void testToJson_givenArrayListAddLeftCurlyBracket() {
     // Arrange
     ArrayList<String> variablesBefore = new ArrayList<>();
     variablesBefore.add("{");
@@ -345,11 +131,9 @@ class InstructionEvaluationRecordDiffblueTest {
    * <p>Method under test: {@link InstructionEvaluationRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder); given ArrayList() add 'skipEvaluation'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder InstructionEvaluationRecord.toJson(StringBuilder)"})
-  void testToJson_givenArrayListAddSkipEvaluation() {
+  public void testToJson_givenArrayListAddSkipEvaluation() {
     // Arrange
     ArrayList<String> variablesBefore = new ArrayList<>();
     variablesBefore.add("skipEvaluation");
@@ -366,6 +150,38 @@ class InstructionEvaluationRecordDiffblueTest {
     assertEquals(
         "foo{\"skipEvaluation\":true,\"isGeneralization\":true,\"evaluationCount\":3,\"instruction\":\"Instruction\","
             + "\"instructionOffset\":1,\"variablesBefore\":[\"skipEvaluation\",\"{\"],\"stackBefore\":[]}",
+        builder.toString());
+    assertSame(builder, actualToJsonResult);
+  }
+
+  /**
+   * Test {@link InstructionEvaluationRecord#toJson(StringBuilder)}.
+   *
+   * <ul>
+   *   <li>When {@link StringBuilder#StringBuilder(String)} with {@code foo}.
+   *   <li>Then {@link StringBuilder#StringBuilder(String)} with {@code foo} toString is a string.
+   * </ul>
+   *
+   * <p>Method under test: {@link InstructionEvaluationRecord#toJson(StringBuilder)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"StringBuilder InstructionEvaluationRecord.toJson(StringBuilder)"})
+  public void testToJson_whenStringBuilderWithFoo_thenStringBuilderWithFooToStringIsAString() {
+    // Arrange
+    ArrayList<String> variablesBefore = new ArrayList<>();
+    InstructionEvaluationRecord instructionEvaluationRecord =
+        new InstructionEvaluationRecord(
+            true, true, 3, "Instruction", 1, variablesBefore, new ArrayList<>());
+    StringBuilder builder = new StringBuilder("foo");
+
+    // Act
+    StringBuilder actualToJsonResult = instructionEvaluationRecord.toJson(builder);
+
+    // Assert
+    assertEquals(
+        "foo{\"skipEvaluation\":true,\"isGeneralization\":true,\"evaluationCount\":3,\"instruction\":\"Instruction\","
+            + "\"instructionOffset\":1,\"variablesBefore\":[],\"stackBefore\":[]}",
         builder.toString());
     assertSame(builder, actualToJsonResult);
   }

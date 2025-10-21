@@ -1,15 +1,14 @@
 package proguard.io;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class DataEntryDirectoryFilterDiffblueTest {
+public class DataEntryDirectoryFilterDiffblueTest {
   /**
    * Test {@link DataEntryDirectoryFilter#accepts(DataEntry)}.
    *
@@ -20,20 +19,16 @@ class DataEntryDirectoryFilterDiffblueTest {
    * <p>Method under test: {@link DataEntryDirectoryFilter#accepts(DataEntry)}
    */
   @Test
-  @DisplayName("Test accepts(DataEntry); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DataEntryDirectoryFilter.accepts(DataEntry)"})
-  void testAccepts_thenReturnTrue() {
+  public void testAccepts_thenReturnTrue() {
     // Arrange
     DataEntryDirectoryFilter dataEntryDirectoryFilter = new DataEntryDirectoryFilter();
-    DummyDataEntry dataEntry = new DummyDataEntry(new ClassPathDataEntry("Name"), "Name", 3L, true);
 
-    // Act
-    boolean actualAcceptsResult = dataEntryDirectoryFilter.accepts(dataEntry);
-
-    // Assert
-    assertTrue(actualAcceptsResult);
+    // Act and Assert
+    assertTrue(
+        dataEntryDirectoryFilter.accepts(
+            new DummyDataEntry(new ClassPathDataEntry("Name"), "Name", 3L, true)));
   }
 
   /**
@@ -47,20 +42,14 @@ class DataEntryDirectoryFilterDiffblueTest {
    * <p>Method under test: {@link DataEntryDirectoryFilter#accepts(DataEntry)}
    */
   @Test
-  @DisplayName(
-      "Test accepts(DataEntry); when ClassPathDataEntry(String) with 'Name'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DataEntryDirectoryFilter.accepts(DataEntry)"})
-  void testAccepts_whenClassPathDataEntryWithName_thenReturnFalse() {
+  public void testAccepts_whenClassPathDataEntryWithName_thenReturnFalse() {
     // Arrange
     DataEntryDirectoryFilter dataEntryDirectoryFilter = new DataEntryDirectoryFilter();
 
-    // Act
-    boolean actualAcceptsResult = dataEntryDirectoryFilter.accepts(new ClassPathDataEntry("Name"));
-
-    // Assert
-    assertFalse(actualAcceptsResult);
+    // Act and Assert
+    assertFalse(dataEntryDirectoryFilter.accepts(new ClassPathDataEntry("Name")));
   }
 
   /**
@@ -74,12 +63,10 @@ class DataEntryDirectoryFilterDiffblueTest {
    * <p>Method under test: {@link DataEntryDirectoryFilter#accepts(DataEntry)}
    */
   @Test
-  @DisplayName("Test accepts(DataEntry); when 'null'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DataEntryDirectoryFilter.accepts(DataEntry)"})
-  void testAccepts_whenNull_thenReturnFalse() {
+  public void testAccepts_whenNull_thenReturnFalse() {
     // Arrange, Act and Assert
-    assertFalse(new DataEntryDirectoryFilter().accepts(null));
+    assertFalse((new DataEntryDirectoryFilter()).accepts(null));
   }
 }

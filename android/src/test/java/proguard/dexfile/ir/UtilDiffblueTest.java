@@ -1,18 +1,17 @@
 package proguard.dexfile.ir;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class UtilDiffblueTest {
+public class UtilDiffblueTest {
   /**
    * Test {@link Util#listDesc(String)}.
    *
@@ -24,11 +23,9 @@ class UtilDiffblueTest {
    * <p>Method under test: {@link Util#listDesc(String)}
    */
   @Test
-  @DisplayName("Test listDesc(String); when empty string; then return Empty")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"List Util.listDesc(String)"})
-  void testListDesc_whenEmptyString_thenReturnEmpty() {
+  public void testListDesc_whenEmptyString_thenReturnEmpty() {
     // Arrange and Act
     List<String> actualListDescResult = Util.listDesc("");
 
@@ -48,12 +45,9 @@ class UtilDiffblueTest {
    * <p>Method under test: {@link Util#appendString(StringBuffer, String)}
    */
   @Test
-  @DisplayName(
-      "Test appendString(StringBuffer, String); when '\\\"'; then StringBuffer(String) with 'foo' toString is 'foo\"\\\\\\\"\"'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Util.appendString(StringBuffer, String)"})
-  void testAppendString_whenBackslashQuotationMark_thenStringBufferWithFooToStringIsFoo() {
+  public void testAppendString_whenBackslashQuotationMark_thenStringBufferWithFooToStringIsFoo() {
     // Arrange
     StringBuffer buf = new StringBuffer("foo");
 
@@ -76,12 +70,9 @@ class UtilDiffblueTest {
    * <p>Method under test: {@link Util#appendString(StringBuffer, String)}
    */
   @Test
-  @DisplayName(
-      "Test appendString(StringBuffer, String); when StringBuffer(String) with 'foo'; then StringBuffer(String) with 'foo' toString is 'foo\"foo\"'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Util.appendString(StringBuffer, String)"})
-  void testAppendString_whenStringBufferWithFoo_thenStringBufferWithFooToStringIsFooFoo() {
+  public void testAppendString_whenStringBufferWithFoo_thenStringBufferWithFooToStringIsFooFoo() {
     // Arrange
     StringBuffer buf = new StringBuffer("foo");
 
@@ -102,11 +93,9 @@ class UtilDiffblueTest {
    * <p>Method under test: {@link Util#toShortClassName(String)}
    */
   @Test
-  @DisplayName("Test toShortClassName(String); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String Util.toShortClassName(String)"})
-  void testToShortClassName_thenThrowUnsupportedOperationException() {
+  public void testToShortClassName_thenThrowUnsupportedOperationException() {
     // Arrange, Act and Assert
     assertThrows(
         UnsupportedOperationException.class,
@@ -124,11 +113,9 @@ class UtilDiffblueTest {
    * <p>Method under test: {@link Util#toShortClassName(String)}
    */
   @Test
-  @DisplayName("Test toShortClassName(String); when 'Desc'; then return 'double'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String Util.toShortClassName(String)"})
-  void testToShortClassName_whenDesc_thenReturnDouble() {
+  public void testToShortClassName_whenDesc_thenReturnDouble() {
     // Arrange, Act and Assert
     assertEquals("double", Util.toShortClassName("Desc"));
   }
@@ -144,11 +131,9 @@ class UtilDiffblueTest {
    * <p>Method under test: {@link Util#toShortClassName(String)}
    */
   @Test
-  @DisplayName("Test toShortClassName(String); when empty string; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String Util.toShortClassName(String)"})
-  void testToShortClassName_whenEmptyString_thenReturnEmptyString() {
+  public void testToShortClassName_whenEmptyString_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", Util.toShortClassName(""));
   }
@@ -164,11 +149,9 @@ class UtilDiffblueTest {
    * <p>Method under test: {@link Util#toShortClassName(String)}
    */
   @Test
-  @DisplayName("Test toShortClassName(String); when 'null'; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String Util.toShortClassName(String)"})
-  void testToShortClassName_whenNull_thenReturnEmptyString() {
+  public void testToShortClassName_whenNull_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", Util.toShortClassName(null));
   }
@@ -184,11 +167,9 @@ class UtilDiffblueTest {
    * <p>Method under test: {@link Util#isMemoryLimitReached(long)}
    */
   @Test
-  @DisplayName("Test isMemoryLimitReached(long); when MAX_VALUE; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Util.isMemoryLimitReached(long)"})
-  void testIsMemoryLimitReached_whenMax_value_thenReturnTrue() {
+  public void testIsMemoryLimitReached_whenMax_value_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(Util.isMemoryLimitReached(Long.MAX_VALUE));
   }
@@ -204,11 +185,9 @@ class UtilDiffblueTest {
    * <p>Method under test: {@link Util#isMemoryLimitReached(long)}
    */
   @Test
-  @DisplayName("Test isMemoryLimitReached(long); when one; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Util.isMemoryLimitReached(long)"})
-  void testIsMemoryLimitReached_whenOne_thenReturnFalse() {
+  public void testIsMemoryLimitReached_whenOne_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(Util.isMemoryLimitReached(1L));
   }
@@ -224,11 +203,9 @@ class UtilDiffblueTest {
    * <p>Method under test: {@link Util#isMemoryLimitReached(long)}
    */
   @Test
-  @DisplayName("Test isMemoryLimitReached(long); when zero; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Util.isMemoryLimitReached(long)"})
-  void testIsMemoryLimitReached_whenZero_thenReturnFalse() {
+  public void testIsMemoryLimitReached_whenZero_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(Util.isMemoryLimitReached(0L));
   }

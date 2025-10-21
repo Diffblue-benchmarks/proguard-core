@@ -1,16 +1,15 @@
 package proguard.evaluation.exception;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.evaluation.TracedVariables;
 
-class VariablesGeneralizationExceptionDiffblueTest {
+public class VariablesGeneralizationExceptionDiffblueTest {
   /**
    * Test {@link VariablesGeneralizationException#VariablesGeneralizationException(Throwable,
    * TracedVariables, TracedVariables)}.
@@ -20,14 +19,11 @@ class VariablesGeneralizationExceptionDiffblueTest {
    * TracedVariables)}
    */
   @Test
-  @DisplayName(
-      "Test new VariablesGeneralizationException(Throwable, TracedVariables, TracedVariables)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void VariablesGeneralizationException.<init>(Throwable, TracedVariables, TracedVariables)"
   })
-  void testNewVariablesGeneralizationException() {
+  public void testNewVariablesGeneralizationException() {
     // Arrange
     Throwable cause = new Throwable();
     TracedVariables first = new TracedVariables(3);
@@ -52,5 +48,37 @@ class VariablesGeneralizationExceptionDiffblueTest {
     assertSame(cause, actualVariablesGeneralizationException.getCause());
     assertSame(first, actualVariablesGeneralizationException.getFirst());
     assertSame(second, actualVariablesGeneralizationException.getSecond());
+  }
+
+  /**
+   * Test getters and setters.
+   *
+   * <p>Methods under test:
+   *
+   * <ul>
+   *   <li>{@link VariablesGeneralizationException#getFirst()}
+   *   <li>{@link VariablesGeneralizationException#getSecond()}
+   * </ul>
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "TracedVariables VariablesGeneralizationException.getFirst()",
+    "TracedVariables VariablesGeneralizationException.getSecond()"
+  })
+  public void testGettersAndSetters() {
+    // Arrange
+    Throwable cause = new Throwable();
+    TracedVariables first = new TracedVariables(3);
+    TracedVariables second = new TracedVariables(3);
+    VariablesGeneralizationException variablesGeneralizationException =
+        new VariablesGeneralizationException(cause, first, second);
+
+    // Act
+    TracedVariables actualFirst = variablesGeneralizationException.getFirst();
+
+    // Assert
+    assertSame(first, actualFirst);
+    assertSame(second, variablesGeneralizationException.getSecond());
   }
 }

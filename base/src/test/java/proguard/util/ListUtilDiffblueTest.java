@@ -1,22 +1,21 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ListUtilDiffblueTest {
+public class ListUtilDiffblueTest {
   /**
    * Test {@link ListUtil#concatenate(List, List)}.
    *
@@ -29,12 +28,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#concatenate(List, List)}
    */
   @Test
-  @DisplayName(
-      "Test concatenate(List, List); given '42'; when ArrayList() add '42'; then return ArrayList()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"List ListUtil.concatenate(List, List)"})
-  void testConcatenate_given42_whenArrayListAdd42_thenReturnArrayList() {
+  public void testConcatenate_given42_whenArrayListAdd42_thenReturnArrayList() {
     // Arrange
     ArrayList<Object> list1 = new ArrayList<>();
     list1.add("42");
@@ -58,12 +54,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#concatenate(List, List)}
    */
   @Test
-  @DisplayName(
-      "Test concatenate(List, List); given '42'; when ArrayList() add '42'; then return ArrayList()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"List ListUtil.concatenate(List, List)"})
-  void testConcatenate_given42_whenArrayListAdd42_thenReturnArrayList2() {
+  public void testConcatenate_given42_whenArrayListAdd42_thenReturnArrayList2() {
     // Arrange
     ArrayList<Object> list1 = new ArrayList<>();
     list1.add("42");
@@ -88,12 +81,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#concatenate(List, List)}
    */
   @Test
-  @DisplayName(
-      "Test concatenate(List, List); given '42'; when ArrayList() add '42'; then return size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"List ListUtil.concatenate(List, List)"})
-  void testConcatenate_given42_whenArrayListAdd42_thenReturnSizeIsOne() {
+  public void testConcatenate_given42_whenArrayListAdd42_thenReturnSizeIsOne() {
     // Arrange
     ArrayList<Object> list1 = new ArrayList<>();
 
@@ -120,12 +110,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#concatenate(List, List)}
    */
   @Test
-  @DisplayName(
-      "Test concatenate(List, List); given '42'; when ArrayList() add '42'; then return size is two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"List ListUtil.concatenate(List, List)"})
-  void testConcatenate_given42_whenArrayListAdd42_thenReturnSizeIsTwo() {
+  public void testConcatenate_given42_whenArrayListAdd42_thenReturnSizeIsTwo() {
     // Arrange
     ArrayList<Object> list1 = new ArrayList<>();
 
@@ -153,11 +140,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#concatenate(List, List)}
    */
   @Test
-  @DisplayName("Test concatenate(List, List); when ArrayList(); then return Empty")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"List ListUtil.concatenate(List, List)"})
-  void testConcatenate_whenArrayList_thenReturnEmpty() {
+  public void testConcatenate_whenArrayList_thenReturnEmpty() {
     // Arrange
     ArrayList<Object> list1 = new ArrayList<>();
 
@@ -179,11 +164,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#concatenate(List, List)}
    */
   @Test
-  @DisplayName("Test concatenate(List, List); when 'null'; then return Empty")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"List ListUtil.concatenate(List, List)"})
-  void testConcatenate_whenNull_thenReturnEmpty() {
+  public void testConcatenate_whenNull_thenReturnEmpty() {
     // Arrange and Act
     List<Object> actualConcatenateResult = ListUtil.concatenate(new ArrayList<>(), null);
 
@@ -202,11 +185,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#concatenate(List, List)}
    */
   @Test
-  @DisplayName("Test concatenate(List, List); when 'null'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"List ListUtil.concatenate(List, List)"})
-  void testConcatenate_whenNull_thenReturnNull() {
+  public void testConcatenate_whenNull_thenReturnNull() {
     // Arrange and Act
     List<Object> actualConcatenateResult = ListUtil.concatenate(null, null);
 
@@ -226,12 +207,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#filter(Collection, StringMatcher)}
    */
   @Test
-  @DisplayName(
-      "Test filter(Collection, StringMatcher); given '42'; when ArrayList() add '42'; then return size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"List ListUtil.filter(Collection, StringMatcher)"})
-  void testFilter_given42_whenArrayListAdd42_thenReturnSizeIsOne() {
+  public void testFilter_given42_whenArrayListAdd42_thenReturnSizeIsOne() {
     // Arrange
     ArrayList<String> list = new ArrayList<>();
     list.add("42");
@@ -257,12 +235,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#filter(Collection, StringMatcher)}
    */
   @Test
-  @DisplayName(
-      "Test filter(Collection, StringMatcher); given empty string; when ArrayList() add empty string; then return ArrayList()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"List ListUtil.filter(Collection, StringMatcher)"})
-  void testFilter_givenEmptyString_whenArrayListAddEmptyString_thenReturnArrayList() {
+  public void testFilter_givenEmptyString_whenArrayListAddEmptyString_thenReturnArrayList() {
     // Arrange
     ArrayList<String> list = new ArrayList<>();
     list.add("");
@@ -286,12 +261,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#filter(Collection, StringMatcher)}
    */
   @Test
-  @DisplayName(
-      "Test filter(Collection, StringMatcher); given 'foo'; when ArrayList() add 'foo'; then return Empty")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"List ListUtil.filter(Collection, StringMatcher)"})
-  void testFilter_givenFoo_whenArrayListAddFoo_thenReturnEmpty() {
+  public void testFilter_givenFoo_whenArrayListAddFoo_thenReturnEmpty() {
     // Arrange
     ArrayList<String> list = new ArrayList<>();
     list.add("foo");
@@ -315,12 +287,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#filter(Collection, StringMatcher)}
    */
   @Test
-  @DisplayName(
-      "Test filter(Collection, StringMatcher); given 'List'; when LinkedHashSet() add 'List'; then return Empty")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"List ListUtil.filter(Collection, StringMatcher)"})
-  void testFilter_givenList_whenLinkedHashSetAddList_thenReturnEmpty() {
+  public void testFilter_givenList_whenLinkedHashSetAddList_thenReturnEmpty() {
     // Arrange
     LinkedHashSet<String> list = new LinkedHashSet<>();
     list.add("List");
@@ -343,11 +312,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#filter(Collection, StringMatcher)}
    */
   @Test
-  @DisplayName("Test filter(Collection, StringMatcher); when ArrayList(); then return Empty")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"List ListUtil.filter(Collection, StringMatcher)"})
-  void testFilter_whenArrayList_thenReturnEmpty() {
+  public void testFilter_whenArrayList_thenReturnEmpty() {
     // Arrange
     ArrayList<String> list = new ArrayList<>();
 
@@ -364,11 +331,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#commaSeparatedString(List, boolean)}
    */
   @Test
-  @DisplayName("Test commaSeparatedString(List, boolean)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ListUtil.commaSeparatedString(List, boolean)"})
-  void testCommaSeparatedString() {
+  public void testCommaSeparatedString() {
     // Arrange
     ArrayList<String> list = new ArrayList<>();
     list.add("List");
@@ -408,12 +373,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#commaSeparatedString(List, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test commaSeparatedString(List, boolean); given '42'; when ArrayList() add '42'; then return '42,foo'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ListUtil.commaSeparatedString(List, boolean)"})
-  void testCommaSeparatedString_given42_whenArrayListAdd42_thenReturn42Foo() {
+  public void testCommaSeparatedString_given42_whenArrayListAdd42_thenReturn42Foo() {
     // Arrange
     ArrayList<String> list = new ArrayList<>();
     list.add("42");
@@ -428,26 +390,21 @@ class ListUtilDiffblueTest {
    *
    * <ul>
    *   <li>Given empty string.
-   *   <li>Then return {@code '',42,foo}.
+   *   <li>Then return {@code ''}.
    * </ul>
    *
    * <p>Method under test: {@link ListUtil#commaSeparatedString(List, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test commaSeparatedString(List, boolean); given empty string; then return ''',42,foo'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ListUtil.commaSeparatedString(List, boolean)"})
-  void testCommaSeparatedString_givenEmptyString_thenReturn42Foo() {
+  public void testCommaSeparatedString_givenEmptyString_thenReturnApostropheApostrophe() {
     // Arrange
     ArrayList<String> list = new ArrayList<>();
     list.add("");
-    list.add("42");
-    list.add("foo");
 
     // Act and Assert
-    assertEquals("'',42,foo", ListUtil.commaSeparatedString(list, true));
+    assertEquals("''", ListUtil.commaSeparatedString(list, true));
   }
 
   /**
@@ -462,12 +419,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#commaSeparatedString(List, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test commaSeparatedString(List, boolean); given 'foo'; when ArrayList() add 'foo'; then return 'foo'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ListUtil.commaSeparatedString(List, boolean)"})
-  void testCommaSeparatedString_givenFoo_whenArrayListAddFoo_thenReturnFoo() {
+  public void testCommaSeparatedString_givenFoo_whenArrayListAddFoo_thenReturnFoo() {
     // Arrange
     ArrayList<String> list = new ArrayList<>();
     list.add("foo");
@@ -487,12 +441,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#commaSeparatedString(List, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test commaSeparatedString(List, boolean); when ArrayList(); then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ListUtil.commaSeparatedString(List, boolean)"})
-  void testCommaSeparatedString_whenArrayList_thenReturnEmptyString() {
+  public void testCommaSeparatedString_whenArrayList_thenReturnEmptyString() {
     // Arrange, Act and Assert
     assertEquals("", ListUtil.commaSeparatedString(new ArrayList<>(), true));
   }
@@ -508,11 +459,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#commaSeparatedString(List, boolean)}
    */
   @Test
-  @DisplayName("Test commaSeparatedString(List, boolean); when 'null'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String ListUtil.commaSeparatedString(List, boolean)"})
-  void testCommaSeparatedString_whenNull_thenReturnNull() {
+  public void testCommaSeparatedString_whenNull_thenReturnNull() {
     // Arrange, Act and Assert
     assertNull(ListUtil.commaSeparatedString(null, false));
   }
@@ -528,11 +477,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#commaSeparatedList(String)}
    */
   @Test
-  @DisplayName("Test commaSeparatedList(String); when 'null'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"List ListUtil.commaSeparatedList(String)"})
-  void testCommaSeparatedList_whenNull_thenReturnNull() {
+  public void testCommaSeparatedList_whenNull_thenReturnNull() {
     // Arrange and Act
     List<String> actualCommaSeparatedListResult = ListUtil.commaSeparatedList(null);
 
@@ -551,11 +498,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#commaSeparatedList(String)}
    */
   @Test
-  @DisplayName("Test commaSeparatedList(String); when 'String'; then return size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"List ListUtil.commaSeparatedList(String)"})
-  void testCommaSeparatedList_whenString_thenReturnSizeIsOne() {
+  public void testCommaSeparatedList_whenString_thenReturnSizeIsOne() {
     // Arrange and Act
     List<String> actualCommaSeparatedListResult = ListUtil.commaSeparatedList("String");
 
@@ -576,12 +521,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#toIntArray(List)}
    */
   @Test
-  @DisplayName(
-      "Test toIntArray(List); given one; when ArrayList() add one; then return array of int with one and one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int[] ListUtil.toIntArray(List)"})
-  void testToIntArray_givenOne_whenArrayListAddOne_thenReturnArrayOfIntWithOneAndOne() {
+  public void testToIntArray_givenOne_whenArrayListAddOne_thenReturnArrayOfIntWithOneAndOne() {
     // Arrange
     ArrayList<Integer> integerList = new ArrayList<>();
     integerList.add(1);
@@ -621,12 +563,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#toIntArray(List)}
    */
   @Test
-  @DisplayName(
-      "Test toIntArray(List); given one; when ArrayList() add one; then return array of int with one and two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int[] ListUtil.toIntArray(List)"})
-  void testToIntArray_givenOne_whenArrayListAddOne_thenReturnArrayOfIntWithOneAndTwo() {
+  public void testToIntArray_givenOne_whenArrayListAddOne_thenReturnArrayOfIntWithOneAndTwo() {
     // Arrange
     ArrayList<Integer> integerList = new ArrayList<>();
     integerList.add(1);
@@ -648,12 +587,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#toIntArray(List)}
    */
   @Test
-  @DisplayName(
-      "Test toIntArray(List); given two; when ArrayList() add two; then return array of int with two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int[] ListUtil.toIntArray(List)"})
-  void testToIntArray_givenTwo_whenArrayListAddTwo_thenReturnArrayOfIntWithTwo() {
+  public void testToIntArray_givenTwo_whenArrayListAddTwo_thenReturnArrayOfIntWithTwo() {
     // Arrange
     ArrayList<Integer> integerList = new ArrayList<>();
     integerList.add(2);
@@ -673,11 +609,9 @@ class ListUtilDiffblueTest {
    * <p>Method under test: {@link ListUtil#toIntArray(List)}
    */
   @Test
-  @DisplayName("Test toIntArray(List); when ArrayList(); then return empty array of int")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int[] ListUtil.toIntArray(List)"})
-  void testToIntArray_whenArrayList_thenReturnEmptyArrayOfInt() {
+  public void testToIntArray_whenArrayList_thenReturnEmptyArrayOfInt() {
     // Arrange, Act and Assert
     assertArrayEquals(new int[] {}, ListUtil.toIntArray(new ArrayList<>()));
   }

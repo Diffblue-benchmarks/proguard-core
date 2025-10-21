@@ -1,36 +1,36 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.analysis.cpa.jvm.cfa.JvmCfa;
 import proguard.analysis.cpa.jvm.domain.value.JvmCfaReferenceValueFactory;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 
-class TypedReferenceValueFactoryDiffblueTest {
+public class TypedReferenceValueFactoryDiffblueTest {
   /**
    * Test {@link TypedReferenceValueFactory#createReferenceValueNull()}.
    *
    * <p>Method under test: {@link TypedReferenceValueFactory#createReferenceValueNull()}
    */
   @Test
-  @DisplayName("Test createReferenceValueNull()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ReferenceValue TypedReferenceValueFactory.createReferenceValueNull()"})
-  void testCreateReferenceValueNull() {
-    // Arrange, Act and Assert
+  public void testCreateReferenceValueNull() {
+    // Arrange
+    TypedReferenceValueFactory typedReferenceValueFactory = new TypedReferenceValueFactory();
+
+    // Act and Assert
     assertSame(
-        TypedReferenceValueFactory.REFERENCE_VALUE_NULL,
-        new TypedReferenceValueFactory().createReferenceValueNull());
+        typedReferenceValueFactory.REFERENCE_VALUE_NULL,
+        typedReferenceValueFactory.createReferenceValueNull());
   }
 
   /**
@@ -41,14 +41,11 @@ class TypedReferenceValueFactoryDiffblueTest {
    * Clazz, IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue) with 'type', 'referencedClass', 'arrayLength'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue TypedReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue)"
   })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength() {
+  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength() {
     // Arrange
     TypedReferenceValueFactory typedReferenceValueFactory = new TypedReferenceValueFactory();
 
@@ -72,14 +69,11 @@ class TypedReferenceValueFactoryDiffblueTest {
    * Clazz, IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue) with 'type', 'referencedClass', 'arrayLength'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue TypedReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue)"
   })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength2() {
+  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength2() {
     // Arrange
     JvmCfaReferenceValueFactory jvmCfaReferenceValueFactory =
         new JvmCfaReferenceValueFactory(new JvmCfa());
@@ -104,14 +98,11 @@ class TypedReferenceValueFactoryDiffblueTest {
    * Clazz, IntegerValue)}
    */
   @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue) with 'type', 'referencedClass', 'arrayLength'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue TypedReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue)"
   })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength3() {
+  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength3() {
     // Arrange
     TypedReferenceValueFactory typedReferenceValueFactory = new TypedReferenceValueFactory();
 
@@ -136,14 +127,11 @@ class TypedReferenceValueFactoryDiffblueTest {
    * Clazz, IntegerValue, Object)}
    */
   @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue, Object) with 'type', 'referencedClass', 'arrayLength', 'elementValues'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue TypedReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue, Object)"
   })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLengthElementValues() {
+  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLengthElementValues() {
     // Arrange
     TypedReferenceValueFactory typedReferenceValueFactory = new TypedReferenceValueFactory();
     LibraryClass referencedClass = new LibraryClass();
@@ -178,14 +166,11 @@ class TypedReferenceValueFactoryDiffblueTest {
    * Clazz, IntegerValue, Object)}
    */
   @Test
-  @DisplayName(
-      "Test createArrayReferenceValue(String, Clazz, IntegerValue, Object) with 'type', 'referencedClass', 'arrayLength', 'elementValues'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue TypedReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue, Object)"
   })
-  void testCreateArrayReferenceValueWithTypeReferencedClassArrayLengthElementValues2() {
+  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLengthElementValues2() {
     // Arrange
     JvmCfaReferenceValueFactory jvmCfaReferenceValueFactory =
         new JvmCfaReferenceValueFactory(new JvmCfa());

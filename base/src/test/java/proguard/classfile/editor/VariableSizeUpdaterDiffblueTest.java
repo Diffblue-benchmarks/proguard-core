@@ -1,12 +1,11 @@
 package proguard.classfile.editor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryMethod;
@@ -14,7 +13,7 @@ import proguard.classfile.Method;
 import proguard.classfile.attribute.CodeAttribute;
 import proguard.classfile.instruction.VariableInstruction;
 
-class VariableSizeUpdaterDiffblueTest {
+public class VariableSizeUpdaterDiffblueTest {
   /**
    * Test {@link VariableSizeUpdater#visitVariableInstruction(Clazz, Method, CodeAttribute, int,
    * VariableInstruction)}.
@@ -23,18 +22,16 @@ class VariableSizeUpdaterDiffblueTest {
    * CodeAttribute, int, VariableInstruction)}
    */
   @Test
-  @DisplayName(
-      "Test visitVariableInstruction(Clazz, Method, CodeAttribute, int, VariableInstruction)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void VariableSizeUpdater.visitVariableInstruction(Clazz, Method, CodeAttribute, int, VariableInstruction)"
   })
-  void testVisitVariableInstruction() {
+  public void testVisitVariableInstruction() {
     // Arrange
     VariableSizeUpdater variableSizeUpdater = new VariableSizeUpdater();
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act
@@ -53,18 +50,16 @@ class VariableSizeUpdaterDiffblueTest {
    * CodeAttribute, int, VariableInstruction)}
    */
   @Test
-  @DisplayName(
-      "Test visitVariableInstruction(Clazz, Method, CodeAttribute, int, VariableInstruction)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void VariableSizeUpdater.visitVariableInstruction(Clazz, Method, CodeAttribute, int, VariableInstruction)"
   })
-  void testVisitVariableInstruction2() {
+  public void testVisitVariableInstruction2() {
     // Arrange
     VariableSizeUpdater variableSizeUpdater = new VariableSizeUpdater();
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act
@@ -83,18 +78,16 @@ class VariableSizeUpdaterDiffblueTest {
    * CodeAttribute, int, VariableInstruction)}
    */
   @Test
-  @DisplayName(
-      "Test visitVariableInstruction(Clazz, Method, CodeAttribute, int, VariableInstruction)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void VariableSizeUpdater.visitVariableInstruction(Clazz, Method, CodeAttribute, int, VariableInstruction)"
   })
-  void testVisitVariableInstruction3() {
+  public void testVisitVariableInstruction3() {
     // Arrange
     VariableSizeUpdater variableSizeUpdater = new VariableSizeUpdater();
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act
@@ -113,18 +106,16 @@ class VariableSizeUpdaterDiffblueTest {
    * CodeAttribute, int, VariableInstruction)}
    */
   @Test
-  @DisplayName(
-      "Test visitVariableInstruction(Clazz, Method, CodeAttribute, int, VariableInstruction)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void VariableSizeUpdater.visitVariableInstruction(Clazz, Method, CodeAttribute, int, VariableInstruction)"
   })
-  void testVisitVariableInstruction4() {
+  public void testVisitVariableInstruction4() {
     // Arrange
     VariableSizeUpdater variableSizeUpdater = new VariableSizeUpdater();
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute =
         new CodeAttribute(1, 3, 3, 3, new byte[] {'A', 1, 'A', 1, 'A', 1, 'A', 1});
 

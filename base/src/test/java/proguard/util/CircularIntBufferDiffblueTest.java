@@ -1,14 +1,13 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class CircularIntBufferDiffblueTest {
+public class CircularIntBufferDiffblueTest {
   /**
    * Test {@link CircularIntBuffer#CircularIntBuffer(int)}.
    *
@@ -20,13 +19,11 @@ class CircularIntBufferDiffblueTest {
    * <p>Method under test: {@link CircularIntBuffer#CircularIntBuffer(int)}
    */
   @Test
-  @DisplayName("Test new CircularIntBuffer(int); when three; then return size is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void CircularIntBuffer.<init>(int)"})
-  void testNewCircularIntBuffer_whenThree_thenReturnSizeIsZero() {
+  public void testNewCircularIntBuffer_whenThree_thenReturnSizeIsZero() {
     // Arrange, Act and Assert
-    assertEquals(0, new CircularIntBuffer(3).size());
+    assertEquals(0, (new CircularIntBuffer(3)).size());
   }
 
   /**
@@ -39,11 +36,9 @@ class CircularIntBufferDiffblueTest {
    * <p>Method under test: {@link CircularIntBuffer#push(int)}
    */
   @Test
-  @DisplayName("Test push(int); then CircularIntBuffer(int) with maxSize is three size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void CircularIntBuffer.push(int)"})
-  void testPush_thenCircularIntBufferWithMaxSizeIsThreeSizeIsOne() {
+  public void testPush_thenCircularIntBufferWithMaxSizeIsThreeSizeIsOne() {
     // Arrange
     CircularIntBuffer circularIntBuffer = new CircularIntBuffer(3);
 
@@ -66,14 +61,11 @@ class CircularIntBufferDiffblueTest {
    * <p>Method under test: {@link CircularIntBuffer#peek(int)}
    */
   @Test
-  @DisplayName(
-      "Test peek(int) with 'int'; given CircularIntBuffer(int) with maxSize is three; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int CircularIntBuffer.peek(int)"})
-  void testPeekWithInt_givenCircularIntBufferWithMaxSizeIsThree_thenReturnZero() {
+  public void testPeekWithInt_givenCircularIntBufferWithMaxSizeIsThree_thenReturnZero() {
     // Arrange, Act and Assert
-    assertEquals(0, new CircularIntBuffer(3).peek(-1));
+    assertEquals(0, (new CircularIntBuffer(3)).peek(-1));
   }
 
   /**
@@ -82,12 +74,10 @@ class CircularIntBufferDiffblueTest {
    * <p>Method under test: {@link CircularIntBuffer#size()}
    */
   @Test
-  @DisplayName("Test size()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int CircularIntBuffer.size()"})
-  void testSize() {
+  public void testSize() {
     // Arrange, Act and Assert
-    assertEquals(0, new CircularIntBuffer(3).size());
+    assertEquals(0, (new CircularIntBuffer(3)).size());
   }
 }

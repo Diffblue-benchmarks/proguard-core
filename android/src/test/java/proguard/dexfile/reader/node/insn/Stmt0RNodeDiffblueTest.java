@@ -1,30 +1,27 @@
 package proguard.dexfile.reader.node.insn;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.reader.Op;
 import proguard.dexfile.reader.node.DexCodeNode;
 import proguard.dexfile.reader.visitors.DexCodeVisitor;
 
-class Stmt0RNodeDiffblueTest {
+public class Stmt0RNodeDiffblueTest {
   /**
    * Test {@link Stmt0RNode#Stmt0RNode(Op)}.
    *
    * <p>Method under test: {@link Stmt0RNode#Stmt0RNode(Op)}
    */
   @Test
-  @DisplayName("Test new Stmt0RNode(Op)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Stmt0RNode.<init>(Op)"})
-  void testNewStmt0RNode() {
+  public void testNewStmt0RNode() {
     // Arrange and Act
     Stmt0RNode actualStmt0RNode = new Stmt0RNode(Op.NOP);
 
@@ -44,12 +41,9 @@ class Stmt0RNodeDiffblueTest {
    * <p>Method under test: {@link Stmt0RNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeNode(); then DexCodeNode() stmts size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void Stmt0RNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
+  public void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
     // Arrange
     Stmt0RNode stmt0RNode = new Stmt0RNode(Op.NOP);
     DexCodeNode cv = new DexCodeNode();

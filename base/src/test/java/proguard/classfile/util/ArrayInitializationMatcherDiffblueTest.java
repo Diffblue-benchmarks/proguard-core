@@ -1,27 +1,24 @@
 package proguard.classfile.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.evaluation.PartialEvaluator;
 
-class ArrayInitializationMatcherDiffblueTest {
+public class ArrayInitializationMatcherDiffblueTest {
   /**
    * Test {@link ArrayInitializationMatcher#ArrayInitializationMatcher()}.
    *
    * <p>Method under test: {@link ArrayInitializationMatcher#ArrayInitializationMatcher()}
    */
   @Test
-  @DisplayName("Test new ArrayInitializationMatcher()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ArrayInitializationMatcher.<init>()"})
-  void testNewArrayInitializationMatcher() {
+  public void testNewArrayInitializationMatcher() {
     // Arrange and Act
     ArrayInitializationMatcher actualArrayInitializationMatcher = new ArrayInitializationMatcher();
 
@@ -38,11 +35,9 @@ class ArrayInitializationMatcherDiffblueTest {
    * ArrayInitializationMatcher#ArrayInitializationMatcher(PartialEvaluator)}
    */
   @Test
-  @DisplayName("Test new ArrayInitializationMatcher(PartialEvaluator)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ArrayInitializationMatcher.<init>(PartialEvaluator)"})
-  void testNewArrayInitializationMatcher2() {
+  public void testNewArrayInitializationMatcher2() {
     // Arrange and Act
     ArrayInitializationMatcher actualArrayInitializationMatcher =
         new ArrayInitializationMatcher(new PartialEvaluator());
@@ -65,15 +60,13 @@ class ArrayInitializationMatcherDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "Object ArrayInitializationMatcher.array()",
     "int ArrayInitializationMatcher.arrayInitializationEnd()",
     "int ArrayInitializationMatcher.arrayInitializationStart()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     ArrayInitializationMatcher arrayInitializationMatcher = new ArrayInitializationMatcher();
 

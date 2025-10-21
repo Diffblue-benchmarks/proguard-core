@@ -1,15 +1,14 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class FileNameParserDiffblueTest {
+public class FileNameParserDiffblueTest {
   /**
    * Test {@link FileNameParser#parse(String)}.
    *
@@ -21,13 +20,11 @@ class FileNameParserDiffblueTest {
    * <p>Method under test: {@link FileNameParser#parse(String)}
    */
   @Test
-  @DisplayName("Test parse(String); given FileNameParser(); then return VariableStringMatcher")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringMatcher FileNameParser.parse(String)"})
-  void testParse_givenFileNameParser_thenReturnVariableStringMatcher() {
+  public void testParse_givenFileNameParser_thenReturnVariableStringMatcher() {
     // Arrange and Act
-    StringMatcher actualParseResult = new FileNameParser().parse("**");
+    StringMatcher actualParseResult = (new FileNameParser()).parse("**");
 
     // Assert
     assertTrue(actualParseResult instanceof VariableStringMatcher);
@@ -46,14 +43,11 @@ class FileNameParserDiffblueTest {
    * <p>Method under test: {@link FileNameParser#parse(String)}
    */
   @Test
-  @DisplayName(
-      "Test parse(String); given FileNameParser(); when 'Regular Expression'; then return FixedStringMatcher")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringMatcher FileNameParser.parse(String)"})
-  void testParse_givenFileNameParser_whenRegularExpression_thenReturnFixedStringMatcher() {
+  public void testParse_givenFileNameParser_whenRegularExpression_thenReturnFixedStringMatcher() {
     // Arrange and Act
-    StringMatcher actualParseResult = new FileNameParser().parse("Regular Expression");
+    StringMatcher actualParseResult = (new FileNameParser()).parse("Regular Expression");
 
     // Assert
     assertTrue(actualParseResult instanceof FixedStringMatcher);
@@ -70,13 +64,11 @@ class FileNameParserDiffblueTest {
    * <p>Method under test: {@link FileNameParser#parse(String)}
    */
   @Test
-  @DisplayName("Test parse(String); then return VariableStringMatcher")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringMatcher FileNameParser.parse(String)"})
-  void testParse_thenReturnVariableStringMatcher() {
+  public void testParse_thenReturnVariableStringMatcher() {
     // Arrange and Act
-    StringMatcher actualParseResult = new FileNameParser(new WildcardManager()).parse("**");
+    StringMatcher actualParseResult = (new FileNameParser(new WildcardManager())).parse("**");
 
     // Assert
     assertTrue(actualParseResult instanceof VariableStringMatcher);

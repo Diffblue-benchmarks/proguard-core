@@ -1,19 +1,18 @@
 package proguard.evaluation.util.jsonprinter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class InstructionBlockEvaluationRecordDiffblueTest {
+public class InstructionBlockEvaluationRecordDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -33,9 +32,7 @@ class InstructionBlockEvaluationRecordDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void InstructionBlockEvaluationRecord.<init>(List, List, int, ExceptionHandlerRecord, List)",
     "List InstructionBlockEvaluationRecord.getBranchEvaluationStack()",
@@ -47,11 +44,12 @@ class InstructionBlockEvaluationRecordDiffblueTest {
     "void InstructionBlockEvaluationRecord.setStartStack(List)",
     "void InstructionBlockEvaluationRecord.setStartVariables(List)"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     ArrayList<String> startVariables = new ArrayList<>();
     ArrayList<String> startStack = new ArrayList<>();
     ExceptionHandlerRecord exceptionHandlerInfo = new ExceptionHandlerRecord(1, 1, 1, "Catch Type");
+
     ArrayList<BranchTargetRecord> branchEvaluationStack = new ArrayList<>();
 
     // Act
@@ -90,15 +88,12 @@ class InstructionBlockEvaluationRecordDiffblueTest {
    * <p>Method under test: {@link InstructionBlockEvaluationRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder InstructionBlockEvaluationRecord.toJson(StringBuilder)"})
-  void testToJson() {
+  public void testToJson() {
     // Arrange
     ArrayList<String> startVariables = new ArrayList<>();
     ArrayList<String> startStack = new ArrayList<>();
-
     InstructionBlockEvaluationRecord instructionBlockEvaluationRecord =
         new InstructionBlockEvaluationRecord(
             startVariables, startStack, 1, null, new ArrayList<>());
@@ -120,23 +115,22 @@ class InstructionBlockEvaluationRecordDiffblueTest {
    * <p>Method under test: {@link InstructionBlockEvaluationRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder InstructionBlockEvaluationRecord.toJson(StringBuilder)"})
-  void testToJson2() {
+  public void testToJson2() {
     // Arrange
     ArrayList<BranchTargetRecord> branchEvaluationStack = new ArrayList<>();
     ArrayList<String> variables = new ArrayList<>();
-    BranchTargetRecord branchTargetRecord = new BranchTargetRecord(variables, new ArrayList<>(), 1);
-    branchEvaluationStack.add(branchTargetRecord);
+    branchEvaluationStack.add(new BranchTargetRecord(variables, new ArrayList<>(), 1));
     ArrayList<String> startVariables = new ArrayList<>();
     ArrayList<String> startStack = new ArrayList<>();
-    ExceptionHandlerRecord exceptionHandlerInfo = new ExceptionHandlerRecord(1, 1, 1, "Catch Type");
-
     InstructionBlockEvaluationRecord instructionBlockEvaluationRecord =
         new InstructionBlockEvaluationRecord(
-            startVariables, startStack, 1, exceptionHandlerInfo, branchEvaluationStack);
+            startVariables,
+            startStack,
+            1,
+            new ExceptionHandlerRecord(1, 1, 1, "Catch Type"),
+            branchEvaluationStack);
     StringBuilder builder = new StringBuilder("foo");
 
     // Act
@@ -157,27 +151,24 @@ class InstructionBlockEvaluationRecordDiffblueTest {
    * <p>Method under test: {@link InstructionBlockEvaluationRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder InstructionBlockEvaluationRecord.toJson(StringBuilder)"})
-  void testToJson3() {
+  public void testToJson3() {
     // Arrange
     ArrayList<BranchTargetRecord> branchEvaluationStack = new ArrayList<>();
     ArrayList<String> variables = new ArrayList<>();
-    BranchTargetRecord branchTargetRecord = new BranchTargetRecord(variables, new ArrayList<>(), 1);
-    branchEvaluationStack.add(branchTargetRecord);
+    branchEvaluationStack.add(new BranchTargetRecord(variables, new ArrayList<>(), 1));
     ArrayList<String> variables2 = new ArrayList<>();
-    BranchTargetRecord branchTargetRecord2 =
-        new BranchTargetRecord(variables2, new ArrayList<>(), 1);
-    branchEvaluationStack.add(branchTargetRecord2);
+    branchEvaluationStack.add(new BranchTargetRecord(variables2, new ArrayList<>(), 1));
     ArrayList<String> startVariables = new ArrayList<>();
     ArrayList<String> startStack = new ArrayList<>();
-    ExceptionHandlerRecord exceptionHandlerInfo = new ExceptionHandlerRecord(1, 1, 1, "Catch Type");
-
     InstructionBlockEvaluationRecord instructionBlockEvaluationRecord =
         new InstructionBlockEvaluationRecord(
-            startVariables, startStack, 1, exceptionHandlerInfo, branchEvaluationStack);
+            startVariables,
+            startStack,
+            1,
+            new ExceptionHandlerRecord(1, 1, 1, "Catch Type"),
+            branchEvaluationStack);
     StringBuilder builder = new StringBuilder("foo");
 
     // Act
@@ -202,11 +193,9 @@ class InstructionBlockEvaluationRecordDiffblueTest {
    * Method under test: {@link InstructionBlockEvaluationRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder); given ArrayList() add '{'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder InstructionBlockEvaluationRecord.toJson(StringBuilder)"})
-  void testToJson_givenArrayListAddLeftCurlyBracket() {
+  public void testToJson_givenArrayListAddLeftCurlyBracket() {
     // Arrange
     ArrayList<String> startVariables = new ArrayList<>();
     startVariables.add("{");
@@ -240,11 +229,9 @@ class InstructionBlockEvaluationRecordDiffblueTest {
    * <p>Method under test: {@link InstructionBlockEvaluationRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder); given ArrayList() add 'startOffset'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder InstructionBlockEvaluationRecord.toJson(StringBuilder)"})
-  void testToJson_givenArrayListAddStartOffset() {
+  public void testToJson_givenArrayListAddStartOffset() {
     // Arrange
     ArrayList<String> startVariables = new ArrayList<>();
     startVariables.add("startOffset");
@@ -279,12 +266,9 @@ class InstructionBlockEvaluationRecordDiffblueTest {
    * <p>Method under test: {@link InstructionBlockEvaluationRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName(
-      "Test toJson(StringBuilder); then StringBuilder(String) with 'foo' toString is a string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder InstructionBlockEvaluationRecord.toJson(StringBuilder)"})
-  void testToJson_thenStringBuilderWithFooToStringIsAString() {
+  public void testToJson_thenStringBuilderWithFooToStringIsAString() {
     // Arrange
     ArrayList<String> startVariables = new ArrayList<>();
     ArrayList<String> startStack = new ArrayList<>();
@@ -313,23 +297,20 @@ class InstructionBlockEvaluationRecordDiffblueTest {
    * <p>Method under test: {@link InstructionBlockEvaluationRecord#getLastInstructionEvaluation()}
    */
   @Test
-  @DisplayName("Test getLastInstructionEvaluation()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InstructionEvaluationRecord InstructionBlockEvaluationRecord.getLastInstructionEvaluation()"
   })
-  void testGetLastInstructionEvaluation() {
+  public void testGetLastInstructionEvaluation() {
     // Arrange
     ArrayList<String> startVariables = new ArrayList<>();
     ArrayList<String> startStack = new ArrayList<>();
     ExceptionHandlerRecord exceptionHandlerInfo = new ExceptionHandlerRecord(1, 1, 1, "Catch Type");
 
-    InstructionBlockEvaluationRecord instructionBlockEvaluationRecord =
-        new InstructionBlockEvaluationRecord(
-            startVariables, startStack, 1, exceptionHandlerInfo, new ArrayList<>());
-
     // Act and Assert
-    assertNull(instructionBlockEvaluationRecord.getLastInstructionEvaluation());
+    assertNull(
+        (new InstructionBlockEvaluationRecord(
+                startVariables, startStack, 1, exceptionHandlerInfo, new ArrayList<>()))
+            .getLastInstructionEvaluation());
   }
 }

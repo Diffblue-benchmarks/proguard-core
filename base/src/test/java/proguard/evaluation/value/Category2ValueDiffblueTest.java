@@ -1,34 +1,28 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class Category2ValueDiffblueTest {
+public class Category2ValueDiffblueTest {
   /**
    * Test {@link Category2Value#category2Value()}.
    *
    * <p>Method under test: {@link Category2Value#category2Value()}
    */
   @Test
-  @DisplayName("Test category2Value()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Category2Value Category2Value.category2Value()"})
-  void testCategory2Value() {
+  public void testCategory2Value() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
-    // Act
-    Category2Value actualCategory2ValueResult = unknownDoubleValue.category2Value();
-
-    // Assert
-    assertSame(unknownDoubleValue, actualCategory2ValueResult);
+    // Act and Assert
+    assertSame(unknownDoubleValue, unknownDoubleValue.category2Value());
   }
 
   /**
@@ -37,12 +31,10 @@ class Category2ValueDiffblueTest {
    * <p>Method under test: {@link Category2Value#isCategory2()}
    */
   @Test
-  @DisplayName("Test isCategory2()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean Category2Value.isCategory2()"})
-  void testIsCategory2() {
+  public void testIsCategory2() {
     // Arrange, Act and Assert
-    assertTrue(new UnknownDoubleValue().isCategory2());
+    assertTrue((new UnknownDoubleValue()).isCategory2());
   }
 }

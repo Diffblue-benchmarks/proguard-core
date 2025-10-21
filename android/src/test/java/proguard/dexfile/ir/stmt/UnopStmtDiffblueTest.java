@@ -1,16 +1,15 @@
 package proguard.dexfile.ir.stmt;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.LabelAndLocalMapper;
 import proguard.dexfile.ir.expr.ArrayExpr;
@@ -21,18 +20,16 @@ import proguard.dexfile.ir.expr.Value;
 import proguard.dexfile.ir.expr.Value.VT;
 import proguard.dexfile.ir.stmt.Stmt.ST;
 
-class UnopStmtDiffblueTest {
+public class UnopStmtDiffblueTest {
   /**
    * Test {@link UnopStmt#UnopStmt(ST, Value)}.
    *
    * <p>Method under test: {@link UnopStmt#UnopStmt(ST, Value)}
    */
   @Test
-  @DisplayName("Test new UnopStmt(ST, Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void UnopStmt.<init>(ST, Value)"})
-  void testNewUnopStmt() {
+  public void testNewUnopStmt() {
     // Arrange
     ArrayExpr op = new ArrayExpr();
 
@@ -42,12 +39,12 @@ class UnopStmtDiffblueTest {
     // Assert
     Value op2 = actualUnopStmt.getOp();
     assertTrue(op2 instanceof ArrayExpr);
+    assertNull(actualUnopStmt.getOps());
     assertNull(actualUnopStmt.frame);
     assertNull(actualUnopStmt.exceptionHandlers);
     assertNull(actualUnopStmt._cfg_froms);
     assertNull(actualUnopStmt.getOp1());
     assertNull(actualUnopStmt.getOp2());
-    assertNull(actualUnopStmt.getOps());
     assertNull(actualUnopStmt.getNext());
     assertNull(actualUnopStmt.getPre());
     assertNull(actualUnopStmt._ts_default_next);
@@ -70,12 +67,9 @@ class UnopStmtDiffblueTest {
    * <p>Method under test: {@link UnopStmt#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; given nLock nNull; then Op return Constant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Stmt UnopStmt.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_givenNLockNNull_thenOpReturnConstant() {
+  public void testCloneWithLabelAndLocalMapper_givenNLockNNull_thenOpReturnConstant() {
     // Arrange
     Constant op = Exprs.nNull();
     UnopStmt nLockResult = Stmts.nLock(op);
@@ -103,28 +97,26 @@ class UnopStmtDiffblueTest {
    * <p>Method under test: {@link UnopStmt#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then Op return CastExpr")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Stmt UnopStmt.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenOpReturnCastExpr() {
+  public void testCloneWithLabelAndLocalMapper_thenOpReturnCastExpr() {
     // Arrange
-    CastExpr op = new CastExpr(Exprs.nNull(), "jane.doe@example.org", "alice.liddell@example.org");
-    UnopStmt nLockResult = Stmts.nLock(op);
+    UnopStmt nLockResult =
+        Stmts.nLock(
+            new CastExpr(Exprs.nNull(), "jane.doe@example.org", "alice.liddell@example.org"));
 
     // Act
     Stmt actualCloneResult = nLockResult.clone(new LabelAndLocalMapper());
 
     // Assert
-    Value op2 = actualCloneResult.getOp();
-    assertTrue(op2 instanceof CastExpr);
-    assertTrue(op2.getOp() instanceof Constant);
+    Value op = actualCloneResult.getOp();
+    assertTrue(op instanceof CastExpr);
+    assertTrue(op.getOp() instanceof Constant);
     assertTrue(actualCloneResult instanceof UnopStmt);
-    assertEquals("alice.liddell@example.org", ((CastExpr) op2).to);
-    assertEquals("jane.doe@example.org", ((CastExpr) op2).from);
-    assertEquals(ET.E1, ((CastExpr) op2).et);
-    assertEquals(VT.CAST, ((CastExpr) op2).vt);
+    assertEquals("alice.liddell@example.org", ((CastExpr) op).to);
+    assertEquals("jane.doe@example.org", ((CastExpr) op).from);
+    assertEquals(ET.E1, ((CastExpr) op).et);
+    assertEquals(VT.CAST, ((CastExpr) op).vt);
   }
 
   /**
@@ -138,19 +130,15 @@ class UnopStmtDiffblueTest {
    * <p>Method under test: {@link UnopStmt#toString()}
    */
   @Test
-  @DisplayName(
-      "Test toString(); given ArrayExpr() Op1 is ArrayExpr(); then return 'lock null[null][null]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String UnopStmt.toString()"})
-  void testToString_givenArrayExprOp1IsArrayExpr_thenReturnLockNullNullNull() {
+  public void testToString_givenArrayExprOp1IsArrayExpr_thenReturnLockNullNullNull() {
     // Arrange
     ArrayExpr op = new ArrayExpr();
     op.setOp1(new ArrayExpr());
-    UnopStmt nLockResult = Stmts.nLock(op);
 
     // Act and Assert
-    assertEquals("lock null[null][null]", nLockResult.toString());
+    assertEquals("lock null[null][null]", Stmts.nLock(op).toString());
   }
 
   /**
@@ -164,16 +152,11 @@ class UnopStmtDiffblueTest {
    * <p>Method under test: {@link UnopStmt#toString()}
    */
   @Test
-  @DisplayName("Test toString(); given nLock ArrayExpr(); then return 'lock null[null]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String UnopStmt.toString()"})
-  void testToString_givenNLockArrayExpr_thenReturnLockNullNull() {
-    // Arrange
-    UnopStmt nLockResult = Stmts.nLock(new ArrayExpr());
-
-    // Act and Assert
-    assertEquals("lock null[null]", nLockResult.toString());
+  public void testToString_givenNLockArrayExpr_thenReturnLockNullNull() {
+    // Arrange, Act and Assert
+    assertEquals("lock null[null]", Stmts.nLock(new ArrayExpr()).toString());
   }
 
   /**
@@ -187,104 +170,83 @@ class UnopStmtDiffblueTest {
    * <p>Method under test: {@link UnopStmt#toString()}
    */
   @Test
-  @DisplayName("Test toString(); given nLock 'null'; then return 'lock null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String UnopStmt.toString()"})
-  void testToString_givenNLockNull_thenReturnLockNull() {
-    // Arrange
-    UnopStmt nLockResult = Stmts.nLock(null);
-
-    // Act and Assert
-    assertEquals("lock null", nLockResult.toString());
+  public void testToString_givenNLockNull_thenReturnLockNull() {
+    // Arrange, Act and Assert
+    assertEquals("lock null", Stmts.nLock(null).toString());
   }
 
   /**
    * Test {@link UnopStmt#toString()}.
    *
    * <ul>
-   *   <li>Given {@link UnopStmt#UnopStmt(ST, Value)} with type is {@code LOCAL_END} and op is
-   *       {@code null}.
-   *   <li>Then return {@code null ::END}.
+   *   <li>Given nReturn {@link ArrayExpr#ArrayExpr()}.
+   *   <li>Then return {@code return null[null]}.
    * </ul>
    *
    * <p>Method under test: {@link UnopStmt#toString()}
    */
   @Test
-  @DisplayName(
-      "Test toString(); given UnopStmt(ST, Value) with type is 'LOCAL_END' and op is 'null'; then return 'null ::END'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String UnopStmt.toString()"})
-  void testToString_givenUnopStmtWithTypeIsLocalEndAndOpIsNull_thenReturnNullEnd() {
+  public void testToString_givenNReturnArrayExpr_thenReturnReturnNullNull() {
     // Arrange, Act and Assert
-    assertEquals("null ::END", new UnopStmt(ST.LOCAL_END, null).toString());
+    assertEquals("return null[null]", Stmts.nReturn(new ArrayExpr()).toString());
   }
 
   /**
    * Test {@link UnopStmt#toString()}.
    *
    * <ul>
-   *   <li>Given {@link UnopStmt#UnopStmt(ST, Value)} with type is {@code RETURN} and op is {@code
-   *       null}.
+   *   <li>Given nReturn {@code null}.
    *   <li>Then return {@code return null}.
    * </ul>
    *
    * <p>Method under test: {@link UnopStmt#toString()}
    */
   @Test
-  @DisplayName(
-      "Test toString(); given UnopStmt(ST, Value) with type is 'RETURN' and op is 'null'; then return 'return null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String UnopStmt.toString()"})
-  void testToString_givenUnopStmtWithTypeIsReturnAndOpIsNull_thenReturnReturnNull() {
+  public void testToString_givenNReturnNull_thenReturnReturnNull() {
     // Arrange, Act and Assert
-    assertEquals("return null", new UnopStmt(ST.RETURN, null).toString());
+    assertEquals("return null", Stmts.nReturn(null).toString());
   }
 
   /**
    * Test {@link UnopStmt#toString()}.
    *
    * <ul>
-   *   <li>Given {@link UnopStmt#UnopStmt(ST, Value)} with type is {@code THROW} and op is {@code
-   *       null}.
+   *   <li>Given nThrow {@link ArrayExpr#ArrayExpr()}.
+   *   <li>Then return {@code throw null[null]}.
+   * </ul>
+   *
+   * <p>Method under test: {@link UnopStmt#toString()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"java.lang.String UnopStmt.toString()"})
+  public void testToString_givenNThrowArrayExpr_thenReturnThrowNullNull() {
+    // Arrange, Act and Assert
+    assertEquals("throw null[null]", Stmts.nThrow(new ArrayExpr()).toString());
+  }
+
+  /**
+   * Test {@link UnopStmt#toString()}.
+   *
+   * <ul>
+   *   <li>Given nThrow {@code null}.
    *   <li>Then return {@code throw null}.
    * </ul>
    *
    * <p>Method under test: {@link UnopStmt#toString()}
    */
   @Test
-  @DisplayName(
-      "Test toString(); given UnopStmt(ST, Value) with type is 'THROW' and op is 'null'; then return 'throw null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String UnopStmt.toString()"})
-  void testToString_givenUnopStmtWithTypeIsThrowAndOpIsNull_thenReturnThrowNull() {
+  public void testToString_givenNThrowNull_thenReturnThrowNull() {
     // Arrange, Act and Assert
-    assertEquals("throw null", new UnopStmt(ST.THROW, null).toString());
-  }
-
-  /**
-   * Test {@link UnopStmt#toString()}.
-   *
-   * <ul>
-   *   <li>Given {@link UnopStmt#UnopStmt(ST, Value)} with type is {@code UNLOCK} and op is {@code
-   *       null}.
-   *   <li>Then return {@code unlock null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link UnopStmt#toString()}
-   */
-  @Test
-  @DisplayName(
-      "Test toString(); given UnopStmt(ST, Value) with type is 'UNLOCK' and op is 'null'; then return 'unlock null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"java.lang.String UnopStmt.toString()"})
-  void testToString_givenUnopStmtWithTypeIsUnlockAndOpIsNull_thenReturnUnlockNull() {
-    // Arrange, Act and Assert
-    assertEquals("unlock null", new UnopStmt(ST.UNLOCK, null).toString());
+    assertEquals("throw null", Stmts.nThrow(null).toString());
   }
 
   /**
@@ -297,92 +259,15 @@ class UnopStmtDiffblueTest {
    * <p>Method under test: {@link UnopStmt#toString()}
    */
   @Test
-  @DisplayName("Test toString(); then return 'lock null[null][null[null]]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String UnopStmt.toString()"})
-  void testToString_thenReturnLockNullNullNullNull() {
+  public void testToString_thenReturnLockNullNullNullNull() {
     // Arrange
     ArrayExpr base = new ArrayExpr();
-    ArrayExpr op = new ArrayExpr(base, new ArrayExpr(), "lock ");
 
     // Act and Assert
-    assertEquals("lock null[null][null[null]]", Stmts.nLock(op).toString());
-  }
-
-  /**
-   * Test {@link UnopStmt#toString()}.
-   *
-   * <ul>
-   *   <li>Then return {@code null[null] ::END}.
-   * </ul>
-   *
-   * <p>Method under test: {@link UnopStmt#toString()}
-   */
-  @Test
-  @DisplayName("Test toString(); then return 'null[null] ::END'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"java.lang.String UnopStmt.toString()"})
-  void testToString_thenReturnNullNullEnd() {
-    // Arrange, Act and Assert
-    assertEquals("null[null] ::END", new UnopStmt(ST.LOCAL_END, new ArrayExpr()).toString());
-  }
-
-  /**
-   * Test {@link UnopStmt#toString()}.
-   *
-   * <ul>
-   *   <li>Then return {@code return null[null]}.
-   * </ul>
-   *
-   * <p>Method under test: {@link UnopStmt#toString()}
-   */
-  @Test
-  @DisplayName("Test toString(); then return 'return null[null]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"java.lang.String UnopStmt.toString()"})
-  void testToString_thenReturnReturnNullNull() {
-    // Arrange, Act and Assert
-    assertEquals("return null[null]", new UnopStmt(ST.RETURN, new ArrayExpr()).toString());
-  }
-
-  /**
-   * Test {@link UnopStmt#toString()}.
-   *
-   * <ul>
-   *   <li>Then return {@code throw null[null]}.
-   * </ul>
-   *
-   * <p>Method under test: {@link UnopStmt#toString()}
-   */
-  @Test
-  @DisplayName("Test toString(); then return 'throw null[null]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"java.lang.String UnopStmt.toString()"})
-  void testToString_thenReturnThrowNullNull() {
-    // Arrange, Act and Assert
-    assertEquals("throw null[null]", new UnopStmt(ST.THROW, new ArrayExpr()).toString());
-  }
-
-  /**
-   * Test {@link UnopStmt#toString()}.
-   *
-   * <ul>
-   *   <li>Then return {@code unlock null[null]}.
-   * </ul>
-   *
-   * <p>Method under test: {@link UnopStmt#toString()}
-   */
-  @Test
-  @DisplayName("Test toString(); then return 'unlock null[null]'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"java.lang.String UnopStmt.toString()"})
-  void testToString_thenReturnUnlockNullNull() {
-    // Arrange, Act and Assert
-    assertEquals("unlock null[null]", new UnopStmt(ST.UNLOCK, new ArrayExpr()).toString());
+    assertEquals(
+        "lock null[null][null[null]]",
+        Stmts.nLock(new ArrayExpr(base, new ArrayExpr(), "lock ")).toString());
   }
 }

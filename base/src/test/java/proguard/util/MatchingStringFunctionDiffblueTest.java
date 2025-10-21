@@ -1,16 +1,15 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.HashSet;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class MatchingStringFunctionDiffblueTest {
+public class MatchingStringFunctionDiffblueTest {
   /**
    * Test {@link MatchingStringFunction#transform(String)}.
    *
@@ -23,15 +22,12 @@ class MatchingStringFunctionDiffblueTest {
    * <p>Method under test: {@link MatchingStringFunction#transform(String)}
    */
   @Test
-  @DisplayName(
-      "Test transform(String); given CollectionMatcher(Set) with set is HashSet(); then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String MatchingStringFunction.transform(String)"})
-  void testTransform_givenCollectionMatcherWithSetIsHashSet_thenReturnNull() {
+  public void testTransform_givenCollectionMatcherWithSetIsHashSet_thenReturnNull() {
     // Arrange, Act and Assert
     assertNull(
-        new MatchingStringFunction(new CollectionMatcher(new HashSet<>())).transform("String"));
+        (new MatchingStringFunction(new CollectionMatcher(new HashSet<>()))).transform("String"));
   }
 
   /**
@@ -45,15 +41,12 @@ class MatchingStringFunctionDiffblueTest {
    * <p>Method under test: {@link MatchingStringFunction#transform(String)}
    */
   @Test
-  @DisplayName(
-      "Test transform(String); given ConstantMatcher(boolean) with matches is 'true'; then return 'String'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String MatchingStringFunction.transform(String)"})
-  void testTransform_givenConstantMatcherWithMatchesIsTrue_thenReturnString() {
+  public void testTransform_givenConstantMatcherWithMatchesIsTrue_thenReturnString() {
     // Arrange, Act and Assert
     assertEquals(
-        "String", new MatchingStringFunction(new ConstantMatcher(true)).transform("String"));
+        "String", (new MatchingStringFunction(new ConstantMatcher(true))).transform("String"));
   }
 
   /**
@@ -67,13 +60,10 @@ class MatchingStringFunctionDiffblueTest {
    * <p>Method under test: {@link MatchingStringFunction#transform(String)}
    */
   @Test
-  @DisplayName(
-      "Test transform(String); given MatchingStringFunction(StringMatcher) with stringMatcher is EmptyStringMatcher (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String MatchingStringFunction.transform(String)"})
-  void testTransform_givenMatchingStringFunctionWithStringMatcherIsEmptyStringMatcher() {
+  public void testTransform_givenMatchingStringFunctionWithStringMatcherIsEmptyStringMatcher() {
     // Arrange, Act and Assert
-    assertNull(new MatchingStringFunction(new EmptyStringMatcher()).transform("String"));
+    assertNull((new MatchingStringFunction(new EmptyStringMatcher())).transform("String"));
   }
 }

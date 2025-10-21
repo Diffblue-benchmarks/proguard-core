@@ -1,19 +1,18 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class TopValueDiffblueTest {
+public class TopValueDiffblueTest {
   /**
    * Test {@link TopValue#generalize(Value)}.
    *
@@ -25,14 +24,12 @@ class TopValueDiffblueTest {
    * <p>Method under test: {@link TopValue#generalize(Value)}
    */
   @Test
-  @DisplayName("Test generalize(Value); when INTEGER_VALUE_BYTE; then return UnknownValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value TopValue.generalize(Value)"})
-  void testGeneralize_whenInteger_value_byte_thenReturnUnknownValue() {
+  public void testGeneralize_whenInteger_value_byte_thenReturnUnknownValue() {
     // Arrange and Act
     Value actualGeneralizeResult =
-        new TopValue().generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+        (new TopValue()).generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
     assertTrue(actualGeneralizeResult instanceof UnknownValue);
@@ -52,20 +49,14 @@ class TopValueDiffblueTest {
    * <p>Method under test: {@link TopValue#generalize(Value)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(Value); when TopValue (default constructor); then return TopValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value TopValue.generalize(Value)"})
-  void testGeneralize_whenTopValue_thenReturnTopValue() {
+  public void testGeneralize_whenTopValue_thenReturnTopValue() {
     // Arrange
     TopValue topValue = new TopValue();
 
-    // Act
-    Value actualGeneralizeResult = topValue.generalize(new TopValue());
-
-    // Assert
-    assertSame(topValue, actualGeneralizeResult);
+    // Act and Assert
+    assertSame(topValue, topValue.generalize(new TopValue()));
   }
 
   /**
@@ -74,13 +65,11 @@ class TopValueDiffblueTest {
    * <p>Method under test: {@link TopValue#computationalType()}
    */
   @Test
-  @DisplayName("Test computationalType()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int TopValue.computationalType()"})
-  void testComputationalType() {
+  public void testComputationalType() {
     // Arrange, Act and Assert
-    assertEquals(7, new TopValue().computationalType());
+    assertEquals(7, (new TopValue()).computationalType());
   }
 
   /**
@@ -89,13 +78,11 @@ class TopValueDiffblueTest {
    * <p>Method under test: {@link TopValue#internalType()}
    */
   @Test
-  @DisplayName("Test internalType()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String TopValue.internalType()"})
-  void testInternalType() {
+  public void testInternalType() {
     // Arrange, Act and Assert
-    assertNull(new TopValue().internalType());
+    assertNull((new TopValue()).internalType());
   }
 
   /**
@@ -114,18 +101,17 @@ class TopValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TopValue.equals(Object)", "int TopValue.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     TopValue topValue = new TopValue();
     TopValue topValue2 = new TopValue();
 
     // Act and Assert
     assertEquals(topValue, topValue2);
-    assertEquals(topValue.hashCode(), topValue2.hashCode());
+    int expectedHashCodeResult = topValue.hashCode();
+    assertEquals(expectedHashCodeResult, topValue2.hashCode());
   }
 
   /**
@@ -144,11 +130,9 @@ class TopValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TopValue.equals(Object)", "int TopValue.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     TopValue topValue = new TopValue();
 
@@ -169,11 +153,9 @@ class TopValueDiffblueTest {
    * <p>Method under test: {@link TopValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TopValue.equals(Object)", "int TopValue.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new TopValue(), 1);
   }
@@ -189,11 +171,9 @@ class TopValueDiffblueTest {
    * <p>Method under test: {@link TopValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TopValue.equals(Object)", "int TopValue.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new TopValue(), null);
   }
@@ -209,11 +189,9 @@ class TopValueDiffblueTest {
    * <p>Method under test: {@link TopValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean TopValue.equals(Object)", "int TopValue.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new TopValue(), "Different type to TopValue");
   }
@@ -231,16 +209,14 @@ class TopValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void TopValue.<init>()",
     "boolean TopValue.isParticular()",
     "boolean TopValue.isSpecific()",
     "String TopValue.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     TopValue actualTopValue = new TopValue();
     String actualToStringResult = actualTopValue.toString();

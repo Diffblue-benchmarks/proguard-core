@@ -1,19 +1,17 @@
 package proguard.classfile.editor;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.UnsupportedEncodingException;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-import proguard.analysis.PartialEvaluatorErrorsTestKt;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.ClassPool;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
@@ -25,79 +23,79 @@ import proguard.classfile.attribute.Attribute;
 import proguard.classfile.constant.ClassConstant;
 import proguard.classfile.constant.Constant;
 import proguard.classfile.constant.Utf8Constant;
+import proguard.classfile.editor.ClassBuilder.CodeBuilder;
 import proguard.classfile.kotlin.KotlinConstants;
 import proguard.classfile.visitor.MemberVisitor;
 
-class ClassBuilderDiffblueTest {
+public class ClassBuilderDiffblueTest {
+  /**
+   * Test {@link ClassBuilder#ClassBuilder(ProgramClass, ClassPool, ClassPool)}.
+   *
+   * <ul>
+   *   <li>Given one.
+   *   <li>When {@link ProgramClass#ProgramClass()} {@link ProgramClass#u2constantPoolCount} is one.
+   * </ul>
+   *
+   * <p>Method under test: {@link ClassBuilder#ClassBuilder(ProgramClass, ClassPool, ClassPool)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"void ClassBuilder.<init>(ProgramClass, ClassPool, ClassPool)"})
+  public void testNewClassBuilder_givenOne_whenProgramClassU2constantPoolCountIsOne() {
+    // Arrange
+    ProgramClass programClass = new ProgramClass();
+    programClass.u2constantPoolCount = 1;
+
+    // Act and Assert
+    assertSame(
+        programClass,
+        (new ClassBuilder(programClass, null, KotlinConstants.dummyClassPool)).getProgramClass());
+  }
+
   /**
    * Test {@link ClassBuilder#ClassBuilder(ProgramClass)}.
+   *
+   * <ul>
+   *   <li>Given two.
+   *   <li>When {@link ProgramClass#ProgramClass()} {@link ProgramClass#u2constantPoolCount} is two.
+   * </ul>
    *
    * <p>Method under test: {@link ClassBuilder#ClassBuilder(ProgramClass)}
    */
   @Test
-  @DisplayName("Test new ClassBuilder(ProgramClass)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassBuilder.<init>(ProgramClass)"})
-  void testNewClassBuilder() {
+  public void testNewClassBuilder_givenTwo_whenProgramClassU2constantPoolCountIsTwo() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ProgramClass programClass = new ProgramClass(1, 2, constantPool, 1, 1, 1);
+    ProgramClass programClass = new ProgramClass();
+    programClass.u2constantPoolCount = 2;
 
-    // Act
-    ClassBuilder actualClassBuilder = new ClassBuilder(programClass);
-
-    // Assert
-    assertSame(programClass, actualClassBuilder.getProgramClass());
-    assertSame(programClass, actualClassBuilder.getConstantPoolEditor().getTargetClass());
+    // Act and Assert
+    assertSame(programClass, (new ClassBuilder(programClass)).getProgramClass());
   }
 
   /**
    * Test {@link ClassBuilder#ClassBuilder(ProgramClass, ClassPool, ClassPool)}.
    *
-   * <p>Method under test: {@link ClassBuilder#ClassBuilder(ProgramClass, ClassPool, ClassPool)}
-   */
-  @Test
-  @DisplayName("Test new ClassBuilder(ProgramClass, ClassPool, ClassPool)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void ClassBuilder.<init>(ProgramClass, ClassPool, ClassPool)"})
-  void testNewClassBuilder2() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ProgramClass programClass = new ProgramClass(1, 1, constantPool, 1, 1, 1);
-
-    // Act
-    ClassBuilder actualClassBuilder =
-        new ClassBuilder(programClass, null, KotlinConstants.dummyClassPool);
-
-    // Assert
-    assertSame(programClass, actualClassBuilder.getProgramClass());
-    assertSame(programClass, actualClassBuilder.getConstantPoolEditor().getTargetClass());
-  }
-
-  /**
-   * Test {@link ClassBuilder#ClassBuilder(ProgramClass, ClassPool, ClassPool)}.
+   * <ul>
+   *   <li>Given two.
+   *   <li>When {@link ProgramClass#ProgramClass()} {@link ProgramClass#u2constantPoolCount} is two.
+   * </ul>
    *
    * <p>Method under test: {@link ClassBuilder#ClassBuilder(ProgramClass, ClassPool, ClassPool)}
    */
   @Test
-  @DisplayName("Test new ClassBuilder(ProgramClass, ClassPool, ClassPool)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassBuilder.<init>(ProgramClass, ClassPool, ClassPool)"})
-  void testNewClassBuilder3() {
+  public void testNewClassBuilder_givenTwo_whenProgramClassU2constantPoolCountIsTwo2() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ProgramClass programClass = new ProgramClass(1, 2, constantPool, 1, 1, 1);
+    ProgramClass programClass = new ProgramClass();
+    programClass.u2constantPoolCount = 2;
 
-    // Act
-    ClassBuilder actualClassBuilder =
-        new ClassBuilder(programClass, null, KotlinConstants.dummyClassPool);
-
-    // Assert
-    assertSame(programClass, actualClassBuilder.getProgramClass());
-    assertSame(programClass, actualClassBuilder.getConstantPoolEditor().getTargetClass());
+    // Act and Assert
+    assertSame(
+        programClass,
+        (new ClassBuilder(programClass, null, KotlinConstants.dummyClassPool)).getProgramClass());
   }
 
   /**
@@ -111,12 +109,9 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#ClassBuilder(int, int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test new ClassBuilder(int, int, String, String); when 'Class Name'; then fifth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassBuilder.<init>(int, int, String, String)"})
-  void testNewClassBuilder_whenClassName_thenFifthElementReturnClassConstant() {
+  public void testNewClassBuilder_whenClassName_thenFifthElementReturnClassConstant() {
     // Arrange and Act
     ClassBuilder actualClassBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
 
@@ -144,12 +139,9 @@ class ClassBuilderDiffblueTest {
    * Object)}
    */
   @Test
-  @DisplayName(
-      "Test new ClassBuilder(int, int, String, String, String, int, Object); when 'Class Name'; then fifth element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassBuilder.<init>(int, int, String, String, String, int, Object)"})
-  void testNewClassBuilder_whenClassName_thenFifthElementReturnClassConstant2() {
+  public void testNewClassBuilder_whenClassName_thenFifthElementReturnClassConstant2() {
     // Arrange and Act
     ClassBuilder actualClassBuilder =
         new ClassBuilder(
@@ -178,12 +170,9 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#ClassBuilder(int, int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test new ClassBuilder(int, int, String, String); when 'Class Name'; then return ProgramClass SuperName is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassBuilder.<init>(int, int, String, String)"})
-  void testNewClassBuilder_whenClassName_thenReturnProgramClassSuperNameIsNull()
+  public void testNewClassBuilder_whenClassName_thenReturnProgramClassSuperNameIsNull()
       throws UnsupportedEncodingException {
     // Arrange and Act
     ClassBuilder actualClassBuilder = new ClassBuilder(1, 1, "Class Name", null);
@@ -200,7 +189,8 @@ class ClassBuilderDiffblueTest {
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
     assertSame(programClass, actualClassBuilder.getConstantPoolEditor().getTargetClass());
     assertSame(programClass, ((ClassConstant) constant).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
   }
 
   /**
@@ -215,12 +205,9 @@ class ClassBuilderDiffblueTest {
    * Object)}
    */
   @Test
-  @DisplayName(
-      "Test new ClassBuilder(int, int, String, String, String, int, Object); when 'Class Name'; then third element return ClassConstant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassBuilder.<init>(int, int, String, String, String, int, Object)"})
-  void testNewClassBuilder_whenClassName_thenThirdElementReturnClassConstant()
+  public void testNewClassBuilder_whenClassName_thenThirdElementReturnClassConstant()
       throws UnsupportedEncodingException {
     // Arrange and Act
     ClassBuilder actualClassBuilder =
@@ -241,7 +228,8 @@ class ClassBuilderDiffblueTest {
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
     assertSame(programClass, actualClassBuilder.getConstantPoolEditor().getTargetClass());
     assertSame(programClass, ((ClassConstant) constant).referencedClass);
-    assertArrayEquals("Class Name".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
   }
 
   /**
@@ -255,21 +243,14 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#ClassBuilder(ProgramClass)}
    */
   @Test
-  @DisplayName(
-      "Test new ClassBuilder(ProgramClass); when ProgramClass(); then return ProgramClass is ProgramClass()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassBuilder.<init>(ProgramClass)"})
-  void testNewClassBuilder_whenProgramClass_thenReturnProgramClassIsProgramClass() {
+  public void testNewClassBuilder_whenProgramClass_thenReturnProgramClassIsProgramClass() {
     // Arrange
     ProgramClass programClass = new ProgramClass();
 
-    // Act
-    ClassBuilder actualClassBuilder = new ClassBuilder(programClass);
-
-    // Assert
-    assertSame(programClass, actualClassBuilder.getProgramClass());
-    assertSame(programClass, actualClassBuilder.getConstantPoolEditor().getTargetClass());
+    // Act and Assert
+    assertSame(programClass, (new ClassBuilder(programClass)).getProgramClass());
   }
 
   /**
@@ -283,23 +264,18 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#ClassBuilder(ProgramClass, ClassPool, ClassPool)}
    */
   @Test
-  @DisplayName(
-      "Test new ClassBuilder(ProgramClass, ClassPool, ClassPool); when ProgramClass(); then return ProgramClass is ProgramClass()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassBuilder.<init>(ProgramClass, ClassPool, ClassPool)"})
-  void testNewClassBuilder_whenProgramClass_thenReturnProgramClassIsProgramClass2() {
+  public void testNewClassBuilder_whenProgramClass_thenReturnProgramClassIsProgramClass2() {
     // Arrange
     ProgramClass programClass = new ProgramClass();
 
-    // Act
-    ClassBuilder actualClassBuilder =
-        new ClassBuilder(
-            programClass, KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool);
-
-    // Assert
-    assertSame(programClass, actualClassBuilder.getProgramClass());
-    assertSame(programClass, actualClassBuilder.getConstantPoolEditor().getTargetClass());
+    // Act and Assert
+    assertSame(
+        programClass,
+        (new ClassBuilder(
+                programClass, KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool))
+            .getProgramClass());
   }
 
   /**
@@ -313,12 +289,9 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#ClassBuilder(int, int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test new ClassBuilder(int, int, String, String); when 'Test.class'; then return ProgramClass Name is 'Test.class'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ClassBuilder.<init>(int, int, String, String)"})
-  void testNewClassBuilder_whenTestClass_thenReturnProgramClassNameIsTestClass()
+  public void testNewClassBuilder_whenTestClass_thenReturnProgramClassNameIsTestClass()
       throws UnsupportedEncodingException {
     // Arrange and Act
     ClassBuilder actualClassBuilder = new ClassBuilder(1, 1, "Test.class", "Test.class");
@@ -335,11 +308,11 @@ class ClassBuilderDiffblueTest {
     assertEquals("Test.class", ((Utf8Constant) constant2).getString());
     assertEquals(2, programClass.u2superClass);
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    Clazz actualSuperClass = programClass.getSuperClass();
-    assertSame(programClass, actualSuperClass);
+    assertSame(programClass, programClass.getSuperClass());
     assertSame(programClass, actualClassBuilder.getConstantPoolEditor().getTargetClass());
     assertSame(programClass, ((ClassConstant) constant).referencedClass);
-    assertArrayEquals("Test.class".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes = "Test.class".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
   }
 
   /**
@@ -353,14 +326,12 @@ class ClassBuilderDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ConstantPoolEditor ClassBuilder.getConstantPoolEditor()",
     "ProgramClass ClassBuilder.getProgramClass()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
 
@@ -413,11 +384,27 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addInterface(Clazz)}
    */
   @Test
-  @DisplayName("Test addInterface(Clazz) with 'interfaceClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addInterface(Clazz)"})
-  void testAddInterfaceWithInterfaceClass() {
+  public void testAddInterfaceWithInterfaceClass() {
+    // Arrange
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
+
+    // Act and Assert
+    assertSame(
+        classBuilder,
+        classBuilder.addInterface(new LibraryClass(5, "This Class Name", "Super Class Name")));
+  }
+
+  /**
+   * Test {@link ClassBuilder#addInterface(Clazz)} with {@code interfaceClass}.
+   *
+   * <p>Method under test: {@link ClassBuilder#addInterface(Clazz)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"ClassBuilder ClassBuilder.addInterface(Clazz)"})
+  public void testAddInterfaceWithInterfaceClass2() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -431,62 +418,8 @@ class ClassBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    ClassBuilder actualAddInterfaceResult = classBuilder.addInterface(new LibraryClass());
-
-    // Assert
-    assertSame(classBuilder, actualAddInterfaceResult);
-  }
-
-  /**
-   * Test {@link ClassBuilder#addInterface(Clazz)} with {@code interfaceClass}.
-   *
-   * <p>Method under test: {@link ClassBuilder#addInterface(Clazz)}
-   */
-  @Test
-  @DisplayName("Test addInterface(Clazz) with 'interfaceClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"ClassBuilder ClassBuilder.addInterface(Clazz)"})
-  void testAddInterfaceWithInterfaceClass2() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassBuilder classBuilder =
-        new ClassBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    ClassBuilder actualAddInterfaceResult = classBuilder.addInterface(new LibraryClass());
-
-    // Assert
-    assertSame(classBuilder, actualAddInterfaceResult);
-  }
-
-  /**
-   * Test {@link ClassBuilder#addInterface(Clazz)} with {@code interfaceClass}.
-   *
-   * <ul>
-   *   <li>Then return buildClass.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassBuilder#addInterface(Clazz)}
-   */
-  @Test
-  @DisplayName("Test addInterface(Clazz) with 'interfaceClass'; then return buildClass")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"ClassBuilder ClassBuilder.addInterface(Clazz)"})
-  void testAddInterfaceWithInterfaceClass_thenReturnBuildClass() {
-    // Arrange
-    ClassBuilder buildClassResult = PartialEvaluatorErrorsTestKt.buildClass();
-    LibraryClass interfaceClass = new LibraryClass(5, "This Class Name", "Super Class Name");
-
-    // Act
-    ClassBuilder actualAddInterfaceResult = buildClassResult.addInterface(interfaceClass);
-
-    // Assert
-    assertSame(buildClassResult, actualAddInterfaceResult);
+    // Act and Assert
+    assertSame(classBuilder, classBuilder.addInterface(new LibraryClass()));
   }
 
   /**
@@ -495,14 +428,14 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addInterface(String)}
    */
   @Test
-  @DisplayName("Test addInterface(String) with 'interfaceName'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addInterface(String)"})
-  void testAddInterfaceWithInterfaceName() throws UnsupportedEncodingException {
+  public void testAddInterfaceWithInterfaceName() throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     ProgramClass programClass =
-        PartialEvaluatorErrorsTestKt.buildClass().addInterface("Interface Name").getProgramClass();
+        (new ClassBuilder(1, 1, "Class Name", "Superclass Name"))
+            .addInterface("Interface Name")
+            .getProgramClass();
     Constant[] constantArray = programClass.constantPool;
     Constant constant = constantArray[1];
     assertTrue(constant instanceof Utf8Constant);
@@ -511,10 +444,12 @@ class ClassBuilderDiffblueTest {
     Constant constant3 = constantArray[5];
     assertTrue(constant3 instanceof Utf8Constant);
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals("Interface Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals(
-        "PartialEvaluatorDummy".getBytes("UTF-8"), ((Utf8Constant) constant).getBytes());
-    assertArrayEquals("java/lang/Object".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant).getBytes());
+    byte[] expectedBytes2 = "Interface Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes3 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant2).getBytes());
     assertArrayEquals(new int[] {6}, programClass.u2interfaces);
   }
 
@@ -524,20 +459,15 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addInterface(String)}
    */
   @Test
-  @DisplayName("Test addInterface(String) with 'interfaceName'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addInterface(String)"})
-  void testAddInterfaceWithInterfaceName2() {
+  public void testAddInterfaceWithInterfaceName2() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ClassBuilder classBuilder = new ClassBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+    ClassBuilder classBuilder =
+        new ClassBuilder(new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    ClassBuilder actualAddInterfaceResult = classBuilder.addInterface("Interface Name");
-
-    // Assert
-    assertSame(classBuilder, actualAddInterfaceResult);
+    // Act and Assert
+    assertSame(classBuilder, classBuilder.addInterface("Interface Name"));
   }
 
   /**
@@ -546,33 +476,9 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addInterface(String)}
    */
   @Test
-  @DisplayName("Test addInterface(String) with 'interfaceName'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addInterface(String)"})
-  void testAddInterfaceWithInterfaceName3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ClassBuilder classBuilder = new ClassBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    ClassBuilder actualAddInterfaceResult = classBuilder.addInterface("Interface Name");
-
-    // Assert
-    assertSame(classBuilder, actualAddInterfaceResult);
-  }
-
-  /**
-   * Test {@link ClassBuilder#addInterface(String)} with {@code interfaceName}.
-   *
-   * <p>Method under test: {@link ClassBuilder#addInterface(String)}
-   */
-  @Test
-  @DisplayName("Test addInterface(String) with 'interfaceName'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"ClassBuilder ClassBuilder.addInterface(String)"})
-  void testAddInterfaceWithInterfaceName4() {
+  public void testAddInterfaceWithInterfaceName3() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -586,36 +492,8 @@ class ClassBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    ClassBuilder actualAddInterfaceResult = classBuilder.addInterface("Interface Name");
-
-    // Assert
-    assertSame(classBuilder, actualAddInterfaceResult);
-  }
-
-  /**
-   * Test {@link ClassBuilder#addInterface(String)} with {@code interfaceName}.
-   *
-   * <p>Method under test: {@link ClassBuilder#addInterface(String)}
-   */
-  @Test
-  @DisplayName("Test addInterface(String) with 'interfaceName'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"ClassBuilder ClassBuilder.addInterface(String)"})
-  void testAddInterfaceWithInterfaceName5() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassBuilder classBuilder =
-        new ClassBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    ClassBuilder actualAddInterfaceResult = classBuilder.addInterface("Interface Name");
-
-    // Assert
-    assertSame(classBuilder, actualAddInterfaceResult);
+    // Act and Assert
+    assertSame(classBuilder, classBuilder.addInterface("Interface Name"));
   }
 
   /**
@@ -625,18 +503,17 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addInterface(String, Clazz)}
    */
   @Test
-  @DisplayName("Test addInterface(String, Clazz) with 'interfaceName', 'referencedInterface'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addInterface(String, Clazz)"})
-  void testAddInterfaceWithInterfaceNameReferencedInterface() throws UnsupportedEncodingException {
+  public void testAddInterfaceWithInterfaceNameReferencedInterface()
+      throws UnsupportedEncodingException {
     // Arrange
-    ClassBuilder buildClassResult = PartialEvaluatorErrorsTestKt.buildClass();
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
     LibraryClass referencedInterface = new LibraryClass();
 
     // Act and Assert
     ProgramClass programClass =
-        buildClassResult.addInterface("Interface Name", referencedInterface).getProgramClass();
+        classBuilder.addInterface("Interface Name", referencedInterface).getProgramClass();
     Constant[] constantArray = programClass.constantPool;
     Constant constant = constantArray[6];
     Clazz clazz = ((ClassConstant) constant).referencedClass;
@@ -650,10 +527,12 @@ class ClassBuilderDiffblueTest {
     assertTrue(constant4 instanceof Utf8Constant);
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
     assertSame(referencedInterface, clazz);
-    assertArrayEquals("Interface Name".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals(
-        "PartialEvaluatorDummy".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-    assertArrayEquals("java/lang/Object".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "Interface Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes3 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant3).getBytes());
     assertArrayEquals(new int[] {6}, programClass.u2interfaces);
   }
 
@@ -664,18 +543,17 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addInterface(String, Clazz)}
    */
   @Test
-  @DisplayName("Test addInterface(String, Clazz) with 'interfaceName', 'referencedInterface'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addInterface(String, Clazz)"})
-  void testAddInterfaceWithInterfaceNameReferencedInterface2() throws UnsupportedEncodingException {
+  public void testAddInterfaceWithInterfaceNameReferencedInterface2()
+      throws UnsupportedEncodingException {
     // Arrange
-    ClassBuilder buildClassResult = PartialEvaluatorErrorsTestKt.buildClass();
-    buildClassResult.addInterface("Interface Name");
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
+    classBuilder.addInterface("Interface Name");
 
     // Act and Assert
     ProgramClass programClass =
-        buildClassResult.addInterface("Interface Name", new LibraryClass()).getProgramClass();
+        classBuilder.addInterface("Interface Name", new LibraryClass()).getProgramClass();
     Constant[] constantArray = programClass.constantPool;
     Constant constant = constantArray[6];
     assertTrue(constant instanceof ClassConstant);
@@ -688,10 +566,12 @@ class ClassBuilderDiffblueTest {
     assertNull(((ClassConstant) constant).referencedClass);
     assertEquals(2, programClass.getInterfaceCount());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals("Interface Name".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals(
-        "PartialEvaluatorDummy".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-    assertArrayEquals("java/lang/Object".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "Interface Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes3 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant3).getBytes());
     assertArrayEquals(new int[] {6, 6}, programClass.u2interfaces);
   }
 
@@ -702,21 +582,15 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addInterface(String, Clazz)}
    */
   @Test
-  @DisplayName("Test addInterface(String, Clazz) with 'interfaceName', 'referencedInterface'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addInterface(String, Clazz)"})
-  void testAddInterfaceWithInterfaceNameReferencedInterface3() {
+  public void testAddInterfaceWithInterfaceNameReferencedInterface3() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ClassBuilder classBuilder = new ClassBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+    ClassBuilder classBuilder =
+        new ClassBuilder(new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    ClassBuilder actualAddInterfaceResult =
-        classBuilder.addInterface("Interface Name", new LibraryClass());
-
-    // Assert
-    assertSame(classBuilder, actualAddInterfaceResult);
+    // Act and Assert
+    assertSame(classBuilder, classBuilder.addInterface("Interface Name", new LibraryClass()));
   }
 
   /**
@@ -726,35 +600,9 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addInterface(String, Clazz)}
    */
   @Test
-  @DisplayName("Test addInterface(String, Clazz) with 'interfaceName', 'referencedInterface'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addInterface(String, Clazz)"})
-  void testAddInterfaceWithInterfaceNameReferencedInterface4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ClassBuilder classBuilder = new ClassBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    ClassBuilder actualAddInterfaceResult =
-        classBuilder.addInterface("Interface Name", new LibraryClass());
-
-    // Assert
-    assertSame(classBuilder, actualAddInterfaceResult);
-  }
-
-  /**
-   * Test {@link ClassBuilder#addInterface(String, Clazz)} with {@code interfaceName}, {@code
-   * referencedInterface}.
-   *
-   * <p>Method under test: {@link ClassBuilder#addInterface(String, Clazz)}
-   */
-  @Test
-  @DisplayName("Test addInterface(String, Clazz) with 'interfaceName', 'referencedInterface'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"ClassBuilder ClassBuilder.addInterface(String, Clazz)"})
-  void testAddInterfaceWithInterfaceNameReferencedInterface5() {
+  public void testAddInterfaceWithInterfaceNameReferencedInterface4() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -768,39 +616,8 @@ class ClassBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    ClassBuilder actualAddInterfaceResult =
-        classBuilder.addInterface("Interface Name", new LibraryClass());
-
-    // Assert
-    assertSame(classBuilder, actualAddInterfaceResult);
-  }
-
-  /**
-   * Test {@link ClassBuilder#addInterface(String, Clazz)} with {@code interfaceName}, {@code
-   * referencedInterface}.
-   *
-   * <p>Method under test: {@link ClassBuilder#addInterface(String, Clazz)}
-   */
-  @Test
-  @DisplayName("Test addInterface(String, Clazz) with 'interfaceName', 'referencedInterface'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"ClassBuilder ClassBuilder.addInterface(String, Clazz)"})
-  void testAddInterfaceWithInterfaceNameReferencedInterface6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassBuilder classBuilder =
-        new ClassBuilder(
-            new ProgramClass(
-                1, 3, new Constant[] {classConstant, null, new ClassConstant()}, 1, 1, 1));
-
-    // Act
-    ClassBuilder actualAddInterfaceResult =
-        classBuilder.addInterface("Interface Name", new LibraryClass());
-
-    // Assert
-    assertSame(classBuilder, actualAddInterfaceResult);
+    // Act and Assert
+    assertSame(classBuilder, classBuilder.addInterface("Interface Name", new LibraryClass()));
   }
 
   /**
@@ -813,19 +630,16 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addInterface(String)}
    */
   @Test
-  @DisplayName(
-      "Test addInterface(String) with 'interfaceName'; then return ProgramClass InterfaceCount is two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addInterface(String)"})
-  void testAddInterfaceWithInterfaceName_thenReturnProgramClassInterfaceCountIsTwo()
+  public void testAddInterfaceWithInterfaceName_thenReturnProgramClassInterfaceCountIsTwo()
       throws UnsupportedEncodingException {
     // Arrange
-    ClassBuilder buildClassResult = PartialEvaluatorErrorsTestKt.buildClass();
-    buildClassResult.addInterface("Interface Name");
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
+    classBuilder.addInterface("Interface Name");
 
     // Act and Assert
-    ProgramClass programClass = buildClassResult.addInterface("Interface Name").getProgramClass();
+    ProgramClass programClass = classBuilder.addInterface("Interface Name").getProgramClass();
     Constant[] constantArray = programClass.constantPool;
     Constant constant = constantArray[1];
     assertTrue(constant instanceof Utf8Constant);
@@ -835,10 +649,12 @@ class ClassBuilderDiffblueTest {
     assertTrue(constant3 instanceof Utf8Constant);
     assertEquals(2, programClass.getInterfaceCount());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals("Interface Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals(
-        "PartialEvaluatorDummy".getBytes("UTF-8"), ((Utf8Constant) constant).getBytes());
-    assertArrayEquals("java/lang/Object".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant).getBytes());
+    byte[] expectedBytes2 = "Interface Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes3 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant2).getBytes());
     assertArrayEquals(new int[] {6, 6}, programClass.u2interfaces);
   }
 
@@ -849,15 +665,13 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addField(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test addField(int, String, String) with 'u2accessFlags', 'fieldName', 'fieldDescriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addField(int, String, String)"})
-  void testAddFieldWithU2accessFlagsFieldNameFieldDescriptor() throws UnsupportedEncodingException {
+  public void testAddFieldWithU2accessFlagsFieldNameFieldDescriptor()
+      throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     Constant[] constantArray =
-        PartialEvaluatorErrorsTestKt.buildClass()
+        (new ClassBuilder(1, 1, "Class Name", "Superclass Name"))
             .addField(2, "Field Name", "Field Descriptor")
             .getProgramClass()
             .constantPool;
@@ -870,11 +684,14 @@ class ClassBuilderDiffblueTest {
     Constant constant4 = constantArray[6];
     assertTrue(constant4 instanceof Utf8Constant);
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals("Field Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Field Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals(
-        "PartialEvaluatorDummy".getBytes("UTF-8"), ((Utf8Constant) constant).getBytes());
-    assertArrayEquals("java/lang/Object".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant).getBytes());
+    byte[] expectedBytes2 = "Field Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes3 = "Field Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes4 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes4, ((Utf8Constant) constant2).getBytes());
   }
 
   /**
@@ -884,21 +701,15 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addField(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test addField(int, String, String) with 'u2accessFlags', 'fieldName', 'fieldDescriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addField(int, String, String)"})
-  void testAddFieldWithU2accessFlagsFieldNameFieldDescriptor2() {
+  public void testAddFieldWithU2accessFlagsFieldNameFieldDescriptor2() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ClassBuilder classBuilder = new ClassBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+    ClassBuilder classBuilder =
+        new ClassBuilder(new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    ClassBuilder actualAddFieldResult = classBuilder.addField(2, "Field Name", "Field Descriptor");
-
-    // Assert
-    assertSame(classBuilder, actualAddFieldResult);
+    // Act and Assert
+    assertSame(classBuilder, classBuilder.addField(2, "Field Name", "Field Descriptor"));
   }
 
   /**
@@ -908,36 +719,9 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addField(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test addField(int, String, String) with 'u2accessFlags', 'fieldName', 'fieldDescriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addField(int, String, String)"})
-  void testAddFieldWithU2accessFlagsFieldNameFieldDescriptor3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ClassBuilder classBuilder = new ClassBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    ClassBuilder actualAddFieldResult = classBuilder.addField(2, "Field Name", "Field Descriptor");
-
-    // Assert
-    assertSame(classBuilder, actualAddFieldResult);
-  }
-
-  /**
-   * Test {@link ClassBuilder#addField(int, String, String)} with {@code u2accessFlags}, {@code
-   * fieldName}, {@code fieldDescriptor}.
-   *
-   * <p>Method under test: {@link ClassBuilder#addField(int, String, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test addField(int, String, String) with 'u2accessFlags', 'fieldName', 'fieldDescriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"ClassBuilder ClassBuilder.addField(int, String, String)"})
-  void testAddFieldWithU2accessFlagsFieldNameFieldDescriptor4() {
+  public void testAddFieldWithU2accessFlagsFieldNameFieldDescriptor3() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -951,11 +735,8 @@ class ClassBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    ClassBuilder actualAddFieldResult = classBuilder.addField(2, "Field Name", "Field Descriptor");
-
-    // Assert
-    assertSame(classBuilder, actualAddFieldResult);
+    // Act and Assert
+    assertSame(classBuilder, classBuilder.addField(2, "Field Name", "Field Descriptor"));
   }
 
   /**
@@ -965,19 +746,16 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addField(int, String, String, MemberVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test addField(int, String, String, MemberVisitor) with 'u2accessFlags', 'fieldName', 'fieldDescriptor', 'extraMemberVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addField(int, String, String, MemberVisitor)"})
-  void testAddFieldWithU2accessFlagsFieldNameFieldDescriptorExtraMemberVisitor()
+  public void testAddFieldWithU2accessFlagsFieldNameFieldDescriptorExtraMemberVisitor()
       throws UnsupportedEncodingException {
     // Arrange
-    ClassBuilder buildClassResult = PartialEvaluatorErrorsTestKt.buildClass();
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
 
     // Act and Assert
     Constant[] constantArray =
-        buildClassResult
+        classBuilder
             .addField(2, "Field Name", "Field Descriptor", new AttributeSorter())
             .getProgramClass()
             .constantPool;
@@ -990,11 +768,14 @@ class ClassBuilderDiffblueTest {
     Constant constant4 = constantArray[6];
     assertTrue(constant4 instanceof Utf8Constant);
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals("Field Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Field Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals(
-        "PartialEvaluatorDummy".getBytes("UTF-8"), ((Utf8Constant) constant).getBytes());
-    assertArrayEquals("java/lang/Object".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant).getBytes());
+    byte[] expectedBytes2 = "Field Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes3 = "Field Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes4 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes4, ((Utf8Constant) constant2).getBytes());
   }
 
   /**
@@ -1004,16 +785,42 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addField(int, String, String, MemberVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test addField(int, String, String, MemberVisitor) with 'u2accessFlags', 'fieldName', 'fieldDescriptor', 'extraMemberVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addField(int, String, String, MemberVisitor)"})
-  void testAddFieldWithU2accessFlagsFieldNameFieldDescriptorExtraMemberVisitor2()
+  public void testAddFieldWithU2accessFlagsFieldNameFieldDescriptorExtraMemberVisitor2() {
+    // Arrange
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
+    classBuilder.addField(2, "Field Name", "Field Descriptor");
+
+    // Act and Assert
+    ProgramClass programClass =
+        classBuilder
+            .addField(2, "Field Name", "Field Descriptor", new AttributeSorter())
+            .getProgramClass();
+    Constant[] constantArray = programClass.constantPool;
+    assertTrue(constantArray[1] instanceof Utf8Constant);
+    assertTrue(constantArray[3] instanceof Utf8Constant);
+    assertTrue(constantArray[5] instanceof Utf8Constant);
+    assertTrue(constantArray[6] instanceof Utf8Constant);
+    assertEquals(2, programClass.fields.length);
+    assertEquals(2, programClass.u2fieldsCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link ClassBuilder#addField(int, String, String, MemberVisitor)} with {@code
+   * u2accessFlags}, {@code fieldName}, {@code fieldDescriptor}, {@code extraMemberVisitor}.
+   *
+   * <p>Method under test: {@link ClassBuilder#addField(int, String, String, MemberVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"ClassBuilder ClassBuilder.addField(int, String, String, MemberVisitor)"})
+  public void testAddFieldWithU2accessFlagsFieldNameFieldDescriptorExtraMemberVisitor3()
       throws UnsupportedEncodingException {
     // Arrange and Act
     ClassBuilder actualAddFieldResult =
-        PartialEvaluatorErrorsTestKt.buildClass()
+        (new ClassBuilder(1, 1, "Class Name", "Superclass Name"))
             .addField(2, "Field Name", "Field Descriptor", null);
 
     // Assert
@@ -1032,11 +839,14 @@ class ClassBuilderDiffblueTest {
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
     assertSame(programClass, actualAddFieldResult.getConstantPoolEditor().getTargetClass());
     assertSame(programClass, ((ClassConstant) constant).referencedClass);
-    assertArrayEquals("Field Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant5).getBytes());
-    assertArrayEquals("Field Name".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals(
-        "PartialEvaluatorDummy".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-    assertArrayEquals("java/lang/Object".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "Field Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant5).getBytes());
+    byte[] expectedBytes3 = "Field Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes4 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes4, ((Utf8Constant) constant3).getBytes());
   }
 
   /**
@@ -1046,111 +856,41 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addField(int, String, String, MemberVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test addField(int, String, String, MemberVisitor) with 'u2accessFlags', 'fieldName', 'fieldDescriptor', 'extraMemberVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addField(int, String, String, MemberVisitor)"})
-  void testAddFieldWithU2accessFlagsFieldNameFieldDescriptorExtraMemberVisitor3() {
+  public void testAddFieldWithU2accessFlagsFieldNameFieldDescriptorExtraMemberVisitor4()
+      throws UnsupportedEncodingException {
     // Arrange
-    ClassBuilder buildClassResult = PartialEvaluatorErrorsTestKt.buildClass();
-    buildClassResult.addField(2, "Field Name", "Field Descriptor");
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
 
-    // Act and Assert
-    ProgramClass programClass =
-        buildClassResult
-            .addField(2, "Field Name", "Field Descriptor", new AttributeSorter())
-            .getProgramClass();
+    // Act
+    ClassBuilder actualAddFieldResult =
+        classBuilder.addField(2, "Field Name", "Field Descriptor", new ConstantPoolShrinker());
+
+    // Assert
+    ProgramClass programClass = actualAddFieldResult.getProgramClass();
     Constant[] constantArray = programClass.constantPool;
-    assertTrue(constantArray[5] instanceof Utf8Constant);
-    assertTrue(constantArray[6] instanceof Utf8Constant);
-    assertEquals(2, programClass.fields.length);
-    assertEquals(2, programClass.u2fieldsCount);
+    Constant constant = constantArray[2];
+    assertTrue(constant instanceof ClassConstant);
+    Constant constant2 = constantArray[1];
+    assertTrue(constant2 instanceof Utf8Constant);
+    Constant constant3 = constantArray[3];
+    assertTrue(constant3 instanceof Utf8Constant);
+    Constant constant4 = constantArray[5];
+    assertTrue(constant4 instanceof Utf8Constant);
+    Constant constant5 = constantArray[6];
+    assertTrue(constant5 instanceof Utf8Constant);
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-  }
-
-  /**
-   * Test {@link ClassBuilder#addField(int, String, String, MemberVisitor)} with {@code
-   * u2accessFlags}, {@code fieldName}, {@code fieldDescriptor}, {@code extraMemberVisitor}.
-   *
-   * <p>Method under test: {@link ClassBuilder#addField(int, String, String, MemberVisitor)}
-   */
-  @Test
-  @DisplayName(
-      "Test addField(int, String, String, MemberVisitor) with 'u2accessFlags', 'fieldName', 'fieldDescriptor', 'extraMemberVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"ClassBuilder ClassBuilder.addField(int, String, String, MemberVisitor)"})
-  void testAddFieldWithU2accessFlagsFieldNameFieldDescriptorExtraMemberVisitor4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ClassBuilder classBuilder = new ClassBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
-    ClassBuilder actualAddFieldResult =
-        classBuilder.addField(2, "Field Name", "Field Descriptor", new AttributeSorter());
-
-    // Assert
-    assertSame(classBuilder, actualAddFieldResult);
-  }
-
-  /**
-   * Test {@link ClassBuilder#addField(int, String, String, MemberVisitor)} with {@code
-   * u2accessFlags}, {@code fieldName}, {@code fieldDescriptor}, {@code extraMemberVisitor}.
-   *
-   * <p>Method under test: {@link ClassBuilder#addField(int, String, String, MemberVisitor)}
-   */
-  @Test
-  @DisplayName(
-      "Test addField(int, String, String, MemberVisitor) with 'u2accessFlags', 'fieldName', 'fieldDescriptor', 'extraMemberVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"ClassBuilder ClassBuilder.addField(int, String, String, MemberVisitor)"})
-  void testAddFieldWithU2accessFlagsFieldNameFieldDescriptorExtraMemberVisitor5() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ClassBuilder classBuilder = new ClassBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    ClassBuilder actualAddFieldResult =
-        classBuilder.addField(2, "Field Name", "Field Descriptor", new AttributeSorter());
-
-    // Assert
-    assertSame(classBuilder, actualAddFieldResult);
-  }
-
-  /**
-   * Test {@link ClassBuilder#addField(int, String, String, MemberVisitor)} with {@code
-   * u2accessFlags}, {@code fieldName}, {@code fieldDescriptor}, {@code extraMemberVisitor}.
-   *
-   * <p>Method under test: {@link ClassBuilder#addField(int, String, String, MemberVisitor)}
-   */
-  @Test
-  @DisplayName(
-      "Test addField(int, String, String, MemberVisitor) with 'u2accessFlags', 'fieldName', 'fieldDescriptor', 'extraMemberVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"ClassBuilder ClassBuilder.addField(int, String, String, MemberVisitor)"})
-  void testAddFieldWithU2accessFlagsFieldNameFieldDescriptorExtraMemberVisitor6() {
-    // Arrange
-    ClassConstant classConstant = new ClassConstant();
-    ClassConstant classConstant2 = new ClassConstant();
-    ClassBuilder classBuilder =
-        new ClassBuilder(
-            new ProgramClass(
-                1,
-                3,
-                new Constant[] {classConstant, classConstant2, new ClassConstant()},
-                1,
-                1,
-                1));
-
-    // Act
-    ClassBuilder actualAddFieldResult =
-        classBuilder.addField(2, "Field Name", "Field Descriptor", new AttributeSorter());
-
-    // Assert
-    assertSame(classBuilder, actualAddFieldResult);
+    assertSame(programClass, actualAddFieldResult.getConstantPoolEditor().getTargetClass());
+    assertSame(programClass, ((ClassConstant) constant).referencedClass);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "Field Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant5).getBytes());
+    byte[] expectedBytes3 = "Field Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes4 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes4, ((Utf8Constant) constant3).getBytes());
   }
 
   /**
@@ -1164,19 +904,16 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addField(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test addField(int, String, String) with 'u2accessFlags', 'fieldName', 'fieldDescriptor'; then return array length is two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addField(int, String, String)"})
-  void testAddFieldWithU2accessFlagsFieldNameFieldDescriptor_thenReturnArrayLengthIsTwo() {
+  public void testAddFieldWithU2accessFlagsFieldNameFieldDescriptor_thenReturnArrayLengthIsTwo() {
     // Arrange
-    ClassBuilder buildClassResult = PartialEvaluatorErrorsTestKt.buildClass();
-    buildClassResult.addField(2, "Field Name", "Field Descriptor");
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
+    classBuilder.addField(2, "Field Name", "Field Descriptor");
 
     // Act and Assert
     ProgramClass programClass =
-        buildClassResult.addField(2, "Field Name", "Field Descriptor").getProgramClass();
+        classBuilder.addField(2, "Field Name", "Field Descriptor").getProgramClass();
     Constant[] constantArray = programClass.constantPool;
     assertTrue(constantArray[5] instanceof Utf8Constant);
     assertTrue(constantArray[6] instanceof Utf8Constant);
@@ -1189,79 +926,30 @@ class ClassBuilderDiffblueTest {
    * Test {@link ClassBuilder#addAndReturnField(int, String, String)}.
    *
    * <ul>
-   *   <li>Given buildClass.
-   *   <li>Then sixth element {@link Utf8Constant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassBuilder#addAndReturnField(int, String, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test addAndReturnField(int, String, String); given buildClass; then sixth element Utf8Constant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"ProgramField ClassBuilder.addAndReturnField(int, String, String)"})
-  void testAddAndReturnField_givenBuildClass_thenSixthElementUtf8Constant()
-      throws UnsupportedEncodingException {
-    // Arrange
-    ClassBuilder buildClassResult = PartialEvaluatorErrorsTestKt.buildClass();
-
-    // Act
-    buildClassResult.addAndReturnField(2, "Field Name", "Field Descriptor");
-
-    // Assert
-    ProgramClass programClass = buildClassResult.getProgramClass();
-    Constant[] constantArray = programClass.constantPool;
-    Constant constant = constantArray[5];
-    assertTrue(constant instanceof Utf8Constant);
-    Constant constant2 = constantArray[6];
-    assertTrue(constant2 instanceof Utf8Constant);
-    assertEquals("Field Descriptor", ((Utf8Constant) constant2).getString());
-    assertEquals("Field Name", ((Utf8Constant) constant).getString());
-    assertNull(constant.getProcessingInfo());
-    assertNull(constant2.getProcessingInfo());
-    assertEquals(0, constant.getProcessingFlags());
-    assertEquals(0, constant2.getProcessingFlags());
-    assertEquals(1, constant.getTag());
-    assertEquals(1, constant2.getTag());
-    assertEquals(7, programClass.u2constantPoolCount);
-    assertFalse(constant.isCategory2());
-    assertFalse(constant2.isCategory2());
-    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals("Field Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-    assertArrayEquals("Field Name".getBytes("UTF-8"), ((Utf8Constant) constant).getBytes());
-  }
-
-  /**
-   * Test {@link ClassBuilder#addAndReturnField(int, String, String)}.
-   *
-   * <ul>
    *   <li>Then array length is two.
    * </ul>
    *
    * <p>Method under test: {@link ClassBuilder#addAndReturnField(int, String, String)}
    */
   @Test
-  @DisplayName("Test addAndReturnField(int, String, String); then array length is two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ProgramField ClassBuilder.addAndReturnField(int, String, String)"})
-  void testAddAndReturnField_thenArrayLengthIsTwo() {
+  public void testAddAndReturnField_thenArrayLengthIsTwo() {
     // Arrange
-    ClassBuilder buildClassResult = PartialEvaluatorErrorsTestKt.buildClass();
-    buildClassResult.addField(2, "Field Name", "Field Descriptor");
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
+    classBuilder.addField(2, "Field Name", "Field Descriptor");
 
     // Act
     ProgramField actualAddAndReturnFieldResult =
-        buildClassResult.addAndReturnField(2, "Field Name", "Field Descriptor");
+        classBuilder.addAndReturnField(2, "Field Name", "Field Descriptor");
 
     // Assert
-    ProgramClass programClass = buildClassResult.getProgramClass();
+    ProgramClass programClass = classBuilder.getProgramClass();
     ProgramField[] programFieldArray = programClass.fields;
     assertEquals(2, programFieldArray.length);
     assertEquals(2, programClass.u2fieldsCount);
     assertEquals(7, programClass.u2constantPoolCount);
-    assertSame(actualAddAndReturnFieldResult.attributes, programFieldArray[0].attributes);
+    assertSame(actualAddAndReturnFieldResult.attributes, (programFieldArray[0]).attributes);
   }
 
   /**
@@ -1274,14 +962,13 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addAndReturnField(int, String, String)}
    */
   @Test
-  @DisplayName("Test addAndReturnField(int, String, String); then return u2nameIndex is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ProgramField ClassBuilder.addAndReturnField(int, String, String)"})
-  void testAddAndReturnField_thenReturnU2nameIndexIsOne() {
+  public void testAddAndReturnField_thenReturnU2nameIndexIsOne() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ProgramClass programClass = new ProgramClass(1, 1, constantPool, 1, 1, 1);
+    ProgramClass programClass =
+        new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1);
+
     ClassBuilder classBuilder = new ClassBuilder(programClass);
 
     // Act
@@ -1306,17 +993,16 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addAndReturnField(int, String, String)}
    */
   @Test
-  @DisplayName("Test addAndReturnField(int, String, String); then return u2nameIndex is three")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ProgramField ClassBuilder.addAndReturnField(int, String, String)"})
-  void testAddAndReturnField_thenReturnU2nameIndexIsThree() {
+  public void testAddAndReturnField_thenReturnU2nameIndexIsThree() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
     ProgramClass programClass =
         new ProgramClass(
             1, 3, new Constant[] {classConstant, classConstant2, new ClassConstant()}, 1, 1, 1);
+
     ClassBuilder classBuilder = new ClassBuilder(programClass);
 
     // Act
@@ -1335,32 +1021,45 @@ class ClassBuilderDiffblueTest {
    * Test {@link ClassBuilder#addAndReturnField(int, String, String)}.
    *
    * <ul>
-   *   <li>Then return {@link ProgramMember#u2nameIndex} is zero.
+   *   <li>Then sixth element {@link Utf8Constant}.
    * </ul>
    *
    * <p>Method under test: {@link ClassBuilder#addAndReturnField(int, String, String)}
    */
   @Test
-  @DisplayName("Test addAndReturnField(int, String, String); then return u2nameIndex is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ProgramField ClassBuilder.addAndReturnField(int, String, String)"})
-  void testAddAndReturnField_thenReturnU2nameIndexIsZero() {
+  public void testAddAndReturnField_thenSixthElementUtf8Constant()
+      throws UnsupportedEncodingException {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ProgramClass programClass = new ProgramClass(1, 0, constantPool, 1, 1, 1);
-    ClassBuilder classBuilder = new ClassBuilder(programClass);
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
 
     // Act
-    ProgramField actualAddAndReturnFieldResult =
-        classBuilder.addAndReturnField(2, "Field Name", "Field Descriptor");
+    classBuilder.addAndReturnField(2, "Field Name", "Field Descriptor");
 
     // Assert
-    assertEquals(0, actualAddAndReturnFieldResult.u2nameIndex);
-    assertEquals(1, actualAddAndReturnFieldResult.u2descriptorIndex);
-    ProgramClass programClass2 = classBuilder.getProgramClass();
-    assertEquals(2, programClass2.u2constantPoolCount);
-    assertSame(programClass.constantPool, programClass2.constantPool);
+    ProgramClass programClass = classBuilder.getProgramClass();
+    Constant[] constantArray = programClass.constantPool;
+    Constant constant = constantArray[5];
+    assertTrue(constant instanceof Utf8Constant);
+    Constant constant2 = constantArray[6];
+    assertTrue(constant2 instanceof Utf8Constant);
+    assertEquals("Field Descriptor", ((Utf8Constant) constant2).getString());
+    assertEquals("Field Name", ((Utf8Constant) constant).getString());
+    assertNull(constant.getProcessingInfo());
+    assertNull(constant2.getProcessingInfo());
+    assertEquals(0, constant.getProcessingFlags());
+    assertEquals(0, constant2.getProcessingFlags());
+    assertEquals(1, constant.getTag());
+    assertEquals(1, constant2.getTag());
+    assertEquals(7, programClass.u2constantPoolCount);
+    assertFalse(constant.isCategory2());
+    assertFalse(constant2.isCategory2());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    byte[] expectedBytes = "Field Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "Field Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant).getBytes());
   }
 
   /**
@@ -1370,16 +1069,13 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test addMethod(int, String, String) with 'u2accessFlags', 'methodName', 'methodDescriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addMethod(int, String, String)"})
-  void testAddMethodWithU2accessFlagsMethodNameMethodDescriptor()
+  public void testAddMethodWithU2accessFlagsMethodNameMethodDescriptor()
       throws UnsupportedEncodingException {
     // Arrange, Act and Assert
     Constant[] constantArray =
-        PartialEvaluatorErrorsTestKt.buildClass()
+        (new ClassBuilder(1, 1, "Class Name", "Superclass Name"))
             .addMethod(2, "Method Name", "Method Descriptor")
             .getProgramClass()
             .constantPool;
@@ -1392,11 +1088,14 @@ class ClassBuilderDiffblueTest {
     Constant constant4 = constantArray[6];
     assertTrue(constant4 instanceof Utf8Constant);
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals("Method Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Method Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals(
-        "PartialEvaluatorDummy".getBytes("UTF-8"), ((Utf8Constant) constant).getBytes());
-    assertArrayEquals("java/lang/Object".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant).getBytes());
+    byte[] expectedBytes2 = "Method Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes3 = "Method Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes4 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes4, ((Utf8Constant) constant2).getBytes());
   }
 
   /**
@@ -1406,19 +1105,16 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test addMethod(int, String, String) with 'u2accessFlags', 'methodName', 'methodDescriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addMethod(int, String, String)"})
-  void testAddMethodWithU2accessFlagsMethodNameMethodDescriptor2() {
+  public void testAddMethodWithU2accessFlagsMethodNameMethodDescriptor2() {
     // Arrange
-    ClassBuilder buildClassResult = PartialEvaluatorErrorsTestKt.buildClass();
-    buildClassResult.addMethod(2, "Method Name", "Method Descriptor");
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
+    classBuilder.addMethod(2, "Method Name", "Method Descriptor");
 
     // Act and Assert
     ProgramClass programClass =
-        buildClassResult.addMethod(2, "Method Name", "Method Descriptor").getProgramClass();
+        classBuilder.addMethod(2, "Method Name", "Method Descriptor").getProgramClass();
     Constant[] constantArray = programClass.constantPool;
     assertTrue(constantArray[5] instanceof Utf8Constant);
     assertTrue(constantArray[6] instanceof Utf8Constant);
@@ -1434,22 +1130,15 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test addMethod(int, String, String) with 'u2accessFlags', 'methodName', 'methodDescriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addMethod(int, String, String)"})
-  void testAddMethodWithU2accessFlagsMethodNameMethodDescriptor3() {
+  public void testAddMethodWithU2accessFlagsMethodNameMethodDescriptor3() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ClassBuilder classBuilder = new ClassBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
+    ClassBuilder classBuilder =
+        new ClassBuilder(new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
 
-    // Act
-    ClassBuilder actualAddMethodResult =
-        classBuilder.addMethod(2, "Method Name", "Method Descriptor");
-
-    // Assert
-    assertSame(classBuilder, actualAddMethodResult);
+    // Act and Assert
+    assertSame(classBuilder, classBuilder.addMethod(2, "Method Name", "Method Descriptor"));
   }
 
   /**
@@ -1459,37 +1148,9 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test addMethod(int, String, String) with 'u2accessFlags', 'methodName', 'methodDescriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addMethod(int, String, String)"})
-  void testAddMethodWithU2accessFlagsMethodNameMethodDescriptor4() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ClassBuilder classBuilder = new ClassBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
-
-    // Act
-    ClassBuilder actualAddMethodResult =
-        classBuilder.addMethod(2, "Method Name", "Method Descriptor");
-
-    // Assert
-    assertSame(classBuilder, actualAddMethodResult);
-  }
-
-  /**
-   * Test {@link ClassBuilder#addMethod(int, String, String)} with {@code u2accessFlags}, {@code
-   * methodName}, {@code methodDescriptor}.
-   *
-   * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test addMethod(int, String, String) with 'u2accessFlags', 'methodName', 'methodDescriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"ClassBuilder ClassBuilder.addMethod(int, String, String)"})
-  void testAddMethodWithU2accessFlagsMethodNameMethodDescriptor5() {
+  public void testAddMethodWithU2accessFlagsMethodNameMethodDescriptor4() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -1503,12 +1164,8 @@ class ClassBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
-    ClassBuilder actualAddMethodResult =
-        classBuilder.addMethod(2, "Method Name", "Method Descriptor");
-
-    // Assert
-    assertSame(classBuilder, actualAddMethodResult);
+    // Act and Assert
+    assertSame(classBuilder, classBuilder.addMethod(2, "Method Name", "Method Descriptor"));
   }
 
   /**
@@ -1518,19 +1175,16 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String, MemberVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test addMethod(int, String, String, MemberVisitor) with 'u2accessFlags', 'methodName', 'methodDescriptor', 'extraMemberVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addMethod(int, String, String, MemberVisitor)"})
-  void testAddMethodWithU2accessFlagsMethodNameMethodDescriptorExtraMemberVisitor()
+  public void testAddMethodWithU2accessFlagsMethodNameMethodDescriptorExtraMemberVisitor()
       throws UnsupportedEncodingException {
     // Arrange
-    ClassBuilder buildClassResult = PartialEvaluatorErrorsTestKt.buildClass();
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
 
     // Act and Assert
     Constant[] constantArray =
-        buildClassResult
+        classBuilder
             .addMethod(2, "Method Name", "Method Descriptor", new AttributeSorter())
             .getProgramClass()
             .constantPool;
@@ -1543,11 +1197,14 @@ class ClassBuilderDiffblueTest {
     Constant constant4 = constantArray[6];
     assertTrue(constant4 instanceof Utf8Constant);
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals("Method Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant4).getBytes());
-    assertArrayEquals("Method Name".getBytes("UTF-8"), ((Utf8Constant) constant3).getBytes());
-    assertArrayEquals(
-        "PartialEvaluatorDummy".getBytes("UTF-8"), ((Utf8Constant) constant).getBytes());
-    assertArrayEquals("java/lang/Object".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant).getBytes());
+    byte[] expectedBytes2 = "Method Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes3 = "Method Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes4 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes4, ((Utf8Constant) constant2).getBytes());
   }
 
   /**
@@ -1557,22 +1214,21 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String, MemberVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test addMethod(int, String, String, MemberVisitor) with 'u2accessFlags', 'methodName', 'methodDescriptor', 'extraMemberVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addMethod(int, String, String, MemberVisitor)"})
-  void testAddMethodWithU2accessFlagsMethodNameMethodDescriptorExtraMemberVisitor2() {
+  public void testAddMethodWithU2accessFlagsMethodNameMethodDescriptorExtraMemberVisitor2() {
     // Arrange
-    ClassBuilder buildClassResult = PartialEvaluatorErrorsTestKt.buildClass();
-    buildClassResult.addMethod(2, "Method Name", "Method Descriptor");
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
+    classBuilder.addMethod(2, "Method Name", "Method Descriptor");
 
     // Act and Assert
     ProgramClass programClass =
-        buildClassResult
+        classBuilder
             .addMethod(2, "Method Name", "Method Descriptor", new AttributeSorter())
             .getProgramClass();
     Constant[] constantArray = programClass.constantPool;
+    assertTrue(constantArray[1] instanceof Utf8Constant);
+    assertTrue(constantArray[3] instanceof Utf8Constant);
     assertTrue(constantArray[5] instanceof Utf8Constant);
     assertTrue(constantArray[6] instanceof Utf8Constant);
     assertEquals(2, programClass.methods.length);
@@ -1587,22 +1243,39 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String, MemberVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test addMethod(int, String, String, MemberVisitor) with 'u2accessFlags', 'methodName', 'methodDescriptor', 'extraMemberVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addMethod(int, String, String, MemberVisitor)"})
-  void testAddMethodWithU2accessFlagsMethodNameMethodDescriptorExtraMemberVisitor3() {
-    // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ClassBuilder classBuilder = new ClassBuilder(new ProgramClass(1, 1, constantPool, 1, 1, 1));
-
-    // Act
+  public void testAddMethodWithU2accessFlagsMethodNameMethodDescriptorExtraMemberVisitor3()
+      throws UnsupportedEncodingException {
+    // Arrange and Act
     ClassBuilder actualAddMethodResult =
-        classBuilder.addMethod(2, "Method Name", "Method Descriptor", new AttributeSorter());
+        (new ClassBuilder(1, 1, "Class Name", "Superclass Name"))
+            .addMethod(2, "Method Name", "Method Descriptor", null);
 
     // Assert
-    assertSame(classBuilder, actualAddMethodResult);
+    ProgramClass programClass = actualAddMethodResult.getProgramClass();
+    Constant[] constantArray = programClass.constantPool;
+    Constant constant = constantArray[2];
+    assertTrue(constant instanceof ClassConstant);
+    Constant constant2 = constantArray[1];
+    assertTrue(constant2 instanceof Utf8Constant);
+    Constant constant3 = constantArray[3];
+    assertTrue(constant3 instanceof Utf8Constant);
+    Constant constant4 = constantArray[5];
+    assertTrue(constant4 instanceof Utf8Constant);
+    Constant constant5 = constantArray[6];
+    assertTrue(constant5 instanceof Utf8Constant);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    assertSame(programClass, actualAddMethodResult.getConstantPoolEditor().getTargetClass());
+    assertSame(programClass, ((ClassConstant) constant).referencedClass);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "Method Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant5).getBytes());
+    byte[] expectedBytes3 = "Method Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes4 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes4, ((Utf8Constant) constant3).getBytes());
   }
 
   /**
@@ -1612,22 +1285,42 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String, MemberVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test addMethod(int, String, String, MemberVisitor) with 'u2accessFlags', 'methodName', 'methodDescriptor', 'extraMemberVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addMethod(int, String, String, MemberVisitor)"})
-  void testAddMethodWithU2accessFlagsMethodNameMethodDescriptorExtraMemberVisitor4() {
+  public void testAddMethodWithU2accessFlagsMethodNameMethodDescriptorExtraMemberVisitor4()
+      throws UnsupportedEncodingException {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ClassBuilder classBuilder = new ClassBuilder(new ProgramClass(1, 0, constantPool, 1, 1, 1));
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
 
     // Act
     ClassBuilder actualAddMethodResult =
-        classBuilder.addMethod(2, "Method Name", "Method Descriptor", new AttributeSorter());
+        classBuilder.addMethod(
+            2, "Method Name", "Method Descriptor", new BootstrapMethodsAttributeShrinker());
 
     // Assert
-    assertSame(classBuilder, actualAddMethodResult);
+    ProgramClass programClass = actualAddMethodResult.getProgramClass();
+    Constant[] constantArray = programClass.constantPool;
+    Constant constant = constantArray[2];
+    assertTrue(constant instanceof ClassConstant);
+    Constant constant2 = constantArray[1];
+    assertTrue(constant2 instanceof Utf8Constant);
+    Constant constant3 = constantArray[3];
+    assertTrue(constant3 instanceof Utf8Constant);
+    Constant constant4 = constantArray[5];
+    assertTrue(constant4 instanceof Utf8Constant);
+    Constant constant5 = constantArray[6];
+    assertTrue(constant5 instanceof Utf8Constant);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    assertSame(programClass, actualAddMethodResult.getConstantPoolEditor().getTargetClass());
+    assertSame(programClass, ((ClassConstant) constant).referencedClass);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "Method Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant5).getBytes());
+    byte[] expectedBytes3 = "Method Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes4 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes4, ((Utf8Constant) constant3).getBytes());
   }
 
   /**
@@ -1637,12 +1330,185 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String, MemberVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test addMethod(int, String, String, MemberVisitor) with 'u2accessFlags', 'methodName', 'methodDescriptor', 'extraMemberVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ClassBuilder ClassBuilder.addMethod(int, String, String, MemberVisitor)"})
-  void testAddMethodWithU2accessFlagsMethodNameMethodDescriptorExtraMemberVisitor5() {
+  public void testAddMethodWithU2accessFlagsMethodNameMethodDescriptorExtraMemberVisitor5()
+      throws UnsupportedEncodingException {
+    // Arrange
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
+
+    // Act
+    ClassBuilder actualAddMethodResult =
+        classBuilder.addMethod(2, "Method Name", "Method Descriptor", new BridgeMethodFixer());
+
+    // Assert
+    ProgramClass programClass = actualAddMethodResult.getProgramClass();
+    Constant[] constantArray = programClass.constantPool;
+    Constant constant = constantArray[2];
+    assertTrue(constant instanceof ClassConstant);
+    Constant constant2 = constantArray[1];
+    assertTrue(constant2 instanceof Utf8Constant);
+    Constant constant3 = constantArray[3];
+    assertTrue(constant3 instanceof Utf8Constant);
+    Constant constant4 = constantArray[5];
+    assertTrue(constant4 instanceof Utf8Constant);
+    Constant constant5 = constantArray[6];
+    assertTrue(constant5 instanceof Utf8Constant);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    assertSame(programClass, actualAddMethodResult.getConstantPoolEditor().getTargetClass());
+    assertSame(programClass, ((ClassConstant) constant).referencedClass);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "Method Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant5).getBytes());
+    byte[] expectedBytes3 = "Method Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes4 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes4, ((Utf8Constant) constant3).getBytes());
+  }
+
+  /**
+   * Test {@link ClassBuilder#addMethod(int, String, String, MemberVisitor)} with {@code
+   * u2accessFlags}, {@code methodName}, {@code methodDescriptor}, {@code extraMemberVisitor}.
+   *
+   * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String, MemberVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"ClassBuilder ClassBuilder.addMethod(int, String, String, MemberVisitor)"})
+  public void testAddMethodWithU2accessFlagsMethodNameMethodDescriptorExtraMemberVisitor6()
+      throws UnsupportedEncodingException {
+    // Arrange
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
+
+    // Act
+    ClassBuilder actualAddMethodResult =
+        classBuilder.addMethod(2, "Method Name", "Method Descriptor", new ConstantPoolShrinker());
+
+    // Assert
+    ProgramClass programClass = actualAddMethodResult.getProgramClass();
+    Constant[] constantArray = programClass.constantPool;
+    Constant constant = constantArray[2];
+    assertTrue(constant instanceof ClassConstant);
+    Constant constant2 = constantArray[1];
+    assertTrue(constant2 instanceof Utf8Constant);
+    Constant constant3 = constantArray[3];
+    assertTrue(constant3 instanceof Utf8Constant);
+    Constant constant4 = constantArray[5];
+    assertTrue(constant4 instanceof Utf8Constant);
+    Constant constant5 = constantArray[6];
+    assertTrue(constant5 instanceof Utf8Constant);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    assertSame(programClass, actualAddMethodResult.getConstantPoolEditor().getTargetClass());
+    assertSame(programClass, ((ClassConstant) constant).referencedClass);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "Method Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant5).getBytes());
+    byte[] expectedBytes3 = "Method Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes4 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes4, ((Utf8Constant) constant3).getBytes());
+  }
+
+  /**
+   * Test {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder)} with {@code
+   * u2accessFlags}, {@code methodName}, {@code methodDescriptor}, {@code maxCodeFragmentLength},
+   * {@code codeBuilder}.
+   *
+   * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"ClassBuilder ClassBuilder.addMethod(int, String, String, int, CodeBuilder)"})
+  public void
+      testAddMethodWithU2accessFlagsMethodNameMethodDescriptorMaxCodeFragmentLengthCodeBuilder()
+          throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
+    Constant[] constantArray =
+        (new ClassBuilder(1, 1, "Class Name", "Superclass Name"))
+            .addMethod(2, "Method Name", "Method Descriptor", 3, null)
+            .getProgramClass()
+            .constantPool;
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof Utf8Constant);
+    Constant constant2 = constantArray[3];
+    assertTrue(constant2 instanceof Utf8Constant);
+    Constant constant3 = constantArray[5];
+    assertTrue(constant3 instanceof Utf8Constant);
+    Constant constant4 = constantArray[6];
+    assertTrue(constant4 instanceof Utf8Constant);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant).getBytes());
+    byte[] expectedBytes2 = "Method Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes3 = "Method Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes4 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes4, ((Utf8Constant) constant2).getBytes());
+  }
+
+  /**
+   * Test {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder)} with {@code
+   * u2accessFlags}, {@code methodName}, {@code methodDescriptor}, {@code maxCodeFragmentLength},
+   * {@code codeBuilder}.
+   *
+   * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"ClassBuilder ClassBuilder.addMethod(int, String, String, int, CodeBuilder)"})
+  public void
+      testAddMethodWithU2accessFlagsMethodNameMethodDescriptorMaxCodeFragmentLengthCodeBuilder2() {
+    // Arrange
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
+    classBuilder.addMethod(2, "Method Name", "Method Descriptor");
+
+    // Act and Assert
+    ProgramClass programClass =
+        classBuilder.addMethod(2, "Method Name", "Method Descriptor", 3, null).getProgramClass();
+    Constant[] constantArray = programClass.constantPool;
+    assertTrue(constantArray[5] instanceof Utf8Constant);
+    assertTrue(constantArray[6] instanceof Utf8Constant);
+    assertEquals(2, programClass.methods.length);
+    assertEquals(2, programClass.u2methodsCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder)} with {@code
+   * u2accessFlags}, {@code methodName}, {@code methodDescriptor}, {@code maxCodeFragmentLength},
+   * {@code codeBuilder}.
+   *
+   * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"ClassBuilder ClassBuilder.addMethod(int, String, String, int, CodeBuilder)"})
+  public void
+      testAddMethodWithU2accessFlagsMethodNameMethodDescriptorMaxCodeFragmentLengthCodeBuilder3() {
+    // Arrange
+    ClassBuilder classBuilder =
+        new ClassBuilder(new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1));
+
+    // Act and Assert
+    assertSame(
+        classBuilder, classBuilder.addMethod(2, "Method Name", "Method Descriptor", 3, null));
+  }
+
+  /**
+   * Test {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder)} with {@code
+   * u2accessFlags}, {@code methodName}, {@code methodDescriptor}, {@code maxCodeFragmentLength},
+   * {@code codeBuilder}.
+   *
+   * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"ClassBuilder ClassBuilder.addMethod(int, String, String, int, CodeBuilder)"})
+  public void
+      testAddMethodWithU2accessFlagsMethodNameMethodDescriptorMaxCodeFragmentLengthCodeBuilder4() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
@@ -1656,12 +1522,289 @@ class ClassBuilderDiffblueTest {
                 1,
                 1));
 
-    // Act
+    // Act and Assert
+    assertSame(
+        classBuilder, classBuilder.addMethod(2, "Method Name", "Method Descriptor", 3, null));
+  }
+
+  /**
+   * Test {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder, MemberVisitor)} with
+   * {@code u2accessFlags}, {@code methodName}, {@code methodDescriptor}, {@code
+   * maxCodeFragmentLength}, {@code codeBuilder}, {@code extraMemberVisitor}.
+   *
+   * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder,
+   * MemberVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "ClassBuilder ClassBuilder.addMethod(int, String, String, int, CodeBuilder, MemberVisitor)"
+  })
+  public void
+      testAddMethodWithU2accessFlagsMethodNameMethodDescriptorMaxCodeFragmentLengthCodeBuilderExtraMemberVisitor()
+          throws UnsupportedEncodingException {
+    // Arrange
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
+
+    // Act and Assert
+    Constant[] constantArray =
+        classBuilder
+            .addMethod(2, "Method Name", "Method Descriptor", 3, null, new AttributeSorter())
+            .getProgramClass()
+            .constantPool;
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof Utf8Constant);
+    Constant constant2 = constantArray[3];
+    assertTrue(constant2 instanceof Utf8Constant);
+    Constant constant3 = constantArray[5];
+    assertTrue(constant3 instanceof Utf8Constant);
+    Constant constant4 = constantArray[6];
+    assertTrue(constant4 instanceof Utf8Constant);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant).getBytes());
+    byte[] expectedBytes2 = "Method Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes3 = "Method Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant3).getBytes());
+    byte[] expectedBytes4 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes4, ((Utf8Constant) constant2).getBytes());
+  }
+
+  /**
+   * Test {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder, MemberVisitor)} with
+   * {@code u2accessFlags}, {@code methodName}, {@code methodDescriptor}, {@code
+   * maxCodeFragmentLength}, {@code codeBuilder}, {@code extraMemberVisitor}.
+   *
+   * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder,
+   * MemberVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "ClassBuilder ClassBuilder.addMethod(int, String, String, int, CodeBuilder, MemberVisitor)"
+  })
+  public void
+      testAddMethodWithU2accessFlagsMethodNameMethodDescriptorMaxCodeFragmentLengthCodeBuilderExtraMemberVisitor2() {
+    // Arrange
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
+    classBuilder.addMethod(2, "Method Name", "Method Descriptor");
+
+    // Act and Assert
+    ProgramClass programClass =
+        classBuilder
+            .addMethod(2, "Method Name", "Method Descriptor", 3, null, new AttributeSorter())
+            .getProgramClass();
+    Constant[] constantArray = programClass.constantPool;
+    assertTrue(constantArray[1] instanceof Utf8Constant);
+    assertTrue(constantArray[3] instanceof Utf8Constant);
+    assertTrue(constantArray[5] instanceof Utf8Constant);
+    assertTrue(constantArray[6] instanceof Utf8Constant);
+    assertEquals(2, programClass.methods.length);
+    assertEquals(2, programClass.u2methodsCount);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+  }
+
+  /**
+   * Test {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder, MemberVisitor)} with
+   * {@code u2accessFlags}, {@code methodName}, {@code methodDescriptor}, {@code
+   * maxCodeFragmentLength}, {@code codeBuilder}, {@code extraMemberVisitor}.
+   *
+   * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder,
+   * MemberVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "ClassBuilder ClassBuilder.addMethod(int, String, String, int, CodeBuilder, MemberVisitor)"
+  })
+  public void
+      testAddMethodWithU2accessFlagsMethodNameMethodDescriptorMaxCodeFragmentLengthCodeBuilderExtraMemberVisitor3()
+          throws UnsupportedEncodingException {
+    // Arrange and Act
     ClassBuilder actualAddMethodResult =
-        classBuilder.addMethod(2, "Method Name", "Method Descriptor", new AttributeSorter());
+        (new ClassBuilder(1, 1, "Class Name", "Superclass Name"))
+            .addMethod(2, "Method Name", "Method Descriptor", 3, null, null);
 
     // Assert
-    assertSame(classBuilder, actualAddMethodResult);
+    ProgramClass programClass = actualAddMethodResult.getProgramClass();
+    Constant[] constantArray = programClass.constantPool;
+    Constant constant = constantArray[2];
+    assertTrue(constant instanceof ClassConstant);
+    Constant constant2 = constantArray[1];
+    assertTrue(constant2 instanceof Utf8Constant);
+    Constant constant3 = constantArray[3];
+    assertTrue(constant3 instanceof Utf8Constant);
+    Constant constant4 = constantArray[5];
+    assertTrue(constant4 instanceof Utf8Constant);
+    Constant constant5 = constantArray[6];
+    assertTrue(constant5 instanceof Utf8Constant);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    assertSame(programClass, actualAddMethodResult.getConstantPoolEditor().getTargetClass());
+    assertSame(programClass, ((ClassConstant) constant).referencedClass);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "Method Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant5).getBytes());
+    byte[] expectedBytes3 = "Method Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes4 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes4, ((Utf8Constant) constant3).getBytes());
+  }
+
+  /**
+   * Test {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder, MemberVisitor)} with
+   * {@code u2accessFlags}, {@code methodName}, {@code methodDescriptor}, {@code
+   * maxCodeFragmentLength}, {@code codeBuilder}, {@code extraMemberVisitor}.
+   *
+   * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder,
+   * MemberVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "ClassBuilder ClassBuilder.addMethod(int, String, String, int, CodeBuilder, MemberVisitor)"
+  })
+  public void
+      testAddMethodWithU2accessFlagsMethodNameMethodDescriptorMaxCodeFragmentLengthCodeBuilderExtraMemberVisitor4()
+          throws UnsupportedEncodingException {
+    // Arrange
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
+
+    // Act
+    ClassBuilder actualAddMethodResult =
+        classBuilder.addMethod(
+            2,
+            "Method Name",
+            "Method Descriptor",
+            3,
+            null,
+            new BootstrapMethodsAttributeShrinker());
+
+    // Assert
+    ProgramClass programClass = actualAddMethodResult.getProgramClass();
+    Constant[] constantArray = programClass.constantPool;
+    Constant constant = constantArray[2];
+    assertTrue(constant instanceof ClassConstant);
+    Constant constant2 = constantArray[1];
+    assertTrue(constant2 instanceof Utf8Constant);
+    Constant constant3 = constantArray[3];
+    assertTrue(constant3 instanceof Utf8Constant);
+    Constant constant4 = constantArray[5];
+    assertTrue(constant4 instanceof Utf8Constant);
+    Constant constant5 = constantArray[6];
+    assertTrue(constant5 instanceof Utf8Constant);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    assertSame(programClass, actualAddMethodResult.getConstantPoolEditor().getTargetClass());
+    assertSame(programClass, ((ClassConstant) constant).referencedClass);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "Method Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant5).getBytes());
+    byte[] expectedBytes3 = "Method Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes4 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes4, ((Utf8Constant) constant3).getBytes());
+  }
+
+  /**
+   * Test {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder, MemberVisitor)} with
+   * {@code u2accessFlags}, {@code methodName}, {@code methodDescriptor}, {@code
+   * maxCodeFragmentLength}, {@code codeBuilder}, {@code extraMemberVisitor}.
+   *
+   * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder,
+   * MemberVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "ClassBuilder ClassBuilder.addMethod(int, String, String, int, CodeBuilder, MemberVisitor)"
+  })
+  public void
+      testAddMethodWithU2accessFlagsMethodNameMethodDescriptorMaxCodeFragmentLengthCodeBuilderExtraMemberVisitor5()
+          throws UnsupportedEncodingException {
+    // Arrange
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
+
+    // Act
+    ClassBuilder actualAddMethodResult =
+        classBuilder.addMethod(
+            2, "Method Name", "Method Descriptor", 3, null, new BridgeMethodFixer());
+
+    // Assert
+    ProgramClass programClass = actualAddMethodResult.getProgramClass();
+    Constant[] constantArray = programClass.constantPool;
+    Constant constant = constantArray[2];
+    assertTrue(constant instanceof ClassConstant);
+    Constant constant2 = constantArray[1];
+    assertTrue(constant2 instanceof Utf8Constant);
+    Constant constant3 = constantArray[3];
+    assertTrue(constant3 instanceof Utf8Constant);
+    Constant constant4 = constantArray[5];
+    assertTrue(constant4 instanceof Utf8Constant);
+    Constant constant5 = constantArray[6];
+    assertTrue(constant5 instanceof Utf8Constant);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    assertSame(programClass, actualAddMethodResult.getConstantPoolEditor().getTargetClass());
+    assertSame(programClass, ((ClassConstant) constant).referencedClass);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "Method Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant5).getBytes());
+    byte[] expectedBytes3 = "Method Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes4 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes4, ((Utf8Constant) constant3).getBytes());
+  }
+
+  /**
+   * Test {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder, MemberVisitor)} with
+   * {@code u2accessFlags}, {@code methodName}, {@code methodDescriptor}, {@code
+   * maxCodeFragmentLength}, {@code codeBuilder}, {@code extraMemberVisitor}.
+   *
+   * <p>Method under test: {@link ClassBuilder#addMethod(int, String, String, int, CodeBuilder,
+   * MemberVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "ClassBuilder ClassBuilder.addMethod(int, String, String, int, CodeBuilder, MemberVisitor)"
+  })
+  public void
+      testAddMethodWithU2accessFlagsMethodNameMethodDescriptorMaxCodeFragmentLengthCodeBuilderExtraMemberVisitor6()
+          throws UnsupportedEncodingException {
+    // Arrange
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
+
+    // Act
+    ClassBuilder actualAddMethodResult =
+        classBuilder.addMethod(
+            2, "Method Name", "Method Descriptor", 3, null, new ConstantPoolShrinker());
+
+    // Assert
+    ProgramClass programClass = actualAddMethodResult.getProgramClass();
+    Constant[] constantArray = programClass.constantPool;
+    Constant constant = constantArray[2];
+    assertTrue(constant instanceof ClassConstant);
+    Constant constant2 = constantArray[1];
+    assertTrue(constant2 instanceof Utf8Constant);
+    Constant constant3 = constantArray[3];
+    assertTrue(constant3 instanceof Utf8Constant);
+    Constant constant4 = constantArray[5];
+    assertTrue(constant4 instanceof Utf8Constant);
+    Constant constant5 = constantArray[6];
+    assertTrue(constant5 instanceof Utf8Constant);
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    assertSame(programClass, actualAddMethodResult.getConstantPoolEditor().getTargetClass());
+    assertSame(programClass, ((ClassConstant) constant).referencedClass);
+    byte[] expectedBytes = "Class Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "Method Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant5).getBytes());
+    byte[] expectedBytes3 = "Method Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes3, ((Utf8Constant) constant4).getBytes());
+    byte[] expectedBytes4 = "Superclass Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes4, ((Utf8Constant) constant3).getBytes());
   }
 
   /**
@@ -1671,21 +1814,18 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addAndReturnMethod(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test addAndReturnMethod(int, String, String) with 'u2accessFlags', 'methodName', 'methodDescriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ProgramMethod ClassBuilder.addAndReturnMethod(int, String, String)"})
-  void testAddAndReturnMethodWithU2accessFlagsMethodNameMethodDescriptor()
+  public void testAddAndReturnMethodWithU2accessFlagsMethodNameMethodDescriptor()
       throws UnsupportedEncodingException {
     // Arrange
-    ClassBuilder buildClassResult = PartialEvaluatorErrorsTestKt.buildClass();
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
 
     // Act
-    buildClassResult.addAndReturnMethod(2, "Method Name", "Method Descriptor");
+    classBuilder.addAndReturnMethod(2, "Method Name", "Method Descriptor");
 
     // Assert
-    ProgramClass programClass = buildClassResult.getProgramClass();
+    ProgramClass programClass = classBuilder.getProgramClass();
     Constant[] constantArray = programClass.constantPool;
     Constant constant = constantArray[5];
     assertTrue(constant instanceof Utf8Constant);
@@ -1703,8 +1843,10 @@ class ClassBuilderDiffblueTest {
     assertFalse(constant.isCategory2());
     assertFalse(constant2.isCategory2());
     assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
-    assertArrayEquals("Method Descriptor".getBytes("UTF-8"), ((Utf8Constant) constant2).getBytes());
-    assertArrayEquals("Method Name".getBytes("UTF-8"), ((Utf8Constant) constant).getBytes());
+    byte[] expectedBytes = "Method Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "Method Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant).getBytes());
   }
 
   /**
@@ -1714,27 +1856,24 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addAndReturnMethod(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test addAndReturnMethod(int, String, String) with 'u2accessFlags', 'methodName', 'methodDescriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ProgramMethod ClassBuilder.addAndReturnMethod(int, String, String)"})
-  void testAddAndReturnMethodWithU2accessFlagsMethodNameMethodDescriptor2() {
+  public void testAddAndReturnMethodWithU2accessFlagsMethodNameMethodDescriptor2() {
     // Arrange
-    ClassBuilder buildClassResult = PartialEvaluatorErrorsTestKt.buildClass();
-    buildClassResult.addMethod(2, "Method Name", "Method Descriptor");
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
+    classBuilder.addMethod(2, "Method Name", "Method Descriptor");
 
     // Act
     ProgramMethod actualAddAndReturnMethodResult =
-        buildClassResult.addAndReturnMethod(2, "Method Name", "Method Descriptor");
+        classBuilder.addAndReturnMethod(2, "Method Name", "Method Descriptor");
 
     // Assert
-    ProgramClass programClass = buildClassResult.getProgramClass();
+    ProgramClass programClass = classBuilder.getProgramClass();
     ProgramMethod[] programMethodArray = programClass.methods;
     assertEquals(2, programMethodArray.length);
     assertEquals(2, programClass.u2methodsCount);
     assertEquals(7, programClass.u2constantPoolCount);
-    assertSame(actualAddAndReturnMethodResult.attributes, programMethodArray[0].attributes);
+    assertSame(actualAddAndReturnMethodResult.attributes, (programMethodArray[0]).attributes);
   }
 
   /**
@@ -1744,15 +1883,13 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addAndReturnMethod(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test addAndReturnMethod(int, String, String) with 'u2accessFlags', 'methodName', 'methodDescriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ProgramMethod ClassBuilder.addAndReturnMethod(int, String, String)"})
-  void testAddAndReturnMethodWithU2accessFlagsMethodNameMethodDescriptor3() {
+  public void testAddAndReturnMethodWithU2accessFlagsMethodNameMethodDescriptor3() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ProgramClass programClass = new ProgramClass(1, 1, constantPool, 1, 1, 1);
+    ProgramClass programClass =
+        new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1);
+
     ClassBuilder classBuilder = new ClassBuilder(programClass);
 
     // Act
@@ -1774,15 +1911,16 @@ class ClassBuilderDiffblueTest {
    * <p>Method under test: {@link ClassBuilder#addAndReturnMethod(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test addAndReturnMethod(int, String, String) with 'u2accessFlags', 'methodName', 'methodDescriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ProgramMethod ClassBuilder.addAndReturnMethod(int, String, String)"})
-  void testAddAndReturnMethodWithU2accessFlagsMethodNameMethodDescriptor4() {
+  public void testAddAndReturnMethodWithU2accessFlagsMethodNameMethodDescriptor4() {
     // Arrange
-    Constant[] constantPool = new Constant[] {new ClassConstant()};
-    ProgramClass programClass = new ProgramClass(1, 0, constantPool, 1, 1, 1);
+    ClassConstant classConstant = new ClassConstant();
+    ClassConstant classConstant2 = new ClassConstant();
+    ProgramClass programClass =
+        new ProgramClass(
+            1, 3, new Constant[] {classConstant, classConstant2, new ClassConstant()}, 1, 1, 1);
+
     ClassBuilder classBuilder = new ClassBuilder(programClass);
 
     // Act
@@ -1790,37 +1928,152 @@ class ClassBuilderDiffblueTest {
         classBuilder.addAndReturnMethod(2, "Method Name", "Method Descriptor");
 
     // Assert
-    assertEquals(0, actualAddAndReturnMethodResult.u2nameIndex);
-    assertEquals(1, actualAddAndReturnMethodResult.u2descriptorIndex);
+    assertEquals(3, actualAddAndReturnMethodResult.u2nameIndex);
+    assertEquals(4, actualAddAndReturnMethodResult.u2descriptorIndex);
     ProgramClass programClass2 = classBuilder.getProgramClass();
-    assertEquals(2, programClass2.u2constantPoolCount);
+    assertEquals(5, programClass2.u2constantPoolCount);
     assertSame(programClass.constantPool, programClass2.constantPool);
   }
 
   /**
-   * Test {@link ClassBuilder#addAndReturnMethod(int, String, String)} with {@code u2accessFlags},
-   * {@code methodName}, {@code methodDescriptor}.
+   * Test {@link ClassBuilder#addAndReturnMethod(int, String, String, int, CodeBuilder)} with {@code
+   * u2accessFlags}, {@code methodName}, {@code methodDescriptor}, {@code maxCodeFragmentLength},
+   * {@code codeBuilder}.
    *
-   * <p>Method under test: {@link ClassBuilder#addAndReturnMethod(int, String, String)}
+   * <p>Method under test: {@link ClassBuilder#addAndReturnMethod(int, String, String, int,
+   * CodeBuilder)}
    */
   @Test
-  @DisplayName(
-      "Test addAndReturnMethod(int, String, String) with 'u2accessFlags', 'methodName', 'methodDescriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"ProgramMethod ClassBuilder.addAndReturnMethod(int, String, String)"})
-  void testAddAndReturnMethodWithU2accessFlagsMethodNameMethodDescriptor5() {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "ProgramMethod ClassBuilder.addAndReturnMethod(int, String, String, int, CodeBuilder)"
+  })
+  public void
+      testAddAndReturnMethodWithU2accessFlagsMethodNameMethodDescriptorMaxCodeFragmentLengthCodeBuilder()
+          throws UnsupportedEncodingException {
+    // Arrange
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
+
+    // Act
+    classBuilder.addAndReturnMethod(2, "Method Name", "Method Descriptor", 3, null);
+
+    // Assert
+    ProgramClass programClass = classBuilder.getProgramClass();
+    Constant[] constantArray = programClass.constantPool;
+    Constant constant = constantArray[5];
+    assertTrue(constant instanceof Utf8Constant);
+    Constant constant2 = constantArray[6];
+    assertTrue(constant2 instanceof Utf8Constant);
+    assertEquals("Method Descriptor", ((Utf8Constant) constant2).getString());
+    assertEquals("Method Name", ((Utf8Constant) constant).getString());
+    assertNull(constant.getProcessingInfo());
+    assertNull(constant2.getProcessingInfo());
+    assertEquals(0, constant.getProcessingFlags());
+    assertEquals(0, constant2.getProcessingFlags());
+    assertEquals(1, constant.getTag());
+    assertEquals(1, constant2.getTag());
+    assertEquals(7, programClass.u2constantPoolCount);
+    assertFalse(constant.isCategory2());
+    assertFalse(constant2.isCategory2());
+    assertEquals(ClassEstimates.TYPICAL_CONSTANT_POOL_SIZE, constantArray.length);
+    byte[] expectedBytes = "Method Descriptor".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes, ((Utf8Constant) constant2).getBytes());
+    byte[] expectedBytes2 = "Method Name".getBytes("UTF-8");
+    assertArrayEquals(expectedBytes2, ((Utf8Constant) constant).getBytes());
+  }
+
+  /**
+   * Test {@link ClassBuilder#addAndReturnMethod(int, String, String, int, CodeBuilder)} with {@code
+   * u2accessFlags}, {@code methodName}, {@code methodDescriptor}, {@code maxCodeFragmentLength},
+   * {@code codeBuilder}.
+   *
+   * <p>Method under test: {@link ClassBuilder#addAndReturnMethod(int, String, String, int,
+   * CodeBuilder)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "ProgramMethod ClassBuilder.addAndReturnMethod(int, String, String, int, CodeBuilder)"
+  })
+  public void
+      testAddAndReturnMethodWithU2accessFlagsMethodNameMethodDescriptorMaxCodeFragmentLengthCodeBuilder2() {
+    // Arrange
+    ClassBuilder classBuilder = new ClassBuilder(1, 1, "Class Name", "Superclass Name");
+    classBuilder.addMethod(2, "Method Name", "Method Descriptor");
+
+    // Act
+    ProgramMethod actualAddAndReturnMethodResult =
+        classBuilder.addAndReturnMethod(2, "Method Name", "Method Descriptor", 3, null);
+
+    // Assert
+    ProgramClass programClass = classBuilder.getProgramClass();
+    ProgramMethod[] programMethodArray = programClass.methods;
+    assertEquals(2, programMethodArray.length);
+    assertEquals(2, programClass.u2methodsCount);
+    assertEquals(7, programClass.u2constantPoolCount);
+    assertSame(actualAddAndReturnMethodResult.attributes, (programMethodArray[0]).attributes);
+  }
+
+  /**
+   * Test {@link ClassBuilder#addAndReturnMethod(int, String, String, int, CodeBuilder)} with {@code
+   * u2accessFlags}, {@code methodName}, {@code methodDescriptor}, {@code maxCodeFragmentLength},
+   * {@code codeBuilder}.
+   *
+   * <p>Method under test: {@link ClassBuilder#addAndReturnMethod(int, String, String, int,
+   * CodeBuilder)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "ProgramMethod ClassBuilder.addAndReturnMethod(int, String, String, int, CodeBuilder)"
+  })
+  public void
+      testAddAndReturnMethodWithU2accessFlagsMethodNameMethodDescriptorMaxCodeFragmentLengthCodeBuilder3() {
+    // Arrange
+    ProgramClass programClass =
+        new ProgramClass(1, 1, new Constant[] {new ClassConstant()}, 1, 1, 1);
+
+    ClassBuilder classBuilder = new ClassBuilder(programClass);
+
+    // Act
+    ProgramMethod actualAddAndReturnMethodResult =
+        classBuilder.addAndReturnMethod(2, "Method Name", "Method Descriptor", 3, null);
+
+    // Assert
+    assertEquals(1, actualAddAndReturnMethodResult.u2nameIndex);
+    assertEquals(2, actualAddAndReturnMethodResult.u2descriptorIndex);
+    ProgramClass programClass2 = classBuilder.getProgramClass();
+    assertEquals(3, programClass2.u2constantPoolCount);
+    assertSame(programClass.constantPool, programClass2.constantPool);
+  }
+
+  /**
+   * Test {@link ClassBuilder#addAndReturnMethod(int, String, String, int, CodeBuilder)} with {@code
+   * u2accessFlags}, {@code methodName}, {@code methodDescriptor}, {@code maxCodeFragmentLength},
+   * {@code codeBuilder}.
+   *
+   * <p>Method under test: {@link ClassBuilder#addAndReturnMethod(int, String, String, int,
+   * CodeBuilder)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "ProgramMethod ClassBuilder.addAndReturnMethod(int, String, String, int, CodeBuilder)"
+  })
+  public void
+      testAddAndReturnMethodWithU2accessFlagsMethodNameMethodDescriptorMaxCodeFragmentLengthCodeBuilder4() {
     // Arrange
     ClassConstant classConstant = new ClassConstant();
     ClassConstant classConstant2 = new ClassConstant();
     ProgramClass programClass =
         new ProgramClass(
             1, 3, new Constant[] {classConstant, classConstant2, new ClassConstant()}, 1, 1, 1);
+
     ClassBuilder classBuilder = new ClassBuilder(programClass);
 
     // Act
     ProgramMethod actualAddAndReturnMethodResult =
-        classBuilder.addAndReturnMethod(2, "Method Name", "Method Descriptor");
+        classBuilder.addAndReturnMethod(2, "Method Name", "Method Descriptor", 3, null);
 
     // Assert
     assertEquals(3, actualAddAndReturnMethodResult.u2nameIndex);

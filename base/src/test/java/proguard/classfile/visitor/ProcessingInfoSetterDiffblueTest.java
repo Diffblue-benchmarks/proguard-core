@@ -1,12 +1,11 @@
 package proguard.classfile.visitor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryField;
@@ -33,7 +32,7 @@ import proguard.classfile.attribute.preverification.VerificationTypeFactory;
 import proguard.classfile.constant.ClassConstant;
 import proguard.classfile.constant.Constant;
 
-class ProcessingInfoSetterDiffblueTest {
+public class ProcessingInfoSetterDiffblueTest {
   /**
    * Test {@link ProcessingInfoSetter#visitAnyClass(Clazz)}.
    *
@@ -44,11 +43,9 @@ class ProcessingInfoSetterDiffblueTest {
    * <p>Method under test: {@link ProcessingInfoSetter#visitAnyClass(Clazz)}
    */
   @Test
-  @DisplayName("Test visitAnyClass(Clazz); then LibraryClass() ProcessingInfo is 'Processing Info'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ProcessingInfoSetter.visitAnyClass(Clazz)"})
-  void testVisitAnyClass_thenLibraryClassProcessingInfoIsProcessingInfo() {
+  public void testVisitAnyClass_thenLibraryClassProcessingInfoIsProcessingInfo() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
     LibraryClass clazz = new LibraryClass();
@@ -70,12 +67,9 @@ class ProcessingInfoSetterDiffblueTest {
    * <p>Method under test: {@link ProcessingInfoSetter#visitAnyConstant(Clazz, Constant)}
    */
   @Test
-  @DisplayName(
-      "Test visitAnyConstant(Clazz, Constant); then ClassConstant() ProcessingInfo is 'Processing Info'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ProcessingInfoSetter.visitAnyConstant(Clazz, Constant)"})
-  void testVisitAnyConstant_thenClassConstantProcessingInfoIsProcessingInfo() {
+  public void testVisitAnyConstant_thenClassConstantProcessingInfoIsProcessingInfo() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
     LibraryClass clazz = new LibraryClass();
@@ -94,11 +88,9 @@ class ProcessingInfoSetterDiffblueTest {
    * <p>Method under test: {@link ProcessingInfoSetter#visitAnyMember(Clazz, Member)}
    */
   @Test
-  @DisplayName("Test visitAnyMember(Clazz, Member)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ProcessingInfoSetter.visitAnyMember(Clazz, Member)"})
-  void testVisitAnyMember() {
+  public void testVisitAnyMember() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
     LibraryClass clazz = new LibraryClass();
@@ -117,11 +109,9 @@ class ProcessingInfoSetterDiffblueTest {
    * <p>Method under test: {@link ProcessingInfoSetter#visitAnyAttribute(Clazz, Attribute)}
    */
   @Test
-  @DisplayName("Test visitAnyAttribute(Clazz, Attribute)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ProcessingInfoSetter.visitAnyAttribute(Clazz, Attribute)"})
-  void testVisitAnyAttribute() {
+  public void testVisitAnyAttribute() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
     LibraryClass clazz = new LibraryClass();
@@ -141,13 +131,11 @@ class ProcessingInfoSetterDiffblueTest {
    * RecordComponentInfo)}
    */
   @Test
-  @DisplayName("Test visitRecordComponentInfo(Clazz, RecordComponentInfo)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ProcessingInfoSetter.visitRecordComponentInfo(Clazz, RecordComponentInfo)"
   })
-  void testVisitRecordComponentInfo() {
+  public void testVisitRecordComponentInfo() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
     LibraryClass clazz = new LibraryClass();
@@ -167,11 +155,9 @@ class ProcessingInfoSetterDiffblueTest {
    * InnerClassesInfo)}
    */
   @Test
-  @DisplayName("Test visitInnerClassesInfo(Clazz, InnerClassesInfo)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ProcessingInfoSetter.visitInnerClassesInfo(Clazz, InnerClassesInfo)"})
-  void testVisitInnerClassesInfo() {
+  public void testVisitInnerClassesInfo() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
     LibraryClass clazz = new LibraryClass();
@@ -192,17 +178,16 @@ class ProcessingInfoSetterDiffblueTest {
    * CodeAttribute, ExceptionInfo)}
    */
   @Test
-  @DisplayName("Test visitExceptionInfo(Clazz, Method, CodeAttribute, ExceptionInfo)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ProcessingInfoSetter.visitExceptionInfo(Clazz, Method, CodeAttribute, ExceptionInfo)"
   })
-  void testVisitExceptionInfo() {
+  public void testVisitExceptionInfo() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
     ExceptionInfo exceptionInfo = new ExceptionInfo(1, 3, 1, 1);
 
@@ -225,18 +210,16 @@ class ProcessingInfoSetterDiffblueTest {
    * CodeAttribute, int, StackMapFrame)}
    */
   @Test
-  @DisplayName(
-      "Test visitAnyStackMapFrame(Clazz, Method, CodeAttribute, int, StackMapFrame); then FullFrame() ProcessingInfo is 'Processing Info'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ProcessingInfoSetter.visitAnyStackMapFrame(Clazz, Method, CodeAttribute, int, StackMapFrame)"
   })
-  void testVisitAnyStackMapFrame_thenFullFrameProcessingInfoIsProcessingInfo() {
+  public void testVisitAnyStackMapFrame_thenFullFrameProcessingInfoIsProcessingInfo() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
     FullFrame stackMapFrame = new FullFrame();
 
@@ -259,18 +242,16 @@ class ProcessingInfoSetterDiffblueTest {
    * CodeAttribute, int, VerificationType)}
    */
   @Test
-  @DisplayName(
-      "Test visitAnyVerificationType(Clazz, Method, CodeAttribute, int, VerificationType); then createDoubleType ProcessingInfo is 'Processing Info'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ProcessingInfoSetter.visitAnyVerificationType(Clazz, Method, CodeAttribute, int, VerificationType)"
   })
-  void testVisitAnyVerificationType_thenCreateDoubleTypeProcessingInfoIsProcessingInfo() {
+  public void testVisitAnyVerificationType_thenCreateDoubleTypeProcessingInfoIsProcessingInfo() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
     DoubleType verificationType = VerificationTypeFactory.createDoubleType();
 
@@ -290,17 +271,16 @@ class ProcessingInfoSetterDiffblueTest {
    * CodeAttribute, LocalVariableInfo)}
    */
   @Test
-  @DisplayName("Test visitLocalVariableInfo(Clazz, Method, CodeAttribute, LocalVariableInfo)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ProcessingInfoSetter.visitLocalVariableInfo(Clazz, Method, CodeAttribute, LocalVariableInfo)"
   })
-  void testVisitLocalVariableInfo() {
+  public void testVisitLocalVariableInfo() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
     LocalVariableInfo localVariableInfo = new LocalVariableInfo(1, 3, 1, 1, 1);
 
@@ -319,18 +299,16 @@ class ProcessingInfoSetterDiffblueTest {
    * CodeAttribute, LocalVariableTypeInfo)}
    */
   @Test
-  @DisplayName(
-      "Test visitLocalVariableTypeInfo(Clazz, Method, CodeAttribute, LocalVariableTypeInfo)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ProcessingInfoSetter.visitLocalVariableTypeInfo(Clazz, Method, CodeAttribute, LocalVariableTypeInfo)"
   })
-  void testVisitLocalVariableTypeInfo() {
+  public void testVisitLocalVariableTypeInfo() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
     LocalVariableTypeInfo localVariableTypeInfo = new LocalVariableTypeInfo(1, 3, 1, 1, 1);
 
@@ -349,11 +327,9 @@ class ProcessingInfoSetterDiffblueTest {
    * <p>Method under test: {@link ProcessingInfoSetter#visitAnnotation(Clazz, Annotation)}
    */
   @Test
-  @DisplayName("Test visitAnnotation(Clazz, Annotation) with 'clazz', 'annotation'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ProcessingInfoSetter.visitAnnotation(Clazz, Annotation)"})
-  void testVisitAnnotationWithClazzAnnotation() {
+  public void testVisitAnnotationWithClazzAnnotation() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
     LibraryClass clazz = new LibraryClass();
@@ -373,11 +349,9 @@ class ProcessingInfoSetterDiffblueTest {
    * <p>Method under test: {@link ProcessingInfoSetter#visitTypeAnnotation(Clazz, TypeAnnotation)}
    */
   @Test
-  @DisplayName("Test visitTypeAnnotation(Clazz, TypeAnnotation) with 'clazz', 'typeAnnotation'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ProcessingInfoSetter.visitTypeAnnotation(Clazz, TypeAnnotation)"})
-  void testVisitTypeAnnotationWithClazzTypeAnnotation() {
+  public void testVisitTypeAnnotationWithClazzTypeAnnotation() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
     LibraryClass clazz = new LibraryClass();
@@ -397,13 +371,11 @@ class ProcessingInfoSetterDiffblueTest {
    * ElementValue)}
    */
   @Test
-  @DisplayName("Test visitAnyElementValue(Clazz, Annotation, ElementValue)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ProcessingInfoSetter.visitAnyElementValue(Clazz, Annotation, ElementValue)"
   })
-  void testVisitAnyElementValue() {
+  public void testVisitAnyElementValue() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
     LibraryClass clazz = new LibraryClass();

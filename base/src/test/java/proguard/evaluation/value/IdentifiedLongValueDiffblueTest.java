@@ -1,16 +1,15 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.evaluation.ParticularReferenceValueFactory;
 
-class IdentifiedLongValueDiffblueTest {
+public class IdentifiedLongValueDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -22,17 +21,15 @@ class IdentifiedLongValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void IdentifiedLongValue.<init>(ValueFactory, int)",
     "java.lang.String IdentifiedLongValue.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
     assertEquals(
-        "l1", new IdentifiedLongValue(new ParticularReferenceValueFactory(), 1).toString());
+        "l1", (new IdentifiedLongValue(new ParticularReferenceValueFactory(), 1)).toString());
   }
 
   /**
@@ -51,14 +48,12 @@ class IdentifiedLongValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean IdentifiedLongValue.equals(Object)",
     "int IdentifiedLongValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     IdentifiedLongValue identifiedLongValue =
         new IdentifiedLongValue(new ParticularReferenceValueFactory(), 1);
@@ -80,14 +75,12 @@ class IdentifiedLongValueDiffblueTest {
    * <p>Method under test: {@link IdentifiedLongValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean IdentifiedLongValue.equals(Object)",
     "int IdentifiedLongValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     IdentifiedLongValue identifiedLongValue =
         new IdentifiedLongValue(new ParticularReferenceValueFactory(), 1);
@@ -108,14 +101,12 @@ class IdentifiedLongValueDiffblueTest {
    * <p>Method under test: {@link IdentifiedLongValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean IdentifiedLongValue.equals(Object)",
     "int IdentifiedLongValue.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new IdentifiedLongValue(new ParticularReferenceValueFactory(), 1), null);
   }
@@ -131,14 +122,12 @@ class IdentifiedLongValueDiffblueTest {
    * <p>Method under test: {@link IdentifiedLongValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean IdentifiedLongValue.equals(Object)",
     "int IdentifiedLongValue.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
         new IdentifiedLongValue(new ParticularReferenceValueFactory(), 1),

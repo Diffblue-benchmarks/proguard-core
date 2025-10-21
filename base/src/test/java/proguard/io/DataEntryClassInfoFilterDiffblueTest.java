@@ -1,15 +1,14 @@
 package proguard.io;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.Assert.assertFalse;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.kotlin.KotlinConstants;
 
-class DataEntryClassInfoFilterDiffblueTest {
+public class DataEntryClassInfoFilterDiffblueTest {
   /**
    * Test {@link DataEntryClassInfoFilter#accepts(DataEntry)}.
    *
@@ -21,22 +20,15 @@ class DataEntryClassInfoFilterDiffblueTest {
    * <p>Method under test: {@link DataEntryClassInfoFilter#accepts(DataEntry)}
    */
   @Test
-  @DisplayName(
-      "Test accepts(DataEntry); when ClassPathDataEntry(String) with name is '.class'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DataEntryClassInfoFilter.accepts(DataEntry)"})
-  void testAccepts_whenClassPathDataEntryWithNameIsClass_thenReturnFalse() {
+  public void testAccepts_whenClassPathDataEntryWithNameIsClass_thenReturnFalse() {
     // Arrange
     DataEntryClassInfoFilter dataEntryClassInfoFilter =
         new DataEntryClassInfoFilter(KotlinConstants.dummyClassPool, "Processing Info");
 
-    // Act
-    boolean actualAcceptsResult =
-        dataEntryClassInfoFilter.accepts(new ClassPathDataEntry(".class"));
-
-    // Assert
-    assertFalse(actualAcceptsResult);
+    // Act and Assert
+    assertFalse(dataEntryClassInfoFilter.accepts(new ClassPathDataEntry(".class")));
   }
 
   /**
@@ -50,21 +42,15 @@ class DataEntryClassInfoFilterDiffblueTest {
    * <p>Method under test: {@link DataEntryClassInfoFilter#accepts(DataEntry)}
    */
   @Test
-  @DisplayName(
-      "Test accepts(DataEntry); when ClassPathDataEntry(String) with 'Name'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DataEntryClassInfoFilter.accepts(DataEntry)"})
-  void testAccepts_whenClassPathDataEntryWithName_thenReturnFalse() {
+  public void testAccepts_whenClassPathDataEntryWithName_thenReturnFalse() {
     // Arrange
     DataEntryClassInfoFilter dataEntryClassInfoFilter =
         new DataEntryClassInfoFilter(KotlinConstants.dummyClassPool, "Processing Info");
 
-    // Act
-    boolean actualAcceptsResult = dataEntryClassInfoFilter.accepts(new ClassPathDataEntry("Name"));
-
-    // Assert
-    assertFalse(actualAcceptsResult);
+    // Act and Assert
+    assertFalse(dataEntryClassInfoFilter.accepts(new ClassPathDataEntry("Name")));
   }
 
   /**
@@ -78,20 +64,15 @@ class DataEntryClassInfoFilterDiffblueTest {
    * <p>Method under test: {@link DataEntryClassInfoFilter#accepts(DataEntry)}
    */
   @Test
-  @DisplayName("Test accepts(DataEntry); when 'java.lang.Object'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean DataEntryClassInfoFilter.accepts(DataEntry)"})
-  void testAccepts_whenJavaLangObject_thenReturnFalse() {
+  public void testAccepts_whenJavaLangObject_thenReturnFalse() {
     // Arrange
     DataEntryClassInfoFilter dataEntryClassInfoFilter =
         new DataEntryClassInfoFilter(KotlinConstants.dummyClassPool, "Processing Info");
     Class<Object> clazz = Object.class;
 
-    // Act
-    boolean actualAcceptsResult = dataEntryClassInfoFilter.accepts(new ClassPathDataEntry(clazz));
-
-    // Assert
-    assertFalse(actualAcceptsResult);
+    // Act and Assert
+    assertFalse(dataEntryClassInfoFilter.accepts(new ClassPathDataEntry(clazz)));
   }
 }

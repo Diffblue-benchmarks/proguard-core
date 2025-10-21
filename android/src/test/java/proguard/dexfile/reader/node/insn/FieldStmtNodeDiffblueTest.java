@@ -1,40 +1,34 @@
 package proguard.dexfile.reader.node.insn;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.reader.Field;
 import proguard.dexfile.reader.Op;
 import proguard.dexfile.reader.node.DexCodeNode;
 import proguard.dexfile.reader.visitors.DexCodeVisitor;
 
-class FieldStmtNodeDiffblueTest {
+public class FieldStmtNodeDiffblueTest {
   /**
    * Test {@link FieldStmtNode#FieldStmtNode(Op, int, int, Field)}.
    *
    * <p>Method under test: {@link FieldStmtNode#FieldStmtNode(Op, int, int, Field)}
    */
   @Test
-  @DisplayName("Test new FieldStmtNode(Op, int, int, Field)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void FieldStmtNode.<init>(Op, int, int, Field)"})
-  void testNewFieldStmtNode() {
-    // Arrange
-    Field field = new Field("Owner", "Name", "Type");
-
-    // Act and Assert
-    Field field2 = new FieldStmtNode(Op.NOP, 1, 1, field).field;
-    assertEquals("Name", field2.getName());
-    assertEquals("Owner", field2.getOwner());
-    assertEquals("Type", field2.getType());
+  public void testNewFieldStmtNode() {
+    // Arrange, Act and Assert
+    Field field = (new FieldStmtNode(Op.NOP, 1, 1, new Field("Owner", "Name", "Type"))).field;
+    assertEquals("Name", field.getName());
+    assertEquals("Owner", field.getOwner());
+    assertEquals("Type", field.getType());
   }
 
   /**
@@ -48,15 +42,12 @@ class FieldStmtNodeDiffblueTest {
    * <p>Method under test: {@link FieldStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeNode(); then DexCodeNode() stmts size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void FieldStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
+  public void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
     // Arrange
-    Field field = new Field("Owner", "Name", "Type");
-    FieldStmtNode fieldStmtNode = new FieldStmtNode(Op.NOP, 1, 1, field);
+    FieldStmtNode fieldStmtNode =
+        new FieldStmtNode(Op.NOP, 1, 1, new Field("Owner", "Name", "Type"));
     DexCodeNode cv = new DexCodeNode();
 
     // Act

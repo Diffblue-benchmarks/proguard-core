@@ -1,18 +1,15 @@
 package proguard.dexfile.ir.ts.an;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import java.util.ArrayList;
-import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.IrMethod;
 import proguard.dexfile.ir.expr.ArrayExpr;
 import proguard.dexfile.ir.expr.Local;
@@ -21,80 +18,36 @@ import proguard.dexfile.ir.stmt.LabelStmt;
 import proguard.dexfile.ir.stmt.Stmt;
 import proguard.dexfile.ir.stmt.Stmts;
 
-class SimpleLiveAnalyzeDiffblueTest {
+public class SimpleLiveAnalyzeDiffblueTest {
+  /**
+   * Test {@link SimpleLiveAnalyze#markUsed()}.
+   *
+   * <ul>
+   *   <li>Given {@link SimpleLiveAnalyze#SimpleLiveAnalyze(IrMethod, boolean)} with method is
+   *       {@link IrMethod} (default constructor) and reindexLocal is {@code true}.
+   * </ul>
+   *
+   * <p>Method under test: {@link SimpleLiveAnalyze#markUsed()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"java.util.Set SimpleLiveAnalyze.markUsed()"})
+  public void testMarkUsed_givenSimpleLiveAnalyzeWithMethodIsIrMethodAndReindexLocalIsTrue() {
+    // Arrange, Act and Assert
+    assertTrue((new SimpleLiveAnalyze(new IrMethod(), true)).markUsed().isEmpty());
+  }
+
   /**
    * Test {@link SimpleLiveAnalyze#getLocalSize()}.
    *
    * <p>Method under test: {@link SimpleLiveAnalyze#getLocalSize()}
    */
   @Test
-  @DisplayName("Test getLocalSize()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int SimpleLiveAnalyze.getLocalSize()"})
-  void testGetLocalSize() {
+  public void testGetLocalSize() {
     // Arrange, Act and Assert
-    assertEquals(0, new SimpleLiveAnalyze(new IrMethod(), true).getLocalSize());
-  }
-
-  /**
-   * Test {@link SimpleLiveAnalyze#SimpleLiveAnalyze(IrMethod, boolean)}.
-   *
-   * <ul>
-   *   <li>Then return {@link BaseAnalyze#method} {@link IrMethod#locals} is {@link
-   *       ArrayList#ArrayList()}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SimpleLiveAnalyze#SimpleLiveAnalyze(IrMethod, boolean)}
-   */
-  @Test
-  @DisplayName(
-      "Test new SimpleLiveAnalyze(IrMethod, boolean); then return method locals is ArrayList()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void SimpleLiveAnalyze.<init>(IrMethod, boolean)"})
-  void testNewSimpleLiveAnalyze_thenReturnMethodLocalsIsArrayList() {
-    // Arrange
-    ArrayList<Local> localList = new ArrayList<>();
-    localList.add(new Local(-1));
-    IrMethod method = new IrMethod();
-    method.locals = localList;
-
-    // Act and Assert
-    assertSame(localList, new SimpleLiveAnalyze(method, false).method.locals);
-  }
-
-  /**
-   * Test {@link SimpleLiveAnalyze#SimpleLiveAnalyze(IrMethod, boolean)}.
-   *
-   * <ul>
-   *   <li>Then return {@link BaseAnalyze#method} {@link IrMethod#locals} size is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link SimpleLiveAnalyze#SimpleLiveAnalyze(IrMethod, boolean)}
-   */
-  @Test
-  @DisplayName(
-      "Test new SimpleLiveAnalyze(IrMethod, boolean); then return method locals size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void SimpleLiveAnalyze.<init>(IrMethod, boolean)"})
-  void testNewSimpleLiveAnalyze_thenReturnMethodLocalsSizeIsOne() {
-    // Arrange
-    ArrayList<Local> localList = new ArrayList<>();
-    Local local = new Local(0);
-    localList.add(local);
-    IrMethod method = new IrMethod();
-    method.locals = localList;
-
-    // Act
-    SimpleLiveAnalyze actualSimpleLiveAnalyze = new SimpleLiveAnalyze(method, false);
-
-    // Assert
-    List<Local> localList2 = actualSimpleLiveAnalyze.method.locals;
-    assertEquals(1, localList2.size());
-    assertEquals(1, actualSimpleLiveAnalyze.getLocalSize());
-    assertSame(local, localList2.get(0));
+    assertEquals(0, (new SimpleLiveAnalyze(new IrMethod(), true)).getLocalSize());
   }
 
   /**
@@ -102,18 +55,15 @@ class SimpleLiveAnalyzeDiffblueTest {
    *
    * <ul>
    *   <li>When {@link IrMethod} (default constructor).
-   *   <li>Then return {@link BaseAnalyze#method} {@link IrMethod#name} is {@code null}.
+   *   <li>Then return {@link BaseAnalyze#method} {@link IrMethod#args} is {@code null}.
    * </ul>
    *
    * <p>Method under test: {@link SimpleLiveAnalyze#SimpleLiveAnalyze(IrMethod, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test new SimpleLiveAnalyze(IrMethod, boolean); when IrMethod (default constructor); then return method name is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void SimpleLiveAnalyze.<init>(IrMethod, boolean)"})
-  void testNewSimpleLiveAnalyze_whenIrMethod_thenReturnMethodNameIsNull() {
+  public void testNewSimpleLiveAnalyze_whenIrMethod_thenReturnMethodArgsIsNull() {
     // Arrange
     IrMethod method = new IrMethod();
 
@@ -122,10 +72,10 @@ class SimpleLiveAnalyzeDiffblueTest {
 
     // Assert
     IrMethod irMethod = actualSimpleLiveAnalyze.method;
+    assertNull(irMethod.args);
     assertNull(irMethod.name);
     assertNull(irMethod.owner);
     assertNull(irMethod.ret);
-    assertNull(irMethod.args);
     assertNull(irMethod.phiLabels);
     assertFalse(irMethod.isStatic);
     assertTrue(irMethod.locals.isEmpty());
@@ -141,11 +91,9 @@ class SimpleLiveAnalyzeDiffblueTest {
    * <p>Method under test: {@link SimpleLiveAnalyze#onAssignLocal(Local, Value)}
    */
   @Test
-  @DisplayName("Test onAssignLocal(Local, Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"SimpleLiveValue SimpleLiveAnalyze.onAssignLocal(Local, Value)"})
-  void testOnAssignLocal() {
+  public void testOnAssignLocal() {
     // Arrange
     SimpleLiveAnalyze simpleLiveAnalyze = new SimpleLiveAnalyze(new IrMethod(), true);
     Local local = new Local();
@@ -172,12 +120,9 @@ class SimpleLiveAnalyzeDiffblueTest {
    * <p>Method under test: {@link SimpleLiveAnalyze#onUseLocal(SimpleLiveValue, Local)}
    */
   @Test
-  @DisplayName(
-      "Test onUseLocal(SimpleLiveValue, Local) with 'SimpleLiveValue', 'Local'; then SimpleLiveValue (default constructor) toRsp is 'x'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void SimpleLiveAnalyze.onUseLocal(SimpleLiveValue, Local)"})
-  void testOnUseLocalWithSimpleLiveValueLocal_thenSimpleLiveValueToRspIsX() {
+  public void testOnUseLocalWithSimpleLiveValueLocal_thenSimpleLiveValueToRspIsX() {
     // Arrange
     SimpleLiveAnalyze simpleLiveAnalyze = new SimpleLiveAnalyze(new IrMethod(), true);
     SimpleLiveValue aValue = new SimpleLiveValue();
@@ -198,80 +143,45 @@ class SimpleLiveAnalyzeDiffblueTest {
    * Stmt, Stmt)}
    */
   @Test
-  @DisplayName(
-      "Test merge(SimpleLiveValue[], SimpleLiveValue[], Stmt, Stmt) with 'SimpleLiveValue[]', 'SimpleLiveValue[]', 'Stmt', 'Stmt'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "SimpleLiveValue[] SimpleLiveAnalyze.merge(SimpleLiveValue[], SimpleLiveValue[], Stmt, Stmt)"
   })
-  void testMergeWithSimpleLiveValueSimpleLiveValueStmtStmt() {
-    // Arrange
-    SimpleLiveAnalyze simpleLiveAnalyze = new SimpleLiveAnalyze(new IrMethod(), true);
-    SimpleLiveValue[] distFrame = new SimpleLiveValue[] {null};
-    LabelStmt src = Stmts.nLabel();
-
-    // Act
-    SimpleLiveValue[] actualMergeResult =
-        simpleLiveAnalyze.merge(
-            new SimpleLiveValue[] {new SimpleLiveValue()}, distFrame, src, Stmts.nLabel());
-
-    // Assert
-    assertSame(distFrame, actualMergeResult);
-  }
-
-  /**
-   * Test {@link SimpleLiveAnalyze#merge(SimpleLiveValue[], SimpleLiveValue[], Stmt, Stmt)} with
-   * {@code SimpleLiveValue[]}, {@code SimpleLiveValue[]}, {@code Stmt}, {@code Stmt}.
-   *
-   * <p>Method under test: {@link SimpleLiveAnalyze#merge(SimpleLiveValue[], SimpleLiveValue[],
-   * Stmt, Stmt)}
-   */
-  @Test
-  @DisplayName(
-      "Test merge(SimpleLiveValue[], SimpleLiveValue[], Stmt, Stmt) with 'SimpleLiveValue[]', 'SimpleLiveValue[]', 'Stmt', 'Stmt'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "SimpleLiveValue[] SimpleLiveAnalyze.merge(SimpleLiveValue[], SimpleLiveValue[], Stmt, Stmt)"
-  })
-  void testMergeWithSimpleLiveValueSimpleLiveValueStmtStmt2() {
-    // Arrange
-    SimpleLiveAnalyze simpleLiveAnalyze = new SimpleLiveAnalyze(new IrMethod(), true);
-    LabelStmt src = Stmts.nLabel();
-
-    // Act and Assert
-    assertEquals(
-        0, simpleLiveAnalyze.merge(new SimpleLiveValue[] {}, null, src, Stmts.nLabel()).length);
-  }
-
-  /**
-   * Test {@link SimpleLiveAnalyze#merge(SimpleLiveValue[], SimpleLiveValue[], Stmt, Stmt)} with
-   * {@code SimpleLiveValue[]}, {@code SimpleLiveValue[]}, {@code Stmt}, {@code Stmt}.
-   *
-   * <p>Method under test: {@link SimpleLiveAnalyze#merge(SimpleLiveValue[], SimpleLiveValue[],
-   * Stmt, Stmt)}
-   */
-  @Test
-  @DisplayName(
-      "Test merge(SimpleLiveValue[], SimpleLiveValue[], Stmt, Stmt) with 'SimpleLiveValue[]', 'SimpleLiveValue[]', 'Stmt', 'Stmt'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "SimpleLiveValue[] SimpleLiveAnalyze.merge(SimpleLiveValue[], SimpleLiveValue[], Stmt, Stmt)"
-  })
-  void testMergeWithSimpleLiveValueSimpleLiveValueStmtStmt3() {
+  public void testMergeWithSimpleLiveValueSimpleLiveValueStmtStmt() {
     // Arrange
     SimpleLiveAnalyze simpleLiveAnalyze = new SimpleLiveAnalyze(new IrMethod(), true);
     SimpleLiveValue[] distFrame = new SimpleLiveValue[] {new SimpleLiveValue()};
     LabelStmt src = Stmts.nLabel();
 
-    // Act
-    SimpleLiveValue[] actualMergeResult =
-        simpleLiveAnalyze.merge(new SimpleLiveValue[] {null}, distFrame, src, Stmts.nLabel());
+    // Act and Assert
+    assertSame(
+        distFrame,
+        simpleLiveAnalyze.merge(new SimpleLiveValue[] {null}, distFrame, src, Stmts.nLabel()));
+  }
 
-    // Assert
-    assertSame(distFrame, actualMergeResult);
+  /**
+   * Test {@link SimpleLiveAnalyze#merge(SimpleLiveValue[], SimpleLiveValue[], Stmt, Stmt)} with
+   * {@code SimpleLiveValue[]}, {@code SimpleLiveValue[]}, {@code Stmt}, {@code Stmt}.
+   *
+   * <p>Method under test: {@link SimpleLiveAnalyze#merge(SimpleLiveValue[], SimpleLiveValue[],
+   * Stmt, Stmt)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "SimpleLiveValue[] SimpleLiveAnalyze.merge(SimpleLiveValue[], SimpleLiveValue[], Stmt, Stmt)"
+  })
+  public void testMergeWithSimpleLiveValueSimpleLiveValueStmtStmt2() {
+    // Arrange
+    SimpleLiveAnalyze simpleLiveAnalyze = new SimpleLiveAnalyze(new IrMethod(), true);
+    SimpleLiveValue[] distFrame = new SimpleLiveValue[] {null};
+    LabelStmt src = Stmts.nLabel();
+
+    // Act and Assert
+    assertSame(
+        distFrame,
+        simpleLiveAnalyze.merge(
+            new SimpleLiveValue[] {new SimpleLiveValue()}, distFrame, src, Stmts.nLabel()));
   }
 
   /**
@@ -286,14 +196,11 @@ class SimpleLiveAnalyzeDiffblueTest {
    * Stmt, Stmt)}
    */
   @Test
-  @DisplayName(
-      "Test merge(SimpleLiveValue[], SimpleLiveValue[], Stmt, Stmt) with 'SimpleLiveValue[]', 'SimpleLiveValue[]', 'Stmt', 'Stmt'; then return array length is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "SimpleLiveValue[] SimpleLiveAnalyze.merge(SimpleLiveValue[], SimpleLiveValue[], Stmt, Stmt)"
   })
-  void testMergeWithSimpleLiveValueSimpleLiveValueStmtStmt_thenReturnArrayLengthIsOne() {
+  public void testMergeWithSimpleLiveValueSimpleLiveValueStmtStmt_thenReturnArrayLengthIsOne() {
     // Arrange
     SimpleLiveAnalyze simpleLiveAnalyze = new SimpleLiveAnalyze(new IrMethod(), true);
     SimpleLiveValue simpleLiveValue = new SimpleLiveValue();
@@ -309,7 +216,7 @@ class SimpleLiveAnalyzeDiffblueTest {
 
     // Assert
     assertEquals(1, actualMergeResult.length);
-    assertSame(simpleLiveValue.otherParents, actualMergeResult[0].otherParents);
+    assertSame(simpleLiveValue.otherParents, (actualMergeResult[0]).otherParents);
   }
 
   /**
@@ -324,14 +231,11 @@ class SimpleLiveAnalyzeDiffblueTest {
    * Stmt, Stmt)}
    */
   @Test
-  @DisplayName(
-      "Test merge(SimpleLiveValue[], SimpleLiveValue[], Stmt, Stmt) with 'SimpleLiveValue[]', 'SimpleLiveValue[]', 'Stmt', 'Stmt'; then return array length is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "SimpleLiveValue[] SimpleLiveAnalyze.merge(SimpleLiveValue[], SimpleLiveValue[], Stmt, Stmt)"
   })
-  void testMergeWithSimpleLiveValueSimpleLiveValueStmtStmt_thenReturnArrayLengthIsZero() {
+  public void testMergeWithSimpleLiveValueSimpleLiveValueStmtStmt_thenReturnArrayLengthIsZero() {
     // Arrange
     SimpleLiveAnalyze simpleLiveAnalyze = new SimpleLiveAnalyze(new IrMethod(), true);
     LabelStmt src = Stmts.nLabel();
@@ -352,14 +256,12 @@ class SimpleLiveAnalyzeDiffblueTest {
    * <p>Method under test: {@link SimpleLiveAnalyze#newFrame(int)}
    */
   @Test
-  @DisplayName("Test newFrame(int) with 'int'; when three; then return first element is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"SimpleLiveValue[] SimpleLiveAnalyze.newFrame(int)"})
-  void testNewFrameWithInt_whenThree_thenReturnFirstElementIsNull() {
+  public void testNewFrameWithInt_whenThree_thenReturnFirstElementIsNull() {
     // Arrange and Act
     SimpleLiveValue[] actualNewFrameResult =
-        new SimpleLiveAnalyze(new IrMethod(), true).newFrame(3);
+        (new SimpleLiveAnalyze(new IrMethod(), true)).newFrame(3);
 
     // Assert
     assertNull(actualNewFrameResult[0]);
@@ -374,13 +276,11 @@ class SimpleLiveAnalyzeDiffblueTest {
    * <p>Method under test: {@link SimpleLiveAnalyze#newValue()}
    */
   @Test
-  @DisplayName("Test newValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"SimpleLiveValue SimpleLiveAnalyze.newValue()"})
-  void testNewValue() {
+  public void testNewValue() {
     // Arrange and Act
-    SimpleLiveValue actualNewValueResult = new SimpleLiveAnalyze(new IrMethod(), true).newValue();
+    SimpleLiveValue actualNewValueResult = (new SimpleLiveAnalyze(new IrMethod(), true)).newValue();
 
     // Assert
     assertEquals('.', actualNewValueResult.toRsp());

@@ -1,17 +1,16 @@
 package proguard.io;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.IOException;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ClassPathDataEntryDiffblueTest {
+public class ClassPathDataEntryDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -28,9 +27,7 @@ class ClassPathDataEntryDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ClassPathDataEntry.<init>(String)",
     "String ClassPathDataEntry.getName()",
@@ -40,7 +37,7 @@ class ClassPathDataEntryDiffblueTest {
     "boolean ClassPathDataEntry.isDirectory()",
     "String ClassPathDataEntry.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     ClassPathDataEntry actualClassPathDataEntry = new ClassPathDataEntry("Name");
     String actualToStringResult = actualClassPathDataEntry.toString();
@@ -69,13 +66,11 @@ class ClassPathDataEntryDiffblueTest {
    * <p>Method under test: {@link ClassPathDataEntry#getInputStream()}
    */
   @Test
-  @DisplayName(
-      "Test getInputStream(); given ClassPathDataEntry(String) with 'Name'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.io.InputStream ClassPathDataEntry.getInputStream()"})
-  void testGetInputStream_givenClassPathDataEntryWithName_thenReturnNull() throws IOException {
+  public void testGetInputStream_givenClassPathDataEntryWithName_thenReturnNull()
+      throws IOException {
     // Arrange, Act and Assert
-    assertNull(new ClassPathDataEntry("Name").getInputStream());
+    assertNull((new ClassPathDataEntry("Name")).getInputStream());
   }
 }

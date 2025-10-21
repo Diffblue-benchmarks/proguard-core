@@ -1,17 +1,16 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class SimpleProcessableDiffblueTest {
+public class SimpleProcessableDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -29,9 +28,7 @@ class SimpleProcessableDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters; then return ProcessingInfo is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void SimpleProcessable.<init>()",
     "void SimpleProcessable.<init>(int, Object)",
@@ -39,7 +36,7 @@ class SimpleProcessableDiffblueTest {
     "Object SimpleProcessable.getProcessingInfo()",
     "void SimpleProcessable.setProcessingFlags(int)"
   })
-  void testGettersAndSetters_thenReturnProcessingInfoIsNull() {
+  public void testGettersAndSetters_thenReturnProcessingInfoIsNull() {
     // Arrange and Act
     SimpleProcessable actualSimpleProcessable = new SimpleProcessable();
     actualSimpleProcessable.setProcessingFlags(1);
@@ -68,9 +65,7 @@ class SimpleProcessableDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters; when one; then return 'Processing Info'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void SimpleProcessable.<init>()",
     "void SimpleProcessable.<init>(int, Object)",
@@ -78,7 +73,7 @@ class SimpleProcessableDiffblueTest {
     "Object SimpleProcessable.getProcessingInfo()",
     "void SimpleProcessable.setProcessingFlags(int)"
   })
-  void testGettersAndSetters_whenOne_thenReturnProcessingInfo() {
+  public void testGettersAndSetters_whenOne_thenReturnProcessingInfo() {
     // Arrange and Act
     SimpleProcessable actualSimpleProcessable = new SimpleProcessable(1, "Processing Info");
     actualSimpleProcessable.setProcessingFlags(1);
@@ -95,11 +90,9 @@ class SimpleProcessableDiffblueTest {
    * <p>Method under test: {@link SimpleProcessable#addProcessingFlags(int[])}
    */
   @Test
-  @DisplayName("Test addProcessingFlags(int[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void SimpleProcessable.addProcessingFlags(int[])"})
-  void testAddProcessingFlags() {
+  public void testAddProcessingFlags() {
     // Arrange
     SimpleProcessable simpleProcessable = new SimpleProcessable();
 
@@ -114,39 +107,39 @@ class SimpleProcessableDiffblueTest {
    * Test {@link SimpleProcessable#hasProcessingFlags(int[])}.
    *
    * <ul>
-   *   <li>Then return {@code true}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SimpleProcessable#hasProcessingFlags(int[])}
-   */
-  @Test
-  @DisplayName("Test hasProcessingFlags(int[]); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean SimpleProcessable.hasProcessingFlags(int[])"})
-  void testHasProcessingFlags_thenReturnTrue() {
-    // Arrange, Act and Assert
-    assertTrue(new SimpleProcessable().hasProcessingFlags());
-  }
-
-  /**
-   * Test {@link SimpleProcessable#hasProcessingFlags(int[])}.
-   *
-   * <ul>
-   *   <li>When one and minus one.
+   *   <li>Given {@link SimpleProcessable#SimpleProcessable()}.
    *   <li>Then return {@code false}.
    * </ul>
    *
    * <p>Method under test: {@link SimpleProcessable#hasProcessingFlags(int[])}
    */
   @Test
-  @DisplayName("Test hasProcessingFlags(int[]); when one and minus one; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean SimpleProcessable.hasProcessingFlags(int[])"})
-  void testHasProcessingFlags_whenOneAndMinusOne_thenReturnFalse() {
+  public void testHasProcessingFlags_givenSimpleProcessable_thenReturnFalse() {
     // Arrange, Act and Assert
-    assertFalse(new SimpleProcessable().hasProcessingFlags(1, -1, 1, -1));
+    assertFalse((new SimpleProcessable()).hasProcessingFlags(1, -1, 1, -1));
+  }
+
+  /**
+   * Test {@link SimpleProcessable#hasProcessingFlags(int[])}.
+   *
+   * <ul>
+   *   <li>Then return {@code true}.
+   * </ul>
+   *
+   * <p>Method under test: {@link SimpleProcessable#hasProcessingFlags(int[])}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"boolean SimpleProcessable.hasProcessingFlags(int[])"})
+  public void testHasProcessingFlags_thenReturnTrue() {
+    // Arrange
+    SimpleProcessable simpleProcessable = new SimpleProcessable();
+    simpleProcessable.addProcessingFlags(-1, 4, 2, 4);
+
+    // Act and Assert
+    assertTrue(simpleProcessable.hasProcessingFlags(1, -1, 1, -1));
   }
 
   /**
@@ -155,11 +148,9 @@ class SimpleProcessableDiffblueTest {
    * <p>Method under test: {@link SimpleProcessable#setProcessingInfo(Object)}
    */
   @Test
-  @DisplayName("Test setProcessingInfo(Object)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void SimpleProcessable.setProcessingInfo(Object)"})
-  void testSetProcessingInfo() {
+  public void testSetProcessingInfo() {
     // Arrange
     SimpleProcessable simpleProcessable = new SimpleProcessable();
 

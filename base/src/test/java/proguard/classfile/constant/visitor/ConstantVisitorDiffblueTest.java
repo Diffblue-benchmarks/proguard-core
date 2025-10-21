@@ -1,13 +1,12 @@
 package proguard.classfile.constant.visitor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.analysis.cpa.jvm.util.ConstantLookupVisitor;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
@@ -33,7 +32,7 @@ import proguard.classfile.constant.RefConstant;
 import proguard.classfile.constant.StringConstant;
 import proguard.classfile.constant.Utf8Constant;
 
-class ConstantVisitorDiffblueTest {
+public class ConstantVisitorDiffblueTest {
   /**
    * Test {@link ConstantVisitor#visitAnyConstant(Clazz, Constant)}.
    *
@@ -45,12 +44,9 @@ class ConstantVisitorDiffblueTest {
    * <p>Method under test: {@link ConstantVisitor#visitAnyConstant(Clazz, Constant)}
    */
   @Test
-  @DisplayName(
-      "Test visitAnyConstant(Clazz, Constant); when ClassConstant(); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantVisitor.visitAnyConstant(Clazz, Constant)"})
-  void testVisitAnyConstant_whenClassConstant_thenThrowUnsupportedOperationException() {
+  public void testVisitAnyConstant_whenClassConstant_thenThrowUnsupportedOperationException() {
     // Arrange
     ConstantLookupVisitor constantLookupVisitor = new ConstantLookupVisitor();
     LibraryClass clazz = new LibraryClass();
@@ -71,12 +67,9 @@ class ConstantVisitorDiffblueTest {
    * <p>Method under test: {@link ConstantVisitor#visitIntegerConstant(Clazz, IntegerConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitIntegerConstant(Clazz, IntegerConstant); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantVisitor.visitIntegerConstant(Clazz, IntegerConstant)"})
-  void testVisitIntegerConstant_thenThrowUnsupportedOperationException() {
+  public void testVisitIntegerConstant_thenThrowUnsupportedOperationException() {
     // Arrange
     ConstantLookupVisitor constantLookupVisitor = new ConstantLookupVisitor();
     LibraryClass clazz = new LibraryClass();
@@ -97,12 +90,9 @@ class ConstantVisitorDiffblueTest {
    * <p>Method under test: {@link ConstantVisitor#visitLongConstant(Clazz, LongConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitLongConstant(Clazz, LongConstant); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantVisitor.visitLongConstant(Clazz, LongConstant)"})
-  void testVisitLongConstant_thenThrowUnsupportedOperationException() {
+  public void testVisitLongConstant_thenThrowUnsupportedOperationException() {
     // Arrange
     ConstantLookupVisitor constantLookupVisitor = new ConstantLookupVisitor();
     LibraryClass clazz = new LibraryClass();
@@ -123,12 +113,9 @@ class ConstantVisitorDiffblueTest {
    * <p>Method under test: {@link ConstantVisitor#visitFloatConstant(Clazz, FloatConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitFloatConstant(Clazz, FloatConstant); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantVisitor.visitFloatConstant(Clazz, FloatConstant)"})
-  void testVisitFloatConstant_thenThrowUnsupportedOperationException() {
+  public void testVisitFloatConstant_thenThrowUnsupportedOperationException() {
     // Arrange
     ConstantLookupVisitor constantLookupVisitor = new ConstantLookupVisitor();
     LibraryClass clazz = new LibraryClass();
@@ -149,12 +136,9 @@ class ConstantVisitorDiffblueTest {
    * <p>Method under test: {@link ConstantVisitor#visitDoubleConstant(Clazz, DoubleConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitDoubleConstant(Clazz, DoubleConstant); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantVisitor.visitDoubleConstant(Clazz, DoubleConstant)"})
-  void testVisitDoubleConstant_thenThrowUnsupportedOperationException() {
+  public void testVisitDoubleConstant_thenThrowUnsupportedOperationException() {
     // Arrange
     ConstantLookupVisitor constantLookupVisitor = new ConstantLookupVisitor();
     LibraryClass clazz = new LibraryClass();
@@ -176,14 +160,11 @@ class ConstantVisitorDiffblueTest {
    * PrimitiveArrayConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitPrimitiveArrayConstant(Clazz, PrimitiveArrayConstant); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ConstantVisitor.visitPrimitiveArrayConstant(Clazz, PrimitiveArrayConstant)"
   })
-  void testVisitPrimitiveArrayConstant_thenThrowUnsupportedOperationException() {
+  public void testVisitPrimitiveArrayConstant_thenThrowUnsupportedOperationException() {
     // Arrange
     ConstantLookupVisitor constantLookupVisitor = new ConstantLookupVisitor();
     LibraryClass clazz = new LibraryClass();
@@ -205,12 +186,9 @@ class ConstantVisitorDiffblueTest {
    * <p>Method under test: {@link ConstantVisitor#visitStringConstant(Clazz, StringConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitStringConstant(Clazz, StringConstant); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantVisitor.visitStringConstant(Clazz, StringConstant)"})
-  void testVisitStringConstant_thenThrowUnsupportedOperationException() {
+  public void testVisitStringConstant_thenThrowUnsupportedOperationException() {
     // Arrange
     ConstantLookupVisitor constantLookupVisitor = new ConstantLookupVisitor();
     LibraryClass clazz = new LibraryClass();
@@ -231,12 +209,9 @@ class ConstantVisitorDiffblueTest {
    * <p>Method under test: {@link ConstantVisitor#visitUtf8Constant(Clazz, Utf8Constant)}
    */
   @Test
-  @DisplayName(
-      "Test visitUtf8Constant(Clazz, Utf8Constant); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantVisitor.visitUtf8Constant(Clazz, Utf8Constant)"})
-  void testVisitUtf8Constant_thenThrowUnsupportedOperationException() {
+  public void testVisitUtf8Constant_thenThrowUnsupportedOperationException() {
     // Arrange
     ConstantLookupVisitor constantLookupVisitor = new ConstantLookupVisitor();
     LibraryClass clazz = new LibraryClass();
@@ -257,12 +232,9 @@ class ConstantVisitorDiffblueTest {
    * <p>Method under test: {@link ConstantVisitor#visitDynamicConstant(Clazz, DynamicConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitDynamicConstant(Clazz, DynamicConstant); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantVisitor.visitDynamicConstant(Clazz, DynamicConstant)"})
-  void testVisitDynamicConstant_thenThrowUnsupportedOperationException() {
+  public void testVisitDynamicConstant_thenThrowUnsupportedOperationException() {
     // Arrange
     ConstantLookupVisitor constantLookupVisitor = new ConstantLookupVisitor();
     LibraryClass clazz = new LibraryClass();
@@ -284,14 +256,11 @@ class ConstantVisitorDiffblueTest {
    * InvokeDynamicConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitInvokeDynamicConstant(Clazz, InvokeDynamicConstant); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ConstantVisitor.visitInvokeDynamicConstant(Clazz, InvokeDynamicConstant)"
   })
-  void testVisitInvokeDynamicConstant_thenThrowUnsupportedOperationException() {
+  public void testVisitInvokeDynamicConstant_thenThrowUnsupportedOperationException() {
     // Arrange
     ConstantLookupVisitor constantLookupVisitor = new ConstantLookupVisitor();
     LibraryClass clazz = new LibraryClass();
@@ -313,12 +282,9 @@ class ConstantVisitorDiffblueTest {
    * MethodHandleConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitMethodHandleConstant(Clazz, MethodHandleConstant); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantVisitor.visitMethodHandleConstant(Clazz, MethodHandleConstant)"})
-  void testVisitMethodHandleConstant_thenThrowUnsupportedOperationException() {
+  public void testVisitMethodHandleConstant_thenThrowUnsupportedOperationException() {
     // Arrange
     ConstantLookupVisitor constantLookupVisitor = new ConstantLookupVisitor();
     LibraryClass clazz = new LibraryClass();
@@ -340,12 +306,9 @@ class ConstantVisitorDiffblueTest {
    * <p>Method under test: {@link ConstantVisitor#visitModuleConstant(Clazz, ModuleConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitModuleConstant(Clazz, ModuleConstant); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantVisitor.visitModuleConstant(Clazz, ModuleConstant)"})
-  void testVisitModuleConstant_thenThrowUnsupportedOperationException() {
+  public void testVisitModuleConstant_thenThrowUnsupportedOperationException() {
     // Arrange
     ConstantLookupVisitor constantLookupVisitor = new ConstantLookupVisitor();
     LibraryClass clazz = new LibraryClass();
@@ -366,12 +329,9 @@ class ConstantVisitorDiffblueTest {
    * <p>Method under test: {@link ConstantVisitor#visitPackageConstant(Clazz, PackageConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitPackageConstant(Clazz, PackageConstant); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantVisitor.visitPackageConstant(Clazz, PackageConstant)"})
-  void testVisitPackageConstant_thenThrowUnsupportedOperationException() {
+  public void testVisitPackageConstant_thenThrowUnsupportedOperationException() {
     // Arrange
     ConstantLookupVisitor constantLookupVisitor = new ConstantLookupVisitor();
     LibraryClass clazz = new LibraryClass();
@@ -392,12 +352,9 @@ class ConstantVisitorDiffblueTest {
    * <p>Method under test: {@link ConstantVisitor#visitAnyRefConstant(Clazz, RefConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitAnyRefConstant(Clazz, RefConstant); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantVisitor.visitAnyRefConstant(Clazz, RefConstant)"})
-  void testVisitAnyRefConstant_thenThrowUnsupportedOperationException() {
+  public void testVisitAnyRefConstant_thenThrowUnsupportedOperationException() {
     // Arrange
     ConstantLookupVisitor constantLookupVisitor = new ConstantLookupVisitor();
     LibraryClass clazz = new LibraryClass();
@@ -414,11 +371,9 @@ class ConstantVisitorDiffblueTest {
    * <p>Method under test: {@link ConstantVisitor#visitFieldrefConstant(Clazz, FieldrefConstant)}
    */
   @Test
-  @DisplayName("Test visitFieldrefConstant(Clazz, FieldrefConstant)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantVisitor.visitFieldrefConstant(Clazz, FieldrefConstant)"})
-  void testVisitFieldrefConstant() {
+  public void testVisitFieldrefConstant() {
     // Arrange
     ConstantCounter constantCounter = new ConstantCounter();
     LibraryClass clazz = new LibraryClass();
@@ -441,12 +396,9 @@ class ConstantVisitorDiffblueTest {
    * AnyMethodrefConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitAnyMethodrefConstant(Clazz, AnyMethodrefConstant); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantVisitor.visitAnyMethodrefConstant(Clazz, AnyMethodrefConstant)"})
-  void testVisitAnyMethodrefConstant_thenThrowUnsupportedOperationException() {
+  public void testVisitAnyMethodrefConstant_thenThrowUnsupportedOperationException() {
     // Arrange
     ConstantLookupVisitor constantLookupVisitor = new ConstantLookupVisitor();
     LibraryClass clazz = new LibraryClass();
@@ -471,14 +423,11 @@ class ConstantVisitorDiffblueTest {
    * InterfaceMethodrefConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitInterfaceMethodrefConstant(Clazz, InterfaceMethodrefConstant); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ConstantVisitor.visitInterfaceMethodrefConstant(Clazz, InterfaceMethodrefConstant)"
   })
-  void testVisitInterfaceMethodrefConstant_thenThrowUnsupportedOperationException() {
+  public void testVisitInterfaceMethodrefConstant_thenThrowUnsupportedOperationException() {
     // Arrange
     ConstantLookupVisitor constantLookupVisitor = new ConstantLookupVisitor();
     LibraryClass clazz = new LibraryClass();
@@ -501,12 +450,9 @@ class ConstantVisitorDiffblueTest {
    * <p>Method under test: {@link ConstantVisitor#visitMethodrefConstant(Clazz, MethodrefConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitMethodrefConstant(Clazz, MethodrefConstant); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantVisitor.visitMethodrefConstant(Clazz, MethodrefConstant)"})
-  void testVisitMethodrefConstant_thenThrowUnsupportedOperationException() {
+  public void testVisitMethodrefConstant_thenThrowUnsupportedOperationException() {
     // Arrange
     ConstantLookupVisitor constantLookupVisitor = new ConstantLookupVisitor();
     LibraryClass clazz = new LibraryClass();
@@ -523,11 +469,9 @@ class ConstantVisitorDiffblueTest {
    * <p>Method under test: {@link ConstantVisitor#visitClassConstant(Clazz, ClassConstant)}
    */
   @Test
-  @DisplayName("Test visitClassConstant(Clazz, ClassConstant)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantVisitor.visitClassConstant(Clazz, ClassConstant)"})
-  void testVisitClassConstant() {
+  public void testVisitClassConstant() {
     // Arrange
     ConstantCounter constantCounter = new ConstantCounter();
     LibraryClass clazz = new LibraryClass();
@@ -550,12 +494,9 @@ class ConstantVisitorDiffblueTest {
    * MethodTypeConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitMethodTypeConstant(Clazz, MethodTypeConstant); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantVisitor.visitMethodTypeConstant(Clazz, MethodTypeConstant)"})
-  void testVisitMethodTypeConstant_thenThrowUnsupportedOperationException() {
+  public void testVisitMethodTypeConstant_thenThrowUnsupportedOperationException() {
     // Arrange
     ConstantLookupVisitor constantLookupVisitor = new ConstantLookupVisitor();
     LibraryClass clazz = new LibraryClass();
@@ -577,12 +518,9 @@ class ConstantVisitorDiffblueTest {
    * NameAndTypeConstant)}
    */
   @Test
-  @DisplayName(
-      "Test visitNameAndTypeConstant(Clazz, NameAndTypeConstant); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ConstantVisitor.visitNameAndTypeConstant(Clazz, NameAndTypeConstant)"})
-  void testVisitNameAndTypeConstant_thenThrowUnsupportedOperationException() {
+  public void testVisitNameAndTypeConstant_thenThrowUnsupportedOperationException() {
     // Arrange
     ConstantLookupVisitor constantLookupVisitor = new ConstantLookupVisitor();
     LibraryClass clazz = new LibraryClass();

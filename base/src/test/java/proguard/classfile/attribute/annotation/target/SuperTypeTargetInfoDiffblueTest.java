@@ -1,32 +1,30 @@
 package proguard.classfile.attribute.annotation.target;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class SuperTypeTargetInfoDiffblueTest {
+public class SuperTypeTargetInfoDiffblueTest {
   /**
    * Test {@link SuperTypeTargetInfo#SuperTypeTargetInfo()}.
    *
    * <p>Method under test: {@link SuperTypeTargetInfo#SuperTypeTargetInfo()}
    */
   @Test
-  @DisplayName("Test new SuperTypeTargetInfo()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void SuperTypeTargetInfo.<init>()",
     "void SuperTypeTargetInfo.<init>(byte)",
     "void SuperTypeTargetInfo.<init>(byte, int)"
   })
-  void testNewSuperTypeTargetInfo() {
+  public void testNewSuperTypeTargetInfo() {
     // Arrange, Act and Assert
     assertEquals(
-        TargetInfo.TARGET_TYPE_PARAMETER_GENERIC_CLASS, new SuperTypeTargetInfo().getTargetType());
+        TargetInfo.TARGET_TYPE_PARAMETER_GENERIC_CLASS,
+        (new SuperTypeTargetInfo()).getTargetType());
   }
 
   /**
@@ -40,17 +38,15 @@ class SuperTypeTargetInfoDiffblueTest {
    * <p>Method under test: {@link SuperTypeTargetInfo#SuperTypeTargetInfo(byte)}
    */
   @Test
-  @DisplayName("Test new SuperTypeTargetInfo(byte); when 'A'; then return TargetType is 'A'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void SuperTypeTargetInfo.<init>()",
     "void SuperTypeTargetInfo.<init>(byte)",
     "void SuperTypeTargetInfo.<init>(byte, int)"
   })
-  void testNewSuperTypeTargetInfo_whenA_thenReturnTargetTypeIsA() {
+  public void testNewSuperTypeTargetInfo_whenA_thenReturnTargetTypeIsA() {
     // Arrange, Act and Assert
-    assertEquals('A', new SuperTypeTargetInfo((byte) 'A').getTargetType());
+    assertEquals('A', (new SuperTypeTargetInfo((byte) 'A')).getTargetType());
   }
 
   /**
@@ -64,16 +60,14 @@ class SuperTypeTargetInfoDiffblueTest {
    * <p>Method under test: {@link SuperTypeTargetInfo#SuperTypeTargetInfo(byte, int)}
    */
   @Test
-  @DisplayName("Test new SuperTypeTargetInfo(byte, int); when one; then return TargetType is 'A'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void SuperTypeTargetInfo.<init>()",
     "void SuperTypeTargetInfo.<init>(byte)",
     "void SuperTypeTargetInfo.<init>(byte, int)"
   })
-  void testNewSuperTypeTargetInfo_whenOne_thenReturnTargetTypeIsA() {
+  public void testNewSuperTypeTargetInfo_whenOne_thenReturnTargetTypeIsA() {
     // Arrange, Act and Assert
-    assertEquals('A', new SuperTypeTargetInfo((byte) 'A', 1).getTargetType());
+    assertEquals('A', (new SuperTypeTargetInfo((byte) 'A', 1)).getTargetType());
   }
 }

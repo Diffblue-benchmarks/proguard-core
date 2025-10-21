@@ -1,41 +1,38 @@
 package proguard.dexfile.ir.expr;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.LabelAndLocalMapper;
 import proguard.dexfile.ir.expr.Value.VT;
 
-class NewExprDiffblueTest {
+public class NewExprDiffblueTest {
   /**
    * Test {@link NewExpr#NewExpr(String)}.
    *
    * <p>Method under test: {@link NewExpr#NewExpr(String)}
    */
   @Test
-  @DisplayName("Test new NewExpr(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void NewExpr.<init>(String)"})
-  void testNewNewExpr() {
+  public void testNewNewExpr() {
     // Arrange and Act
     NewExpr actualNewExpr = new NewExpr("Type");
 
     // Assert
     assertEquals("Type", actualNewExpr.type);
+    assertNull(actualNewExpr.getOps());
     assertNull(actualNewExpr.tag);
     assertNull(actualNewExpr.valueType);
     assertNull(actualNewExpr.getOp());
     assertNull(actualNewExpr.getOp1());
     assertNull(actualNewExpr.getOp2());
-    assertNull(actualNewExpr.getOps());
     assertEquals(ET.E0, actualNewExpr.et);
     assertEquals(VT.NEW, actualNewExpr.vt);
   }
@@ -46,23 +43,21 @@ class NewExprDiffblueTest {
    * <p>Method under test: {@link NewExpr#clone()}
    */
   @Test
-  @DisplayName("Test clone()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value NewExpr.clone()"})
-  void testClone() {
+  public void testClone() {
     // Arrange and Act
     Value actualCloneResult = Exprs.nNew("Type").clone();
 
     // Assert
     assertTrue(actualCloneResult instanceof NewExpr);
     assertEquals("Type", ((NewExpr) actualCloneResult).type);
+    assertNull(actualCloneResult.getOps());
     assertNull(((NewExpr) actualCloneResult).tag);
     assertNull(((NewExpr) actualCloneResult).valueType);
     assertNull(actualCloneResult.getOp());
     assertNull(actualCloneResult.getOp1());
     assertNull(actualCloneResult.getOp2());
-    assertNull(actualCloneResult.getOps());
     assertEquals(ET.E0, ((NewExpr) actualCloneResult).et);
     assertEquals(VT.NEW, ((NewExpr) actualCloneResult).vt);
   }
@@ -73,11 +68,9 @@ class NewExprDiffblueTest {
    * <p>Method under test: {@link NewExpr#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName("Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value NewExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper() {
+  public void testCloneWithLabelAndLocalMapper() {
     // Arrange
     NewExpr nNewResult = Exprs.nNew("Type");
 
@@ -87,12 +80,12 @@ class NewExprDiffblueTest {
     // Assert
     assertTrue(actualCloneResult instanceof NewExpr);
     assertEquals("Type", ((NewExpr) actualCloneResult).type);
+    assertNull(actualCloneResult.getOps());
     assertNull(((NewExpr) actualCloneResult).tag);
     assertNull(((NewExpr) actualCloneResult).valueType);
     assertNull(actualCloneResult.getOp());
     assertNull(actualCloneResult.getOp1());
     assertNull(actualCloneResult.getOp2());
-    assertNull(actualCloneResult.getOps());
     assertEquals(ET.E0, ((NewExpr) actualCloneResult).et);
     assertEquals(VT.NEW, ((NewExpr) actualCloneResult).vt);
   }
@@ -103,11 +96,9 @@ class NewExprDiffblueTest {
    * <p>Method under test: {@link NewExpr#releaseMemory()}
    */
   @Test
-  @DisplayName("Test releaseMemory()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void NewExpr.releaseMemory()"})
-  void testReleaseMemory() {
+  public void testReleaseMemory() {
     // Arrange
     NewExpr nNewResult = Exprs.nNew("Type");
 
@@ -130,33 +121,11 @@ class NewExprDiffblueTest {
    * <p>Method under test: {@link NewExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); given nNew 'D'; then return 'NEW double'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String NewExpr.toString0()"})
-  void testToString0_givenNNewD_thenReturnNewDouble() {
+  public void testToString0_givenNNewD_thenReturnNewDouble() {
     // Arrange, Act and Assert
     assertEquals("NEW double", Exprs.nNew("D").toString0());
-  }
-
-  /**
-   * Test {@link NewExpr#toString0()}.
-   *
-   * <ul>
-   *   <li>Given nNew empty string.
-   *   <li>Then return {@code NEW}.
-   * </ul>
-   *
-   * <p>Method under test: {@link NewExpr#toString0()}
-   */
-  @Test
-  @DisplayName("Test toString0(); given nNew empty string; then return 'NEW'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String NewExpr.toString0()"})
-  void testToString0_givenNNewEmptyString_thenReturnNew() {
-    // Arrange, Act and Assert
-    assertEquals("NEW ", Exprs.nNew("").toString0());
   }
 
   /**
@@ -170,11 +139,9 @@ class NewExprDiffblueTest {
    * <p>Method under test: {@link NewExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); given nNew 'F'; then return 'NEW float'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String NewExpr.toString0()"})
-  void testToString0_givenNNewF_thenReturnNewFloat() {
+  public void testToString0_givenNNewF_thenReturnNewFloat() {
     // Arrange, Act and Assert
     assertEquals("NEW float", Exprs.nNew("F").toString0());
   }
@@ -190,11 +157,9 @@ class NewExprDiffblueTest {
    * <p>Method under test: {@link NewExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); given nNew 'I'; then return 'NEW int'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String NewExpr.toString0()"})
-  void testToString0_givenNNewI_thenReturnNewInt() {
+  public void testToString0_givenNNewI_thenReturnNewInt() {
     // Arrange, Act and Assert
     assertEquals("NEW int", Exprs.nNew("I").toString0());
   }
@@ -210,12 +175,54 @@ class NewExprDiffblueTest {
    * <p>Method under test: {@link NewExpr#toString0()}
    */
   @Test
-  @DisplayName("Test toString0(); given nNew 'J'; then return 'NEW long'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String NewExpr.toString0()"})
-  void testToString0_givenNNewJ_thenReturnNewLong() {
+  public void testToString0_givenNNewJ_thenReturnNewLong() {
     // Arrange, Act and Assert
     assertEquals("NEW long", Exprs.nNew("J").toString0());
+  }
+
+  /**
+   * Test {@link NewExpr#toString0()}.
+   *
+   * <ul>
+   *   <li>Given nNew {@code Type} {@link NewExpr#type} is empty string.
+   *   <li>Then return {@code NEW}.
+   * </ul>
+   *
+   * <p>Method under test: {@link NewExpr#toString0()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String NewExpr.toString0()"})
+  public void testToString0_givenNNewTypeTypeIsEmptyString_thenReturnNew() {
+    // Arrange
+    NewExpr nNewResult = Exprs.nNew("Type");
+    nNewResult.type = "";
+
+    // Act and Assert
+    assertEquals("NEW ", nNewResult.toString0());
+  }
+
+  /**
+   * Test {@link NewExpr#toString0()}.
+   *
+   * <ul>
+   *   <li>Given nNew {@code Type} {@link NewExpr#type} is {@code null}.
+   *   <li>Then return {@code NEW}.
+   * </ul>
+   *
+   * <p>Method under test: {@link NewExpr#toString0()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"String NewExpr.toString0()"})
+  public void testToString0_givenNNewTypeTypeIsNull_thenReturnNew() {
+    // Arrange
+    NewExpr nNewResult = Exprs.nNew("Type");
+    nNewResult.type = null;
+
+    // Act and Assert
+    assertEquals("NEW ", nNewResult.toString0());
   }
 }

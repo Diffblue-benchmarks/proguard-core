@@ -1,34 +1,30 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class OrMatcherDiffblueTest {
+public class OrMatcherDiffblueTest {
   /**
    * Test {@link OrMatcher#prefix()}.
    *
    * <p>Method under test: {@link OrMatcher#prefix()}
    */
   @Test
-  @DisplayName("Test prefix()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String OrMatcher.prefix()"})
-  void testPrefix() {
+  public void testPrefix() {
     // Arrange
     EmptyStringMatcher matcher1 = new EmptyStringMatcher();
-    AndMatcher andMatcher = new AndMatcher(matcher1, new EmptyStringMatcher());
 
     // Act and Assert
-    assertEquals("", new OrMatcher(andMatcher).prefix());
+    assertEquals("", (new OrMatcher(new AndMatcher(matcher1, new EmptyStringMatcher()))).prefix());
   }
 
   /**
@@ -42,14 +38,11 @@ class OrMatcherDiffblueTest {
    * <p>Method under test: {@link OrMatcher#prefix()}
    */
   @Test
-  @DisplayName(
-      "Test prefix(); given ConstantMatcher(boolean) with matches is 'true'; then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String OrMatcher.prefix()"})
-  void testPrefix_givenConstantMatcherWithMatchesIsTrue_thenReturnEmptyString() {
+  public void testPrefix_givenConstantMatcherWithMatchesIsTrue_thenReturnEmptyString() {
     // Arrange, Act and Assert
-    assertEquals("", new OrMatcher(new ConstantMatcher(true)).prefix());
+    assertEquals("", (new OrMatcher(new ConstantMatcher(true))).prefix());
   }
 
   /**
@@ -64,18 +57,14 @@ class OrMatcherDiffblueTest {
    * <p>Method under test: {@link OrMatcher#prefix()}
    */
   @Test
-  @DisplayName(
-      "Test prefix(); given OrMatcher(StringMatcher[]) with matchers is EmptyStringMatcher (default constructor) and EmptyStringMatcher (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String OrMatcher.prefix()"})
-  void testPrefix_givenOrMatcherWithMatchersIsEmptyStringMatcherAndEmptyStringMatcher() {
+  public void testPrefix_givenOrMatcherWithMatchersIsEmptyStringMatcherAndEmptyStringMatcher() {
     // Arrange
     EmptyStringMatcher emptyStringMatcher = new EmptyStringMatcher();
-    OrMatcher orMatcher = new OrMatcher(emptyStringMatcher, new EmptyStringMatcher());
 
     // Act and Assert
-    assertEquals("", orMatcher.prefix());
+    assertEquals("", (new OrMatcher(emptyStringMatcher, new EmptyStringMatcher())).prefix());
   }
 
   /**
@@ -90,14 +79,11 @@ class OrMatcherDiffblueTest {
    * <p>Method under test: {@link OrMatcher#prefix()}
    */
   @Test
-  @DisplayName(
-      "Test prefix(); given OrMatcher(StringMatcher[]) with matchers is EmptyStringMatcher (default constructor); then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String OrMatcher.prefix()"})
-  void testPrefix_givenOrMatcherWithMatchersIsEmptyStringMatcher_thenReturnEmptyString() {
+  public void testPrefix_givenOrMatcherWithMatchersIsEmptyStringMatcher_thenReturnEmptyString() {
     // Arrange, Act and Assert
-    assertEquals("", new OrMatcher(new EmptyStringMatcher()).prefix());
+    assertEquals("", (new OrMatcher(new EmptyStringMatcher())).prefix());
   }
 
   /**
@@ -111,13 +97,11 @@ class OrMatcherDiffblueTest {
    * <p>Method under test: {@link OrMatcher#prefix()}
    */
   @Test
-  @DisplayName("Test prefix(); given OrMatcher(StringMatcher[]); then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String OrMatcher.prefix()"})
-  void testPrefix_givenOrMatcher_thenReturnNull() {
+  public void testPrefix_givenOrMatcher_thenReturnNull() {
     // Arrange, Act and Assert
-    assertNull(new OrMatcher().prefix());
+    assertNull((new OrMatcher()).prefix());
   }
 
   /**
@@ -131,14 +115,11 @@ class OrMatcherDiffblueTest {
    * <p>Method under test: {@link OrMatcher#matches(String, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test matches(String, int, int) with 'string', 'beginOffset', 'endOffset'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean OrMatcher.matches(String, int, int)"})
-  void testMatchesWithStringBeginOffsetEndOffset_thenReturnFalse() {
+  public void testMatchesWithStringBeginOffsetEndOffset_thenReturnFalse() {
     // Arrange, Act and Assert
-    assertFalse(new OrMatcher(new EmptyStringMatcher()).matches("String", 1, 3));
+    assertFalse((new OrMatcher(new EmptyStringMatcher())).matches("String", 1, 3));
   }
 
   /**
@@ -152,13 +133,10 @@ class OrMatcherDiffblueTest {
    * <p>Method under test: {@link OrMatcher#matches(String, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test matches(String, int, int) with 'string', 'beginOffset', 'endOffset'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean OrMatcher.matches(String, int, int)"})
-  void testMatchesWithStringBeginOffsetEndOffset_thenReturnTrue() {
+  public void testMatchesWithStringBeginOffsetEndOffset_thenReturnTrue() {
     // Arrange, Act and Assert
-    assertTrue(new OrMatcher(new ConstantMatcher(true)).matches("String", 1, 3));
+    assertTrue((new OrMatcher(new ConstantMatcher(true))).matches("String", 1, 3));
   }
 }

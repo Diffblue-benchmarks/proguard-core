@@ -1,50 +1,43 @@
 package proguard.dexfile.reader.node.insn;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.reader.Method;
 import proguard.dexfile.reader.Op;
 import proguard.dexfile.reader.Proto;
 import proguard.dexfile.reader.node.DexCodeNode;
 import proguard.dexfile.reader.visitors.DexCodeVisitor;
 
-class MethodStmtNodeDiffblueTest {
+public class MethodStmtNodeDiffblueTest {
   /**
    * Test {@link MethodStmtNode#MethodStmtNode(Op, int[], Method)}.
    *
    * <p>Method under test: {@link MethodStmtNode#MethodStmtNode(Op, int[], Method)}
    */
   @Test
-  @DisplayName("Test new MethodStmtNode(Op, int[], Method)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MethodStmtNode.<init>(Op, int[], Method)"})
-  void testNewMethodStmtNode() {
+  public void testNewMethodStmtNode() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
-    // Act
-    MethodStmtNode actualMethodStmtNode =
-        new MethodStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, method);
-
-    // Assert
-    Method method2 = actualMethodStmtNode.method;
-    assertEquals("(Parameter Types)Return Type", method2.getDesc());
-    assertEquals("Name", method2.getName());
-    assertEquals("Owner", method2.getOwner());
-    assertEquals("Return Type", method2.getReturnType());
-    assertSame(proto, method2.getProto());
+    // Act and Assert
+    Method method =
+        (new MethodStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, new Method("Owner", "Name", proto)))
+            .method;
+    assertEquals("(Parameter Types)Return Type", method.getDesc());
+    assertEquals("Name", method.getName());
+    assertEquals("Owner", method.getOwner());
+    assertEquals("Return Type", method.getReturnType());
+    assertSame(proto, method.getProto());
   }
 
   /**
@@ -58,17 +51,14 @@ class MethodStmtNodeDiffblueTest {
    * <p>Method under test: {@link MethodStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeNode(); then DexCodeNode() stmts size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MethodStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
+  public void testAccept_whenDexCodeNode_thenDexCodeNodeStmtsSizeIsOne() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto);
-    MethodStmtNode methodStmtNode = new MethodStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, method);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
+
+    MethodStmtNode methodStmtNode =
+        new MethodStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, new Method("Owner", "Name", proto));
     DexCodeNode cv = new DexCodeNode();
 
     // Act
@@ -98,16 +88,14 @@ class MethodStmtNodeDiffblueTest {
    * <p>Method under test: {@link MethodStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName("Test accept(DexCodeVisitor); when DexCodeVisitor()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MethodStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeVisitor() {
+  public void testAccept_whenDexCodeVisitor() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto);
-    MethodStmtNode methodStmtNode = new MethodStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, method);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
+
+    MethodStmtNode methodStmtNode =
+        new MethodStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, new Method("Owner", "Name", proto));
 
     // Act
     methodStmtNode.accept(new DexCodeVisitor());
@@ -128,17 +116,14 @@ class MethodStmtNodeDiffblueTest {
    * <p>Method under test: {@link MethodStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeVisitor(DexCodeVisitor) with visitor is DexCodeNode()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MethodStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeNode() {
+  public void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeNode() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto);
-    MethodStmtNode methodStmtNode = new MethodStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, method);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
+
+    MethodStmtNode methodStmtNode =
+        new MethodStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, new Method("Owner", "Name", proto));
 
     // Act
     methodStmtNode.accept(new DexCodeVisitor(new DexCodeNode()));
@@ -159,17 +144,14 @@ class MethodStmtNodeDiffblueTest {
    * <p>Method under test: {@link MethodStmtNode#accept(DexCodeVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexCodeVisitor); when DexCodeVisitor(DexCodeVisitor) with visitor is DexCodeVisitor()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void MethodStmtNode.accept(DexCodeVisitor)"})
-  void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeVisitor() {
+  public void testAccept_whenDexCodeVisitorWithVisitorIsDexCodeVisitor() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto);
-    MethodStmtNode methodStmtNode = new MethodStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, method);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
+
+    MethodStmtNode methodStmtNode =
+        new MethodStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, new Method("Owner", "Name", proto));
 
     // Act
     methodStmtNode.accept(new DexCodeVisitor(new DexCodeVisitor()));
@@ -185,18 +167,16 @@ class MethodStmtNodeDiffblueTest {
    * <p>Method under test: {@link MethodStmtNode#getProto()}
    */
   @Test
-  @DisplayName("Test getProto()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Proto MethodStmtNode.getProto()"})
-  void testGetProto() {
+  public void testGetProto() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    Method method = new Method("Owner", "Name", proto);
-    MethodStmtNode methodStmtNode = new MethodStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, method);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     // Act and Assert
-    assertSame(proto, methodStmtNode.getProto());
+    assertSame(
+        proto,
+        (new MethodStmtNode(Op.NOP, new int[] {1, -1, 1, -1}, new Method("Owner", "Name", proto)))
+            .getProto());
   }
 }

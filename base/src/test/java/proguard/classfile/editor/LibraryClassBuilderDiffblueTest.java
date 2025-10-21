@@ -1,16 +1,15 @@
 package proguard.classfile.editor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryField;
@@ -19,26 +18,20 @@ import proguard.classfile.LibraryMethod;
 import proguard.classfile.kotlin.KotlinClassKindMetadata;
 import proguard.classfile.kotlin.KotlinMetadata;
 import proguard.classfile.visitor.MemberVisitor;
-import proguard.testutils.cpa.NamedClass;
 
-class LibraryClassBuilderDiffblueTest {
+public class LibraryClassBuilderDiffblueTest {
   /**
    * Test {@link LibraryClassBuilder#LibraryClassBuilder(int, String, String)}.
    *
    * <p>Method under test: {@link LibraryClassBuilder#LibraryClassBuilder(int, String, String)}
    */
   @Test
-  @DisplayName("Test new LibraryClassBuilder(int, String, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void LibraryClassBuilder.<init>(int, String, String)"})
-  void testNewLibraryClassBuilder() {
-    // Arrange and Act
-    LibraryClassBuilder actualLibraryClassBuilder =
-        new LibraryClassBuilder(1, "Class Name", "Superclass Name");
-
-    // Assert
-    LibraryClass libraryClass = actualLibraryClassBuilder.getLibraryClass();
+  public void testNewLibraryClassBuilder() {
+    // Arrange, Act and Assert
+    LibraryClass libraryClass =
+        (new LibraryClassBuilder(1, "Class Name", "Superclass Name")).getLibraryClass();
     assertEquals("Class Name", libraryClass.getName());
     assertEquals("Superclass Name", libraryClass.getSuperName());
     assertNull(libraryClass.getProcessingInfo());
@@ -66,41 +59,34 @@ class LibraryClassBuilderDiffblueTest {
    * String[], Clazz[], int, Clazz[], LibraryField[], LibraryMethod[], KotlinMetadata)}
    */
   @Test
-  @DisplayName(
-      "Test new LibraryClassBuilder(int, String, String, String[], Clazz[], int, Clazz[], LibraryField[], LibraryMethod[], KotlinMetadata)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void LibraryClassBuilder.<init>(int, String, String, String[], Clazz[], int, Clazz[], LibraryField[], LibraryMethod[], KotlinMetadata)"
   })
-  void testNewLibraryClassBuilder2() {
+  public void testNewLibraryClassBuilder2() {
     // Arrange
     String[] interfaceNames = new String[] {"Interface Names"};
     Clazz[] interfaceClasses = new Clazz[] {new LibraryClass()};
     Clazz[] subClasses = new Clazz[] {new LibraryClass()};
-    LibraryField libraryField = new LibraryField(1, "Name", "Descriptor");
-    LibraryField[] fields = new LibraryField[] {libraryField};
-    LibraryMethod libraryMethod = new LibraryMethod(1, "Name", "Descriptor");
-    LibraryMethod[] methods = new LibraryMethod[] {libraryMethod};
+    LibraryField[] fields = new LibraryField[] {new LibraryField(1, "Name", "Descriptor")};
+    LibraryMethod[] methods = new LibraryMethod[] {new LibraryMethod(1, "Name", "Descriptor")};
     KotlinClassKindMetadata kotlinMetadata =
         new KotlinClassKindMetadata(new int[] {1, -1, 1, -1}, 1, "Xs", "Pn");
 
-    // Act
-    LibraryClassBuilder actualLibraryClassBuilder =
-        new LibraryClassBuilder(
-            1,
-            "Class Name",
-            "Superclass Name",
-            interfaceNames,
-            interfaceClasses,
-            3,
-            subClasses,
-            fields,
-            methods,
-            kotlinMetadata);
-
-    // Assert
-    LibraryClass libraryClass = actualLibraryClassBuilder.getLibraryClass();
+    // Act and Assert
+    LibraryClass libraryClass =
+        (new LibraryClassBuilder(
+                1,
+                "Class Name",
+                "Superclass Name",
+                interfaceNames,
+                interfaceClasses,
+                3,
+                subClasses,
+                fields,
+                methods,
+                kotlinMetadata))
+            .getLibraryClass();
     KotlinMetadata kotlinMetadata2 = libraryClass.kotlinMetadata;
     assertTrue(kotlinMetadata2 instanceof KotlinClassKindMetadata);
     assertEquals("Class Name", libraryClass.getName());
@@ -135,16 +121,14 @@ class LibraryClassBuilderDiffblueTest {
    * <p>Method under test: {@link LibraryClassBuilder#LibraryClassBuilder(LibraryClass)}
    */
   @Test
-  @DisplayName("Test new LibraryClassBuilder(LibraryClass)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void LibraryClassBuilder.<init>(LibraryClass)"})
-  void testNewLibraryClassBuilder3() {
+  public void testNewLibraryClassBuilder3() {
     // Arrange
     LibraryClass libraryClass = new LibraryClass();
 
     // Act and Assert
-    assertSame(libraryClass, new LibraryClassBuilder(libraryClass).getLibraryClass());
+    assertSame(libraryClass, (new LibraryClassBuilder(libraryClass)).getLibraryClass());
   }
 
   /**
@@ -153,17 +137,12 @@ class LibraryClassBuilderDiffblueTest {
    * <p>Method under test: {@link LibraryClassBuilder#getLibraryClass()}
    */
   @Test
-  @DisplayName("Test getLibraryClass()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LibraryClass LibraryClassBuilder.getLibraryClass()"})
-  void testGetLibraryClass() {
-    // Arrange
-    LibraryClassBuilder libraryClassBuilder =
-        new LibraryClassBuilder(1, "Class Name", "Superclass Name");
-
-    // Act
-    LibraryClass actualLibraryClass = libraryClassBuilder.getLibraryClass();
+  public void testGetLibraryClass() {
+    // Arrange and Act
+    LibraryClass actualLibraryClass =
+        (new LibraryClassBuilder(1, "Class Name", "Superclass Name")).getLibraryClass();
 
     // Assert
     assertEquals("Class Name", actualLibraryClass.getName());
@@ -194,66 +173,33 @@ class LibraryClassBuilderDiffblueTest {
    * <p>Method under test: {@link LibraryClassBuilder#getConstantPoolEditor()}
    */
   @Test
-  @DisplayName("Test getConstantPoolEditor(); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "proguard.classfile.editor.ConstantPoolEditor LibraryClassBuilder.getConstantPoolEditor()"
   })
-  void testGetConstantPoolEditor_thenThrowUnsupportedOperationException() {
+  public void testGetConstantPoolEditor_thenThrowUnsupportedOperationException() {
+    // Arrange, Act and Assert
+    assertThrows(
+        UnsupportedOperationException.class,
+        () ->
+            (new LibraryClassBuilder(1, "Class Name", "Superclass Name")).getConstantPoolEditor());
+  }
+
+  /**
+   * Test {@link LibraryClassBuilder#addInterface(Clazz)} with {@code interfaceClass}.
+   *
+   * <p>Method under test: {@link LibraryClassBuilder#addInterface(Clazz)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"LibraryClassBuilder LibraryClassBuilder.addInterface(Clazz)"})
+  public void testAddInterfaceWithInterfaceClass() {
     // Arrange
     LibraryClassBuilder libraryClassBuilder =
         new LibraryClassBuilder(1, "Class Name", "Superclass Name");
 
     // Act and Assert
-    assertThrows(
-        UnsupportedOperationException.class, () -> libraryClassBuilder.getConstantPoolEditor());
-  }
-
-  /**
-   * Test {@link LibraryClassBuilder#addInterface(Clazz)} with {@code interfaceClass}.
-   *
-   * <p>Method under test: {@link LibraryClassBuilder#addInterface(Clazz)}
-   */
-  @Test
-  @DisplayName("Test addInterface(Clazz) with 'interfaceClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"LibraryClassBuilder LibraryClassBuilder.addInterface(Clazz)"})
-  void testAddInterfaceWithInterfaceClass() {
-    // Arrange
-    LibraryClassBuilder libraryClassBuilder =
-        new LibraryClassBuilder(1, "Class Name", "Superclass Name");
-
-    // Act
-    LibraryClassBuilder actualAddInterfaceResult =
-        libraryClassBuilder.addInterface(new LibraryClass());
-
-    // Assert
-    assertSame(libraryClassBuilder, actualAddInterfaceResult);
-  }
-
-  /**
-   * Test {@link LibraryClassBuilder#addInterface(Clazz)} with {@code interfaceClass}.
-   *
-   * <p>Method under test: {@link LibraryClassBuilder#addInterface(Clazz)}
-   */
-  @Test
-  @DisplayName("Test addInterface(Clazz) with 'interfaceClass'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"LibraryClassBuilder LibraryClassBuilder.addInterface(Clazz)"})
-  void testAddInterfaceWithInterfaceClass2() {
-    // Arrange
-    LibraryClass libraryClass = new LibraryClass(1, "This Class Name", "Super Class Name");
-    LibraryClassBuilder libraryClassBuilder = new LibraryClassBuilder(libraryClass);
-
-    // Act
-    LibraryClassBuilder actualAddInterfaceResult =
-        libraryClassBuilder.addInterface(new NamedClass("Member Name"));
-
-    // Assert
-    assertSame(libraryClassBuilder, actualAddInterfaceResult);
+    assertSame(libraryClassBuilder, libraryClassBuilder.addInterface(new LibraryClass()));
   }
 
   /**
@@ -262,21 +208,15 @@ class LibraryClassBuilderDiffblueTest {
    * <p>Method under test: {@link LibraryClassBuilder#addInterface(String)}
    */
   @Test
-  @DisplayName("Test addInterface(String) with 'interfaceName'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LibraryClassBuilder LibraryClassBuilder.addInterface(String)"})
-  void testAddInterfaceWithInterfaceName() {
+  public void testAddInterfaceWithInterfaceName() {
     // Arrange
     LibraryClassBuilder libraryClassBuilder =
         new LibraryClassBuilder(1, "Class Name", "Superclass Name");
 
-    // Act
-    LibraryClassBuilder actualAddInterfaceResult =
-        libraryClassBuilder.addInterface("Interface Name");
-
-    // Assert
-    assertSame(libraryClassBuilder, actualAddInterfaceResult);
+    // Act and Assert
+    assertSame(libraryClassBuilder, libraryClassBuilder.addInterface("Interface Name"));
   }
 
   /**
@@ -286,21 +226,17 @@ class LibraryClassBuilderDiffblueTest {
    * <p>Method under test: {@link LibraryClassBuilder#addInterface(String, Clazz)}
    */
   @Test
-  @DisplayName("Test addInterface(String, Clazz) with 'interfaceName', 'referencedInterface'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LibraryClassBuilder LibraryClassBuilder.addInterface(String, Clazz)"})
-  void testAddInterfaceWithInterfaceNameReferencedInterface() {
+  public void testAddInterfaceWithInterfaceNameReferencedInterface() {
     // Arrange
     LibraryClassBuilder libraryClassBuilder =
         new LibraryClassBuilder(1, "Class Name", "Superclass Name");
 
-    // Act
-    LibraryClassBuilder actualAddInterfaceResult =
-        libraryClassBuilder.addInterface("Interface Name", new LibraryClass());
-
-    // Assert
-    assertSame(libraryClassBuilder, actualAddInterfaceResult);
+    // Act and Assert
+    assertSame(
+        libraryClassBuilder,
+        libraryClassBuilder.addInterface("Interface Name", new LibraryClass()));
   }
 
   /**
@@ -310,22 +246,16 @@ class LibraryClassBuilderDiffblueTest {
    * <p>Method under test: {@link LibraryClassBuilder#addField(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test addField(int, String, String) with 'u2accessFlags', 'fieldName', 'fieldDescriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LibraryClassBuilder LibraryClassBuilder.addField(int, String, String)"})
-  void testAddFieldWithU2accessFlagsFieldNameFieldDescriptor() {
+  public void testAddFieldWithU2accessFlagsFieldNameFieldDescriptor() {
     // Arrange
     LibraryClassBuilder libraryClassBuilder =
         new LibraryClassBuilder(1, "Class Name", "Superclass Name");
 
-    // Act
-    LibraryClassBuilder actualAddFieldResult =
-        libraryClassBuilder.addField(2, "Field Name", "Field Descriptor");
-
-    // Assert
-    assertSame(libraryClassBuilder, actualAddFieldResult);
+    // Act and Assert
+    assertSame(
+        libraryClassBuilder, libraryClassBuilder.addField(2, "Field Name", "Field Descriptor"));
   }
 
   /**
@@ -335,25 +265,42 @@ class LibraryClassBuilderDiffblueTest {
    * <p>Method under test: {@link LibraryClassBuilder#addField(int, String, String, MemberVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test addField(int, String, String, MemberVisitor) with 'u2accessFlags', 'fieldName', 'fieldDescriptor', 'extraMemberVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "LibraryClassBuilder LibraryClassBuilder.addField(int, String, String, MemberVisitor)"
   })
-  void testAddFieldWithU2accessFlagsFieldNameFieldDescriptorExtraMemberVisitor() {
+  public void testAddFieldWithU2accessFlagsFieldNameFieldDescriptorExtraMemberVisitor() {
     // Arrange
     LibraryClassBuilder libraryClassBuilder =
         new LibraryClassBuilder(1, "Class Name", "Superclass Name");
 
-    // Act
-    LibraryClassBuilder actualAddFieldResult =
+    // Act and Assert
+    assertSame(
+        libraryClassBuilder,
         libraryClassBuilder.addField(
-            2, "Field Name", "Field Descriptor", new ConstantPoolRemapper());
+            2, "Field Name", "Field Descriptor", new ConstantPoolRemapper()));
+  }
 
-    // Assert
-    assertSame(libraryClassBuilder, actualAddFieldResult);
+  /**
+   * Test {@link LibraryClassBuilder#addField(int, String, String, MemberVisitor)} with {@code
+   * u2accessFlags}, {@code fieldName}, {@code fieldDescriptor}, {@code extraMemberVisitor}.
+   *
+   * <p>Method under test: {@link LibraryClassBuilder#addField(int, String, String, MemberVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "LibraryClassBuilder LibraryClassBuilder.addField(int, String, String, MemberVisitor)"
+  })
+  public void testAddFieldWithU2accessFlagsFieldNameFieldDescriptorExtraMemberVisitor2() {
+    // Arrange
+    LibraryClassBuilder libraryClassBuilder =
+        new LibraryClassBuilder(1, "Class Name", "Superclass Name");
+
+    // Act and Assert
+    assertSame(
+        libraryClassBuilder,
+        libraryClassBuilder.addField(2, "Field Name", "Field Descriptor", new MemberRemover()));
   }
 
   /**
@@ -367,24 +314,19 @@ class LibraryClassBuilderDiffblueTest {
    * <p>Method under test: {@link LibraryClassBuilder#addField(int, String, String, MemberVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test addField(int, String, String, MemberVisitor) with 'u2accessFlags', 'fieldName', 'fieldDescriptor', 'extraMemberVisitor'; when 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "LibraryClassBuilder LibraryClassBuilder.addField(int, String, String, MemberVisitor)"
   })
-  void testAddFieldWithU2accessFlagsFieldNameFieldDescriptorExtraMemberVisitor_whenNull() {
+  public void testAddFieldWithU2accessFlagsFieldNameFieldDescriptorExtraMemberVisitor_whenNull() {
     // Arrange
     LibraryClassBuilder libraryClassBuilder =
         new LibraryClassBuilder(1, "Class Name", "Superclass Name");
 
-    // Act
-    LibraryClassBuilder actualAddFieldResult =
-        libraryClassBuilder.addField(2, "Field Name", "Field Descriptor", null);
-
-    // Assert
-    assertSame(libraryClassBuilder, actualAddFieldResult);
+    // Act and Assert
+    assertSame(
+        libraryClassBuilder,
+        libraryClassBuilder.addField(2, "Field Name", "Field Descriptor", null));
   }
 
   /**
@@ -397,12 +339,9 @@ class LibraryClassBuilderDiffblueTest {
    * <p>Method under test: {@link LibraryClassBuilder#addAndReturnField(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test addAndReturnField(int, String, String); then return descriptor is 'Field Descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LibraryField LibraryClassBuilder.addAndReturnField(int, String, String)"})
-  void testAddAndReturnField_thenReturnDescriptorIsFieldDescriptor() {
+  public void testAddAndReturnField_thenReturnDescriptorIsFieldDescriptor() {
     // Arrange
     LibraryClassBuilder libraryClassBuilder =
         new LibraryClassBuilder(1, "Class Name", "Superclass Name");
@@ -428,22 +367,16 @@ class LibraryClassBuilderDiffblueTest {
    * <p>Method under test: {@link LibraryClassBuilder#addMethod(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test addMethod(int, String, String) with 'u2accessFlags', 'methodName', 'methodDescriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LibraryClassBuilder LibraryClassBuilder.addMethod(int, String, String)"})
-  void testAddMethodWithU2accessFlagsMethodNameMethodDescriptor() {
+  public void testAddMethodWithU2accessFlagsMethodNameMethodDescriptor() {
     // Arrange
     LibraryClassBuilder libraryClassBuilder =
         new LibraryClassBuilder(1, "Class Name", "Superclass Name");
 
-    // Act
-    LibraryClassBuilder actualAddMethodResult =
-        libraryClassBuilder.addMethod(2, "Method Name", "Method Descriptor");
-
-    // Assert
-    assertSame(libraryClassBuilder, actualAddMethodResult);
+    // Act and Assert
+    assertSame(
+        libraryClassBuilder, libraryClassBuilder.addMethod(2, "Method Name", "Method Descriptor"));
   }
 
   /**
@@ -453,24 +386,19 @@ class LibraryClassBuilderDiffblueTest {
    * <p>Method under test: {@link LibraryClassBuilder#addMethod(int, String, String, MemberVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test addMethod(int, String, String, MemberVisitor) with 'u2accessFlags', 'methodName', 'methodDescriptor', 'extraMemberVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "LibraryClassBuilder LibraryClassBuilder.addMethod(int, String, String, MemberVisitor)"
   })
-  void testAddMethodWithU2accessFlagsMethodNameMethodDescriptorExtraMemberVisitor() {
+  public void testAddMethodWithU2accessFlagsMethodNameMethodDescriptorExtraMemberVisitor() {
     // Arrange
     LibraryClassBuilder libraryClassBuilder =
         new LibraryClassBuilder(1, "Class Name", "Superclass Name");
 
-    // Act
-    LibraryClassBuilder actualAddMethodResult =
-        libraryClassBuilder.addMethod(2, "Method Name", "Method Descriptor", null);
-
-    // Assert
-    assertSame(libraryClassBuilder, actualAddMethodResult);
+    // Act and Assert
+    assertSame(
+        libraryClassBuilder,
+        libraryClassBuilder.addMethod(2, "Method Name", "Method Descriptor", null));
   }
 
   /**
@@ -480,25 +408,42 @@ class LibraryClassBuilderDiffblueTest {
    * <p>Method under test: {@link LibraryClassBuilder#addMethod(int, String, String, MemberVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test addMethod(int, String, String, MemberVisitor) with 'u2accessFlags', 'methodName', 'methodDescriptor', 'extraMemberVisitor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "LibraryClassBuilder LibraryClassBuilder.addMethod(int, String, String, MemberVisitor)"
   })
-  void testAddMethodWithU2accessFlagsMethodNameMethodDescriptorExtraMemberVisitor2() {
+  public void testAddMethodWithU2accessFlagsMethodNameMethodDescriptorExtraMemberVisitor2() {
     // Arrange
     LibraryClassBuilder libraryClassBuilder =
         new LibraryClassBuilder(1, "Class Name", "Superclass Name");
 
-    // Act
-    LibraryClassBuilder actualAddMethodResult =
+    // Act and Assert
+    assertSame(
+        libraryClassBuilder,
         libraryClassBuilder.addMethod(
-            2, "Method Name", "Method Descriptor", new ConstantPoolRemapper());
+            2, "Method Name", "Method Descriptor", new ConstantPoolRemapper()));
+  }
 
-    // Assert
-    assertSame(libraryClassBuilder, actualAddMethodResult);
+  /**
+   * Test {@link LibraryClassBuilder#addMethod(int, String, String, MemberVisitor)} with {@code
+   * u2accessFlags}, {@code methodName}, {@code methodDescriptor}, {@code extraMemberVisitor}.
+   *
+   * <p>Method under test: {@link LibraryClassBuilder#addMethod(int, String, String, MemberVisitor)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "LibraryClassBuilder LibraryClassBuilder.addMethod(int, String, String, MemberVisitor)"
+  })
+  public void testAddMethodWithU2accessFlagsMethodNameMethodDescriptorExtraMemberVisitor3() {
+    // Arrange
+    LibraryClassBuilder libraryClassBuilder =
+        new LibraryClassBuilder(1, "Class Name", "Superclass Name");
+
+    // Act and Assert
+    assertSame(
+        libraryClassBuilder,
+        libraryClassBuilder.addMethod(2, "Method Name", "Method Descriptor", new MemberRemover()));
   }
 
   /**
@@ -511,12 +456,9 @@ class LibraryClassBuilderDiffblueTest {
    * <p>Method under test: {@link LibraryClassBuilder#addAndReturnMethod(int, String, String)}
    */
   @Test
-  @DisplayName(
-      "Test addAndReturnMethod(int, String, String); then return descriptor is 'Method Descriptor'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LibraryMethod LibraryClassBuilder.addAndReturnMethod(int, String, String)"})
-  void testAddAndReturnMethod_thenReturnDescriptorIsMethodDescriptor() {
+  public void testAddAndReturnMethod_thenReturnDescriptorIsMethodDescriptor() {
     // Arrange
     LibraryClassBuilder libraryClassBuilder =
         new LibraryClassBuilder(1, "Class Name", "Superclass Name");
@@ -528,8 +470,8 @@ class LibraryClassBuilderDiffblueTest {
     // Assert
     assertEquals("Method Descriptor", actualAddAndReturnMethodResult.descriptor);
     assertEquals("Method Name", actualAddAndReturnMethodResult.name);
-    assertNull(actualAddAndReturnMethodResult.getProcessingInfo());
     assertNull(actualAddAndReturnMethodResult.referencedClasses);
+    assertNull(actualAddAndReturnMethodResult.getProcessingInfo());
     assertEquals(0, actualAddAndReturnMethodResult.getProcessingFlags());
     assertEquals(1, libraryClassBuilder.getLibraryClass().methods.length);
     assertEquals(2, actualAddAndReturnMethodResult.getAccessFlags());

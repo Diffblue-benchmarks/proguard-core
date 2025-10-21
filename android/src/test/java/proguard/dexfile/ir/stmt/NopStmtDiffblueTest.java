@@ -1,42 +1,39 @@
 package proguard.dexfile.ir.stmt;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.LabelAndLocalMapper;
 import proguard.dexfile.ir.stmt.Stmt.ST;
 
-class NopStmtDiffblueTest {
+public class NopStmtDiffblueTest {
   /**
    * Test new {@link NopStmt} (default constructor).
    *
    * <p>Method under test: default or parameterless constructor of {@link NopStmt}
    */
   @Test
-  @DisplayName("Test new NopStmt (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void NopStmt.<init>()"})
-  void testNewNopStmt() {
+  public void testNewNopStmt() {
     // Arrange and Act
     NopStmt actualNopStmt = new NopStmt();
 
     // Assert
+    assertNull(actualNopStmt.getOps());
     assertNull(actualNopStmt.frame);
     assertNull(actualNopStmt.exceptionHandlers);
     assertNull(actualNopStmt._cfg_froms);
     assertNull(actualNopStmt.getOp());
     assertNull(actualNopStmt.getOp1());
     assertNull(actualNopStmt.getOp2());
-    assertNull(actualNopStmt.getOps());
     assertNull(actualNopStmt.getNext());
     assertNull(actualNopStmt.getPre());
     assertNull(actualNopStmt._ts_default_next);
@@ -53,11 +50,9 @@ class NopStmtDiffblueTest {
    * <p>Method under test: {@link NopStmt#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName("Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Stmt NopStmt.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper() {
+  public void testCloneWithLabelAndLocalMapper() {
     // Arrange
     NopStmt nNopResult = Stmts.nNop();
 
@@ -66,13 +61,13 @@ class NopStmtDiffblueTest {
 
     // Assert
     assertTrue(actualCloneResult instanceof NopStmt);
+    assertNull(actualCloneResult.getOps());
     assertNull(((NopStmt) actualCloneResult).frame);
     assertNull(((NopStmt) actualCloneResult).exceptionHandlers);
     assertNull(((NopStmt) actualCloneResult)._cfg_froms);
     assertNull(actualCloneResult.getOp());
     assertNull(actualCloneResult.getOp1());
     assertNull(actualCloneResult.getOp2());
-    assertNull(actualCloneResult.getOps());
     assertNull(actualCloneResult.getNext());
     assertNull(actualCloneResult.getPre());
     assertNull(((NopStmt) actualCloneResult)._ts_default_next);
@@ -89,12 +84,10 @@ class NopStmtDiffblueTest {
    * <p>Method under test: {@link NopStmt#toString()}
    */
   @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String NopStmt.toString()"})
-  void testToString() {
+  public void testToString() {
     // Arrange, Act and Assert
-    assertEquals("NOP", new NopStmt().toString());
+    assertEquals("NOP", (new NopStmt()).toString());
   }
 }

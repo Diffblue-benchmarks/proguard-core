@@ -1,17 +1,16 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class NegatedIntegerValueDiffblueTest {
+public class NegatedIntegerValueDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -23,17 +22,15 @@ class NegatedIntegerValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void NegatedIntegerValue.<init>(IntegerValue)",
     "java.lang.String NegatedIntegerValue.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
     assertEquals(
-        "-b", new NegatedIntegerValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).toString());
+        "-b", (new NegatedIntegerValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).toString());
   }
 
   /**
@@ -42,14 +39,12 @@ class NegatedIntegerValueDiffblueTest {
    * <p>Method under test: {@link NegatedIntegerValue#negate()}
    */
   @Test
-  @DisplayName("Test negate()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue NegatedIntegerValue.negate()"})
-  void testNegate() {
+  public void testNegate() {
     // Arrange and Act
     IntegerValue actualNegateResult =
-        new NegatedIntegerValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE).negate();
+        (new NegatedIntegerValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).negate();
 
     // Assert
     assertTrue(actualNegateResult instanceof RangeIntegerValue);
@@ -74,14 +69,12 @@ class NegatedIntegerValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean NegatedIntegerValue.equals(Object)",
     "int NegatedIntegerValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     NegatedIntegerValue negatedIntegerValue =
         new NegatedIntegerValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -90,7 +83,8 @@ class NegatedIntegerValueDiffblueTest {
 
     // Act and Assert
     assertEquals(negatedIntegerValue, negatedIntegerValue2);
-    assertEquals(negatedIntegerValue.hashCode(), negatedIntegerValue2.hashCode());
+    int expectedHashCodeResult = negatedIntegerValue.hashCode();
+    assertEquals(expectedHashCodeResult, negatedIntegerValue2.hashCode());
   }
 
   /**
@@ -109,14 +103,12 @@ class NegatedIntegerValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean NegatedIntegerValue.equals(Object)",
     "int NegatedIntegerValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     NegatedIntegerValue negatedIntegerValue =
         new NegatedIntegerValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
@@ -138,14 +130,12 @@ class NegatedIntegerValueDiffblueTest {
    * <p>Method under test: {@link NegatedIntegerValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean NegatedIntegerValue.equals(Object)",
     "int NegatedIntegerValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     NegatedIntegerValue negatedIntegerValue =
         new NegatedIntegerValue(BasicRangeValueFactory.INTEGER_VALUE_CHAR);
@@ -166,14 +156,12 @@ class NegatedIntegerValueDiffblueTest {
    * <p>Method under test: {@link NegatedIntegerValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean NegatedIntegerValue.equals(Object)",
     "int NegatedIntegerValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
     NegatedIntegerValue negatedIntegerValue =
         new NegatedIntegerValue(new NegatedIntegerValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
@@ -194,14 +182,12 @@ class NegatedIntegerValueDiffblueTest {
    * <p>Method under test: {@link NegatedIntegerValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean NegatedIntegerValue.equals(Object)",
     "int NegatedIntegerValue.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new NegatedIntegerValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE), null);
   }
@@ -217,14 +203,12 @@ class NegatedIntegerValueDiffblueTest {
    * <p>Method under test: {@link NegatedIntegerValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean NegatedIntegerValue.equals(Object)",
     "int NegatedIntegerValue.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
         new NegatedIntegerValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE),

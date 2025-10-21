@@ -1,20 +1,19 @@
 package proguard.classfile.instruction;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.UnsupportedEncodingException;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class VariableInstructionDiffblueTest {
+public class VariableInstructionDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -30,17 +29,15 @@ class VariableInstructionDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters; then return not Wide")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void VariableInstruction.<init>()",
     "void VariableInstruction.<init>(boolean)",
     "boolean VariableInstruction.isWide()"
   })
-  void testGettersAndSetters_thenReturnNotWide() {
+  public void testGettersAndSetters_thenReturnNotWide() {
     // Arrange, Act and Assert
-    assertFalse(new VariableInstruction().isWide());
+    assertFalse((new VariableInstruction()).isWide());
   }
 
   /**
@@ -59,47 +56,15 @@ class VariableInstructionDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters; when 'true'; then return Wide")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void VariableInstruction.<init>()",
     "void VariableInstruction.<init>(boolean)",
     "boolean VariableInstruction.isWide()"
   })
-  void testGettersAndSetters_whenTrue_thenReturnWide() {
+  public void testGettersAndSetters_whenTrue_thenReturnWide() {
     // Arrange, Act and Assert
-    assertTrue(new VariableInstruction(true).isWide());
-  }
-
-  /**
-   * Test {@link VariableInstruction#VariableInstruction(byte, int, int)}.
-   *
-   * <ul>
-   *   <li>Then return {@link VariableInstruction#constant} is two hundred fifty-five.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#VariableInstruction(byte, int, int)}
-   */
-  @Test
-  @DisplayName(
-      "Test new VariableInstruction(byte, int, int); then return constant is two hundred fifty-five")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void VariableInstruction.<init>(byte, int, int)"})
-  void testNewVariableInstruction_thenReturnConstantIsTwoHundredFiftyFive() {
-    // Arrange and Act
-    VariableInstruction actualVariableInstruction =
-        new VariableInstruction(Instruction.OP_IINC, 65, 255);
-
-    // Assert
-    assertEquals("iinc", actualVariableInstruction.getName());
-    assertEquals(255, actualVariableInstruction.constant);
-    assertEquals(65, actualVariableInstruction.variableIndex);
-    assertFalse(actualVariableInstruction.isCategory2());
-    assertTrue(actualVariableInstruction.isLoad());
-    assertTrue(actualVariableInstruction.isWide());
-    assertEquals(Instruction.OP_IINC, actualVariableInstruction.opcode);
+    assertTrue((new VariableInstruction(true)).isWide());
   }
 
   /**
@@ -112,12 +77,9 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#VariableInstruction(byte, int)}
    */
   @Test
-  @DisplayName(
-      "Test new VariableInstruction(byte, int); then return variableIndex is minus one hundred twenty-four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.<init>(byte, int)"})
-  void testNewVariableInstruction_thenReturnVariableIndexIsMinusOneHundredTwentyFour() {
+  public void testNewVariableInstruction_thenReturnVariableIndexIsMinusOneHundredTwentyFour() {
     // Arrange and Act
     VariableInstruction actualVariableInstruction = new VariableInstruction((byte) 'A', -124);
 
@@ -140,12 +102,9 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#VariableInstruction(byte, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test new VariableInstruction(byte, int, int); then return variableIndex is minus one hundred twenty-four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.<init>(byte, int, int)"})
-  void testNewVariableInstruction_thenReturnVariableIndexIsMinusOneHundredTwentyFour2() {
+  public void testNewVariableInstruction_thenReturnVariableIndexIsMinusOneHundredTwentyFour2() {
     // Arrange and Act
     VariableInstruction actualVariableInstruction = new VariableInstruction((byte) 'A', -124, 1);
 
@@ -169,11 +128,9 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#VariableInstruction(byte)}
    */
   @Test
-  @DisplayName("Test new VariableInstruction(byte); when 'A'; then return Name is 'lstore_2'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.<init>(byte)"})
-  void testNewVariableInstruction_whenA_thenReturnNameIsLstore2() {
+  public void testNewVariableInstruction_whenA_thenReturnNameIsLstore2() {
     // Arrange and Act
     VariableInstruction actualVariableInstruction = new VariableInstruction((byte) 'A');
 
@@ -189,18 +146,15 @@ class VariableInstructionDiffblueTest {
    *
    * <ul>
    *   <li>When {@code A}.
-   *   <li>Then return Name is {@code lstore_2}.
+   *   <li>Then return {@link VariableInstruction#variableIndex} is one.
    * </ul>
    *
    * <p>Method under test: {@link VariableInstruction#VariableInstruction(byte, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test new VariableInstruction(byte, int, int); when 'A'; then return Name is 'lstore_2'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.<init>(byte, int, int)"})
-  void testNewVariableInstruction_whenA_thenReturnNameIsLstore22() {
+  public void testNewVariableInstruction_whenA_thenReturnVariableIndexIsOne() {
     // Arrange and Act
     VariableInstruction actualVariableInstruction = new VariableInstruction((byte) 'A', 1, 1);
 
@@ -224,19 +178,15 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#VariableInstruction(byte, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test new VariableInstruction(byte, int, int); when MIN_VALUE; then return constant is MIN_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.<init>(byte, int, int)"})
-  void testNewVariableInstruction_whenMin_value_thenReturnConstantIsMin_value() {
+  public void testNewVariableInstruction_whenMin_value_thenReturnConstantIsMin_value() {
     // Arrange and Act
     VariableInstruction actualVariableInstruction =
         new VariableInstruction(Instruction.OP_IINC, 1, Integer.MIN_VALUE);
 
     // Assert
     assertEquals("iinc", actualVariableInstruction.getName());
-    assertEquals(1, actualVariableInstruction.variableIndex);
     assertFalse(actualVariableInstruction.isCategory2());
     assertTrue(actualVariableInstruction.isLoad());
     assertTrue(actualVariableInstruction.isWide());
@@ -255,12 +205,9 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#VariableInstruction(byte, int)}
    */
   @Test
-  @DisplayName(
-      "Test new VariableInstruction(byte, int); when one; then return variableIndex is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.<init>(byte, int)"})
-  void testNewVariableInstruction_whenOne_thenReturnVariableIndexIsOne() {
+  public void testNewVariableInstruction_whenOne_thenReturnVariableIndexIsOne() {
     // Arrange and Act
     VariableInstruction actualVariableInstruction = new VariableInstruction((byte) 'A', 1);
 
@@ -284,11 +231,9 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#VariableInstruction(byte)}
    */
   @Test
-  @DisplayName("Test new VariableInstruction(byte); when OP_IINC; then return Name is 'iinc'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.<init>(byte)"})
-  void testNewVariableInstruction_whenOp_iinc_thenReturnNameIsIinc() {
+  public void testNewVariableInstruction_whenOp_iinc_thenReturnNameIsIinc() {
     // Arrange and Act
     VariableInstruction actualVariableInstruction = new VariableInstruction(Instruction.OP_IINC);
 
@@ -310,11 +255,9 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#VariableInstruction(byte, int)}
    */
   @Test
-  @DisplayName("Test new VariableInstruction(byte, int); when OP_IINC; then return Name is 'iinc'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.<init>(byte, int)"})
-  void testNewVariableInstruction_whenOp_iinc_thenReturnNameIsIinc2() {
+  public void testNewVariableInstruction_whenOp_iinc_thenReturnNameIsIinc2() {
     // Arrange and Act
     VariableInstruction actualVariableInstruction = new VariableInstruction(Instruction.OP_IINC, 1);
 
@@ -336,21 +279,16 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#VariableInstruction(byte, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test new VariableInstruction(byte, int, int); when OP_IINC; then return Name is 'iinc'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.<init>(byte, int, int)"})
-  void testNewVariableInstruction_whenOp_iinc_thenReturnNameIsIinc3() {
+  public void testNewVariableInstruction_whenOp_iinc_thenReturnNameIsIinc3() {
     // Arrange and Act
     VariableInstruction actualVariableInstruction =
         new VariableInstruction(Instruction.OP_IINC, 1, 1);
 
     // Assert
     assertEquals("iinc", actualVariableInstruction.getName());
-    assertEquals(1, actualVariableInstruction.variableIndex);
     assertFalse(actualVariableInstruction.isCategory2());
-    assertFalse(actualVariableInstruction.isWide());
     assertTrue(actualVariableInstruction.isLoad());
     assertEquals(Instruction.OP_IINC, actualVariableInstruction.opcode);
   }
@@ -366,11 +304,9 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#VariableInstruction(byte)}
    */
   @Test
-  @DisplayName("Test new VariableInstruction(byte); when OP_ILOAD_1; then return Name is 'iload_1'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.<init>(byte)"})
-  void testNewVariableInstruction_whenOp_iload_1_thenReturnNameIsIload1() {
+  public void testNewVariableInstruction_whenOp_iload_1_thenReturnNameIsIload1() {
     // Arrange and Act
     VariableInstruction actualVariableInstruction = new VariableInstruction(Instruction.OP_ILOAD_1);
 
@@ -393,11 +329,9 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#VariableInstruction(byte)}
    */
   @Test
-  @DisplayName("Test new VariableInstruction(byte); when OP_ILOAD_3; then return Name is 'iload_3'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.<init>(byte)"})
-  void testNewVariableInstruction_whenOp_iload_3_thenReturnNameIsIload3() {
+  public void testNewVariableInstruction_whenOp_iload_3_thenReturnNameIsIload3() {
     // Arrange and Act
     VariableInstruction actualVariableInstruction = new VariableInstruction(Instruction.OP_ILOAD_3);
 
@@ -420,11 +354,9 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#VariableInstruction(byte)}
    */
   @Test
-  @DisplayName("Test new VariableInstruction(byte); when OP_LLOAD_0; then return Name is 'lload_0'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.<init>(byte)"})
-  void testNewVariableInstruction_whenOp_lload_0_thenReturnNameIsLload0() {
+  public void testNewVariableInstruction_whenOp_lload_0_thenReturnNameIsLload0() {
     // Arrange and Act
     VariableInstruction actualVariableInstruction = new VariableInstruction(Instruction.OP_LLOAD_0);
 
@@ -446,12 +378,9 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#VariableInstruction(byte, int)}
    */
   @Test
-  @DisplayName(
-      "Test new VariableInstruction(byte, int); when sixty-five; then return variableIndex is sixty-five")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.<init>(byte, int)"})
-  void testNewVariableInstruction_whenSixtyFive_thenReturnVariableIndexIsSixtyFive() {
+  public void testNewVariableInstruction_whenSixtyFive_thenReturnVariableIndexIsSixtyFive() {
     // Arrange and Act
     VariableInstruction actualVariableInstruction = new VariableInstruction((byte) 'A', 65);
 
@@ -475,12 +404,9 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#VariableInstruction(byte, int, int)}
    */
   @Test
-  @DisplayName(
-      "Test new VariableInstruction(byte, int, int); when sixty-five; then return variableIndex is sixty-five")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.<init>(byte, int, int)"})
-  void testNewVariableInstruction_whenSixtyFive_thenReturnVariableIndexIsSixtyFive2() {
+  public void testNewVariableInstruction_whenSixtyFive_thenReturnVariableIndexIsSixtyFive2() {
     // Arrange and Act
     VariableInstruction actualVariableInstruction = new VariableInstruction((byte) 'A', 65, 1);
 
@@ -504,42 +430,60 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#copy(VariableInstruction)}
    */
   @Test
-  @DisplayName(
-      "Test copy(VariableInstruction); then return VariableInstruction(byte) with opcode is 'A'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"VariableInstruction VariableInstruction.copy(VariableInstruction)"})
-  void testCopy_thenReturnVariableInstructionWithOpcodeIsA() {
+  public void testCopy_thenReturnVariableInstructionWithOpcodeIsA() {
     // Arrange
     VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
 
-    // Act
-    VariableInstruction actualCopyResult =
-        variableInstruction.copy(new VariableInstruction((byte) 'A'));
-
-    // Assert
-    assertSame(variableInstruction, actualCopyResult);
+    // Act and Assert
+    assertSame(variableInstruction, variableInstruction.copy(new VariableInstruction((byte) 'A')));
   }
 
   /**
    * Test {@link VariableInstruction#isStore()}.
    *
    * <ul>
-   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code 5}.
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@code 5}.
    *   <li>Then return {@code false}.
    * </ul>
    *
    * <p>Method under test: {@link VariableInstruction#isStore()}
    */
   @Test
-  @DisplayName(
-      "Test isStore(); given VariableInstruction(byte) with opcode is '5'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean VariableInstruction.isStore()"})
-  void testIsStore_givenVariableInstructionWithOpcodeIs5_thenReturnFalse() {
-    // Arrange, Act and Assert
-    assertFalse(new VariableInstruction((byte) '5').isStore());
+  public void testIsStore_givenVariableInstructionWithOpcodeIsAOpcodeIs5_thenReturnFalse() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = (byte) '5';
+
+    // Act and Assert
+    assertFalse(variableInstruction.isStore());
+  }
+
+  /**
+   * Test {@link VariableInstruction#isStore()}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@link Instruction#OP_IINC}.
+   *   <li>Then return {@code true}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#isStore()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"boolean VariableInstruction.isStore()"})
+  public void testIsStore_givenVariableInstructionWithOpcodeIsAOpcodeIsOp_iinc_thenReturnTrue() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = Instruction.OP_IINC;
+
+    // Act and Assert
+    assertTrue(variableInstruction.isStore());
   }
 
   /**
@@ -553,57 +497,34 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#isStore()}
    */
   @Test
-  @DisplayName(
-      "Test isStore(); given VariableInstruction(byte) with opcode is 'A'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean VariableInstruction.isStore()"})
-  void testIsStore_givenVariableInstructionWithOpcodeIsA_thenReturnTrue() {
+  public void testIsStore_givenVariableInstructionWithOpcodeIsA_thenReturnTrue() {
     // Arrange, Act and Assert
-    assertTrue(new VariableInstruction((byte) 'A').isStore());
-  }
-
-  /**
-   * Test {@link VariableInstruction#isStore()}.
-   *
-   * <ul>
-   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@link
-   *       Instruction#OP_IINC}.
-   *   <li>Then return {@code true}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#isStore()}
-   */
-  @Test
-  @DisplayName(
-      "Test isStore(); given VariableInstruction(byte) with opcode is OP_IINC; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean VariableInstruction.isStore()"})
-  void testIsStore_givenVariableInstructionWithOpcodeIsOp_iinc_thenReturnTrue() {
-    // Arrange, Act and Assert
-    assertTrue(new VariableInstruction(Instruction.OP_IINC).isStore());
+    assertTrue((new VariableInstruction((byte) 'A')).isStore());
   }
 
   /**
    * Test {@link VariableInstruction#isLoad()}.
    *
    * <ul>
-   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code 5}.
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@code 5}.
    *   <li>Then return {@code true}.
    * </ul>
    *
    * <p>Method under test: {@link VariableInstruction#isLoad()}
    */
   @Test
-  @DisplayName(
-      "Test isLoad(); given VariableInstruction(byte) with opcode is '5'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean VariableInstruction.isLoad()"})
-  void testIsLoad_givenVariableInstructionWithOpcodeIs5_thenReturnTrue() {
-    // Arrange, Act and Assert
-    assertTrue(new VariableInstruction((byte) '5').isLoad());
+  public void testIsLoad_givenVariableInstructionWithOpcodeIsAOpcodeIs5_thenReturnTrue() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = (byte) '5';
+
+    // Act and Assert
+    assertTrue(variableInstruction.isLoad());
   }
 
   /**
@@ -617,14 +538,57 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#isLoad()}
    */
   @Test
-  @DisplayName(
-      "Test isLoad(); given VariableInstruction(byte) with opcode is 'A'; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean VariableInstruction.isLoad()"})
-  void testIsLoad_givenVariableInstructionWithOpcodeIsA_thenReturnFalse() {
+  public void testIsLoad_givenVariableInstructionWithOpcodeIsA_thenReturnFalse() {
     // Arrange, Act and Assert
-    assertFalse(new VariableInstruction((byte) 'A').isLoad());
+    assertFalse((new VariableInstruction((byte) 'A')).isLoad());
+  }
+
+  /**
+   * Test {@link VariableInstruction#canonicalOpcode()}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@code C}.
+   *   <li>Then return {@code 8}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#canonicalOpcode()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"byte VariableInstruction.canonicalOpcode()"})
+  public void testCanonicalOpcode_givenVariableInstructionWithOpcodeIsAOpcodeIsC_thenReturn8() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = (byte) 'C';
+
+    // Act and Assert
+    assertEquals('8', variableInstruction.canonicalOpcode());
+  }
+
+  /**
+   * Test {@link VariableInstruction#canonicalOpcode()}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@code G}.
+   *   <li>Then return {@code 9}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#canonicalOpcode()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"byte VariableInstruction.canonicalOpcode()"})
+  public void testCanonicalOpcode_givenVariableInstructionWithOpcodeIsAOpcodeIsG_thenReturn9() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = (byte) 'G';
+
+    // Act and Assert
+    assertEquals('9', variableInstruction.canonicalOpcode());
   }
 
   /**
@@ -638,119 +602,74 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#canonicalOpcode()}
    */
   @Test
-  @DisplayName(
-      "Test canonicalOpcode(); given VariableInstruction(byte) with opcode is 'A'; then return '7'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"byte VariableInstruction.canonicalOpcode()"})
-  void testCanonicalOpcode_givenVariableInstructionWithOpcodeIsA_thenReturn7() {
+  public void testCanonicalOpcode_givenVariableInstructionWithOpcodeIsA_thenReturn7() {
     // Arrange, Act and Assert
-    assertEquals('7', new VariableInstruction((byte) 'A').canonicalOpcode());
+    assertEquals('7', (new VariableInstruction((byte) 'A')).canonicalOpcode());
   }
 
   /**
    * Test {@link VariableInstruction#canonicalOpcode()}.
    *
    * <ul>
-   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code C}.
-   *   <li>Then return {@code 8}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#canonicalOpcode()}
-   */
-  @Test
-  @DisplayName(
-      "Test canonicalOpcode(); given VariableInstruction(byte) with opcode is 'C'; then return '8'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"byte VariableInstruction.canonicalOpcode()"})
-  void testCanonicalOpcode_givenVariableInstructionWithOpcodeIsC_thenReturn8() {
-    // Arrange, Act and Assert
-    assertEquals('8', new VariableInstruction((byte) 'C').canonicalOpcode());
-  }
-
-  /**
-   * Test {@link VariableInstruction#canonicalOpcode()}.
-   *
-   * <ul>
-   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code .}.
-   *   <li>Then return {@code .}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#canonicalOpcode()}
-   */
-  @Test
-  @DisplayName(
-      "Test canonicalOpcode(); given VariableInstruction(byte) with opcode is '.'; then return '.'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"byte VariableInstruction.canonicalOpcode()"})
-  void testCanonicalOpcode_givenVariableInstructionWithOpcodeIsDot_thenReturnDot() {
-    // Arrange, Act and Assert
-    assertEquals('.', new VariableInstruction((byte) '.').canonicalOpcode());
-  }
-
-  /**
-   * Test {@link VariableInstruction#canonicalOpcode()}.
-   *
-   * <ul>
-   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code G}.
-   *   <li>Then return {@code 9}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#canonicalOpcode()}
-   */
-  @Test
-  @DisplayName(
-      "Test canonicalOpcode(); given VariableInstruction(byte) with opcode is 'G'; then return '9'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"byte VariableInstruction.canonicalOpcode()"})
-  void testCanonicalOpcode_givenVariableInstructionWithOpcodeIsG_thenReturn9() {
-    // Arrange, Act and Assert
-    assertEquals('9', new VariableInstruction((byte) 'G').canonicalOpcode());
-  }
-
-  /**
-   * Test {@link VariableInstruction#canonicalOpcode()}.
-   *
-   * <ul>
-   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code K}.
-   *   <li>Then return {@code :}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#canonicalOpcode()}
-   */
-  @Test
-  @DisplayName(
-      "Test canonicalOpcode(); given VariableInstruction(byte) with opcode is 'K'; then return ':'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"byte VariableInstruction.canonicalOpcode()"})
-  void testCanonicalOpcode_givenVariableInstructionWithOpcodeIsK_thenReturnColon() {
-    // Arrange, Act and Assert
-    assertEquals(':', new VariableInstruction((byte) 'K').canonicalOpcode());
-  }
-
-  /**
-   * Test {@link VariableInstruction#canonicalOpcode()}.
-   *
-   * <ul>
-   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code ;}.
    *   <li>Then return {@code 6}.
    * </ul>
    *
    * <p>Method under test: {@link VariableInstruction#canonicalOpcode()}
    */
   @Test
-  @DisplayName(
-      "Test canonicalOpcode(); given VariableInstruction(byte) with opcode is ';'; then return '6'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"byte VariableInstruction.canonicalOpcode()"})
-  void testCanonicalOpcode_givenVariableInstructionWithOpcodeIsSemicolon_thenReturn6() {
-    // Arrange, Act and Assert
-    assertEquals('6', new VariableInstruction((byte) ';').canonicalOpcode());
+  public void testCanonicalOpcode_thenReturn6() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = (byte) ';';
+
+    // Act and Assert
+    assertEquals('6', variableInstruction.canonicalOpcode());
+  }
+
+  /**
+   * Test {@link VariableInstruction#canonicalOpcode()}.
+   *
+   * <ul>
+   *   <li>Then return {@code :}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#canonicalOpcode()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"byte VariableInstruction.canonicalOpcode()"})
+  public void testCanonicalOpcode_thenReturnColon() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = (byte) 'K';
+
+    // Act and Assert
+    assertEquals(':', variableInstruction.canonicalOpcode());
+  }
+
+  /**
+   * Test {@link VariableInstruction#canonicalOpcode()}.
+   *
+   * <ul>
+   *   <li>Then return {@code .}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#canonicalOpcode()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"byte VariableInstruction.canonicalOpcode()"})
+  public void testCanonicalOpcode_thenReturnDot() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = (byte) '.';
+
+    // Act and Assert
+    assertEquals('.', variableInstruction.canonicalOpcode());
   }
 
   /**
@@ -763,13 +682,15 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#canonicalOpcode()}
    */
   @Test
-  @DisplayName("Test canonicalOpcode(); then return OP_ALOAD")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"byte VariableInstruction.canonicalOpcode()"})
-  void testCanonicalOpcode_thenReturnOp_aload() {
-    // Arrange, Act and Assert
-    assertEquals(Instruction.OP_ALOAD, new VariableInstruction((byte) '*').canonicalOpcode());
+  public void testCanonicalOpcode_thenReturnOp_aload() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = (byte) '*';
+
+    // Act and Assert
+    assertEquals(Instruction.OP_ALOAD, variableInstruction.canonicalOpcode());
   }
 
   /**
@@ -782,13 +703,15 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#canonicalOpcode()}
    */
   @Test
-  @DisplayName("Test canonicalOpcode(); then return OP_DLOAD")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"byte VariableInstruction.canonicalOpcode()"})
-  void testCanonicalOpcode_thenReturnOp_dload() {
-    // Arrange, Act and Assert
-    assertEquals(Instruction.OP_DLOAD, new VariableInstruction((byte) '&').canonicalOpcode());
+  public void testCanonicalOpcode_thenReturnOp_dload() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = (byte) '&';
+
+    // Act and Assert
+    assertEquals(Instruction.OP_DLOAD, variableInstruction.canonicalOpcode());
   }
 
   /**
@@ -801,13 +724,15 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#canonicalOpcode()}
    */
   @Test
-  @DisplayName("Test canonicalOpcode(); then return OP_FLOAD")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"byte VariableInstruction.canonicalOpcode()"})
-  void testCanonicalOpcode_thenReturnOp_fload() {
-    // Arrange, Act and Assert
-    assertEquals(Instruction.OP_FLOAD, new VariableInstruction((byte) '"').canonicalOpcode());
+  public void testCanonicalOpcode_thenReturnOp_fload() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = (byte) '"';
+
+    // Act and Assert
+    assertEquals(Instruction.OP_FLOAD, variableInstruction.canonicalOpcode());
   }
 
   /**
@@ -820,14 +745,15 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#canonicalOpcode()}
    */
   @Test
-  @DisplayName("Test canonicalOpcode(); then return OP_ILOAD")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"byte VariableInstruction.canonicalOpcode()"})
-  void testCanonicalOpcode_thenReturnOp_iload() {
-    // Arrange, Act and Assert
-    assertEquals(
-        Instruction.OP_ILOAD, new VariableInstruction(Instruction.OP_ILOAD_0).canonicalOpcode());
+  public void testCanonicalOpcode_thenReturnOp_iload() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = Instruction.OP_ILOAD_0;
+
+    // Act and Assert
+    assertEquals(Instruction.OP_ILOAD, variableInstruction.canonicalOpcode());
   }
 
   /**
@@ -840,40 +766,405 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#canonicalOpcode()}
    */
   @Test
-  @DisplayName("Test canonicalOpcode(); then return OP_LLOAD")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"byte VariableInstruction.canonicalOpcode()"})
-  void testCanonicalOpcode_thenReturnOp_lload() {
-    // Arrange, Act and Assert
-    assertEquals(
-        Instruction.OP_LLOAD, new VariableInstruction(Instruction.OP_LLOAD_0).canonicalOpcode());
+  public void testCanonicalOpcode_thenReturnOp_lload() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = Instruction.OP_LLOAD_0;
+
+    // Act and Assert
+    assertEquals(Instruction.OP_LLOAD, variableInstruction.canonicalOpcode());
   }
 
   /**
    * Test {@link VariableInstruction#shrink()}.
    *
    * <ul>
-   *   <li>Then return {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code
-   *       A}.
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@code 6}.
    * </ul>
    *
    * <p>Method under test: {@link VariableInstruction#shrink()}
    */
   @Test
-  @DisplayName("Test shrink(); then return VariableInstruction(byte) with opcode is 'A'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenReturnVariableInstructionWithOpcodeIsA() {
+  public void testShrink_givenVariableInstructionWithOpcodeIsAOpcodeIs6() {
     // Arrange
     VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.variableIndex = 3;
+    variableInstruction.opcode = (byte) '6';
 
     // Act
     Instruction actualShrinkResult = variableInstruction.shrink();
 
     // Assert
-    assertSame(variableInstruction, actualShrinkResult);
+    assertTrue(actualShrinkResult instanceof VariableInstruction);
+    assertEquals("istore_3", variableInstruction.getName());
+    assertEquals("istore_3", actualShrinkResult.getName());
+    assertEquals('>', variableInstruction.opcode);
+    assertEquals('>', ((VariableInstruction) actualShrinkResult).opcode);
+  }
+
+  /**
+   * Test {@link VariableInstruction#shrink()}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@code 8}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#shrink()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
+  public void testShrink_givenVariableInstructionWithOpcodeIsAOpcodeIs8() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.variableIndex = 3;
+    variableInstruction.opcode = (byte) '8';
+
+    // Act
+    Instruction actualShrinkResult = variableInstruction.shrink();
+
+    // Assert
+    assertTrue(actualShrinkResult instanceof VariableInstruction);
+    assertEquals("fstore_3", variableInstruction.getName());
+    assertEquals("fstore_3", actualShrinkResult.getName());
+    assertEquals('F', variableInstruction.opcode);
+    assertEquals('F', ((VariableInstruction) actualShrinkResult).opcode);
+  }
+
+  /**
+   * Test {@link VariableInstruction#shrink()}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@code &}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#shrink()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
+  public void testShrink_givenVariableInstructionWithOpcodeIsAOpcodeIsAmpersand() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.variableIndex = 3;
+    variableInstruction.opcode = (byte) '&';
+
+    // Act
+    Instruction actualShrinkResult = variableInstruction.shrink();
+
+    // Assert
+    assertTrue(actualShrinkResult instanceof VariableInstruction);
+    assertEquals("dload_3", variableInstruction.getName());
+    assertEquals("dload_3", actualShrinkResult.getName());
+    assertEquals(')', variableInstruction.opcode);
+    assertEquals(')', ((VariableInstruction) actualShrinkResult).opcode);
+  }
+
+  /**
+   * Test {@link VariableInstruction#shrink()}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@code *}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#shrink()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
+  public void testShrink_givenVariableInstructionWithOpcodeIsAOpcodeIsAsterisk() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.variableIndex = 3;
+    variableInstruction.opcode = (byte) '*';
+
+    // Act
+    Instruction actualShrinkResult = variableInstruction.shrink();
+
+    // Assert
+    assertTrue(actualShrinkResult instanceof VariableInstruction);
+    assertEquals("aload_3", variableInstruction.getName());
+    assertEquals("aload_3", actualShrinkResult.getName());
+    assertEquals('-', variableInstruction.opcode);
+    assertEquals('-', ((VariableInstruction) actualShrinkResult).opcode);
+  }
+
+  /**
+   * Test {@link VariableInstruction#shrink()}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@code C}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#shrink()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
+  public void testShrink_givenVariableInstructionWithOpcodeIsAOpcodeIsC() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.variableIndex = 3;
+    variableInstruction.opcode = (byte) 'C';
+
+    // Act
+    Instruction actualShrinkResult = variableInstruction.shrink();
+
+    // Assert
+    assertTrue(actualShrinkResult instanceof VariableInstruction);
+    assertEquals("fstore_3", variableInstruction.getName());
+    assertEquals("fstore_3", actualShrinkResult.getName());
+    assertEquals('F', variableInstruction.opcode);
+    assertEquals('F', ((VariableInstruction) actualShrinkResult).opcode);
+  }
+
+  /**
+   * Test {@link VariableInstruction#shrink()}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@link Instruction#OP_ALOAD}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#shrink()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
+  public void testShrink_givenVariableInstructionWithOpcodeIsAOpcodeIsOp_aload() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.variableIndex = 3;
+    variableInstruction.opcode = Instruction.OP_ALOAD;
+
+    // Act
+    Instruction actualShrinkResult = variableInstruction.shrink();
+
+    // Assert
+    assertTrue(actualShrinkResult instanceof VariableInstruction);
+    assertEquals("aload_3", variableInstruction.getName());
+    assertEquals("aload_3", actualShrinkResult.getName());
+    assertEquals('-', variableInstruction.opcode);
+    assertEquals('-', ((VariableInstruction) actualShrinkResult).opcode);
+  }
+
+  /**
+   * Test {@link VariableInstruction#shrink()}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@link Instruction#OP_DLOAD}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#shrink()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
+  public void testShrink_givenVariableInstructionWithOpcodeIsAOpcodeIsOp_dload() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.variableIndex = 3;
+    variableInstruction.opcode = Instruction.OP_DLOAD;
+
+    // Act
+    Instruction actualShrinkResult = variableInstruction.shrink();
+
+    // Assert
+    assertTrue(actualShrinkResult instanceof VariableInstruction);
+    assertEquals("dload_3", variableInstruction.getName());
+    assertEquals("dload_3", actualShrinkResult.getName());
+    assertEquals(')', variableInstruction.opcode);
+    assertEquals(')', ((VariableInstruction) actualShrinkResult).opcode);
+  }
+
+  /**
+   * Test {@link VariableInstruction#shrink()}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@link Instruction#OP_FLOAD}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#shrink()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
+  public void testShrink_givenVariableInstructionWithOpcodeIsAOpcodeIsOp_fload() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.variableIndex = 3;
+    variableInstruction.opcode = Instruction.OP_FLOAD;
+
+    // Act
+    Instruction actualShrinkResult = variableInstruction.shrink();
+
+    // Assert
+    assertTrue(actualShrinkResult instanceof VariableInstruction);
+    assertEquals("fload_3", variableInstruction.getName());
+    assertEquals("fload_3", actualShrinkResult.getName());
+    assertEquals('%', variableInstruction.opcode);
+    assertEquals('%', ((VariableInstruction) actualShrinkResult).opcode);
+  }
+
+  /**
+   * Test {@link VariableInstruction#shrink()}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@link Instruction#OP_ILOAD_0}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#shrink()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
+  public void testShrink_givenVariableInstructionWithOpcodeIsAOpcodeIsOp_iload_0() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.variableIndex = 3;
+    variableInstruction.opcode = Instruction.OP_ILOAD_0;
+
+    // Act
+    Instruction actualShrinkResult = variableInstruction.shrink();
+
+    // Assert
+    assertTrue(actualShrinkResult instanceof VariableInstruction);
+    assertEquals("iload_3", variableInstruction.getName());
+    assertEquals("iload_3", actualShrinkResult.getName());
+    assertEquals(Instruction.OP_ILOAD_3, variableInstruction.opcode);
+    assertEquals(Instruction.OP_ILOAD_3, ((VariableInstruction) actualShrinkResult).opcode);
+  }
+
+  /**
+   * Test {@link VariableInstruction#shrink()}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@link Instruction#OP_LLOAD}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#shrink()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
+  public void testShrink_givenVariableInstructionWithOpcodeIsAOpcodeIsOp_lload() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.variableIndex = 3;
+    variableInstruction.opcode = Instruction.OP_LLOAD;
+
+    // Act
+    Instruction actualShrinkResult = variableInstruction.shrink();
+
+    // Assert
+    assertTrue(actualShrinkResult instanceof VariableInstruction);
+    assertEquals("lload_3", variableInstruction.getName());
+    assertEquals("lload_3", actualShrinkResult.getName());
+    assertEquals('!', variableInstruction.opcode);
+    assertEquals('!', ((VariableInstruction) actualShrinkResult).opcode);
+  }
+
+  /**
+   * Test {@link VariableInstruction#shrink()}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@link Instruction#OP_LLOAD_0}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#shrink()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
+  public void testShrink_givenVariableInstructionWithOpcodeIsAOpcodeIsOp_lload_0() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.variableIndex = 3;
+    variableInstruction.opcode = Instruction.OP_LLOAD_0;
+
+    // Act
+    Instruction actualShrinkResult = variableInstruction.shrink();
+
+    // Assert
+    assertTrue(actualShrinkResult instanceof VariableInstruction);
+    assertEquals("lload_3", variableInstruction.getName());
+    assertEquals("lload_3", actualShrinkResult.getName());
+    assertEquals('!', variableInstruction.opcode);
+    assertEquals('!', ((VariableInstruction) actualShrinkResult).opcode);
+  }
+
+  /**
+   * Test {@link VariableInstruction#shrink()}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@code "}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#shrink()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
+  public void testShrink_givenVariableInstructionWithOpcodeIsAOpcodeIsQuotationMark() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.variableIndex = 3;
+    variableInstruction.opcode = (byte) '"';
+
+    // Act
+    Instruction actualShrinkResult = variableInstruction.shrink();
+
+    // Assert
+    assertTrue(actualShrinkResult instanceof VariableInstruction);
+    assertEquals("fload_3", variableInstruction.getName());
+    assertEquals("fload_3", actualShrinkResult.getName());
+    assertEquals('%', variableInstruction.opcode);
+    assertEquals('%', ((VariableInstruction) actualShrinkResult).opcode);
+  }
+
+  /**
+   * Test {@link VariableInstruction#shrink()}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@code ;}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#shrink()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
+  public void testShrink_givenVariableInstructionWithOpcodeIsAOpcodeIsSemicolon() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.variableIndex = 3;
+    variableInstruction.opcode = (byte) ';';
+
+    // Act
+    Instruction actualShrinkResult = variableInstruction.shrink();
+
+    // Assert
+    assertTrue(actualShrinkResult instanceof VariableInstruction);
+    assertEquals("istore_3", variableInstruction.getName());
+    assertEquals("istore_3", actualShrinkResult.getName());
+    assertEquals('>', variableInstruction.opcode);
+    assertEquals('>', ((VariableInstruction) actualShrinkResult).opcode);
   }
 
   /**
@@ -887,395 +1178,34 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#shrink()}
    */
   @Test
-  @DisplayName("Test shrink(); then return VariableInstruction(byte) with opcode is OP_IINC")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenReturnVariableInstructionWithOpcodeIsOp_iinc() {
+  public void testShrink_thenReturnVariableInstructionWithOpcodeIsOp_iinc() {
     // Arrange
     VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_IINC);
 
-    // Act
-    Instruction actualShrinkResult = variableInstruction.shrink();
-
-    // Assert
-    assertSame(variableInstruction, actualShrinkResult);
+    // Act and Assert
+    assertSame(variableInstruction, variableInstruction.shrink());
   }
 
   /**
    * Test {@link VariableInstruction#shrink()}.
    *
    * <ul>
-   *   <li>Then return {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@link
-   *       Instruction#OP_ILOAD}.
+   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A} Name
+   *       is {@code aload}.
    * </ul>
    *
    * <p>Method under test: {@link VariableInstruction#shrink()}
    */
   @Test
-  @DisplayName("Test shrink(); then return VariableInstruction(byte) with opcode is OP_ILOAD")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenReturnVariableInstructionWithOpcodeIsOp_iload() {
+  public void testShrink_thenVariableInstructionWithOpcodeIsANameIsAload() {
     // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_ILOAD);
-    variableInstruction.variableIndex = 26;
-
-    // Act
-    Instruction actualShrinkResult = variableInstruction.shrink();
-
-    // Assert
-    assertSame(variableInstruction, actualShrinkResult);
-  }
-
-  /**
-   * Test {@link VariableInstruction#shrink()}.
-   *
-   * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code 6} Name
-   *       is {@code istore_3}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#shrink()}
-   */
-  @Test
-  @DisplayName(
-      "Test shrink(); then VariableInstruction(byte) with opcode is '6' Name is 'istore_3'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenVariableInstructionWithOpcodeIs6NameIsIstore3() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction((byte) '6');
-    variableInstruction.variableIndex = 3;
-
-    // Act
-    Instruction actualShrinkResult = variableInstruction.shrink();
-
-    // Assert
-    assertEquals("istore_3", variableInstruction.getName());
-    assertEquals('>', variableInstruction.opcode);
-    assertSame(variableInstruction, actualShrinkResult);
-  }
-
-  /**
-   * Test {@link VariableInstruction#shrink()}.
-   *
-   * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code 8} Name
-   *       is {@code fstore_3}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#shrink()}
-   */
-  @Test
-  @DisplayName(
-      "Test shrink(); then VariableInstruction(byte) with opcode is '8' Name is 'fstore_3'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenVariableInstructionWithOpcodeIs8NameIsFstore3() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction((byte) '8');
-    variableInstruction.variableIndex = 3;
-
-    // Act
-    Instruction actualShrinkResult = variableInstruction.shrink();
-
-    // Assert
-    assertEquals("fstore_3", variableInstruction.getName());
-    assertEquals('F', variableInstruction.opcode);
-    assertSame(variableInstruction, actualShrinkResult);
-  }
-
-  /**
-   * Test {@link VariableInstruction#shrink()}.
-   *
-   * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code 9} Name
-   *       is {@code dstore_3}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#shrink()}
-   */
-  @Test
-  @DisplayName(
-      "Test shrink(); then VariableInstruction(byte) with opcode is '9' Name is 'dstore_3'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenVariableInstructionWithOpcodeIs9NameIsDstore3() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction((byte) '9');
-    variableInstruction.variableIndex = 3;
-
-    // Act
-    Instruction actualShrinkResult = variableInstruction.shrink();
-
-    // Assert
-    assertEquals("dstore_3", variableInstruction.getName());
-    assertEquals('J', variableInstruction.opcode);
-    assertSame(variableInstruction, actualShrinkResult);
-  }
-
-  /**
-   * Test {@link VariableInstruction#shrink()}.
-   *
-   * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code &} Name
-   *       is {@code dload_3}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#shrink()}
-   */
-  @Test
-  @DisplayName("Test shrink(); then VariableInstruction(byte) with opcode is '&' Name is 'dload_3'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenVariableInstructionWithOpcodeIsAmpersandNameIsDload3() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction((byte) '&');
-    variableInstruction.variableIndex = 3;
-
-    // Act
-    Instruction actualShrinkResult = variableInstruction.shrink();
-
-    // Assert
-    assertEquals("dload_3", variableInstruction.getName());
-    assertEquals(')', variableInstruction.opcode);
-    assertSame(variableInstruction, actualShrinkResult);
-  }
-
-  /**
-   * Test {@link VariableInstruction#shrink()}.
-   *
-   * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code *} Name
-   *       is {@code aload_3}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#shrink()}
-   */
-  @Test
-  @DisplayName("Test shrink(); then VariableInstruction(byte) with opcode is '*' Name is 'aload_3'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenVariableInstructionWithOpcodeIsAsteriskNameIsAload3() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction((byte) '*');
-    variableInstruction.variableIndex = 3;
-
-    // Act
-    Instruction actualShrinkResult = variableInstruction.shrink();
-
-    // Assert
-    assertEquals("aload_3", variableInstruction.getName());
-    assertEquals('-', variableInstruction.opcode);
-    assertSame(variableInstruction, actualShrinkResult);
-  }
-
-  /**
-   * Test {@link VariableInstruction#shrink()}.
-   *
-   * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code C} Name
-   *       is {@code fstore_3}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#shrink()}
-   */
-  @Test
-  @DisplayName(
-      "Test shrink(); then VariableInstruction(byte) with opcode is 'C' Name is 'fstore_3'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenVariableInstructionWithOpcodeIsCNameIsFstore3() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction((byte) 'C');
-    variableInstruction.variableIndex = 3;
-
-    // Act
-    Instruction actualShrinkResult = variableInstruction.shrink();
-
-    // Assert
-    assertEquals("fstore_3", variableInstruction.getName());
-    assertEquals('F', variableInstruction.opcode);
-    assertSame(variableInstruction, actualShrinkResult);
-  }
-
-  /**
-   * Test {@link VariableInstruction#shrink()}.
-   *
-   * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code :} Name
-   *       is {@code astore_3}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#shrink()}
-   */
-  @Test
-  @DisplayName(
-      "Test shrink(); then VariableInstruction(byte) with opcode is ':' Name is 'astore_3'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenVariableInstructionWithOpcodeIsColonNameIsAstore3() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction((byte) ':');
-    variableInstruction.variableIndex = 3;
-
-    // Act
-    Instruction actualShrinkResult = variableInstruction.shrink();
-
-    // Assert
-    assertEquals("astore_3", variableInstruction.getName());
-    assertEquals('N', variableInstruction.opcode);
-    assertSame(variableInstruction, actualShrinkResult);
-  }
-
-  /**
-   * Test {@link VariableInstruction#shrink()}.
-   *
-   * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code .} Name
-   *       is {@code iaload}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#shrink()}
-   */
-  @Test
-  @DisplayName("Test shrink(); then VariableInstruction(byte) with opcode is '.' Name is 'iaload'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenVariableInstructionWithOpcodeIsDotNameIsIaload() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction((byte) '.');
-    variableInstruction.variableIndex = 3;
-
-    // Act
-    Instruction actualShrinkResult = variableInstruction.shrink();
-
-    // Assert
-    assertEquals("iaload", variableInstruction.getName());
-    assertEquals('.', variableInstruction.opcode);
-    assertSame(variableInstruction, actualShrinkResult);
-  }
-
-  /**
-   * Test {@link VariableInstruction#shrink()}.
-   *
-   * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@link
-   *       Instruction#OP_ALOAD} Name is {@code aload_3}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#shrink()}
-   */
-  @Test
-  @DisplayName(
-      "Test shrink(); then VariableInstruction(byte) with opcode is OP_ALOAD Name is 'aload_3'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenVariableInstructionWithOpcodeIsOp_aloadNameIsAload3() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_ALOAD);
-    variableInstruction.variableIndex = 3;
-
-    // Act
-    Instruction actualShrinkResult = variableInstruction.shrink();
-
-    // Assert
-    assertEquals("aload_3", variableInstruction.getName());
-    assertEquals('-', variableInstruction.opcode);
-    assertSame(variableInstruction, actualShrinkResult);
-  }
-
-  /**
-   * Test {@link VariableInstruction#shrink()}.
-   *
-   * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@link
-   *       Instruction#OP_DLOAD} Name is {@code dload_3}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#shrink()}
-   */
-  @Test
-  @DisplayName(
-      "Test shrink(); then VariableInstruction(byte) with opcode is OP_DLOAD Name is 'dload_3'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenVariableInstructionWithOpcodeIsOp_dloadNameIsDload3() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_DLOAD);
-    variableInstruction.variableIndex = 3;
-
-    // Act
-    Instruction actualShrinkResult = variableInstruction.shrink();
-
-    // Assert
-    assertEquals("dload_3", variableInstruction.getName());
-    assertEquals(')', variableInstruction.opcode);
-    assertSame(variableInstruction, actualShrinkResult);
-  }
-
-  /**
-   * Test {@link VariableInstruction#shrink()}.
-   *
-   * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@link
-   *       Instruction#OP_FLOAD} Name is {@code fload_3}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#shrink()}
-   */
-  @Test
-  @DisplayName(
-      "Test shrink(); then VariableInstruction(byte) with opcode is OP_FLOAD Name is 'fload_3'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenVariableInstructionWithOpcodeIsOp_floadNameIsFload3() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_FLOAD);
-    variableInstruction.variableIndex = 3;
-
-    // Act
-    Instruction actualShrinkResult = variableInstruction.shrink();
-
-    // Assert
-    assertEquals("fload_3", variableInstruction.getName());
-    assertEquals('%', variableInstruction.opcode);
-    assertSame(variableInstruction, actualShrinkResult);
-  }
-
-  /**
-   * Test {@link VariableInstruction#shrink()}.
-   *
-   * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@link
-   *       Instruction#OP_ILOAD} Name is {@code aload}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#shrink()}
-   */
-  @Test
-  @DisplayName(
-      "Test shrink(); then VariableInstruction(byte) with opcode is OP_ILOAD Name is 'aload'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenVariableInstructionWithOpcodeIsOp_iloadNameIsAload() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_ILOAD);
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
     variableInstruction.variableIndex = -1;
+    variableInstruction.opcode = Instruction.OP_ILOAD;
 
     // Act
     Instruction actualShrinkResult = variableInstruction.shrink();
@@ -1295,22 +1225,141 @@ class VariableInstructionDiffblueTest {
    * Test {@link VariableInstruction#shrink()}.
    *
    * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@link
-   *       Instruction#OP_ILOAD} Name is {@code iload_3}.
+   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A} Name
+   *       is {@code astore_3}.
    * </ul>
    *
    * <p>Method under test: {@link VariableInstruction#shrink()}
    */
   @Test
-  @DisplayName(
-      "Test shrink(); then VariableInstruction(byte) with opcode is OP_ILOAD Name is 'iload_3'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenVariableInstructionWithOpcodeIsOp_iloadNameIsIload3() {
+  public void testShrink_thenVariableInstructionWithOpcodeIsANameIsAstore3() {
     // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_ILOAD);
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
     variableInstruction.variableIndex = 3;
+    variableInstruction.opcode = (byte) ':';
+
+    // Act
+    Instruction actualShrinkResult = variableInstruction.shrink();
+
+    // Assert
+    assertTrue(actualShrinkResult instanceof VariableInstruction);
+    assertEquals("astore_3", variableInstruction.getName());
+    assertEquals("astore_3", actualShrinkResult.getName());
+    assertEquals('N', variableInstruction.opcode);
+    assertEquals('N', ((VariableInstruction) actualShrinkResult).opcode);
+  }
+
+  /**
+   * Test {@link VariableInstruction#shrink()}.
+   *
+   * <ul>
+   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A} Name
+   *       is {@code dstore_3}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#shrink()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
+  public void testShrink_thenVariableInstructionWithOpcodeIsANameIsDstore3() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.variableIndex = 3;
+    variableInstruction.opcode = (byte) '9';
+
+    // Act
+    Instruction actualShrinkResult = variableInstruction.shrink();
+
+    // Assert
+    assertTrue(actualShrinkResult instanceof VariableInstruction);
+    assertEquals("dstore_3", variableInstruction.getName());
+    assertEquals("dstore_3", actualShrinkResult.getName());
+    assertEquals('J', variableInstruction.opcode);
+    assertEquals('J', ((VariableInstruction) actualShrinkResult).opcode);
+  }
+
+  /**
+   * Test {@link VariableInstruction#shrink()}.
+   *
+   * <ul>
+   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A} Name
+   *       is {@code iaload}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#shrink()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
+  public void testShrink_thenVariableInstructionWithOpcodeIsANameIsIaload() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.variableIndex = 3;
+    variableInstruction.opcode = (byte) '.';
+
+    // Act
+    Instruction actualShrinkResult = variableInstruction.shrink();
+
+    // Assert
+    assertTrue(actualShrinkResult instanceof VariableInstruction);
+    assertEquals("iaload", variableInstruction.getName());
+    assertEquals("iaload", actualShrinkResult.getName());
+    assertEquals('.', variableInstruction.opcode);
+    assertEquals('.', ((VariableInstruction) actualShrinkResult).opcode);
+  }
+
+  /**
+   * Test {@link VariableInstruction#shrink()}.
+   *
+   * <ul>
+   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A} Name
+   *       is {@code iload}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#shrink()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
+  public void testShrink_thenVariableInstructionWithOpcodeIsANameIsIload() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.variableIndex = 26;
+    variableInstruction.opcode = Instruction.OP_ILOAD;
+
+    // Act
+    Instruction actualShrinkResult = variableInstruction.shrink();
+
+    // Assert
+    assertTrue(actualShrinkResult instanceof VariableInstruction);
+    assertEquals("iload", variableInstruction.getName());
+    assertEquals("iload", actualShrinkResult.getName());
+    assertEquals(26, ((VariableInstruction) actualShrinkResult).variableIndex);
+    assertEquals(Instruction.OP_ILOAD, variableInstruction.opcode);
+    assertEquals(Instruction.OP_ILOAD, ((VariableInstruction) actualShrinkResult).opcode);
+  }
+
+  /**
+   * Test {@link VariableInstruction#shrink()}.
+   *
+   * <ul>
+   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A} Name
+   *       is {@code iload_3}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#shrink()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
+  public void testShrink_thenVariableInstructionWithOpcodeIsANameIsIload3() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.variableIndex = 3;
+    variableInstruction.opcode = Instruction.OP_ILOAD;
 
     // Act
     Instruction actualShrinkResult = variableInstruction.shrink();
@@ -1327,150 +1376,110 @@ class VariableInstructionDiffblueTest {
    * Test {@link VariableInstruction#shrink()}.
    *
    * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@link
-   *       Instruction#OP_ILOAD_0} Name is {@code iload_3}.
+   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A} Name
+   *       is {@code lstore_2}.
    * </ul>
    *
    * <p>Method under test: {@link VariableInstruction#shrink()}
    */
   @Test
-  @DisplayName(
-      "Test shrink(); then VariableInstruction(byte) with opcode is OP_ILOAD_0 Name is 'iload_3'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenVariableInstructionWithOpcodeIsOp_iload_0NameIsIload3() {
+  public void testShrink_thenVariableInstructionWithOpcodeIsANameIsLstore2() {
     // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_ILOAD_0);
-    variableInstruction.variableIndex = 3;
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
 
     // Act
     Instruction actualShrinkResult = variableInstruction.shrink();
 
     // Assert
-    assertEquals("iload_3", variableInstruction.getName());
-    assertEquals(Instruction.OP_ILOAD_3, variableInstruction.opcode);
-    assertSame(variableInstruction, actualShrinkResult);
+    assertTrue(actualShrinkResult instanceof VariableInstruction);
+    assertEquals("lstore_2", variableInstruction.getName());
+    assertEquals("lstore_2", actualShrinkResult.getName());
+    assertEquals(2, ((VariableInstruction) actualShrinkResult).variableIndex);
+    assertEquals('A', variableInstruction.opcode);
+    assertEquals('A', ((VariableInstruction) actualShrinkResult).opcode);
   }
 
   /**
-   * Test {@link VariableInstruction#shrink()}.
+   * Test {@link VariableInstruction#readInfo(byte[], int)}.
    *
    * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@link
-   *       Instruction#OP_LLOAD} Name is {@code lload_3}.
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@code :}.
    * </ul>
    *
-   * <p>Method under test: {@link VariableInstruction#shrink()}
+   * <p>Method under test: {@link VariableInstruction#readInfo(byte[], int)}
    */
   @Test
-  @DisplayName(
-      "Test shrink(); then VariableInstruction(byte) with opcode is OP_LLOAD Name is 'lload_3'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenVariableInstructionWithOpcodeIsOp_lloadNameIsLload3() {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"void VariableInstruction.readInfo(byte[], int)"})
+  public void testReadInfo_givenVariableInstructionWithOpcodeIsAOpcodeIsColon() {
     // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_LLOAD);
-    variableInstruction.variableIndex = 3;
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = (byte) ':';
+    variableInstruction.wide = false;
 
     // Act
-    Instruction actualShrinkResult = variableInstruction.shrink();
+    variableInstruction.readInfo(new byte[] {'A', 'X', 'A', 'X', 'A', 'X', 'A', 'X'}, 2);
 
     // Assert
-    assertEquals("lload_3", variableInstruction.getName());
-    assertEquals('!', variableInstruction.opcode);
-    assertSame(variableInstruction, actualShrinkResult);
+    assertEquals(0, variableInstruction.constant);
+    assertEquals(65, variableInstruction.variableIndex);
   }
 
   /**
-   * Test {@link VariableInstruction#shrink()}.
+   * Test {@link VariableInstruction#readInfo(byte[], int)}.
    *
    * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@link
-   *       Instruction#OP_LLOAD_0} Name is {@code lload_3}.
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@code O}.
    * </ul>
    *
-   * <p>Method under test: {@link VariableInstruction#shrink()}
+   * <p>Method under test: {@link VariableInstruction#readInfo(byte[], int)}
    */
   @Test
-  @DisplayName(
-      "Test shrink(); then VariableInstruction(byte) with opcode is OP_LLOAD_0 Name is 'lload_3'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenVariableInstructionWithOpcodeIsOp_lload_0NameIsLload3() {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"void VariableInstruction.readInfo(byte[], int)"})
+  public void testReadInfo_givenVariableInstructionWithOpcodeIsAOpcodeIsO() {
     // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_LLOAD_0);
-    variableInstruction.variableIndex = 3;
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = (byte) 'O';
+    variableInstruction.wide = false;
 
     // Act
-    Instruction actualShrinkResult = variableInstruction.shrink();
+    variableInstruction.readInfo(new byte[] {'A', 'X', 'A', 'X', 'A', 'X', 'A', 'X'}, 2);
 
     // Assert
-    assertEquals("lload_3", variableInstruction.getName());
-    assertEquals('!', variableInstruction.opcode);
-    assertSame(variableInstruction, actualShrinkResult);
+    assertEquals(0, variableInstruction.constant);
+    assertEquals(65, variableInstruction.variableIndex);
   }
 
   /**
-   * Test {@link VariableInstruction#shrink()}.
+   * Test {@link VariableInstruction#readInfo(byte[], int)}.
    *
    * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code "} Name
-   *       is {@code fload_3}.
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@link Instruction#OP_ALOAD}.
    * </ul>
    *
-   * <p>Method under test: {@link VariableInstruction#shrink()}
+   * <p>Method under test: {@link VariableInstruction#readInfo(byte[], int)}
    */
   @Test
-  @DisplayName(
-      "Test shrink(); then VariableInstruction(byte) with opcode is '\"' Name is 'fload_3'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenVariableInstructionWithOpcodeIsQuotationMarkNameIsFload3() {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"void VariableInstruction.readInfo(byte[], int)"})
+  public void testReadInfo_givenVariableInstructionWithOpcodeIsAOpcodeIsOp_aload() {
     // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction((byte) '"');
-    variableInstruction.variableIndex = 3;
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = Instruction.OP_ALOAD;
+    variableInstruction.wide = false;
 
     // Act
-    Instruction actualShrinkResult = variableInstruction.shrink();
+    variableInstruction.readInfo(new byte[] {'A', 'X', 'A', 'X', 'A', 'X', 'A', 'X'}, 2);
 
     // Assert
-    assertEquals("fload_3", variableInstruction.getName());
-    assertEquals('%', variableInstruction.opcode);
-    assertSame(variableInstruction, actualShrinkResult);
-  }
-
-  /**
-   * Test {@link VariableInstruction#shrink()}.
-   *
-   * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code ;} Name
-   *       is {@code istore_3}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#shrink()}
-   */
-  @Test
-  @DisplayName(
-      "Test shrink(); then VariableInstruction(byte) with opcode is ';' Name is 'istore_3'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"Instruction VariableInstruction.shrink()"})
-  void testShrink_thenVariableInstructionWithOpcodeIsSemicolonNameIsIstore3() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction((byte) ';');
-    variableInstruction.variableIndex = 3;
-
-    // Act
-    Instruction actualShrinkResult = variableInstruction.shrink();
-
-    // Assert
-    assertEquals("istore_3", variableInstruction.getName());
-    assertEquals('>', variableInstruction.opcode);
-    assertSame(variableInstruction, actualShrinkResult);
+    assertEquals(0, variableInstruction.constant);
+    assertEquals(65, variableInstruction.variableIndex);
   }
 
   /**
@@ -1478,18 +1487,42 @@ class VariableInstructionDiffblueTest {
    *
    * <ul>
    *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
-   *       {@link VariableInstruction#constant} is zero.
+   *       {@link VariableInstruction#constant} is eighty-eight.
    * </ul>
    *
    * <p>Method under test: {@link VariableInstruction#readInfo(byte[], int)}
    */
   @Test
-  @DisplayName(
-      "Test readInfo(byte[], int); then VariableInstruction(byte) with opcode is 'A' constant is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.readInfo(byte[], int)"})
-  void testReadInfo_thenVariableInstructionWithOpcodeIsAConstantIsZero()
+  public void testReadInfo_thenVariableInstructionWithOpcodeIsAConstantIsEightyEight() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = Instruction.OP_IINC;
+    variableInstruction.wide = false;
+
+    // Act
+    variableInstruction.readInfo(new byte[] {'A', 'X', 'A', 'X', 'A', 'X', 'A', 'X'}, 2);
+
+    // Assert
+    assertEquals(65, variableInstruction.variableIndex);
+    assertEquals(88, variableInstruction.constant);
+  }
+
+  /**
+   * Test {@link VariableInstruction#readInfo(byte[], int)}.
+   *
+   * <ul>
+   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link VariableInstruction#variableIndex} is two.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#readInfo(byte[], int)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"void VariableInstruction.readInfo(byte[], int)"})
+  public void testReadInfo_thenVariableInstructionWithOpcodeIsAVariableIndexIsTwo()
       throws UnsupportedEncodingException {
     // Arrange
     VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
@@ -1506,143 +1539,25 @@ class VariableInstructionDiffblueTest {
    * Test {@link VariableInstruction#readInfo(byte[], int)}.
    *
    * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code :}
-   *       {@link VariableInstruction#constant} is zero.
+   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link VariableInstruction#variableIndex} is zero.
    * </ul>
    *
    * <p>Method under test: {@link VariableInstruction#readInfo(byte[], int)}
    */
   @Test
-  @DisplayName(
-      "Test readInfo(byte[], int); then VariableInstruction(byte) with opcode is ':' constant is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.readInfo(byte[], int)"})
-  void testReadInfo_thenVariableInstructionWithOpcodeIsColonConstantIsZero() {
+  public void testReadInfo_thenVariableInstructionWithOpcodeIsAVariableIndexIsZero() {
     // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction((byte) ':');
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = Instruction.OP_ILOAD_0;
     variableInstruction.wide = false;
 
     // Act
     variableInstruction.readInfo(new byte[] {'A', 'X', 'A', 'X', 'A', 'X', 'A', 'X'}, 2);
 
     // Assert
-    assertEquals(0, variableInstruction.constant);
-    assertEquals(65, variableInstruction.variableIndex);
-  }
-
-  /**
-   * Test {@link VariableInstruction#readInfo(byte[], int)}.
-   *
-   * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code O}
-   *       {@link VariableInstruction#constant} is zero.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#readInfo(byte[], int)}
-   */
-  @Test
-  @DisplayName(
-      "Test readInfo(byte[], int); then VariableInstruction(byte) with opcode is 'O' constant is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void VariableInstruction.readInfo(byte[], int)"})
-  void testReadInfo_thenVariableInstructionWithOpcodeIsOConstantIsZero() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction((byte) 'O');
-    variableInstruction.wide = false;
-
-    // Act
-    variableInstruction.readInfo(new byte[] {'A', 'X', 'A', 'X', 'A', 'X', 'A', 'X'}, 2);
-
-    // Assert
-    assertEquals(0, variableInstruction.constant);
-    assertEquals(65, variableInstruction.variableIndex);
-  }
-
-  /**
-   * Test {@link VariableInstruction#readInfo(byte[], int)}.
-   *
-   * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@link
-   *       Instruction#OP_ALOAD} {@link VariableInstruction#constant} is zero.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#readInfo(byte[], int)}
-   */
-  @Test
-  @DisplayName(
-      "Test readInfo(byte[], int); then VariableInstruction(byte) with opcode is OP_ALOAD constant is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void VariableInstruction.readInfo(byte[], int)"})
-  void testReadInfo_thenVariableInstructionWithOpcodeIsOp_aloadConstantIsZero() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_ALOAD);
-    variableInstruction.wide = false;
-
-    // Act
-    variableInstruction.readInfo(new byte[] {'A', 'X', 'A', 'X', 'A', 'X', 'A', 'X'}, 2);
-
-    // Assert
-    assertEquals(0, variableInstruction.constant);
-    assertEquals(65, variableInstruction.variableIndex);
-  }
-
-  /**
-   * Test {@link VariableInstruction#readInfo(byte[], int)}.
-   *
-   * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@link
-   *       Instruction#OP_IINC} {@link VariableInstruction#variableIndex} is sixty-five.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#readInfo(byte[], int)}
-   */
-  @Test
-  @DisplayName(
-      "Test readInfo(byte[], int); then VariableInstruction(byte) with opcode is OP_IINC variableIndex is sixty-five")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void VariableInstruction.readInfo(byte[], int)"})
-  void testReadInfo_thenVariableInstructionWithOpcodeIsOp_iincVariableIndexIsSixtyFive() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_IINC);
-    variableInstruction.wide = false;
-
-    // Act
-    variableInstruction.readInfo(new byte[] {'A', 'X', 'A', 'X', 'A', 'X', 'A', 'X'}, 2);
-
-    // Assert
-    assertEquals(65, variableInstruction.variableIndex);
-    assertEquals(88, variableInstruction.constant);
-  }
-
-  /**
-   * Test {@link VariableInstruction#readInfo(byte[], int)}.
-   *
-   * <ul>
-   *   <li>Then {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@link
-   *       Instruction#OP_ILOAD_0} {@link VariableInstruction#constant} is zero.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#readInfo(byte[], int)}
-   */
-  @Test
-  @DisplayName(
-      "Test readInfo(byte[], int); then VariableInstruction(byte) with opcode is OP_ILOAD_0 constant is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void VariableInstruction.readInfo(byte[], int)"})
-  void testReadInfo_thenVariableInstructionWithOpcodeIsOp_iload_0ConstantIsZero() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_ILOAD_0);
-    variableInstruction.wide = false;
-
-    // Act
-    variableInstruction.readInfo(new byte[] {'A', 'X', 'A', 'X', 'A', 'X', 'A', 'X'}, 2);
-
-    // Assert that nothing has changed
     assertEquals(0, variableInstruction.constant);
     assertEquals(0, variableInstruction.variableIndex);
   }
@@ -1658,12 +1573,9 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#readInfo(byte[], int)}
    */
   @Test
-  @DisplayName(
-      "Test readInfo(byte[], int); then VariableInstruction(boolean) with wide is 'true' constant is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.readInfo(byte[], int)"})
-  void testReadInfo_thenVariableInstructionWithWideIsTrueConstantIsZero()
+  public void testReadInfo_thenVariableInstructionWithWideIsTrueConstantIsZero()
       throws UnsupportedEncodingException {
     // Arrange
     VariableInstruction variableInstruction = new VariableInstruction(true);
@@ -1680,6 +1592,91 @@ class VariableInstructionDiffblueTest {
    * Test {@link VariableInstruction#writeInfo(byte[], int)}.
    *
    * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@code O}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#writeInfo(byte[], int)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"void VariableInstruction.writeInfo(byte[], int)"})
+  public void testWriteInfo_givenVariableInstructionWithOpcodeIsAOpcodeIsO() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = (byte) 'O';
+    variableInstruction.wide = false;
+    byte[] code = new byte[] {'A', 'X', 'A', 'X', 'A', 'X', 'A', 'X'};
+
+    // Act
+    variableInstruction.writeInfo(code, 2);
+
+    // Assert
+    assertArrayEquals(
+        new byte[] {'A', 'X', Instruction.OP_ICONST_M1, 'X', 'A', 'X', 'A', 'X'}, code);
+  }
+
+  /**
+   * Test {@link VariableInstruction#writeInfo(byte[], int)}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@link Instruction#OP_ALOAD}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#writeInfo(byte[], int)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"void VariableInstruction.writeInfo(byte[], int)"})
+  public void testWriteInfo_givenVariableInstructionWithOpcodeIsAOpcodeIsOp_aload() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = Instruction.OP_ALOAD;
+    variableInstruction.wide = false;
+    byte[] code = new byte[] {'A', 'X', 'A', 'X', 'A', 'X', 'A', 'X'};
+
+    // Act
+    variableInstruction.writeInfo(code, 2);
+
+    // Assert
+    assertArrayEquals(
+        new byte[] {'A', 'X', Instruction.OP_ICONST_M1, 'X', 'A', 'X', 'A', 'X'}, code);
+  }
+
+  /**
+   * Test {@link VariableInstruction#writeInfo(byte[], int)}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@link Instruction#OP_IINC}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#writeInfo(byte[], int)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"void VariableInstruction.writeInfo(byte[], int)"})
+  public void testWriteInfo_givenVariableInstructionWithOpcodeIsAOpcodeIsOp_iinc() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = Instruction.OP_IINC;
+    variableInstruction.wide = false;
+    byte[] code = new byte[] {'A', 'X', 'A', 'X', 'A', 'X', 'A', 'X'};
+
+    // Act
+    variableInstruction.writeInfo(code, 2);
+
+    // Assert
+    assertArrayEquals(
+        new byte[] {'A', 'X', Instruction.OP_ICONST_M1, Instruction.OP_NOP, 'A', 'X', 'A', 'X'},
+        code);
+  }
+
+  /**
+   * Test {@link VariableInstruction#writeInfo(byte[], int)}.
+   *
+   * <ul>
    *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}.
    *   <li>Then {@code AXAXAXAX} Bytes is {@code UTF-8}.
    * </ul>
@@ -1687,149 +1684,19 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#writeInfo(byte[], int)}
    */
   @Test
-  @DisplayName(
-      "Test writeInfo(byte[], int); given VariableInstruction(byte) with opcode is 'A'; then 'AXAXAXAX' Bytes is 'UTF-8'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.writeInfo(byte[], int)"})
-  void testWriteInfo_givenVariableInstructionWithOpcodeIsA_thenAxaxaxaxBytesIsUtf8()
+  public void testWriteInfo_givenVariableInstructionWithOpcodeIsA_thenAxaxaxaxBytesIsUtf8()
       throws UnsupportedEncodingException {
     // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
     byte[] code = "AXAXAXAX".getBytes("UTF-8");
 
     // Act
-    new VariableInstruction((byte) 'A').writeInfo(code, 2);
+    variableInstruction.writeInfo(code, 2);
 
     // Assert that nothing has changed
     assertArrayEquals("AXAXAXAX".getBytes("UTF-8"), code);
-  }
-
-  /**
-   * Test {@link VariableInstruction#writeInfo(byte[], int)}.
-   *
-   * <ul>
-   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code O}
-   *       {@link VariableInstruction#wide} is {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#writeInfo(byte[], int)}
-   */
-  @Test
-  @DisplayName(
-      "Test writeInfo(byte[], int); given VariableInstruction(byte) with opcode is 'O' wide is 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void VariableInstruction.writeInfo(byte[], int)"})
-  void testWriteInfo_givenVariableInstructionWithOpcodeIsOWideIsFalse() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction((byte) 'O');
-    variableInstruction.wide = false;
-    byte[] code = new byte[] {'A', 'X', 'A', 'X', 'A', 'X', 'A', 'X'};
-
-    // Act
-    variableInstruction.writeInfo(code, 2);
-
-    // Assert
-    assertArrayEquals(new byte[] {'A', 'X', Instruction.OP_NOP, 'X', 'A', 'X', 'A', 'X'}, code);
-  }
-
-  /**
-   * Test {@link VariableInstruction#writeInfo(byte[], int)}.
-   *
-   * <ul>
-   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@link
-   *       Instruction#OP_ALOAD} {@link VariableInstruction#wide} is {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#writeInfo(byte[], int)}
-   */
-  @Test
-  @DisplayName(
-      "Test writeInfo(byte[], int); given VariableInstruction(byte) with opcode is OP_ALOAD wide is 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void VariableInstruction.writeInfo(byte[], int)"})
-  void testWriteInfo_givenVariableInstructionWithOpcodeIsOp_aloadWideIsFalse() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_ALOAD);
-    variableInstruction.wide = false;
-    byte[] code = new byte[] {'A', 'X', 'A', 'X', 'A', 'X', 'A', 'X'};
-
-    // Act
-    variableInstruction.writeInfo(code, 2);
-
-    // Assert
-    assertArrayEquals(new byte[] {'A', 'X', Instruction.OP_NOP, 'X', 'A', 'X', 'A', 'X'}, code);
-  }
-
-  /**
-   * Test {@link VariableInstruction#writeInfo(byte[], int)}.
-   *
-   * <ul>
-   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@link
-   *       Instruction#OP_IINC} {@link VariableInstruction#wide} is {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#writeInfo(byte[], int)}
-   */
-  @Test
-  @DisplayName(
-      "Test writeInfo(byte[], int); given VariableInstruction(byte) with opcode is OP_IINC wide is 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void VariableInstruction.writeInfo(byte[], int)"})
-  void testWriteInfo_givenVariableInstructionWithOpcodeIsOp_iincWideIsFalse() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_IINC);
-    variableInstruction.wide = false;
-    byte[] code = new byte[] {'A', 'X', 'A', 'X', 'A', 'X', 'A', 'X'};
-
-    // Act
-    variableInstruction.writeInfo(code, 2);
-
-    // Assert
-    assertArrayEquals(
-        new byte[] {'A', 'X', Instruction.OP_NOP, Instruction.OP_NOP, 'A', 'X', 'A', 'X'}, code);
-  }
-
-  /**
-   * Test {@link VariableInstruction#writeInfo(byte[], int)}.
-   *
-   * <ul>
-   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@link
-   *       Instruction#OP_IINC} {@link VariableInstruction#wide} is {@code true}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#writeInfo(byte[], int)}
-   */
-  @Test
-  @DisplayName(
-      "Test writeInfo(byte[], int); given VariableInstruction(byte) with opcode is OP_IINC wide is 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void VariableInstruction.writeInfo(byte[], int)"})
-  void testWriteInfo_givenVariableInstructionWithOpcodeIsOp_iincWideIsTrue() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_IINC);
-    variableInstruction.wide = true;
-    byte[] code = new byte[] {'A', 'X', 'A', 'X', 'A', 'X', 'A', 'X'};
-
-    // Act
-    variableInstruction.writeInfo(code, 2);
-
-    // Assert
-    assertArrayEquals(
-        new byte[] {
-          'A',
-          'X',
-          Instruction.OP_NOP,
-          Instruction.OP_NOP,
-          Instruction.OP_NOP,
-          Instruction.OP_NOP,
-          'A',
-          'X'
-        },
-        code);
   }
 
   /**
@@ -1843,15 +1710,13 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#writeInfo(byte[], int)}
    */
   @Test
-  @DisplayName(
-      "Test writeInfo(byte[], int); then array of byte with 'A' and 'X' is 'AXAXAXAX' Bytes is 'UTF-8'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.writeInfo(byte[], int)"})
-  void testWriteInfo_thenArrayOfByteWithAAndXIsAxaxaxaxBytesIsUtf8()
+  public void testWriteInfo_thenArrayOfByteWithAAndXIsAxaxaxaxBytesIsUtf8()
       throws UnsupportedEncodingException {
     // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_ILOAD_0);
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.opcode = Instruction.OP_ILOAD_0;
     variableInstruction.wide = false;
     byte[] code = new byte[] {'A', 'X', 'A', 'X', 'A', 'X', 'A', 'X'};
 
@@ -1873,22 +1738,140 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#writeInfo(byte[], int)}
    */
   @Test
-  @DisplayName(
-      "Test writeInfo(byte[], int); then 'AXAXAXAX' Bytes is 'UTF-8' is array of byte with 'A' and 'X'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VariableInstruction.writeInfo(byte[], int)"})
-  void testWriteInfo_thenAxaxaxaxBytesIsUtf8IsArrayOfByteWithAAndX()
+  public void testWriteInfo_thenAxaxaxaxBytesIsUtf8IsArrayOfByteWithAAndX()
       throws UnsupportedEncodingException {
     // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction(true);
     byte[] code = "AXAXAXAX".getBytes("UTF-8");
 
     // Act
-    new VariableInstruction(true).writeInfo(code, 2);
+    variableInstruction.writeInfo(code, 2);
 
     // Assert
     assertArrayEquals(
         new byte[] {'A', 'X', Instruction.OP_NOP, Instruction.OP_NOP, 'A', 'X', 'A', 'X'}, code);
+  }
+
+  /**
+   * Test {@link VariableInstruction#length(int)}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@code O}.
+   *   <li>Then return two.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#length(int)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"int VariableInstruction.length(int)"})
+  public void testLength_givenVariableInstructionWithOpcodeIsAOpcodeIsO_thenReturnTwo() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.wide = false;
+    variableInstruction.opcode = (byte) 'O';
+
+    // Act and Assert
+    assertEquals(2, variableInstruction.length(2));
+  }
+
+  /**
+   * Test {@link VariableInstruction#length(int)}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@link Instruction#OP_ALOAD}.
+   *   <li>Then return two.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#length(int)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"int VariableInstruction.length(int)"})
+  public void testLength_givenVariableInstructionWithOpcodeIsAOpcodeIsOp_aload_thenReturnTwo() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.wide = false;
+    variableInstruction.opcode = Instruction.OP_ALOAD;
+
+    // Act and Assert
+    assertEquals(2, variableInstruction.length(2));
+  }
+
+  /**
+   * Test {@link VariableInstruction#length(int)}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@link Instruction#OP_IINC}.
+   *   <li>Then return three.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#length(int)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"int VariableInstruction.length(int)"})
+  public void testLength_givenVariableInstructionWithOpcodeIsAOpcodeIsOp_iinc_thenReturnThree() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.wide = false;
+    variableInstruction.opcode = Instruction.OP_IINC;
+
+    // Act and Assert
+    assertEquals(3, variableInstruction.length(2));
+  }
+
+  /**
+   * Test {@link VariableInstruction#length(int)}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link Instruction#opcode} is {@link Instruction#OP_ILOAD_0}.
+   *   <li>Then return one.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#length(int)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"int VariableInstruction.length(int)"})
+  public void testLength_givenVariableInstructionWithOpcodeIsAOpcodeIsOp_iload_0_thenReturnOne() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.wide = false;
+    variableInstruction.opcode = Instruction.OP_ILOAD_0;
+
+    // Act and Assert
+    assertEquals(1, variableInstruction.length(2));
+  }
+
+  /**
+   * Test {@link VariableInstruction#length(int)}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link VariableInstruction#wide} is {@code true}.
+   *   <li>Then return six.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#length(int)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"int VariableInstruction.length(int)"})
+  public void testLength_givenVariableInstructionWithOpcodeIsAWideIsTrue_thenReturnSix() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.wide = true;
+    variableInstruction.opcode = Instruction.OP_IINC;
+
+    // Act and Assert
+    assertEquals(6, variableInstruction.length(2));
   }
 
   /**
@@ -1902,117 +1885,11 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#length(int)}
    */
   @Test
-  @DisplayName(
-      "Test length(int); given VariableInstruction(byte) with opcode is 'A'; then return one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int VariableInstruction.length(int)"})
-  void testLength_givenVariableInstructionWithOpcodeIsA_thenReturnOne() {
+  public void testLength_givenVariableInstructionWithOpcodeIsA_thenReturnOne() {
     // Arrange, Act and Assert
-    assertEquals(1, new VariableInstruction((byte) 'A').length(2));
-  }
-
-  /**
-   * Test {@link VariableInstruction#length(int)}.
-   *
-   * <ul>
-   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code O}
-   *       {@link VariableInstruction#wide} is {@code false}.
-   *   <li>Then return two.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#length(int)}
-   */
-  @Test
-  @DisplayName(
-      "Test length(int); given VariableInstruction(byte) with opcode is 'O' wide is 'false'; then return two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"int VariableInstruction.length(int)"})
-  void testLength_givenVariableInstructionWithOpcodeIsOWideIsFalse_thenReturnTwo() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction((byte) 'O');
-    variableInstruction.wide = false;
-
-    // Act and Assert
-    assertEquals(2, variableInstruction.length(2));
-  }
-
-  /**
-   * Test {@link VariableInstruction#length(int)}.
-   *
-   * <ul>
-   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@link
-   *       Instruction#OP_ALOAD} {@link VariableInstruction#wide} is {@code false}.
-   *   <li>Then return two.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#length(int)}
-   */
-  @Test
-  @DisplayName(
-      "Test length(int); given VariableInstruction(byte) with opcode is OP_ALOAD wide is 'false'; then return two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"int VariableInstruction.length(int)"})
-  void testLength_givenVariableInstructionWithOpcodeIsOp_aloadWideIsFalse_thenReturnTwo() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_ALOAD);
-    variableInstruction.wide = false;
-
-    // Act and Assert
-    assertEquals(2, variableInstruction.length(2));
-  }
-
-  /**
-   * Test {@link VariableInstruction#length(int)}.
-   *
-   * <ul>
-   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@link
-   *       Instruction#OP_IINC} {@link VariableInstruction#wide} is {@code true}.
-   *   <li>Then return six.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#length(int)}
-   */
-  @Test
-  @DisplayName(
-      "Test length(int); given VariableInstruction(byte) with opcode is OP_IINC wide is 'true'; then return six")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"int VariableInstruction.length(int)"})
-  void testLength_givenVariableInstructionWithOpcodeIsOp_iincWideIsTrue_thenReturnSix() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_IINC);
-    variableInstruction.wide = true;
-
-    // Act and Assert
-    assertEquals(6, variableInstruction.length(2));
-  }
-
-  /**
-   * Test {@link VariableInstruction#length(int)}.
-   *
-   * <ul>
-   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@link
-   *       Instruction#OP_ILOAD_0} {@link VariableInstruction#wide} is {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#length(int)}
-   */
-  @Test
-  @DisplayName(
-      "Test length(int); given VariableInstruction(byte) with opcode is OP_ILOAD_0 wide is 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"int VariableInstruction.length(int)"})
-  void testLength_givenVariableInstructionWithOpcodeIsOp_iload_0WideIsFalse() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_ILOAD_0);
-    variableInstruction.wide = false;
-
-    // Act and Assert
-    assertEquals(1, variableInstruction.length(2));
+    assertEquals(1, (new VariableInstruction((byte) 'A')).length(2));
   }
 
   /**
@@ -2026,37 +1903,59 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#length(int)}
    */
   @Test
-  @DisplayName(
-      "Test length(int); given VariableInstruction(boolean) with wide is 'true'; then return four")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int VariableInstruction.length(int)"})
-  void testLength_givenVariableInstructionWithWideIsTrue_thenReturnFour() {
+  public void testLength_givenVariableInstructionWithWideIsTrue_thenReturnFour() {
     // Arrange, Act and Assert
-    assertEquals(4, new VariableInstruction(true).length(2));
+    assertEquals(4, (new VariableInstruction(true)).length(2));
   }
 
   /**
-   * Test {@link VariableInstruction#length(int)}.
+   * Test {@link VariableInstruction#toString()}.
    *
    * <ul>
-   *   <li>Then return three.
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link VariableInstruction#wide} is {@code false}.
+   *   <li>Then return {@code iinc v2, 0}.
    * </ul>
    *
-   * <p>Method under test: {@link VariableInstruction#length(int)}
+   * <p>Method under test: {@link VariableInstruction#toString()}
    */
   @Test
-  @DisplayName("Test length(int); then return three")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"int VariableInstruction.length(int)"})
-  void testLength_thenReturnThree() {
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"java.lang.String VariableInstruction.toString()"})
+  public void testToString_givenVariableInstructionWithOpcodeIsAWideIsFalse_thenReturnIincV20() {
     // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_IINC);
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
     variableInstruction.wide = false;
+    variableInstruction.opcode = Instruction.OP_IINC;
 
     // Act and Assert
-    assertEquals(3, variableInstruction.length(2));
+    assertEquals("iinc v2, 0", variableInstruction.toString());
+  }
+
+  /**
+   * Test {@link VariableInstruction#toString()}.
+   *
+   * <ul>
+   *   <li>Given {@link VariableInstruction#VariableInstruction(byte)} with opcode is {@code A}
+   *       {@link VariableInstruction#wide} is {@code true}.
+   *   <li>Then return {@code iinc_w v2, 0}.
+   * </ul>
+   *
+   * <p>Method under test: {@link VariableInstruction#toString()}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({"java.lang.String VariableInstruction.toString()"})
+  public void testToString_givenVariableInstructionWithOpcodeIsAWideIsTrue_thenReturnIincWV20() {
+    // Arrange
+    VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
+    variableInstruction.wide = true;
+    variableInstruction.opcode = Instruction.OP_IINC;
+
+    // Act and Assert
+    assertEquals("iinc_w v2, 0", variableInstruction.toString());
   }
 
   /**
@@ -2070,14 +1969,11 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#toString()}
    */
   @Test
-  @DisplayName(
-      "Test toString(); given VariableInstruction(byte) with opcode is 'A'; then return 'lstore_2 v2'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String VariableInstruction.toString()"})
-  void testToString_givenVariableInstructionWithOpcodeIsA_thenReturnLstore2V2() {
+  public void testToString_givenVariableInstructionWithOpcodeIsA_thenReturnLstore2V2() {
     // Arrange, Act and Assert
-    assertEquals("lstore_2 v2", new VariableInstruction((byte) 'A').toString());
+    assertEquals("lstore_2 v2", (new VariableInstruction((byte) 'A')).toString());
   }
 
   /**
@@ -2091,60 +1987,11 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#toString()}
    */
   @Test
-  @DisplayName(
-      "Test toString(); given VariableInstruction(boolean) with wide is 'true'; then return 'nop_w v0'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String VariableInstruction.toString()"})
-  void testToString_givenVariableInstructionWithWideIsTrue_thenReturnNopWV0() {
+  public void testToString_givenVariableInstructionWithWideIsTrue_thenReturnNopWV0() {
     // Arrange, Act and Assert
-    assertEquals("nop_w v0", new VariableInstruction(true).toString());
-  }
-
-  /**
-   * Test {@link VariableInstruction#toString()}.
-   *
-   * <ul>
-   *   <li>Then return {@code iinc v0, 0}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#toString()}
-   */
-  @Test
-  @DisplayName("Test toString(); then return 'iinc v0, 0'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"java.lang.String VariableInstruction.toString()"})
-  void testToString_thenReturnIincV00() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_IINC);
-    variableInstruction.wide = false;
-
-    // Act and Assert
-    assertEquals("iinc v0, 0", variableInstruction.toString());
-  }
-
-  /**
-   * Test {@link VariableInstruction#toString()}.
-   *
-   * <ul>
-   *   <li>Then return {@code iinc_w v0, 0}.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableInstruction#toString()}
-   */
-  @Test
-  @DisplayName("Test toString(); then return 'iinc_w v0, 0'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"java.lang.String VariableInstruction.toString()"})
-  void testToString_thenReturnIincWV00() {
-    // Arrange
-    VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_IINC);
-    variableInstruction.wide = true;
-
-    // Act and Assert
-    assertEquals("iinc_w v0, 0", variableInstruction.toString());
+    assertEquals("nop_w v0", (new VariableInstruction(true)).toString());
   }
 
   /**
@@ -2163,21 +2010,20 @@ class VariableInstructionDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean VariableInstruction.equals(Object)",
     "int VariableInstruction.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
     VariableInstruction variableInstruction2 = new VariableInstruction((byte) 'A');
 
     // Act and Assert
     assertEquals(variableInstruction, variableInstruction2);
-    assertEquals(variableInstruction.hashCode(), variableInstruction2.hashCode());
+    int expectedHashCodeResult = variableInstruction.hashCode();
+    assertEquals(expectedHashCodeResult, variableInstruction2.hashCode());
   }
 
   /**
@@ -2196,14 +2042,12 @@ class VariableInstructionDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean VariableInstruction.equals(Object)",
     "int VariableInstruction.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     VariableInstruction variableInstruction = new VariableInstruction((byte) 'A');
 
@@ -2224,14 +2068,12 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean VariableInstruction.equals(Object)",
     "int VariableInstruction.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     VariableInstruction variableInstruction = new VariableInstruction(Instruction.OP_ICONST_M1);
 
@@ -2250,14 +2092,12 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean VariableInstruction.equals(Object)",
     "int VariableInstruction.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
     VariableInstruction variableInstruction = new VariableInstruction((byte) 'A', 1);
 
@@ -2276,14 +2116,12 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean VariableInstruction.equals(Object)",
     "int VariableInstruction.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
     // Arrange
     VariableInstruction variableInstruction = new VariableInstruction((byte) 'A', -124);
 
@@ -2302,14 +2140,12 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean VariableInstruction.equals(Object)",
     "int VariableInstruction.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new VariableInstruction((byte) 'A'), null);
   }
@@ -2325,14 +2161,12 @@ class VariableInstructionDiffblueTest {
    * <p>Method under test: {@link VariableInstruction#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean VariableInstruction.equals(Object)",
     "int VariableInstruction.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new VariableInstruction((byte) 'A'), "Different type to VariableInstruction");
   }

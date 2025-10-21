@@ -1,16 +1,15 @@
 package proguard.dexfile.ir.stmt;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.LabelAndLocalMapper;
 import proguard.dexfile.ir.expr.ArrayExpr;
@@ -21,18 +20,16 @@ import proguard.dexfile.ir.expr.Value;
 import proguard.dexfile.ir.expr.Value.VT;
 import proguard.dexfile.ir.stmt.Stmt.ST;
 
-class VoidInvokeStmtDiffblueTest {
+public class VoidInvokeStmtDiffblueTest {
   /**
    * Test {@link VoidInvokeStmt#VoidInvokeStmt(Value)}.
    *
    * <p>Method under test: {@link VoidInvokeStmt#VoidInvokeStmt(Value)}
    */
   @Test
-  @DisplayName("Test new VoidInvokeStmt(Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void VoidInvokeStmt.<init>(Value)"})
-  void testNewVoidInvokeStmt() {
+  public void testNewVoidInvokeStmt() {
     // Arrange
     ArrayExpr op = new ArrayExpr();
 
@@ -42,12 +39,12 @@ class VoidInvokeStmtDiffblueTest {
     // Assert
     Value op2 = actualVoidInvokeStmt.getOp();
     assertTrue(op2 instanceof ArrayExpr);
+    assertNull(actualVoidInvokeStmt.getOps());
     assertNull(actualVoidInvokeStmt.frame);
     assertNull(actualVoidInvokeStmt.exceptionHandlers);
     assertNull(actualVoidInvokeStmt._cfg_froms);
     assertNull(actualVoidInvokeStmt.getOp1());
     assertNull(actualVoidInvokeStmt.getOp2());
-    assertNull(actualVoidInvokeStmt.getOps());
     assertNull(actualVoidInvokeStmt.getNext());
     assertNull(actualVoidInvokeStmt.getPre());
     assertNull(actualVoidInvokeStmt._ts_default_next);
@@ -70,12 +67,9 @@ class VoidInvokeStmtDiffblueTest {
    * <p>Method under test: {@link VoidInvokeStmt#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; given nVoidInvoke nNull; then Op return Constant")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Stmt VoidInvokeStmt.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_givenNVoidInvokeNNull_thenOpReturnConstant() {
+  public void testCloneWithLabelAndLocalMapper_givenNVoidInvokeNNull_thenOpReturnConstant() {
     // Arrange
     Constant op = Exprs.nNull();
     VoidInvokeStmt nVoidInvokeResult = Stmts.nVoidInvoke(op);
@@ -103,28 +97,26 @@ class VoidInvokeStmtDiffblueTest {
    * <p>Method under test: {@link VoidInvokeStmt#clone(LabelAndLocalMapper)}
    */
   @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then Op return CastExpr")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Stmt VoidInvokeStmt.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenOpReturnCastExpr() {
+  public void testCloneWithLabelAndLocalMapper_thenOpReturnCastExpr() {
     // Arrange
-    CastExpr op = new CastExpr(Exprs.nNull(), "jane.doe@example.org", "alice.liddell@example.org");
-    VoidInvokeStmt nVoidInvokeResult = Stmts.nVoidInvoke(op);
+    VoidInvokeStmt nVoidInvokeResult =
+        Stmts.nVoidInvoke(
+            new CastExpr(Exprs.nNull(), "jane.doe@example.org", "alice.liddell@example.org"));
 
     // Act
     Stmt actualCloneResult = nVoidInvokeResult.clone(new LabelAndLocalMapper());
 
     // Assert
-    Value op2 = actualCloneResult.getOp();
-    assertTrue(op2 instanceof CastExpr);
-    assertTrue(op2.getOp() instanceof Constant);
+    Value op = actualCloneResult.getOp();
+    assertTrue(op instanceof CastExpr);
+    assertTrue(op.getOp() instanceof Constant);
     assertTrue(actualCloneResult instanceof VoidInvokeStmt);
-    assertEquals("alice.liddell@example.org", ((CastExpr) op2).to);
-    assertEquals("jane.doe@example.org", ((CastExpr) op2).from);
-    assertEquals(ET.E1, ((CastExpr) op2).et);
-    assertEquals(VT.CAST, ((CastExpr) op2).vt);
+    assertEquals("alice.liddell@example.org", ((CastExpr) op).to);
+    assertEquals("jane.doe@example.org", ((CastExpr) op).from);
+    assertEquals(ET.E1, ((CastExpr) op).et);
+    assertEquals(VT.CAST, ((CastExpr) op).vt);
   }
 
   /**
@@ -133,12 +125,10 @@ class VoidInvokeStmtDiffblueTest {
    * <p>Method under test: {@link VoidInvokeStmt#toString()}
    */
   @Test
-  @DisplayName("Test toString()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String VoidInvokeStmt.toString()"})
-  void testToString() {
+  public void testToString() {
     // Arrange, Act and Assert
-    assertEquals("void null[null]", new VoidInvokeStmt(new ArrayExpr()).toString());
+    assertEquals("void null[null]", (new VoidInvokeStmt(new ArrayExpr())).toString());
   }
 }

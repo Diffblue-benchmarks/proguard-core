@@ -1,16 +1,15 @@
 package proguard.analysis.cpa.jvm.cfa.edges;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.analysis.cpa.jvm.cfa.nodes.JvmCfaNode;
 import proguard.analysis.cpa.jvm.cfa.nodes.JvmUnknownCfaNode;
 import proguard.analysis.datastructure.CodeLocation;
@@ -23,7 +22,7 @@ import proguard.classfile.MethodDescriptor;
 import proguard.classfile.MethodSignature;
 import proguard.classfile.instruction.BranchInstruction;
 
-class JvmCallCfaEdgeDiffblueTest {
+public class JvmCallCfaEdgeDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -35,16 +34,13 @@ class JvmCallCfaEdgeDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void JvmCallCfaEdge.<init>(Call)", "Call JvmCallCfaEdge.getCall()"})
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
+    CodeLocation caller = new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
 
-    CodeLocation caller = new CodeLocation(clazz, member, 2);
     SymbolicCall call =
         new SymbolicCall(
             caller,
@@ -74,17 +70,14 @@ class JvmCallCfaEdgeDiffblueTest {
    * <p>Method under test: {@link JvmCallCfaEdge#JvmCallCfaEdge(JvmCfaNode, JvmCfaNode, Call)}
    */
   @Test
-  @DisplayName(
-      "Test new JvmCallCfaEdge(JvmCfaNode, JvmCfaNode, Call); then Source return JvmUnknownCfaNode")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void JvmCallCfaEdge.<init>(JvmCfaNode, JvmCfaNode, Call)"})
-  void testNewJvmCallCfaEdge_thenSourceReturnJvmUnknownCfaNode() {
+  public void testNewJvmCallCfaEdge_thenSourceReturnJvmUnknownCfaNode() {
     // Arrange
+    JvmUnknownCfaNode target = JvmUnknownCfaNode.INSTANCE;
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
+    CodeLocation caller = new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
 
-    CodeLocation caller = new CodeLocation(clazz, member, 2);
     SymbolicCall call =
         new SymbolicCall(
             caller,
@@ -96,7 +89,7 @@ class JvmCallCfaEdgeDiffblueTest {
 
     // Act
     JvmCallCfaEdge actualJvmCallCfaEdge =
-        new JvmCallCfaEdge(JvmUnknownCfaNode.INSTANCE, JvmUnknownCfaNode.INSTANCE, call);
+        new JvmCallCfaEdge(JvmUnknownCfaNode.INSTANCE, target, call);
 
     // Assert
     JvmCfaNode source = actualJvmCallCfaEdge.getSource();
@@ -104,7 +97,7 @@ class JvmCallCfaEdgeDiffblueTest {
     Call call2 = actualJvmCallCfaEdge.getCall();
     assertTrue(call2 instanceof SymbolicCall);
     assertSame(call, call2);
-    JvmUnknownCfaNode jvmUnknownCfaNode = JvmUnknownCfaNode.INSTANCE;
+    JvmUnknownCfaNode jvmUnknownCfaNode = target.INSTANCE;
     assertSame(jvmUnknownCfaNode, source);
     assertSame(jvmUnknownCfaNode, actualJvmCallCfaEdge.getTarget());
   }
@@ -119,28 +112,24 @@ class JvmCallCfaEdgeDiffblueTest {
    * <p>Method under test: {@link JvmCallCfaEdge#targetSignature()}
    */
   @Test
-  @DisplayName(
-      "Test targetSignature(); then return PrettyFqn is 'Class ClassLoader.findLoadedClass(String)'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"MethodSignature JvmCallCfaEdge.targetSignature()"})
-  void testTargetSignature_thenReturnPrettyFqnIsClassClassLoaderFindLoadedClassString() {
+  public void testTargetSignature_thenReturnPrettyFqnIsClassClassLoaderFindLoadedClassString() {
     // Arrange
     LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation caller = new CodeLocation(clazz, member, 2);
-    SymbolicCall call =
-        new SymbolicCall(
-            caller,
-            ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE,
-            1,
-            new BranchInstruction((byte) 'A', 1),
-            true,
-            true);
+    CodeLocation caller = new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
 
     // Act
-    MethodSignature actualTargetSignatureResult = new JvmCallCfaEdge(call).targetSignature();
+    MethodSignature actualTargetSignatureResult =
+        (new JvmCallCfaEdge(
+                new SymbolicCall(
+                    caller,
+                    ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE,
+                    1,
+                    new BranchInstruction((byte) 'A', 1),
+                    true,
+                    true)))
+            .targetSignature();
 
     // Assert
     assertEquals(

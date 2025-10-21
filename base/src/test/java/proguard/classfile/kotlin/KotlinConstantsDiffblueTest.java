@@ -1,18 +1,17 @@
 package proguard.classfile.kotlin;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 
-class KotlinConstantsDiffblueTest {
+public class KotlinConstantsDiffblueTest {
   /**
    * Test {@link KotlinConstants#metadataKindToString(int)}.
    *
@@ -24,11 +23,9 @@ class KotlinConstantsDiffblueTest {
    * <p>Method under test: {@link KotlinConstants#metadataKindToString(int)}
    */
   @Test
-  @DisplayName("Test metadataKindToString(int); when five; then return 'multi-file class part'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String KotlinConstants.metadataKindToString(int)"})
-  void testMetadataKindToString_whenFive_thenReturnMultiFileClassPart() {
+  public void testMetadataKindToString_whenFive_thenReturnMultiFileClassPart() {
     // Arrange, Act and Assert
     assertEquals("multi-file class part", KotlinConstants.metadataKindToString(5));
   }
@@ -44,11 +41,9 @@ class KotlinConstantsDiffblueTest {
    * <p>Method under test: {@link KotlinConstants#metadataKindToString(int)}
    */
   @Test
-  @DisplayName("Test metadataKindToString(int); when four; then return 'multi-file class facade'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String KotlinConstants.metadataKindToString(int)"})
-  void testMetadataKindToString_whenFour_thenReturnMultiFileClassFacade() {
+  public void testMetadataKindToString_whenFour_thenReturnMultiFileClassFacade() {
     // Arrange, Act and Assert
     assertEquals("multi-file class facade", KotlinConstants.metadataKindToString(4));
   }
@@ -64,11 +59,9 @@ class KotlinConstantsDiffblueTest {
    * <p>Method under test: {@link KotlinConstants#metadataKindToString(int)}
    */
   @Test
-  @DisplayName("Test metadataKindToString(int); when one; then return 'class'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String KotlinConstants.metadataKindToString(int)"})
-  void testMetadataKindToString_whenOne_thenReturnClass() {
+  public void testMetadataKindToString_whenOne_thenReturnClass() {
     // Arrange, Act and Assert
     assertEquals("class", KotlinConstants.metadataKindToString(1));
   }
@@ -84,11 +77,9 @@ class KotlinConstantsDiffblueTest {
    * <p>Method under test: {@link KotlinConstants#metadataKindToString(int)}
    */
   @Test
-  @DisplayName("Test metadataKindToString(int); when three; then return 'synthetic class'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String KotlinConstants.metadataKindToString(int)"})
-  void testMetadataKindToString_whenThree_thenReturnSyntheticClass() {
+  public void testMetadataKindToString_whenThree_thenReturnSyntheticClass() {
     // Arrange, Act and Assert
     assertEquals("synthetic class", KotlinConstants.metadataKindToString(3));
   }
@@ -104,11 +95,9 @@ class KotlinConstantsDiffblueTest {
    * <p>Method under test: {@link KotlinConstants#metadataKindToString(int)}
    */
   @Test
-  @DisplayName("Test metadataKindToString(int); when two; then return 'file facade'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String KotlinConstants.metadataKindToString(int)"})
-  void testMetadataKindToString_whenTwo_thenReturnFileFacade() {
+  public void testMetadataKindToString_whenTwo_thenReturnFileFacade() {
     // Arrange, Act and Assert
     assertEquals("file facade", KotlinConstants.metadataKindToString(2));
   }
@@ -124,11 +113,9 @@ class KotlinConstantsDiffblueTest {
    * <p>Method under test: {@link KotlinConstants#metadataKindToString(int)}
    */
   @Test
-  @DisplayName("Test metadataKindToString(int); when zero; then return 'unknown'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String KotlinConstants.metadataKindToString(int)"})
-  void testMetadataKindToString_whenZero_thenReturnUnknown() {
+  public void testMetadataKindToString_whenZero_thenReturnUnknown() {
     // Arrange, Act and Assert
     assertEquals("unknown", KotlinConstants.metadataKindToString(0));
   }
@@ -144,24 +131,22 @@ class KotlinConstantsDiffblueTest {
    * <p>Method under test: {@link KotlinConstants#getKotlinType(Clazz)}
    */
   @Test
-  @DisplayName("Test getKotlinType(Clazz); when LibraryClass(); then return LibraryClass")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Clazz KotlinConstants.getKotlinType(Clazz)"})
-  void testGetKotlinType_whenLibraryClass_thenReturnLibraryClass() {
+  public void testGetKotlinType_whenLibraryClass_thenReturnLibraryClass() {
     // Arrange and Act
     Clazz actualKotlinType = KotlinConstants.getKotlinType(new LibraryClass());
 
     // Assert
     assertTrue(actualKotlinType instanceof LibraryClass);
+    assertNull(((LibraryClass) actualKotlinType).interfaceNames);
+    assertNull(((LibraryClass) actualKotlinType).fields);
+    assertNull(((LibraryClass) actualKotlinType).methods);
     assertNull(actualKotlinType.getProcessingInfo());
     assertNull(actualKotlinType.getName());
     assertNull(actualKotlinType.getSuperName());
     assertNull(actualKotlinType.getFeatureName());
-    assertNull(((LibraryClass) actualKotlinType).interfaceNames);
     assertNull(actualKotlinType.getSuperClass());
-    assertNull(((LibraryClass) actualKotlinType).fields);
-    assertNull(((LibraryClass) actualKotlinType).methods);
     assertNull(((LibraryClass) actualKotlinType).kotlinMetadata);
     assertEquals(0, actualKotlinType.getAccessFlags());
     assertEquals(0, actualKotlinType.getInterfaceCount());

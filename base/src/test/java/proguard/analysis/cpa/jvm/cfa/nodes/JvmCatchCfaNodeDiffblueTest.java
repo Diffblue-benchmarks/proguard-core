@@ -1,19 +1,18 @@
 package proguard.analysis.cpa.jvm.cfa.nodes;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.analysis.cpa.jvm.cfa.edges.JvmCallCfaEdge;
 import proguard.analysis.cpa.jvm.cfa.edges.JvmCfaEdge;
 import proguard.classfile.ClassConstants;
@@ -21,7 +20,7 @@ import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.MethodSignature;
 
-class JvmCatchCfaNodeDiffblueTest {
+public class JvmCatchCfaNodeDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -33,14 +32,12 @@ class JvmCatchCfaNodeDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void JvmCatchCfaNode.<init>(List, List, MethodSignature, int, int, Clazz)",
     "int JvmCatchCfaNode.getCatchType()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     ArrayList<JvmCfaEdge> leavingEdges = new ArrayList<>();
     ArrayList<JvmCfaEdge> enteringEdges = new ArrayList<>();
@@ -70,11 +67,9 @@ class JvmCatchCfaNodeDiffblueTest {
    * <p>Method under test: {@link JvmCatchCfaNode#JvmCatchCfaNode(MethodSignature, int, int, Clazz)}
    */
   @Test
-  @DisplayName("Test new JvmCatchCfaNode(MethodSignature, int, int, Clazz)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void JvmCatchCfaNode.<init>(MethodSignature, int, int, Clazz)"})
-  void testNewJvmCatchCfaNode() {
+  public void testNewJvmCatchCfaNode() {
     // Arrange
     MethodSignature signature = ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE;
     LibraryClass clazz = new LibraryClass();
@@ -128,15 +123,13 @@ class JvmCatchCfaNodeDiffblueTest {
    * <p>Method under test: {@link JvmCatchCfaNode#isFinallyNode()}
    */
   @Test
-  @DisplayName("Test isFinallyNode(); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean JvmCatchCfaNode.isFinallyNode()"})
-  void testIsFinallyNode_thenReturnFalse() {
+  public void testIsFinallyNode_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(
-        new JvmCatchCfaNode(
-                ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, 2, 1, new LibraryClass())
+        (new JvmCatchCfaNode(
+                ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, 2, 1, new LibraryClass()))
             .isFinallyNode());
   }
 
@@ -150,15 +143,13 @@ class JvmCatchCfaNodeDiffblueTest {
    * <p>Method under test: {@link JvmCatchCfaNode#isFinallyNode()}
    */
   @Test
-  @DisplayName("Test isFinallyNode(); then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean JvmCatchCfaNode.isFinallyNode()"})
-  void testIsFinallyNode_thenReturnTrue() {
+  public void testIsFinallyNode_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(
-        new JvmCatchCfaNode(
-                ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, 2, 0, new LibraryClass())
+        (new JvmCatchCfaNode(
+                ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, 2, 0, new LibraryClass()))
             .isFinallyNode());
   }
 }

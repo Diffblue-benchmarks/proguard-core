@@ -1,31 +1,28 @@
 package proguard.evaluation;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.attribute.CodeAttribute;
 import proguard.evaluation.value.InstructionOffsetValue;
 
-class TracedBranchUnitDiffblueTest {
+public class TracedBranchUnitDiffblueTest {
   /**
    * Test {@link TracedBranchUnit#reset()}.
    *
    * <p>Method under test: {@link TracedBranchUnit#reset()}
    */
   @Test
-  @DisplayName("Test reset()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TracedBranchUnit.reset()"})
-  void testReset() {
+  public void testReset() {
     // Arrange
     TracedBranchUnit tracedBranchUnit = new TracedBranchUnit();
 
@@ -45,11 +42,9 @@ class TracedBranchUnitDiffblueTest {
    * <p>Method under test: {@link TracedBranchUnit#branch(Clazz, CodeAttribute, int, int)}
    */
   @Test
-  @DisplayName("Test branch(Clazz, CodeAttribute, int, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TracedBranchUnit.branch(Clazz, CodeAttribute, int, int)"})
-  void testBranch() {
+  public void testBranch() {
     // Arrange
     TracedBranchUnit tracedBranchUnit = new TracedBranchUnit();
     LibraryClass clazz = new LibraryClass();
@@ -77,14 +72,11 @@ class TracedBranchUnitDiffblueTest {
    * int, int)}
    */
   @Test
-  @DisplayName(
-      "Test branchConditionally(Clazz, CodeAttribute, int, int, int); given CodeAttribute(int) with u2attributeNameIndex is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void TracedBranchUnit.branchConditionally(Clazz, CodeAttribute, int, int, int)"
   })
-  void testBranchConditionally_givenCodeAttributeWithU2attributeNameIndexIsOne() {
+  public void testBranchConditionally_givenCodeAttributeWithU2attributeNameIndexIsOne() {
     // Arrange
     TracedBranchUnit tracedBranchUnit = new TracedBranchUnit();
     LibraryClass clazz = new LibraryClass();
@@ -114,14 +106,11 @@ class TracedBranchUnitDiffblueTest {
    * int, int)}
    */
   @Test
-  @DisplayName(
-      "Test branchConditionally(Clazz, CodeAttribute, int, int, int); then not TracedBranchUnit (default constructor) TraceBranchTargets Category2")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void TracedBranchUnit.branchConditionally(Clazz, CodeAttribute, int, int, int)"
   })
-  void testBranchConditionally_thenNotTracedBranchUnitTraceBranchTargetsCategory2() {
+  public void testBranchConditionally_thenNotTracedBranchUnitTraceBranchTargetsCategory2() {
     // Arrange
     TracedBranchUnit tracedBranchUnit = new TracedBranchUnit();
     LibraryClass clazz = new LibraryClass();
@@ -150,14 +139,11 @@ class TracedBranchUnitDiffblueTest {
    * int, int)}
    */
   @Test
-  @DisplayName(
-      "Test branchConditionally(Clazz, CodeAttribute, int, int, int); when NONE; then TracedBranchUnit (default constructor) wasCalled")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void TracedBranchUnit.branchConditionally(Clazz, CodeAttribute, int, int, int)"
   })
-  void testBranchConditionally_whenNone_thenTracedBranchUnitWasCalled() {
+  public void testBranchConditionally_whenNone_thenTracedBranchUnitWasCalled() {
     // Arrange
     TracedBranchUnit tracedBranchUnit = new TracedBranchUnit();
     LibraryClass clazz = new LibraryClass();
@@ -177,12 +163,10 @@ class TracedBranchUnitDiffblueTest {
    * <p>Method under test: default or parameterless constructor of {@link TracedBranchUnit}
    */
   @Test
-  @DisplayName("Test new TracedBranchUnit (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TracedBranchUnit.<init>()"})
-  void testNewTracedBranchUnit() {
+  public void testNewTracedBranchUnit() {
     // Arrange, Act and Assert
-    assertNull(new TracedBranchUnit().getTraceBranchTargets());
+    assertNull((new TracedBranchUnit()).getTraceBranchTargets());
   }
 }

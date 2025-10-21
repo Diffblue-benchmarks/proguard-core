@@ -1,15 +1,14 @@
 package proguard.evaluation.util.jsonprinter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ErrorRecordDiffblueTest {
+public class ErrorRecordDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -22,15 +21,13 @@ class ErrorRecordDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void ErrorRecord.<init>(int, String)",
     "int ErrorRecord.getInstructionOffset()",
     "String ErrorRecord.getMessage()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     ErrorRecord actualErrorRecord = new ErrorRecord(1, "Not all who wander are lost");
     int actualInstructionOffset = actualErrorRecord.getInstructionOffset();
@@ -46,11 +43,9 @@ class ErrorRecordDiffblueTest {
    * <p>Method under test: {@link ErrorRecord#toJson(StringBuilder)}
    */
   @Test
-  @DisplayName("Test toJson(StringBuilder)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StringBuilder ErrorRecord.toJson(StringBuilder)"})
-  void testToJson() {
+  public void testToJson() {
     // Arrange
     ErrorRecord errorRecord = new ErrorRecord(1, "Not all who wander are lost");
     StringBuilder builder = new StringBuilder("foo");

@@ -1,16 +1,15 @@
 package proguard.dexfile.ir.expr;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.expr.Value.VT;
 import proguard.dexfile.reader.DexType;
@@ -19,7 +18,7 @@ import proguard.dexfile.reader.Method;
 import proguard.dexfile.reader.MethodHandle;
 import proguard.dexfile.reader.Proto;
 
-class ExprsDiffblueTest {
+public class ExprsDiffblueTest {
   /**
    * Test {@link Exprs#copy(Value[])}.
    *
@@ -31,12 +30,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#copy(Value[])}
    */
   @Test
-  @DisplayName(
-      "Test copy(Value[]); when array of Value with ArrayExpr(); then return array length is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value[] Exprs.copy(Value[])"})
-  void testCopy_whenArrayOfValueWithArrayExpr_thenReturnArrayLengthIsOne() {
+  public void testCopy_whenArrayOfValueWithArrayExpr_thenReturnArrayLengthIsOne() {
     // Arrange
     ArrayExpr arrayExpr = new ArrayExpr();
 
@@ -59,16 +55,11 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#copy(Value[])}
    */
   @Test
-  @DisplayName("Test copy(Value[]); when 'null'; then return array length is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Value[] Exprs.copy(Value[])"})
-  void testCopy_whenNull_thenReturnArrayLengthIsZero() {
-    // Arrange and Act
-    Value[] actualCopyResult = Exprs.copy(null);
-
-    // Assert
-    assertEquals(0, actualCopyResult.length);
+  public void testCopy_whenNull_thenReturnArrayLengthIsZero() {
+    // Arrange, Act and Assert
+    assertEquals(0, Exprs.copy(null).length);
   }
 
   /**
@@ -77,21 +68,19 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nByte(byte)}
    */
   @Test
-  @DisplayName("Test nByte(byte)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Constant Exprs.nByte(byte)"})
-  void testNByte() {
+  public void testNByte() {
     // Arrange and Act
     Constant actualNByteResult = Exprs.nByte((byte) 'A');
 
     // Assert
+    assertNull(actualNByteResult.getOps());
     assertNull(actualNByteResult.tag);
     assertNull(actualNByteResult.valueType);
     assertNull(actualNByteResult.getOp());
     assertNull(actualNByteResult.getOp1());
     assertNull(actualNByteResult.getOp2());
-    assertNull(actualNByteResult.getOps());
     assertEquals(ET.E0, actualNByteResult.et);
     assertEquals(VT.CONSTANT, actualNByteResult.vt);
     assertEquals('A', ((Byte) actualNByteResult.value).byteValue());
@@ -103,22 +92,20 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nChar(char)}
    */
   @Test
-  @DisplayName("Test nChar(char)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Constant Exprs.nChar(char)"})
-  void testNChar() {
+  public void testNChar() {
     // Arrange and Act
     Constant actualNCharResult = Exprs.nChar('A');
 
     // Assert
     assertEquals('A', ((Character) actualNCharResult.value).charValue());
+    assertNull(actualNCharResult.getOps());
     assertNull(actualNCharResult.tag);
     assertNull(actualNCharResult.valueType);
     assertNull(actualNCharResult.getOp());
     assertNull(actualNCharResult.getOp1());
     assertNull(actualNCharResult.getOp2());
-    assertNull(actualNCharResult.getOps());
     assertEquals(ET.E0, actualNCharResult.et);
     assertEquals(VT.CONSTANT, actualNCharResult.vt);
   }
@@ -129,11 +116,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nType(String)}
    */
   @Test
-  @DisplayName("Test nType(String) with 'desc'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Constant Exprs.nType(String)"})
-  void testNTypeWithDesc() {
+  public void testNTypeWithDesc() {
     // Arrange and Act
     Constant actualNTypeResult = Exprs.nType("The characteristics of someone or something");
 
@@ -141,12 +126,12 @@ class ExprsDiffblueTest {
     Object object = actualNTypeResult.value;
     assertTrue(object instanceof DexType);
     assertEquals("The characteristics of someone or something", object.toString());
+    assertNull(actualNTypeResult.getOps());
     assertNull(actualNTypeResult.tag);
     assertNull(actualNTypeResult.valueType);
     assertNull(actualNTypeResult.getOp());
     assertNull(actualNTypeResult.getOp1());
     assertNull(actualNTypeResult.getOp2());
-    assertNull(actualNTypeResult.getOps());
     assertEquals(ET.E0, actualNTypeResult.et);
     assertEquals(VT.CONSTANT, actualNTypeResult.vt);
   }
@@ -157,11 +142,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nType(DexType)}
    */
   @Test
-  @DisplayName("Test nType(DexType) with 't'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Constant Exprs.nType(DexType)"})
-  void testNTypeWithT() {
+  public void testNTypeWithT() {
     // Arrange and Act
     Constant actualNTypeResult =
         Exprs.nType(new DexType("The characteristics of someone or something"));
@@ -170,12 +153,12 @@ class ExprsDiffblueTest {
     Object object = actualNTypeResult.value;
     assertTrue(object instanceof DexType);
     assertEquals("The characteristics of someone or something", object.toString());
+    assertNull(actualNTypeResult.getOps());
     assertNull(actualNTypeResult.tag);
     assertNull(actualNTypeResult.valueType);
     assertNull(actualNTypeResult.getOp());
     assertNull(actualNTypeResult.getOp1());
     assertNull(actualNTypeResult.getOp2());
-    assertNull(actualNTypeResult.getOps());
     assertEquals(ET.E0, actualNTypeResult.et);
     assertEquals(VT.CONSTANT, actualNTypeResult.vt);
   }
@@ -186,22 +169,20 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nDouble(double)}
    */
   @Test
-  @DisplayName("Test nDouble(double)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Constant Exprs.nDouble(double)"})
-  void testNDouble() {
+  public void testNDouble() {
     // Arrange and Act
     Constant actualNDoubleResult = Exprs.nDouble(10.0d);
 
     // Assert
+    assertNull(actualNDoubleResult.getOps());
     assertNull(actualNDoubleResult.tag);
     assertNull(actualNDoubleResult.valueType);
     assertNull(actualNDoubleResult.getOp());
     assertNull(actualNDoubleResult.getOp1());
     assertNull(actualNDoubleResult.getOp2());
-    assertNull(actualNDoubleResult.getOps());
-    assertEquals(10.0d, ((Double) actualNDoubleResult.value).doubleValue());
+    assertEquals(10.0d, ((Double) actualNDoubleResult.value).doubleValue(), 0.0);
     assertEquals(ET.E0, actualNDoubleResult.et);
     assertEquals(VT.CONSTANT, actualNDoubleResult.vt);
   }
@@ -212,22 +193,20 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nFloat(float)}
    */
   @Test
-  @DisplayName("Test nFloat(float)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Constant Exprs.nFloat(float)"})
-  void testNFloat() {
+  public void testNFloat() {
     // Arrange and Act
     Constant actualNFloatResult = Exprs.nFloat(10.0f);
 
     // Assert
+    assertNull(actualNFloatResult.getOps());
     assertNull(actualNFloatResult.tag);
     assertNull(actualNFloatResult.valueType);
     assertNull(actualNFloatResult.getOp());
     assertNull(actualNFloatResult.getOp1());
     assertNull(actualNFloatResult.getOp2());
-    assertNull(actualNFloatResult.getOps());
-    assertEquals(10.0f, ((Float) actualNFloatResult.value).floatValue());
+    assertEquals(10.0f, ((Float) actualNFloatResult.value).floatValue(), 0.0f);
     assertEquals(ET.E0, actualNFloatResult.et);
     assertEquals(VT.CONSTANT, actualNFloatResult.vt);
   }
@@ -238,21 +217,19 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nInt(int)}
    */
   @Test
-  @DisplayName("Test nInt(int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Constant Exprs.nInt(int)"})
-  void testNInt() {
+  public void testNInt() {
     // Arrange and Act
     Constant actualNIntResult = Exprs.nInt(1);
 
     // Assert
+    assertNull(actualNIntResult.getOps());
     assertNull(actualNIntResult.tag);
     assertNull(actualNIntResult.valueType);
     assertNull(actualNIntResult.getOp());
     assertNull(actualNIntResult.getOp1());
     assertNull(actualNIntResult.getOp2());
-    assertNull(actualNIntResult.getOps());
     assertEquals(1, ((Integer) actualNIntResult.value).intValue());
     assertEquals(ET.E0, actualNIntResult.et);
     assertEquals(VT.CONSTANT, actualNIntResult.vt);
@@ -264,21 +241,19 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nLong(long)}
    */
   @Test
-  @DisplayName("Test nLong(long)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Constant Exprs.nLong(long)"})
-  void testNLong() {
+  public void testNLong() {
     // Arrange and Act
     Constant actualNLongResult = Exprs.nLong(1L);
 
     // Assert
+    assertNull(actualNLongResult.getOps());
     assertNull(actualNLongResult.tag);
     assertNull(actualNLongResult.valueType);
     assertNull(actualNLongResult.getOp());
     assertNull(actualNLongResult.getOp1());
     assertNull(actualNLongResult.getOp2());
-    assertNull(actualNLongResult.getOps());
     assertEquals(1L, ((Long) actualNLongResult.value).longValue());
     assertEquals(ET.E0, actualNLongResult.et);
     assertEquals(VT.CONSTANT, actualNLongResult.vt);
@@ -290,21 +265,19 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nNull()}
    */
   @Test
-  @DisplayName("Test nNull()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Constant Exprs.nNull()"})
-  void testNNull() {
+  public void testNNull() {
     // Arrange and Act
     Constant actualNNullResult = Exprs.nNull();
 
     // Assert
+    assertNull(actualNNullResult.getOps());
     assertNull(actualNNullResult.tag);
     assertNull(actualNNullResult.valueType);
     assertNull(actualNNullResult.getOp());
     assertNull(actualNNullResult.getOp1());
     assertNull(actualNNullResult.getOp2());
-    assertNull(actualNNullResult.getOps());
     assertEquals(ET.E0, actualNNullResult.et);
     assertEquals(VT.CONSTANT, actualNNullResult.vt);
   }
@@ -315,21 +288,19 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nShort(short)}
    */
   @Test
-  @DisplayName("Test nShort(short)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Constant Exprs.nShort(short)"})
-  void testNShort() {
+  public void testNShort() {
     // Arrange and Act
     Constant actualNShortResult = Exprs.nShort((short) 1);
 
     // Assert
+    assertNull(actualNShortResult.getOps());
     assertNull(actualNShortResult.tag);
     assertNull(actualNShortResult.valueType);
     assertNull(actualNShortResult.getOp());
     assertNull(actualNShortResult.getOp1());
     assertNull(actualNShortResult.getOp2());
-    assertNull(actualNShortResult.getOps());
     assertEquals((short) 1, ((Short) actualNShortResult.value).shortValue());
     assertEquals(ET.E0, actualNShortResult.et);
     assertEquals(VT.CONSTANT, actualNShortResult.vt);
@@ -341,22 +312,20 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nString(String)}
    */
   @Test
-  @DisplayName("Test nString(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Constant Exprs.nString(String)"})
-  void testNString() {
+  public void testNString() {
     // Arrange and Act
     Constant actualNStringResult = Exprs.nString("foo");
 
     // Assert
     assertEquals("foo", actualNStringResult.value);
+    assertNull(actualNStringResult.getOps());
     assertNull(actualNStringResult.tag);
     assertNull(actualNStringResult.valueType);
     assertNull(actualNStringResult.getOp());
     assertNull(actualNStringResult.getOp1());
     assertNull(actualNStringResult.getOp2());
-    assertNull(actualNStringResult.getOps());
     assertEquals(ET.E0, actualNStringResult.et);
     assertEquals(VT.CONSTANT, actualNStringResult.vt);
   }
@@ -367,11 +336,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nAdd(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nAdd(Value, Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nAdd(Value, Value, String)"})
-  void testNAdd() {
+  public void testNAdd() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -386,10 +353,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] + null[null])", actualNAddResult.toString0());
     assertEquals("Type", actualNAddResult.type);
+    assertNull(actualNAddResult.getOps());
     assertNull(actualNAddResult.tag);
     assertNull(actualNAddResult.valueType);
     assertNull(actualNAddResult.getOp());
-    assertNull(actualNAddResult.getOps());
     assertEquals(ET.E2, actualNAddResult.et);
     assertEquals(VT.ADD, actualNAddResult.vt);
     assertSame(a, op1);
@@ -402,11 +369,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#niAdd(Value, Value)}
    */
   @Test
-  @DisplayName("Test niAdd(Value, Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.niAdd(Value, Value)"})
-  void testNiAdd() {
+  public void testNiAdd() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -421,10 +386,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] + null[null])", actualNiAddResult.toString0());
     assertEquals("I", actualNiAddResult.type);
+    assertNull(actualNiAddResult.getOps());
     assertNull(actualNiAddResult.tag);
     assertNull(actualNiAddResult.valueType);
     assertNull(actualNiAddResult.getOp());
-    assertNull(actualNiAddResult.getOps());
     assertEquals(ET.E2, actualNiAddResult.et);
     assertEquals(VT.ADD, actualNiAddResult.vt);
     assertSame(a, op1);
@@ -437,11 +402,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nAnd(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nAnd(Value, Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nAnd(Value, Value, String)"})
-  void testNAnd() {
+  public void testNAnd() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -456,10 +419,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] & null[null])", actualNAndResult.toString0());
     assertEquals("Type", actualNAndResult.type);
+    assertNull(actualNAndResult.getOps());
     assertNull(actualNAndResult.tag);
     assertNull(actualNAndResult.valueType);
     assertNull(actualNAndResult.getOp());
-    assertNull(actualNAndResult.getOps());
     assertEquals(ET.E2, actualNAndResult.et);
     assertEquals(VT.AND, actualNAndResult.vt);
     assertSame(a, op1);
@@ -472,11 +435,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nArray(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nArray(Value, Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ArrayExpr Exprs.nArray(Value, Value, String)"})
-  void testNArray() {
+  public void testNArray() {
     // Arrange
     ArrayExpr base = new ArrayExpr();
     ArrayExpr index = new ArrayExpr();
@@ -491,10 +452,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("Element Type", actualNArrayResult.elementType);
     assertEquals("null[null][null[null]]", actualNArrayResult.toString0());
+    assertNull(actualNArrayResult.getOps());
     assertNull(actualNArrayResult.tag);
     assertNull(actualNArrayResult.valueType);
     assertNull(actualNArrayResult.getOp());
-    assertNull(actualNArrayResult.getOps());
     assertEquals(ET.E2, actualNArrayResult.et);
     assertEquals(VT.ARRAY, actualNArrayResult.vt);
     assertSame(base, op1);
@@ -507,21 +468,19 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nArrayValue(Object)}
    */
   @Test
-  @DisplayName("Test nArrayValue(Object)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Constant Exprs.nArrayValue(Object)"})
-  void testNArrayValue() {
+  public void testNArrayValue() {
     // Arrange and Act
     Constant actualNArrayValueResult = Exprs.nArrayValue(Constant.Null);
 
     // Assert
+    assertNull(actualNArrayValueResult.getOps());
     assertNull(actualNArrayValueResult.tag);
     assertNull(actualNArrayValueResult.valueType);
     assertNull(actualNArrayValueResult.getOp());
     assertNull(actualNArrayValueResult.getOp1());
     assertNull(actualNArrayValueResult.getOp2());
-    assertNull(actualNArrayValueResult.getOps());
     assertEquals(ET.E0, actualNArrayValueResult.et);
     assertEquals(VT.CONSTANT, actualNArrayValueResult.vt);
   }
@@ -532,11 +491,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nCast(Value, String, String)}
    */
   @Test
-  @DisplayName("Test nCast(Value, String, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"CastExpr Exprs.nCast(Value, String, String)"})
-  void testNCast() {
+  public void testNCast() {
     // Arrange
     ArrayExpr obj = new ArrayExpr();
 
@@ -549,11 +506,11 @@ class ExprsDiffblueTest {
     assertTrue(op instanceof ArrayExpr);
     assertEquals("alice.liddell@example.org", actualNCastResult.to);
     assertEquals("jane.doe@example.org", actualNCastResult.from);
+    assertNull(actualNCastResult.getOps());
     assertNull(actualNCastResult.tag);
     assertNull(actualNCastResult.valueType);
     assertNull(actualNCastResult.getOp1());
     assertNull(actualNCastResult.getOp2());
-    assertNull(actualNCastResult.getOps());
     assertEquals(ET.E1, actualNCastResult.et);
     assertEquals(VT.CAST, actualNCastResult.vt);
     assertSame(obj, op);
@@ -565,11 +522,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nCheckCast(Value, String)}
    */
   @Test
-  @DisplayName("Test nCheckCast(Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"TypeExpr Exprs.nCheckCast(Value, String)"})
-  void testNCheckCast() {
+  public void testNCheckCast() {
     // Arrange
     ArrayExpr obj = new ArrayExpr();
 
@@ -580,11 +535,11 @@ class ExprsDiffblueTest {
     Value op = actualNCheckCastResult.getOp();
     assertTrue(op instanceof ArrayExpr);
     assertEquals("Type", actualNCheckCastResult.type);
+    assertNull(actualNCheckCastResult.getOps());
     assertNull(actualNCheckCastResult.tag);
     assertNull(actualNCheckCastResult.valueType);
     assertNull(actualNCheckCastResult.getOp1());
     assertNull(actualNCheckCastResult.getOp2());
-    assertNull(actualNCheckCastResult.getOps());
     assertEquals(ET.E1, actualNCheckCastResult.et);
     assertEquals(VT.CHECK_CAST, actualNCheckCastResult.vt);
     assertSame(obj, op);
@@ -596,11 +551,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nDCmpg(Value, Value)}
    */
   @Test
-  @DisplayName("Test nDCmpg(Value, Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nDCmpg(Value, Value)"})
-  void testNDCmpg() {
+  public void testNDCmpg() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -615,10 +568,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] DCMPG null[null])", actualNDCmpgResult.toString0());
     assertEquals("D", actualNDCmpgResult.type);
+    assertNull(actualNDCmpgResult.getOps());
     assertNull(actualNDCmpgResult.tag);
     assertNull(actualNDCmpgResult.valueType);
     assertNull(actualNDCmpgResult.getOp());
-    assertNull(actualNDCmpgResult.getOps());
     assertEquals(ET.E2, actualNDCmpgResult.et);
     assertEquals(VT.DCMPG, actualNDCmpgResult.vt);
     assertSame(a, op1);
@@ -631,11 +584,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nDCmpl(Value, Value)}
    */
   @Test
-  @DisplayName("Test nDCmpl(Value, Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nDCmpl(Value, Value)"})
-  void testNDCmpl() {
+  public void testNDCmpl() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -650,10 +601,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] DCMPL null[null])", actualNDCmplResult.toString0());
     assertEquals("D", actualNDCmplResult.type);
+    assertNull(actualNDCmplResult.getOps());
     assertNull(actualNDCmplResult.tag);
     assertNull(actualNDCmplResult.valueType);
     assertNull(actualNDCmplResult.getOp());
-    assertNull(actualNDCmplResult.getOps());
     assertEquals(ET.E2, actualNDCmplResult.et);
     assertEquals(VT.DCMPL, actualNDCmplResult.vt);
     assertSame(a, op1);
@@ -671,11 +622,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nDiv(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nDiv(Value, Value, String); when 'D'; then return type is 'D'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nDiv(Value, Value, String)"})
-  void testNDiv_whenD_thenReturnTypeIsD() {
+  public void testNDiv_whenD_thenReturnTypeIsD() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -690,10 +639,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] / null[null])", actualNDivResult.toString0());
     assertEquals("D", actualNDivResult.type);
+    assertNull(actualNDivResult.getOps());
     assertNull(actualNDivResult.tag);
     assertNull(actualNDivResult.valueType);
     assertNull(actualNDivResult.getOp());
-    assertNull(actualNDivResult.getOps());
     assertEquals(ET.E2, actualNDivResult.et);
     assertEquals(VT.DDIV, actualNDivResult.vt);
     assertSame(a, op1);
@@ -711,11 +660,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nDiv(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nDiv(Value, Value, String); when 'F'; then return type is 'F'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nDiv(Value, Value, String)"})
-  void testNDiv_whenF_thenReturnTypeIsF() {
+  public void testNDiv_whenF_thenReturnTypeIsF() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -730,10 +677,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] / null[null])", actualNDivResult.toString0());
     assertEquals("F", actualNDivResult.type);
+    assertNull(actualNDivResult.getOps());
     assertNull(actualNDivResult.tag);
     assertNull(actualNDivResult.valueType);
     assertNull(actualNDivResult.getOp());
-    assertNull(actualNDivResult.getOps());
     assertEquals(ET.E2, actualNDivResult.et);
     assertEquals(VT.FDIV, actualNDivResult.vt);
     assertSame(a, op1);
@@ -751,11 +698,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nDiv(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nDiv(Value, Value, String); when 'I'; then return type is 'I'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nDiv(Value, Value, String)"})
-  void testNDiv_whenI_thenReturnTypeIsI() {
+  public void testNDiv_whenI_thenReturnTypeIsI() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -770,10 +715,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] / null[null])", actualNDivResult.toString0());
     assertEquals("I", actualNDivResult.type);
+    assertNull(actualNDivResult.getOps());
     assertNull(actualNDivResult.tag);
     assertNull(actualNDivResult.valueType);
     assertNull(actualNDivResult.getOp());
-    assertNull(actualNDivResult.getOps());
     assertEquals(ET.E2, actualNDivResult.et);
     assertEquals(VT.IDIV, actualNDivResult.vt);
     assertSame(a, op1);
@@ -791,11 +736,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nDiv(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nDiv(Value, Value, String); when 'J'; then return type is 'J'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nDiv(Value, Value, String)"})
-  void testNDiv_whenJ_thenReturnTypeIsJ() {
+  public void testNDiv_whenJ_thenReturnTypeIsJ() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -810,10 +753,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] / null[null])", actualNDivResult.toString0());
     assertEquals("J", actualNDivResult.type);
+    assertNull(actualNDivResult.getOps());
     assertNull(actualNDivResult.tag);
     assertNull(actualNDivResult.valueType);
     assertNull(actualNDivResult.getOp());
-    assertNull(actualNDivResult.getOps());
     assertEquals(ET.E2, actualNDivResult.et);
     assertEquals(VT.LDIV, actualNDivResult.vt);
     assertSame(a, op1);
@@ -831,11 +774,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nDiv(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nDiv(Value, Value, String); when 'Type'; then throw RuntimeException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nDiv(Value, Value, String)"})
-  void testNDiv_whenType_thenThrowRuntimeException() {
+  public void testNDiv_whenType_thenThrowRuntimeException() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
 
@@ -849,11 +790,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nEq(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nEq(Value, Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nEq(Value, Value, String)"})
-  void testNEq() {
+  public void testNEq() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -868,10 +807,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] == null[null])", actualNEqResult.toString0());
     assertEquals("Type", actualNEqResult.type);
+    assertNull(actualNEqResult.getOps());
     assertNull(actualNEqResult.tag);
     assertNull(actualNEqResult.valueType);
     assertNull(actualNEqResult.getOp());
-    assertNull(actualNEqResult.getOps());
     assertEquals(ET.E2, actualNEqResult.et);
     assertEquals(VT.EQ, actualNEqResult.vt);
     assertSame(a, op1);
@@ -884,11 +823,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#niEq(Value, Value)}
    */
   @Test
-  @DisplayName("Test niEq(Value, Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.niEq(Value, Value)"})
-  void testNiEq() {
+  public void testNiEq() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -903,10 +840,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] == null[null])", actualNiEqResult.toString0());
     assertEquals("I", actualNiEqResult.type);
+    assertNull(actualNiEqResult.getOps());
     assertNull(actualNiEqResult.tag);
     assertNull(actualNiEqResult.valueType);
     assertNull(actualNiEqResult.getOp());
-    assertNull(actualNiEqResult.getOps());
     assertEquals(ET.E2, actualNiEqResult.et);
     assertEquals(VT.EQ, actualNiEqResult.vt);
     assertSame(a, op1);
@@ -919,23 +856,21 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nExceptionRef(String)}
    */
   @Test
-  @DisplayName("Test nExceptionRef(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"RefExpr Exprs.nExceptionRef(String)"})
-  void testNExceptionRef() {
+  public void testNExceptionRef() {
     // Arrange and Act
     RefExpr actualNExceptionRefResult = Exprs.nExceptionRef("Type");
 
     // Assert
     assertEquals("@Exception", actualNExceptionRefResult.toString0());
     assertEquals("Type", actualNExceptionRefResult.type);
+    assertNull(actualNExceptionRefResult.getOps());
     assertNull(actualNExceptionRefResult.tag);
     assertNull(actualNExceptionRefResult.valueType);
     assertNull(actualNExceptionRefResult.getOp());
     assertNull(actualNExceptionRefResult.getOp1());
     assertNull(actualNExceptionRefResult.getOp2());
-    assertNull(actualNExceptionRefResult.getOps());
     assertEquals(-1, actualNExceptionRefResult.parameterIndex);
     assertEquals(ET.E0, actualNExceptionRefResult.et);
     assertEquals(VT.EXCEPTION_REF, actualNExceptionRefResult.vt);
@@ -947,11 +882,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nFCmpg(Value, Value)}
    */
   @Test
-  @DisplayName("Test nFCmpg(Value, Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nFCmpg(Value, Value)"})
-  void testNFCmpg() {
+  public void testNFCmpg() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -966,10 +899,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] FCMPG null[null])", actualNFCmpgResult.toString0());
     assertEquals("F", actualNFCmpgResult.type);
+    assertNull(actualNFCmpgResult.getOps());
     assertNull(actualNFCmpgResult.tag);
     assertNull(actualNFCmpgResult.valueType);
     assertNull(actualNFCmpgResult.getOp());
-    assertNull(actualNFCmpgResult.getOps());
     assertEquals(ET.E2, actualNFCmpgResult.et);
     assertEquals(VT.FCMPG, actualNFCmpgResult.vt);
     assertSame(a, op1);
@@ -982,11 +915,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nFCmpl(Value, Value)}
    */
   @Test
-  @DisplayName("Test nFCmpl(Value, Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nFCmpl(Value, Value)"})
-  void testNFCmpl() {
+  public void testNFCmpl() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -1001,10 +932,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] FCMPL null[null])", actualNFCmplResult.toString0());
     assertEquals("F", actualNFCmplResult.type);
+    assertNull(actualNFCmplResult.getOps());
     assertNull(actualNFCmplResult.tag);
     assertNull(actualNFCmplResult.valueType);
     assertNull(actualNFCmplResult.getOp());
-    assertNull(actualNFCmplResult.getOps());
     assertEquals(ET.E2, actualNFCmplResult.et);
     assertEquals(VT.FCMPL, actualNFCmplResult.vt);
     assertSame(a, op1);
@@ -1017,11 +948,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nField(Value, String, String, String)}
    */
   @Test
-  @DisplayName("Test nField(Value, String, String, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FieldExpr Exprs.nField(Value, String, String, String)"})
-  void testNField() {
+  public void testNField() {
     // Arrange
     ArrayExpr object = new ArrayExpr();
 
@@ -1035,11 +964,11 @@ class ExprsDiffblueTest {
     assertEquals("Field Type", actualNFieldResult.type);
     assertEquals("Owner Type", actualNFieldResult.owner);
     assertEquals("null[null].Field Name", actualNFieldResult.toString0());
+    assertNull(actualNFieldResult.getOps());
     assertNull(actualNFieldResult.tag);
     assertNull(actualNFieldResult.valueType);
     assertNull(actualNFieldResult.getOp1());
     assertNull(actualNFieldResult.getOp2());
-    assertNull(actualNFieldResult.getOps());
     assertEquals(ET.E1, actualNFieldResult.et);
     assertEquals(VT.FIELD, actualNFieldResult.vt);
     assertSame(object, op);
@@ -1051,11 +980,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nGe(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nGe(Value, Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nGe(Value, Value, String)"})
-  void testNGe() {
+  public void testNGe() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -1070,10 +997,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] >= null[null])", actualNGeResult.toString0());
     assertEquals("Type", actualNGeResult.type);
+    assertNull(actualNGeResult.getOps());
     assertNull(actualNGeResult.tag);
     assertNull(actualNGeResult.valueType);
     assertNull(actualNGeResult.getOp());
-    assertNull(actualNGeResult.getOps());
     assertEquals(ET.E2, actualNGeResult.et);
     assertEquals(VT.GE, actualNGeResult.vt);
     assertSame(a, op1);
@@ -1086,11 +1013,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nGt(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nGt(Value, Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nGt(Value, Value, String)"})
-  void testNGt() {
+  public void testNGt() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -1105,10 +1030,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] > null[null])", actualNGtResult.toString0());
     assertEquals("Type", actualNGtResult.type);
+    assertNull(actualNGtResult.getOps());
     assertNull(actualNGtResult.tag);
     assertNull(actualNGtResult.valueType);
     assertNull(actualNGtResult.getOp());
-    assertNull(actualNGtResult.getOps());
     assertEquals(ET.E2, actualNGtResult.et);
     assertEquals(VT.GT, actualNGtResult.vt);
     assertSame(a, op1);
@@ -1121,11 +1046,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#njGt(Value, Value)}
    */
   @Test
-  @DisplayName("Test njGt(Value, Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.njGt(Value, Value)"})
-  void testNjGt() {
+  public void testNjGt() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -1140,10 +1063,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] > null[null])", actualNjGtResult.toString0());
     assertEquals("J", actualNjGtResult.type);
+    assertNull(actualNjGtResult.getOps());
     assertNull(actualNjGtResult.tag);
     assertNull(actualNjGtResult.valueType);
     assertNull(actualNjGtResult.getOp());
-    assertNull(actualNjGtResult.getOps());
     assertEquals(ET.E2, actualNjGtResult.et);
     assertEquals(VT.GT, actualNjGtResult.vt);
     assertSame(a, op1);
@@ -1156,11 +1079,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#niGt(Value, Value)}
    */
   @Test
-  @DisplayName("Test niGt(Value, Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.niGt(Value, Value)"})
-  void testNiGt() {
+  public void testNiGt() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -1175,10 +1096,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] > null[null])", actualNiGtResult.toString0());
     assertEquals("I", actualNiGtResult.type);
+    assertNull(actualNiGtResult.getOps());
     assertNull(actualNiGtResult.tag);
     assertNull(actualNiGtResult.valueType);
     assertNull(actualNiGtResult.getOp());
-    assertNull(actualNiGtResult.getOps());
     assertEquals(ET.E2, actualNiGtResult.et);
     assertEquals(VT.GT, actualNiGtResult.vt);
     assertSame(a, op1);
@@ -1191,11 +1112,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nInstanceOf(Value, String)}
    */
   @Test
-  @DisplayName("Test nInstanceOf(Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"TypeExpr Exprs.nInstanceOf(Value, String)"})
-  void testNInstanceOf() {
+  public void testNInstanceOf() {
     // Arrange
     ArrayExpr value = new ArrayExpr();
 
@@ -1206,11 +1125,11 @@ class ExprsDiffblueTest {
     Value op = actualNInstanceOfResult.getOp();
     assertTrue(op instanceof ArrayExpr);
     assertEquals("Type", actualNInstanceOfResult.type);
+    assertNull(actualNInstanceOfResult.getOps());
     assertNull(actualNInstanceOfResult.tag);
     assertNull(actualNInstanceOfResult.valueType);
     assertNull(actualNInstanceOfResult.getOp1());
     assertNull(actualNInstanceOfResult.getOp2());
-    assertNull(actualNInstanceOfResult.getOps());
     assertEquals(ET.E1, actualNInstanceOfResult.et);
     assertEquals(VT.INSTANCE_OF, actualNInstanceOfResult.vt);
     assertSame(value, op);
@@ -1222,13 +1141,11 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nInvokeInterface(Value[], String, String, String[], String)}
    */
   @Test
-  @DisplayName("Test nInvokeInterface(Value[], String, String, String[], String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InvokeExpr Exprs.nInvokeInterface(Value[], String, String, String[], String)"
   })
-  void testNInvokeInterface() {
+  public void testNInvokeInterface() {
     // Arrange
     Value[] regs = new Value[] {new ArrayExpr()};
     String[] argmentTypes = new String[] {"Argment Types"};
@@ -1262,11 +1179,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nInvokeNew(Value[], String[], String)}
    */
   @Test
-  @DisplayName("Test nInvokeNew(Value[], String[], String) with 'regs', 'argmentTypes', 'owner'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr Exprs.nInvokeNew(Value[], String[], String)"})
-  void testNInvokeNewWithRegsArgmentTypesOwner() {
+  public void testNInvokeNewWithRegsArgmentTypesOwner() {
     // Arrange
     Value[] regs = new Value[] {new ArrayExpr()};
     String[] argmentTypes = new String[] {"Argment Types"};
@@ -1300,12 +1215,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nInvokeNew(Value[], String[], String, String)}
    */
   @Test
-  @DisplayName(
-      "Test nInvokeNew(Value[], String[], String, String) with 'regs', 'argmentTypes', 'owner', 'className'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr Exprs.nInvokeNew(Value[], String[], String, String)"})
-  void testNInvokeNewWithRegsArgmentTypesOwnerClassName() {
+  public void testNInvokeNewWithRegsArgmentTypesOwnerClassName() {
     // Arrange
     Value[] regs = new Value[] {new ArrayExpr()};
     String[] argmentTypes = new String[] {"Argment Types"};
@@ -1338,11 +1250,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nInvokeSpecial(Value[], String, String, String[], String)}
    */
   @Test
-  @DisplayName("Test nInvokeSpecial(Value[], String, String, String[], String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr Exprs.nInvokeSpecial(Value[], String, String, String[], String)"})
-  void testNInvokeSpecial() {
+  public void testNInvokeSpecial() {
     // Arrange
     Value[] regs = new Value[] {new ArrayExpr()};
     String[] argmentTypes = new String[] {"Argment Types"};
@@ -1375,11 +1285,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nInvokeStatic(Value[], String, String, String[], String)}
    */
   @Test
-  @DisplayName("Test nInvokeStatic(Value[], String, String, String[], String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr Exprs.nInvokeStatic(Value[], String, String, String[], String)"})
-  void testNInvokeStatic() {
+  public void testNInvokeStatic() {
     // Arrange
     Value[] regs = new Value[] {new ArrayExpr()};
     String[] argmentTypes = new String[] {"Argment Types"};
@@ -1411,11 +1319,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nInvokeVirtual(Value[], String, String, String[], String)}
    */
   @Test
-  @DisplayName("Test nInvokeVirtual(Value[], String, String, String[], String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokeExpr Exprs.nInvokeVirtual(Value[], String, String, String[], String)"})
-  void testNInvokeVirtual() {
+  public void testNInvokeVirtual() {
     // Arrange
     Value[] regs = new Value[] {new ArrayExpr()};
     String[] argmentTypes = new String[] {"Argment Types"};
@@ -1455,27 +1361,25 @@ class ExprsDiffblueTest {
    * Object[])}
    */
   @Test
-  @DisplayName(
-      "Test nInvokeCustom(Value[], String, Proto, MethodHandle, Object[]); when Field(String, String, String) with 'Owner' and 'Name' and 'Type'; then return handle Method is 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InvokeCustomExpr Exprs.nInvokeCustom(Value[], String, Proto, MethodHandle, Object[])"
   })
-  void testNInvokeCustom_whenFieldWithOwnerAndNameAndType_thenReturnHandleMethodIsNull() {
+  public void testNInvokeCustom_whenFieldWithOwnerAndNameAndType_thenReturnHandleMethodIsNull() {
     // Arrange
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
+
     Field field = new Field("Owner", "Name", "Type");
-    MethodHandle handle = new MethodHandle(1, field);
 
-    // Act
-    InvokeCustomExpr actualNInvokeCustomResult =
+    // Act and Assert
+    MethodHandle methodHandle =
         Exprs.nInvokeCustom(
-            new Value[] {new ArrayExpr()}, "Name", proto, handle, new Object[] {Constant.Null});
-
-    // Assert
-    MethodHandle methodHandle = actualNInvokeCustomResult.handle;
+                new Value[] {new ArrayExpr()},
+                "Name",
+                proto,
+                new MethodHandle(1, field),
+                new Object[] {Constant.Null})
+            .handle;
     assertNull(methodHandle.getMethod());
     assertEquals(1, methodHandle.getType());
     assertSame(field, methodHandle.getField());
@@ -1493,18 +1397,14 @@ class ExprsDiffblueTest {
    * Object[])}
    */
   @Test
-  @DisplayName(
-      "Test nInvokeCustom(Value[], String, Proto, MethodHandle, Object[]); when 'null'; then return toString0 is 'InvokeCustomExpr(....)'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "InvokeCustomExpr Exprs.nInvokeCustom(Value[], String, Proto, MethodHandle, Object[])"
   })
-  void testNInvokeCustom_whenNull_thenReturnToString0IsInvokeCustomExpr() {
+  public void testNInvokeCustom_whenNull_thenReturnToString0IsInvokeCustomExpr() {
     // Arrange
     Value[] regs = new Value[] {new ArrayExpr()};
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     // Act
     InvokeCustomExpr actualNInvokeCustomResult =
@@ -1513,12 +1413,12 @@ class ExprsDiffblueTest {
     // Assert
     assertEquals("InvokeCustomExpr(....)", actualNInvokeCustomResult.toString0());
     assertEquals("Name", actualNInvokeCustomResult.name);
+    assertNull(actualNInvokeCustomResult.getArgs());
     assertNull(actualNInvokeCustomResult.tag);
     assertNull(actualNInvokeCustomResult.getName());
     assertNull(actualNInvokeCustomResult.getOwner());
     assertNull(actualNInvokeCustomResult.getRet());
     assertNull(actualNInvokeCustomResult.valueType);
-    assertNull(actualNInvokeCustomResult.getArgs());
     assertNull(actualNInvokeCustomResult.getOp());
     assertNull(actualNInvokeCustomResult.getOp1());
     assertNull(actualNInvokeCustomResult.getOp2());
@@ -1539,22 +1439,20 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nInvokePolymorphic(Value[], Proto, Method)}
    */
   @Test
-  @DisplayName("Test nInvokePolymorphic(Value[], Proto, Method)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"InvokePolymorphicExpr Exprs.nInvokePolymorphic(Value[], Proto, Method)"})
-  void testNInvokePolymorphic() {
+  public void testNInvokePolymorphic() {
     // Arrange
     Value[] regs = new Value[] {new ArrayExpr()};
-    String[] parameterTypes = new String[] {"Parameter Types"};
-    Proto proto = new Proto(parameterTypes, "Return Type");
-    String[] parameterTypes2 = new String[] {"Parameter Types"};
-    Proto proto2 = new Proto(parameterTypes2, "Return Type");
-    Method method = new Method("Owner", "Name", proto2);
+    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
 
     // Act
     InvokePolymorphicExpr actualNInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(regs, proto, method);
+        Exprs.nInvokePolymorphic(
+            regs,
+            proto,
+            new Method(
+                "Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")));
 
     // Assert
     assertEquals("Name", actualNInvokePolymorphicResult.getName());
@@ -1581,11 +1479,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nLCmp(Value, Value)}
    */
   @Test
-  @DisplayName("Test nLCmp(Value, Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nLCmp(Value, Value)"})
-  void testNLCmp() {
+  public void testNLCmp() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -1600,10 +1496,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] LCMP null[null])", actualNLCmpResult.toString0());
     assertEquals("J", actualNLCmpResult.type);
+    assertNull(actualNLCmpResult.getOps());
     assertNull(actualNLCmpResult.tag);
     assertNull(actualNLCmpResult.valueType);
     assertNull(actualNLCmpResult.getOp());
-    assertNull(actualNLCmpResult.getOps());
     assertEquals(ET.E2, actualNLCmpResult.et);
     assertEquals(VT.LCMP, actualNLCmpResult.vt);
     assertSame(a, op1);
@@ -1616,11 +1512,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nLe(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nLe(Value, Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nLe(Value, Value, String)"})
-  void testNLe() {
+  public void testNLe() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -1635,10 +1529,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] <= null[null])", actualNLeResult.toString0());
     assertEquals("Type", actualNLeResult.type);
+    assertNull(actualNLeResult.getOps());
     assertNull(actualNLeResult.tag);
     assertNull(actualNLeResult.valueType);
     assertNull(actualNLeResult.getOp());
-    assertNull(actualNLeResult.getOps());
     assertEquals(ET.E2, actualNLeResult.et);
     assertEquals(VT.LE, actualNLeResult.vt);
     assertSame(a, op1);
@@ -1651,11 +1545,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nLength(Value)}
    */
   @Test
-  @DisplayName("Test nLength(Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"UnopExpr Exprs.nLength(Value)"})
-  void testNLength() {
+  public void testNLength() {
     // Arrange
     ArrayExpr array = new ArrayExpr();
 
@@ -1666,12 +1558,12 @@ class ExprsDiffblueTest {
     Value op = actualNLengthResult.getOp();
     assertTrue(op instanceof ArrayExpr);
     assertEquals("null[null].length", actualNLengthResult.toString0());
+    assertNull(actualNLengthResult.getOps());
     assertNull(actualNLengthResult.tag);
     assertNull(actualNLengthResult.type);
     assertNull(actualNLengthResult.valueType);
     assertNull(actualNLengthResult.getOp1());
     assertNull(actualNLengthResult.getOp2());
-    assertNull(actualNLengthResult.getOps());
     assertEquals(ET.E1, actualNLengthResult.et);
     assertEquals(VT.LENGTH, actualNLengthResult.vt);
     assertSame(array, op);
@@ -1683,24 +1575,22 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nLocal(String)}
    */
   @Test
-  @DisplayName("Test nLocal(String) with 'debugName'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Local Exprs.nLocal(String)"})
-  void testNLocalWithDebugName() {
+  public void testNLocalWithDebugName() {
     // Arrange and Act
     Local actualNLocalResult = Exprs.nLocal("Debug Name");
 
     // Assert
     assertEquals("Debug Name", actualNLocalResult.debugName);
     assertEquals("Debug Name_0", actualNLocalResult.toString0());
+    assertNull(actualNLocalResult.getOps());
     assertNull(actualNLocalResult.tag);
     assertNull(actualNLocalResult.signature);
     assertNull(actualNLocalResult.valueType);
     assertNull(actualNLocalResult.getOp());
     assertNull(actualNLocalResult.getOp1());
     assertNull(actualNLocalResult.getOp2());
-    assertNull(actualNLocalResult.getOps());
     assertEquals(0, actualNLocalResult._ls_index);
     assertEquals(ET.E0, actualNLocalResult.et);
     assertEquals(VT.LOCAL, actualNLocalResult.vt);
@@ -1712,16 +1602,15 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nLocal(int)}
    */
   @Test
-  @DisplayName("Test nLocal(int) with 'index'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Local Exprs.nLocal(int)"})
-  void testNLocalWithIndex() {
+  public void testNLocalWithIndex() {
     // Arrange and Act
     Local actualNLocalResult = Exprs.nLocal(1);
 
     // Assert
     assertEquals("a1", actualNLocalResult.toString0());
+    assertNull(actualNLocalResult.getOps());
     assertNull(actualNLocalResult.tag);
     assertNull(actualNLocalResult.debugName);
     assertNull(actualNLocalResult.signature);
@@ -1729,7 +1618,6 @@ class ExprsDiffblueTest {
     assertNull(actualNLocalResult.getOp());
     assertNull(actualNLocalResult.getOp1());
     assertNull(actualNLocalResult.getOp2());
-    assertNull(actualNLocalResult.getOps());
     assertEquals(1, actualNLocalResult._ls_index);
     assertEquals(ET.E0, actualNLocalResult.et);
     assertEquals(VT.LOCAL, actualNLocalResult.vt);
@@ -1741,24 +1629,22 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nLocal(int, String)}
    */
   @Test
-  @DisplayName("Test nLocal(int, String) with 'index', 'debugName'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Local Exprs.nLocal(int, String)"})
-  void testNLocalWithIndexDebugName() {
+  public void testNLocalWithIndexDebugName() {
     // Arrange and Act
     Local actualNLocalResult = Exprs.nLocal(1, "Debug Name");
 
     // Assert
     assertEquals("Debug Name", actualNLocalResult.debugName);
     assertEquals("Debug Name_1", actualNLocalResult.toString0());
+    assertNull(actualNLocalResult.getOps());
     assertNull(actualNLocalResult.tag);
     assertNull(actualNLocalResult.signature);
     assertNull(actualNLocalResult.valueType);
     assertNull(actualNLocalResult.getOp());
     assertNull(actualNLocalResult.getOp1());
     assertNull(actualNLocalResult.getOp2());
-    assertNull(actualNLocalResult.getOps());
     assertEquals(1, actualNLocalResult._ls_index);
     assertEquals(ET.E0, actualNLocalResult.et);
     assertEquals(VT.LOCAL, actualNLocalResult.vt);
@@ -1770,11 +1656,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nLt(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nLt(Value, Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nLt(Value, Value, String)"})
-  void testNLt() {
+  public void testNLt() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -1789,10 +1673,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] < null[null])", actualNLtResult.toString0());
     assertEquals("Type", actualNLtResult.type);
+    assertNull(actualNLtResult.getOps());
     assertNull(actualNLtResult.tag);
     assertNull(actualNLtResult.valueType);
     assertNull(actualNLtResult.getOp());
-    assertNull(actualNLtResult.getOps());
     assertEquals(ET.E2, actualNLtResult.et);
     assertEquals(VT.LT, actualNLtResult.vt);
     assertSame(a, op1);
@@ -1805,11 +1689,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nMul(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nMul(Value, Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nMul(Value, Value, String)"})
-  void testNMul() {
+  public void testNMul() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -1824,10 +1706,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] * null[null])", actualNMulResult.toString0());
     assertEquals("Type", actualNMulResult.type);
+    assertNull(actualNMulResult.getOps());
     assertNull(actualNMulResult.tag);
     assertNull(actualNMulResult.valueType);
     assertNull(actualNMulResult.getOp());
-    assertNull(actualNMulResult.getOps());
     assertEquals(ET.E2, actualNMulResult.et);
     assertEquals(VT.MUL, actualNMulResult.vt);
     assertSame(a, op1);
@@ -1840,11 +1722,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nNe(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nNe(Value, Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nNe(Value, Value, String)"})
-  void testNNe() {
+  public void testNNe() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -1859,10 +1739,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] != null[null])", actualNNeResult.toString0());
     assertEquals("Type", actualNNeResult.type);
+    assertNull(actualNNeResult.getOps());
     assertNull(actualNNeResult.tag);
     assertNull(actualNNeResult.valueType);
     assertNull(actualNNeResult.getOp());
-    assertNull(actualNNeResult.getOps());
     assertEquals(ET.E2, actualNNeResult.et);
     assertEquals(VT.NE, actualNNeResult.vt);
     assertSame(a, op1);
@@ -1875,11 +1755,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nNeg(Value, String)}
    */
   @Test
-  @DisplayName("Test nNeg(Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"UnopExpr Exprs.nNeg(Value, String)"})
-  void testNNeg() {
+  public void testNNeg() {
     // Arrange
     ArrayExpr array = new ArrayExpr();
 
@@ -1891,11 +1769,11 @@ class ExprsDiffblueTest {
     assertTrue(op instanceof ArrayExpr);
     assertEquals("(-null[null])", actualNNegResult.toString0());
     assertEquals("Type", actualNNegResult.type);
+    assertNull(actualNNegResult.getOps());
     assertNull(actualNNegResult.tag);
     assertNull(actualNNegResult.valueType);
     assertNull(actualNNegResult.getOp1());
     assertNull(actualNNegResult.getOp2());
-    assertNull(actualNNegResult.getOps());
     assertEquals(ET.E1, actualNNegResult.et);
     assertEquals(VT.NEG, actualNNegResult.vt);
     assertSame(array, op);
@@ -1907,22 +1785,20 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nNew(String)}
    */
   @Test
-  @DisplayName("Test nNew(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"NewExpr Exprs.nNew(String)"})
-  void testNNew() {
+  public void testNNew() {
     // Arrange and Act
     NewExpr actualNNewResult = Exprs.nNew("Type");
 
     // Assert
     assertEquals("Type", actualNNewResult.type);
+    assertNull(actualNNewResult.getOps());
     assertNull(actualNNewResult.tag);
     assertNull(actualNNewResult.valueType);
     assertNull(actualNNewResult.getOp());
     assertNull(actualNNewResult.getOp1());
     assertNull(actualNNewResult.getOp2());
-    assertNull(actualNNewResult.getOps());
     assertEquals(ET.E0, actualNNewResult.et);
     assertEquals(VT.NEW, actualNNewResult.vt);
   }
@@ -1933,11 +1809,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nNewArray(String, Value)}
    */
   @Test
-  @DisplayName("Test nNewArray(String, Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"TypeExpr Exprs.nNewArray(String, Value)"})
-  void testNNewArray() {
+  public void testNNewArray() {
     // Arrange
     ArrayExpr size = new ArrayExpr();
 
@@ -1948,11 +1822,11 @@ class ExprsDiffblueTest {
     Value op = actualNNewArrayResult.getOp();
     assertTrue(op instanceof ArrayExpr);
     assertEquals("Element Type", actualNNewArrayResult.type);
+    assertNull(actualNNewArrayResult.getOps());
     assertNull(actualNNewArrayResult.tag);
     assertNull(actualNNewArrayResult.valueType);
     assertNull(actualNNewArrayResult.getOp1());
     assertNull(actualNNewArrayResult.getOp2());
-    assertNull(actualNNewArrayResult.getOps());
     assertEquals(ET.E1, actualNNewArrayResult.et);
     assertEquals(VT.NEW_ARRAY, actualNNewArrayResult.vt);
     assertSame(size, op);
@@ -1964,11 +1838,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nNewIntArray(Value)}
    */
   @Test
-  @DisplayName("Test nNewIntArray(Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"TypeExpr Exprs.nNewIntArray(Value)"})
-  void testNNewIntArray() {
+  public void testNNewIntArray() {
     // Arrange
     ArrayExpr size = new ArrayExpr();
 
@@ -1979,11 +1851,11 @@ class ExprsDiffblueTest {
     Value op = actualNNewIntArrayResult.getOp();
     assertTrue(op instanceof ArrayExpr);
     assertEquals("I", actualNNewIntArrayResult.type);
+    assertNull(actualNNewIntArrayResult.getOps());
     assertNull(actualNNewIntArrayResult.tag);
     assertNull(actualNNewIntArrayResult.valueType);
     assertNull(actualNNewIntArrayResult.getOp1());
     assertNull(actualNNewIntArrayResult.getOp2());
-    assertNull(actualNNewIntArrayResult.getOps());
     assertEquals(ET.E1, actualNNewIntArrayResult.et);
     assertEquals(VT.NEW_ARRAY, actualNNewIntArrayResult.vt);
     assertSame(size, op);
@@ -1995,11 +1867,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nNewLongArray(Value)}
    */
   @Test
-  @DisplayName("Test nNewLongArray(Value)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"TypeExpr Exprs.nNewLongArray(Value)"})
-  void testNNewLongArray() {
+  public void testNNewLongArray() {
     // Arrange
     ArrayExpr size = new ArrayExpr();
 
@@ -2010,11 +1880,11 @@ class ExprsDiffblueTest {
     Value op = actualNNewLongArrayResult.getOp();
     assertTrue(op instanceof ArrayExpr);
     assertEquals("J", actualNNewLongArrayResult.type);
+    assertNull(actualNNewLongArrayResult.getOps());
     assertNull(actualNNewLongArrayResult.tag);
     assertNull(actualNNewLongArrayResult.valueType);
     assertNull(actualNNewLongArrayResult.getOp1());
     assertNull(actualNNewLongArrayResult.getOp2());
-    assertNull(actualNNewLongArrayResult.getOps());
     assertEquals(ET.E1, actualNNewLongArrayResult.et);
     assertEquals(VT.NEW_ARRAY, actualNNewLongArrayResult.vt);
     assertSame(size, op);
@@ -2026,11 +1896,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nFilledArray(String, Value[])}
    */
   @Test
-  @DisplayName("Test nFilledArray(String, Value[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FilledArrayExpr Exprs.nFilledArray(String, Value[])"})
-  void testNFilledArray() {
+  public void testNFilledArray() {
     // Arrange
     Value[] datas = new Value[] {new ArrayExpr()};
 
@@ -2055,11 +1923,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nNewMutiArray(String, int, Value[])}
    */
   @Test
-  @DisplayName("Test nNewMutiArray(String, int, Value[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"NewMutiArrayExpr Exprs.nNewMutiArray(String, int, Value[])"})
-  void testNNewMutiArray() {
+  public void testNNewMutiArray() {
     // Arrange
     Value[] sizes = new Value[] {new ArrayExpr()};
 
@@ -2086,11 +1952,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nNot(Value, String)}
    */
   @Test
-  @DisplayName("Test nNot(Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"UnopExpr Exprs.nNot(Value, String)"})
-  void testNNot() {
+  public void testNNot() {
     // Arrange
     ArrayExpr array = new ArrayExpr();
 
@@ -2102,11 +1966,11 @@ class ExprsDiffblueTest {
     assertTrue(op instanceof ArrayExpr);
     assertEquals("(!null[null])", actualNNotResult.toString0());
     assertEquals("Type", actualNNotResult.type);
+    assertNull(actualNNotResult.getOps());
     assertNull(actualNNotResult.tag);
     assertNull(actualNNotResult.valueType);
     assertNull(actualNNotResult.getOp1());
     assertNull(actualNNotResult.getOp2());
-    assertNull(actualNNotResult.getOps());
     assertEquals(ET.E1, actualNNotResult.et);
     assertEquals(VT.NOT, actualNNotResult.vt);
     assertSame(array, op);
@@ -2118,11 +1982,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nOr(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nOr(Value, Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nOr(Value, Value, String)"})
-  void testNOr() {
+  public void testNOr() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -2137,10 +1999,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] | null[null])", actualNOrResult.toString0());
     assertEquals("Type", actualNOrResult.type);
+    assertNull(actualNOrResult.getOps());
     assertNull(actualNOrResult.tag);
     assertNull(actualNOrResult.valueType);
     assertNull(actualNOrResult.getOp());
-    assertNull(actualNOrResult.getOps());
     assertEquals(ET.E2, actualNOrResult.et);
     assertEquals(VT.OR, actualNOrResult.vt);
     assertSame(a, op1);
@@ -2153,23 +2015,21 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nParameterRef(String, int)}
    */
   @Test
-  @DisplayName("Test nParameterRef(String, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"RefExpr Exprs.nParameterRef(String, int)"})
-  void testNParameterRef() {
+  public void testNParameterRef() {
     // Arrange and Act
     RefExpr actualNParameterRefResult = Exprs.nParameterRef("Type", 1);
 
     // Assert
     assertEquals("@parameter_1", actualNParameterRefResult.toString0());
     assertEquals("Type", actualNParameterRefResult.type);
+    assertNull(actualNParameterRefResult.getOps());
     assertNull(actualNParameterRefResult.tag);
     assertNull(actualNParameterRefResult.valueType);
     assertNull(actualNParameterRefResult.getOp());
     assertNull(actualNParameterRefResult.getOp1());
     assertNull(actualNParameterRefResult.getOp2());
-    assertNull(actualNParameterRefResult.getOps());
     assertEquals(1, actualNParameterRefResult.parameterIndex);
     assertEquals(ET.E0, actualNParameterRefResult.et);
     assertEquals(VT.PARAMETER_REF, actualNParameterRefResult.vt);
@@ -2181,11 +2041,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nRem(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nRem(Value, Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nRem(Value, Value, String)"})
-  void testNRem() {
+  public void testNRem() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -2200,10 +2058,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] % null[null])", actualNRemResult.toString0());
     assertEquals("Type", actualNRemResult.type);
+    assertNull(actualNRemResult.getOps());
     assertNull(actualNRemResult.tag);
     assertNull(actualNRemResult.valueType);
     assertNull(actualNRemResult.getOp());
-    assertNull(actualNRemResult.getOps());
     assertEquals(ET.E2, actualNRemResult.et);
     assertEquals(VT.REM, actualNRemResult.vt);
     assertSame(a, op1);
@@ -2216,11 +2074,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nShl(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nShl(Value, Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nShl(Value, Value, String)"})
-  void testNShl() {
+  public void testNShl() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -2235,10 +2091,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] << null[null])", actualNShlResult.toString0());
     assertEquals("Type", actualNShlResult.type);
+    assertNull(actualNShlResult.getOps());
     assertNull(actualNShlResult.tag);
     assertNull(actualNShlResult.valueType);
     assertNull(actualNShlResult.getOp());
-    assertNull(actualNShlResult.getOps());
     assertEquals(ET.E2, actualNShlResult.et);
     assertEquals(VT.SHL, actualNShlResult.vt);
     assertSame(a, op1);
@@ -2251,11 +2107,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nShr(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nShr(Value, Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nShr(Value, Value, String)"})
-  void testNShr() {
+  public void testNShr() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -2270,10 +2124,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] >> null[null])", actualNShrResult.toString0());
     assertEquals("Type", actualNShrResult.type);
+    assertNull(actualNShrResult.getOps());
     assertNull(actualNShrResult.tag);
     assertNull(actualNShrResult.valueType);
     assertNull(actualNShrResult.getOp());
-    assertNull(actualNShrResult.getOps());
     assertEquals(ET.E2, actualNShrResult.et);
     assertEquals(VT.SHR, actualNShrResult.vt);
     assertSame(a, op1);
@@ -2286,11 +2140,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nStaticField(String, String, String)}
    */
   @Test
-  @DisplayName("Test nStaticField(String, String, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"StaticFieldExpr Exprs.nStaticField(String, String, String)"})
-  void testNStaticField() {
+  public void testNStaticField() {
     // Arrange and Act
     StaticFieldExpr actualNStaticFieldResult =
         Exprs.nStaticField("Owner Type", "Field Name", "Field Type");
@@ -2299,12 +2151,12 @@ class ExprsDiffblueTest {
     assertEquals("Field Name", actualNStaticFieldResult.name);
     assertEquals("Field Type", actualNStaticFieldResult.type);
     assertEquals("Owner Type", actualNStaticFieldResult.owner);
+    assertNull(actualNStaticFieldResult.getOps());
     assertNull(actualNStaticFieldResult.tag);
     assertNull(actualNStaticFieldResult.valueType);
     assertNull(actualNStaticFieldResult.getOp());
     assertNull(actualNStaticFieldResult.getOp1());
     assertNull(actualNStaticFieldResult.getOp2());
-    assertNull(actualNStaticFieldResult.getOps());
     assertEquals(ET.E0, actualNStaticFieldResult.et);
     assertEquals(VT.STATIC_FIELD, actualNStaticFieldResult.vt);
   }
@@ -2315,11 +2167,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nSub(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nSub(Value, Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nSub(Value, Value, String)"})
-  void testNSub() {
+  public void testNSub() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -2334,10 +2184,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] - null[null])", actualNSubResult.toString0());
     assertEquals("Type", actualNSubResult.type);
+    assertNull(actualNSubResult.getOps());
     assertNull(actualNSubResult.tag);
     assertNull(actualNSubResult.valueType);
     assertNull(actualNSubResult.getOp());
-    assertNull(actualNSubResult.getOps());
     assertEquals(ET.E2, actualNSubResult.et);
     assertEquals(VT.SUB, actualNSubResult.vt);
     assertSame(a, op1);
@@ -2350,23 +2200,21 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nThisRef(String)}
    */
   @Test
-  @DisplayName("Test nThisRef(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"RefExpr Exprs.nThisRef(String)"})
-  void testNThisRef() {
+  public void testNThisRef() {
     // Arrange and Act
     RefExpr actualNThisRefResult = Exprs.nThisRef("Type");
 
     // Assert
     assertEquals("@this", actualNThisRefResult.toString0());
     assertEquals("Type", actualNThisRefResult.type);
+    assertNull(actualNThisRefResult.getOps());
     assertNull(actualNThisRefResult.tag);
     assertNull(actualNThisRefResult.valueType);
     assertNull(actualNThisRefResult.getOp());
     assertNull(actualNThisRefResult.getOp1());
     assertNull(actualNThisRefResult.getOp2());
-    assertNull(actualNThisRefResult.getOps());
     assertEquals(-1, actualNThisRefResult.parameterIndex);
     assertEquals(ET.E0, actualNThisRefResult.et);
     assertEquals(VT.THIS_REF, actualNThisRefResult.vt);
@@ -2378,11 +2226,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nUshr(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nUshr(Value, Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nUshr(Value, Value, String)"})
-  void testNUshr() {
+  public void testNUshr() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -2397,10 +2243,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] >>> null[null])", actualNUshrResult.toString0());
     assertEquals("Type", actualNUshrResult.type);
+    assertNull(actualNUshrResult.getOps());
     assertNull(actualNUshrResult.tag);
     assertNull(actualNUshrResult.valueType);
     assertNull(actualNUshrResult.getOp());
-    assertNull(actualNUshrResult.getOps());
     assertEquals(ET.E2, actualNUshrResult.et);
     assertEquals(VT.USHR, actualNUshrResult.vt);
     assertSame(a, op1);
@@ -2413,11 +2259,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nXor(Value, Value, String)}
    */
   @Test
-  @DisplayName("Test nXor(Value, Value, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"BinopExpr Exprs.nXor(Value, Value, String)"})
-  void testNXor() {
+  public void testNXor() {
     // Arrange
     ArrayExpr a = new ArrayExpr();
     ArrayExpr b = new ArrayExpr();
@@ -2432,10 +2276,10 @@ class ExprsDiffblueTest {
     assertTrue(op2 instanceof ArrayExpr);
     assertEquals("(null[null] ^ null[null])", actualNXorResult.toString0());
     assertEquals("Type", actualNXorResult.type);
+    assertNull(actualNXorResult.getOps());
     assertNull(actualNXorResult.tag);
     assertNull(actualNXorResult.valueType);
     assertNull(actualNXorResult.getOp());
-    assertNull(actualNXorResult.getOps());
     assertEquals(ET.E2, actualNXorResult.et);
     assertEquals(VT.XOR, actualNXorResult.vt);
     assertSame(a, op1);
@@ -2448,11 +2292,9 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nPhi(Value[])}
    */
   @Test
-  @DisplayName("Test nPhi(Value[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"PhiExpr Exprs.nPhi(Value[])"})
-  void testNPhi() {
+  public void testNPhi() {
     // Arrange
     Value[] ops = new Value[] {new ArrayExpr()};
 
@@ -2477,21 +2319,19 @@ class ExprsDiffblueTest {
    * <p>Method under test: {@link Exprs#nConstant(Object)}
    */
   @Test
-  @DisplayName("Test nConstant(Object)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Constant Exprs.nConstant(Object)"})
-  void testNConstant() {
+  public void testNConstant() {
     // Arrange and Act
     Constant actualNConstantResult = Exprs.nConstant(Constant.Null);
 
     // Assert
+    assertNull(actualNConstantResult.getOps());
     assertNull(actualNConstantResult.tag);
     assertNull(actualNConstantResult.valueType);
     assertNull(actualNConstantResult.getOp());
     assertNull(actualNConstantResult.getOp1());
     assertNull(actualNConstantResult.getOp2());
-    assertNull(actualNConstantResult.getOps());
     assertEquals(ET.E0, actualNConstantResult.et);
     assertEquals(VT.CONSTANT, actualNConstantResult.vt);
   }

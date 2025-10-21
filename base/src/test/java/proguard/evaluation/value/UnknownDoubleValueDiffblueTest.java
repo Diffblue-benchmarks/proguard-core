@@ -1,37 +1,31 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class UnknownDoubleValueDiffblueTest {
+public class UnknownDoubleValueDiffblueTest {
   /**
    * Test {@link UnknownDoubleValue#negate()}.
    *
    * <p>Method under test: {@link UnknownDoubleValue#negate()}
    */
   @Test
-  @DisplayName("Test negate()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue UnknownDoubleValue.negate()"})
-  void testNegate() {
+  public void testNegate() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
-    // Act
-    DoubleValue actualNegateResult = unknownDoubleValue.negate();
-
-    // Assert
-    assertSame(unknownDoubleValue, actualNegateResult);
+    // Act and Assert
+    assertSame(unknownDoubleValue, unknownDoubleValue.negate());
   }
 
   /**
@@ -40,13 +34,11 @@ class UnknownDoubleValueDiffblueTest {
    * <p>Method under test: {@link UnknownDoubleValue#convertToInteger()}
    */
   @Test
-  @DisplayName("Test convertToInteger()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue UnknownDoubleValue.convertToInteger()"})
-  void testConvertToInteger() {
+  public void testConvertToInteger() {
     // Arrange and Act
-    IntegerValue actualConvertToIntegerResult = new UnknownDoubleValue().convertToInteger();
+    IntegerValue actualConvertToIntegerResult = (new UnknownDoubleValue()).convertToInteger();
 
     // Assert
     assertTrue(actualConvertToIntegerResult instanceof UnknownIntegerValue);
@@ -61,13 +53,11 @@ class UnknownDoubleValueDiffblueTest {
    * <p>Method under test: {@link UnknownDoubleValue#convertToLong()}
    */
   @Test
-  @DisplayName("Test convertToLong()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LongValue UnknownDoubleValue.convertToLong()"})
-  void testConvertToLong() {
+  public void testConvertToLong() {
     // Arrange and Act
-    LongValue actualConvertToLongResult = new UnknownDoubleValue().convertToLong();
+    LongValue actualConvertToLongResult = (new UnknownDoubleValue()).convertToLong();
 
     // Assert
     assertTrue(actualConvertToLongResult instanceof UnknownLongValue);
@@ -82,13 +72,11 @@ class UnknownDoubleValueDiffblueTest {
    * <p>Method under test: {@link UnknownDoubleValue#convertToFloat()}
    */
   @Test
-  @DisplayName("Test convertToFloat()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue UnknownDoubleValue.convertToFloat()"})
-  void testConvertToFloat() {
+  public void testConvertToFloat() {
     // Arrange and Act
-    FloatValue actualConvertToFloatResult = new UnknownDoubleValue().convertToFloat();
+    FloatValue actualConvertToFloatResult = (new UnknownDoubleValue()).convertToFloat();
 
     // Assert
     assertTrue(actualConvertToFloatResult instanceof UnknownFloatValue);
@@ -103,20 +91,14 @@ class UnknownDoubleValueDiffblueTest {
    * <p>Method under test: {@link UnknownDoubleValue#generalize(DoubleValue)}
    */
   @Test
-  @DisplayName("Test generalize(DoubleValue) with 'DoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue UnknownDoubleValue.generalize(DoubleValue)"})
-  void testGeneralizeWithDoubleValue() {
+  public void testGeneralizeWithDoubleValue() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
-    // Act
-    DoubleValue actualGeneralizeResult =
-        unknownDoubleValue.generalize(BasicValueFactory.DOUBLE_VALUE);
-
-    // Assert
-    assertSame(unknownDoubleValue, actualGeneralizeResult);
+    // Act and Assert
+    assertSame(unknownDoubleValue, unknownDoubleValue.generalize(BasicValueFactory.DOUBLE_VALUE));
   }
 
   /**
@@ -125,19 +107,14 @@ class UnknownDoubleValueDiffblueTest {
    * <p>Method under test: {@link UnknownDoubleValue#add(DoubleValue)}
    */
   @Test
-  @DisplayName("Test add(DoubleValue) with 'DoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue UnknownDoubleValue.add(DoubleValue)"})
-  void testAddWithDoubleValue() {
+  public void testAddWithDoubleValue() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
-    // Act
-    DoubleValue actualAddResult = unknownDoubleValue.add(BasicValueFactory.DOUBLE_VALUE);
-
-    // Assert
-    assertSame(unknownDoubleValue, actualAddResult);
+    // Act and Assert
+    assertSame(unknownDoubleValue, unknownDoubleValue.add(BasicValueFactory.DOUBLE_VALUE));
   }
 
   /**
@@ -146,19 +123,14 @@ class UnknownDoubleValueDiffblueTest {
    * <p>Method under test: {@link UnknownDoubleValue#subtract(DoubleValue)}
    */
   @Test
-  @DisplayName("Test subtract(DoubleValue) with 'DoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue UnknownDoubleValue.subtract(DoubleValue)"})
-  void testSubtractWithDoubleValue() {
+  public void testSubtractWithDoubleValue() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
-    // Act
-    DoubleValue actualSubtractResult = unknownDoubleValue.subtract(BasicValueFactory.DOUBLE_VALUE);
-
-    // Assert
-    assertSame(unknownDoubleValue, actualSubtractResult);
+    // Act and Assert
+    assertSame(unknownDoubleValue, unknownDoubleValue.subtract(BasicValueFactory.DOUBLE_VALUE));
   }
 
   /**
@@ -167,20 +139,14 @@ class UnknownDoubleValueDiffblueTest {
    * <p>Method under test: {@link UnknownDoubleValue#subtractFrom(DoubleValue)}
    */
   @Test
-  @DisplayName("Test subtractFrom(DoubleValue) with 'DoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue UnknownDoubleValue.subtractFrom(DoubleValue)"})
-  void testSubtractFromWithDoubleValue() {
+  public void testSubtractFromWithDoubleValue() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
-    // Act
-    DoubleValue actualSubtractFromResult =
-        unknownDoubleValue.subtractFrom(BasicValueFactory.DOUBLE_VALUE);
-
-    // Assert
-    assertSame(unknownDoubleValue, actualSubtractFromResult);
+    // Act and Assert
+    assertSame(unknownDoubleValue, unknownDoubleValue.subtractFrom(BasicValueFactory.DOUBLE_VALUE));
   }
 
   /**
@@ -189,19 +155,14 @@ class UnknownDoubleValueDiffblueTest {
    * <p>Method under test: {@link UnknownDoubleValue#multiply(DoubleValue)}
    */
   @Test
-  @DisplayName("Test multiply(DoubleValue) with 'DoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue UnknownDoubleValue.multiply(DoubleValue)"})
-  void testMultiplyWithDoubleValue() {
+  public void testMultiplyWithDoubleValue() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
-    // Act
-    DoubleValue actualMultiplyResult = unknownDoubleValue.multiply(BasicValueFactory.DOUBLE_VALUE);
-
-    // Assert
-    assertSame(unknownDoubleValue, actualMultiplyResult);
+    // Act and Assert
+    assertSame(unknownDoubleValue, unknownDoubleValue.multiply(BasicValueFactory.DOUBLE_VALUE));
   }
 
   /**
@@ -210,19 +171,14 @@ class UnknownDoubleValueDiffblueTest {
    * <p>Method under test: {@link UnknownDoubleValue#divide(DoubleValue)}
    */
   @Test
-  @DisplayName("Test divide(DoubleValue) with 'DoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue UnknownDoubleValue.divide(DoubleValue)"})
-  void testDivideWithDoubleValue() {
+  public void testDivideWithDoubleValue() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
-    // Act
-    DoubleValue actualDivideResult = unknownDoubleValue.divide(BasicValueFactory.DOUBLE_VALUE);
-
-    // Assert
-    assertSame(unknownDoubleValue, actualDivideResult);
+    // Act and Assert
+    assertSame(unknownDoubleValue, unknownDoubleValue.divide(BasicValueFactory.DOUBLE_VALUE));
   }
 
   /**
@@ -231,19 +187,14 @@ class UnknownDoubleValueDiffblueTest {
    * <p>Method under test: {@link UnknownDoubleValue#divideOf(DoubleValue)}
    */
   @Test
-  @DisplayName("Test divideOf(DoubleValue) with 'DoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue UnknownDoubleValue.divideOf(DoubleValue)"})
-  void testDivideOfWithDoubleValue() {
+  public void testDivideOfWithDoubleValue() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
-    // Act
-    DoubleValue actualDivideOfResult = unknownDoubleValue.divideOf(BasicValueFactory.DOUBLE_VALUE);
-
-    // Assert
-    assertSame(unknownDoubleValue, actualDivideOfResult);
+    // Act and Assert
+    assertSame(unknownDoubleValue, unknownDoubleValue.divideOf(BasicValueFactory.DOUBLE_VALUE));
   }
 
   /**
@@ -252,20 +203,14 @@ class UnknownDoubleValueDiffblueTest {
    * <p>Method under test: {@link UnknownDoubleValue#remainder(DoubleValue)}
    */
   @Test
-  @DisplayName("Test remainder(DoubleValue) with 'DoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue UnknownDoubleValue.remainder(DoubleValue)"})
-  void testRemainderWithDoubleValue() {
+  public void testRemainderWithDoubleValue() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
-    // Act
-    DoubleValue actualRemainderResult =
-        unknownDoubleValue.remainder(BasicValueFactory.DOUBLE_VALUE);
-
-    // Assert
-    assertSame(unknownDoubleValue, actualRemainderResult);
+    // Act and Assert
+    assertSame(unknownDoubleValue, unknownDoubleValue.remainder(BasicValueFactory.DOUBLE_VALUE));
   }
 
   /**
@@ -274,20 +219,14 @@ class UnknownDoubleValueDiffblueTest {
    * <p>Method under test: {@link UnknownDoubleValue#remainderOf(DoubleValue)}
    */
   @Test
-  @DisplayName("Test remainderOf(DoubleValue) with 'DoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"DoubleValue UnknownDoubleValue.remainderOf(DoubleValue)"})
-  void testRemainderOfWithDoubleValue() {
+  public void testRemainderOfWithDoubleValue() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
-    // Act
-    DoubleValue actualRemainderOfResult =
-        unknownDoubleValue.remainderOf(BasicValueFactory.DOUBLE_VALUE);
-
-    // Assert
-    assertSame(unknownDoubleValue, actualRemainderOfResult);
+    // Act and Assert
+    assertSame(unknownDoubleValue, unknownDoubleValue.remainderOf(BasicValueFactory.DOUBLE_VALUE));
   }
 
   /**
@@ -296,14 +235,12 @@ class UnknownDoubleValueDiffblueTest {
    * <p>Method under test: {@link UnknownDoubleValue#compare(DoubleValue)}
    */
   @Test
-  @DisplayName("Test compare(DoubleValue) with 'DoubleValue'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"IntegerValue UnknownDoubleValue.compare(DoubleValue)"})
-  void testCompareWithDoubleValue() {
+  public void testCompareWithDoubleValue() {
     // Arrange and Act
     IntegerValue actualCompareResult =
-        new UnknownDoubleValue().compare(BasicValueFactory.DOUBLE_VALUE);
+        (new UnknownDoubleValue()).compare(BasicValueFactory.DOUBLE_VALUE);
 
     // Assert
     assertTrue(actualCompareResult instanceof UnknownIntegerValue);
@@ -328,21 +265,20 @@ class UnknownDoubleValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean UnknownDoubleValue.equals(Object)",
     "int UnknownDoubleValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
     UnknownDoubleValue unknownDoubleValue2 = new UnknownDoubleValue();
 
     // Act and Assert
     assertEquals(unknownDoubleValue, unknownDoubleValue2);
-    assertEquals(unknownDoubleValue.hashCode(), unknownDoubleValue2.hashCode());
+    int expectedHashCodeResult = unknownDoubleValue.hashCode();
+    assertEquals(expectedHashCodeResult, unknownDoubleValue2.hashCode());
   }
 
   /**
@@ -361,14 +297,12 @@ class UnknownDoubleValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean UnknownDoubleValue.equals(Object)",
     "int UnknownDoubleValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
@@ -389,14 +323,12 @@ class UnknownDoubleValueDiffblueTest {
    * <p>Method under test: {@link UnknownDoubleValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean UnknownDoubleValue.equals(Object)",
     "int UnknownDoubleValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new UnknownDoubleValue(), 1);
   }
@@ -412,14 +344,12 @@ class UnknownDoubleValueDiffblueTest {
    * <p>Method under test: {@link UnknownDoubleValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean UnknownDoubleValue.equals(Object)",
     "int UnknownDoubleValue.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new UnknownDoubleValue(), null);
   }
@@ -435,14 +365,12 @@ class UnknownDoubleValueDiffblueTest {
    * <p>Method under test: {@link UnknownDoubleValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean UnknownDoubleValue.equals(Object)",
     "int UnknownDoubleValue.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new UnknownDoubleValue(), "Different type to UnknownDoubleValue");
   }
@@ -458,15 +386,13 @@ class UnknownDoubleValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void UnknownDoubleValue.<init>()",
     "java.lang.String UnknownDoubleValue.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
-    assertEquals("d", new UnknownDoubleValue().toString());
+    assertEquals("d", (new UnknownDoubleValue()).toString());
   }
 }

@@ -1,20 +1,19 @@
 package proguard.evaluation.value.object;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.evaluation.value.object.model.ClassLoaderModel;
 
-class AnalyzedObjectDiffblueTest {
+public class AnalyzedObjectDiffblueTest {
   /**
    * Test {@link AnalyzedObject#isOfType(String)}.
    *
@@ -26,14 +25,11 @@ class AnalyzedObjectDiffblueTest {
    * <p>Method under test: {@link AnalyzedObject#isOfType(String)}
    */
   @Test
-  @DisplayName(
-      "Test isOfType(String); given TypedNullObject(String) with 'Type'; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AnalyzedObject.isOfType(String)"})
-  void testIsOfType_givenTypedNullObjectWithType_thenReturnTrue() {
+  public void testIsOfType_givenTypedNullObjectWithType_thenReturnTrue() {
     // Arrange, Act and Assert
-    assertTrue(new TypedNullObject("Type").isOfType("Type"));
+    assertTrue((new TypedNullObject("Type")).isOfType("Type"));
   }
 
   /**
@@ -46,14 +42,12 @@ class AnalyzedObjectDiffblueTest {
    * <p>Method under test: {@link AnalyzedObject#isOfType(String)}
    */
   @Test
-  @DisplayName("Test isOfType(String); then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AnalyzedObject.isOfType(String)"})
-  void testIsOfType_thenReturnFalse() {
+  public void testIsOfType_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(
-        new TypedNullObject("proguard.evaluation.value.object.TypedNullObject").isOfType("Type"));
+        (new TypedNullObject("proguard.evaluation.value.object.TypedNullObject")).isOfType("Type"));
   }
 
   /**
@@ -62,13 +56,11 @@ class AnalyzedObjectDiffblueTest {
    * <p>Method under test: {@link AnalyzedObject#isOfTypeAndNotNull(String)}
    */
   @Test
-  @DisplayName("Test isOfTypeAndNotNull(String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AnalyzedObject.isOfTypeAndNotNull(String)"})
-  void testIsOfTypeAndNotNull() {
+  public void testIsOfTypeAndNotNull() {
     // Arrange, Act and Assert
-    assertFalse(new TypedNullObject("Type").isOfTypeAndNotNull("Type"));
+    assertFalse((new TypedNullObject("Type")).isOfTypeAndNotNull("Type"));
   }
 
   /**
@@ -77,11 +69,9 @@ class AnalyzedObjectDiffblueTest {
    * <p>Method under test: {@link AnalyzedObject#isInstanceOf(Clazz)}
    */
   @Test
-  @DisplayName("Test isInstanceOf(Clazz)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean AnalyzedObject.isInstanceOf(Clazz)"})
-  void testIsInstanceOf() {
+  public void testIsInstanceOf() {
     // Arrange
     TypedNullObject typedNullObject = new TypedNullObject("Type");
 
@@ -95,15 +85,13 @@ class AnalyzedObjectDiffblueTest {
    * <p>Method under test: {@link AnalyzedObject#getPreciseValue()}
    */
   @Test
-  @DisplayName("Test getPreciseValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.Object AnalyzedObject.getPreciseValue()"})
-  void testGetPreciseValue() {
+  public void testGetPreciseValue() {
     // Arrange, Act and Assert
     assertThrows(
         UnsupportedOperationException.class,
-        () -> new ModeledObject(new ClassLoaderModel()).getPreciseValue());
+        () -> (new ModeledObject(new ClassLoaderModel())).getPreciseValue());
   }
 
   /**
@@ -112,16 +100,14 @@ class AnalyzedObjectDiffblueTest {
    * <p>Method under test: {@link AnalyzedObject#getModeledValue()}
    */
   @Test
-  @DisplayName("Test getModeledValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "proguard.evaluation.value.object.model.Model AnalyzedObject.getModeledValue()"
   })
-  void testGetModeledValue() {
+  public void testGetModeledValue() {
     // Arrange, Act and Assert
     assertThrows(
-        UnsupportedOperationException.class, () -> new TypedNullObject("Type").getModeledValue());
+        UnsupportedOperationException.class, () -> (new TypedNullObject("Type")).getModeledValue());
   }
 
   /**
@@ -130,14 +116,12 @@ class AnalyzedObjectDiffblueTest {
    * <p>Method under test: {@link AnalyzedObject#getModeledOrNullValue()}
    */
   @Test
-  @DisplayName("Test getModeledOrNullValue()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "proguard.evaluation.value.object.model.Model AnalyzedObject.getModeledOrNullValue()"
   })
-  void testGetModeledOrNullValue() {
+  public void testGetModeledOrNullValue() {
     // Arrange, Act and Assert
-    assertNull(new TypedNullObject("Type").getModeledOrNullValue());
+    assertNull((new TypedNullObject("Type")).getModeledOrNullValue());
   }
 }

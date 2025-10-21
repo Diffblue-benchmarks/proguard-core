@@ -2,8 +2,7 @@ package com.example;
 
 import static org.junit.Assert.assertEquals;
 
-import com.diffblue.cover.annotations.ContributionFromDiffblue;
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -20,15 +19,11 @@ public class SampleClassWithObjectsDiffblueTest {
    * <p>Method under test: {@link SampleClassWithObjects#getAnswer(Number)}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Number SampleClassWithObjects.getAnswer(Number)"})
   public void testGetAnswer_whenNull_thenReturnIntValueIsFortyTwo() {
-    // Arrange and Act
-    Number actualAnswer = SampleClassWithObjects.getAnswer(null);
-
-    // Assert
-    assertEquals(42, actualAnswer.intValue());
+    // Arrange, Act and Assert
+    assertEquals(42, SampleClassWithObjects.getAnswer(null).intValue());
   }
 
   /**
@@ -42,8 +37,7 @@ public class SampleClassWithObjectsDiffblueTest {
    * <p>Method under test: {@link SampleClassWithObjects#getAnswer(Number)}
    */
   @Test
-  @Category(ContributionFromDiffblue.class)
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Number SampleClassWithObjects.getAnswer(Number)"})
   public void testGetAnswer_whenValueOfOne_thenReturnIntValueIsOne() {
     // Arrange, Act and Assert

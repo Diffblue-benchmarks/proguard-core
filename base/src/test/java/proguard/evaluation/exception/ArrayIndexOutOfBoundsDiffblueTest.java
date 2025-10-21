@@ -1,26 +1,23 @@
 package proguard.evaluation.exception;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class ArrayIndexOutOfBoundsDiffblueTest {
+public class ArrayIndexOutOfBoundsDiffblueTest {
   /**
    * Test {@link ArrayIndexOutOfBounds#ArrayIndexOutOfBounds(int, int)}.
    *
    * <p>Method under test: {@link ArrayIndexOutOfBounds#ArrayIndexOutOfBounds(int, int)}
    */
   @Test
-  @DisplayName("Test new ArrayIndexOutOfBounds(int, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void ArrayIndexOutOfBounds.<init>(int, int)"})
-  void testNewArrayIndexOutOfBounds() {
+  public void testNewArrayIndexOutOfBounds() {
     // Arrange and Act
     ArrayIndexOutOfBounds actualArrayIndexOutOfBounds = new ArrayIndexOutOfBounds(1, 1);
 
@@ -52,14 +49,12 @@ class ArrayIndexOutOfBoundsDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "int ArrayIndexOutOfBounds.getBound()",
     "int ArrayIndexOutOfBounds.getIndex()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange
     ArrayIndexOutOfBounds arrayIndexOutOfBounds = new ArrayIndexOutOfBounds(1, 1);
 

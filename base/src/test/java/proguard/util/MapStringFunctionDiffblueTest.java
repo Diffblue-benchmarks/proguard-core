@@ -1,16 +1,15 @@
 package proguard.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.HashMap;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class MapStringFunctionDiffblueTest {
+public class MapStringFunctionDiffblueTest {
   /**
    * Test {@link MapStringFunction#transform(String)}.
    *
@@ -23,17 +22,15 @@ class MapStringFunctionDiffblueTest {
    * <p>Method under test: {@link MapStringFunction#transform(String)}
    */
   @Test
-  @DisplayName("Test transform(String); given HashMap() '42' is '42'; when '42'; then return '42'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String MapStringFunction.transform(String)"})
-  void testTransform_givenHashMap42Is42_when42_thenReturn42() {
+  public void testTransform_givenHashMap42Is42_when42_thenReturn42() {
     // Arrange
     HashMap<Object, Object> map = new HashMap<>();
     map.put("42", "42");
 
     // Act and Assert
-    assertEquals("42", new MapStringFunction(map).transform("42"));
+    assertEquals("42", (new MapStringFunction(map)).transform("42"));
   }
 
   /**
@@ -47,12 +44,10 @@ class MapStringFunctionDiffblueTest {
    * <p>Method under test: {@link MapStringFunction#transform(String)}
    */
   @Test
-  @DisplayName("Test transform(String); when 'String'; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String MapStringFunction.transform(String)"})
-  void testTransform_whenString_thenReturnNull() {
+  public void testTransform_whenString_thenReturnNull() {
     // Arrange, Act and Assert
-    assertNull(new MapStringFunction(new HashMap<>()).transform("String"));
+    assertNull((new MapStringFunction(new HashMap<>())).transform("String"));
   }
 }

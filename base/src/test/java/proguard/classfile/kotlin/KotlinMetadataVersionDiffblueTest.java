@@ -1,18 +1,17 @@
 package proguard.classfile.kotlin;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.io.kotlin.KotlinMetadataWriter;
 
-class KotlinMetadataVersionDiffblueTest {
+public class KotlinMetadataVersionDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -24,16 +23,14 @@ class KotlinMetadataVersionDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void KotlinMetadataVersion.<init>(int, int, int)",
     "java.lang.String KotlinMetadataVersion.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
-    assertEquals("1.1.1", new KotlinMetadataVersion(1, 1, 1).toString());
+    assertEquals("1.1.1", (new KotlinMetadataVersion(1, 1, 1)).toString());
   }
 
   /**
@@ -42,11 +39,9 @@ class KotlinMetadataVersionDiffblueTest {
    * <p>Method under test: {@link KotlinMetadataVersion#KotlinMetadataVersion(int[])}
    */
   @Test
-  @DisplayName("Test new KotlinMetadataVersion(int[])")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void KotlinMetadataVersion.<init>(int[])"})
-  void testNewKotlinMetadataVersion() {
+  public void testNewKotlinMetadataVersion() {
     // Arrange and Act
     KotlinMetadataVersion actualKotlinMetadataVersion =
         new KotlinMetadataVersion(new int[] {1, -1, 1, -1});
@@ -64,13 +59,11 @@ class KotlinMetadataVersionDiffblueTest {
    * <p>Method under test: {@link KotlinMetadataVersion#canBeWritten()}
    */
   @Test
-  @DisplayName("Test canBeWritten()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean KotlinMetadataVersion.canBeWritten()"})
-  void testCanBeWritten() {
+  public void testCanBeWritten() {
     // Arrange, Act and Assert
-    assertFalse(new KotlinMetadataVersion(1, 1, 1).canBeWritten());
+    assertFalse((new KotlinMetadataVersion(1, 1, 1)).canBeWritten());
   }
 
   /**
@@ -79,13 +72,11 @@ class KotlinMetadataVersionDiffblueTest {
    * <p>Method under test: {@link KotlinMetadataVersion#canBeWritten()}
    */
   @Test
-  @DisplayName("Test canBeWritten()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean KotlinMetadataVersion.canBeWritten()"})
-  void testCanBeWritten2() {
+  public void testCanBeWritten2() {
     // Arrange, Act and Assert
-    assertTrue(new KotlinMetadataVersion(1, 4, 1).canBeWritten());
+    assertTrue((new KotlinMetadataVersion(1, 4, 1)).canBeWritten());
   }
 
   /**
@@ -99,11 +90,9 @@ class KotlinMetadataVersionDiffblueTest {
    * <p>Method under test: {@link KotlinMetadataVersion#canBeWritten()}
    */
   @Test
-  @DisplayName("Test canBeWritten(); given HIGHEST_ALLOWED_TO_WRITE; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean KotlinMetadataVersion.canBeWritten()"})
-  void testCanBeWritten_givenHighest_allowed_to_write_thenReturnTrue() {
+  public void testCanBeWritten_givenHighest_allowed_to_write_thenReturnTrue() {
     // Arrange, Act and Assert
     assertTrue(KotlinMetadataWriter.HIGHEST_ALLOWED_TO_WRITE.canBeWritten());
   }
@@ -119,11 +108,9 @@ class KotlinMetadataVersionDiffblueTest {
    * <p>Method under test: {@link KotlinMetadataVersion#canBeWritten()}
    */
   @Test
-  @DisplayName("Test canBeWritten(); given UNKNOWN_VERSION; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean KotlinMetadataVersion.canBeWritten()"})
-  void testCanBeWritten_givenUnknown_version_thenReturnFalse() {
+  public void testCanBeWritten_givenUnknown_version_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(KotlinMetadataVersion.UNKNOWN_VERSION.canBeWritten());
   }
@@ -134,11 +121,9 @@ class KotlinMetadataVersionDiffblueTest {
    * <p>Method under test: {@link KotlinMetadataVersion#toArray()}
    */
   @Test
-  @DisplayName("Test toArray()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int[] KotlinMetadataVersion.toArray()"})
-  void testToArray() {
+  public void testToArray() {
     // Arrange, Act and Assert
     assertArrayEquals(new int[] {-1, -1, 0}, KotlinMetadataVersion.UNKNOWN_VERSION.toArray());
   }

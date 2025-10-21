@@ -1,25 +1,22 @@
 package proguard.util.kotlin.asserter.constraint;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.Assert.assertNull;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class TypeIntegrityDiffblueTest {
+public class TypeIntegrityDiffblueTest {
   /**
    * Test new {@link TypeIntegrity} (default constructor).
    *
    * <p>Method under test: default or parameterless constructor of {@link TypeIntegrity}
    */
   @Test
-  @DisplayName("Test new TypeIntegrity (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void TypeIntegrity.<init>()"})
-  void testNewTypeIntegrity() {
+  public void testNewTypeIntegrity() {
     // Arrange and Act
     TypeIntegrity actualTypeIntegrity = new TypeIntegrity();
 

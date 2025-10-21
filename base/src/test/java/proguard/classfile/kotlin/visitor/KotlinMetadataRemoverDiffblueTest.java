@@ -1,16 +1,15 @@
 package proguard.classfile.kotlin.visitor;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertThrows;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 
-class KotlinMetadataRemoverDiffblueTest {
+public class KotlinMetadataRemoverDiffblueTest {
   /**
    * Test {@link KotlinMetadataRemover#visitAnyClass(Clazz)}.
    *
@@ -22,12 +21,9 @@ class KotlinMetadataRemoverDiffblueTest {
    * <p>Method under test: {@link KotlinMetadataRemover#visitAnyClass(Clazz)}
    */
   @Test
-  @DisplayName(
-      "Test visitAnyClass(Clazz); when LibraryClass(); then throw UnsupportedOperationException")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void KotlinMetadataRemover.visitAnyClass(Clazz)"})
-  void testVisitAnyClass_whenLibraryClass_thenThrowUnsupportedOperationException() {
+  public void testVisitAnyClass_whenLibraryClass_thenThrowUnsupportedOperationException() {
     // Arrange
     KotlinMetadataRemover kotlinMetadataRemover = new KotlinMetadataRemover();
 

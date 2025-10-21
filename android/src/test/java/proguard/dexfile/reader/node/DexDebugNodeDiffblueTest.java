@@ -1,17 +1,16 @@
 package proguard.dexfile.reader.node;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.reader.DexLabel;
 import proguard.dexfile.reader.node.DexDebugNode.DexDebugOpNode;
 import proguard.dexfile.reader.node.DexDebugNode.DexDebugOpNode.EndLocal;
@@ -22,7 +21,7 @@ import proguard.dexfile.reader.node.DexDebugNode.DexDebugOpNode.RestartLocal;
 import proguard.dexfile.reader.node.DexDebugNode.DexDebugOpNode.StartLocalNode;
 import proguard.dexfile.reader.visitors.DexDebugVisitor;
 
-class DexDebugNodeDiffblueTest {
+public class DexDebugNodeDiffblueTest {
   /**
    * Test {@link DexDebugNode#addDebug(DexDebugOpNode)}.
    *
@@ -35,12 +34,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#addDebug(DexDebugOpNode)}
    */
   @Test
-  @DisplayName(
-      "Test addDebug(DexDebugOpNode); given DexDebugNode (default constructor); then DexDebugNode (default constructor) debugNodes size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.addDebug(DexDebugOpNode)"})
-  void testAddDebug_givenDexDebugNode_thenDexDebugNodeDebugNodesSizeIsOne() {
+  public void testAddDebug_givenDexDebugNode_thenDexDebugNodeDebugNodesSizeIsOne() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     Epiogue dexDebugNode2 = new Epiogue(new DexLabel());
@@ -65,12 +61,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugOpNode.EndLocal#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test DexDebugOpNode_EndLocal accept(DexDebugVisitor); then DexDebugNode (default constructor) debugNodes size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugOpNode.EndLocal.accept(DexDebugVisitor)"})
-  void testDexDebugOpNode_EndLocalAccept_thenDexDebugNodeDebugNodesSizeIsOne() {
+  public void testDexDebugOpNode_EndLocalAccept_thenDexDebugNodeDebugNodesSizeIsOne() {
     // Arrange
     EndLocal endLocal = new EndLocal(new DexLabel(), 1);
     DexDebugNode cv = new DexDebugNode();
@@ -93,13 +86,11 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugOpNode.EndLocal#EndLocal(DexLabel, int)}
    */
   @Test
-  @DisplayName("Test DexDebugOpNode_EndLocal new EndLocal(DexLabel, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugOpNode.EndLocal.<init>(DexLabel, int)"})
-  void testDexDebugOpNode_EndLocalNewEndLocal() {
+  public void testDexDebugOpNode_EndLocalNewEndLocal() {
     // Arrange, Act and Assert
-    assertEquals(1, new EndLocal(new DexLabel(), 1).reg);
+    assertEquals(1, (new EndLocal(new DexLabel(), 1)).reg);
   }
 
   /**
@@ -113,12 +104,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugOpNode.Epiogue#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test DexDebugOpNode_Epiogue accept(DexDebugVisitor); then DexDebugNode (default constructor) debugNodes size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugOpNode.Epiogue.accept(DexDebugVisitor)"})
-  void testDexDebugOpNode_EpiogueAccept_thenDexDebugNodeDebugNodesSizeIsOne() {
+  public void testDexDebugOpNode_EpiogueAccept_thenDexDebugNodeDebugNodesSizeIsOne() {
     // Arrange
     Epiogue epiogue = new Epiogue(new DexLabel());
     DexDebugNode cv = new DexDebugNode();
@@ -145,12 +133,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugOpNode.LineNumber#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test DexDebugOpNode_LineNumber accept(DexDebugVisitor); then DexDebugNode (default constructor) debugNodes size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugOpNode.LineNumber.accept(DexDebugVisitor)"})
-  void testDexDebugOpNode_LineNumberAccept_thenDexDebugNodeDebugNodesSizeIsOne() {
+  public void testDexDebugOpNode_LineNumberAccept_thenDexDebugNodeDebugNodesSizeIsOne() {
     // Arrange
     LineNumber lineNumber = new LineNumber(new DexLabel(), 2);
     DexDebugNode cv = new DexDebugNode();
@@ -173,13 +158,11 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugOpNode.LineNumber#LineNumber(DexLabel, int)}
    */
   @Test
-  @DisplayName("Test DexDebugOpNode_LineNumber new LineNumber(DexLabel, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugOpNode.LineNumber.<init>(DexLabel, int)"})
-  void testDexDebugOpNode_LineNumberNewLineNumber() {
+  public void testDexDebugOpNode_LineNumberNewLineNumber() {
     // Arrange, Act and Assert
-    assertEquals(2, new LineNumber(new DexLabel(), 2).line);
+    assertEquals(2, (new LineNumber(new DexLabel(), 2)).line);
   }
 
   /**
@@ -193,12 +176,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugOpNode.Prologue#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test DexDebugOpNode_Prologue accept(DexDebugVisitor); then DexDebugNode (default constructor) debugNodes size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugOpNode.Prologue.accept(DexDebugVisitor)"})
-  void testDexDebugOpNode_PrologueAccept_thenDexDebugNodeDebugNodesSizeIsOne() {
+  public void testDexDebugOpNode_PrologueAccept_thenDexDebugNodeDebugNodesSizeIsOne() {
     // Arrange
     Prologue prologue = new Prologue(new DexLabel());
     DexDebugNode cv = new DexDebugNode();
@@ -225,12 +205,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugOpNode.RestartLocal#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test DexDebugOpNode_RestartLocal accept(DexDebugVisitor); then DexDebugNode (default constructor) debugNodes size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugOpNode.RestartLocal.accept(DexDebugVisitor)"})
-  void testDexDebugOpNode_RestartLocalAccept_thenDexDebugNodeDebugNodesSizeIsOne() {
+  public void testDexDebugOpNode_RestartLocalAccept_thenDexDebugNodeDebugNodesSizeIsOne() {
     // Arrange
     RestartLocal restartLocal = new RestartLocal(new DexLabel(), 1);
     DexDebugNode cv = new DexDebugNode();
@@ -254,13 +231,11 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugOpNode.RestartLocal#RestartLocal(DexLabel, int)}
    */
   @Test
-  @DisplayName("Test DexDebugOpNode_RestartLocal new RestartLocal(DexLabel, int)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugOpNode.RestartLocal.<init>(DexLabel, int)"})
-  void testDexDebugOpNode_RestartLocalNewRestartLocal() {
+  public void testDexDebugOpNode_RestartLocalNewRestartLocal() {
     // Arrange, Act and Assert
-    assertEquals(1, new RestartLocal(new DexLabel(), 1).reg);
+    assertEquals(1, (new RestartLocal(new DexLabel(), 1)).reg);
   }
 
   /**
@@ -274,12 +249,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link StartLocalNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test DexDebugOpNode_StartLocalNode accept(DexDebugVisitor); then DexDebugNode (default constructor) debugNodes size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void StartLocalNode.accept(DexDebugVisitor)"})
-  void testDexDebugOpNode_StartLocalNodeAccept_thenDexDebugNodeDebugNodesSizeIsOne() {
+  public void testDexDebugOpNode_StartLocalNodeAccept_thenDexDebugNodeDebugNodesSizeIsOne() {
     // Arrange
     StartLocalNode startLocalNode =
         new StartLocalNode(new DexLabel(), 1, "Name", "Type", "Signature");
@@ -308,12 +280,9 @@ class DexDebugNodeDiffblueTest {
    * String)}
    */
   @Test
-  @DisplayName(
-      "Test DexDebugOpNode_StartLocalNode new StartLocalNode(DexLabel, int, String, String, String)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void StartLocalNode.<init>(DexLabel, int, String, String, String)"})
-  void testDexDebugOpNode_StartLocalNodeNewStartLocalNode() {
+  public void testDexDebugOpNode_StartLocalNodeNewStartLocalNode() {
     // Arrange and Act
     StartLocalNode actualStartLocalNode =
         new StartLocalNode(new DexLabel(), 1, "Name", "Type", "Signature");
@@ -337,12 +306,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#visitRestartLocal(int, DexLabel)}
    */
   @Test
-  @DisplayName(
-      "Test visitRestartLocal(int, DexLabel); given DexDebugNode (default constructor); then DexDebugNode (default constructor) debugNodes size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.visitRestartLocal(int, DexLabel)"})
-  void testVisitRestartLocal_givenDexDebugNode_thenDexDebugNodeDebugNodesSizeIsOne() {
+  public void testVisitRestartLocal_givenDexDebugNode_thenDexDebugNodeDebugNodesSizeIsOne() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     DexLabel label = new DexLabel();
@@ -370,12 +336,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#visitParameterName(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test visitParameterName(int, String); given DexDebugNode (default constructor) parameterNames is ArrayList()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.visitParameterName(int, String)"})
-  void testVisitParameterName_givenDexDebugNodeParameterNamesIsArrayList() {
+  public void testVisitParameterName_givenDexDebugNodeParameterNamesIsArrayList() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     dexDebugNode.parameterNames = new ArrayList<>();
@@ -402,12 +365,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#visitParameterName(int, String)}
    */
   @Test
-  @DisplayName(
-      "Test visitParameterName(int, String); given DexDebugNode (default constructor); then DexDebugNode (default constructor) parameterNames size is two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.visitParameterName(int, String)"})
-  void testVisitParameterName_givenDexDebugNode_thenDexDebugNodeParameterNamesSizeIsTwo() {
+  public void testVisitParameterName_givenDexDebugNode_thenDexDebugNodeParameterNamesSizeIsTwo() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
 
@@ -433,12 +393,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#visitLineNumber(int, DexLabel)}
    */
   @Test
-  @DisplayName(
-      "Test visitLineNumber(int, DexLabel); given DexDebugNode (default constructor); then DexDebugNode (default constructor) debugNodes size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.visitLineNumber(int, DexLabel)"})
-  void testVisitLineNumber_givenDexDebugNode_thenDexDebugNodeDebugNodesSizeIsOne() {
+  public void testVisitLineNumber_givenDexDebugNode_thenDexDebugNodeDebugNodesSizeIsOne() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     DexLabel label = new DexLabel();
@@ -468,12 +425,9 @@ class DexDebugNodeDiffblueTest {
    * String)}
    */
   @Test
-  @DisplayName(
-      "Test visitStartLocal(int, DexLabel, String, String, String); given DexDebugNode (default constructor); then DexDebugNode (default constructor) debugNodes size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.visitStartLocal(int, DexLabel, String, String, String)"})
-  void testVisitStartLocal_givenDexDebugNode_thenDexDebugNodeDebugNodesSizeIsOne() {
+  public void testVisitStartLocal_givenDexDebugNode_thenDexDebugNodeDebugNodesSizeIsOne() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     DexLabel label = new DexLabel();
@@ -505,12 +459,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#visitEndLocal(int, DexLabel)}
    */
   @Test
-  @DisplayName(
-      "Test visitEndLocal(int, DexLabel); given DexDebugNode (default constructor); then DexDebugNode (default constructor) debugNodes size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.visitEndLocal(int, DexLabel)"})
-  void testVisitEndLocal_givenDexDebugNode_thenDexDebugNodeDebugNodesSizeIsOne() {
+  public void testVisitEndLocal_givenDexDebugNode_thenDexDebugNodeDebugNodesSizeIsOne() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     DexLabel label = new DexLabel();
@@ -533,14 +484,13 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName("Test accept(DexDebugVisitor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept() {
+  public void testAccept() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     EndLocal dexDebugNode2 = new EndLocal(new DexLabel(), 1);
+
     dexDebugNode.addDebug(dexDebugNode2);
 
     // Act
@@ -558,14 +508,13 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName("Test accept(DexDebugVisitor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept2() {
+  public void testAccept2() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     LineNumber dexDebugNode2 = new LineNumber(new DexLabel(), 2);
+
     dexDebugNode.addDebug(dexDebugNode2);
 
     // Act
@@ -583,14 +532,13 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName("Test accept(DexDebugVisitor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept3() {
+  public void testAccept3() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     RestartLocal dexDebugNode2 = new RestartLocal(new DexLabel(), 1);
+
     dexDebugNode.addDebug(dexDebugNode2);
 
     // Act
@@ -608,15 +556,14 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName("Test accept(DexDebugVisitor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept4() {
+  public void testAccept4() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     StartLocalNode dexDebugNode2 =
         new StartLocalNode(new DexLabel(), 1, "Name", "Type", "Signature");
+
     dexDebugNode.addDebug(dexDebugNode2);
 
     // Act
@@ -634,14 +581,13 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName("Test accept(DexDebugVisitor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept5() {
+  public void testAccept5() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     EndLocal dexDebugNode2 = new EndLocal(new DexLabel(), 1);
+
     dexDebugNode.addDebug(dexDebugNode2);
 
     // Act
@@ -659,14 +605,13 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName("Test accept(DexDebugVisitor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept6() {
+  public void testAccept6() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     LineNumber dexDebugNode2 = new LineNumber(new DexLabel(), 2);
+
     dexDebugNode.addDebug(dexDebugNode2);
 
     // Act
@@ -684,14 +629,13 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName("Test accept(DexDebugVisitor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept7() {
+  public void testAccept7() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     RestartLocal dexDebugNode2 = new RestartLocal(new DexLabel(), 1);
+
     dexDebugNode.addDebug(dexDebugNode2);
 
     // Act
@@ -709,15 +653,14 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName("Test accept(DexDebugVisitor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept8() {
+  public void testAccept8() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     StartLocalNode dexDebugNode2 =
         new StartLocalNode(new DexLabel(), 1, "Name", "Type", "Signature");
+
     dexDebugNode.addDebug(dexDebugNode2);
 
     // Act
@@ -739,12 +682,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexDebugVisitor); given DexDebugNode (default constructor) visitParameterName one and 'Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept_givenDexDebugNodeVisitParameterNameOneAndName() {
+  public void testAccept_givenDexDebugNodeVisitParameterNameOneAndName() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     dexDebugNode.visitParameterName(1, "Name");
@@ -770,12 +710,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexDebugVisitor); given DexDebugNode (default constructor) visitParameterName one and 'Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept_givenDexDebugNodeVisitParameterNameOneAndName2() {
+  public void testAccept_givenDexDebugNodeVisitParameterNameOneAndName2() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     dexDebugNode.visitParameterName(1, "Name");
@@ -801,12 +738,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexDebugVisitor); given DexDebugNode (default constructor) visitSetFile 'File'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept_givenDexDebugNodeVisitSetFileFile() {
+  public void testAccept_givenDexDebugNodeVisitSetFileFile() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     dexDebugNode.visitSetFile("File");
@@ -832,12 +766,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexDebugVisitor); given DexDebugNode (default constructor) visitSetFile 'File'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept_givenDexDebugNodeVisitSetFileFile2() {
+  public void testAccept_givenDexDebugNodeVisitSetFileFile2() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     dexDebugNode.visitSetFile("File");
@@ -865,12 +796,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexDebugVisitor); given DexDebugNode (default constructor) visitSetFile 'File'; then DexDebugNode (default constructor) fineName is 'File'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept_givenDexDebugNodeVisitSetFileFile_thenDexDebugNodeFineNameIsFile() {
+  public void testAccept_givenDexDebugNodeVisitSetFileFile_thenDexDebugNodeFineNameIsFile() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     dexDebugNode.visitSetFile("File");
@@ -907,12 +835,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexDebugVisitor); given DexDebugNode (default constructor); when DexDebugVisitor(); then DexDebugNode (default constructor) debugNodes Empty")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept_givenDexDebugNode_whenDexDebugVisitor_thenDexDebugNodeDebugNodesEmpty() {
+  public void testAccept_givenDexDebugNode_whenDexDebugVisitor_thenDexDebugNodeDebugNodesEmpty() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
 
@@ -927,48 +852,6 @@ class DexDebugNodeDiffblueTest {
    * Test {@link DexDebugNode#accept(DexDebugVisitor)}.
    *
    * <ul>
-   *   <li>Given one.
-   *   <li>When {@link DexDebugNode} (default constructor) visitParameterName one and {@code Name}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
-   */
-  @Test
-  @DisplayName(
-      "Test accept(DexDebugVisitor); given one; when DexDebugNode (default constructor) visitParameterName one and 'Name'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept_givenOne_whenDexDebugNodeVisitParameterNameOneAndName() {
-    // Arrange
-    DexDebugNode dexDebugNode = new DexDebugNode();
-    dexDebugNode.visitParameterName(1, "Name");
-    Epiogue dexDebugNode2 = new Epiogue(new DexLabel());
-    dexDebugNode.addDebug(dexDebugNode2);
-    Epiogue dexDebugNode3 = new Epiogue(new DexLabel());
-    dexDebugNode.addDebug(dexDebugNode3);
-
-    DexDebugNode v = new DexDebugNode();
-    v.visitParameterName(1, "Name");
-
-    // Act
-    dexDebugNode.accept(v);
-
-    // Assert
-    List<DexDebugOpNode> dexDebugOpNodeList = v.debugNodes;
-    assertEquals(2, dexDebugOpNodeList.size());
-    DexDebugOpNode getResult = dexDebugOpNodeList.get(0);
-    assertTrue(getResult instanceof Epiogue);
-    DexDebugOpNode getResult2 = dexDebugOpNodeList.get(1);
-    assertTrue(getResult2 instanceof Epiogue);
-    assertSame(dexDebugNode2.label, ((Epiogue) getResult).label);
-    assertSame(dexDebugNode3.label, ((Epiogue) getResult2).label);
-  }
-
-  /**
-   * Test {@link DexDebugNode#accept(DexDebugVisitor)}.
-   *
-   * <ul>
    *   <li>Then {@link DexDebugNode} (default constructor) {@link DexDebugNode#debugNodes} first
    *       {@link DexDebugOpNode.EndLocal}.
    * </ul>
@@ -976,15 +859,13 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexDebugVisitor); then DexDebugNode (default constructor) debugNodes first EndLocal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept_thenDexDebugNodeDebugNodesFirstEndLocal() {
+  public void testAccept_thenDexDebugNodeDebugNodesFirstEndLocal() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     EndLocal dexDebugNode2 = new EndLocal(new DexLabel(), 1);
+
     dexDebugNode.addDebug(dexDebugNode2);
     Epiogue dexDebugNode3 = new Epiogue(new DexLabel());
     dexDebugNode.addDebug(dexDebugNode3);
@@ -1017,12 +898,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexDebugVisitor); then DexDebugNode (default constructor) debugNodes first is Epiogue(DexLabel) with label is DexLabel()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept_thenDexDebugNodeDebugNodesFirstIsEpiogueWithLabelIsDexLabel() {
+  public void testAccept_thenDexDebugNodeDebugNodesFirstIsEpiogueWithLabelIsDexLabel() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     Epiogue dexDebugNode2 = new Epiogue(new DexLabel());
@@ -1049,12 +927,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexDebugVisitor); then DexDebugNode (default constructor) debugNodes first is Epiogue(DexLabel) with label is DexLabel()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept_thenDexDebugNodeDebugNodesFirstIsEpiogueWithLabelIsDexLabel2() {
+  public void testAccept_thenDexDebugNodeDebugNodesFirstIsEpiogueWithLabelIsDexLabel2() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     Epiogue dexDebugNode2 = new Epiogue(new DexLabel());
@@ -1081,12 +956,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexDebugVisitor); then DexDebugNode (default constructor) debugNodes first is Prologue(DexLabel) with label is DexLabel()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept_thenDexDebugNodeDebugNodesFirstIsPrologueWithLabelIsDexLabel() {
+  public void testAccept_thenDexDebugNodeDebugNodesFirstIsPrologueWithLabelIsDexLabel() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     Prologue dexDebugNode2 = new Prologue(new DexLabel());
@@ -1113,12 +985,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexDebugVisitor); then DexDebugNode (default constructor) debugNodes first is Prologue(DexLabel) with label is DexLabel()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept_thenDexDebugNodeDebugNodesFirstIsPrologueWithLabelIsDexLabel2() {
+  public void testAccept_thenDexDebugNodeDebugNodesFirstIsPrologueWithLabelIsDexLabel2() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     Prologue dexDebugNode2 = new Prologue(new DexLabel());
@@ -1144,15 +1013,13 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexDebugVisitor); then DexDebugNode (default constructor) debugNodes first LineNumber")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept_thenDexDebugNodeDebugNodesFirstLineNumber() {
+  public void testAccept_thenDexDebugNodeDebugNodesFirstLineNumber() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     LineNumber dexDebugNode2 = new LineNumber(new DexLabel(), 2);
+
     dexDebugNode.addDebug(dexDebugNode2);
     Epiogue dexDebugNode3 = new Epiogue(new DexLabel());
     dexDebugNode.addDebug(dexDebugNode3);
@@ -1184,12 +1051,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexDebugVisitor); then DexDebugNode (default constructor) debugNodes first Prologue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept_thenDexDebugNodeDebugNodesFirstPrologue() {
+  public void testAccept_thenDexDebugNodeDebugNodesFirstPrologue() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     Prologue dexDebugNode2 = new Prologue(new DexLabel());
@@ -1223,15 +1087,13 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexDebugVisitor); then DexDebugNode (default constructor) debugNodes first RestartLocal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept_thenDexDebugNodeDebugNodesFirstRestartLocal() {
+  public void testAccept_thenDexDebugNodeDebugNodesFirstRestartLocal() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     RestartLocal dexDebugNode2 = new RestartLocal(new DexLabel(), 1);
+
     dexDebugNode.addDebug(dexDebugNode2);
     Epiogue dexDebugNode3 = new Epiogue(new DexLabel());
     dexDebugNode.addDebug(dexDebugNode3);
@@ -1263,16 +1125,14 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexDebugVisitor); then DexDebugNode (default constructor) debugNodes first StartLocalNode")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept_thenDexDebugNodeDebugNodesFirstStartLocalNode() {
+  public void testAccept_thenDexDebugNodeDebugNodesFirstStartLocalNode() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     StartLocalNode dexDebugNode2 =
         new StartLocalNode(new DexLabel(), 1, "Name", "Type", "Signature");
+
     dexDebugNode.addDebug(dexDebugNode2);
     dexDebugNode.addDebug(new Epiogue(new DexLabel()));
     DexDebugNode v = new DexDebugNode();
@@ -1301,12 +1161,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexDebugVisitor); then DexDebugNode (default constructor) parameterNames")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept_thenDexDebugNodeParameterNames() {
+  public void testAccept_thenDexDebugNodeParameterNames() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     dexDebugNode.visitParameterName(1, "Name");
@@ -1333,12 +1190,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#accept(DexDebugVisitor)}
    */
   @Test
-  @DisplayName(
-      "Test accept(DexDebugVisitor); when DexDebugNode (default constructor); then DexDebugNode (default constructor) debugNodes first Epiogue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.accept(DexDebugVisitor)"})
-  void testAccept_whenDexDebugNode_thenDexDebugNodeDebugNodesFirstEpiogue() {
+  public void testAccept_whenDexDebugNode_thenDexDebugNodeDebugNodesFirstEpiogue() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     Epiogue dexDebugNode2 = new Epiogue(new DexLabel());
@@ -1373,12 +1227,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#visitPrologue(DexLabel)}
    */
   @Test
-  @DisplayName(
-      "Test visitPrologue(DexLabel); given DexDebugNode (default constructor); then DexDebugNode (default constructor) debugNodes size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.visitPrologue(DexLabel)"})
-  void testVisitPrologue_givenDexDebugNode_thenDexDebugNodeDebugNodesSizeIsOne() {
+  public void testVisitPrologue_givenDexDebugNode_thenDexDebugNodeDebugNodesSizeIsOne() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     DexLabel dexLabel = new DexLabel();
@@ -1406,12 +1257,9 @@ class DexDebugNodeDiffblueTest {
    * <p>Method under test: {@link DexDebugNode#visitEpiogue(DexLabel)}
    */
   @Test
-  @DisplayName(
-      "Test visitEpiogue(DexLabel); given DexDebugNode (default constructor); then DexDebugNode (default constructor) debugNodes size is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.visitEpiogue(DexLabel)"})
-  void testVisitEpiogue_givenDexDebugNode_thenDexDebugNodeDebugNodesSizeIsOne() {
+  public void testVisitEpiogue_givenDexDebugNode_thenDexDebugNodeDebugNodesSizeIsOne() {
     // Arrange
     DexDebugNode dexDebugNode = new DexDebugNode();
     DexLabel dexLabel = new DexLabel();
@@ -1438,11 +1286,9 @@ class DexDebugNodeDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void DexDebugNode.<init>()", "void DexDebugNode.visitSetFile(String)"})
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     DexDebugNode actualDexDebugNode = new DexDebugNode();
     actualDexDebugNode.visitSetFile("File");

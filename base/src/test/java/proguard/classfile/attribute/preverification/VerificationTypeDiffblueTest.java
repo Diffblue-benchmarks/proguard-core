@@ -1,15 +1,14 @@
 package proguard.classfile.attribute.preverification;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class VerificationTypeDiffblueTest {
+public class VerificationTypeDiffblueTest {
   /**
    * Test {@link VerificationType#equals(Object)}, and {@link VerificationType#hashCode()}.
    *
@@ -26,18 +25,17 @@ class VerificationTypeDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean VerificationType.equals(Object)", "int VerificationType.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     DoubleType doubleType = VerificationTypeFactory.DOUBLE_TYPE;
     DoubleType doubleType2 = VerificationTypeFactory.DOUBLE_TYPE;
 
     // Act and Assert
     assertEquals(doubleType, doubleType2);
-    assertEquals(doubleType.hashCode(), doubleType2.hashCode());
+    int expectedHashCodeResult = doubleType.hashCode();
+    assertEquals(expectedHashCodeResult, doubleType2.hashCode());
   }
 
   /**
@@ -56,11 +54,9 @@ class VerificationTypeDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean VerificationType.equals(Object)", "int VerificationType.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     DoubleType doubleType = VerificationTypeFactory.DOUBLE_TYPE;
 
@@ -81,11 +77,9 @@ class VerificationTypeDiffblueTest {
    * <p>Method under test: {@link VerificationType#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean VerificationType.equals(Object)", "int VerificationType.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(VerificationTypeFactory.DOUBLE_TYPE, 1);
   }
@@ -101,11 +95,9 @@ class VerificationTypeDiffblueTest {
    * <p>Method under test: {@link VerificationType#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean VerificationType.equals(Object)", "int VerificationType.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(VerificationTypeFactory.DOUBLE_TYPE, null);
   }
@@ -121,11 +113,9 @@ class VerificationTypeDiffblueTest {
    * <p>Method under test: {@link VerificationType#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean VerificationType.equals(Object)", "int VerificationType.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(VerificationTypeFactory.DOUBLE_TYPE, "Different type to VerificationType");
   }

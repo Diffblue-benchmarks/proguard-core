@@ -1,16 +1,15 @@
 package proguard.dexfile.ir.ts.an;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.Set;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.IrMethod;
 import proguard.dexfile.ir.expr.ArrayExpr;
 import proguard.dexfile.ir.stmt.GotoStmt;
@@ -21,18 +20,16 @@ import proguard.dexfile.ir.stmt.Stmt;
 import proguard.dexfile.ir.stmt.StmtList;
 import proguard.dexfile.ir.stmt.Stmts;
 
-class BaseAnalyzeDiffblueTest {
+public class BaseAnalyzeDiffblueTest {
   /**
    * Test {@link BaseAnalyze#analyze0()}.
    *
    * <p>Method under test: {@link BaseAnalyze#analyze0()}
    */
   @Test
-  @DisplayName("Test analyze0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void BaseAnalyze.analyze0()"})
-  void testAnalyze0() {
+  public void testAnalyze0() {
     // Arrange
     StmtList stmtList = new StmtList();
     ReturnVoidStmt stmt = Stmts.nReturnVoid();
@@ -61,20 +58,15 @@ class BaseAnalyzeDiffblueTest {
    * <p>Method under test: {@link BaseAnalyze#exec(AnalyzeValue[], Stmt)}
    */
   @Test
-  @DisplayName("Test exec(AnalyzeValue[], Stmt) with 'SimpleLiveValue[]', 'Stmt'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"AnalyzeValue[] BaseAnalyze.exec(AnalyzeValue[], Stmt)"})
-  void testExecWithSimpleLiveValueStmt() {
+  public void testExecWithSimpleLiveValueStmt() {
     // Arrange
     SimpleLiveAnalyze simpleLiveAnalyze = new SimpleLiveAnalyze(new IrMethod(), true);
     SimpleLiveValue[] frame = new SimpleLiveValue[] {new SimpleLiveValue()};
 
-    // Act
-    SimpleLiveValue[] actualExecResult = simpleLiveAnalyze.exec(frame, Stmts.nLabel());
-
-    // Assert
-    assertSame(frame, actualExecResult);
+    // Act and Assert
+    assertSame(frame, simpleLiveAnalyze.exec(frame, Stmts.nLabel()));
   }
 
   /**
@@ -88,11 +80,9 @@ class BaseAnalyzeDiffblueTest {
    * <p>Method under test: {@link BaseAnalyze#getFrame(Stmt)}
    */
   @Test
-  @DisplayName("Test getFrame(Stmt); when nLabel; then return 'null'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"AnalyzeValue[] BaseAnalyze.getFrame(Stmt)"})
-  void testGetFrame_whenNLabel_thenReturnNull() {
+  public void testGetFrame_whenNLabel_thenReturnNull() {
     // Arrange
     SimpleLiveAnalyze simpleLiveAnalyze = new SimpleLiveAnalyze(new IrMethod(), true);
 
@@ -106,11 +96,9 @@ class BaseAnalyzeDiffblueTest {
    * <p>Method under test: {@link BaseAnalyze#initCFG()}
    */
   @Test
-  @DisplayName("Test initCFG()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void BaseAnalyze.initCFG()"})
-  void testInitCFG() {
+  public void testInitCFG() {
     // Arrange
     StmtList stmtList = new StmtList();
     stmtList.add(Stmts.nLabel());
@@ -133,11 +121,9 @@ class BaseAnalyzeDiffblueTest {
    * <p>Method under test: {@link BaseAnalyze#initCFG()}
    */
   @Test
-  @DisplayName("Test initCFG()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void BaseAnalyze.initCFG()"})
-  void testInitCFG2() {
+  public void testInitCFG2() {
     // Arrange
     StmtList stmtList = new StmtList();
     stmtList.add(Stmts.nLabel());
@@ -168,38 +154,9 @@ class BaseAnalyzeDiffblueTest {
    * <p>Method under test: {@link BaseAnalyze#initCFG()}
    */
   @Test
-  @DisplayName("Test initCFG()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void BaseAnalyze.initCFG()"})
-  void testInitCFG3() {
-    // Arrange
-    StmtList stmtList = new StmtList();
-    stmtList.add(Stmts.nReturnVoid());
-    IrMethod method = new IrMethod();
-    method.stmts = stmtList;
-    SimpleLiveAnalyze simpleLiveAnalyze = new SimpleLiveAnalyze(method, true);
-
-    // Act
-    simpleLiveAnalyze.initCFG();
-
-    // Assert
-    Stmt first = simpleLiveAnalyze.method.stmts.getFirst();
-    assertTrue(first instanceof ReturnVoidStmt);
-    assertTrue(((ReturnVoidStmt) first)._cfg_froms.isEmpty());
-  }
-
-  /**
-   * Test {@link BaseAnalyze#initCFG()}.
-   *
-   * <p>Method under test: {@link BaseAnalyze#initCFG()}
-   */
-  @Test
-  @DisplayName("Test initCFG()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void BaseAnalyze.initCFG()"})
-  void testInitCFG4() {
+  public void testInitCFG3() {
     // Arrange
     StmtList stmtList = new StmtList();
     stmtList.add(new GotoStmt(null));
@@ -222,17 +179,14 @@ class BaseAnalyzeDiffblueTest {
    * <p>Method under test: {@link BaseAnalyze#initCFG()}
    */
   @Test
-  @DisplayName("Test initCFG()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void BaseAnalyze.initCFG()"})
-  void testInitCFG5() {
+  public void testInitCFG4() {
     // Arrange
     StmtList stmtList = new StmtList();
-    LabelStmt[] targets = new LabelStmt[] {null};
-    LookupSwitchStmt stmt =
-        new LookupSwitchStmt(new ArrayExpr(), new int[] {42, 1, 42, 1}, targets, null);
-    stmtList.add(stmt);
+    stmtList.add(
+        new LookupSwitchStmt(
+            new ArrayExpr(), new int[] {42, 1, 42, 1}, new LabelStmt[] {null}, null));
     IrMethod method = new IrMethod();
     method.stmts = stmtList;
     SimpleLiveAnalyze simpleLiveAnalyze = new SimpleLiveAnalyze(method, true);
@@ -252,13 +206,11 @@ class BaseAnalyzeDiffblueTest {
    * <p>Method under test: {@link BaseAnalyze#newFrame()}
    */
   @Test
-  @DisplayName("Test newFrame()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"AnalyzeValue[] BaseAnalyze.newFrame()"})
-  void testNewFrame() {
+  public void testNewFrame() {
     // Arrange, Act and Assert
-    assertEquals(0, new SimpleLiveAnalyze(new IrMethod(), true).newFrame().length);
+    assertEquals(0, (new SimpleLiveAnalyze(new IrMethod(), true)).newFrame().length);
   }
 
   /**
@@ -271,13 +223,11 @@ class BaseAnalyzeDiffblueTest {
    * <p>Method under test: {@link BaseAnalyze#toString()}
    */
   @Test
-  @DisplayName("Test toString(); then return empty string")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"java.lang.String BaseAnalyze.toString()"})
-  void testToString_thenReturnEmptyString() {
+  public void testToString_thenReturnEmptyString() {
     // Arrange, Act and Assert
-    assertEquals("", new SimpleLiveAnalyze(new IrMethod(), true).toString());
+    assertEquals("", (new SimpleLiveAnalyze(new IrMethod(), true)).toString());
   }
 
   /**
@@ -286,11 +236,9 @@ class BaseAnalyzeDiffblueTest {
    * <p>Method under test: {@link BaseAnalyze#initFirstFrame(Stmt)}
    */
   @Test
-  @DisplayName("Test initFirstFrame(Stmt)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"AnalyzeValue[] BaseAnalyze.initFirstFrame(Stmt)"})
-  void testInitFirstFrame() {
+  public void testInitFirstFrame() {
     // Arrange
     SimpleLiveAnalyze simpleLiveAnalyze = new SimpleLiveAnalyze(new IrMethod(), true);
 

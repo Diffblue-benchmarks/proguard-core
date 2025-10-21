@@ -1,34 +1,31 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.evaluation.ParticularReferenceValueFactory;
 
-class UnknownReferenceValueDiffblueTest {
+public class UnknownReferenceValueDiffblueTest {
   /**
    * Test {@link UnknownReferenceValue#mayBeExtension()}.
    *
    * <p>Method under test: {@link UnknownReferenceValue#mayBeExtension()}
    */
   @Test
-  @DisplayName("Test mayBeExtension()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"boolean UnknownReferenceValue.mayBeExtension()"})
-  void testMayBeExtension() {
+  public void testMayBeExtension() {
     // Arrange, Act and Assert
-    assertTrue(new UnknownReferenceValue().mayBeExtension());
+    assertTrue((new UnknownReferenceValue()).mayBeExtension());
   }
 
   /**
@@ -37,11 +34,9 @@ class UnknownReferenceValueDiffblueTest {
    * <p>Method under test: {@link UnknownReferenceValue#instanceOf(String, Clazz)}
    */
   @Test
-  @DisplayName("Test instanceOf(String, Clazz)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int UnknownReferenceValue.instanceOf(String, Clazz)"})
-  void testInstanceOf() {
+  public void testInstanceOf() {
     // Arrange
     UnknownReferenceValue unknownReferenceValue = new UnknownReferenceValue();
 
@@ -53,29 +48,55 @@ class UnknownReferenceValueDiffblueTest {
    * Test {@link UnknownReferenceValue#cast(String, Clazz, ValueFactory, boolean)}.
    *
    * <ul>
-   *   <li>When {@link BasicValueFactory} (default constructor).
-   *   <li>Then return {@link BasicValueFactory#REFERENCE_VALUE}.
+   *   <li>Then return {@link PrimitiveTypedReferenceValueFactory} (default constructor) {@link
+   *       BasicValueFactory#REFERENCE_VALUE}.
    * </ul>
    *
    * <p>Method under test: {@link UnknownReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test cast(String, Clazz, ValueFactory, boolean); when BasicValueFactory (default constructor); then return REFERENCE_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue UnknownReferenceValue.cast(String, Clazz, ValueFactory, boolean)"
   })
-  void testCast_whenBasicValueFactory_thenReturnReference_value() {
+  public void testCast_thenReturnPrimitiveTypedReferenceValueFactoryReference_value() {
     // Arrange
     UnknownReferenceValue unknownReferenceValue = new UnknownReferenceValue();
     LibraryClass referencedClass = new LibraryClass();
+    PrimitiveTypedReferenceValueFactory valueFactory = new PrimitiveTypedReferenceValueFactory();
 
     // Act and Assert
     assertSame(
-        BasicValueFactory.REFERENCE_VALUE,
-        unknownReferenceValue.cast("Type", referencedClass, new BasicValueFactory(), true));
+        valueFactory.REFERENCE_VALUE,
+        unknownReferenceValue.cast("Type", referencedClass, valueFactory, true));
+  }
+
+  /**
+   * Test {@link UnknownReferenceValue#cast(String, Clazz, ValueFactory, boolean)}.
+   *
+   * <ul>
+   *   <li>When {@link BasicValueFactory} (default constructor).
+   *   <li>Then return {@link BasicValueFactory} (default constructor) {@link
+   *       BasicValueFactory#REFERENCE_VALUE}.
+   * </ul>
+   *
+   * <p>Method under test: {@link UnknownReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
+   */
+  @Test
+  @Category(MaintainedByDiffblue.class)
+  @MethodsUnderTest({
+    "ReferenceValue UnknownReferenceValue.cast(String, Clazz, ValueFactory, boolean)"
+  })
+  public void testCast_whenBasicValueFactory_thenReturnBasicValueFactoryReference_value() {
+    // Arrange
+    UnknownReferenceValue unknownReferenceValue = new UnknownReferenceValue();
+    LibraryClass referencedClass = new LibraryClass();
+    BasicValueFactory valueFactory = new BasicValueFactory();
+
+    // Act and Assert
+    assertSame(
+        valueFactory.REFERENCE_VALUE,
+        unknownReferenceValue.cast("Type", referencedClass, valueFactory, true));
   }
 
   /**
@@ -83,29 +104,25 @@ class UnknownReferenceValueDiffblueTest {
    *
    * <ul>
    *   <li>When empty string.
-   *   <li>Then return {@link BasicValueFactory#REFERENCE_VALUE}.
    * </ul>
    *
    * <p>Method under test: {@link UnknownReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test cast(String, Clazz, ValueFactory, boolean); when empty string; then return REFERENCE_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue UnknownReferenceValue.cast(String, Clazz, ValueFactory, boolean)"
   })
-  void testCast_whenEmptyString_thenReturnReference_value() {
+  public void testCast_whenEmptyString() {
     // Arrange
     UnknownReferenceValue unknownReferenceValue = new UnknownReferenceValue();
     LibraryClass referencedClass = new LibraryClass();
+    PrimitiveTypedReferenceValueFactory valueFactory = new PrimitiveTypedReferenceValueFactory();
 
     // Act and Assert
     assertSame(
-        BasicValueFactory.REFERENCE_VALUE,
-        unknownReferenceValue.cast(
-            "", referencedClass, new PrimitiveTypedReferenceValueFactory(), true));
+        valueFactory.REFERENCE_VALUE,
+        unknownReferenceValue.cast("", referencedClass, valueFactory, true));
   }
 
   /**
@@ -119,14 +136,11 @@ class UnknownReferenceValueDiffblueTest {
    * <p>Method under test: {@link UnknownReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test cast(String, Clazz, ValueFactory, boolean); when MultiTypedReferenceValueFactory(); then return MultiTypedReferenceValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue UnknownReferenceValue.cast(String, Clazz, ValueFactory, boolean)"
   })
-  void testCast_whenMultiTypedReferenceValueFactory_thenReturnMultiTypedReferenceValue() {
+  public void testCast_whenMultiTypedReferenceValueFactory_thenReturnMultiTypedReferenceValue() {
     // Arrange
     UnknownReferenceValue unknownReferenceValue = new UnknownReferenceValue();
     LibraryClass referencedClass = new LibraryClass();
@@ -158,14 +172,11 @@ class UnknownReferenceValueDiffblueTest {
    * <p>Method under test: {@link UnknownReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
    */
   @Test
-  @DisplayName(
-      "Test cast(String, Clazz, ValueFactory, boolean); when ParticularReferenceValueFactory (default constructor); then return IdentifiedReferenceValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "ReferenceValue UnknownReferenceValue.cast(String, Clazz, ValueFactory, boolean)"
   })
-  void testCast_whenParticularReferenceValueFactory_thenReturnIdentifiedReferenceValue() {
+  public void testCast_whenParticularReferenceValueFactory_thenReturnIdentifiedReferenceValue() {
     // Arrange
     UnknownReferenceValue unknownReferenceValue = new UnknownReferenceValue();
     LibraryClass referencedClass = new LibraryClass();
@@ -190,36 +201,6 @@ class UnknownReferenceValueDiffblueTest {
   }
 
   /**
-   * Test {@link UnknownReferenceValue#cast(String, Clazz, ValueFactory, boolean)}.
-   *
-   * <ul>
-   *   <li>When {@link PrimitiveTypedReferenceValueFactory} (default constructor).
-   *   <li>Then return {@link BasicValueFactory#REFERENCE_VALUE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link UnknownReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
-   */
-  @Test
-  @DisplayName(
-      "Test cast(String, Clazz, ValueFactory, boolean); when PrimitiveTypedReferenceValueFactory (default constructor); then return REFERENCE_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "ReferenceValue UnknownReferenceValue.cast(String, Clazz, ValueFactory, boolean)"
-  })
-  void testCast_whenPrimitiveTypedReferenceValueFactory_thenReturnReference_value() {
-    // Arrange
-    UnknownReferenceValue unknownReferenceValue = new UnknownReferenceValue();
-    LibraryClass referencedClass = new LibraryClass();
-
-    // Act and Assert
-    assertSame(
-        BasicValueFactory.REFERENCE_VALUE,
-        unknownReferenceValue.cast(
-            "Type", referencedClass, new PrimitiveTypedReferenceValueFactory(), true));
-  }
-
-  /**
    * Test {@link UnknownReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
    *
    * <ul>
@@ -229,16 +210,14 @@ class UnknownReferenceValueDiffblueTest {
    * <p>Method under test: {@link UnknownReferenceValue#generalize(ReferenceValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(ReferenceValue) with 'ReferenceValue'; then return MultiTypedReferenceValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ReferenceValue UnknownReferenceValue.generalize(ReferenceValue)"})
-  void testGeneralizeWithReferenceValue_thenReturnMultiTypedReferenceValue() {
+  public void testGeneralizeWithReferenceValue_thenReturnMultiTypedReferenceValue() {
     // Arrange
     UnknownReferenceValue unknownReferenceValue = new UnknownReferenceValue();
-    TypedReferenceValue type = new TypedReferenceValue("Type", new LibraryClass(), true, true);
-    MultiTypedReferenceValue other = new MultiTypedReferenceValue(type, true);
+    MultiTypedReferenceValue other =
+        new MultiTypedReferenceValue(
+            new TypedReferenceValue("Type", new LibraryClass(), true, true), true);
 
     // Act
     ReferenceValue actualGeneralizeResult =
@@ -259,12 +238,9 @@ class UnknownReferenceValueDiffblueTest {
    * <p>Method under test: {@link UnknownReferenceValue#generalize(ReferenceValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(ReferenceValue) with 'ReferenceValue'; then return TracedReferenceValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ReferenceValue UnknownReferenceValue.generalize(ReferenceValue)"})
-  void testGeneralizeWithReferenceValue_thenReturnTracedReferenceValue() {
+  public void testGeneralizeWithReferenceValue_thenReturnTracedReferenceValue() {
     // Arrange
     UnknownReferenceValue unknownReferenceValue = new UnknownReferenceValue();
     TracedReferenceValue other =
@@ -290,21 +266,15 @@ class UnknownReferenceValueDiffblueTest {
    * <p>Method under test: {@link UnknownReferenceValue#generalize(ReferenceValue)}
    */
   @Test
-  @DisplayName(
-      "Test generalize(ReferenceValue) with 'ReferenceValue'; then return UnknownReferenceValue (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"ReferenceValue UnknownReferenceValue.generalize(ReferenceValue)"})
-  void testGeneralizeWithReferenceValue_thenReturnUnknownReferenceValue() {
+  public void testGeneralizeWithReferenceValue_thenReturnUnknownReferenceValue() {
     // Arrange
     UnknownReferenceValue unknownReferenceValue = new UnknownReferenceValue();
 
-    // Act
-    ReferenceValue actualGeneralizeResult =
-        unknownReferenceValue.generalize(BasicValueFactory.REFERENCE_VALUE);
-
-    // Assert
-    assertSame(unknownReferenceValue, actualGeneralizeResult);
+    // Act and Assert
+    assertSame(
+        unknownReferenceValue, unknownReferenceValue.generalize(BasicValueFactory.REFERENCE_VALUE));
   }
 
   /**
@@ -318,14 +288,11 @@ class UnknownReferenceValueDiffblueTest {
    * <p>Method under test: {@link UnknownReferenceValue#equal(ReferenceValue)}
    */
   @Test
-  @DisplayName(
-      "Test equal(ReferenceValue) with 'ReferenceValue'; when REFERENCE_VALUE; then return zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"int UnknownReferenceValue.equal(ReferenceValue)"})
-  void testEqualWithReferenceValue_whenReference_value_thenReturnZero() {
+  public void testEqualWithReferenceValue_whenReference_value_thenReturnZero() {
     // Arrange, Act and Assert
-    assertEquals(0, new UnknownReferenceValue().equal(BasicValueFactory.REFERENCE_VALUE));
+    assertEquals(0, (new UnknownReferenceValue()).equal(BasicValueFactory.REFERENCE_VALUE));
   }
 
   /**
@@ -334,13 +301,11 @@ class UnknownReferenceValueDiffblueTest {
    * <p>Method under test: {@link UnknownReferenceValue#internalType()}
    */
   @Test
-  @DisplayName("Test internalType()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"String UnknownReferenceValue.internalType()"})
-  void testInternalType() {
+  public void testInternalType() {
     // Arrange, Act and Assert
-    assertEquals("Ljava/lang/Object;", new UnknownReferenceValue().internalType());
+    assertEquals("Ljava/lang/Object;", (new UnknownReferenceValue()).internalType());
   }
 
   /**
@@ -358,9 +323,7 @@ class UnknownReferenceValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void UnknownReferenceValue.<init>()",
     "Clazz UnknownReferenceValue.getReferencedClass()",
@@ -369,7 +332,7 @@ class UnknownReferenceValueDiffblueTest {
     "boolean UnknownReferenceValue.isParticular()",
     "String UnknownReferenceValue.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     UnknownReferenceValue actualUnknownReferenceValue = new UnknownReferenceValue();
     String actualToStringResult = actualUnknownReferenceValue.toString();

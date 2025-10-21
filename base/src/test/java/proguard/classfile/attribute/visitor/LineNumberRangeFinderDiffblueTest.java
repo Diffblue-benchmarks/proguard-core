@@ -1,14 +1,13 @@
 package proguard.classfile.attribute.visitor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryMethod;
@@ -17,12 +16,13 @@ import proguard.classfile.attribute.CodeAttribute;
 import proguard.classfile.attribute.ExtendedLineNumberInfo;
 import proguard.classfile.attribute.LineNumberInfo;
 
-class LineNumberRangeFinderDiffblueTest {
+public class LineNumberRangeFinderDiffblueTest {
   /**
    * Test {@link LineNumberRangeFinder#visitLineNumberInfo(Clazz, Method, CodeAttribute,
    * LineNumberInfo)}.
    *
    * <ul>
+   *   <li>Given {@code 42}.
    *   <li>Then {@link LineNumberRangeFinder} (default constructor) hasSource.
    * </ul>
    *
@@ -30,23 +30,23 @@ class LineNumberRangeFinderDiffblueTest {
    * CodeAttribute, LineNumberInfo)}
    */
   @Test
-  @DisplayName(
-      "Test visitLineNumberInfo(Clazz, Method, CodeAttribute, LineNumberInfo); then LineNumberRangeFinder (default constructor) hasSource")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void LineNumberRangeFinder.visitLineNumberInfo(Clazz, Method, CodeAttribute, LineNumberInfo)"
   })
-  void testVisitLineNumberInfo_thenLineNumberRangeFinderHasSource() {
+  public void testVisitLineNumberInfo_given42_thenLineNumberRangeFinderHasSource() {
     // Arrange
     LineNumberRangeFinder lineNumberRangeFinder = new LineNumberRangeFinder();
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
+    ExtendedLineNumberInfo lineNumberInfo = new ExtendedLineNumberInfo(1, 2, "Source");
+
+    lineNumberInfo.source = "42";
 
     // Act
-    lineNumberRangeFinder.visitLineNumberInfo(
-        clazz, method, codeAttribute, new ExtendedLineNumberInfo(1, 2, "Source"));
+    lineNumberRangeFinder.visitLineNumberInfo(clazz, method, codeAttribute, lineNumberInfo);
 
     // Assert
     assertEquals(2, lineNumberRangeFinder.getHighestLineNumber());
@@ -67,18 +67,16 @@ class LineNumberRangeFinderDiffblueTest {
    * CodeAttribute, LineNumberInfo)}
    */
   @Test
-  @DisplayName(
-      "Test visitLineNumberInfo(Clazz, Method, CodeAttribute, LineNumberInfo); then LineNumberRangeFinder (default constructor) HighestLineNumber is MAX_VALUE")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void LineNumberRangeFinder.visitLineNumberInfo(Clazz, Method, CodeAttribute, LineNumberInfo)"
   })
-  void testVisitLineNumberInfo_thenLineNumberRangeFinderHighestLineNumberIsMax_value() {
+  public void testVisitLineNumberInfo_thenLineNumberRangeFinderHighestLineNumberIsMax_value() {
     // Arrange
     LineNumberRangeFinder lineNumberRangeFinder = new LineNumberRangeFinder();
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act
@@ -103,18 +101,16 @@ class LineNumberRangeFinderDiffblueTest {
    * CodeAttribute, LineNumberInfo)}
    */
   @Test
-  @DisplayName(
-      "Test visitLineNumberInfo(Clazz, Method, CodeAttribute, LineNumberInfo); then LineNumberRangeFinder (default constructor) HighestLineNumber is zero")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void LineNumberRangeFinder.visitLineNumberInfo(Clazz, Method, CodeAttribute, LineNumberInfo)"
   })
-  void testVisitLineNumberInfo_thenLineNumberRangeFinderHighestLineNumberIsZero() {
+  public void testVisitLineNumberInfo_thenLineNumberRangeFinderHighestLineNumberIsZero() {
     // Arrange
     LineNumberRangeFinder lineNumberRangeFinder = new LineNumberRangeFinder();
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act
@@ -140,18 +136,16 @@ class LineNumberRangeFinderDiffblueTest {
    * CodeAttribute, LineNumberInfo)}
    */
   @Test
-  @DisplayName(
-      "Test visitLineNumberInfo(Clazz, Method, CodeAttribute, LineNumberInfo); when LineNumberInfo(int, int) with u2startPC is one and u2lineNumber is two")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void LineNumberRangeFinder.visitLineNumberInfo(Clazz, Method, CodeAttribute, LineNumberInfo)"
   })
-  void testVisitLineNumberInfo_whenLineNumberInfoWithU2startPCIsOneAndU2lineNumberIsTwo() {
+  public void testVisitLineNumberInfo_whenLineNumberInfoWithU2startPCIsOneAndU2lineNumberIsTwo() {
     // Arrange
     LineNumberRangeFinder lineNumberRangeFinder = new LineNumberRangeFinder();
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act
@@ -177,16 +171,14 @@ class LineNumberRangeFinderDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void LineNumberRangeFinder.<init>()",
     "int LineNumberRangeFinder.getHighestLineNumber()",
     "int LineNumberRangeFinder.getLowestLineNumber()",
     "boolean LineNumberRangeFinder.hasSource()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange and Act
     LineNumberRangeFinder actualLineNumberRangeFinder = new LineNumberRangeFinder();
     int actualHighestLineNumber = actualLineNumberRangeFinder.getHighestLineNumber();

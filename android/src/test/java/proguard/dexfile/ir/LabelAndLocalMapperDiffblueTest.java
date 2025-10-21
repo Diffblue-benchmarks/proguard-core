@@ -1,33 +1,30 @@
 package proguard.dexfile.ir;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.expr.Local;
 import proguard.dexfile.ir.expr.Value.VT;
 import proguard.dexfile.ir.stmt.LabelStmt;
 import proguard.dexfile.ir.stmt.Stmt.ST;
 import proguard.dexfile.ir.stmt.Stmts;
 
-class LabelAndLocalMapperDiffblueTest {
+public class LabelAndLocalMapperDiffblueTest {
   /**
    * Test {@link LabelAndLocalMapper#map(LabelStmt)} with {@code label}.
    *
    * <p>Method under test: {@link LabelAndLocalMapper#map(LabelStmt)}
    */
   @Test
-  @DisplayName("Test map(LabelStmt) with 'label'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"LabelStmt LabelAndLocalMapper.map(LabelStmt)"})
-  void testMapWithLabel() {
+  public void testMapWithLabel() {
     // Arrange
     LabelAndLocalMapper labelAndLocalMapper = new LabelAndLocalMapper();
 
@@ -35,6 +32,7 @@ class LabelAndLocalMapperDiffblueTest {
     LabelStmt actualMapResult = labelAndLocalMapper.map(Stmts.nLabel());
 
     // Assert
+    assertNull(actualMapResult.getOps());
     assertNull(actualMapResult.tag);
     assertNull(actualMapResult.frame);
     assertNull(actualMapResult.displayName);
@@ -44,7 +42,6 @@ class LabelAndLocalMapperDiffblueTest {
     assertNull(actualMapResult.getOp());
     assertNull(actualMapResult.getOp1());
     assertNull(actualMapResult.getOp2());
-    assertNull(actualMapResult.getOps());
     assertNull(actualMapResult.getNext());
     assertNull(actualMapResult.getPre());
     assertNull(actualMapResult._ts_default_next);
@@ -67,11 +64,9 @@ class LabelAndLocalMapperDiffblueTest {
    * <p>Method under test: {@link LabelAndLocalMapper#map(Local)}
    */
   @Test
-  @DisplayName("Test map(Local) with 'local'; when Local(); then return toString0 is 'a0'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"Local LabelAndLocalMapper.map(Local)"})
-  void testMapWithLocal_whenLocal_thenReturnToString0IsA0() {
+  public void testMapWithLocal_whenLocal_thenReturnToString0IsA0() {
     // Arrange
     LabelAndLocalMapper labelAndLocalMapper = new LabelAndLocalMapper();
 
@@ -80,6 +75,7 @@ class LabelAndLocalMapperDiffblueTest {
 
     // Assert
     assertEquals("a0", actualMapResult.toString0());
+    assertNull(actualMapResult.getOps());
     assertNull(actualMapResult.tag);
     assertNull(actualMapResult.debugName);
     assertNull(actualMapResult.signature);
@@ -87,7 +83,6 @@ class LabelAndLocalMapperDiffblueTest {
     assertNull(actualMapResult.getOp());
     assertNull(actualMapResult.getOp1());
     assertNull(actualMapResult.getOp2());
-    assertNull(actualMapResult.getOps());
     assertEquals(0, actualMapResult._ls_index);
     assertEquals(1, labelAndLocalMapper.locals.size());
     assertEquals(ET.E0, actualMapResult.et);
@@ -100,11 +95,9 @@ class LabelAndLocalMapperDiffblueTest {
    * <p>Method under test: default or parameterless constructor of {@link LabelAndLocalMapper}
    */
   @Test
-  @DisplayName("Test new LabelAndLocalMapper (default constructor)")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"void LabelAndLocalMapper.<init>()"})
-  void testNewLabelAndLocalMapper() {
+  public void testNewLabelAndLocalMapper() {
     // Arrange and Act
     LabelAndLocalMapper actualLabelAndLocalMapper = new LabelAndLocalMapper();
 

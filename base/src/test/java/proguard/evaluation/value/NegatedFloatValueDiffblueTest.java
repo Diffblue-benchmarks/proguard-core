@@ -1,17 +1,16 @@
 package proguard.evaluation.value;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
-import com.diffblue.cover.annotations.ManagedByDiffblue;
+import com.diffblue.cover.annotations.MaintainedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-class NegatedFloatValueDiffblueTest {
+public class NegatedFloatValueDiffblueTest {
   /**
    * Test getters and setters.
    *
@@ -23,16 +22,14 @@ class NegatedFloatValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test getters and setters")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "void NegatedFloatValue.<init>(FloatValue)",
     "java.lang.String NegatedFloatValue.toString()"
   })
-  void testGettersAndSetters() {
+  public void testGettersAndSetters() {
     // Arrange, Act and Assert
-    assertEquals("-f", new NegatedFloatValue(BasicValueFactory.FLOAT_VALUE).toString());
+    assertEquals("-f", (new NegatedFloatValue(BasicValueFactory.FLOAT_VALUE)).toString());
   }
 
   /**
@@ -41,13 +38,11 @@ class NegatedFloatValueDiffblueTest {
    * <p>Method under test: {@link NegatedFloatValue#negate()}
    */
   @Test
-  @DisplayName("Test negate()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({"FloatValue NegatedFloatValue.negate()"})
-  void testNegate() {
+  public void testNegate() {
     // Arrange and Act
-    FloatValue actualNegateResult = new NegatedFloatValue(BasicValueFactory.FLOAT_VALUE).negate();
+    FloatValue actualNegateResult = (new NegatedFloatValue(BasicValueFactory.FLOAT_VALUE)).negate();
 
     // Assert
     assertTrue(actualNegateResult instanceof UnknownFloatValue);
@@ -72,21 +67,20 @@ class NegatedFloatValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean NegatedFloatValue.equals(Object)",
     "int NegatedFloatValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     NegatedFloatValue negatedFloatValue = new NegatedFloatValue(BasicValueFactory.FLOAT_VALUE);
     NegatedFloatValue negatedFloatValue2 = new NegatedFloatValue(BasicValueFactory.FLOAT_VALUE);
 
     // Act and Assert
     assertEquals(negatedFloatValue, negatedFloatValue2);
-    assertEquals(negatedFloatValue.hashCode(), negatedFloatValue2.hashCode());
+    int expectedHashCodeResult = negatedFloatValue.hashCode();
+    assertEquals(expectedHashCodeResult, negatedFloatValue2.hashCode());
   }
 
   /**
@@ -105,14 +99,12 @@ class NegatedFloatValueDiffblueTest {
    * </ul>
    */
   @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean NegatedFloatValue.equals(Object)",
     "int NegatedFloatValue.hashCode()"
   })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     NegatedFloatValue negatedFloatValue = new NegatedFloatValue(BasicValueFactory.FLOAT_VALUE);
 
@@ -133,14 +125,12 @@ class NegatedFloatValueDiffblueTest {
    * <p>Method under test: {@link NegatedFloatValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean NegatedFloatValue.equals(Object)",
     "int NegatedFloatValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     NegatedFloatValue negatedFloatValue =
         new NegatedFloatValue(ParticularValueFactory.FLOAT_VALUE_0);
@@ -160,14 +150,12 @@ class NegatedFloatValueDiffblueTest {
    * <p>Method under test: {@link NegatedFloatValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean NegatedFloatValue.equals(Object)",
     "int NegatedFloatValue.hashCode()"
   })
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
     NegatedFloatValue negatedFloatValue =
         new NegatedFloatValue(new NegatedFloatValue(BasicValueFactory.FLOAT_VALUE));
@@ -187,14 +175,12 @@ class NegatedFloatValueDiffblueTest {
    * <p>Method under test: {@link NegatedFloatValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean NegatedFloatValue.equals(Object)",
     "int NegatedFloatValue.hashCode()"
   })
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new NegatedFloatValue(BasicValueFactory.FLOAT_VALUE), null);
   }
@@ -210,14 +196,12 @@ class NegatedFloatValueDiffblueTest {
    * <p>Method under test: {@link NegatedFloatValue#equals(Object)}
    */
   @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
+  @Category(MaintainedByDiffblue.class)
   @MethodsUnderTest({
     "boolean NegatedFloatValue.equals(Object)",
     "int NegatedFloatValue.hashCode()"
   })
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
         new NegatedFloatValue(BasicValueFactory.FLOAT_VALUE),
