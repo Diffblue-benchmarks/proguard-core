@@ -4,11 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryField;
@@ -16,22 +12,18 @@ import proguard.classfile.Member;
 
 public class JavaMethodReferenceInfoDiffblueTest {
   /**
-   * Test {@link JavaMethodReferenceInfo#JavaMethodReferenceInfo(Clazz, Clazz, Member)}.
-   *
-   * <p>Method under test: {@link JavaMethodReferenceInfo#JavaMethodReferenceInfo(Clazz, Clazz,
-   * Member)}
+   * Method under test:
+   * {@link JavaMethodReferenceInfo#JavaMethodReferenceInfo(Clazz, Clazz, Member)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void JavaMethodReferenceInfo.<init>(Clazz, Clazz, Member)"})
   public void testNewJavaMethodReferenceInfo() {
     // Arrange
     LibraryClass ownerClass = new LibraryClass();
     LibraryClass clazz = new LibraryClass();
 
     // Act
-    JavaMethodReferenceInfo actualJavaMethodReferenceInfo =
-        new JavaMethodReferenceInfo(ownerClass, clazz, new LibraryField(1, "Name", "Descriptor"));
+    JavaMethodReferenceInfo actualJavaMethodReferenceInfo = new JavaMethodReferenceInfo(ownerClass, clazz,
+        new LibraryField(1, "Name", "Descriptor"));
 
     // Assert
     Clazz clazz2 = actualJavaMethodReferenceInfo.clazz;

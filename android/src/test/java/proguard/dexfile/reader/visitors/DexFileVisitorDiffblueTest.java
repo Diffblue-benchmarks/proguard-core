@@ -1,80 +1,56 @@
 package proguard.dexfile.reader.visitors;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
+import java.util.List;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.dexfile.reader.node.DexClassNode;
 import proguard.dexfile.reader.node.DexFileNode;
 
 public class DexFileVisitorDiffblueTest {
   /**
-   * Test {@link DexFileVisitor#DexFileVisitor()}.
-   *
-   * <ul>
-   *   <li>Then return {@link DexFileVisitor#visitor} is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexFileVisitor#DexFileVisitor()}
+   * Method under test: {@link DexFileVisitor#DexFileVisitor()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexFileVisitor.<init>()", "void DexFileVisitor.<init>(DexFileVisitor)"})
-  public void testNewDexFileVisitor_thenReturnVisitorIsNull() {
+  public void testNewDexFileVisitor() {
     // Arrange, Act and Assert
     assertNull((new DexFileVisitor()).visitor);
-  }
-
-  /**
-   * Test {@link DexFileVisitor#DexFileVisitor(DexFileVisitor)}.
-   *
-   * <ul>
-   *   <li>When {@link DexFileVisitor#DexFileVisitor()}.
-   *   <li>Then return {@link DexFileVisitor#visitor} {@link DexFileVisitor#visitor} is {@code
-   *       null}.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link DexFileVisitor#DexFileVisitor(DexFileVisitor)}
-   *   <li>{@link DexFileVisitor#DexFileVisitor()}
-   * </ul>
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexFileVisitor.<init>()", "void DexFileVisitor.<init>(DexFileVisitor)"})
-  public void testNewDexFileVisitor_whenDexFileVisitor_thenReturnVisitorVisitorIsNull() {
-    // Arrange, Act and Assert
     assertNull((new DexFileVisitor(new DexFileVisitor())).visitor.visitor);
   }
 
   /**
-   * Test {@link DexFileVisitor#visit(int, String, String, String[])}.
-   *
-   * <ul>
-   *   <li>Given {@link DexFileVisitor#DexFileVisitor(DexFileVisitor)} with visitor is {@link
-   *       DexFileNode} (default constructor).
-   *   <li>Then return {@link DexClassNode}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexFileVisitor#visit(int, String, String, String[])}
+   * Method under test:
+   * {@link DexFileVisitor#visit(int, String, String, String[])}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DexClassVisitor DexFileVisitor.visit(int, String, String, String[])"})
-  public void testVisit_givenDexFileVisitorWithVisitorIsDexFileNode_thenReturnDexClassNode() {
-    // Arrange and Act
-    DexClassVisitor actualVisitResult =
-        (new DexFileVisitor(new DexFileNode()))
-            .visit(1, "Class Name", "Super Class", new String[] {"Interface Names"});
+  public void testVisit() {
+    // Arrange, Act and Assert
+    assertNull((new DexFileVisitor()).visit(1, "Class Name", "Super Class", new String[]{"Interface Names"}));
+    assertNull((new DexFileVisitor(new DexFileVisitor())).visit(1, "Class Name", "Super Class",
+        new String[]{"Interface Names"}));
+  }
+
+  /**
+   * Method under test:
+   * {@link DexFileVisitor#visit(int, String, String, String[])}
+   */
+  @Test
+  public void testVisit2() {
+    // Arrange
+    DexFileNode visitor = new DexFileNode();
+    DexFileVisitor dexFileVisitor = new DexFileVisitor(visitor);
+
+    // Act
+    DexClassVisitor actualVisitResult = dexFileVisitor.visit(1, "Class Name", "Super Class",
+        new String[]{"Interface Names"});
 
     // Assert
     assertTrue(actualVisitResult instanceof DexClassNode);
+    DexFileVisitor dexFileVisitor2 = dexFileVisitor.visitor;
+    assertTrue(dexFileVisitor2 instanceof DexFileNode);
     assertEquals("Class Name", ((DexClassNode) actualVisitResult).className);
     assertEquals("Super Class", ((DexClassNode) actualVisitResult).superClass);
     assertNull(((DexClassNode) actualVisitResult).source);
@@ -82,48 +58,10 @@ public class DexFileVisitorDiffblueTest {
     assertNull(((DexClassNode) actualVisitResult).fields);
     assertNull(((DexClassNode) actualVisitResult).methods);
     assertNull(((DexClassNode) actualVisitResult).visitor);
-    assertEquals(1, ((DexClassNode) actualVisitResult).interfaceNames.length);
+    List<DexClassNode> dexClassNodeList = ((DexFileNode) dexFileVisitor2).clzs;
+    assertEquals(1, dexClassNodeList.size());
     assertEquals(1, ((DexClassNode) actualVisitResult).access);
-  }
-
-  /**
-   * Test {@link DexFileVisitor#visit(int, String, String, String[])}.
-   *
-   * <ul>
-   *   <li>Given {@link DexFileVisitor#DexFileVisitor(DexFileVisitor)} with visitor is {@link
-   *       DexFileVisitor#DexFileVisitor()}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexFileVisitor#visit(int, String, String, String[])}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DexClassVisitor DexFileVisitor.visit(int, String, String, String[])"})
-  public void testVisit_givenDexFileVisitorWithVisitorIsDexFileVisitor_thenReturnNull() {
-    // Arrange, Act and Assert
-    assertNull(
-        (new DexFileVisitor(new DexFileVisitor()))
-            .visit(1, "Class Name", "Super Class", new String[] {"Interface Names"}));
-  }
-
-  /**
-   * Test {@link DexFileVisitor#visit(int, String, String, String[])}.
-   *
-   * <ul>
-   *   <li>Given {@link DexFileVisitor#DexFileVisitor()}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexFileVisitor#visit(int, String, String, String[])}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DexClassVisitor DexFileVisitor.visit(int, String, String, String[])"})
-  public void testVisit_givenDexFileVisitor_thenReturnNull() {
-    // Arrange, Act and Assert
-    assertNull(
-        (new DexFileVisitor())
-            .visit(1, "Class Name", "Super Class", new String[] {"Interface Names"}));
+    assertSame(visitor.clzs, dexClassNodeList);
+    assertArrayEquals(new String[]{"Interface Names"}, ((DexClassNode) actualVisitResult).interfaceNames);
   }
 }

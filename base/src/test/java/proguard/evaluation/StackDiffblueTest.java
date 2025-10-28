@@ -6,11 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.evaluation.value.BasicValueFactory;
 import proguard.evaluation.value.DoubleValue;
 import proguard.evaluation.value.FloatValue;
@@ -19,87 +15,10 @@ import proguard.evaluation.value.Value;
 
 public class StackDiffblueTest {
   /**
-   * Test {@link Stack#Stack(Stack)}.
-   *
-   * <p>Method under test: {@link Stack#Stack(Stack)}
+   * Method under test: {@link Stack#reset(int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void Stack.<init>(Stack)"})
-  public void testNewStack() {
-    // Arrange
-    Stack stack = new Stack(3);
-
-    // Act and Assert
-    assertEquals(stack, new Stack(stack));
-  }
-
-  /**
-   * Test {@link Stack#Stack(int)}.
-   *
-   * <ul>
-   *   <li>When three.
-   *   <li>Then return first element is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#Stack(int)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void Stack.<init>(int)"})
-  public void testNewStack_whenThree_thenReturnFirstElementIsNull() {
-    // Arrange and Act
-    Stack actualStack = new Stack(3);
-
-    // Assert
-    Value[] valueArray = actualStack.values;
-    assertNull(valueArray[0]);
-    assertNull(valueArray[1]);
-    assertNull(valueArray[2]);
-    assertEquals(0, actualStack.getActualMaxSize());
-    assertEquals(0, actualStack.size());
-    assertEquals(3, valueArray.length);
-  }
-
-  /**
-   * Test getters and setters.
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link Stack#getActualMaxSize()}
-   *   <li>{@link Stack#size()}
-   * </ul>
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int Stack.getActualMaxSize()", "void Stack.pop1()", "int Stack.size()"})
-  public void testGettersAndSetters() {
-    // Arrange
-    Stack stack = new Stack(3);
-
-    // Act
-    int actualActualMaxSize = stack.getActualMaxSize();
-
-    // Assert
-    assertEquals(0, actualActualMaxSize);
-    assertEquals(0, stack.size());
-  }
-
-  /**
-   * Test {@link Stack#reset(int)}.
-   *
-   * <ul>
-   *   <li>Given {@link Stack#Stack(int)} with maxSize is one.
-   *   <li>Then second element is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#reset(int)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void Stack.reset(int)"})
-  public void testReset_givenStackWithMaxSizeIsOne_thenSecondElementIsNull() {
+  public void testReset() {
     // Arrange
     Stack stack = new Stack(1);
 
@@ -114,65 +33,10 @@ public class StackDiffblueTest {
   }
 
   /**
-   * Test {@link Stack#reset(int)}.
-   *
-   * <ul>
-   *   <li>Given {@link Stack#Stack(int)} with maxSize is three.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#reset(int)}
+   * Method under test: {@link Stack#copy(Stack)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void Stack.reset(int)"})
-  public void testReset_givenStackWithMaxSizeIsThree() {
-    // Arrange
-    Stack stack = new Stack(3);
-
-    // Act
-    stack.reset(3);
-
-    // Assert that nothing has changed
-    assertEquals(3, stack.values.length);
-  }
-
-  /**
-   * Test {@link Stack#reset(int)}.
-   *
-   * <ul>
-   *   <li>Given {@link TracedStack#TracedStack(int)} with maxSize is three.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#reset(int)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void Stack.reset(int)"})
-  public void testReset_givenTracedStackWithMaxSizeIsThree() {
-    // Arrange
-    TracedStack tracedStack = new TracedStack(3);
-
-    // Act
-    tracedStack.reset(3);
-
-    // Assert that nothing has changed
-    assertEquals(3, tracedStack.values.length);
-  }
-
-  /**
-   * Test {@link Stack#copy(Stack)}.
-   *
-   * <ul>
-   *   <li>Given {@link Stack#Stack(int)} with maxSize is one.
-   *   <li>Then second element is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#copy(Stack)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void Stack.copy(Stack)"})
-  public void testCopy_givenStackWithMaxSizeIsOne_thenSecondElementIsNull() {
+  public void testCopy() {
     // Arrange
     Stack stack = new Stack(1);
 
@@ -187,19 +51,10 @@ public class StackDiffblueTest {
   }
 
   /**
-   * Test {@link Stack#generalize(Stack)}.
-   *
-   * <ul>
-   *   <li>When {@link Stack#Stack(int)} with maxSize is three.
-   *   <li>Then return {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#generalize(Stack)}
+   * Method under test: {@link Stack#generalize(Stack)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Stack.generalize(Stack)"})
-  public void testGeneralize_whenStackWithMaxSizeIsThree_thenReturnFalse() {
+  public void testGeneralize() {
     // Arrange
     Stack stack = new Stack(3);
 
@@ -208,37 +63,19 @@ public class StackDiffblueTest {
   }
 
   /**
-   * Test {@link Stack#getBottom(int)}.
-   *
-   * <ul>
-   *   <li>Given {@link Stack#Stack(int)} with maxSize is three.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#getBottom(int)}
+   * Method under test: {@link Stack#getBottom(int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Value Stack.getBottom(int)"})
-  public void testGetBottom_givenStackWithMaxSizeIsThree_thenReturnNull() {
+  public void testGetBottom() {
     // Arrange, Act and Assert
     assertNull((new Stack(3)).getBottom(1));
   }
 
   /**
-   * Test {@link Stack#setBottom(int, Value)}.
-   *
-   * <ul>
-   *   <li>Given {@link Stack#Stack(int)} with maxSize is three.
-   *   <li>Then array length is three.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#setBottom(int, Value)}
+   * Method under test: {@link Stack#setBottom(int, Value)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void Stack.setBottom(int, Value)"})
-  public void testSetBottom_givenStackWithMaxSizeIsThree_thenArrayLengthIsThree() {
+  public void testSetBottom() {
     // Arrange
     Stack stack = new Stack(3);
     DoubleValue value = BasicValueFactory.DOUBLE_VALUE;
@@ -253,37 +90,19 @@ public class StackDiffblueTest {
   }
 
   /**
-   * Test {@link Stack#getTop(int)}.
-   *
-   * <ul>
-   *   <li>When {@link InitializationFinder#NONE}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#getTop(int)}
+   * Method under test: {@link Stack#getTop(int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Value Stack.getTop(int)"})
-  public void testGetTop_whenNone_thenReturnNull() {
+  public void testGetTop() {
     // Arrange, Act and Assert
     assertNull((new Stack(3)).getTop(InitializationFinder.NONE));
   }
 
   /**
-   * Test {@link Stack#setTop(int, Value)}.
-   *
-   * <ul>
-   *   <li>When {@link InitializationFinder#NONE}.
-   *   <li>Then array length is three.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#setTop(int, Value)}
+   * Method under test: {@link Stack#setTop(int, Value)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void Stack.setTop(int, Value)"})
-  public void testSetTop_whenNone_thenArrayLengthIsThree() {
+  public void testSetTop() {
     // Arrange
     Stack stack = new Stack(3);
     DoubleValue value = BasicValueFactory.DOUBLE_VALUE;
@@ -298,20 +117,10 @@ public class StackDiffblueTest {
   }
 
   /**
-   * Test {@link Stack#push(Value)}.
-   *
-   * <ul>
-   *   <li>Given {@link Stack#Stack(int)} with maxSize is three.
-   *   <li>When {@link BasicValueFactory#DOUBLE_VALUE}.
-   *   <li>Then first element {@link TopValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#push(Value)}
+   * Method under test: {@link Stack#push(Value)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void Stack.push(Value)"})
-  public void testPush_givenStackWithMaxSizeIsThree_whenDouble_value_thenFirstElementTopValue() {
+  public void testPush() {
     // Arrange
     Stack stack = new Stack(3);
     DoubleValue value = BasicValueFactory.DOUBLE_VALUE;
@@ -333,20 +142,10 @@ public class StackDiffblueTest {
   }
 
   /**
-   * Test {@link Stack#push(Value)}.
-   *
-   * <ul>
-   *   <li>Given {@link Stack#Stack(int)} with maxSize is three.
-   *   <li>When {@link BasicValueFactory#FLOAT_VALUE}.
-   *   <li>Then second element is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#push(Value)}
+   * Method under test: {@link Stack#push(Value)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void Stack.push(Value)"})
-  public void testPush_givenStackWithMaxSizeIsThree_whenFloat_value_thenSecondElementIsNull() {
+  public void testPush2() {
     // Arrange
     Stack stack = new Stack(3);
     FloatValue value = BasicValueFactory.FLOAT_VALUE;
@@ -364,18 +163,10 @@ public class StackDiffblueTest {
   }
 
   /**
-   * Test {@link Stack#replaceReferences(Value, Value)}.
-   *
-   * <ul>
-   *   <li>When {@link BasicValueFactory#DOUBLE_VALUE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#replaceReferences(Value, Value)}
+   * Method under test: {@link Stack#replaceReferences(Value, Value)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void Stack.replaceReferences(Value, Value)"})
-  public void testReplaceReferences_whenDouble_value() {
+  public void testReplaceReferences() {
     // Arrange
     Stack stack = new Stack(3);
 
@@ -387,19 +178,10 @@ public class StackDiffblueTest {
   }
 
   /**
-   * Test {@link Stack#replaceReferences(Value, Value)}.
-   *
-   * <ul>
-   *   <li>When {@code null}.
-   *   <li>Then first element is {@link BasicValueFactory#DOUBLE_VALUE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#replaceReferences(Value, Value)}
+   * Method under test: {@link Stack#replaceReferences(Value, Value)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void Stack.replaceReferences(Value, Value)"})
-  public void testReplaceReferences_whenNull_thenFirstElementIsDouble_value() {
+  public void testReplaceReferences2() {
     // Arrange
     Stack stack = new Stack(3);
     DoubleValue replacement = BasicValueFactory.DOUBLE_VALUE;
@@ -416,23 +198,13 @@ public class StackDiffblueTest {
   }
 
   /**
-   * Test {@link Stack#equals(Object)}, and {@link Stack#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is equal.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
    *   <li>{@link Stack#equals(Object)}
    *   <li>{@link Stack#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Stack.equals(Object)", "int Stack.hashCode()"})
   public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     Stack stack = new Stack(3);
@@ -445,18 +217,9 @@ public class StackDiffblueTest {
   }
 
   /**
-   * Test {@link Stack#equals(Object)}, and {@link Stack#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is equal.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#equals(Object)}
+   * Method under test: {@link Stack#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Stack.equals(Object)", "int Stack.hashCode()"})
   public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual2() {
     // Arrange
     TracedStack tracedStack = new TracedStack(3);
@@ -469,23 +232,13 @@ public class StackDiffblueTest {
   }
 
   /**
-   * Test {@link Stack#equals(Object)}, and {@link Stack#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is same.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
    *   <li>{@link Stack#equals(Object)}
    *   <li>{@link Stack#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Stack.equals(Object)", "int Stack.hashCode()"})
   public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     Stack stack = new Stack(3);
@@ -497,18 +250,19 @@ public class StackDiffblueTest {
   }
 
   /**
-   * Test {@link Stack#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#equals(Object)}
+   * Method under test: {@link Stack#toString()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Stack.equals(Object)", "int Stack.hashCode()"})
+  public void testToString() {
+    // Arrange, Act and Assert
+    assertEquals("", (new Stack(3)).toString());
+    assertEquals("", (new TracedStack(3)).toString());
+  }
+
+  /**
+   * Method under test: {@link Stack#equals(Object)}
+   */
+  @Test
   public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
     TracedStack tracedStack = new TracedStack(3);
@@ -518,72 +272,70 @@ public class StackDiffblueTest {
   }
 
   /**
-   * Test {@link Stack#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is {@code null}.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#equals(Object)}
+   * Method under test: {@link Stack#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Stack.equals(Object)", "int Stack.hashCode()"})
   public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new Stack(3), null);
   }
 
   /**
-   * Test {@link Stack#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is wrong type.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#equals(Object)}
+   * Method under test: {@link Stack#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Stack.equals(Object)", "int Stack.hashCode()"})
   public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new Stack(3), "Different type to Stack");
   }
 
   /**
-   * Test {@link Stack#toString()}.
-   *
+   * Methods under test:
    * <ul>
-   *   <li>Given {@link Stack#Stack(int)} with maxSize is three.
+   *   <li>{@link Stack#getActualMaxSize()}
+   *   <li>{@link Stack#size()}
    * </ul>
-   *
-   * <p>Method under test: {@link Stack#toString()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"java.lang.String Stack.toString()"})
-  public void testToString_givenStackWithMaxSizeIsThree() {
-    // Arrange, Act and Assert
-    assertEquals("", (new Stack(3)).toString());
+  public void testGettersAndSetters() {
+    // Arrange
+    Stack stack = new Stack(3);
+
+    // Act
+    int actualActualMaxSize = stack.getActualMaxSize();
+
+    // Assert
+    assertEquals(0, actualActualMaxSize);
+    assertEquals(0, stack.size());
   }
 
   /**
-   * Test {@link Stack#toString()}.
-   *
-   * <ul>
-   *   <li>Given {@link TracedStack#TracedStack(int)} with maxSize is three.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#toString()}
+   * Method under test: {@link Stack#Stack(int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"java.lang.String Stack.toString()"})
-  public void testToString_givenTracedStackWithMaxSizeIsThree() {
-    // Arrange, Act and Assert
-    assertEquals("", (new TracedStack(3)).toString());
+  public void testNewStack() {
+    // Arrange and Act
+    Stack actualStack = new Stack(3);
+
+    // Assert
+    Value[] valueArray = actualStack.values;
+    assertNull(valueArray[0]);
+    assertNull(valueArray[1]);
+    assertNull(valueArray[2]);
+    assertEquals(0, actualStack.getActualMaxSize());
+    assertEquals(0, actualStack.size());
+    assertEquals(3, valueArray.length);
+  }
+
+  /**
+   * Method under test: {@link Stack#Stack(Stack)}
+   */
+  @Test
+  public void testNewStack2() {
+    // Arrange
+    Stack stack = new Stack(3);
+
+    // Act and Assert
+    assertEquals(stack, new Stack(stack));
   }
 }

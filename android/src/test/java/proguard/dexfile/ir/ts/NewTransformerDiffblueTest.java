@@ -5,13 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.IrMethod;
 import proguard.dexfile.ir.expr.ArrayExpr;
 import proguard.dexfile.ir.expr.Exprs;
@@ -19,34 +15,19 @@ import proguard.dexfile.ir.expr.Local;
 import proguard.dexfile.ir.expr.NewExpr;
 import proguard.dexfile.ir.stmt.AssignStmt;
 import proguard.dexfile.ir.stmt.Stmt;
-import proguard.dexfile.ir.stmt.Stmt.ST;
 import proguard.dexfile.ir.stmt.Stmts;
-import proguard.dexfile.ir.ts.NewTransformer.TObject;
-import proguard.dexfile.ir.ts.NewTransformer.Vx;
 
 public class NewTransformerDiffblueTest {
   /**
-   * Test {@link NewTransformer#makeSureUsedBeforeConstructor(IrMethod, Map, int)}.
-   *
-   * <ul>
-   *   <li>Given {@link TObject#TObject(Local, NewExpr)} with local is {@link Local#Local()} and
-   *       init is nNew {@code Type}.
-   * </ul>
-   *
-   * <p>Method under test: {@link NewTransformer#makeSureUsedBeforeConstructor(IrMethod, Map, int)}
+   * Method under test:
+   * {@link NewTransformer#makeSureUsedBeforeConstructor(IrMethod, Map, int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void NewTransformer.makeSureUsedBeforeConstructor(IrMethod, Map, int)"})
-  public void testMakeSureUsedBeforeConstructor_givenTObjectWithLocalIsLocalAndInitIsNNewType() {
+  public void testMakeSureUsedBeforeConstructor() {
     // Arrange
     NewTransformer newTransformer = new NewTransformer();
     IrMethod method = new IrMethod();
-
-    HashMap<Local, TObject> init = new HashMap<>();
-    Local local = new Local();
-    Local local2 = new Local();
-    init.put(local, new TObject(local2, Exprs.nNew("Type")));
+    HashMap<Local, NewTransformer.TObject> init = new HashMap<>();
 
     // Act
     newTransformer.makeSureUsedBeforeConstructor(method, init, 3);
@@ -56,62 +37,32 @@ public class NewTransformerDiffblueTest {
   }
 
   /**
-   * Test {@link NewTransformer#makeSureUsedBeforeConstructor(IrMethod, Map, int)}.
-   *
-   * <ul>
-   *   <li>When {@link HashMap#HashMap()}.
-   *   <li>Then {@link HashMap#HashMap()} Empty.
-   * </ul>
-   *
-   * <p>Method under test: {@link NewTransformer#makeSureUsedBeforeConstructor(IrMethod, Map, int)}
+   * Method under test:
+   * {@link NewTransformer#makeSureUsedBeforeConstructor(IrMethod, Map, int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void NewTransformer.makeSureUsedBeforeConstructor(IrMethod, Map, int)"})
-  public void testMakeSureUsedBeforeConstructor_whenHashMap_thenHashMapEmpty() {
+  public void testMakeSureUsedBeforeConstructor2() {
     // Arrange
     NewTransformer newTransformer = new NewTransformer();
     IrMethod method = new IrMethod();
-    HashMap<Local, TObject> init = new HashMap<>();
+
+    HashMap<Local, NewTransformer.TObject> init = new HashMap<>();
+    Local local = new Local();
+    Local local2 = new Local();
+    init.put(local, new NewTransformer.TObject(local2, Exprs.nNew("Type")));
 
     // Act
     newTransformer.makeSureUsedBeforeConstructor(method, init, 3);
 
-    // Assert that nothing has changed
+    // Assert
     assertTrue(init.isEmpty());
   }
 
   /**
-   * Test {@link NewTransformer#findInvokeExpr(Stmt)}.
-   *
-   * <p>Method under test: {@link NewTransformer#findInvokeExpr(Stmt)}
+   * Method under test: {@link NewTransformer#findInvokeExpr(Stmt)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"proguard.dexfile.ir.expr.InvokeExpr NewTransformer.findInvokeExpr(Stmt)"})
   public void testFindInvokeExpr() {
-    // Arrange
-    NewTransformer newTransformer = new NewTransformer();
-    ArrayExpr left = new ArrayExpr();
-
-    // Act and Assert
-    assertNull(newTransformer.findInvokeExpr(new AssignStmt(ST.ASSIGN, left, new ArrayExpr())));
-  }
-
-  /**
-   * Test {@link NewTransformer#findInvokeExpr(Stmt)}.
-   *
-   * <ul>
-   *   <li>When nLabel.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link NewTransformer#findInvokeExpr(Stmt)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"proguard.dexfile.ir.expr.InvokeExpr NewTransformer.findInvokeExpr(Stmt)"})
-  public void testFindInvokeExpr_whenNLabel_thenReturnNull() {
     // Arrange
     NewTransformer newTransformer = new NewTransformer();
 
@@ -120,19 +71,28 @@ public class NewTransformerDiffblueTest {
   }
 
   /**
-   * Test TObject {@link TObject#TObject(Local, NewExpr)}.
-   *
-   * <p>Method under test: {@link TObject#TObject(Local, NewExpr)}
+   * Method under test: {@link NewTransformer#findInvokeExpr(Stmt)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void TObject.<init>(Local, NewExpr)"})
+  public void testFindInvokeExpr2() {
+    // Arrange
+    NewTransformer newTransformer = new NewTransformer();
+    ArrayExpr left = new ArrayExpr();
+
+    // Act and Assert
+    assertNull(newTransformer.findInvokeExpr(new AssignStmt(Stmt.ST.ASSIGN, left, new ArrayExpr())));
+  }
+
+  /**
+   * Method under test: {@link NewTransformer.TObject#TObject(Local, NewExpr)}
+   */
+  @Test
   public void testTObjectNewTObject() {
     // Arrange
     Local local = new Local();
 
     // Act and Assert
-    Local local2 = (new TObject(local, Exprs.nNew("Type"))).local;
+    Local local2 = (new NewTransformer.TObject(local, Exprs.nNew("Type"))).local;
     assertEquals("a0", local2.toString0());
     assertNull(local2.getOps());
     assertNull(local2.getOp());
@@ -141,23 +101,20 @@ public class NewTransformerDiffblueTest {
   }
 
   /**
-   * Test Vx {@link Vx#Vx(TObject, boolean)}.
-   *
-   * <p>Method under test: {@link Vx#Vx(TObject, boolean)}
+   * Method under test:
+   * {@link NewTransformer.Vx#Vx(NewTransformer.TObject, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void Vx.<init>(TObject, boolean)"})
   public void testVxNewVx() {
     // Arrange
     Local local = new Local();
-    TObject obj = new TObject(local, Exprs.nNew("Type"));
+    NewTransformer.TObject obj = new NewTransformer.TObject(local, Exprs.nNew("Type"));
 
     // Act
-    Vx actualVx = new Vx(obj, true);
+    NewTransformer.Vx actualVx = new NewTransformer.Vx(obj, true);
 
     // Assert
-    TObject tObject = actualVx.obj;
+    NewTransformer.TObject tObject = actualVx.obj;
     assertNull(tObject.invokeStmt);
     assertFalse(tObject.useBeforeInit);
     assertTrue(actualVx.init);

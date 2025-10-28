@@ -1,31 +1,18 @@
 package proguard.classfile.visitor;
 
 import static org.junit.Assert.assertEquals;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.classfile.ProgramClass;
 import proguard.classfile.ProgramField;
 import proguard.classfile.ProgramMethod;
 
 public class MemberAccessFlagSetterDiffblueTest {
   /**
-   * Test {@link MemberAccessFlagSetter#visitProgramField(ProgramClass, ProgramField)}.
-   *
-   * <ul>
-   *   <li>When {@link ProgramField#ProgramField()}.
-   *   <li>Then {@link ProgramField#ProgramField()} AccessFlags is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link MemberAccessFlagSetter#visitProgramField(ProgramClass,
-   * ProgramField)}
+   * Method under test:
+   * {@link MemberAccessFlagSetter#visitProgramField(ProgramClass, ProgramField)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void MemberAccessFlagSetter.visitProgramField(ProgramClass, ProgramField)"})
-  public void testVisitProgramField_whenProgramField_thenProgramFieldAccessFlagsIsOne() {
+  public void testVisitProgramField() {
     // Arrange
     MemberAccessFlagSetter memberAccessFlagSetter = new MemberAccessFlagSetter(1);
     ProgramClass programClass = new ProgramClass();
@@ -39,20 +26,11 @@ public class MemberAccessFlagSetterDiffblueTest {
   }
 
   /**
-   * Test {@link MemberAccessFlagSetter#visitProgramMethod(ProgramClass, ProgramMethod)}.
-   *
-   * <ul>
-   *   <li>When {@link ProgramMethod#ProgramMethod()}.
-   *   <li>Then {@link ProgramMethod#ProgramMethod()} AccessFlags is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link MemberAccessFlagSetter#visitProgramMethod(ProgramClass,
-   * ProgramMethod)}
+   * Method under test:
+   * {@link MemberAccessFlagSetter#visitProgramMethod(ProgramClass, ProgramMethod)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void MemberAccessFlagSetter.visitProgramMethod(ProgramClass, ProgramMethod)"})
-  public void testVisitProgramMethod_whenProgramMethod_thenProgramMethodAccessFlagsIsOne() {
+  public void testVisitProgramMethod() {
     // Arrange
     MemberAccessFlagSetter memberAccessFlagSetter = new MemberAccessFlagSetter(1);
     ProgramClass programClass = new ProgramClass();

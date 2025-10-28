@@ -1,11 +1,7 @@
 package proguard.classfile.instruction.visitor;
 
 import static org.junit.Assert.assertThrows;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryMethod;
@@ -17,22 +13,11 @@ import proguard.classfile.instruction.Instruction;
 
 public class InstructionVisitorDiffblueTest {
   /**
-   * Test {@link InstructionVisitor#visitAnyInstruction(Clazz, Method, CodeAttribute, int,
-   * Instruction)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link UnsupportedOperationException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionVisitor#visitAnyInstruction(Clazz, Method,
-   * CodeAttribute, int, Instruction)}
+   * Method under test:
+   * {@link InstructionVisitor#visitAnyInstruction(Clazz, Method, CodeAttribute, int, Instruction)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void InstructionVisitor.visitAnyInstruction(Clazz, Method, CodeAttribute, int, Instruction)"
-  })
-  public void testVisitAnyInstruction_thenThrowUnsupportedOperationException() {
+  public void testVisitAnyInstruction() {
     // Arrange
     MaxStackSizeComputer maxStackSizeComputer = new MaxStackSizeComputer();
     LibraryClass clazz = new LibraryClass();
@@ -41,10 +26,7 @@ public class InstructionVisitorDiffblueTest {
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act and Assert
-    assertThrows(
-        UnsupportedOperationException.class,
-        () ->
-            maxStackSizeComputer.visitAnyInstruction(
-                clazz, method, codeAttribute, 2, new BranchInstruction((byte) 'A', 1)));
+    assertThrows(UnsupportedOperationException.class, () -> maxStackSizeComputer.visitAnyInstruction(clazz, method,
+        codeAttribute, 2, new BranchInstruction((byte) 'A', 1)));
   }
 }

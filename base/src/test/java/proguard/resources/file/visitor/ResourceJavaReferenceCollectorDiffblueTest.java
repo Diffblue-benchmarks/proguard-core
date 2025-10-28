@@ -1,31 +1,40 @@
 package proguard.resources.file.visitor;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
+import java.io.IOException;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import proguard.io.ClassPathDataEntry;
+import proguard.io.DataEntry;
 
 public class ResourceJavaReferenceCollectorDiffblueTest {
   /**
-   * Test getters and setters.
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
-   *   <li>default or parameterless constructor of {@link ResourceJavaReferenceCollector}
+   *   <li>default or parameterless constructor of
+   * {@link ResourceJavaReferenceCollector}
    *   <li>{@link ResourceJavaReferenceCollector#getReferences()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ResourceJavaReferenceCollector.<init>()",
-    "java.util.Set ResourceJavaReferenceCollector.getReferences()"
-  })
   public void testGettersAndSetters() {
     // Arrange, Act and Assert
     assertNull((new ResourceJavaReferenceCollector()).getReferences());
+  }
+
+  /**
+   * Method under test: {@link ResourceJavaReferenceCollector#read(DataEntry)}
+   */
+  @Test
+  public void testRead() throws IOException {
+    // Arrange
+    ResourceJavaReferenceCollector resourceJavaReferenceCollector = new ResourceJavaReferenceCollector();
+    Class<Object> clazz = Object.class;
+
+    // Act
+    resourceJavaReferenceCollector.read(new ClassPathDataEntry(clazz));
+
+    // Assert
+    assertEquals(145, resourceJavaReferenceCollector.getReferences().size());
   }
 }

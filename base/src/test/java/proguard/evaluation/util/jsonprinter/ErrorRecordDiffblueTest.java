@@ -2,18 +2,11 @@ package proguard.evaluation.util.jsonprinter;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 public class ErrorRecordDiffblueTest {
   /**
-   * Test getters and setters.
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
    *   <li>{@link ErrorRecord#ErrorRecord(int, String)}
    *   <li>{@link ErrorRecord#getInstructionOffset()}
@@ -21,12 +14,6 @@ public class ErrorRecordDiffblueTest {
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ErrorRecord.<init>(int, String)",
-    "int ErrorRecord.getInstructionOffset()",
-    "String ErrorRecord.getMessage()"
-  })
   public void testGettersAndSetters() {
     // Arrange and Act
     ErrorRecord actualErrorRecord = new ErrorRecord(1, "Not all who wander are lost");
@@ -38,13 +25,9 @@ public class ErrorRecordDiffblueTest {
   }
 
   /**
-   * Test {@link ErrorRecord#toJson(StringBuilder)}.
-   *
-   * <p>Method under test: {@link ErrorRecord#toJson(StringBuilder)}
+   * Method under test: {@link ErrorRecord#toJson(StringBuilder)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"StringBuilder ErrorRecord.toJson(StringBuilder)"})
   public void testToJson() {
     // Arrange
     ErrorRecord errorRecord = new ErrorRecord(1, "Not all who wander are lost");
@@ -54,9 +37,9 @@ public class ErrorRecordDiffblueTest {
     StringBuilder actualToJsonResult = errorRecord.toJson(builder);
 
     // Assert
-    assertEquals(
-        "foo{\"instructionOffset\":1,\"message\":\"Not all who wander are lost\"}",
-        builder.toString());
+    assertEquals("foo{\"instructionOffset\":1,\"message\":\"Not all who wander are lost\"}", builder.toString());
+    assertEquals("foo{\"instructionOffset\":1,\"message\":\"Not all who wander are lost\"}",
+        actualToJsonResult.toString());
     assertSame(builder, actualToJsonResult);
   }
 }

@@ -4,11 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.expr.Constant;
 import proguard.dexfile.reader.DexLabel;
 import proguard.dexfile.reader.Field;
@@ -20,60 +16,10 @@ import proguard.dexfile.reader.node.DexCodeNode;
 
 public class DexCodeVisitorDiffblueTest {
   /**
-   * Test {@link DexCodeVisitor#DexCodeVisitor()}.
-   *
-   * <ul>
-   *   <li>Then return {@link DexCodeVisitor#visitor} is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexCodeVisitor#DexCodeVisitor()}
+   * Method under test: {@link DexCodeVisitor#visitRegister(int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.<init>()", "void DexCodeVisitor.<init>(DexCodeVisitor)"})
-  public void testNewDexCodeVisitor_thenReturnVisitorIsNull() {
-    // Arrange, Act and Assert
-    assertNull((new DexCodeVisitor()).visitor);
-  }
-
-  /**
-   * Test {@link DexCodeVisitor#DexCodeVisitor(DexCodeVisitor)}.
-   *
-   * <ul>
-   *   <li>When {@link DexCodeVisitor#DexCodeVisitor()}.
-   *   <li>Then return {@link DexCodeVisitor#visitor} {@link DexCodeVisitor#visitor} is {@code
-   *       null}.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link DexCodeVisitor#DexCodeVisitor(DexCodeVisitor)}
-   *   <li>{@link DexCodeVisitor#DexCodeVisitor()}
-   * </ul>
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.<init>()", "void DexCodeVisitor.<init>(DexCodeVisitor)"})
-  public void testNewDexCodeVisitor_whenDexCodeVisitor_thenReturnVisitorVisitorIsNull() {
-    // Arrange, Act and Assert
-    assertNull((new DexCodeVisitor(new DexCodeVisitor())).visitor.visitor);
-  }
-
-  /**
-   * Test {@link DexCodeVisitor#visitRegister(int)}.
-   *
-   * <ul>
-   *   <li>Then {@link DexCodeVisitor#DexCodeVisitor(DexCodeVisitor)} with visitor is {@link
-   *       DexCodeNode#DexCodeNode()} {@link DexCodeVisitor#visitor} {@link DexCodeNode}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitRegister(int)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.visitRegister(int)"})
-  public void testVisitRegister_thenDexCodeVisitorWithVisitorIsDexCodeNodeVisitorDexCodeNode() {
+  public void testVisitRegister() {
     // Arrange
     DexCodeVisitor dexCodeVisitor = new DexCodeVisitor(new DexCodeNode());
 
@@ -87,19 +33,10 @@ public class DexCodeVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexCodeVisitor#visitStmt2R1N(Op, int, int, int)}.
-   *
-   * <ul>
-   *   <li>Then {@link DexCodeVisitor#DexCodeVisitor(DexCodeVisitor)} with visitor is {@link
-   *       DexCodeNode#DexCodeNode()} {@link DexCodeVisitor#visitor} {@link DexCodeNode}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitStmt2R1N(Op, int, int, int)}
+   * Method under test: {@link DexCodeVisitor#visitStmt2R1N(Op, int, int, int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.visitStmt2R1N(Op, int, int, int)"})
-  public void testVisitStmt2R1N_thenDexCodeVisitorWithVisitorIsDexCodeNodeVisitorDexCodeNode() {
+  public void testVisitStmt2R1N() {
     // Arrange
     DexCodeNode visitor = new DexCodeNode();
     DexCodeVisitor dexCodeVisitor = new DexCodeVisitor(visitor);
@@ -114,19 +51,10 @@ public class DexCodeVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexCodeVisitor#visitStmt3R(Op, int, int, int)}.
-   *
-   * <ul>
-   *   <li>Then {@link DexCodeVisitor#DexCodeVisitor(DexCodeVisitor)} with visitor is {@link
-   *       DexCodeNode#DexCodeNode()} {@link DexCodeVisitor#visitor} {@link DexCodeNode}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitStmt3R(Op, int, int, int)}
+   * Method under test: {@link DexCodeVisitor#visitStmt3R(Op, int, int, int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.visitStmt3R(Op, int, int, int)"})
-  public void testVisitStmt3R_thenDexCodeVisitorWithVisitorIsDexCodeNodeVisitorDexCodeNode() {
+  public void testVisitStmt3R() {
     // Arrange
     DexCodeNode visitor = new DexCodeNode();
     DexCodeVisitor dexCodeVisitor = new DexCodeVisitor(visitor);
@@ -141,19 +69,10 @@ public class DexCodeVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexCodeVisitor#visitTypeStmt(Op, int, int, String)}.
-   *
-   * <ul>
-   *   <li>Then {@link DexCodeVisitor#DexCodeVisitor(DexCodeVisitor)} with visitor is {@link
-   *       DexCodeNode#DexCodeNode()} {@link DexCodeVisitor#visitor} {@link DexCodeNode}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitTypeStmt(Op, int, int, String)}
+   * Method under test: {@link DexCodeVisitor#visitTypeStmt(Op, int, int, String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.visitTypeStmt(Op, int, int, String)"})
-  public void testVisitTypeStmt_thenDexCodeVisitorWithVisitorIsDexCodeNodeVisitorDexCodeNode() {
+  public void testVisitTypeStmt() {
     // Arrange
     DexCodeNode visitor = new DexCodeNode();
     DexCodeVisitor dexCodeVisitor = new DexCodeVisitor(visitor);
@@ -168,19 +87,20 @@ public class DexCodeVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexCodeVisitor#visitConstStmt(Op, int, Object)}.
-   *
-   * <ul>
-   *   <li>Then {@link DexCodeVisitor#DexCodeVisitor(DexCodeVisitor)} with visitor is {@link
-   *       DexCodeNode#DexCodeNode()} {@link DexCodeVisitor#visitor} {@link DexCodeNode}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitConstStmt(Op, int, Object)}
+   * Method under test: {@link DexCodeVisitor#DexCodeVisitor()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.visitConstStmt(Op, int, Object)"})
-  public void testVisitConstStmt_thenDexCodeVisitorWithVisitorIsDexCodeNodeVisitorDexCodeNode() {
+  public void testNewDexCodeVisitor() {
+    // Arrange, Act and Assert
+    assertNull((new DexCodeVisitor()).visitor);
+    assertNull((new DexCodeVisitor(new DexCodeVisitor())).visitor.visitor);
+  }
+
+  /**
+   * Method under test: {@link DexCodeVisitor#visitConstStmt(Op, int, Object)}
+   */
+  @Test
+  public void testVisitConstStmt() {
     // Arrange
     DexCodeNode visitor = new DexCodeNode();
     DexCodeVisitor dexCodeVisitor = new DexCodeVisitor(visitor);
@@ -195,13 +115,10 @@ public class DexCodeVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexCodeVisitor#visitFillArrayDataStmt(Op, int, Object)}.
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitFillArrayDataStmt(Op, int, Object)}
+   * Method under test:
+   * {@link DexCodeVisitor#visitFillArrayDataStmt(Op, int, Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.visitFillArrayDataStmt(Op, int, Object)"})
   public void testVisitFillArrayDataStmt() {
     // Arrange
     DexCodeNode visitor = new DexCodeNode();
@@ -217,19 +134,10 @@ public class DexCodeVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexCodeVisitor#visitFieldStmt(Op, int, int, Field)}.
-   *
-   * <ul>
-   *   <li>Then {@link DexCodeVisitor#DexCodeVisitor(DexCodeVisitor)} with visitor is {@link
-   *       DexCodeNode#DexCodeNode()} {@link DexCodeVisitor#visitor} {@link DexCodeNode}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitFieldStmt(Op, int, int, Field)}
+   * Method under test: {@link DexCodeVisitor#visitFieldStmt(Op, int, int, Field)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.visitFieldStmt(Op, int, int, Field)"})
-  public void testVisitFieldStmt_thenDexCodeVisitorWithVisitorIsDexCodeNodeVisitorDexCodeNode() {
+  public void testVisitFieldStmt() {
     // Arrange
     DexCodeNode visitor = new DexCodeNode();
     DexCodeVisitor dexCodeVisitor = new DexCodeVisitor(visitor);
@@ -244,20 +152,17 @@ public class DexCodeVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexCodeVisitor#visitFilledNewArrayStmt(Op, int[], String)}.
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitFilledNewArrayStmt(Op, int[], String)}
+   * Method under test:
+   * {@link DexCodeVisitor#visitFilledNewArrayStmt(Op, int[], String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.visitFilledNewArrayStmt(Op, int[], String)"})
   public void testVisitFilledNewArrayStmt() {
     // Arrange
     DexCodeNode visitor = new DexCodeNode();
     DexCodeVisitor dexCodeVisitor = new DexCodeVisitor(visitor);
 
     // Act
-    dexCodeVisitor.visitFilledNewArrayStmt(Op.NOP, new int[] {1, -1, 1, -1}, "Type");
+    dexCodeVisitor.visitFilledNewArrayStmt(Op.NOP, new int[]{1, -1, 1, -1}, "Type");
 
     // Assert
     DexCodeVisitor dexCodeVisitor2 = dexCodeVisitor.visitor;
@@ -266,19 +171,11 @@ public class DexCodeVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexCodeVisitor#visitJumpStmt(Op, int, int, DexLabel)}.
-   *
-   * <ul>
-   *   <li>Then {@link DexCodeVisitor#DexCodeVisitor(DexCodeVisitor)} with visitor is {@link
-   *       DexCodeNode#DexCodeNode()} {@link DexCodeVisitor#visitor} {@link DexCodeNode}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitJumpStmt(Op, int, int, DexLabel)}
+   * Method under test:
+   * {@link DexCodeVisitor#visitJumpStmt(Op, int, int, DexLabel)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.visitJumpStmt(Op, int, int, DexLabel)"})
-  public void testVisitJumpStmt_thenDexCodeVisitorWithVisitorIsDexCodeNodeVisitorDexCodeNode() {
+  public void testVisitJumpStmt() {
     // Arrange
     DexCodeNode visitor = new DexCodeNode();
     DexCodeVisitor dexCodeVisitor = new DexCodeVisitor(visitor);
@@ -293,19 +190,10 @@ public class DexCodeVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexCodeVisitor#visitLabel(DexLabel)}.
-   *
-   * <ul>
-   *   <li>Then {@link DexCodeVisitor#DexCodeVisitor(DexCodeVisitor)} with visitor is {@link
-   *       DexCodeNode#DexCodeNode()} {@link DexCodeVisitor#visitor} {@link DexCodeNode}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitLabel(DexLabel)}
+   * Method under test: {@link DexCodeVisitor#visitLabel(DexLabel)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.visitLabel(DexLabel)"})
-  public void testVisitLabel_thenDexCodeVisitorWithVisitorIsDexCodeNodeVisitorDexCodeNode() {
+  public void testVisitLabel() {
     // Arrange
     DexCodeNode visitor = new DexCodeNode();
     DexCodeVisitor dexCodeVisitor = new DexCodeVisitor(visitor);
@@ -320,21 +208,17 @@ public class DexCodeVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexCodeVisitor#visitSparseSwitchStmt(Op, int, int[], DexLabel[])}.
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitSparseSwitchStmt(Op, int, int[], DexLabel[])}
+   * Method under test:
+   * {@link DexCodeVisitor#visitSparseSwitchStmt(Op, int, int[], DexLabel[])}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.visitSparseSwitchStmt(Op, int, int[], DexLabel[])"})
   public void testVisitSparseSwitchStmt() {
     // Arrange
     DexCodeNode visitor = new DexCodeNode();
     DexCodeVisitor dexCodeVisitor = new DexCodeVisitor(visitor);
 
     // Act
-    dexCodeVisitor.visitSparseSwitchStmt(
-        Op.NOP, 1, new int[] {1, -1, 1, -1}, new DexLabel[] {new DexLabel()});
+    dexCodeVisitor.visitSparseSwitchStmt(Op.NOP, 1, new int[]{1, -1, 1, -1}, new DexLabel[]{new DexLabel()});
 
     // Assert
     DexCodeVisitor dexCodeVisitor2 = dexCodeVisitor.visitor;
@@ -343,27 +227,19 @@ public class DexCodeVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexCodeVisitor#visitMethodStmt(Op, int[], Method, Proto)} with {@code op}, {@code
-   * args}, {@code bsm}, {@code proto}.
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitMethodStmt(Op, int[], Method, Proto)}
+   * Method under test:
+   * {@link DexCodeVisitor#visitMethodStmt(Op, int[], String, Proto, MethodHandle, Object[])}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.visitMethodStmt(Op, int[], Method, Proto)"})
-  public void testVisitMethodStmtWithOpArgsBsmProto() {
+  public void testVisitMethodStmt() {
     // Arrange
     DexCodeNode visitor = new DexCodeNode();
     DexCodeVisitor dexCodeVisitor = new DexCodeVisitor(visitor);
-    Method bsm =
-        new Method("Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type"));
+    Proto proto = new Proto(new String[]{"Parameter Types"}, "Return Type");
 
     // Act
-    dexCodeVisitor.visitMethodStmt(
-        Op.NOP,
-        new int[] {1, -1, 1, -1},
-        bsm,
-        new Proto(new String[] {"Parameter Types"}, "Return Type"));
+    dexCodeVisitor.visitMethodStmt(Op.NOP, new int[]{1, -1, 1, -1}, "Name", proto,
+        new MethodHandle(1, new Field("Owner", "Name", "Type")), Constant.Null);
 
     // Assert
     DexCodeVisitor dexCodeVisitor2 = dexCodeVisitor.visitor;
@@ -372,24 +248,17 @@ public class DexCodeVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexCodeVisitor#visitMethodStmt(Op, int[], Method)} with {@code op}, {@code args},
-   * {@code method}.
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitMethodStmt(Op, int[], Method)}
+   * Method under test: {@link DexCodeVisitor#visitMethodStmt(Op, int[], Method)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.visitMethodStmt(Op, int[], Method)"})
-  public void testVisitMethodStmtWithOpArgsMethod() {
+  public void testVisitMethodStmt2() {
     // Arrange
     DexCodeNode visitor = new DexCodeNode();
     DexCodeVisitor dexCodeVisitor = new DexCodeVisitor(visitor);
 
     // Act
-    dexCodeVisitor.visitMethodStmt(
-        Op.NOP,
-        new int[] {1, -1, 1, -1},
-        new Method("Owner", "Name", new Proto(new String[] {"Parameter Types"}, "Return Type")));
+    dexCodeVisitor.visitMethodStmt(Op.NOP, new int[]{1, -1, 1, -1},
+        new Method("Owner", "Name", new Proto(new String[]{"Parameter Types"}, "Return Type")));
 
     // Assert
     DexCodeVisitor dexCodeVisitor2 = dexCodeVisitor.visitor;
@@ -398,31 +267,19 @@ public class DexCodeVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexCodeVisitor#visitMethodStmt(Op, int[], String, Proto, MethodHandle, Object[])}
-   * with {@code op}, {@code args}, {@code name}, {@code proto}, {@code bsm}, {@code bsmArgs}.
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitMethodStmt(Op, int[], String, Proto,
-   * MethodHandle, Object[])}
+   * Method under test:
+   * {@link DexCodeVisitor#visitMethodStmt(Op, int[], Method, Proto)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void DexCodeVisitor.visitMethodStmt(Op, int[], String, Proto, MethodHandle, Object[])"
-  })
-  public void testVisitMethodStmtWithOpArgsNameProtoBsmBsmArgs() {
+  public void testVisitMethodStmt3() {
     // Arrange
     DexCodeNode visitor = new DexCodeNode();
     DexCodeVisitor dexCodeVisitor = new DexCodeVisitor(visitor);
-    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
+    Method bsm = new Method("Owner", "Name", new Proto(new String[]{"Parameter Types"}, "Return Type"));
 
     // Act
-    dexCodeVisitor.visitMethodStmt(
-        Op.NOP,
-        new int[] {1, -1, 1, -1},
-        "Name",
-        proto,
-        new MethodHandle(1, new Field("Owner", "Name", "Type")),
-        Constant.Null);
+    dexCodeVisitor.visitMethodStmt(Op.NOP, new int[]{1, -1, 1, -1}, bsm,
+        new Proto(new String[]{"Parameter Types"}, "Return Type"));
 
     // Assert
     DexCodeVisitor dexCodeVisitor2 = dexCodeVisitor.visitor;
@@ -431,19 +288,10 @@ public class DexCodeVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexCodeVisitor#visitStmt2R(Op, int, int)}.
-   *
-   * <ul>
-   *   <li>Then {@link DexCodeVisitor#DexCodeVisitor(DexCodeVisitor)} with visitor is {@link
-   *       DexCodeNode#DexCodeNode()} {@link DexCodeVisitor#visitor} {@link DexCodeNode}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitStmt2R(Op, int, int)}
+   * Method under test: {@link DexCodeVisitor#visitStmt2R(Op, int, int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.visitStmt2R(Op, int, int)"})
-  public void testVisitStmt2R_thenDexCodeVisitorWithVisitorIsDexCodeNodeVisitorDexCodeNode() {
+  public void testVisitStmt2R() {
     // Arrange
     DexCodeNode visitor = new DexCodeNode();
     DexCodeVisitor dexCodeVisitor = new DexCodeVisitor(visitor);
@@ -458,19 +306,10 @@ public class DexCodeVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexCodeVisitor#visitStmt0R(Op)}.
-   *
-   * <ul>
-   *   <li>Then {@link DexCodeVisitor#DexCodeVisitor(DexCodeVisitor)} with visitor is {@link
-   *       DexCodeNode#DexCodeNode()} {@link DexCodeVisitor#visitor} {@link DexCodeNode}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitStmt0R(Op)}
+   * Method under test: {@link DexCodeVisitor#visitStmt0R(Op)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.visitStmt0R(Op)"})
-  public void testVisitStmt0R_thenDexCodeVisitorWithVisitorIsDexCodeNodeVisitorDexCodeNode() {
+  public void testVisitStmt0R() {
     // Arrange
     DexCodeNode visitor = new DexCodeNode();
     DexCodeVisitor dexCodeVisitor = new DexCodeVisitor(visitor);
@@ -485,19 +324,10 @@ public class DexCodeVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexCodeVisitor#visitStmt1R(Op, int)}.
-   *
-   * <ul>
-   *   <li>Then {@link DexCodeVisitor#DexCodeVisitor(DexCodeVisitor)} with visitor is {@link
-   *       DexCodeNode#DexCodeNode()} {@link DexCodeVisitor#visitor} {@link DexCodeNode}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitStmt1R(Op, int)}
+   * Method under test: {@link DexCodeVisitor#visitStmt1R(Op, int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.visitStmt1R(Op, int)"})
-  public void testVisitStmt1R_thenDexCodeVisitorWithVisitorIsDexCodeNodeVisitorDexCodeNode() {
+  public void testVisitStmt1R() {
     // Arrange
     DexCodeNode visitor = new DexCodeNode();
     DexCodeVisitor dexCodeVisitor = new DexCodeVisitor(visitor);
@@ -512,20 +342,17 @@ public class DexCodeVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexCodeVisitor#visitPackedSwitchStmt(Op, int, int, DexLabel[])}.
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitPackedSwitchStmt(Op, int, int, DexLabel[])}
+   * Method under test:
+   * {@link DexCodeVisitor#visitPackedSwitchStmt(Op, int, int, DexLabel[])}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.visitPackedSwitchStmt(Op, int, int, DexLabel[])"})
   public void testVisitPackedSwitchStmt() {
     // Arrange
     DexCodeNode visitor = new DexCodeNode();
     DexCodeVisitor dexCodeVisitor = new DexCodeVisitor(visitor);
 
     // Act
-    dexCodeVisitor.visitPackedSwitchStmt(Op.NOP, 1, 1, new DexLabel[] {new DexLabel()});
+    dexCodeVisitor.visitPackedSwitchStmt(Op.NOP, 1, 1, new DexLabel[]{new DexLabel()});
 
     // Assert
     DexCodeVisitor dexCodeVisitor2 = dexCodeVisitor.visitor;
@@ -534,20 +361,11 @@ public class DexCodeVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexCodeVisitor#visitTryCatch(DexLabel, DexLabel, DexLabel[], String[])}.
-   *
-   * <ul>
-   *   <li>Then {@link DexCodeVisitor#DexCodeVisitor(DexCodeVisitor)} with visitor is {@link
-   *       DexCodeNode#DexCodeNode()} {@link DexCodeVisitor#visitor} {@link DexCodeNode}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitTryCatch(DexLabel, DexLabel, DexLabel[],
-   * String[])}
+   * Method under test:
+   * {@link DexCodeVisitor#visitTryCatch(DexLabel, DexLabel, DexLabel[], String[])}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexCodeVisitor.visitTryCatch(DexLabel, DexLabel, DexLabel[], String[])"})
-  public void testVisitTryCatch_thenDexCodeVisitorWithVisitorIsDexCodeNodeVisitorDexCodeNode() {
+  public void testVisitTryCatch() {
     // Arrange
     DexCodeNode visitor = new DexCodeNode();
     DexCodeVisitor dexCodeVisitor = new DexCodeVisitor(visitor);
@@ -555,8 +373,7 @@ public class DexCodeVisitorDiffblueTest {
     DexLabel end = new DexLabel();
 
     // Act
-    dexCodeVisitor.visitTryCatch(
-        start, end, new DexLabel[] {new DexLabel()}, new String[] {"Type"});
+    dexCodeVisitor.visitTryCatch(start, end, new DexLabel[]{new DexLabel()}, new String[]{"Type"});
 
     // Assert
     DexCodeVisitor dexCodeVisitor2 = dexCodeVisitor.visitor;
@@ -565,43 +382,12 @@ public class DexCodeVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexCodeVisitor#visitDebug()}.
-   *
-   * <ul>
-   *   <li>Given {@link DexCodeVisitor#DexCodeVisitor(DexCodeVisitor)} with visitor is {@link
-   *       DexCodeVisitor#DexCodeVisitor()}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitDebug()}
+   * Method under test: {@link DexCodeVisitor#visitDebug()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "proguard.dexfile.reader.visitors.DexDebugVisitor DexCodeVisitor.visitDebug()"
-  })
-  public void testVisitDebug_givenDexCodeVisitorWithVisitorIsDexCodeVisitor_thenReturnNull() {
-    // Arrange, Act and Assert
-    assertNull((new DexCodeVisitor(new DexCodeVisitor())).visitDebug());
-  }
-
-  /**
-   * Test {@link DexCodeVisitor#visitDebug()}.
-   *
-   * <ul>
-   *   <li>Given {@link DexCodeVisitor#DexCodeVisitor()}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexCodeVisitor#visitDebug()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "proguard.dexfile.reader.visitors.DexDebugVisitor DexCodeVisitor.visitDebug()"
-  })
-  public void testVisitDebug_givenDexCodeVisitor_thenReturnNull() {
+  public void testVisitDebug() {
     // Arrange, Act and Assert
     assertNull((new DexCodeVisitor()).visitDebug());
+    assertNull((new DexCodeVisitor(new DexCodeVisitor())).visitDebug());
   }
 }

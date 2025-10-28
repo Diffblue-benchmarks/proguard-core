@@ -4,11 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryField;
@@ -16,22 +12,60 @@ import proguard.classfile.Member;
 
 public class JavaFieldReferenceInfoDiffblueTest {
   /**
-   * Test {@link JavaFieldReferenceInfo#JavaFieldReferenceInfo(Clazz, Clazz, Member)}.
-   *
-   * <p>Method under test: {@link JavaFieldReferenceInfo#JavaFieldReferenceInfo(Clazz, Clazz,
-   * Member)}
+   * Method under test: {@link JavaFieldReferenceInfo#getSignature()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void JavaFieldReferenceInfo.<init>(Clazz, Clazz, Member)"})
+  public void testGetSignature() {
+    // Arrange
+    LibraryClass ownerClass = new LibraryClass();
+    LibraryClass clazz = new LibraryClass();
+
+    // Act and Assert
+    assertEquals("getName()Descriptor",
+        (new JavaFieldReferenceInfo(ownerClass, clazz, new LibraryField(1, "Name", "Descriptor"))).getSignature());
+  }
+
+  /**
+   * Method under test: {@link JavaFieldReferenceInfo#getSignature()}
+   */
+  @Test
+  public void testGetSignature2() {
+    // Arrange
+    LibraryClass ownerClass = new LibraryClass();
+    LibraryClass clazz = new LibraryClass();
+
+    // Act and Assert
+    assertEquals("getIs()Descriptor",
+        (new JavaFieldReferenceInfo(ownerClass, clazz, new LibraryField(1, "is", "Descriptor"))).getSignature());
+  }
+
+  /**
+   * Method under test: {@link JavaFieldReferenceInfo#getSignature()}
+   */
+  @Test
+  public void testGetSignature3() {
+    // Arrange
+    LibraryClass ownerClass = new LibraryClass();
+    LibraryClass clazz = new LibraryClass();
+
+    // Act and Assert
+    assertEquals("()Descriptor",
+        (new JavaFieldReferenceInfo(ownerClass, clazz, new LibraryField(1, "", "Descriptor"))).getSignature());
+  }
+
+  /**
+   * Method under test:
+   * {@link JavaFieldReferenceInfo#JavaFieldReferenceInfo(Clazz, Clazz, Member)}
+   */
+  @Test
   public void testNewJavaFieldReferenceInfo() {
     // Arrange
     LibraryClass ownerClass = new LibraryClass();
     LibraryClass clazz = new LibraryClass();
 
     // Act
-    JavaFieldReferenceInfo actualJavaFieldReferenceInfo =
-        new JavaFieldReferenceInfo(ownerClass, clazz, new LibraryField(1, "Name", "Descriptor"));
+    JavaFieldReferenceInfo actualJavaFieldReferenceInfo = new JavaFieldReferenceInfo(ownerClass, clazz,
+        new LibraryField(1, "Name", "Descriptor"));
 
     // Assert
     Clazz clazz2 = actualJavaFieldReferenceInfo.clazz;
@@ -66,77 +100,5 @@ public class JavaFieldReferenceInfoDiffblueTest {
     Clazz[] clazzArray2 = clazz.subClasses;
     assertSame(clazzArray2, clazzArray);
     assertSame(clazzArray2, ((LibraryClass) clazz2).subClasses);
-  }
-
-  /**
-   * Test {@link JavaFieldReferenceInfo#getSignature()}.
-   *
-   * <ul>
-   *   <li>Then return {@code ()Descriptor}.
-   * </ul>
-   *
-   * <p>Method under test: {@link JavaFieldReferenceInfo#getSignature()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"java.lang.String JavaFieldReferenceInfo.getSignature()"})
-  public void testGetSignature_thenReturnDescriptor() {
-    // Arrange
-    LibraryClass ownerClass = new LibraryClass();
-    LibraryClass clazz = new LibraryClass();
-
-    // Act and Assert
-    assertEquals(
-        "()Descriptor",
-        (new JavaFieldReferenceInfo(ownerClass, clazz, new LibraryField(1, "", "Descriptor")))
-            .getSignature());
-  }
-
-  /**
-   * Test {@link JavaFieldReferenceInfo#getSignature()}.
-   *
-   * <ul>
-   *   <li>Then return {@code getIs()Descriptor}.
-   * </ul>
-   *
-   * <p>Method under test: {@link JavaFieldReferenceInfo#getSignature()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"java.lang.String JavaFieldReferenceInfo.getSignature()"})
-  public void testGetSignature_thenReturnGetIsDescriptor() {
-    // Arrange
-    LibraryClass ownerClass = new LibraryClass();
-    LibraryClass clazz = new LibraryClass();
-
-    // Act and Assert
-    assertEquals(
-        "getIs()Descriptor",
-        (new JavaFieldReferenceInfo(ownerClass, clazz, new LibraryField(1, "is", "Descriptor")))
-            .getSignature());
-  }
-
-  /**
-   * Test {@link JavaFieldReferenceInfo#getSignature()}.
-   *
-   * <ul>
-   *   <li>Then return {@code getName()Descriptor}.
-   * </ul>
-   *
-   * <p>Method under test: {@link JavaFieldReferenceInfo#getSignature()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"java.lang.String JavaFieldReferenceInfo.getSignature()"})
-  public void testGetSignature_thenReturnGetNameDescriptor() {
-    // Arrange
-    LibraryClass ownerClass = new LibraryClass();
-    LibraryClass clazz = new LibraryClass();
-
-    // Act and Assert
-    assertEquals(
-        "getName()Descriptor",
-        (new JavaFieldReferenceInfo(ownerClass, clazz, new LibraryField(1, "Name", "Descriptor")))
-            .getSignature());
   }
 }

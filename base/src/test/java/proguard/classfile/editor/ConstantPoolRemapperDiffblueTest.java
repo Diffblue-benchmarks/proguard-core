@@ -1,16 +1,11 @@
 package proguard.classfile.editor;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.UnsupportedEncodingException;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.Field;
 import proguard.classfile.LibraryClass;
@@ -19,9 +14,7 @@ import proguard.classfile.LibraryMethod;
 import proguard.classfile.Method;
 import proguard.classfile.ProgramClass;
 import proguard.classfile.ProgramField;
-import proguard.classfile.ProgramMember;
 import proguard.classfile.ProgramMethod;
-import proguard.classfile.attribute.Attribute;
 import proguard.classfile.attribute.BootstrapMethodInfo;
 import proguard.classfile.attribute.BootstrapMethodsAttribute;
 import proguard.classfile.attribute.CodeAttribute;
@@ -94,72 +87,14 @@ import proguard.testutils.cpa.NamedMember;
 
 public class ConstantPoolRemapperDiffblueTest {
   /**
-   * Test {@link ConstantPoolRemapper#visitProgramClass(ProgramClass)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitProgramClass(ProgramClass)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitProgramClass(ProgramClass)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitProgramClass(ProgramClass)"})
-  public void testVisitProgramClass_thenThrowIllegalArgumentException() {
+  public void testVisitProgramClass() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> constantPoolRemapper.visitProgramClass(new ProgramClass()));
-  }
-
-  /**
-   * Test {@link ConstantPoolRemapper#visitProgramClass(ProgramClass)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitProgramClass(ProgramClass)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitProgramClass(ProgramClass)"})
-  public void testVisitProgramClass_thenThrowIllegalArgumentException2() {
-    // Arrange
-    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
-    ClassConstant classConstant = new ClassConstant();
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitProgramClass(
-                new ProgramClass(
-                    1, 3, new Constant[] {classConstant, new ClassConstant()}, 1, 1, 1)));
-  }
-
-  /**
-   * Test {@link ConstantPoolRemapper#visitProgramClass(ProgramClass)}.
-   *
-   * <ul>
-   *   <li>When {@link ProgramClass#ProgramClass()}.
-   *   <li>Then {@link ProgramClass#ProgramClass()} {@link ProgramClass#u2superClass} is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitProgramClass(ProgramClass)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitProgramClass(ProgramClass)"})
-  public void testVisitProgramClass_whenProgramClass_thenProgramClassU2superClassIsOne() {
-    // Arrange
-    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     ProgramClass programClass = new ProgramClass();
 
     // Act
@@ -171,21 +106,44 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitStringConstant(Clazz, StringConstant)}.
-   *
-   * <ul>
-   *   <li>Then {@link StringConstant#StringConstant()} {@link StringConstant#u2stringIndex} is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitStringConstant(Clazz, StringConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitProgramClass(ProgramClass)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitStringConstant(Clazz, StringConstant)"})
-  public void testVisitStringConstant_thenStringConstantU2stringIndexIsOne() {
+  public void testVisitProgramClass2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
+
+    // Act and Assert
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper.visitProgramClass(new ProgramClass()));
+  }
+
+  /**
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitProgramClass(ProgramClass)}
+   */
+  @Test
+  public void testVisitProgramClass3() {
+    // Arrange
+    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
+    ClassConstant classConstant = new ClassConstant();
+
+    // Act and Assert
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper
+        .visitProgramClass(new ProgramClass(1, 3, new Constant[]{classConstant, new ClassConstant()}, 1, 1, 1)));
+  }
+
+  /**
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitStringConstant(Clazz, StringConstant)}
+   */
+  @Test
+  public void testVisitStringConstant() {
+    // Arrange
+    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     StringConstant stringConstant = new StringConstant();
 
@@ -197,45 +155,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitStringConstant(Clazz, StringConstant)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitStringConstant(Clazz, StringConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitStringConstant(Clazz, StringConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitStringConstant(Clazz, StringConstant)"})
-  public void testVisitStringConstant_thenThrowIllegalArgumentException() {
+  public void testVisitStringConstant2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitStringConstant(clazz, new StringConstant()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitDynamicConstant(Clazz, DynamicConstant)}.
-   *
-   * <ul>
-   *   <li>Then {@link DynamicConstant#DynamicConstant()} NameAndTypeIndex is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitDynamicConstant(Clazz, DynamicConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitDynamicConstant(Clazz, DynamicConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitDynamicConstant(Clazz, DynamicConstant)"})
-  public void testVisitDynamicConstant_thenDynamicConstantNameAndTypeIndexIsOne() {
+  public void testVisitDynamicConstant() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     DynamicConstant dynamicConstant = new DynamicConstant();
 
@@ -247,48 +190,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitDynamicConstant(Clazz, DynamicConstant)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitDynamicConstant(Clazz, DynamicConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitDynamicConstant(Clazz, DynamicConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitDynamicConstant(Clazz, DynamicConstant)"})
-  public void testVisitDynamicConstant_thenThrowIllegalArgumentException() {
+  public void testVisitDynamicConstant2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitDynamicConstant(clazz, new DynamicConstant()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitInvokeDynamicConstant(Clazz, InvokeDynamicConstant)}.
-   *
-   * <ul>
-   *   <li>Then {@link InvokeDynamicConstant#InvokeDynamicConstant()} NameAndTypeIndex is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitInvokeDynamicConstant(Clazz,
-   * InvokeDynamicConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitInvokeDynamicConstant(Clazz, InvokeDynamicConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitInvokeDynamicConstant(Clazz, InvokeDynamicConstant)"
-  })
-  public void testVisitInvokeDynamicConstant_thenInvokeDynamicConstantNameAndTypeIndexIsOne() {
+  public void testVisitInvokeDynamicConstant() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     InvokeDynamicConstant invokeDynamicConstant = new InvokeDynamicConstant();
 
@@ -300,47 +225,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitInvokeDynamicConstant(Clazz, InvokeDynamicConstant)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitInvokeDynamicConstant(Clazz,
-   * InvokeDynamicConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitInvokeDynamicConstant(Clazz, InvokeDynamicConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitInvokeDynamicConstant(Clazz, InvokeDynamicConstant)"
-  })
-  public void testVisitInvokeDynamicConstant_thenThrowIllegalArgumentException() {
+  public void testVisitInvokeDynamicConstant2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitInvokeDynamicConstant(clazz, new InvokeDynamicConstant()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitMethodHandleConstant(Clazz, MethodHandleConstant)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitMethodHandleConstant(Clazz,
-   * MethodHandleConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitMethodHandleConstant(Clazz, MethodHandleConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitMethodHandleConstant(Clazz, MethodHandleConstant)"
-  })
   public void testVisitMethodHandleConstant() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     MethodHandleConstant methodHandleConstant = new MethodHandleConstant(1, 1);
 
@@ -352,50 +260,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitMethodHandleConstant(Clazz, MethodHandleConstant)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitMethodHandleConstant(Clazz,
-   * MethodHandleConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitMethodHandleConstant(Clazz, MethodHandleConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitMethodHandleConstant(Clazz, MethodHandleConstant)"
-  })
-  public void testVisitMethodHandleConstant_thenThrowIllegalArgumentException() {
+  public void testVisitMethodHandleConstant2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitMethodHandleConstant(clazz, new MethodHandleConstant(1, 1)));
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitMethodHandleConstant(clazz, new MethodHandleConstant(1, 1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitModuleConstant(Clazz, ModuleConstant)}.
-   *
-   * <ul>
-   *   <li>Then {@link ModuleConstant#ModuleConstant(int)} with u2nameIndex is one {@link
-   *       ModuleConstant#u2nameIndex} is zero.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitModuleConstant(Clazz, ModuleConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitModuleConstant(Clazz, ModuleConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitModuleConstant(Clazz, ModuleConstant)"})
-  public void testVisitModuleConstant_thenModuleConstantWithU2nameIndexIsOneU2nameIndexIsZero() {
+  public void testVisitModuleConstant() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     ModuleConstant moduleConstant = new ModuleConstant(1);
 
@@ -407,41 +295,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitModuleConstant(Clazz, ModuleConstant)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitModuleConstant(Clazz, ModuleConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitModuleConstant(Clazz, ModuleConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitModuleConstant(Clazz, ModuleConstant)"})
-  public void testVisitModuleConstant_thenThrowIllegalArgumentException() {
+  public void testVisitModuleConstant2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitModuleConstant(clazz, new ModuleConstant(1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitPackageConstant(Clazz, PackageConstant)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitPackageConstant(Clazz, PackageConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitPackageConstant(Clazz, PackageConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitPackageConstant(Clazz, PackageConstant)"})
   public void testVisitPackageConstant() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     PackageConstant packageConstant = new PackageConstant(1);
 
@@ -453,46 +330,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitPackageConstant(Clazz, PackageConstant)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitPackageConstant(Clazz, PackageConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitPackageConstant(Clazz, PackageConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitPackageConstant(Clazz, PackageConstant)"})
-  public void testVisitPackageConstant_thenThrowIllegalArgumentException() {
+  public void testVisitPackageConstant2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitPackageConstant(clazz, new PackageConstant(1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitFieldrefConstant(Clazz, FieldrefConstant)}.
-   *
-   * <ul>
-   *   <li>Then {@link FieldrefConstant#FieldrefConstant()} ClassIndex is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitFieldrefConstant(Clazz,
-   * FieldrefConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitFieldrefConstant(Clazz, FieldrefConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitFieldrefConstant(Clazz, FieldrefConstant)"})
-  public void testVisitFieldrefConstant_thenFieldrefConstantClassIndexIsOne() {
+  public void testVisitFieldrefConstant() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     FieldrefConstant fieldrefConstant = new FieldrefConstant();
 
@@ -505,46 +366,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitFieldrefConstant(Clazz, FieldrefConstant)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitFieldrefConstant(Clazz,
-   * FieldrefConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitFieldrefConstant(Clazz, FieldrefConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitFieldrefConstant(Clazz, FieldrefConstant)"})
-  public void testVisitFieldrefConstant_thenThrowIllegalArgumentException() {
+  public void testVisitFieldrefConstant2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitFieldrefConstant(clazz, new FieldrefConstant()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitInterfaceMethodrefConstant(Clazz,
-   * InterfaceMethodrefConstant)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitInterfaceMethodrefConstant(Clazz,
-   * InterfaceMethodrefConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitInterfaceMethodrefConstant(Clazz, InterfaceMethodrefConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitInterfaceMethodrefConstant(Clazz, InterfaceMethodrefConstant)"
-  })
   public void testVisitInterfaceMethodrefConstant() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     InterfaceMethodrefConstant interfaceMethodrefConstant = new InterfaceMethodrefConstant();
 
@@ -557,52 +402,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitInterfaceMethodrefConstant(Clazz,
-   * InterfaceMethodrefConstant)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitInterfaceMethodrefConstant(Clazz,
-   * InterfaceMethodrefConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitInterfaceMethodrefConstant(Clazz, InterfaceMethodrefConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitInterfaceMethodrefConstant(Clazz, InterfaceMethodrefConstant)"
-  })
-  public void testVisitInterfaceMethodrefConstant_thenThrowIllegalArgumentException() {
+  public void testVisitInterfaceMethodrefConstant2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitInterfaceMethodrefConstant(
-                clazz, new InterfaceMethodrefConstant()));
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitInterfaceMethodrefConstant(clazz, new InterfaceMethodrefConstant()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitMethodrefConstant(Clazz, MethodrefConstant)}.
-   *
-   * <ul>
-   *   <li>Then {@link MethodrefConstant#MethodrefConstant()} ClassIndex is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitMethodrefConstant(Clazz,
-   * MethodrefConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitMethodrefConstant(Clazz, MethodrefConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitMethodrefConstant(Clazz, MethodrefConstant)"})
-  public void testVisitMethodrefConstant_thenMethodrefConstantClassIndexIsOne() {
+  public void testVisitMethodrefConstant() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     MethodrefConstant methodrefConstant = new MethodrefConstant();
 
@@ -615,46 +438,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitMethodrefConstant(Clazz, MethodrefConstant)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitMethodrefConstant(Clazz,
-   * MethodrefConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitMethodrefConstant(Clazz, MethodrefConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitMethodrefConstant(Clazz, MethodrefConstant)"})
-  public void testVisitMethodrefConstant_thenThrowIllegalArgumentException() {
+  public void testVisitMethodrefConstant2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitMethodrefConstant(clazz, new MethodrefConstant()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitClassConstant(Clazz, ClassConstant)}.
-   *
-   * <ul>
-   *   <li>Then {@link ClassConstant#ClassConstant()} {@link ClassConstant#u2nameIndex} is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitClassConstant(Clazz, ClassConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitClassConstant(Clazz, ClassConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitClassConstant(Clazz, ClassConstant)"})
-  public void testVisitClassConstant_thenClassConstantU2nameIndexIsOne() {
+  public void testVisitClassConstant() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     ClassConstant classConstant = new ClassConstant();
 
@@ -666,48 +473,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitClassConstant(Clazz, ClassConstant)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitClassConstant(Clazz, ClassConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitClassConstant(Clazz, ClassConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitClassConstant(Clazz, ClassConstant)"})
-  public void testVisitClassConstant_thenThrowIllegalArgumentException() {
+  public void testVisitClassConstant2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitClassConstant(clazz, new ClassConstant()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitMethodTypeConstant(Clazz, MethodTypeConstant)}.
-   *
-   * <ul>
-   *   <li>Then {@link MethodTypeConstant#MethodTypeConstant()} DescriptorIndex is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitMethodTypeConstant(Clazz,
-   * MethodTypeConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitMethodTypeConstant(Clazz, MethodTypeConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitMethodTypeConstant(Clazz, MethodTypeConstant)"
-  })
-  public void testVisitMethodTypeConstant_thenMethodTypeConstantDescriptorIndexIsOne() {
+  public void testVisitMethodTypeConstant() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     MethodTypeConstant methodTypeConstant = new MethodTypeConstant();
 
@@ -719,126 +508,46 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitMethodTypeConstant(Clazz, MethodTypeConstant)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitMethodTypeConstant(Clazz,
-   * MethodTypeConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitMethodTypeConstant(Clazz, MethodTypeConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitMethodTypeConstant(Clazz, MethodTypeConstant)"
-  })
-  public void testVisitMethodTypeConstant_thenThrowIllegalArgumentException() {
+  public void testVisitMethodTypeConstant2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitMethodTypeConstant(clazz, new MethodTypeConstant()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitNameAndTypeConstant(Clazz, NameAndTypeConstant)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitNameAndTypeConstant(Clazz,
-   * NameAndTypeConstant)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitNameAndTypeConstant(Clazz, NameAndTypeConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitNameAndTypeConstant(Clazz, NameAndTypeConstant)"
-  })
-  public void testVisitNameAndTypeConstant_thenThrowIllegalArgumentException() {
+  public void testVisitNameAndTypeConstant() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitNameAndTypeConstant(clazz, new NameAndTypeConstant(1, 1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitProgramField(ProgramClass, ProgramField)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitProgramField(ProgramClass,
-   * ProgramField)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitProgramField(ProgramClass, ProgramField)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitProgramField(ProgramClass, ProgramField)"})
   public void testVisitProgramField() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
-    ProgramClass programClass = new ProgramClass();
-    NamedField programField = new NamedField("Field Name", "Field Descriptor");
-
-    // Act
-    constantPoolRemapper.visitProgramField(programClass, programField);
-
-    // Assert
-    assertEquals(1, programField.u2descriptorIndex);
-    assertEquals(1, programField.u2nameIndex);
-  }
-
-  /**
-   * Test {@link ConstantPoolRemapper#visitProgramField(ProgramClass, ProgramField)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitProgramField(ProgramClass,
-   * ProgramField)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitProgramField(ProgramClass, ProgramField)"})
-  public void testVisitProgramField_thenThrowIllegalArgumentException() {
-    // Arrange
-    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
-    ProgramClass programClass = new ProgramClass();
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> constantPoolRemapper.visitProgramField(programClass, new ProgramField()));
-  }
-
-  /**
-   * Test {@link ConstantPoolRemapper#visitProgramField(ProgramClass, ProgramField)}.
-   *
-   * <ul>
-   *   <li>When {@link ProgramField#ProgramField()}.
-   *   <li>Then {@link ProgramField#ProgramField()} {@link ProgramMember#u2descriptorIndex} is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitProgramField(ProgramClass,
-   * ProgramField)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitProgramField(ProgramClass, ProgramField)"})
-  public void testVisitProgramField_whenProgramField_thenProgramFieldU2descriptorIndexIsOne() {
-    // Arrange
-    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     ProgramClass programClass = new ProgramClass();
     ProgramField programField = new ProgramField();
 
@@ -851,73 +560,50 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitProgramMethod(ProgramClass, ProgramMethod)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitProgramMethod(ProgramClass,
-   * ProgramMethod)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitProgramField(ProgramClass, ProgramField)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitProgramMethod(ProgramClass, ProgramMethod)"})
-  public void testVisitProgramMethod() {
+  public void testVisitProgramField2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
-    ProgramClass programClass = new ProgramClass();
-    NamedMember programMethod = new NamedMember("Member Name", "Descriptor");
-
-    // Act
-    constantPoolRemapper.visitProgramMethod(programClass, programMethod);
-
-    // Assert
-    assertEquals(1, programMethod.u2descriptorIndex);
-    assertEquals(1, programMethod.u2nameIndex);
-  }
-
-  /**
-   * Test {@link ConstantPoolRemapper#visitProgramMethod(ProgramClass, ProgramMethod)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitProgramMethod(ProgramClass,
-   * ProgramMethod)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitProgramMethod(ProgramClass, ProgramMethod)"})
-  public void testVisitProgramMethod_thenThrowIllegalArgumentException() {
-    // Arrange
-    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     ProgramClass programClass = new ProgramClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> constantPoolRemapper.visitProgramMethod(programClass, new ProgramMethod()));
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitProgramField(programClass, new ProgramField()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitProgramMethod(ProgramClass, ProgramMethod)}.
-   *
-   * <ul>
-   *   <li>When {@link ProgramMethod#ProgramMethod()}.
-   *   <li>Then {@link ProgramMethod#ProgramMethod()} {@link ProgramMember#u2descriptorIndex} is
-   *       one.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitProgramMethod(ProgramClass,
-   * ProgramMethod)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitProgramField(ProgramClass, ProgramField)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitProgramMethod(ProgramClass, ProgramMethod)"})
-  public void testVisitProgramMethod_whenProgramMethod_thenProgramMethodU2descriptorIndexIsOne() {
+  public void testVisitProgramField3() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
+    ProgramClass programClass = new ProgramClass();
+    NamedField programField = new NamedField("Field Name", "Field Descriptor");
+
+    // Act
+    constantPoolRemapper.visitProgramField(programClass, programField);
+
+    // Assert
+    assertEquals(1, programField.u2descriptorIndex);
+    assertEquals(1, programField.u2nameIndex);
+  }
+
+  /**
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitProgramMethod(ProgramClass, ProgramMethod)}
+   */
+  @Test
+  public void testVisitProgramMethod() {
+    // Arrange
+    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     ProgramClass programClass = new ProgramClass();
     ProgramMethod programMethod = new ProgramMethod();
 
@@ -930,18 +616,50 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitUnknownAttribute(Clazz, UnknownAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitUnknownAttribute(Clazz,
-   * UnknownAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitProgramMethod(ProgramClass, ProgramMethod)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitUnknownAttribute(Clazz, UnknownAttribute)"})
+  public void testVisitProgramMethod2() {
+    // Arrange
+    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
+    ProgramClass programClass = new ProgramClass();
+
+    // Act and Assert
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitProgramMethod(programClass, new ProgramMethod()));
+  }
+
+  /**
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitProgramMethod(ProgramClass, ProgramMethod)}
+   */
+  @Test
+  public void testVisitProgramMethod3() {
+    // Arrange
+    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
+    ProgramClass programClass = new ProgramClass();
+    NamedMember programMethod = new NamedMember("Member Name", "Descriptor");
+
+    // Act
+    constantPoolRemapper.visitProgramMethod(programClass, programMethod);
+
+    // Assert
+    assertEquals(1, programMethod.u2descriptorIndex);
+    assertEquals(1, programMethod.u2nameIndex);
+  }
+
+  /**
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitUnknownAttribute(Clazz, UnknownAttribute)}
+   */
+  @Test
   public void testVisitUnknownAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     UnknownAttribute unknownAttribute = new UnknownAttribute(1, 3);
 
@@ -953,46 +671,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitUnknownAttribute(Clazz, UnknownAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitUnknownAttribute(Clazz,
-   * UnknownAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitUnknownAttribute(Clazz, UnknownAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitUnknownAttribute(Clazz, UnknownAttribute)"})
-  public void testVisitUnknownAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitUnknownAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitUnknownAttribute(clazz, new UnknownAttribute(1, 3)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitBootstrapMethodsAttribute(Clazz,
-   * BootstrapMethodsAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitBootstrapMethodsAttribute(Clazz,
-   * BootstrapMethodsAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitBootstrapMethodsAttribute(Clazz, BootstrapMethodsAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitBootstrapMethodsAttribute(Clazz, BootstrapMethodsAttribute)"
-  })
   public void testVisitBootstrapMethodsAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     BootstrapMethodsAttribute bootstrapMethodsAttribute = new BootstrapMethodsAttribute();
 
@@ -1004,82 +706,46 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitBootstrapMethodsAttribute(Clazz,
-   * BootstrapMethodsAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitBootstrapMethodsAttribute(Clazz,
-   * BootstrapMethodsAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitBootstrapMethodsAttribute(Clazz, BootstrapMethodsAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitBootstrapMethodsAttribute(Clazz, BootstrapMethodsAttribute)"
-  })
-  public void testVisitBootstrapMethodsAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitBootstrapMethodsAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitBootstrapMethodsAttribute(
-                clazz, new BootstrapMethodsAttribute()));
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitBootstrapMethodsAttribute(clazz, new BootstrapMethodsAttribute()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitBootstrapMethodsAttribute(Clazz,
-   * BootstrapMethodsAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitBootstrapMethodsAttribute(Clazz,
-   * BootstrapMethodsAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitBootstrapMethodsAttribute(Clazz, BootstrapMethodsAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitBootstrapMethodsAttribute(Clazz, BootstrapMethodsAttribute)"
-  })
-  public void testVisitBootstrapMethodsAttribute_thenThrowIllegalArgumentException2() {
+  public void testVisitBootstrapMethodsAttribute3() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitBootstrapMethodsAttribute(
-                clazz,
-                new BootstrapMethodsAttribute(
-                    1, 3, new BootstrapMethodInfo[] {new BootstrapMethodInfo()})));
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper.visitBootstrapMethodsAttribute(clazz,
+        new BootstrapMethodsAttribute(1, 3, new BootstrapMethodInfo[]{new BootstrapMethodInfo()})));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitSourceFileAttribute(Clazz, SourceFileAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitSourceFileAttribute(Clazz,
-   * SourceFileAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitSourceFileAttribute(Clazz, SourceFileAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitSourceFileAttribute(Clazz, SourceFileAttribute)"
-  })
   public void testVisitSourceFileAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     SourceFileAttribute sourceFileAttribute = new SourceFileAttribute(1, 1);
 
@@ -1092,47 +758,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitSourceFileAttribute(Clazz, SourceFileAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitSourceFileAttribute(Clazz,
-   * SourceFileAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitSourceFileAttribute(Clazz, SourceFileAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitSourceFileAttribute(Clazz, SourceFileAttribute)"
-  })
-  public void testVisitSourceFileAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitSourceFileAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitSourceFileAttribute(clazz, new SourceFileAttribute(1, 1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitSourceDirAttribute(Clazz, SourceDirAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitSourceDirAttribute(Clazz,
-   * SourceDirAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitSourceDirAttribute(Clazz, SourceDirAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitSourceDirAttribute(Clazz, SourceDirAttribute)"
-  })
   public void testVisitSourceDirAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     SourceDirAttribute sourceDirAttribute = new SourceDirAttribute(1, 1);
 
@@ -1145,51 +794,32 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitSourceDirAttribute(Clazz, SourceDirAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitSourceDirAttribute(Clazz,
-   * SourceDirAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitSourceDirAttribute(Clazz, SourceDirAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitSourceDirAttribute(Clazz, SourceDirAttribute)"
-  })
-  public void testVisitSourceDirAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitSourceDirAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitSourceDirAttribute(clazz, new SourceDirAttribute(1, 1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitSourceDebugExtensionAttribute(Clazz,
-   * SourceDebugExtensionAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitSourceDebugExtensionAttribute(Clazz,
-   * SourceDebugExtensionAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitSourceDebugExtensionAttribute(Clazz, SourceDebugExtensionAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitSourceDebugExtensionAttribute(Clazz, SourceDebugExtensionAttribute)"
-  })
   public void testVisitSourceDebugExtensionAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
-    SourceDebugExtensionAttribute sourceDebugExtensionAttribute =
-        new SourceDebugExtensionAttribute();
+    SourceDebugExtensionAttribute sourceDebugExtensionAttribute = new SourceDebugExtensionAttribute();
 
     // Act
     constantPoolRemapper.visitSourceDebugExtensionAttribute(clazz, sourceDebugExtensionAttribute);
@@ -1199,52 +829,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitSourceDebugExtensionAttribute(Clazz,
-   * SourceDebugExtensionAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitSourceDebugExtensionAttribute(Clazz,
-   * SourceDebugExtensionAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitSourceDebugExtensionAttribute(Clazz, SourceDebugExtensionAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitSourceDebugExtensionAttribute(Clazz, SourceDebugExtensionAttribute)"
-  })
-  public void testVisitSourceDebugExtensionAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitSourceDebugExtensionAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitSourceDebugExtensionAttribute(
-                clazz, new SourceDebugExtensionAttribute()));
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitSourceDebugExtensionAttribute(clazz, new SourceDebugExtensionAttribute()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitRecordAttribute(Clazz, RecordAttribute)}.
-   *
-   * <ul>
-   *   <li>Then {@link RecordAttribute#RecordAttribute()} {@link Attribute#u2attributeNameIndex} is
-   *       one.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitRecordAttribute(Clazz, RecordAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitRecordAttribute(Clazz, RecordAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitRecordAttribute(Clazz, RecordAttribute)"})
-  public void testVisitRecordAttribute_thenRecordAttributeU2attributeNameIndexIsOne() {
+  public void testVisitRecordAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     RecordAttribute recordAttribute = new RecordAttribute();
 
@@ -1256,71 +864,46 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitRecordAttribute(Clazz, RecordAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitRecordAttribute(Clazz, RecordAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitRecordAttribute(Clazz, RecordAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitRecordAttribute(Clazz, RecordAttribute)"})
-  public void testVisitRecordAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitRecordAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitRecordAttribute(clazz, new RecordAttribute()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitRecordAttribute(Clazz, RecordAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitRecordAttribute(Clazz, RecordAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitRecordAttribute(Clazz, RecordAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitRecordAttribute(Clazz, RecordAttribute)"})
-  public void testVisitRecordAttribute_thenThrowIllegalArgumentException2() {
+  public void testVisitRecordAttribute3() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitRecordAttribute(
-                clazz,
-                new RecordAttribute(1, 3, new RecordComponentInfo[] {new RecordComponentInfo()})));
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper.visitRecordAttribute(clazz,
+        new RecordAttribute(1, 3, new RecordComponentInfo[]{new RecordComponentInfo()})));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitInnerClassesAttribute(Clazz, InnerClassesAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitInnerClassesAttribute(Clazz,
-   * InnerClassesAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitInnerClassesAttribute(Clazz, InnerClassesAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitInnerClassesAttribute(Clazz, InnerClassesAttribute)"
-  })
   public void testVisitInnerClassesAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     InnerClassesAttribute innerClassesAttribute = new InnerClassesAttribute();
 
@@ -1332,48 +915,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitInnerClassesAttribute(Clazz, InnerClassesAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitInnerClassesAttribute(Clazz,
-   * InnerClassesAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitInnerClassesAttribute(Clazz, InnerClassesAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitInnerClassesAttribute(Clazz, InnerClassesAttribute)"
-  })
-  public void testVisitInnerClassesAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitInnerClassesAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitInnerClassesAttribute(clazz, new InnerClassesAttribute()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitEnclosingMethodAttribute(Clazz,
-   * EnclosingMethodAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitEnclosingMethodAttribute(Clazz,
-   * EnclosingMethodAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitEnclosingMethodAttribute(Clazz, EnclosingMethodAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitEnclosingMethodAttribute(Clazz, EnclosingMethodAttribute)"
-  })
   public void testVisitEnclosingMethodAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     EnclosingMethodAttribute enclosingMethodAttribute = new EnclosingMethodAttribute(1, 1, 1);
 
@@ -1387,48 +952,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitEnclosingMethodAttribute(Clazz,
-   * EnclosingMethodAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitEnclosingMethodAttribute(Clazz,
-   * EnclosingMethodAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitEnclosingMethodAttribute(Clazz, EnclosingMethodAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitEnclosingMethodAttribute(Clazz, EnclosingMethodAttribute)"
-  })
-  public void testVisitEnclosingMethodAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitEnclosingMethodAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitEnclosingMethodAttribute(
-                clazz, new EnclosingMethodAttribute(1, 1, 1)));
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitEnclosingMethodAttribute(clazz, new EnclosingMethodAttribute(1, 1, 1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitNestHostAttribute(Clazz, NestHostAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitNestHostAttribute(Clazz,
-   * NestHostAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitNestHostAttribute(Clazz, NestHostAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitNestHostAttribute(Clazz, NestHostAttribute)"})
   public void testVisitNestHostAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     NestHostAttribute nestHostAttribute = new NestHostAttribute(1, 1);
 
@@ -1441,77 +988,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitNestHostAttribute(Clazz, NestHostAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitNestHostAttribute(Clazz,
-   * NestHostAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitNestHostAttribute(Clazz, NestHostAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitNestHostAttribute(Clazz, NestHostAttribute)"})
-  public void testVisitNestHostAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitNestHostAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitNestHostAttribute(clazz, new NestHostAttribute(1, 1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitNestMembersAttribute(Clazz, NestMembersAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitNestMembersAttribute(Clazz,
-   * NestMembersAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitNestMembersAttribute(Clazz, NestMembersAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitNestMembersAttribute(Clazz, NestMembersAttribute)"
-  })
   public void testVisitNestMembersAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
-    LibraryClass clazz = new LibraryClass();
-    NestMembersAttribute nestMembersAttribute =
-        new NestMembersAttribute(1, 3, new int[] {1, 0, 1, 0});
-
-    // Act
-    constantPoolRemapper.visitNestMembersAttribute(clazz, nestMembersAttribute);
-
-    // Assert
-    assertEquals(0, nestMembersAttribute.u2attributeNameIndex);
-    assertArrayEquals(new int[] {0, 1, 0, 0}, nestMembersAttribute.u2classes);
-  }
-
-  /**
-   * Test {@link ConstantPoolRemapper#visitNestMembersAttribute(Clazz, NestMembersAttribute)}.
-   *
-   * <ul>
-   *   <li>Then {@link NestMembersAttribute#NestMembersAttribute()} {@link
-   *       NestMembersAttribute#u2classes} is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitNestMembersAttribute(Clazz,
-   * NestMembersAttribute)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitNestMembersAttribute(Clazz, NestMembersAttribute)"
-  })
-  public void testVisitNestMembersAttribute_thenNestMembersAttributeU2classesIsNull() {
-    // Arrange
-    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     NestMembersAttribute nestMembersAttribute = new NestMembersAttribute();
 
@@ -1519,53 +1019,58 @@ public class ConstantPoolRemapperDiffblueTest {
     constantPoolRemapper.visitNestMembersAttribute(clazz, nestMembersAttribute);
 
     // Assert
-    assertNull(nestMembersAttribute.u2classes);
     assertEquals(1, nestMembersAttribute.u2attributeNameIndex);
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitNestMembersAttribute(Clazz, NestMembersAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitNestMembersAttribute(Clazz,
-   * NestMembersAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitNestMembersAttribute(Clazz, NestMembersAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitNestMembersAttribute(Clazz, NestMembersAttribute)"
-  })
-  public void testVisitNestMembersAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitNestMembersAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitNestMembersAttribute(clazz, new NestMembersAttribute()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitPermittedSubclassesAttribute(Clazz,
-   * PermittedSubclassesAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitPermittedSubclassesAttribute(Clazz,
-   * PermittedSubclassesAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitNestMembersAttribute(Clazz, NestMembersAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitPermittedSubclassesAttribute(Clazz, PermittedSubclassesAttribute)"
-  })
+  public void testVisitNestMembersAttribute3() {
+    // Arrange
+    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
+    LibraryClass clazz = new LibraryClass();
+    NestMembersAttribute nestMembersAttribute = new NestMembersAttribute(1, 3, new int[]{1, 0, 1, 0});
+
+    // Act
+    constantPoolRemapper.visitNestMembersAttribute(clazz, nestMembersAttribute);
+
+    // Assert
+    int[] intArray = nestMembersAttribute.u2classes;
+    assertEquals(0, intArray[0]);
+    assertEquals(0, intArray[2]);
+    assertEquals(0, nestMembersAttribute.u2attributeNameIndex);
+    assertEquals(1, intArray[1]);
+    assertEquals(4, intArray.length);
+  }
+
+  /**
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitPermittedSubclassesAttribute(Clazz, PermittedSubclassesAttribute)}
+   */
+  @Test
   public void testVisitPermittedSubclassesAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     PermittedSubclassesAttribute permittedSubclassesAttribute = new PermittedSubclassesAttribute();
 
@@ -1573,85 +1078,59 @@ public class ConstantPoolRemapperDiffblueTest {
     constantPoolRemapper.visitPermittedSubclassesAttribute(clazz, permittedSubclassesAttribute);
 
     // Assert
-    assertNull(permittedSubclassesAttribute.u2classes);
     assertEquals(1, permittedSubclassesAttribute.u2attributeNameIndex);
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitPermittedSubclassesAttribute(Clazz,
-   * PermittedSubclassesAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitPermittedSubclassesAttribute(Clazz,
-   * PermittedSubclassesAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitPermittedSubclassesAttribute(Clazz, PermittedSubclassesAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitPermittedSubclassesAttribute(Clazz, PermittedSubclassesAttribute)"
-  })
   public void testVisitPermittedSubclassesAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
-    PermittedSubclassesAttribute permittedSubclassesAttribute =
-        new PermittedSubclassesAttribute(1, 3, new int[] {1, 0, 1, 0});
+
+    // Act and Assert
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitPermittedSubclassesAttribute(clazz, new PermittedSubclassesAttribute()));
+  }
+
+  /**
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitPermittedSubclassesAttribute(Clazz, PermittedSubclassesAttribute)}
+   */
+  @Test
+  public void testVisitPermittedSubclassesAttribute3() {
+    // Arrange
+    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
+    LibraryClass clazz = new LibraryClass();
+    PermittedSubclassesAttribute permittedSubclassesAttribute = new PermittedSubclassesAttribute(1, 3,
+        new int[]{1, 0, 1, 0});
 
     // Act
     constantPoolRemapper.visitPermittedSubclassesAttribute(clazz, permittedSubclassesAttribute);
 
     // Assert
+    int[] intArray = permittedSubclassesAttribute.u2classes;
+    assertEquals(0, intArray[0]);
+    assertEquals(0, intArray[2]);
     assertEquals(0, permittedSubclassesAttribute.u2attributeNameIndex);
-    assertArrayEquals(new int[] {0, 1, 0, 0}, permittedSubclassesAttribute.u2classes);
+    assertEquals(1, intArray[1]);
+    assertEquals(4, intArray.length);
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitPermittedSubclassesAttribute(Clazz,
-   * PermittedSubclassesAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitPermittedSubclassesAttribute(Clazz,
-   * PermittedSubclassesAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitModuleAttribute(Clazz, ModuleAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitPermittedSubclassesAttribute(Clazz, PermittedSubclassesAttribute)"
-  })
-  public void testVisitPermittedSubclassesAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitModuleAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
-    LibraryClass clazz = new LibraryClass();
-
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitPermittedSubclassesAttribute(
-                clazz, new PermittedSubclassesAttribute()));
-  }
-
-  /**
-   * Test {@link ConstantPoolRemapper#visitModuleAttribute(Clazz, ModuleAttribute)}.
-   *
-   * <ul>
-   *   <li>Then {@link ModuleAttribute#ModuleAttribute()} {@link Attribute#u2attributeNameIndex} is
-   *       one.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitModuleAttribute(Clazz, ModuleAttribute)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitModuleAttribute(Clazz, ModuleAttribute)"})
-  public void testVisitModuleAttribute_thenModuleAttributeU2attributeNameIndexIsOne() {
-    // Arrange
-    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     ModuleAttribute moduleAttribute = new ModuleAttribute();
 
@@ -1664,45 +1143,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitModuleAttribute(Clazz, ModuleAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitModuleAttribute(Clazz, ModuleAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitModuleAttribute(Clazz, ModuleAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitModuleAttribute(Clazz, ModuleAttribute)"})
-  public void testVisitModuleAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitModuleAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitModuleAttribute(clazz, new ModuleAttribute()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitModuleMainClassAttribute(Clazz,
-   * ModuleMainClassAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitModuleMainClassAttribute(Clazz,
-   * ModuleMainClassAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitModuleMainClassAttribute(Clazz, ModuleMainClassAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitModuleMainClassAttribute(Clazz, ModuleMainClassAttribute)"
-  })
   public void testVisitModuleMainClassAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     ModuleMainClassAttribute moduleMainClassAttribute = new ModuleMainClassAttribute(1, 1);
 
@@ -1715,82 +1179,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitModuleMainClassAttribute(Clazz,
-   * ModuleMainClassAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitModuleMainClassAttribute(Clazz,
-   * ModuleMainClassAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitModuleMainClassAttribute(Clazz, ModuleMainClassAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitModuleMainClassAttribute(Clazz, ModuleMainClassAttribute)"
-  })
-  public void testVisitModuleMainClassAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitModuleMainClassAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitModuleMainClassAttribute(
-                clazz, new ModuleMainClassAttribute(1, 1)));
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitModuleMainClassAttribute(clazz, new ModuleMainClassAttribute(1, 1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitModulePackagesAttribute(Clazz, ModulePackagesAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitModulePackagesAttribute(Clazz,
-   * ModulePackagesAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitModulePackagesAttribute(Clazz, ModulePackagesAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitModulePackagesAttribute(Clazz, ModulePackagesAttribute)"
-  })
   public void testVisitModulePackagesAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
-    LibraryClass clazz = new LibraryClass();
-    ModulePackagesAttribute modulePackagesAttribute =
-        new ModulePackagesAttribute(1, 3, new int[] {1, 0, 1, 0});
-
-    // Act
-    constantPoolRemapper.visitModulePackagesAttribute(clazz, modulePackagesAttribute);
-
-    // Assert
-    assertEquals(0, modulePackagesAttribute.u2attributeNameIndex);
-    assertArrayEquals(new int[] {0, 1, 0, 0}, modulePackagesAttribute.u2packages);
-  }
-
-  /**
-   * Test {@link ConstantPoolRemapper#visitModulePackagesAttribute(Clazz, ModulePackagesAttribute)}.
-   *
-   * <ul>
-   *   <li>Then {@link ModulePackagesAttribute#ModulePackagesAttribute()} {@link
-   *       ModulePackagesAttribute#u2packages} is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitModulePackagesAttribute(Clazz,
-   * ModulePackagesAttribute)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitModulePackagesAttribute(Clazz, ModulePackagesAttribute)"
-  })
-  public void testVisitModulePackagesAttribute_thenModulePackagesAttributeU2packagesIsNull() {
-    // Arrange
-    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     ModulePackagesAttribute modulePackagesAttribute = new ModulePackagesAttribute();
 
@@ -1798,55 +1210,58 @@ public class ConstantPoolRemapperDiffblueTest {
     constantPoolRemapper.visitModulePackagesAttribute(clazz, modulePackagesAttribute);
 
     // Assert
-    assertNull(modulePackagesAttribute.u2packages);
     assertEquals(1, modulePackagesAttribute.u2attributeNameIndex);
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitModulePackagesAttribute(Clazz, ModulePackagesAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitModulePackagesAttribute(Clazz,
-   * ModulePackagesAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitModulePackagesAttribute(Clazz, ModulePackagesAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitModulePackagesAttribute(Clazz, ModulePackagesAttribute)"
-  })
-  public void testVisitModulePackagesAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitModulePackagesAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitModulePackagesAttribute(
-                clazz, new ModulePackagesAttribute()));
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitModulePackagesAttribute(clazz, new ModulePackagesAttribute()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitDeprecatedAttribute(Clazz, DeprecatedAttribute)} with
-   * {@code clazz}, {@code deprecatedAttribute}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitDeprecatedAttribute(Clazz,
-   * DeprecatedAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitModulePackagesAttribute(Clazz, ModulePackagesAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitDeprecatedAttribute(Clazz, DeprecatedAttribute)"
-  })
-  public void testVisitDeprecatedAttributeWithClazzDeprecatedAttribute() {
+  public void testVisitModulePackagesAttribute3() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
+    LibraryClass clazz = new LibraryClass();
+    ModulePackagesAttribute modulePackagesAttribute = new ModulePackagesAttribute(1, 3, new int[]{1, 0, 1, 0});
+
+    // Act
+    constantPoolRemapper.visitModulePackagesAttribute(clazz, modulePackagesAttribute);
+
+    // Assert
+    int[] intArray = modulePackagesAttribute.u2packages;
+    assertEquals(0, intArray[0]);
+    assertEquals(0, intArray[2]);
+    assertEquals(0, modulePackagesAttribute.u2attributeNameIndex);
+    assertEquals(1, intArray[1]);
+    assertEquals(4, intArray.length);
+  }
+
+  /**
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitDeprecatedAttribute(Clazz, DeprecatedAttribute)}
+   */
+  @Test
+  public void testVisitDeprecatedAttribute() {
+    // Arrange
+    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     DeprecatedAttribute deprecatedAttribute = new DeprecatedAttribute(1);
 
@@ -1858,45 +1273,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitDeprecatedAttribute(Clazz, DeprecatedAttribute)} with
-   * {@code clazz}, {@code deprecatedAttribute}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitDeprecatedAttribute(Clazz,
-   * DeprecatedAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitDeprecatedAttribute(Clazz, DeprecatedAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitDeprecatedAttribute(Clazz, DeprecatedAttribute)"
-  })
-  public void testVisitDeprecatedAttributeWithClazzDeprecatedAttribute2() {
+  public void testVisitDeprecatedAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitDeprecatedAttribute(clazz, new DeprecatedAttribute(1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitSyntheticAttribute(Clazz, SyntheticAttribute)} with
-   * {@code clazz}, {@code syntheticAttribute}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitSyntheticAttribute(Clazz,
-   * SyntheticAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitSyntheticAttribute(Clazz, SyntheticAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitSyntheticAttribute(Clazz, SyntheticAttribute)"
-  })
-  public void testVisitSyntheticAttributeWithClazzSyntheticAttribute() {
+  public void testVisitSyntheticAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     SyntheticAttribute syntheticAttribute = new SyntheticAttribute(1);
 
@@ -1908,45 +1308,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitSyntheticAttribute(Clazz, SyntheticAttribute)} with
-   * {@code clazz}, {@code syntheticAttribute}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitSyntheticAttribute(Clazz,
-   * SyntheticAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitSyntheticAttribute(Clazz, SyntheticAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitSyntheticAttribute(Clazz, SyntheticAttribute)"
-  })
-  public void testVisitSyntheticAttributeWithClazzSyntheticAttribute2() {
+  public void testVisitSyntheticAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitSyntheticAttribute(clazz, new SyntheticAttribute(1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitSignatureAttribute(Clazz, SignatureAttribute)} with
-   * {@code clazz}, {@code signatureAttribute}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitSignatureAttribute(Clazz,
-   * SignatureAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitSignatureAttribute(Clazz, SignatureAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitSignatureAttribute(Clazz, SignatureAttribute)"
-  })
-  public void testVisitSignatureAttributeWithClazzSignatureAttribute() {
+  public void testVisitSignatureAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     SignatureAttribute signatureAttribute = new SignatureAttribute(1, 1);
 
@@ -1959,45 +1344,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitSignatureAttribute(Clazz, SignatureAttribute)} with
-   * {@code clazz}, {@code signatureAttribute}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitSignatureAttribute(Clazz,
-   * SignatureAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitSignatureAttribute(Clazz, SignatureAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitSignatureAttribute(Clazz, SignatureAttribute)"
-  })
-  public void testVisitSignatureAttributeWithClazzSignatureAttribute2() {
+  public void testVisitSignatureAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitSignatureAttribute(clazz, new SignatureAttribute(1, 1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitConstantValueAttribute(Clazz, Field,
-   * ConstantValueAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitConstantValueAttribute(Clazz, Field,
-   * ConstantValueAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitConstantValueAttribute(Clazz, Field, ConstantValueAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitConstantValueAttribute(Clazz, Field, ConstantValueAttribute)"
-  })
   public void testVisitConstantValueAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryField field = new LibraryField(1, "Name", "Descriptor");
 
@@ -2012,52 +1382,31 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitConstantValueAttribute(Clazz, Field,
-   * ConstantValueAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitConstantValueAttribute(Clazz, Field,
-   * ConstantValueAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitConstantValueAttribute(Clazz, Field, ConstantValueAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitConstantValueAttribute(Clazz, Field, ConstantValueAttribute)"
-  })
-  public void testVisitConstantValueAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitConstantValueAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryField field = new LibraryField(1, "Name", "Descriptor");
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitConstantValueAttribute(
-                clazz, field, new ConstantValueAttribute(1, 1)));
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitConstantValueAttribute(clazz, field, new ConstantValueAttribute(1, 1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitMethodParametersAttribute(Clazz, Method,
-   * MethodParametersAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitMethodParametersAttribute(Clazz, Method,
-   * MethodParametersAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitMethodParametersAttribute(Clazz, Method, MethodParametersAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitMethodParametersAttribute(Clazz, Method, MethodParametersAttribute)"
-  })
   public void testVisitMethodParametersAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
@@ -2071,56 +1420,31 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitMethodParametersAttribute(Clazz, Method,
-   * MethodParametersAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitMethodParametersAttribute(Clazz, Method,
-   * MethodParametersAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitMethodParametersAttribute(Clazz, Method, MethodParametersAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitMethodParametersAttribute(Clazz, Method, MethodParametersAttribute)"
-  })
-  public void testVisitMethodParametersAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitMethodParametersAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitMethodParametersAttribute(
-                clazz, method, new MethodParametersAttribute()));
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitMethodParametersAttribute(clazz, method, new MethodParametersAttribute()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitExceptionsAttribute(Clazz, Method, ExceptionsAttribute)}.
-   *
-   * <ul>
-   *   <li>Then {@link ExceptionsAttribute#ExceptionsAttribute()} {@link
-   *       Attribute#u2attributeNameIndex} is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitExceptionsAttribute(Clazz, Method,
-   * ExceptionsAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitExceptionsAttribute(Clazz, Method, ExceptionsAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitExceptionsAttribute(Clazz, Method, ExceptionsAttribute)"
-  })
-  public void testVisitExceptionsAttribute_thenExceptionsAttributeU2attributeNameIndexIsOne() {
+  public void testVisitExceptionsAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
@@ -2134,48 +1458,31 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitExceptionsAttribute(Clazz, Method, ExceptionsAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitExceptionsAttribute(Clazz, Method,
-   * ExceptionsAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitExceptionsAttribute(Clazz, Method, ExceptionsAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitExceptionsAttribute(Clazz, Method, ExceptionsAttribute)"
-  })
-  public void testVisitExceptionsAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitExceptionsAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitExceptionsAttribute(
-                clazz, method, new ExceptionsAttribute()));
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitExceptionsAttribute(clazz, method, new ExceptionsAttribute()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitCodeAttribute(Clazz, Method, CodeAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitCodeAttribute(Clazz, Method,
-   * CodeAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitCodeAttribute(Clazz, Method, CodeAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitCodeAttribute(Clazz, Method, CodeAttribute)"})
   public void testVisitCodeAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
@@ -2189,18 +1496,31 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitCodeAttribute(Clazz, Method, CodeAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitCodeAttribute(Clazz, Method,
-   * CodeAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitCodeAttribute(Clazz, Method, CodeAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitCodeAttribute(Clazz, Method, CodeAttribute)"})
-  public void testVisitCodeAttribute2() throws UnsupportedEncodingException {
+  public void testVisitCodeAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
+    LibraryClass clazz = new LibraryClass();
+    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
+    // Act and Assert
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitCodeAttribute(clazz, method, new CodeAttribute(1)));
+  }
+
+  /**
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitCodeAttribute(Clazz, Method, CodeAttribute)}
+   */
+  @Test
+  public void testVisitCodeAttribute3() throws UnsupportedEncodingException {
+    // Arrange
+    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
@@ -2214,49 +1534,18 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitCodeAttribute(Clazz, Method, CodeAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitCodeAttribute(Clazz, Method,
-   * CodeAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitCodeAttribute(Clazz, Method, CodeAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitCodeAttribute(Clazz, Method, CodeAttribute)"})
-  public void testVisitCodeAttribute3() {
-    // Arrange
-    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
-    LibraryClass clazz = new LibraryClass();
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    CodeAttribute codeAttribute =
-        new CodeAttribute(1, 3, 3, 3, new byte[] {-96, 'X', 'A', 'X', 'A', 'X', 'A', 'X'});
-
-    // Act
-    constantPoolRemapper.visitCodeAttribute(clazz, method, codeAttribute);
-
-    // Assert
-    assertEquals(0, codeAttribute.u2attributeNameIndex);
-  }
-
-  /**
-   * Test {@link ConstantPoolRemapper#visitCodeAttribute(Clazz, Method, CodeAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitCodeAttribute(Clazz, Method,
-   * CodeAttribute)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitCodeAttribute(Clazz, Method, CodeAttribute)"})
   public void testVisitCodeAttribute4() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
-    CodeAttribute codeAttribute =
-        new CodeAttribute(1, 3, 3, 3, new byte[] {-60, 'X', 'A', 'X', 'A', 'X', 'A', 'X'});
+    CodeAttribute codeAttribute = new CodeAttribute(1, 3, 3, 3, new byte[]{-96, 'X', 'A', 'X', 'A', 'X', 'A', 'X'});
 
     // Act
     constantPoolRemapper.visitCodeAttribute(clazz, method, codeAttribute);
@@ -2266,23 +1555,18 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitCodeAttribute(Clazz, Method, CodeAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitCodeAttribute(Clazz, Method,
-   * CodeAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitCodeAttribute(Clazz, Method, CodeAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitCodeAttribute(Clazz, Method, CodeAttribute)"})
   public void testVisitCodeAttribute5() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
-    CodeAttribute codeAttribute =
-        new CodeAttribute(1, 3, 3, 3, new byte[] {'A', -60, 'A', 'X', 'A', 'X', 'A', 'X'});
+    CodeAttribute codeAttribute = new CodeAttribute(1, 3, 3, 3, new byte[]{-60, 'X', 'A', 'X', 'A', 'X', 'A', 'X'});
 
     // Act
     constantPoolRemapper.visitCodeAttribute(clazz, method, codeAttribute);
@@ -2292,52 +1576,35 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitCodeAttribute(Clazz, Method, CodeAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitCodeAttribute(Clazz, Method,
-   * CodeAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitCodeAttribute(Clazz, Method, CodeAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitCodeAttribute(Clazz, Method, CodeAttribute)"})
-  public void testVisitCodeAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitCodeAttribute6() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
-    // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> constantPoolRemapper.visitCodeAttribute(clazz, method, new CodeAttribute(1)));
+    CodeAttribute codeAttribute = new CodeAttribute(1, 3, 3, 3, new byte[]{'A', -60, 'A', 'X', 'A', 'X', 'A', 'X'});
+
+    // Act
+    constantPoolRemapper.visitCodeAttribute(clazz, method, codeAttribute);
+
+    // Assert
+    assertEquals(0, codeAttribute.u2attributeNameIndex);
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitStackMapAttribute(Clazz, Method, CodeAttribute,
-   * StackMapAttribute)}.
-   *
-   * <ul>
-   *   <li>Then {@link StackMapAttribute#StackMapAttribute()} {@link Attribute#u2attributeNameIndex}
-   *       is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitStackMapAttribute(Clazz, Method,
-   * CodeAttribute, StackMapAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitStackMapAttribute(Clazz, Method, CodeAttribute, StackMapAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitStackMapAttribute(Clazz, Method, CodeAttribute, StackMapAttribute)"
-  })
-  public void testVisitStackMapAttribute_thenStackMapAttributeU2attributeNameIndexIsOne() {
+  public void testVisitStackMapAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
@@ -2352,54 +1619,33 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitStackMapAttribute(Clazz, Method, CodeAttribute,
-   * StackMapAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitStackMapAttribute(Clazz, Method,
-   * CodeAttribute, StackMapAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitStackMapAttribute(Clazz, Method, CodeAttribute, StackMapAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitStackMapAttribute(Clazz, Method, CodeAttribute, StackMapAttribute)"
-  })
-  public void testVisitStackMapAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitStackMapAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitStackMapAttribute(
-                clazz, method, codeAttribute, new StackMapAttribute()));
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitStackMapAttribute(clazz, method, codeAttribute, new StackMapAttribute()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitStackMapTableAttribute(Clazz, Method, CodeAttribute,
-   * StackMapTableAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitStackMapTableAttribute(Clazz, Method,
-   * CodeAttribute, StackMapTableAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitStackMapTableAttribute(Clazz, Method, CodeAttribute, StackMapTableAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitStackMapTableAttribute(Clazz, Method, CodeAttribute, StackMapTableAttribute)"
-  })
   public void testVisitStackMapTableAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
@@ -2407,62 +1653,40 @@ public class ConstantPoolRemapperDiffblueTest {
     StackMapTableAttribute stackMapTableAttribute = new StackMapTableAttribute();
 
     // Act
-    constantPoolRemapper.visitStackMapTableAttribute(
-        clazz, method, codeAttribute, stackMapTableAttribute);
+    constantPoolRemapper.visitStackMapTableAttribute(clazz, method, codeAttribute, stackMapTableAttribute);
 
     // Assert
     assertEquals(1, stackMapTableAttribute.u2attributeNameIndex);
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitStackMapTableAttribute(Clazz, Method, CodeAttribute,
-   * StackMapTableAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitStackMapTableAttribute(Clazz, Method,
-   * CodeAttribute, StackMapTableAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitStackMapTableAttribute(Clazz, Method, CodeAttribute, StackMapTableAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitStackMapTableAttribute(Clazz, Method, CodeAttribute, StackMapTableAttribute)"
-  })
-  public void testVisitStackMapTableAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitStackMapTableAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitStackMapTableAttribute(
-                clazz, method, codeAttribute, new StackMapTableAttribute()));
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper.visitStackMapTableAttribute(clazz, method,
+        codeAttribute, new StackMapTableAttribute()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitLineNumberTableAttribute(Clazz, Method, CodeAttribute,
-   * LineNumberTableAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitLineNumberTableAttribute(Clazz, Method,
-   * CodeAttribute, LineNumberTableAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitLineNumberTableAttribute(Clazz, Method, CodeAttribute, LineNumberTableAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitLineNumberTableAttribute(Clazz, Method, CodeAttribute, LineNumberTableAttribute)"
-  })
   public void testVisitLineNumberTableAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
@@ -2470,62 +1694,40 @@ public class ConstantPoolRemapperDiffblueTest {
     LineNumberTableAttribute lineNumberTableAttribute = new LineNumberTableAttribute();
 
     // Act
-    constantPoolRemapper.visitLineNumberTableAttribute(
-        clazz, method, codeAttribute, lineNumberTableAttribute);
+    constantPoolRemapper.visitLineNumberTableAttribute(clazz, method, codeAttribute, lineNumberTableAttribute);
 
     // Assert
     assertEquals(1, lineNumberTableAttribute.u2attributeNameIndex);
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitLineNumberTableAttribute(Clazz, Method, CodeAttribute,
-   * LineNumberTableAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitLineNumberTableAttribute(Clazz, Method,
-   * CodeAttribute, LineNumberTableAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitLineNumberTableAttribute(Clazz, Method, CodeAttribute, LineNumberTableAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitLineNumberTableAttribute(Clazz, Method, CodeAttribute, LineNumberTableAttribute)"
-  })
-  public void testVisitLineNumberTableAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitLineNumberTableAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitLineNumberTableAttribute(
-                clazz, method, codeAttribute, new LineNumberTableAttribute()));
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper.visitLineNumberTableAttribute(clazz, method,
+        codeAttribute, new LineNumberTableAttribute()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitLocalVariableTableAttribute(Clazz, Method, CodeAttribute,
-   * LocalVariableTableAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitLocalVariableTableAttribute(Clazz,
-   * Method, CodeAttribute, LocalVariableTableAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitLocalVariableTableAttribute(Clazz, Method, CodeAttribute, LocalVariableTableAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitLocalVariableTableAttribute(Clazz, Method, CodeAttribute, LocalVariableTableAttribute)"
-  })
   public void testVisitLocalVariableTableAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
@@ -2533,128 +1735,84 @@ public class ConstantPoolRemapperDiffblueTest {
     LocalVariableTableAttribute localVariableTableAttribute = new LocalVariableTableAttribute();
 
     // Act
-    constantPoolRemapper.visitLocalVariableTableAttribute(
-        clazz, method, codeAttribute, localVariableTableAttribute);
+    constantPoolRemapper.visitLocalVariableTableAttribute(clazz, method, codeAttribute, localVariableTableAttribute);
 
     // Assert
     assertEquals(1, localVariableTableAttribute.u2attributeNameIndex);
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitLocalVariableTableAttribute(Clazz, Method, CodeAttribute,
-   * LocalVariableTableAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitLocalVariableTableAttribute(Clazz,
-   * Method, CodeAttribute, LocalVariableTableAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitLocalVariableTableAttribute(Clazz, Method, CodeAttribute, LocalVariableTableAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitLocalVariableTableAttribute(Clazz, Method, CodeAttribute, LocalVariableTableAttribute)"
-  })
-  public void testVisitLocalVariableTableAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitLocalVariableTableAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitLocalVariableTableAttribute(
-                clazz, method, codeAttribute, new LocalVariableTableAttribute()));
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper.visitLocalVariableTableAttribute(clazz,
+        method, codeAttribute, new LocalVariableTableAttribute()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitLocalVariableTypeTableAttribute(Clazz, Method,
-   * CodeAttribute, LocalVariableTypeTableAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitLocalVariableTypeTableAttribute(Clazz,
-   * Method, CodeAttribute, LocalVariableTypeTableAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitLocalVariableTypeTableAttribute(Clazz, Method, CodeAttribute, LocalVariableTypeTableAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitLocalVariableTypeTableAttribute(Clazz, Method, CodeAttribute, LocalVariableTypeTableAttribute)"
-  })
   public void testVisitLocalVariableTypeTableAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     CodeAttribute codeAttribute = new CodeAttribute(1);
-    LocalVariableTypeTableAttribute localVariableTypeTableAttribute =
-        new LocalVariableTypeTableAttribute();
+    LocalVariableTypeTableAttribute localVariableTypeTableAttribute = new LocalVariableTypeTableAttribute();
 
     // Act
-    constantPoolRemapper.visitLocalVariableTypeTableAttribute(
-        clazz, method, codeAttribute, localVariableTypeTableAttribute);
+    constantPoolRemapper.visitLocalVariableTypeTableAttribute(clazz, method, codeAttribute,
+        localVariableTypeTableAttribute);
 
     // Assert
     assertEquals(1, localVariableTypeTableAttribute.u2attributeNameIndex);
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitLocalVariableTypeTableAttribute(Clazz, Method,
-   * CodeAttribute, LocalVariableTypeTableAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitLocalVariableTypeTableAttribute(Clazz,
-   * Method, CodeAttribute, LocalVariableTypeTableAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitLocalVariableTypeTableAttribute(Clazz, Method, CodeAttribute, LocalVariableTypeTableAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitLocalVariableTypeTableAttribute(Clazz, Method, CodeAttribute, LocalVariableTypeTableAttribute)"
-  })
-  public void testVisitLocalVariableTypeTableAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitLocalVariableTypeTableAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitLocalVariableTypeTableAttribute(
-                clazz, method, codeAttribute, new LocalVariableTypeTableAttribute()));
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper.visitLocalVariableTypeTableAttribute(clazz,
+        method, codeAttribute, new LocalVariableTypeTableAttribute()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitAnyAnnotationsAttribute(Clazz, AnnotationsAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitAnyAnnotationsAttribute(Clazz,
-   * AnnotationsAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitAnyAnnotationsAttribute(Clazz, AnnotationsAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitAnyAnnotationsAttribute(Clazz, AnnotationsAttribute)"
-  })
   public void testVisitAnyAnnotationsAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
-    RuntimeInvisibleAnnotationsAttribute annotationsAttribute =
-        new RuntimeInvisibleAnnotationsAttribute();
+    RuntimeInvisibleAnnotationsAttribute annotationsAttribute = new RuntimeInvisibleAnnotationsAttribute();
 
     // Act
     constantPoolRemapper.visitAnyAnnotationsAttribute(clazz, annotationsAttribute);
@@ -2664,116 +1822,74 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitAnyAnnotationsAttribute(Clazz, AnnotationsAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitAnyAnnotationsAttribute(Clazz,
-   * AnnotationsAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitAnyAnnotationsAttribute(Clazz, AnnotationsAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitAnyAnnotationsAttribute(Clazz, AnnotationsAttribute)"
-  })
-  public void testVisitAnyAnnotationsAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitAnyAnnotationsAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitAnyAnnotationsAttribute(
-                clazz, new RuntimeInvisibleAnnotationsAttribute()));
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitAnyAnnotationsAttribute(clazz, new RuntimeInvisibleAnnotationsAttribute()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitAnyParameterAnnotationsAttribute(Clazz, Method,
-   * ParameterAnnotationsAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitAnyParameterAnnotationsAttribute(Clazz,
-   * Method, ParameterAnnotationsAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitAnyParameterAnnotationsAttribute(Clazz, Method, ParameterAnnotationsAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitAnyParameterAnnotationsAttribute(Clazz, Method, ParameterAnnotationsAttribute)"
-  })
   public void testVisitAnyParameterAnnotationsAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
-    RuntimeInvisibleParameterAnnotationsAttribute parameterAnnotationsAttribute =
-        new RuntimeInvisibleParameterAnnotationsAttribute();
+    RuntimeInvisibleParameterAnnotationsAttribute parameterAnnotationsAttribute = new RuntimeInvisibleParameterAnnotationsAttribute();
 
     // Act
-    constantPoolRemapper.visitAnyParameterAnnotationsAttribute(
-        clazz, method, parameterAnnotationsAttribute);
+    constantPoolRemapper.visitAnyParameterAnnotationsAttribute(clazz, method, parameterAnnotationsAttribute);
 
     // Assert
     assertEquals(1, parameterAnnotationsAttribute.u2attributeNameIndex);
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitAnyParameterAnnotationsAttribute(Clazz, Method,
-   * ParameterAnnotationsAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitAnyParameterAnnotationsAttribute(Clazz,
-   * Method, ParameterAnnotationsAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitAnyParameterAnnotationsAttribute(Clazz, Method, ParameterAnnotationsAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitAnyParameterAnnotationsAttribute(Clazz, Method, ParameterAnnotationsAttribute)"
-  })
-  public void testVisitAnyParameterAnnotationsAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitAnyParameterAnnotationsAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitAnyParameterAnnotationsAttribute(
-                clazz, method, new RuntimeInvisibleParameterAnnotationsAttribute()));
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper.visitAnyParameterAnnotationsAttribute(clazz,
+        method, new RuntimeInvisibleParameterAnnotationsAttribute()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitAnnotationDefaultAttribute(Clazz, Method,
-   * AnnotationDefaultAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitAnnotationDefaultAttribute(Clazz,
-   * Method, AnnotationDefaultAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitAnnotationDefaultAttribute(Clazz, Method, AnnotationDefaultAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitAnnotationDefaultAttribute(Clazz, Method, AnnotationDefaultAttribute)"
-  })
   public void testVisitAnnotationDefaultAttribute() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
-    AnnotationDefaultAttribute annotationDefaultAttribute =
-        new AnnotationDefaultAttribute(1, new AnnotationElementValue(1, new Annotation()));
+    AnnotationElementValue defaultValue = new AnnotationElementValue(1, new Annotation());
+
+    AnnotationDefaultAttribute annotationDefaultAttribute = new AnnotationDefaultAttribute(1, defaultValue);
 
     // Act
     constantPoolRemapper.visitAnnotationDefaultAttribute(clazz, method, annotationDefaultAttribute);
@@ -2783,30 +1899,24 @@ public class ConstantPoolRemapperDiffblueTest {
     assertTrue(elementValue instanceof AnnotationElementValue);
     assertEquals(0, annotationDefaultAttribute.u2attributeNameIndex);
     assertEquals(0, ((AnnotationElementValue) elementValue).u2elementNameIndex);
-    assertEquals(1, ((AnnotationElementValue) elementValue).annotationValue.u2typeIndex);
+    Annotation annotation = ((AnnotationElementValue) elementValue).annotationValue;
+    assertEquals(1, annotation.u2typeIndex);
+    assertSame(defaultValue.annotationValue, annotation);
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitAnnotationDefaultAttribute(Clazz, Method,
-   * AnnotationDefaultAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitAnnotationDefaultAttribute(Clazz,
-   * Method, AnnotationDefaultAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitAnnotationDefaultAttribute(Clazz, Method, AnnotationDefaultAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitAnnotationDefaultAttribute(Clazz, Method, AnnotationDefaultAttribute)"
-  })
   public void testVisitAnnotationDefaultAttribute2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
-    AnnotationDefaultAttribute annotationDefaultAttribute =
-        new AnnotationDefaultAttribute(1, new ArrayElementValue());
+    AnnotationDefaultAttribute annotationDefaultAttribute = new AnnotationDefaultAttribute(1, new ArrayElementValue());
 
     // Act
     constantPoolRemapper.visitAnnotationDefaultAttribute(clazz, method, annotationDefaultAttribute);
@@ -2819,26 +1929,19 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitAnnotationDefaultAttribute(Clazz, Method,
-   * AnnotationDefaultAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitAnnotationDefaultAttribute(Clazz,
-   * Method, AnnotationDefaultAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitAnnotationDefaultAttribute(Clazz, Method, AnnotationDefaultAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitAnnotationDefaultAttribute(Clazz, Method, AnnotationDefaultAttribute)"
-  })
   public void testVisitAnnotationDefaultAttribute3() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
-    AnnotationDefaultAttribute annotationDefaultAttribute =
-        new AnnotationDefaultAttribute(1, new ClassElementValue(1, 1));
+    AnnotationDefaultAttribute annotationDefaultAttribute = new AnnotationDefaultAttribute(1,
+        new ClassElementValue(1, 1));
 
     // Act
     constantPoolRemapper.visitAnnotationDefaultAttribute(clazz, method, annotationDefaultAttribute);
@@ -2852,26 +1955,19 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitAnnotationDefaultAttribute(Clazz, Method,
-   * AnnotationDefaultAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitAnnotationDefaultAttribute(Clazz,
-   * Method, AnnotationDefaultAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitAnnotationDefaultAttribute(Clazz, Method, AnnotationDefaultAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitAnnotationDefaultAttribute(Clazz, Method, AnnotationDefaultAttribute)"
-  })
   public void testVisitAnnotationDefaultAttribute4() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
-    AnnotationDefaultAttribute annotationDefaultAttribute =
-        new AnnotationDefaultAttribute(1, new ConstantElementValue('\u0001'));
+    AnnotationDefaultAttribute annotationDefaultAttribute = new AnnotationDefaultAttribute(1,
+        new ConstantElementValue('\u0001'));
 
     // Act
     constantPoolRemapper.visitAnnotationDefaultAttribute(clazz, method, annotationDefaultAttribute);
@@ -2885,26 +1981,19 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitAnnotationDefaultAttribute(Clazz, Method,
-   * AnnotationDefaultAttribute)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitAnnotationDefaultAttribute(Clazz,
-   * Method, AnnotationDefaultAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitAnnotationDefaultAttribute(Clazz, Method, AnnotationDefaultAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitAnnotationDefaultAttribute(Clazz, Method, AnnotationDefaultAttribute)"
-  })
   public void testVisitAnnotationDefaultAttribute5() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
-    AnnotationDefaultAttribute annotationDefaultAttribute =
-        new AnnotationDefaultAttribute(1, new EnumConstantElementValue(1, 1, 1));
+    AnnotationDefaultAttribute annotationDefaultAttribute = new AnnotationDefaultAttribute(1,
+        new EnumConstantElementValue(1, 1, 1));
 
     // Act
     constantPoolRemapper.visitAnnotationDefaultAttribute(clazz, method, annotationDefaultAttribute);
@@ -2919,85 +2008,31 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitAnnotationDefaultAttribute(Clazz, Method,
-   * AnnotationDefaultAttribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitAnnotationDefaultAttribute(Clazz,
-   * Method, AnnotationDefaultAttribute)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitAnnotationDefaultAttribute(Clazz, Method, AnnotationDefaultAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitAnnotationDefaultAttribute(Clazz, Method, AnnotationDefaultAttribute)"
-  })
-  public void testVisitAnnotationDefaultAttribute_thenThrowIllegalArgumentException() {
+  public void testVisitAnnotationDefaultAttribute6() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitAnnotationDefaultAttribute(
-                clazz,
-                method,
-                new AnnotationDefaultAttribute(
-                    1, new AnnotationElementValue(1, new Annotation()))));
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper.visitAnnotationDefaultAttribute(clazz,
+        method, new AnnotationDefaultAttribute(1, new AnnotationElementValue(1, new Annotation()))));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitBootstrapMethodInfo(Clazz,
-   * BootstrapMethodInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)"
-  })
   public void testVisitBootstrapMethodInfo() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
-    LibraryClass clazz = new LibraryClass();
-    BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo(1, 3, new int[] {1, 0, 1, 0});
-
-    // Act
-    constantPoolRemapper.visitBootstrapMethodInfo(clazz, bootstrapMethodInfo);
-
-    // Assert
-    assertEquals(0, bootstrapMethodInfo.u2methodHandleIndex);
-    assertArrayEquals(new int[] {0, 1, 0, 0}, bootstrapMethodInfo.u2methodArguments);
-  }
-
-  /**
-   * Test {@link ConstantPoolRemapper#visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)}.
-   *
-   * <ul>
-   *   <li>Then {@link BootstrapMethodInfo#BootstrapMethodInfo()} {@link
-   *       BootstrapMethodInfo#u2methodArguments} is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitBootstrapMethodInfo(Clazz,
-   * BootstrapMethodInfo)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)"
-  })
-  public void testVisitBootstrapMethodInfo_thenBootstrapMethodInfoU2methodArgumentsIsNull() {
-    // Arrange
-    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo();
 
@@ -3005,57 +2040,58 @@ public class ConstantPoolRemapperDiffblueTest {
     constantPoolRemapper.visitBootstrapMethodInfo(clazz, bootstrapMethodInfo);
 
     // Assert
-    assertNull(bootstrapMethodInfo.u2methodArguments);
     assertEquals(1, bootstrapMethodInfo.u2methodHandleIndex);
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitBootstrapMethodInfo(Clazz,
-   * BootstrapMethodInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)"
-  })
-  public void testVisitBootstrapMethodInfo_thenThrowIllegalArgumentException() {
+  public void testVisitBootstrapMethodInfo2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitBootstrapMethodInfo(clazz, new BootstrapMethodInfo()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitRecordComponentInfo(Clazz, RecordComponentInfo)}.
-   *
-   * <ul>
-   *   <li>Then {@link RecordComponentInfo#RecordComponentInfo()} {@link
-   *       RecordComponentInfo#u2descriptorIndex} is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitRecordComponentInfo(Clazz,
-   * RecordComponentInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitBootstrapMethodInfo(Clazz, BootstrapMethodInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitRecordComponentInfo(Clazz, RecordComponentInfo)"
-  })
-  public void testVisitRecordComponentInfo_thenRecordComponentInfoU2descriptorIndexIsOne() {
+  public void testVisitBootstrapMethodInfo3() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
+    LibraryClass clazz = new LibraryClass();
+    BootstrapMethodInfo bootstrapMethodInfo = new BootstrapMethodInfo(1, 3, new int[]{1, 0, 1, 0});
+
+    // Act
+    constantPoolRemapper.visitBootstrapMethodInfo(clazz, bootstrapMethodInfo);
+
+    // Assert
+    int[] intArray = bootstrapMethodInfo.u2methodArguments;
+    assertEquals(0, intArray[0]);
+    assertEquals(0, intArray[2]);
+    assertEquals(0, bootstrapMethodInfo.u2methodHandleIndex);
+    assertEquals(1, intArray[1]);
+    assertEquals(4, intArray.length);
+  }
+
+  /**
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitRecordComponentInfo(Clazz, RecordComponentInfo)}
+   */
+  @Test
+  public void testVisitRecordComponentInfo() {
+    // Arrange
+    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     RecordComponentInfo recordComponentInfo = new RecordComponentInfo();
 
@@ -3068,71 +2104,27 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitRecordComponentInfo(Clazz, RecordComponentInfo)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitRecordComponentInfo(Clazz,
-   * RecordComponentInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitRecordComponentInfo(Clazz, RecordComponentInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitRecordComponentInfo(Clazz, RecordComponentInfo)"
-  })
-  public void testVisitRecordComponentInfo_thenThrowIllegalArgumentException() {
+  public void testVisitRecordComponentInfo2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitRecordComponentInfo(clazz, new RecordComponentInfo()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitInnerClassesInfo(Clazz, InnerClassesInfo)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitInnerClassesInfo(Clazz,
-   * InnerClassesInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitInnerClassesInfo(Clazz, InnerClassesInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitInnerClassesInfo(Clazz, InnerClassesInfo)"})
   public void testVisitInnerClassesInfo() {
-    // Arrange
-    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
-    LibraryClass clazz = new LibraryClass();
-    InnerClassesInfo innerClassesInfo = new InnerClassesInfo(1, 1, 1, 1);
-
-    // Act
-    constantPoolRemapper.visitInnerClassesInfo(clazz, innerClassesInfo);
-
-    // Assert
-    assertEquals(0, innerClassesInfo.u2innerClassIndex);
-    assertEquals(0, innerClassesInfo.u2innerNameIndex);
-    assertEquals(0, innerClassesInfo.u2outerClassIndex);
-  }
-
-  /**
-   * Test {@link ConstantPoolRemapper#visitInnerClassesInfo(Clazz, InnerClassesInfo)}.
-   *
-   * <ul>
-   *   <li>Given zero.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitInnerClassesInfo(Clazz,
-   * InnerClassesInfo)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitInnerClassesInfo(Clazz, InnerClassesInfo)"})
-  public void testVisitInnerClassesInfo_givenZero() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
     LibraryClass clazz = new LibraryClass();
@@ -3152,76 +2144,48 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitInnerClassesInfo(Clazz, InnerClassesInfo)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitInnerClassesInfo(Clazz,
-   * InnerClassesInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitInnerClassesInfo(Clazz, InnerClassesInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitInnerClassesInfo(Clazz, InnerClassesInfo)"})
-  public void testVisitInnerClassesInfo_thenThrowIllegalArgumentException() {
+  public void testVisitInnerClassesInfo2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
+    LibraryClass clazz = new LibraryClass();
+    InnerClassesInfo innerClassesInfo = new InnerClassesInfo(1, 1, 1, 1);
+
+    // Act
+    constantPoolRemapper.visitInnerClassesInfo(clazz, innerClassesInfo);
+
+    // Assert
+    assertEquals(0, innerClassesInfo.u2innerClassIndex);
+    assertEquals(0, innerClassesInfo.u2innerNameIndex);
+    assertEquals(0, innerClassesInfo.u2outerClassIndex);
+  }
+
+  /**
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitInnerClassesInfo(Clazz, InnerClassesInfo)}
+   */
+  @Test
+  public void testVisitInnerClassesInfo3() {
+    // Arrange
+    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitInnerClassesInfo(clazz, new InnerClassesInfo(1, 1, 1, 1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitExceptionInfo(Clazz, Method, CodeAttribute,
-   * ExceptionInfo)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitExceptionInfo(Clazz, Method,
-   * CodeAttribute, ExceptionInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitExceptionInfo(Clazz, Method, CodeAttribute, ExceptionInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitExceptionInfo(Clazz, Method, CodeAttribute, ExceptionInfo)"
-  })
   public void testVisitExceptionInfo() {
-    // Arrange
-    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
-    LibraryClass clazz = new LibraryClass();
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    CodeAttribute codeAttribute = new CodeAttribute(1);
-    ExceptionInfo exceptionInfo = new ExceptionInfo(1, 3, 1, 1);
-
-    // Act
-    constantPoolRemapper.visitExceptionInfo(clazz, method, codeAttribute, exceptionInfo);
-
-    // Assert
-    assertEquals(0, exceptionInfo.u2catchType);
-  }
-
-  /**
-   * Test {@link ConstantPoolRemapper#visitExceptionInfo(Clazz, Method, CodeAttribute,
-   * ExceptionInfo)}.
-   *
-   * <ul>
-   *   <li>Given zero.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitExceptionInfo(Clazz, Method,
-   * CodeAttribute, ExceptionInfo)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitExceptionInfo(Clazz, Method, CodeAttribute, ExceptionInfo)"
-  })
-  public void testVisitExceptionInfo_givenZero() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
     LibraryClass clazz = new LibraryClass();
@@ -3240,87 +2204,74 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitExceptionInfo(Clazz, Method, CodeAttribute,
-   * ExceptionInfo)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitExceptionInfo(Clazz, Method,
-   * CodeAttribute, ExceptionInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitExceptionInfo(Clazz, Method, CodeAttribute, ExceptionInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitExceptionInfo(Clazz, Method, CodeAttribute, ExceptionInfo)"
-  })
-  public void testVisitExceptionInfo_thenThrowIllegalArgumentException() {
+  public void testVisitExceptionInfo2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
+    LibraryClass clazz = new LibraryClass();
+    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
+    CodeAttribute codeAttribute = new CodeAttribute(1);
+    ExceptionInfo exceptionInfo = new ExceptionInfo(1, 3, 1, 1);
+
+    // Act
+    constantPoolRemapper.visitExceptionInfo(clazz, method, codeAttribute, exceptionInfo);
+
+    // Assert
+    assertEquals(0, exceptionInfo.u2catchType);
+  }
+
+  /**
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitExceptionInfo(Clazz, Method, CodeAttribute, ExceptionInfo)}
+   */
+  @Test
+  public void testVisitExceptionInfo3() {
+    // Arrange
+    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitExceptionInfo(
-                clazz, method, codeAttribute, new ExceptionInfo(1, 3, 1, 1)));
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitExceptionInfo(clazz, method, codeAttribute, new ExceptionInfo(1, 3, 1, 1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitConstantInstruction(Clazz, Method, CodeAttribute, int,
-   * ConstantInstruction)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitConstantInstruction(Clazz, Method,
-   * CodeAttribute, int, ConstantInstruction)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitConstantInstruction(Clazz, Method, CodeAttribute, int, ConstantInstruction)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitConstantInstruction(Clazz, Method, CodeAttribute, int, ConstantInstruction)"
-  })
-  public void testVisitConstantInstruction_thenThrowIllegalArgumentException() {
+  public void testVisitConstantInstruction() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitConstantInstruction(
-                clazz, method, codeAttribute, 2, new ConstantInstruction((byte) 'A', 1)));
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper.visitConstantInstruction(clazz, method,
+        codeAttribute, 2, new ConstantInstruction((byte) 'A', 1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitSameOneFrame(Clazz, Method, CodeAttribute, int,
-   * SameOneFrame)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitSameOneFrame(Clazz, Method,
-   * CodeAttribute, int, SameOneFrame)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitSameOneFrame(Clazz, Method, CodeAttribute, int, SameOneFrame)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitSameOneFrame(Clazz, Method, CodeAttribute, int, SameOneFrame)"
-  })
   public void testVisitSameOneFrame() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
@@ -3337,62 +2288,33 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitSameOneFrame(Clazz, Method, CodeAttribute, int,
-   * SameOneFrame)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitSameOneFrame(Clazz, Method,
-   * CodeAttribute, int, SameOneFrame)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitSameOneFrame(Clazz, Method, CodeAttribute, int, SameOneFrame)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitSameOneFrame(Clazz, Method, CodeAttribute, int, SameOneFrame)"
-  })
-  public void testVisitSameOneFrame_thenThrowIllegalArgumentException() {
+  public void testVisitSameOneFrame2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitSameOneFrame(
-                clazz,
-                method,
-                codeAttribute,
-                2,
-                new SameOneFrame(VerificationTypeFactory.createObjectType(1))));
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper.visitSameOneFrame(clazz, method,
+        codeAttribute, 2, new SameOneFrame(VerificationTypeFactory.createObjectType(1))));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitObjectType(Clazz, Method, CodeAttribute, int,
-   * ObjectType)}.
-   *
-   * <ul>
-   *   <li>Then createObjectType one {@link ObjectType#u2classIndex} is zero.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitObjectType(Clazz, Method, CodeAttribute,
-   * int, ObjectType)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitObjectType(Clazz, Method, CodeAttribute, int, ObjectType)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitObjectType(Clazz, Method, CodeAttribute, int, ObjectType)"
-  })
-  public void testVisitObjectType_thenCreateObjectTypeOneU2classIndexIsZero() {
+  public void testVisitObjectType() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
@@ -3407,53 +2329,33 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitObjectType(Clazz, Method, CodeAttribute, int,
-   * ObjectType)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitObjectType(Clazz, Method, CodeAttribute,
-   * int, ObjectType)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitObjectType(Clazz, Method, CodeAttribute, int, ObjectType)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitObjectType(Clazz, Method, CodeAttribute, int, ObjectType)"
-  })
-  public void testVisitObjectType_thenThrowIllegalArgumentException() {
+  public void testVisitObjectType2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitObjectType(
-                clazz, method, codeAttribute, 2, VerificationTypeFactory.createObjectType(1)));
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper.visitObjectType(clazz, method,
+        codeAttribute, 2, VerificationTypeFactory.createObjectType(1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitParameterInfo(Clazz, Method, int, ParameterInfo)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitParameterInfo(Clazz, Method, int,
-   * ParameterInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitParameterInfo(Clazz, Method, int, ParameterInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitParameterInfo(Clazz, Method, int, ParameterInfo)"
-  })
   public void testVisitParameterInfo() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
@@ -3467,49 +2369,31 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitParameterInfo(Clazz, Method, int, ParameterInfo)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitParameterInfo(Clazz, Method, int,
-   * ParameterInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitParameterInfo(Clazz, Method, int, ParameterInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitParameterInfo(Clazz, Method, int, ParameterInfo)"
-  })
-  public void testVisitParameterInfo_thenThrowIllegalArgumentException() {
+  public void testVisitParameterInfo2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitParameterInfo(clazz, method, 1, new ParameterInfo(1, 1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitLocalVariableInfo(Clazz, Method, CodeAttribute,
-   * LocalVariableInfo)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitLocalVariableInfo(Clazz, Method,
-   * CodeAttribute, LocalVariableInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitLocalVariableInfo(Clazz, Method, CodeAttribute, LocalVariableInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitLocalVariableInfo(Clazz, Method, CodeAttribute, LocalVariableInfo)"
-  })
   public void testVisitLocalVariableInfo() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
@@ -3525,54 +2409,33 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitLocalVariableInfo(Clazz, Method, CodeAttribute,
-   * LocalVariableInfo)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitLocalVariableInfo(Clazz, Method,
-   * CodeAttribute, LocalVariableInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitLocalVariableInfo(Clazz, Method, CodeAttribute, LocalVariableInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitLocalVariableInfo(Clazz, Method, CodeAttribute, LocalVariableInfo)"
-  })
-  public void testVisitLocalVariableInfo_thenThrowIllegalArgumentException() {
+  public void testVisitLocalVariableInfo2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitLocalVariableInfo(
-                clazz, method, codeAttribute, new LocalVariableInfo(1, 3, 1, 1, 1)));
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper.visitLocalVariableInfo(clazz, method,
+        codeAttribute, new LocalVariableInfo(1, 3, 1, 1, 1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitLocalVariableTypeInfo(Clazz, Method, CodeAttribute,
-   * LocalVariableTypeInfo)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitLocalVariableTypeInfo(Clazz, Method,
-   * CodeAttribute, LocalVariableTypeInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitLocalVariableTypeInfo(Clazz, Method, CodeAttribute, LocalVariableTypeInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitLocalVariableTypeInfo(Clazz, Method, CodeAttribute, LocalVariableTypeInfo)"
-  })
   public void testVisitLocalVariableTypeInfo() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
@@ -3580,8 +2443,7 @@ public class ConstantPoolRemapperDiffblueTest {
     LocalVariableTypeInfo localVariableTypeInfo = new LocalVariableTypeInfo(1, 3, 1, 1, 1);
 
     // Act
-    constantPoolRemapper.visitLocalVariableTypeInfo(
-        clazz, method, codeAttribute, localVariableTypeInfo);
+    constantPoolRemapper.visitLocalVariableTypeInfo(clazz, method, codeAttribute, localVariableTypeInfo);
 
     // Assert
     assertEquals(0, localVariableTypeInfo.u2nameIndex);
@@ -3589,50 +2451,33 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitLocalVariableTypeInfo(Clazz, Method, CodeAttribute,
-   * LocalVariableTypeInfo)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitLocalVariableTypeInfo(Clazz, Method,
-   * CodeAttribute, LocalVariableTypeInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitLocalVariableTypeInfo(Clazz, Method, CodeAttribute, LocalVariableTypeInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitLocalVariableTypeInfo(Clazz, Method, CodeAttribute, LocalVariableTypeInfo)"
-  })
-  public void testVisitLocalVariableTypeInfo_thenThrowIllegalArgumentException() {
+  public void testVisitLocalVariableTypeInfo2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitLocalVariableTypeInfo(
-                clazz, method, codeAttribute, new LocalVariableTypeInfo(1, 3, 1, 1, 1)));
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper.visitLocalVariableTypeInfo(clazz, method,
+        codeAttribute, new LocalVariableTypeInfo(1, 3, 1, 1, 1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitRequiresInfo(Clazz, RequiresInfo)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitRequiresInfo(Clazz, RequiresInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitRequiresInfo(Clazz, RequiresInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitRequiresInfo(Clazz, RequiresInfo)"})
   public void testVisitRequiresInfo() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     RequiresInfo requiresInfo = new RequiresInfo(1, 1, 1);
 
@@ -3645,69 +2490,30 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitRequiresInfo(Clazz, RequiresInfo)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitRequiresInfo(Clazz, RequiresInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitRequiresInfo(Clazz, RequiresInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitRequiresInfo(Clazz, RequiresInfo)"})
-  public void testVisitRequiresInfo_thenThrowIllegalArgumentException() {
+  public void testVisitRequiresInfo2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitRequiresInfo(clazz, new RequiresInfo(1, 1, 1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitExportsInfo(Clazz, ExportsInfo)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitExportsInfo(Clazz, ExportsInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitExportsInfo(Clazz, ExportsInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitExportsInfo(Clazz, ExportsInfo)"})
   public void testVisitExportsInfo() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
-    LibraryClass clazz = new LibraryClass();
-    ExportsInfo exportsInfo = new ExportsInfo(1, 1, 3, new int[] {1, 0, 1, 0});
-
-    // Act
-    constantPoolRemapper.visitExportsInfo(clazz, exportsInfo);
-
-    // Assert
-    assertEquals(0, exportsInfo.u2exportsIndex);
-    assertArrayEquals(new int[] {0, 1, 0, 0}, exportsInfo.u2exportsToIndex);
-  }
-
-  /**
-   * Test {@link ConstantPoolRemapper#visitExportsInfo(Clazz, ExportsInfo)}.
-   *
-   * <ul>
-   *   <li>Then {@link ExportsInfo#ExportsInfo()} {@link ExportsInfo#u2exportsToIndex} is {@code
-   *       null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitExportsInfo(Clazz, ExportsInfo)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitExportsInfo(Clazz, ExportsInfo)"})
-  public void testVisitExportsInfo_thenExportsInfoU2exportsToIndexIsNull() {
-    // Arrange
-    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     ExportsInfo exportsInfo = new ExportsInfo();
 
@@ -3715,73 +2521,57 @@ public class ConstantPoolRemapperDiffblueTest {
     constantPoolRemapper.visitExportsInfo(clazz, exportsInfo);
 
     // Assert
-    assertNull(exportsInfo.u2exportsToIndex);
     assertEquals(1, exportsInfo.u2exportsIndex);
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitExportsInfo(Clazz, ExportsInfo)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitExportsInfo(Clazz, ExportsInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitExportsInfo(Clazz, ExportsInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitExportsInfo(Clazz, ExportsInfo)"})
-  public void testVisitExportsInfo_thenThrowIllegalArgumentException() {
+  public void testVisitExportsInfo2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> constantPoolRemapper.visitExportsInfo(clazz, new ExportsInfo()));
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper.visitExportsInfo(clazz, new ExportsInfo()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitOpensInfo(Clazz, OpensInfo)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitOpensInfo(Clazz, OpensInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitExportsInfo(Clazz, ExportsInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitOpensInfo(Clazz, OpensInfo)"})
+  public void testVisitExportsInfo3() {
+    // Arrange
+    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
+    LibraryClass clazz = new LibraryClass();
+    ExportsInfo exportsInfo = new ExportsInfo(1, 1, 3, new int[]{1, 0, 1, 0});
+
+    // Act
+    constantPoolRemapper.visitExportsInfo(clazz, exportsInfo);
+
+    // Assert
+    int[] intArray = exportsInfo.u2exportsToIndex;
+    assertEquals(0, intArray[0]);
+    assertEquals(0, intArray[2]);
+    assertEquals(0, exportsInfo.u2exportsIndex);
+    assertEquals(1, intArray[1]);
+    assertEquals(4, intArray.length);
+  }
+
+  /**
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitOpensInfo(Clazz, OpensInfo)}
+   */
+  @Test
   public void testVisitOpensInfo() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
-    LibraryClass clazz = new LibraryClass();
-    OpensInfo opensInfo = new OpensInfo(1, 1, 3, new int[] {1, 0, 1, 0});
-
-    // Act
-    constantPoolRemapper.visitOpensInfo(clazz, opensInfo);
-
-    // Assert
-    assertEquals(0, opensInfo.u2opensIndex);
-    assertArrayEquals(new int[] {0, 1, 0, 0}, opensInfo.u2opensToIndex);
-  }
-
-  /**
-   * Test {@link ConstantPoolRemapper#visitOpensInfo(Clazz, OpensInfo)}.
-   *
-   * <ul>
-   *   <li>Then {@link OpensInfo#OpensInfo()} {@link OpensInfo#u2opensToIndex} is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitOpensInfo(Clazz, OpensInfo)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitOpensInfo(Clazz, OpensInfo)"})
-  public void testVisitOpensInfo_thenOpensInfoU2opensToIndexIsNull() {
-    // Arrange
-    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     OpensInfo opensInfo = new OpensInfo();
 
@@ -3789,74 +2579,57 @@ public class ConstantPoolRemapperDiffblueTest {
     constantPoolRemapper.visitOpensInfo(clazz, opensInfo);
 
     // Assert
-    assertNull(opensInfo.u2opensToIndex);
     assertEquals(1, opensInfo.u2opensIndex);
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitOpensInfo(Clazz, OpensInfo)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitOpensInfo(Clazz, OpensInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitOpensInfo(Clazz, OpensInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitOpensInfo(Clazz, OpensInfo)"})
-  public void testVisitOpensInfo_thenThrowIllegalArgumentException() {
+  public void testVisitOpensInfo2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> constantPoolRemapper.visitOpensInfo(clazz, new OpensInfo()));
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper.visitOpensInfo(clazz, new OpensInfo()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitProvidesInfo(Clazz, ProvidesInfo)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitProvidesInfo(Clazz, ProvidesInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitOpensInfo(Clazz, OpensInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitProvidesInfo(Clazz, ProvidesInfo)"})
+  public void testVisitOpensInfo3() {
+    // Arrange
+    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
+    LibraryClass clazz = new LibraryClass();
+    OpensInfo opensInfo = new OpensInfo(1, 1, 3, new int[]{1, 0, 1, 0});
+
+    // Act
+    constantPoolRemapper.visitOpensInfo(clazz, opensInfo);
+
+    // Assert
+    int[] intArray = opensInfo.u2opensToIndex;
+    assertEquals(0, intArray[0]);
+    assertEquals(0, intArray[2]);
+    assertEquals(0, opensInfo.u2opensIndex);
+    assertEquals(1, intArray[1]);
+    assertEquals(4, intArray.length);
+  }
+
+  /**
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitProvidesInfo(Clazz, ProvidesInfo)}
+   */
+  @Test
   public void testVisitProvidesInfo() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
-    LibraryClass clazz = new LibraryClass();
-    ProvidesInfo providesInfo = new ProvidesInfo(1, 1, new int[] {1, 2, 1, 2});
-
-    // Act
-    constantPoolRemapper.visitProvidesInfo(clazz, providesInfo);
-
-    // Assert
-    assertEquals(0, providesInfo.u2providesIndex);
-    assertArrayEquals(new int[] {0, 2, 1, 2}, providesInfo.u2providesWithIndex);
-  }
-
-  /**
-   * Test {@link ConstantPoolRemapper#visitProvidesInfo(Clazz, ProvidesInfo)}.
-   *
-   * <ul>
-   *   <li>Then {@link ProvidesInfo#ProvidesInfo()} {@link ProvidesInfo#u2providesWithIndex} is
-   *       {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitProvidesInfo(Clazz, ProvidesInfo)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitProvidesInfo(Clazz, ProvidesInfo)"})
-  public void testVisitProvidesInfo_thenProvidesInfoU2providesWithIndexIsNull() {
-    // Arrange
-    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     ProvidesInfo providesInfo = new ProvidesInfo();
 
@@ -3864,51 +2637,56 @@ public class ConstantPoolRemapperDiffblueTest {
     constantPoolRemapper.visitProvidesInfo(clazz, providesInfo);
 
     // Assert
-    assertNull(providesInfo.u2providesWithIndex);
     assertEquals(1, providesInfo.u2providesIndex);
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitProvidesInfo(Clazz, ProvidesInfo)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitProvidesInfo(Clazz, ProvidesInfo)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitProvidesInfo(Clazz, ProvidesInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitProvidesInfo(Clazz, ProvidesInfo)"})
-  public void testVisitProvidesInfo_thenThrowIllegalArgumentException() {
+  public void testVisitProvidesInfo2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
+    assertThrows(IllegalArgumentException.class,
         () -> constantPoolRemapper.visitProvidesInfo(clazz, new ProvidesInfo()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitAnnotation(Clazz, Annotation)} with {@code clazz}, {@code
-   * annotation}.
-   *
-   * <ul>
-   *   <li>Then {@link Annotation#Annotation()} {@link Annotation#u2typeIndex} is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitAnnotation(Clazz, Annotation)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitProvidesInfo(Clazz, ProvidesInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitAnnotation(Clazz, Annotation)"})
-  public void testVisitAnnotationWithClazzAnnotation_thenAnnotationU2typeIndexIsOne() {
+  public void testVisitProvidesInfo3() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
+    LibraryClass clazz = new LibraryClass();
+    ProvidesInfo providesInfo = new ProvidesInfo(1, 1, new int[]{1, 2, 1, 2});
+
+    // Act
+    constantPoolRemapper.visitProvidesInfo(clazz, providesInfo);
+
+    // Assert
+    int[] intArray = providesInfo.u2providesWithIndex;
+    assertEquals(0, intArray[0]);
+    assertEquals(0, providesInfo.u2providesIndex);
+    assertEquals(4, intArray.length);
+  }
+
+  /**
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitAnnotation(Clazz, Annotation)}
+   */
+  @Test
+  public void testVisitAnnotation() {
+    // Arrange
+    ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     Annotation annotation = new Annotation();
 
@@ -3920,46 +2698,29 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitAnnotation(Clazz, Annotation)} with {@code clazz}, {@code
-   * annotation}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitAnnotation(Clazz, Annotation)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitAnnotation(Clazz, Annotation)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolRemapper.visitAnnotation(Clazz, Annotation)"})
-  public void testVisitAnnotationWithClazzAnnotation_thenThrowIllegalArgumentException() {
+  public void testVisitAnnotation2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> constantPoolRemapper.visitAnnotation(clazz, new Annotation()));
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper.visitAnnotation(clazz, new Annotation()));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitConstantElementValue(Clazz, Annotation,
-   * ConstantElementValue)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitConstantElementValue(Clazz, Annotation,
-   * ConstantElementValue)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitConstantElementValue(Clazz, Annotation, ConstantElementValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitConstantElementValue(Clazz, Annotation, ConstantElementValue)"
-  })
   public void testVisitConstantElementValue() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     Annotation annotation = new Annotation();
     ConstantElementValue constantElementValue = new ConstantElementValue('A');
@@ -3973,52 +2734,31 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitConstantElementValue(Clazz, Annotation,
-   * ConstantElementValue)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitConstantElementValue(Clazz, Annotation,
-   * ConstantElementValue)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitConstantElementValue(Clazz, Annotation, ConstantElementValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitConstantElementValue(Clazz, Annotation, ConstantElementValue)"
-  })
-  public void testVisitConstantElementValue_thenThrowIllegalArgumentException() {
+  public void testVisitConstantElementValue2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     Annotation annotation = new Annotation();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitConstantElementValue(
-                clazz, annotation, new ConstantElementValue('A')));
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitConstantElementValue(clazz, annotation, new ConstantElementValue('A')));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitEnumConstantElementValue(Clazz, Annotation,
-   * EnumConstantElementValue)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitEnumConstantElementValue(Clazz,
-   * Annotation, EnumConstantElementValue)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitEnumConstantElementValue(Clazz, Annotation, EnumConstantElementValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitEnumConstantElementValue(Clazz, Annotation, EnumConstantElementValue)"
-  })
   public void testVisitEnumConstantElementValue() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     Annotation annotation = new Annotation();
     EnumConstantElementValue enumConstantElementValue = new EnumConstantElementValue(1, 1, 1);
@@ -4033,51 +2773,31 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitEnumConstantElementValue(Clazz, Annotation,
-   * EnumConstantElementValue)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitEnumConstantElementValue(Clazz,
-   * Annotation, EnumConstantElementValue)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitEnumConstantElementValue(Clazz, Annotation, EnumConstantElementValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitEnumConstantElementValue(Clazz, Annotation, EnumConstantElementValue)"
-  })
-  public void testVisitEnumConstantElementValue_thenThrowIllegalArgumentException() {
+  public void testVisitEnumConstantElementValue2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
     Annotation annotation = new Annotation();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitEnumConstantElementValue(
-                clazz, annotation, new EnumConstantElementValue(1, 1, 1)));
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper.visitEnumConstantElementValue(clazz,
+        annotation, new EnumConstantElementValue(1, 1, 1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitClassElementValue(Clazz, Annotation, ClassElementValue)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitClassElementValue(Clazz, Annotation,
-   * ClassElementValue)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitClassElementValue(Clazz, Annotation, ClassElementValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitClassElementValue(Clazz, Annotation, ClassElementValue)"
-  })
   public void testVisitClassElementValue() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     Annotation annotation = new Annotation();
     ClassElementValue classElementValue = new ClassElementValue(1, 1);
@@ -4091,51 +2811,31 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitClassElementValue(Clazz, Annotation, ClassElementValue)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitClassElementValue(Clazz, Annotation,
-   * ClassElementValue)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitClassElementValue(Clazz, Annotation, ClassElementValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitClassElementValue(Clazz, Annotation, ClassElementValue)"
-  })
-  public void testVisitClassElementValue_thenThrowIllegalArgumentException() {
+  public void testVisitClassElementValue2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, -1, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, -1, 1, 0});
     LibraryClass clazz = new LibraryClass();
     Annotation annotation = new Annotation();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitClassElementValue(
-                clazz, annotation, new ClassElementValue(1, 1)));
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitClassElementValue(clazz, annotation, new ClassElementValue(1, 1)));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitAnnotationElementValue(Clazz, Annotation,
-   * AnnotationElementValue)}.
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitAnnotationElementValue(Clazz,
-   * Annotation, AnnotationElementValue)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitAnnotationElementValue(Clazz, Annotation, AnnotationElementValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitAnnotationElementValue(Clazz, Annotation, AnnotationElementValue)"
-  })
   public void testVisitAnnotationElementValue() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     Annotation annotation = new Annotation();
     AnnotationElementValue annotationElementValue = new AnnotationElementValue(1, new Annotation());
@@ -4149,56 +2849,31 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitAnnotationElementValue(Clazz, Annotation,
-   * AnnotationElementValue)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitAnnotationElementValue(Clazz,
-   * Annotation, AnnotationElementValue)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitAnnotationElementValue(Clazz, Annotation, AnnotationElementValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitAnnotationElementValue(Clazz, Annotation, AnnotationElementValue)"
-  })
-  public void testVisitAnnotationElementValue_thenThrowIllegalArgumentException() {
+  public void testVisitAnnotationElementValue2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     Annotation annotation = new Annotation();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitAnnotationElementValue(
-                clazz, annotation, new AnnotationElementValue(1, new Annotation())));
+    assertThrows(IllegalArgumentException.class, () -> constantPoolRemapper.visitAnnotationElementValue(clazz,
+        annotation, new AnnotationElementValue(1, new Annotation())));
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitArrayElementValue(Clazz, Annotation, ArrayElementValue)}.
-   *
-   * <ul>
-   *   <li>Then {@link ArrayElementValue#ArrayElementValue()} {@link
-   *       ElementValue#u2elementNameIndex} is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitArrayElementValue(Clazz, Annotation,
-   * ArrayElementValue)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitArrayElementValue(Clazz, Annotation, ArrayElementValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitArrayElementValue(Clazz, Annotation, ArrayElementValue)"
-  })
-  public void testVisitArrayElementValue_thenArrayElementValueU2elementNameIndexIsOne() {
+  public void testVisitArrayElementValue() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     Annotation annotation = new Annotation();
     ArrayElementValue arrayElementValue = new ArrayElementValue();
@@ -4211,32 +2886,19 @@ public class ConstantPoolRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolRemapper#visitArrayElementValue(Clazz, Annotation, ArrayElementValue)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolRemapper#visitArrayElementValue(Clazz, Annotation,
-   * ArrayElementValue)}
+   * Method under test:
+   * {@link ConstantPoolRemapper#visitArrayElementValue(Clazz, Annotation, ArrayElementValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolRemapper.visitArrayElementValue(Clazz, Annotation, ArrayElementValue)"
-  })
-  public void testVisitArrayElementValue_thenThrowIllegalArgumentException() {
+  public void testVisitArrayElementValue2() {
     // Arrange
     ConstantPoolRemapper constantPoolRemapper = new ConstantPoolRemapper();
-    constantPoolRemapper.setConstantIndexMap(new int[] {-1, 0, 1, 0});
+    constantPoolRemapper.setConstantIndexMap(new int[]{-1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     Annotation annotation = new Annotation();
 
     // Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            constantPoolRemapper.visitArrayElementValue(
-                clazz, annotation, new ArrayElementValue()));
+    assertThrows(IllegalArgumentException.class,
+        () -> constantPoolRemapper.visitArrayElementValue(clazz, annotation, new ArrayElementValue()));
   }
 }

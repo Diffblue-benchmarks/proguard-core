@@ -4,22 +4,25 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 public class StreamingDataEntryDiffblueTest {
   /**
-   * Test getters and setters.
-   *
-   * <p>Methods under test:
-   *
+   * Method under test: {@link StreamingDataEntry#getOriginalName()}
+   */
+  @Test
+  public void testGetOriginalName() throws UnsupportedEncodingException {
+    // Arrange, Act and Assert
+    assertEquals("Name",
+        (new StreamingDataEntry("Name", new ByteArrayInputStream("AXAXAXAX".getBytes("UTF-8")))).getOriginalName());
+  }
+
+  /**
+   * Methods under test:
    * <ul>
    *   <li>{@link StreamingDataEntry#StreamingDataEntry(String, InputStream)}
    *   <li>{@link StreamingDataEntry#toString()}
@@ -31,16 +34,6 @@ public class StreamingDataEntryDiffblueTest {
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void StreamingDataEntry.<init>(String, InputStream)",
-    "InputStream StreamingDataEntry.getInputStream()",
-    "String StreamingDataEntry.getName()",
-    "DataEntry StreamingDataEntry.getParent()",
-    "long StreamingDataEntry.getSize()",
-    "boolean StreamingDataEntry.isDirectory()",
-    "String StreamingDataEntry.toString()"
-  })
   public void testGettersAndSetters() throws IOException {
     // Arrange
     ByteArrayInputStream inputStream = new ByteArrayInputStream("AXAXAXAX".getBytes("UTF-8"));
@@ -62,21 +55,5 @@ public class StreamingDataEntryDiffblueTest {
     assertEquals(8, actualInputStream.read(new byte[8]));
     assertFalse(actualIsDirectoryResult);
     assertSame(inputStream, actualInputStream);
-  }
-
-  /**
-   * Test {@link StreamingDataEntry#getOriginalName()}.
-   *
-   * <p>Method under test: {@link StreamingDataEntry#getOriginalName()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String StreamingDataEntry.getOriginalName()"})
-  public void testGetOriginalName() throws UnsupportedEncodingException {
-    // Arrange, Act and Assert
-    assertEquals(
-        "Name",
-        (new StreamingDataEntry("Name", new ByteArrayInputStream("AXAXAXAX".getBytes("UTF-8"))))
-            .getOriginalName());
   }
 }

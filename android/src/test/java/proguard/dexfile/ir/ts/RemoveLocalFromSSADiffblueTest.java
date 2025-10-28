@@ -4,35 +4,26 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.IrMethod;
 import proguard.dexfile.ir.expr.Local;
-import proguard.dexfile.ir.expr.Value.VT;
-import proguard.dexfile.ir.ts.RemoveLocalFromSSA.PhiObject;
+import proguard.dexfile.ir.expr.Value;
 
 public class RemoveLocalFromSSADiffblueTest {
   /**
-   * Test {@link RemoveLocalFromSSA#getOrCreate(Map, Local)}.
-   *
-   * <p>Method under test: {@link RemoveLocalFromSSA#getOrCreate(Map, Local)}
+   * Method under test: {@link RemoveLocalFromSSA#getOrCreate(Map, Local)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"PhiObject RemoveLocalFromSSA.getOrCreate(Map, Local)"})
   public void testGetOrCreate() {
     // Arrange
-    HashMap<Local, PhiObject> map = new HashMap<>();
+    HashMap<Local, RemoveLocalFromSSA.PhiObject> map = new HashMap<>();
 
     // Act
-    PhiObject actualOrCreate = RemoveLocalFromSSA.getOrCreate(map, new Local());
+    RemoveLocalFromSSA.PhiObject actualOrCreate = RemoveLocalFromSSA.getOrCreate(map, new Local());
 
     // Assert
     assertEquals(1, map.size());
@@ -48,47 +39,36 @@ public class RemoveLocalFromSSADiffblueTest {
     assertNull(local.getOp2());
     assertEquals(0, local._ls_index);
     assertEquals(ET.E0, local.et);
-    assertEquals(VT.LOCAL, local.vt);
+    assertEquals(Value.VT.LOCAL, local.vt);
     assertFalse(actualOrCreate.isInitByPhi);
     assertTrue(actualOrCreate.children.isEmpty());
     assertTrue(actualOrCreate.parent.isEmpty());
   }
 
   /**
-   * Test {@link RemoveLocalFromSSA#linkPhiObject(PhiObject, PhiObject)}.
-   *
-   * <ul>
-   *   <li>When {@link PhiObject} (default constructor).
-   *   <li>Then {@link PhiObject} (default constructor) {@link PhiObject#children} size is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link RemoveLocalFromSSA#linkPhiObject(PhiObject, PhiObject)}
+   * Method under test:
+   * {@link RemoveLocalFromSSA#linkPhiObject(RemoveLocalFromSSA.PhiObject, RemoveLocalFromSSA.PhiObject)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void RemoveLocalFromSSA.linkPhiObject(PhiObject, PhiObject)"})
-  public void testLinkPhiObject_whenPhiObject_thenPhiObjectChildrenSizeIsOne() {
+  public void testLinkPhiObject() {
     // Arrange
-    PhiObject parent = new PhiObject();
+    RemoveLocalFromSSA.PhiObject parent = new RemoveLocalFromSSA.PhiObject();
 
     // Act
-    RemoveLocalFromSSA.linkPhiObject(parent, new PhiObject());
+    RemoveLocalFromSSA.linkPhiObject(parent, new RemoveLocalFromSSA.PhiObject());
 
     // Assert
     assertEquals(1, parent.children.size());
   }
 
   /**
-   * Test PhiObject new {@link PhiObject} (default constructor).
-   *
-   * <p>Method under test: default or parameterless constructor of {@link PhiObject}
+   * Method under test: default or parameterless constructor of
+   * {@link RemoveLocalFromSSA.PhiObject}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void PhiObject.<init>()"})
   public void testPhiObjectNewPhiObject() {
     // Arrange and Act
-    PhiObject actualPhiObject = new PhiObject();
+    RemoveLocalFromSSA.PhiObject actualPhiObject = new RemoveLocalFromSSA.PhiObject();
 
     // Assert
     assertTrue(actualPhiObject.children.isEmpty());
@@ -96,19 +76,24 @@ public class RemoveLocalFromSSADiffblueTest {
   }
 
   /**
-   * Test {@link RemoveLocalFromSSA#transformReportChanged(IrMethod)}.
-   *
-   * <ul>
-   *   <li>Given {@link ArrayList#ArrayList()}.
-   *   <li>Then return {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link RemoveLocalFromSSA#transformReportChanged(IrMethod)}
+   * Method under test:
+   * {@link RemoveLocalFromSSA#transformReportChanged(IrMethod)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean RemoveLocalFromSSA.transformReportChanged(IrMethod)"})
-  public void testTransformReportChanged_givenArrayList_thenReturnFalse() {
+  public void testTransformReportChanged() {
+    // Arrange
+    RemoveLocalFromSSA removeLocalFromSSA = new RemoveLocalFromSSA();
+
+    // Act and Assert
+    assertFalse(removeLocalFromSSA.transformReportChanged(new IrMethod()));
+  }
+
+  /**
+   * Method under test:
+   * {@link RemoveLocalFromSSA#transformReportChanged(IrMethod)}
+   */
+  @Test
+  public void testTransformReportChanged2() {
     // Arrange
     RemoveLocalFromSSA removeLocalFromSSA = new RemoveLocalFromSSA();
     IrMethod method = new IrMethod();
@@ -116,26 +101,5 @@ public class RemoveLocalFromSSADiffblueTest {
 
     // Act and Assert
     assertFalse(removeLocalFromSSA.transformReportChanged(method));
-  }
-
-  /**
-   * Test {@link RemoveLocalFromSSA#transformReportChanged(IrMethod)}.
-   *
-   * <ul>
-   *   <li>When {@link IrMethod} (default constructor).
-   *   <li>Then return {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link RemoveLocalFromSSA#transformReportChanged(IrMethod)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean RemoveLocalFromSSA.transformReportChanged(IrMethod)"})
-  public void testTransformReportChanged_whenIrMethod_thenReturnFalse() {
-    // Arrange
-    RemoveLocalFromSSA removeLocalFromSSA = new RemoveLocalFromSSA();
-
-    // Act and Assert
-    assertFalse(removeLocalFromSSA.transformReportChanged(new IrMethod()));
   }
 }

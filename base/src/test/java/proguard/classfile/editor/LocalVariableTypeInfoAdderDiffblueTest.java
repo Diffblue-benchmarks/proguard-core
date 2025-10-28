@@ -2,11 +2,8 @@ package proguard.classfile.editor;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryMethod;
 import proguard.classfile.ProgramClass;
@@ -16,86 +13,28 @@ import proguard.classfile.attribute.LocalVariableTypeTableAttribute;
 
 public class LocalVariableTypeInfoAdderDiffblueTest {
   /**
-   * Test {@link LocalVariableTypeInfoAdder#LocalVariableTypeInfoAdder(ProgramClass,
-   * LocalVariableTypeTableAttribute)}.
-   *
-   * <ul>
-   *   <li>Then first element {@link LocalVariableTypeInfo#u2nameIndex} is zero.
-   * </ul>
-   *
-   * <p>Method under test: {@link
-   * LocalVariableTypeInfoAdder#LocalVariableTypeInfoAdder(ProgramClass,
-   * LocalVariableTypeTableAttribute)}
+   * Method under test:
+   * {@link LocalVariableTypeInfoAdder#LocalVariableTypeInfoAdder(ProgramClass, LocalVariableTypeTableAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void LocalVariableTypeInfoAdder.<init>(ProgramClass, LocalVariableTypeTableAttribute)"
-  })
-  public void testNewLocalVariableTypeInfoAdder_thenFirstElementU2nameIndexIsZero() {
+  public void testNewLocalVariableTypeInfoAdder() {
     // Arrange
     ProgramClass targetClass = new ProgramClass();
-    LocalVariableTypeTableAttribute targetLocalVariableTypeTableAttribute =
-        new LocalVariableTypeTableAttribute(
-            1, 0, new LocalVariableTypeInfo[] {new LocalVariableTypeInfo(1, 3, 1, 1, 1)});
+    LocalVariableTypeTableAttribute targetLocalVariableTypeTableAttribute = new LocalVariableTypeTableAttribute(1, 3,
+        new LocalVariableTypeInfo[]{new LocalVariableTypeInfo(1, 3, 1, 1, 1)});
 
     // Act
-    LocalVariableTypeInfoAdder actualLocalVariableTypeInfoAdder =
-        new LocalVariableTypeInfoAdder(targetClass, targetLocalVariableTypeTableAttribute);
+    LocalVariableTypeInfoAdder actualLocalVariableTypeInfoAdder = new LocalVariableTypeInfoAdder(targetClass,
+        targetLocalVariableTypeTableAttribute);
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
     CodeAttribute codeAttribute = new CodeAttribute(1);
-    actualLocalVariableTypeInfoAdder.visitLocalVariableTypeInfo(
-        clazz, method, codeAttribute, new LocalVariableTypeInfo(1, 3, 1, 1, 1));
+    actualLocalVariableTypeInfoAdder.visitLocalVariableTypeInfo(clazz, method, codeAttribute,
+        new LocalVariableTypeInfo(1, 3, 1, 1, 1));
 
     // Assert
-    LocalVariableTypeInfo[] localVariableTypeInfoArray =
-        targetLocalVariableTypeTableAttribute.localVariableTypeTable;
-    LocalVariableTypeInfo localVariableTypeInfo = localVariableTypeInfoArray[0];
-    assertEquals(0, localVariableTypeInfo.u2nameIndex);
-    assertEquals(0, localVariableTypeInfo.u2signatureIndex);
-    assertEquals(1, localVariableTypeInfoArray.length);
-    assertEquals(1, targetLocalVariableTypeTableAttribute.u2localVariableTypeTableLength);
-  }
-
-  /**
-   * Test {@link LocalVariableTypeInfoAdder#LocalVariableTypeInfoAdder(ProgramClass,
-   * LocalVariableTypeTableAttribute)}.
-   *
-   * <ul>
-   *   <li>Then fourth element {@link LocalVariableTypeInfo#referencedClasses} is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link
-   * LocalVariableTypeInfoAdder#LocalVariableTypeInfoAdder(ProgramClass,
-   * LocalVariableTypeTableAttribute)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void LocalVariableTypeInfoAdder.<init>(ProgramClass, LocalVariableTypeTableAttribute)"
-  })
-  public void testNewLocalVariableTypeInfoAdder_thenFourthElementReferencedClassesIsNull() {
-    // Arrange
-    ProgramClass targetClass = new ProgramClass();
-    LocalVariableTypeTableAttribute targetLocalVariableTypeTableAttribute =
-        new LocalVariableTypeTableAttribute(
-            1, 3, new LocalVariableTypeInfo[] {new LocalVariableTypeInfo(1, 3, 1, 1, 1)});
-
-    // Act
-    LocalVariableTypeInfoAdder actualLocalVariableTypeInfoAdder =
-        new LocalVariableTypeInfoAdder(targetClass, targetLocalVariableTypeTableAttribute);
-    LibraryClass clazz = new LibraryClass();
-    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
-
-    CodeAttribute codeAttribute = new CodeAttribute(1);
-    actualLocalVariableTypeInfoAdder.visitLocalVariableTypeInfo(
-        clazz, method, codeAttribute, new LocalVariableTypeInfo(1, 3, 1, 1, 1));
-
-    // Assert
-    LocalVariableTypeInfo[] localVariableTypeInfoArray =
-        targetLocalVariableTypeTableAttribute.localVariableTypeTable;
+    LocalVariableTypeInfo[] localVariableTypeInfoArray = targetLocalVariableTypeTableAttribute.localVariableTypeTable;
     LocalVariableTypeInfo localVariableTypeInfo = localVariableTypeInfoArray[3];
     assertNull(localVariableTypeInfo.referencedClasses);
     assertNull(localVariableTypeInfo.getProcessingInfo());
@@ -109,5 +48,37 @@ public class LocalVariableTypeInfoAdderDiffblueTest {
     assertEquals(3, localVariableTypeInfo.u2length);
     assertEquals(4, localVariableTypeInfoArray.length);
     assertEquals(4, targetLocalVariableTypeTableAttribute.u2localVariableTypeTableLength);
+    assertTrue(clazz.getExtraFeatureNames().isEmpty());
+  }
+
+  /**
+   * Method under test:
+   * {@link LocalVariableTypeInfoAdder#LocalVariableTypeInfoAdder(ProgramClass, LocalVariableTypeTableAttribute)}
+   */
+  @Test
+  public void testNewLocalVariableTypeInfoAdder2() {
+    // Arrange
+    ProgramClass targetClass = new ProgramClass();
+    LocalVariableTypeTableAttribute targetLocalVariableTypeTableAttribute = new LocalVariableTypeTableAttribute(1, 0,
+        new LocalVariableTypeInfo[]{new LocalVariableTypeInfo(1, 3, 1, 1, 1)});
+
+    // Act
+    LocalVariableTypeInfoAdder actualLocalVariableTypeInfoAdder = new LocalVariableTypeInfoAdder(targetClass,
+        targetLocalVariableTypeTableAttribute);
+    LibraryClass clazz = new LibraryClass();
+    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
+    CodeAttribute codeAttribute = new CodeAttribute(1);
+    actualLocalVariableTypeInfoAdder.visitLocalVariableTypeInfo(clazz, method, codeAttribute,
+        new LocalVariableTypeInfo(1, 3, 1, 1, 1));
+
+    // Assert
+    LocalVariableTypeInfo[] localVariableTypeInfoArray = targetLocalVariableTypeTableAttribute.localVariableTypeTable;
+    LocalVariableTypeInfo localVariableTypeInfo = localVariableTypeInfoArray[0];
+    assertEquals(0, localVariableTypeInfo.u2nameIndex);
+    assertEquals(0, localVariableTypeInfo.u2signatureIndex);
+    assertEquals(1, localVariableTypeInfoArray.length);
+    assertEquals(1, targetLocalVariableTypeTableAttribute.u2localVariableTypeTableLength);
+    assertTrue(clazz.getExtraFeatureNames().isEmpty());
   }
 }

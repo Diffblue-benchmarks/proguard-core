@@ -3,19 +3,19 @@
     "reportVersion" : "2.6"
   },
   "run" : {
-    "version" : "2025.02.02-08b2a5a-licensed",
-    "creationTimestamp" : "2025-10-20T16:55:15.491848Z",
+    "version" : "2024.10.01-2ee2e3d-licensed",
+    "creationTimestamp" : "2025-10-27T14:27:28.903852Z",
     "command" : "dcover create --coverage-reports --upload http://localhost:8080 --project-name proguard-core --name with-diffblue-tests",
-    "totalTime" : 2161.392,
-    "environmentDetectionTime" : 2.949,
-    "indexingTime" : 0.402,
-    "entryPointsTime" : 2.929,
-    "generationTime" : 1838.009,
-    "timeToFirstTest" : 97.035,
-    "timeToLastTest" : 2048.798,
-    "indexQueryTime" : 18.315,
-    "verificationTime" : 131.388,
-    "validationTime" : 65.187
+    "totalTime" : 1928.977,
+    "environmentDetectionTime" : 2.783,
+    "indexingTime" : 0.242,
+    "entryPointsTime" : 2.765,
+    "generationTime" : 1611.906,
+    "timeToFirstTest" : 106.666,
+    "timeToLastTest" : 1841.62,
+    "indexQueryTime" : 17.506,
+    "verificationTime" : 140.729,
+    "validationTime" : 33.667
   },
   "codes" : {
     "F009" : "Internal error",
@@ -44,9 +44,9 @@
   "summary" : {
     "classesCount" : 219,
     "methodsCount" : 1246,
-    "cumulativeDiffblueTestCount" : 1077,
+    "cumulativeDiffblueTestCount" : 969,
     "cumulativeManualTestCount" : 55,
-    "completeTestCount" : 1077,
+    "completeTestCount" : 1087,
     "incompleteTestCount" : 0,
     "skeletonTestCount" : 0,
     "totalPhysicalLineCount" : 15029,
@@ -66,10 +66,10 @@
     },
     "perMethodOutcome" : {
       "F009" : 5,
-      "R000" : 610,
+      "R000" : 605,
       "R002" : 23,
-      "R004" : 34,
-      "R013" : 74,
+      "R004" : 36,
+      "R013" : 77,
       "R081" : 6,
       "R083" : 3,
       "T003" : 224,
@@ -83,13 +83,13 @@
       "W002" : 1
     },
     "perTestOutcome" : {
-      "R000" : 1077
+      "R000" : 1087
     },
     "perTestValidation" : {
-      "V000" : 1077
+      "V000" : 1087
     },
     "warnings" : {
-      "W001" : 13,
+      "W001" : 14,
       "W002" : 4
     }
   },
@@ -361,16 +361,17 @@
     },
     "proguard.dexfile.ir.IrMethod" : {
       "methodsCount" : 3,
-      "completeTestCount" : 16,
+      "completeTestCount" : 2,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 3
       },
       "perMethodOutcome" : {
-        "R000" : 3
+        "R000" : 2,
+        "R013" : 1
       },
       "perTestOutcome" : {
-        "R000" : 16
+        "R000" : 2
       }
     },
     "proguard.dexfile.ir.LabelAndLocalMapper" : {
@@ -1039,16 +1040,17 @@
     },
     "proguard.dexfile.ir.stmt.LabelStmt" : {
       "methodsCount" : 4,
-      "completeTestCount" : 4,
+      "completeTestCount" : 2,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 4
       },
       "perMethodOutcome" : {
-        "R000" : 4
+        "R000" : 2,
+        "R004" : 2
       },
       "perTestOutcome" : {
-        "R000" : 4
+        "R000" : 2
       }
     },
     "proguard.dexfile.ir.stmt.LookupSwitchStmt" : {
@@ -1177,7 +1179,7 @@
     },
     "proguard.dexfile.ir.stmt.StmtList" : {
       "methodsCount" : 21,
-      "completeTestCount" : 10,
+      "completeTestCount" : 7,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 15,
@@ -1187,14 +1189,14 @@
         "T012" : 1
       },
       "perMethodOutcome" : {
-        "R000" : 11,
+        "R000" : 10,
         "R004" : 1,
-        "R013" : 7,
+        "R013" : 8,
         "T003" : 1,
         "T012" : 1
       },
       "perTestOutcome" : {
-        "R000" : 10
+        "R000" : 7
       }
     },
     "proguard.dexfile.ir.stmt.StmtList$StmtListIterator" : {
@@ -1352,7 +1354,7 @@
     },
     "proguard.dexfile.ir.ts.Cfg" : {
       "methodsCount" : 20,
-      "completeTestCount" : 43,
+      "completeTestCount" : 47,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 16,
@@ -1366,10 +1368,10 @@
         "T005" : 1
       },
       "perTestOutcome" : {
-        "R000" : 43
+        "R000" : 47
       },
       "warnings" : {
-        "W001" : 1
+        "W001" : 2
       }
     },
     "proguard.dexfile.ir.ts.Cfg$1" : {
@@ -1734,7 +1736,7 @@
     },
     "proguard.dexfile.ir.ts.TypeTransformer" : {
       "methodsCount" : 4,
-      "completeTestCount" : 6,
+      "completeTestCount" : 10,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 1,
@@ -1747,7 +1749,7 @@
         "T012" : 2
       },
       "perTestOutcome" : {
-        "R000" : 6
+        "R000" : 10
       }
     },
     "proguard.dexfile.ir.ts.TypeTransformer$1" : {
@@ -2043,7 +2045,7 @@
     },
     "proguard.dexfile.ir.ts.an.BaseAnalyze" : {
       "methodsCount" : 22,
-      "completeTestCount" : 10,
+      "completeTestCount" : 11,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 17,
@@ -2051,16 +2053,16 @@
         "T012" : 1
       },
       "perMethodOutcome" : {
-        "R000" : 7,
+        "R000" : 6,
         "R004" : 3,
-        "R013" : 3,
+        "R013" : 4,
         "R083" : 3,
         "T010" : 4,
         "T012" : 1,
         "W001" : 1
       },
       "perTestOutcome" : {
-        "R000" : 10
+        "R000" : 11
       },
       "warnings" : {
         "W001" : 1
@@ -2469,7 +2471,7 @@
     },
     "proguard.dexfile.reader.node.DexClassNode" : {
       "methodsCount" : 8,
-      "completeTestCount" : 30,
+      "completeTestCount" : 33,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 5,
@@ -2480,12 +2482,12 @@
         "R000" : 8
       },
       "perTestOutcome" : {
-        "R000" : 30
+        "R000" : 33
       }
     },
     "proguard.dexfile.reader.node.DexCodeNode" : {
       "methodsCount" : 25,
-      "completeTestCount" : 35,
+      "completeTestCount" : 37,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 22,
@@ -2497,7 +2499,7 @@
         "R013" : 1
       },
       "perTestOutcome" : {
-        "R000" : 35
+        "R000" : 37
       }
     },
     "proguard.dexfile.reader.node.DexDebugNode" : {
@@ -2621,7 +2623,7 @@
     },
     "proguard.dexfile.reader.node.DexFieldNode" : {
       "methodsCount" : 5,
-      "completeTestCount" : 6,
+      "completeTestCount" : 9,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 3,
@@ -2632,12 +2634,12 @@
         "R013" : 1
       },
       "perTestOutcome" : {
-        "R000" : 6
+        "R000" : 9
       }
     },
     "proguard.dexfile.reader.node.DexFileNode" : {
       "methodsCount" : 5,
-      "completeTestCount" : 15,
+      "completeTestCount" : 27,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 4,
@@ -2647,7 +2649,7 @@
         "R000" : 5
       },
       "perTestOutcome" : {
-        "R000" : 15
+        "R000" : 27
       }
     },
     "proguard.dexfile.reader.node.DexMethodNode" : {
@@ -7000,13 +7002,10 @@
       ]
     },
     "proguard.dexfile.ir.IrMethod.toString:()Ljava/lang/String;" : {
-      "completeTestCount" : 14,
+      "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
-      "perMethodOutcome" : "R000",
-      "perTestOutcome" : {
-        "R000" : 14
-      },
+      "perMethodOutcome" : "R013",
       "lineNumbers" : [
         75,
         76,
@@ -10725,13 +10724,10 @@
       ]
     },
     "proguard.dexfile.ir.stmt.LabelStmt.getDisplayName:()Ljava/lang/String;" : {
-      "completeTestCount" : 1,
+      "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
-      "perMethodOutcome" : "R000",
-      "perTestOutcome" : {
-        "R000" : 1
-      },
+      "perMethodOutcome" : "R004",
       "lineNumbers" : [
         54,
         55,
@@ -10740,13 +10736,10 @@
       ]
     },
     "proguard.dexfile.ir.stmt.LabelStmt.toString:()Ljava/lang/String;" : {
-      "completeTestCount" : 1,
+      "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
-      "perMethodOutcome" : "R000",
-      "perTestOutcome" : {
-        "R000" : 1
-      },
+      "perMethodOutcome" : "R004",
       "lineNumbers" : [
         63,
         64,
@@ -11314,12 +11307,12 @@
       ]
     },
     "proguard.dexfile.ir.stmt.StmtList.clone:(Lproguard/dexfile/ir/LabelAndLocalMapper;)Lproguard/dexfile/ir/stmt/StmtList;" : {
-      "completeTestCount" : 2,
+      "completeTestCount" : 1,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 2
+        "R000" : 1
       },
       "lineNumbers" : [
         87,
@@ -11567,13 +11560,10 @@
       ]
     },
     "proguard.dexfile.ir.stmt.StmtList.toString:()Ljava/lang/String;" : {
-      "completeTestCount" : 2,
+      "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
-      "perMethodOutcome" : "R000",
-      "perTestOutcome" : {
-        "R000" : 2
-      },
+      "perMethodOutcome" : "R013",
       "lineNumbers" : [
         233,
         234,
@@ -12380,12 +12370,12 @@
       ]
     },
     "proguard.dexfile.ir.ts.Cfg.createCFG:(Lproguard/dexfile/ir/IrMethod;)V" : {
-      "completeTestCount" : 4,
+      "completeTestCount" : 5,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 4
+        "R000" : 5
       },
       "lineNumbers" : [
         155,
@@ -12406,12 +12396,12 @@
       ]
     },
     "proguard.dexfile.ir.ts.Cfg.createCfgWithoutEx:(Lproguard/dexfile/ir/IrMethod;)V" : {
-      "completeTestCount" : 4,
+      "completeTestCount" : 5,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 4
+        "R000" : 5
       },
       "lineNumbers" : [
         127,
@@ -12635,12 +12625,15 @@
       ]
     },
     "proguard.dexfile.ir.ts.Cfg.reIndexLocalAndLabel:(Lproguard/dexfile/ir/IrMethod;)V" : {
-      "completeTestCount" : 1,
+      "completeTestCount" : 3,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 1
+        "R000" : 3
+      },
+      "warnings" : {
+        "W001" : 1
       },
       "lineNumbers" : [
         62,
@@ -15526,12 +15519,12 @@
       ]
     },
     "proguard.dexfile.ir.ts.TypeTransformer.transform:(Lproguard/dexfile/ir/IrMethod;)V" : {
-      "completeTestCount" : 6,
+      "completeTestCount" : 10,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 6
+        "R000" : 10
       },
       "lineNumbers" : [
         39,
@@ -16387,12 +16380,12 @@
       ]
     },
     "proguard.dexfile.ir.ts.an.BaseAnalyze.analyze0:()V" : {
-      "completeTestCount" : 1,
+      "completeTestCount" : 2,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 1
+        "R000" : 2
       },
       "lineNumbers" : [
         74,
@@ -16489,12 +16482,12 @@
       ]
     },
     "proguard.dexfile.ir.ts.an.BaseAnalyze.initCFG:()V" : {
-      "completeTestCount" : 4,
+      "completeTestCount" : 5,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 4
+        "R000" : 5
       },
       "lineNumbers" : [
         130,
@@ -16594,13 +16587,10 @@
       ]
     },
     "proguard.dexfile.ir.ts.an.BaseAnalyze.toString:()Ljava/lang/String;" : {
-      "completeTestCount" : 1,
+      "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
-      "perMethodOutcome" : "R000",
-      "perTestOutcome" : {
-        "R000" : 1
-      },
+      "perMethodOutcome" : "R013",
       "lineNumbers" : [
         171,
         172,
@@ -20007,12 +19997,12 @@
       ]
     },
     "proguard.dexfile.reader.node.DexClassNode.accept:(Lproguard/dexfile/reader/visitors/DexFileVisitor;)V" : {
-      "completeTestCount" : 5,
+      "completeTestCount" : 8,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 5
+        "R000" : 8
       },
       "lineNumbers" : [
         78,
@@ -20139,12 +20129,12 @@
       ]
     },
     "proguard.dexfile.reader.node.DexCodeNode.accept:(Lproguard/dexfile/reader/visitors/DexMethodVisitor;)V" : {
-      "completeTestCount" : 12,
+      "completeTestCount" : 14,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 12
+        "R000" : 14
       },
       "lineNumbers" : [
         65,
@@ -20795,12 +20785,12 @@
       ]
     },
     "proguard.dexfile.reader.node.DexFieldNode.accept:(Lproguard/dexfile/reader/visitors/DexClassVisitor;)V" : {
-      "completeTestCount" : 2,
+      "completeTestCount" : 5,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 2
+        "R000" : 5
       },
       "lineNumbers" : [
         51,
@@ -20854,12 +20844,12 @@
       ]
     },
     "proguard.dexfile.reader.node.DexFileNode.accept:(Lproguard/dexfile/reader/visitors/DexClassVisitor;)V" : {
-      "completeTestCount" : 4,
+      "completeTestCount" : 16,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
       "perMethodOutcome" : "R000",
       "perTestOutcome" : {
-        "R000" : 4
+        "R000" : 16
       },
       "lineNumbers" : [
         44,

@@ -4,39 +4,23 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 public class DoubleValueDiffblueTest {
   /**
-   * Test {@link DoubleValue#value()}.
-   *
-   * <p>Method under test: {@link DoubleValue#value()}
+   * Method under test: {@link DoubleValue#value()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"double DoubleValue.value()"})
   public void testValue() {
     // Arrange, Act and Assert
     assertEquals(0.0d, (new UnknownDoubleValue()).value(), 0.0);
   }
 
   /**
-   * Test {@link DoubleValue#generalize(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#generalize(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#generalize(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.generalize(ParticularDoubleValue)"})
-  public void testGeneralizeWithParticularDoubleValue_thenReturnUnknownDoubleValue() {
+  public void testGeneralize() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
@@ -45,26 +29,16 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#generalize(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#generalize(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#generalize(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.generalize(ParticularDoubleValue)"})
-  public void testGeneralizeWithParticularDoubleValue_thenReturnUnknownDoubleValue2() {
+  public void testGeneralize2() {
     // Arrange
-    CompositeDoubleValue compositeDoubleValue =
-        new CompositeDoubleValue(
-            BasicValueFactory.DOUBLE_VALUE, (byte) 'A', BasicValueFactory.DOUBLE_VALUE);
+    CompositeDoubleValue compositeDoubleValue = new CompositeDoubleValue(BasicValueFactory.DOUBLE_VALUE, (byte) 'A',
+        BasicValueFactory.DOUBLE_VALUE);
 
     // Act
-    DoubleValue actualGeneralizeResult =
-        compositeDoubleValue.generalize(new ParticularDoubleValue(10.0d));
+    DoubleValue actualGeneralizeResult = compositeDoubleValue.generalize(new ParticularDoubleValue(10.0d));
 
     // Assert
     assertTrue(actualGeneralizeResult instanceof UnknownDoubleValue);
@@ -74,37 +48,23 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#generalize(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <p>Method under test: {@link DoubleValue#generalize(SpecificDoubleValue)}
+   * Method under test: {@link DoubleValue#generalize(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.generalize(SpecificDoubleValue)"})
-  public void testGeneralizeWithSpecificDoubleValue() {
+  public void testGeneralize3() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
     // Act and Assert
-    assertSame(
-        unknownDoubleValue,
+    assertSame(unknownDoubleValue,
         unknownDoubleValue.generalize((SpecificDoubleValue) new ParticularDoubleValue(10.0d)));
   }
 
   /**
-   * Test {@link DoubleValue#generalize(Value)} with {@code Value}.
-   *
-   * <ul>
-   *   <li>Given {@link BasicValueFactory#DOUBLE_VALUE}.
-   *   <li>Then return {@link BasicValueFactory#UNKNOWN_VALUE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#generalize(Value)}
+   * Method under test: {@link DoubleValue#generalize(Value)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Value DoubleValue.generalize(Value)"})
-  public void testGeneralizeWithValue_givenDouble_value_thenReturnUnknown_value() {
+  public void testGeneralize4() {
     // Arrange
     UnknownValue other = BasicValueFactory.UNKNOWN_VALUE;
 
@@ -113,68 +73,34 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#generalize(Value)} with {@code Value}.
-   *
-   * <ul>
-   *   <li>When {@link BasicValueFactory#DOUBLE_VALUE}.
-   *   <li>Then return {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#generalize(Value)}
+   * Method under test: {@link DoubleValue#generalize(Value)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Value DoubleValue.generalize(Value)"})
-  public void testGeneralizeWithValue_whenDouble_value_thenReturnUnknownDoubleValue() {
+  public void testGeneralize5() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
     // Act and Assert
-    assertSame(
-        unknownDoubleValue, unknownDoubleValue.generalize((Value) BasicValueFactory.DOUBLE_VALUE));
+    assertSame(unknownDoubleValue, unknownDoubleValue.generalize((Value) BasicValueFactory.DOUBLE_VALUE));
   }
 
   /**
-   * Test {@link DoubleValue#add(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link CompositeDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#add(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#add(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.add(ParticularDoubleValue)"})
-  public void testAddWithParticularDoubleValue_thenReturnCompositeDoubleValue() {
+  public void testAdd() {
     // Arrange
-    CompositeDoubleValue compositeDoubleValue =
-        new CompositeDoubleValue(
-            BasicValueFactory.DOUBLE_VALUE, (byte) 'A', BasicValueFactory.DOUBLE_VALUE);
+    UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
-    // Act
-    DoubleValue actualAddResult = compositeDoubleValue.add(new ParticularDoubleValue(10.0d));
-
-    // Assert
-    assertTrue(actualAddResult instanceof CompositeDoubleValue);
-    assertFalse(actualAddResult.isParticular());
-    assertTrue(actualAddResult.isCategory2());
-    assertTrue(actualAddResult.isSpecific());
+    // Act and Assert
+    assertSame(unknownDoubleValue, unknownDoubleValue.add(new ParticularDoubleValue(10.0d)));
   }
 
   /**
-   * Test {@link DoubleValue#add(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link ParticularDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#add(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#add(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.add(ParticularDoubleValue)"})
-  public void testAddWithParticularDoubleValue_thenReturnParticularDoubleValue() {
+  public void testAdd2() {
     // Arrange
     ParticularDoubleValue other = new ParticularDoubleValue(10.0d);
 
@@ -187,42 +113,16 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#add(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#add(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#add(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.add(ParticularDoubleValue)"})
-  public void testAddWithParticularDoubleValue_thenReturnUnknownDoubleValue() {
+  public void testAdd3() {
     // Arrange
-    UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
+    CompositeDoubleValue compositeDoubleValue = new CompositeDoubleValue(BasicValueFactory.DOUBLE_VALUE, (byte) 'A',
+        BasicValueFactory.DOUBLE_VALUE);
 
-    // Act and Assert
-    assertSame(unknownDoubleValue, unknownDoubleValue.add(new ParticularDoubleValue(10.0d)));
-  }
-
-  /**
-   * Test {@link DoubleValue#add(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link CompositeDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#add(SpecificDoubleValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.add(SpecificDoubleValue)"})
-  public void testAddWithSpecificDoubleValue_thenReturnCompositeDoubleValue() {
-    // Arrange and Act
-    DoubleValue actualAddResult =
-        ParticularValueFactory.DOUBLE_VALUE_0.add(
-            (SpecificDoubleValue) new ParticularDoubleValue(10.0d));
+    // Act
+    DoubleValue actualAddResult = compositeDoubleValue.add(new ParticularDoubleValue(10.0d));
 
     // Assert
     assertTrue(actualAddResult instanceof CompositeDoubleValue);
@@ -232,93 +132,38 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#add(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#add(SpecificDoubleValue)}
+   * Method under test: {@link DoubleValue#add(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.add(SpecificDoubleValue)"})
-  public void testAddWithSpecificDoubleValue_thenReturnUnknownDoubleValue() {
+  public void testAdd4() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
     // Act and Assert
-    assertSame(
-        unknownDoubleValue,
-        unknownDoubleValue.add((SpecificDoubleValue) new ParticularDoubleValue(10.0d)));
+    assertSame(unknownDoubleValue, unknownDoubleValue.add((SpecificDoubleValue) new ParticularDoubleValue(10.0d)));
   }
 
   /**
-   * Test {@link DoubleValue#subtract(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link CompositeDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#subtract(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#add(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.subtract(ParticularDoubleValue)"})
-  public void testSubtractWithParticularDoubleValue_thenReturnCompositeDoubleValue() {
-    // Arrange
-    CompositeDoubleValue compositeDoubleValue =
-        new CompositeDoubleValue(
-            BasicValueFactory.DOUBLE_VALUE, (byte) 'A', BasicValueFactory.DOUBLE_VALUE);
-
-    // Act
-    DoubleValue actualSubtractResult =
-        compositeDoubleValue.subtract(new ParticularDoubleValue(10.0d));
-
-    // Assert
-    assertTrue(actualSubtractResult instanceof CompositeDoubleValue);
-    assertFalse(actualSubtractResult.isParticular());
-    assertTrue(actualSubtractResult.isCategory2());
-    assertTrue(actualSubtractResult.isSpecific());
-  }
-
-  /**
-   * Test {@link DoubleValue#subtract(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link ParticularDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#subtract(ParticularDoubleValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.subtract(ParticularDoubleValue)"})
-  public void testSubtractWithParticularDoubleValue_thenReturnParticularDoubleValue() {
+  public void testAdd5() {
     // Arrange and Act
-    DoubleValue actualSubtractResult =
-        ParticularValueFactory.DOUBLE_VALUE_0.subtract(new ParticularDoubleValue(10.0d));
+    DoubleValue actualAddResult = ParticularValueFactory.DOUBLE_VALUE_0
+        .add((SpecificDoubleValue) new ParticularDoubleValue(10.0d));
 
     // Assert
-    assertTrue(actualSubtractResult instanceof ParticularDoubleValue);
-    assertEquals(-10.0d, actualSubtractResult.value(), 0.0);
-    assertTrue(actualSubtractResult.isParticular());
-    assertTrue(actualSubtractResult.isSpecific());
+    assertTrue(actualAddResult instanceof CompositeDoubleValue);
+    assertFalse(actualAddResult.isParticular());
+    assertTrue(actualAddResult.isCategory2());
+    assertTrue(actualAddResult.isSpecific());
   }
 
   /**
-   * Test {@link DoubleValue#subtract(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#subtract(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#subtract(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.subtract(ParticularDoubleValue)"})
-  public void testSubtractWithParticularDoubleValue_thenReturnUnknownDoubleValue() {
+  public void testSubtract() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
@@ -327,22 +172,32 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#subtract(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link CompositeDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#subtract(SpecificDoubleValue)}
+   * Method under test: {@link DoubleValue#subtract(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.subtract(SpecificDoubleValue)"})
-  public void testSubtractWithSpecificDoubleValue_thenReturnCompositeDoubleValue() {
+  public void testSubtract2() {
     // Arrange and Act
-    DoubleValue actualSubtractResult =
-        ParticularValueFactory.DOUBLE_VALUE_0.subtract(
-            (SpecificDoubleValue) new ParticularDoubleValue(10.0d));
+    DoubleValue actualSubtractResult = ParticularValueFactory.DOUBLE_VALUE_0.subtract(new ParticularDoubleValue(10.0d));
+
+    // Assert
+    assertTrue(actualSubtractResult instanceof ParticularDoubleValue);
+    assertEquals(-10.0d, actualSubtractResult.value(), 0.0);
+    assertTrue(actualSubtractResult.isCategory2());
+    assertTrue(actualSubtractResult.isParticular());
+    assertTrue(actualSubtractResult.isSpecific());
+  }
+
+  /**
+   * Method under test: {@link DoubleValue#subtract(ParticularDoubleValue)}
+   */
+  @Test
+  public void testSubtract3() {
+    // Arrange
+    CompositeDoubleValue compositeDoubleValue = new CompositeDoubleValue(BasicValueFactory.DOUBLE_VALUE, (byte) 'A',
+        BasicValueFactory.DOUBLE_VALUE);
+
+    // Act
+    DoubleValue actualSubtractResult = compositeDoubleValue.subtract(new ParticularDoubleValue(10.0d));
 
     // Assert
     assertTrue(actualSubtractResult instanceof CompositeDoubleValue);
@@ -352,77 +207,55 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#subtract(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#subtract(SpecificDoubleValue)}
+   * Method under test: {@link DoubleValue#subtract(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.subtract(SpecificDoubleValue)"})
-  public void testSubtractWithSpecificDoubleValue_thenReturnUnknownDoubleValue() {
+  public void testSubtract4() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
     // Act and Assert
-    assertSame(
-        unknownDoubleValue,
-        unknownDoubleValue.subtract((SpecificDoubleValue) new ParticularDoubleValue(10.0d)));
+    assertSame(unknownDoubleValue, unknownDoubleValue.subtract((SpecificDoubleValue) new ParticularDoubleValue(10.0d)));
   }
 
   /**
-   * Test {@link DoubleValue#subtractFrom(ParticularDoubleValue)} with {@code
-   * ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link CompositeDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#subtractFrom(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#subtract(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.subtractFrom(ParticularDoubleValue)"})
-  public void testSubtractFromWithParticularDoubleValue_thenReturnCompositeDoubleValue() {
-    // Arrange
-    CompositeDoubleValue compositeDoubleValue =
-        new CompositeDoubleValue(
-            BasicValueFactory.DOUBLE_VALUE, (byte) 'A', BasicValueFactory.DOUBLE_VALUE);
-
-    // Act
-    DoubleValue actualSubtractFromResult =
-        compositeDoubleValue.subtractFrom(new ParticularDoubleValue(10.0d));
+  public void testSubtract5() {
+    // Arrange and Act
+    DoubleValue actualSubtractResult = ParticularValueFactory.DOUBLE_VALUE_0
+        .subtract((SpecificDoubleValue) new ParticularDoubleValue(10.0d));
 
     // Assert
-    assertTrue(actualSubtractFromResult instanceof CompositeDoubleValue);
-    assertFalse(actualSubtractFromResult.isParticular());
-    assertTrue(actualSubtractFromResult.isCategory2());
-    assertTrue(actualSubtractFromResult.isSpecific());
+    assertTrue(actualSubtractResult instanceof CompositeDoubleValue);
+    assertFalse(actualSubtractResult.isParticular());
+    assertTrue(actualSubtractResult.isCategory2());
+    assertTrue(actualSubtractResult.isSpecific());
   }
 
   /**
-   * Test {@link DoubleValue#subtractFrom(ParticularDoubleValue)} with {@code
-   * ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link ParticularDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#subtractFrom(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#subtractFrom(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.subtractFrom(ParticularDoubleValue)"})
-  public void testSubtractFromWithParticularDoubleValue_thenReturnParticularDoubleValue() {
+  public void testSubtractFrom() {
+    // Arrange
+    UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
+
+    // Act and Assert
+    assertSame(unknownDoubleValue, unknownDoubleValue.subtractFrom(new ParticularDoubleValue(10.0d)));
+  }
+
+  /**
+   * Method under test: {@link DoubleValue#subtractFrom(ParticularDoubleValue)}
+   */
+  @Test
+  public void testSubtractFrom2() {
     // Arrange
     ParticularDoubleValue other = new ParticularDoubleValue(10.0d);
 
     // Act
-    DoubleValue actualSubtractFromResult =
-        ParticularValueFactory.DOUBLE_VALUE_0.subtractFrom(other);
+    DoubleValue actualSubtractFromResult = ParticularValueFactory.DOUBLE_VALUE_0.subtractFrom(other);
 
     // Assert
     assertTrue(actualSubtractFromResult instanceof ParticularDoubleValue);
@@ -430,44 +263,16 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#subtractFrom(ParticularDoubleValue)} with {@code
-   * ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#subtractFrom(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#subtractFrom(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.subtractFrom(ParticularDoubleValue)"})
-  public void testSubtractFromWithParticularDoubleValue_thenReturnUnknownDoubleValue() {
+  public void testSubtractFrom3() {
     // Arrange
-    UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
+    CompositeDoubleValue compositeDoubleValue = new CompositeDoubleValue(BasicValueFactory.DOUBLE_VALUE, (byte) 'A',
+        BasicValueFactory.DOUBLE_VALUE);
 
-    // Act and Assert
-    assertSame(
-        unknownDoubleValue, unknownDoubleValue.subtractFrom(new ParticularDoubleValue(10.0d)));
-  }
-
-  /**
-   * Test {@link DoubleValue#subtractFrom(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link CompositeDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#subtractFrom(SpecificDoubleValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.subtractFrom(SpecificDoubleValue)"})
-  public void testSubtractFromWithSpecificDoubleValue_thenReturnCompositeDoubleValue() {
-    // Arrange and Act
-    DoubleValue actualSubtractFromResult =
-        ParticularValueFactory.DOUBLE_VALUE_0.subtractFrom(
-            (SpecificDoubleValue) new ParticularDoubleValue(10.0d));
+    // Act
+    DoubleValue actualSubtractFromResult = compositeDoubleValue.subtractFrom(new ParticularDoubleValue(10.0d));
 
     // Assert
     assertTrue(actualSubtractFromResult instanceof CompositeDoubleValue);
@@ -477,69 +282,51 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#subtractFrom(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#subtractFrom(SpecificDoubleValue)}
+   * Method under test: {@link DoubleValue#subtractFrom(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.subtractFrom(SpecificDoubleValue)"})
-  public void testSubtractFromWithSpecificDoubleValue_thenReturnUnknownDoubleValue() {
+  public void testSubtractFrom4() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
     // Act and Assert
-    assertSame(
-        unknownDoubleValue,
+    assertSame(unknownDoubleValue,
         unknownDoubleValue.subtractFrom((SpecificDoubleValue) new ParticularDoubleValue(10.0d)));
   }
 
   /**
-   * Test {@link DoubleValue#multiply(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link CompositeDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#multiply(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#subtractFrom(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.multiply(ParticularDoubleValue)"})
-  public void testMultiplyWithParticularDoubleValue_thenReturnCompositeDoubleValue() {
-    // Arrange
-    CompositeDoubleValue compositeDoubleValue =
-        new CompositeDoubleValue(
-            BasicValueFactory.DOUBLE_VALUE, (byte) 'A', BasicValueFactory.DOUBLE_VALUE);
-
-    // Act
-    DoubleValue actualMultiplyResult =
-        compositeDoubleValue.multiply(new ParticularDoubleValue(10.0d));
+  public void testSubtractFrom5() {
+    // Arrange and Act
+    DoubleValue actualSubtractFromResult = ParticularValueFactory.DOUBLE_VALUE_0
+        .subtractFrom((SpecificDoubleValue) new ParticularDoubleValue(10.0d));
 
     // Assert
-    assertTrue(actualMultiplyResult instanceof CompositeDoubleValue);
-    assertFalse(actualMultiplyResult.isParticular());
-    assertTrue(actualMultiplyResult.isCategory2());
-    assertTrue(actualMultiplyResult.isSpecific());
+    assertTrue(actualSubtractFromResult instanceof CompositeDoubleValue);
+    assertFalse(actualSubtractFromResult.isParticular());
+    assertTrue(actualSubtractFromResult.isCategory2());
+    assertTrue(actualSubtractFromResult.isSpecific());
   }
 
   /**
-   * Test {@link DoubleValue#multiply(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link ParticularDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#multiply(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#multiply(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.multiply(ParticularDoubleValue)"})
-  public void testMultiplyWithParticularDoubleValue_thenReturnParticularDoubleValue() {
+  public void testMultiply() {
+    // Arrange
+    UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
+
+    // Act and Assert
+    assertSame(unknownDoubleValue, unknownDoubleValue.multiply(new ParticularDoubleValue(10.0d)));
+  }
+
+  /**
+   * Method under test: {@link DoubleValue#multiply(ParticularDoubleValue)}
+   */
+  @Test
+  public void testMultiply2() {
     // Arrange
     DoubleValue doubleValue = ParticularValueFactory.DOUBLE_VALUE_0;
 
@@ -552,42 +339,16 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#multiply(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#multiply(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#multiply(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.multiply(ParticularDoubleValue)"})
-  public void testMultiplyWithParticularDoubleValue_thenReturnUnknownDoubleValue() {
+  public void testMultiply3() {
     // Arrange
-    UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
+    CompositeDoubleValue compositeDoubleValue = new CompositeDoubleValue(BasicValueFactory.DOUBLE_VALUE, (byte) 'A',
+        BasicValueFactory.DOUBLE_VALUE);
 
-    // Act and Assert
-    assertSame(unknownDoubleValue, unknownDoubleValue.multiply(new ParticularDoubleValue(10.0d)));
-  }
-
-  /**
-   * Test {@link DoubleValue#multiply(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link CompositeDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#multiply(SpecificDoubleValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.multiply(SpecificDoubleValue)"})
-  public void testMultiplyWithSpecificDoubleValue_thenReturnCompositeDoubleValue() {
-    // Arrange and Act
-    DoubleValue actualMultiplyResult =
-        ParticularValueFactory.DOUBLE_VALUE_0.multiply(
-            (SpecificDoubleValue) new ParticularDoubleValue(10.0d));
+    // Act
+    DoubleValue actualMultiplyResult = compositeDoubleValue.multiply(new ParticularDoubleValue(10.0d));
 
     // Assert
     assertTrue(actualMultiplyResult instanceof CompositeDoubleValue);
@@ -597,68 +358,50 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#multiply(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#multiply(SpecificDoubleValue)}
+   * Method under test: {@link DoubleValue#multiply(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.multiply(SpecificDoubleValue)"})
-  public void testMultiplyWithSpecificDoubleValue_thenReturnUnknownDoubleValue() {
+  public void testMultiply4() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
     // Act and Assert
-    assertSame(
-        unknownDoubleValue,
-        unknownDoubleValue.multiply((SpecificDoubleValue) new ParticularDoubleValue(10.0d)));
+    assertSame(unknownDoubleValue, unknownDoubleValue.multiply((SpecificDoubleValue) new ParticularDoubleValue(10.0d)));
   }
 
   /**
-   * Test {@link DoubleValue#divide(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link CompositeDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#divide(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#multiply(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.divide(ParticularDoubleValue)"})
-  public void testDivideWithParticularDoubleValue_thenReturnCompositeDoubleValue() {
-    // Arrange
-    CompositeDoubleValue compositeDoubleValue =
-        new CompositeDoubleValue(
-            BasicValueFactory.DOUBLE_VALUE, (byte) 'A', BasicValueFactory.DOUBLE_VALUE);
-
-    // Act
-    DoubleValue actualDivideResult = compositeDoubleValue.divide(new ParticularDoubleValue(10.0d));
+  public void testMultiply5() {
+    // Arrange and Act
+    DoubleValue actualMultiplyResult = ParticularValueFactory.DOUBLE_VALUE_0
+        .multiply((SpecificDoubleValue) new ParticularDoubleValue(10.0d));
 
     // Assert
-    assertTrue(actualDivideResult instanceof CompositeDoubleValue);
-    assertFalse(actualDivideResult.isParticular());
-    assertTrue(actualDivideResult.isCategory2());
-    assertTrue(actualDivideResult.isSpecific());
+    assertTrue(actualMultiplyResult instanceof CompositeDoubleValue);
+    assertFalse(actualMultiplyResult.isParticular());
+    assertTrue(actualMultiplyResult.isCategory2());
+    assertTrue(actualMultiplyResult.isSpecific());
   }
 
   /**
-   * Test {@link DoubleValue#divide(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link ParticularDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#divide(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#divide(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.divide(ParticularDoubleValue)"})
-  public void testDivideWithParticularDoubleValue_thenReturnParticularDoubleValue() {
+  public void testDivide() {
+    // Arrange
+    UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
+
+    // Act and Assert
+    assertSame(unknownDoubleValue, unknownDoubleValue.divide(new ParticularDoubleValue(10.0d)));
+  }
+
+  /**
+   * Method under test: {@link DoubleValue#divide(ParticularDoubleValue)}
+   */
+  @Test
+  public void testDivide2() {
     // Arrange
     DoubleValue doubleValue = ParticularValueFactory.DOUBLE_VALUE_0;
 
@@ -671,42 +414,16 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#divide(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#divide(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#divide(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.divide(ParticularDoubleValue)"})
-  public void testDivideWithParticularDoubleValue_thenReturnUnknownDoubleValue() {
+  public void testDivide3() {
     // Arrange
-    UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
+    CompositeDoubleValue compositeDoubleValue = new CompositeDoubleValue(BasicValueFactory.DOUBLE_VALUE, (byte) 'A',
+        BasicValueFactory.DOUBLE_VALUE);
 
-    // Act and Assert
-    assertSame(unknownDoubleValue, unknownDoubleValue.divide(new ParticularDoubleValue(10.0d)));
-  }
-
-  /**
-   * Test {@link DoubleValue#divide(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link CompositeDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#divide(SpecificDoubleValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.divide(SpecificDoubleValue)"})
-  public void testDivideWithSpecificDoubleValue_thenReturnCompositeDoubleValue() {
-    // Arrange and Act
-    DoubleValue actualDivideResult =
-        ParticularValueFactory.DOUBLE_VALUE_0.divide(
-            (SpecificDoubleValue) new ParticularDoubleValue(10.0d));
+    // Act
+    DoubleValue actualDivideResult = compositeDoubleValue.divide(new ParticularDoubleValue(10.0d));
 
     // Assert
     assertTrue(actualDivideResult instanceof CompositeDoubleValue);
@@ -716,93 +433,38 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#divide(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#divide(SpecificDoubleValue)}
+   * Method under test: {@link DoubleValue#divide(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.divide(SpecificDoubleValue)"})
-  public void testDivideWithSpecificDoubleValue_thenReturnUnknownDoubleValue() {
+  public void testDivide4() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
     // Act and Assert
-    assertSame(
-        unknownDoubleValue,
-        unknownDoubleValue.divide((SpecificDoubleValue) new ParticularDoubleValue(10.0d)));
+    assertSame(unknownDoubleValue, unknownDoubleValue.divide((SpecificDoubleValue) new ParticularDoubleValue(10.0d)));
   }
 
   /**
-   * Test {@link DoubleValue#divideOf(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link CompositeDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#divideOf(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#divide(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.divideOf(ParticularDoubleValue)"})
-  public void testDivideOfWithParticularDoubleValue_thenReturnCompositeDoubleValue() {
-    // Arrange
-    CompositeDoubleValue compositeDoubleValue =
-        new CompositeDoubleValue(
-            BasicValueFactory.DOUBLE_VALUE, (byte) 'A', BasicValueFactory.DOUBLE_VALUE);
-
-    // Act
-    DoubleValue actualDivideOfResult =
-        compositeDoubleValue.divideOf(new ParticularDoubleValue(10.0d));
-
-    // Assert
-    assertTrue(actualDivideOfResult instanceof CompositeDoubleValue);
-    assertFalse(actualDivideOfResult.isParticular());
-    assertTrue(actualDivideOfResult.isCategory2());
-    assertTrue(actualDivideOfResult.isSpecific());
-  }
-
-  /**
-   * Test {@link DoubleValue#divideOf(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link ParticularDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#divideOf(ParticularDoubleValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.divideOf(ParticularDoubleValue)"})
-  public void testDivideOfWithParticularDoubleValue_thenReturnParticularDoubleValue() {
+  public void testDivide5() {
     // Arrange and Act
-    DoubleValue actualDivideOfResult =
-        ParticularValueFactory.DOUBLE_VALUE_0.divideOf(new ParticularDoubleValue(10.0d));
+    DoubleValue actualDivideResult = ParticularValueFactory.DOUBLE_VALUE_0
+        .divide((SpecificDoubleValue) new ParticularDoubleValue(10.0d));
 
     // Assert
-    assertTrue(actualDivideOfResult instanceof ParticularDoubleValue);
-    assertTrue(actualDivideOfResult.isParticular());
-    assertTrue(actualDivideOfResult.isSpecific());
-    assertEquals(Double.POSITIVE_INFINITY, actualDivideOfResult.value(), 0.0);
+    assertTrue(actualDivideResult instanceof CompositeDoubleValue);
+    assertFalse(actualDivideResult.isParticular());
+    assertTrue(actualDivideResult.isCategory2());
+    assertTrue(actualDivideResult.isSpecific());
   }
 
   /**
-   * Test {@link DoubleValue#divideOf(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#divideOf(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#divideOf(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.divideOf(ParticularDoubleValue)"})
-  public void testDivideOfWithParticularDoubleValue_thenReturnUnknownDoubleValue() {
+  public void testDivideOf() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
@@ -811,22 +473,32 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#divideOf(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link CompositeDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#divideOf(SpecificDoubleValue)}
+   * Method under test: {@link DoubleValue#divideOf(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.divideOf(SpecificDoubleValue)"})
-  public void testDivideOfWithSpecificDoubleValue_thenReturnCompositeDoubleValue() {
+  public void testDivideOf2() {
     // Arrange and Act
-    DoubleValue actualDivideOfResult =
-        ParticularValueFactory.DOUBLE_VALUE_0.divideOf(
-            (SpecificDoubleValue) new ParticularDoubleValue(10.0d));
+    DoubleValue actualDivideOfResult = ParticularValueFactory.DOUBLE_VALUE_0.divideOf(new ParticularDoubleValue(10.0d));
+
+    // Assert
+    assertTrue(actualDivideOfResult instanceof ParticularDoubleValue);
+    assertTrue(actualDivideOfResult.isCategory2());
+    assertTrue(actualDivideOfResult.isParticular());
+    assertTrue(actualDivideOfResult.isSpecific());
+    assertEquals(Double.POSITIVE_INFINITY, actualDivideOfResult.value(), 0.0);
+  }
+
+  /**
+   * Method under test: {@link DoubleValue#divideOf(ParticularDoubleValue)}
+   */
+  @Test
+  public void testDivideOf3() {
+    // Arrange
+    CompositeDoubleValue compositeDoubleValue = new CompositeDoubleValue(BasicValueFactory.DOUBLE_VALUE, (byte) 'A',
+        BasicValueFactory.DOUBLE_VALUE);
+
+    // Act
+    DoubleValue actualDivideOfResult = compositeDoubleValue.divideOf(new ParticularDoubleValue(10.0d));
 
     // Assert
     assertTrue(actualDivideOfResult instanceof CompositeDoubleValue);
@@ -836,69 +508,50 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#divideOf(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#divideOf(SpecificDoubleValue)}
+   * Method under test: {@link DoubleValue#divideOf(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.divideOf(SpecificDoubleValue)"})
-  public void testDivideOfWithSpecificDoubleValue_thenReturnUnknownDoubleValue() {
+  public void testDivideOf4() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
     // Act and Assert
-    assertSame(
-        unknownDoubleValue,
-        unknownDoubleValue.divideOf((SpecificDoubleValue) new ParticularDoubleValue(10.0d)));
+    assertSame(unknownDoubleValue, unknownDoubleValue.divideOf((SpecificDoubleValue) new ParticularDoubleValue(10.0d)));
   }
 
   /**
-   * Test {@link DoubleValue#remainder(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link CompositeDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#remainder(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#divideOf(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.remainder(ParticularDoubleValue)"})
-  public void testRemainderWithParticularDoubleValue_thenReturnCompositeDoubleValue() {
-    // Arrange
-    CompositeDoubleValue compositeDoubleValue =
-        new CompositeDoubleValue(
-            BasicValueFactory.DOUBLE_VALUE, (byte) 'A', BasicValueFactory.DOUBLE_VALUE);
-
-    // Act
-    DoubleValue actualRemainderResult =
-        compositeDoubleValue.remainder(new ParticularDoubleValue(10.0d));
+  public void testDivideOf5() {
+    // Arrange and Act
+    DoubleValue actualDivideOfResult = ParticularValueFactory.DOUBLE_VALUE_0
+        .divideOf((SpecificDoubleValue) new ParticularDoubleValue(10.0d));
 
     // Assert
-    assertTrue(actualRemainderResult instanceof CompositeDoubleValue);
-    assertFalse(actualRemainderResult.isParticular());
-    assertTrue(actualRemainderResult.isCategory2());
-    assertTrue(actualRemainderResult.isSpecific());
+    assertTrue(actualDivideOfResult instanceof CompositeDoubleValue);
+    assertFalse(actualDivideOfResult.isParticular());
+    assertTrue(actualDivideOfResult.isCategory2());
+    assertTrue(actualDivideOfResult.isSpecific());
   }
 
   /**
-   * Test {@link DoubleValue#remainder(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link ParticularDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#remainder(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#remainder(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.remainder(ParticularDoubleValue)"})
-  public void testRemainderWithParticularDoubleValue_thenReturnParticularDoubleValue() {
+  public void testRemainder() {
+    // Arrange
+    UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
+
+    // Act and Assert
+    assertSame(unknownDoubleValue, unknownDoubleValue.remainder(new ParticularDoubleValue(10.0d)));
+  }
+
+  /**
+   * Method under test: {@link DoubleValue#remainder(ParticularDoubleValue)}
+   */
+  @Test
+  public void testRemainder2() {
     // Arrange
     DoubleValue doubleValue = ParticularValueFactory.DOUBLE_VALUE_0;
 
@@ -911,42 +564,16 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#remainder(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#remainder(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#remainder(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.remainder(ParticularDoubleValue)"})
-  public void testRemainderWithParticularDoubleValue_thenReturnUnknownDoubleValue() {
+  public void testRemainder3() {
     // Arrange
-    UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
+    CompositeDoubleValue compositeDoubleValue = new CompositeDoubleValue(BasicValueFactory.DOUBLE_VALUE, (byte) 'A',
+        BasicValueFactory.DOUBLE_VALUE);
 
-    // Act and Assert
-    assertSame(unknownDoubleValue, unknownDoubleValue.remainder(new ParticularDoubleValue(10.0d)));
-  }
-
-  /**
-   * Test {@link DoubleValue#remainder(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link CompositeDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#remainder(SpecificDoubleValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.remainder(SpecificDoubleValue)"})
-  public void testRemainderWithSpecificDoubleValue_thenReturnCompositeDoubleValue() {
-    // Arrange and Act
-    DoubleValue actualRemainderResult =
-        ParticularValueFactory.DOUBLE_VALUE_0.remainder(
-            (SpecificDoubleValue) new ParticularDoubleValue(10.0d));
+    // Act
+    DoubleValue actualRemainderResult = compositeDoubleValue.remainder(new ParticularDoubleValue(10.0d));
 
     // Assert
     assertTrue(actualRemainderResult instanceof CompositeDoubleValue);
@@ -956,118 +583,74 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#remainder(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#remainder(SpecificDoubleValue)}
+   * Method under test: {@link DoubleValue#remainder(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.remainder(SpecificDoubleValue)"})
-  public void testRemainderWithSpecificDoubleValue_thenReturnUnknownDoubleValue() {
+  public void testRemainder4() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
     // Act and Assert
-    assertSame(
-        unknownDoubleValue,
+    assertSame(unknownDoubleValue,
         unknownDoubleValue.remainder((SpecificDoubleValue) new ParticularDoubleValue(10.0d)));
   }
 
   /**
-   * Test {@link DoubleValue#remainderOf(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link CompositeDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#remainderOf(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#remainder(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.remainderOf(ParticularDoubleValue)"})
-  public void testRemainderOfWithParticularDoubleValue_thenReturnCompositeDoubleValue() {
-    // Arrange
-    CompositeDoubleValue compositeDoubleValue =
-        new CompositeDoubleValue(
-            BasicValueFactory.DOUBLE_VALUE, (byte) 'A', BasicValueFactory.DOUBLE_VALUE);
-
-    // Act
-    DoubleValue actualRemainderOfResult =
-        compositeDoubleValue.remainderOf(new ParticularDoubleValue(10.0d));
+  public void testRemainder5() {
+    // Arrange and Act
+    DoubleValue actualRemainderResult = ParticularValueFactory.DOUBLE_VALUE_0
+        .remainder((SpecificDoubleValue) new ParticularDoubleValue(10.0d));
 
     // Assert
-    assertTrue(actualRemainderOfResult instanceof CompositeDoubleValue);
-    assertFalse(actualRemainderOfResult.isParticular());
-    assertTrue(actualRemainderOfResult.isCategory2());
-    assertTrue(actualRemainderOfResult.isSpecific());
+    assertTrue(actualRemainderResult instanceof CompositeDoubleValue);
+    assertFalse(actualRemainderResult.isParticular());
+    assertTrue(actualRemainderResult.isCategory2());
+    assertTrue(actualRemainderResult.isSpecific());
   }
 
   /**
-   * Test {@link DoubleValue#remainderOf(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link ParticularDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#remainderOf(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#remainderOf(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.remainderOf(ParticularDoubleValue)"})
-  public void testRemainderOfWithParticularDoubleValue_thenReturnParticularDoubleValue() {
+  public void testRemainderOf() {
+    // Arrange
+    UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
+
+    // Act and Assert
+    assertSame(unknownDoubleValue, unknownDoubleValue.remainderOf(new ParticularDoubleValue(10.0d)));
+  }
+
+  /**
+   * Method under test: {@link DoubleValue#remainderOf(ParticularDoubleValue)}
+   */
+  @Test
+  public void testRemainderOf2() {
     // Arrange and Act
-    DoubleValue actualRemainderOfResult =
-        ParticularValueFactory.DOUBLE_VALUE_0.remainderOf(new ParticularDoubleValue(10.0d));
+    DoubleValue actualRemainderOfResult = ParticularValueFactory.DOUBLE_VALUE_0
+        .remainderOf(new ParticularDoubleValue(10.0d));
 
     // Assert
     assertTrue(actualRemainderOfResult instanceof ParticularDoubleValue);
+    assertTrue(actualRemainderOfResult.isCategory2());
     assertTrue(actualRemainderOfResult.isParticular());
     assertTrue(actualRemainderOfResult.isSpecific());
     assertEquals(Double.NaN, actualRemainderOfResult.value(), 0.0);
   }
 
   /**
-   * Test {@link DoubleValue#remainderOf(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#remainderOf(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#remainderOf(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.remainderOf(ParticularDoubleValue)"})
-  public void testRemainderOfWithParticularDoubleValue_thenReturnUnknownDoubleValue() {
+  public void testRemainderOf3() {
     // Arrange
-    UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
+    CompositeDoubleValue compositeDoubleValue = new CompositeDoubleValue(BasicValueFactory.DOUBLE_VALUE, (byte) 'A',
+        BasicValueFactory.DOUBLE_VALUE);
 
-    // Act and Assert
-    assertSame(
-        unknownDoubleValue, unknownDoubleValue.remainderOf(new ParticularDoubleValue(10.0d)));
-  }
-
-  /**
-   * Test {@link DoubleValue#remainderOf(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link CompositeDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#remainderOf(SpecificDoubleValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.remainderOf(SpecificDoubleValue)"})
-  public void testRemainderOfWithSpecificDoubleValue_thenReturnCompositeDoubleValue() {
-    // Arrange and Act
-    DoubleValue actualRemainderOfResult =
-        ParticularValueFactory.DOUBLE_VALUE_0.remainderOf(
-            (SpecificDoubleValue) new ParticularDoubleValue(10.0d));
+    // Act
+    DoubleValue actualRemainderOfResult = compositeDoubleValue.remainderOf(new ParticularDoubleValue(10.0d));
 
     // Assert
     assertTrue(actualRemainderOfResult instanceof CompositeDoubleValue);
@@ -1077,65 +660,39 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#remainderOf(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#remainderOf(SpecificDoubleValue)}
+   * Method under test: {@link DoubleValue#remainderOf(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.remainderOf(SpecificDoubleValue)"})
-  public void testRemainderOfWithSpecificDoubleValue_thenReturnUnknownDoubleValue() {
+  public void testRemainderOf4() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
     // Act and Assert
-    assertSame(
-        unknownDoubleValue,
+    assertSame(unknownDoubleValue,
         unknownDoubleValue.remainderOf((SpecificDoubleValue) new ParticularDoubleValue(10.0d)));
   }
 
   /**
-   * Test {@link DoubleValue#compare(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <p>Method under test: {@link DoubleValue#compare(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#remainderOf(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"IntegerValue DoubleValue.compare(ParticularDoubleValue)"})
-  public void testCompareWithParticularDoubleValue() {
-    // Arrange
-    CompositeDoubleValue compositeDoubleValue =
-        new CompositeDoubleValue(
-            BasicValueFactory.DOUBLE_VALUE, (byte) 'A', BasicValueFactory.DOUBLE_VALUE);
-
-    // Act
-    IntegerValue actualCompareResult =
-        compositeDoubleValue.compare(new ParticularDoubleValue(10.0d));
+  public void testRemainderOf5() {
+    // Arrange and Act
+    DoubleValue actualRemainderOfResult = ParticularValueFactory.DOUBLE_VALUE_0
+        .remainderOf((SpecificDoubleValue) new ParticularDoubleValue(10.0d));
 
     // Assert
-    assertTrue(actualCompareResult instanceof UnknownIntegerValue);
-    assertFalse(actualCompareResult.isCategory2());
-    assertFalse(actualCompareResult.isParticular());
-    assertFalse(actualCompareResult.isSpecific());
+    assertTrue(actualRemainderOfResult instanceof CompositeDoubleValue);
+    assertFalse(actualRemainderOfResult.isParticular());
+    assertTrue(actualRemainderOfResult.isCategory2());
+    assertTrue(actualRemainderOfResult.isSpecific());
   }
 
   /**
-   * Test {@link DoubleValue#compare(ParticularDoubleValue)} with {@code ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Given {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#compare(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#compare(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"IntegerValue DoubleValue.compare(ParticularDoubleValue)"})
-  public void testCompareWithParticularDoubleValue_givenUnknownDoubleValue() {
+  public void testCompare() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
@@ -1150,20 +707,16 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#compare(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <p>Method under test: {@link DoubleValue#compare(SpecificDoubleValue)}
+   * Method under test: {@link DoubleValue#compare(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"IntegerValue DoubleValue.compare(SpecificDoubleValue)"})
-  public void testCompareWithSpecificDoubleValue() {
+  public void testCompare2() {
     // Arrange
-    UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
+    CompositeDoubleValue compositeDoubleValue = new CompositeDoubleValue(BasicValueFactory.DOUBLE_VALUE, (byte) 'A',
+        BasicValueFactory.DOUBLE_VALUE);
 
     // Act
-    IntegerValue actualCompareResult =
-        unknownDoubleValue.compare((SpecificDoubleValue) new ParticularDoubleValue(10.0d));
+    IntegerValue actualCompareResult = compositeDoubleValue.compare(new ParticularDoubleValue(10.0d));
 
     // Assert
     assertTrue(actualCompareResult instanceof UnknownIntegerValue);
@@ -1173,121 +726,31 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#compareReverse(DoubleValue)} with {@code DoubleValue}.
-   *
-   * <p>Method under test: {@link DoubleValue#compareReverse(DoubleValue)}
+   * Method under test: {@link DoubleValue#compare(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"IntegerValue DoubleValue.compareReverse(DoubleValue)"})
-  public void testCompareReverseWithDoubleValue() {
-    // Arrange and Act
-    IntegerValue actualCompareReverseResult =
-        (new CompositeDoubleValue(
-                BasicValueFactory.DOUBLE_VALUE, (byte) 'A', BasicValueFactory.DOUBLE_VALUE))
-            .compareReverse(BasicValueFactory.DOUBLE_VALUE);
-
-    // Assert
-    assertTrue(actualCompareReverseResult instanceof UnknownIntegerValue);
-    assertFalse(actualCompareReverseResult.isCategory2());
-    assertFalse(actualCompareReverseResult.isParticular());
-    assertFalse(actualCompareReverseResult.isSpecific());
-  }
-
-  /**
-   * Test {@link DoubleValue#compareReverse(DoubleValue)} with {@code DoubleValue}.
-   *
-   * <ul>
-   *   <li>Given {@link ParticularValueFactory#DOUBLE_VALUE_0}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#compareReverse(DoubleValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"IntegerValue DoubleValue.compareReverse(DoubleValue)"})
-  public void testCompareReverseWithDoubleValue_givenDouble_value_0() {
-    // Arrange and Act
-    IntegerValue actualCompareReverseResult =
-        ParticularValueFactory.DOUBLE_VALUE_0.compareReverse(BasicValueFactory.DOUBLE_VALUE);
-
-    // Assert
-    assertTrue(actualCompareReverseResult instanceof UnknownIntegerValue);
-    assertFalse(actualCompareReverseResult.isCategory2());
-    assertFalse(actualCompareReverseResult.isParticular());
-    assertFalse(actualCompareReverseResult.isSpecific());
-  }
-
-  /**
-   * Test {@link DoubleValue#compareReverse(DoubleValue)} with {@code DoubleValue}.
-   *
-   * <ul>
-   *   <li>Given {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#compareReverse(DoubleValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"IntegerValue DoubleValue.compareReverse(DoubleValue)"})
-  public void testCompareReverseWithDoubleValue_givenUnknownDoubleValue() {
-    // Arrange and Act
-    IntegerValue actualCompareReverseResult =
-        (new UnknownDoubleValue()).compareReverse(BasicValueFactory.DOUBLE_VALUE);
-
-    // Assert
-    assertTrue(actualCompareReverseResult instanceof UnknownIntegerValue);
-    assertFalse(actualCompareReverseResult.isCategory2());
-    assertFalse(actualCompareReverseResult.isParticular());
-    assertFalse(actualCompareReverseResult.isSpecific());
-  }
-
-  /**
-   * Test {@link DoubleValue#compareReverse(ParticularDoubleValue)} with {@code
-   * ParticularDoubleValue}.
-   *
-   * <p>Method under test: {@link DoubleValue#compareReverse(ParticularDoubleValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"IntegerValue DoubleValue.compareReverse(ParticularDoubleValue)"})
-  public void testCompareReverseWithParticularDoubleValue() {
-    // Arrange
-    CompositeDoubleValue compositeDoubleValue =
-        new CompositeDoubleValue(
-            BasicValueFactory.DOUBLE_VALUE, (byte) 'A', BasicValueFactory.DOUBLE_VALUE);
-
-    // Act
-    IntegerValue actualCompareReverseResult =
-        compositeDoubleValue.compareReverse(new ParticularDoubleValue(10.0d));
-
-    // Assert
-    assertTrue(actualCompareReverseResult instanceof UnknownIntegerValue);
-    assertFalse(actualCompareReverseResult.isCategory2());
-    assertFalse(actualCompareReverseResult.isParticular());
-    assertFalse(actualCompareReverseResult.isSpecific());
-  }
-
-  /**
-   * Test {@link DoubleValue#compareReverse(ParticularDoubleValue)} with {@code
-   * ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Given {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#compareReverse(ParticularDoubleValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"IntegerValue DoubleValue.compareReverse(ParticularDoubleValue)"})
-  public void testCompareReverseWithParticularDoubleValue_givenUnknownDoubleValue() {
+  public void testCompare3() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
     // Act
-    IntegerValue actualCompareReverseResult =
-        unknownDoubleValue.compareReverse(new ParticularDoubleValue(10.0d));
+    IntegerValue actualCompareResult = unknownDoubleValue
+        .compare((SpecificDoubleValue) new ParticularDoubleValue(10.0d));
+
+    // Assert
+    assertTrue(actualCompareResult instanceof UnknownIntegerValue);
+    assertFalse(actualCompareResult.isCategory2());
+    assertFalse(actualCompareResult.isParticular());
+    assertFalse(actualCompareResult.isSpecific());
+  }
+
+  /**
+   * Method under test: {@link DoubleValue#compareReverse(DoubleValue)}
+   */
+  @Test
+  public void testCompareReverse() {
+    // Arrange and Act
+    IntegerValue actualCompareReverseResult = (new UnknownDoubleValue()).compareReverse(BasicValueFactory.DOUBLE_VALUE);
 
     // Assert
     assertTrue(actualCompareReverseResult instanceof UnknownIntegerValue);
@@ -1297,47 +760,83 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#compareReverse(ParticularDoubleValue)} with {@code
-   * ParticularDoubleValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link ParticularIntegerValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#compareReverse(ParticularDoubleValue)}
+   * Method under test: {@link DoubleValue#compareReverse(DoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"IntegerValue DoubleValue.compareReverse(ParticularDoubleValue)"})
-  public void testCompareReverseWithParticularDoubleValue_thenReturnParticularIntegerValue() {
+  public void testCompareReverse2() {
     // Arrange and Act
-    IntegerValue actualCompareReverseResult =
-        ParticularValueFactory.DOUBLE_VALUE_0.compareReverse(new ParticularDoubleValue(10.0d));
+    IntegerValue actualCompareReverseResult = ParticularValueFactory.DOUBLE_VALUE_0
+        .compareReverse(BasicValueFactory.DOUBLE_VALUE);
+
+    // Assert
+    assertTrue(actualCompareReverseResult instanceof UnknownIntegerValue);
+    assertFalse(actualCompareReverseResult.isCategory2());
+    assertFalse(actualCompareReverseResult.isParticular());
+    assertFalse(actualCompareReverseResult.isSpecific());
+  }
+
+  /**
+   * Method under test: {@link DoubleValue#compareReverse(DoubleValue)}
+   */
+  @Test
+  public void testCompareReverse3() {
+    // Arrange and Act
+    IntegerValue actualCompareReverseResult = (new CompositeDoubleValue(BasicValueFactory.DOUBLE_VALUE, (byte) 'A',
+        BasicValueFactory.DOUBLE_VALUE)).compareReverse(BasicValueFactory.DOUBLE_VALUE);
+
+    // Assert
+    assertTrue(actualCompareReverseResult instanceof UnknownIntegerValue);
+    assertFalse(actualCompareReverseResult.isCategory2());
+    assertFalse(actualCompareReverseResult.isParticular());
+    assertFalse(actualCompareReverseResult.isSpecific());
+  }
+
+  /**
+   * Method under test: {@link DoubleValue#compareReverse(ParticularDoubleValue)}
+   */
+  @Test
+  public void testCompareReverse4() {
+    // Arrange
+    UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
+
+    // Act
+    IntegerValue actualCompareReverseResult = unknownDoubleValue.compareReverse(new ParticularDoubleValue(10.0d));
+
+    // Assert
+    assertTrue(actualCompareReverseResult instanceof UnknownIntegerValue);
+    assertFalse(actualCompareReverseResult.isCategory2());
+    assertFalse(actualCompareReverseResult.isParticular());
+    assertFalse(actualCompareReverseResult.isSpecific());
+  }
+
+  /**
+   * Method under test: {@link DoubleValue#compareReverse(ParticularDoubleValue)}
+   */
+  @Test
+  public void testCompareReverse5() {
+    // Arrange and Act
+    IntegerValue actualCompareReverseResult = ParticularValueFactory.DOUBLE_VALUE_0
+        .compareReverse(new ParticularDoubleValue(10.0d));
 
     // Assert
     assertTrue(actualCompareReverseResult instanceof ParticularIntegerValue);
     assertEquals(1, actualCompareReverseResult.value());
+    assertFalse(actualCompareReverseResult.isCategory2());
     assertTrue(actualCompareReverseResult.isParticular());
     assertTrue(actualCompareReverseResult.isSpecific());
   }
 
   /**
-   * Test {@link DoubleValue#compareReverse(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <ul>
-   *   <li>Given {@link ParticularValueFactory#DOUBLE_VALUE_0}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#compareReverse(SpecificDoubleValue)}
+   * Method under test: {@link DoubleValue#compareReverse(ParticularDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"IntegerValue DoubleValue.compareReverse(SpecificDoubleValue)"})
-  public void testCompareReverseWithSpecificDoubleValue_givenDouble_value_0() {
-    // Arrange and Act
-    IntegerValue actualCompareReverseResult =
-        ParticularValueFactory.DOUBLE_VALUE_0.compareReverse(
-            (SpecificDoubleValue) new ParticularDoubleValue(10.0d));
+  public void testCompareReverse6() {
+    // Arrange
+    CompositeDoubleValue compositeDoubleValue = new CompositeDoubleValue(BasicValueFactory.DOUBLE_VALUE, (byte) 'A',
+        BasicValueFactory.DOUBLE_VALUE);
+
+    // Act
+    IntegerValue actualCompareReverseResult = compositeDoubleValue.compareReverse(new ParticularDoubleValue(10.0d));
 
     // Assert
     assertTrue(actualCompareReverseResult instanceof UnknownIntegerValue);
@@ -1347,24 +846,16 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#compareReverse(SpecificDoubleValue)} with {@code SpecificDoubleValue}.
-   *
-   * <ul>
-   *   <li>Given {@link UnknownDoubleValue} (default constructor).
-   * </ul>
-   *
-   * <p>Method under test: {@link DoubleValue#compareReverse(SpecificDoubleValue)}
+   * Method under test: {@link DoubleValue#compareReverse(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"IntegerValue DoubleValue.compareReverse(SpecificDoubleValue)"})
-  public void testCompareReverseWithSpecificDoubleValue_givenUnknownDoubleValue() {
+  public void testCompareReverse7() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
 
     // Act
-    IntegerValue actualCompareReverseResult =
-        unknownDoubleValue.compareReverse((SpecificDoubleValue) new ParticularDoubleValue(10.0d));
+    IntegerValue actualCompareReverseResult = unknownDoubleValue
+        .compareReverse((SpecificDoubleValue) new ParticularDoubleValue(10.0d));
 
     // Assert
     assertTrue(actualCompareReverseResult instanceof UnknownIntegerValue);
@@ -1374,13 +865,25 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#doubleValue()}.
-   *
-   * <p>Method under test: {@link DoubleValue#doubleValue()}
+   * Method under test: {@link DoubleValue#compareReverse(SpecificDoubleValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue DoubleValue.doubleValue()"})
+  public void testCompareReverse8() {
+    // Arrange and Act
+    IntegerValue actualCompareReverseResult = ParticularValueFactory.DOUBLE_VALUE_0
+        .compareReverse((SpecificDoubleValue) new ParticularDoubleValue(10.0d));
+
+    // Assert
+    assertTrue(actualCompareReverseResult instanceof UnknownIntegerValue);
+    assertFalse(actualCompareReverseResult.isCategory2());
+    assertFalse(actualCompareReverseResult.isParticular());
+    assertFalse(actualCompareReverseResult.isSpecific());
+  }
+
+  /**
+   * Method under test: {@link DoubleValue#doubleValue()}
+   */
+  @Test
   public void testDoubleValue() {
     // Arrange
     UnknownDoubleValue unknownDoubleValue = new UnknownDoubleValue();
@@ -1390,26 +893,18 @@ public class DoubleValueDiffblueTest {
   }
 
   /**
-   * Test {@link DoubleValue#computationalType()}.
-   *
-   * <p>Method under test: {@link DoubleValue#computationalType()}
+   * Method under test: {@link DoubleValue#computationalType()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int DoubleValue.computationalType()"})
   public void testComputationalType() {
     // Arrange, Act and Assert
     assertEquals(4, (new UnknownDoubleValue()).computationalType());
   }
 
   /**
-   * Test {@link DoubleValue#internalType()}.
-   *
-   * <p>Method under test: {@link DoubleValue#internalType()}
+   * Method under test: {@link DoubleValue#internalType()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"java.lang.String DoubleValue.internalType()"})
   public void testInternalType() {
     // Arrange, Act and Assert
     assertEquals("D", (new UnknownDoubleValue()).internalType());

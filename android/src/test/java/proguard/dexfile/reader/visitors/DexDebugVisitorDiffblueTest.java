@@ -4,74 +4,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.List;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.dexfile.reader.DexLabel;
 import proguard.dexfile.reader.node.DexDebugNode;
-import proguard.dexfile.reader.node.DexDebugNode.DexDebugOpNode;
-import proguard.dexfile.reader.node.DexDebugNode.DexDebugOpNode.Epiogue;
-import proguard.dexfile.reader.node.DexDebugNode.DexDebugOpNode.Prologue;
 
 public class DexDebugVisitorDiffblueTest {
   /**
-   * Test {@link DexDebugVisitor#DexDebugVisitor()}.
-   *
-   * <ul>
-   *   <li>Then return {@link DexDebugVisitor#visitor} is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexDebugVisitor#DexDebugVisitor()}
+   * Method under test: {@link DexDebugVisitor#visitParameterName(int, String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void DexDebugVisitor.<init>()",
-    "void DexDebugVisitor.<init>(DexDebugVisitor)"
-  })
-  public void testNewDexDebugVisitor_thenReturnVisitorIsNull() {
-    // Arrange, Act and Assert
-    assertNull((new DexDebugVisitor()).visitor);
-  }
-
-  /**
-   * Test {@link DexDebugVisitor#DexDebugVisitor(DexDebugVisitor)}.
-   *
-   * <ul>
-   *   <li>When {@link DexDebugVisitor#DexDebugVisitor()}.
-   *   <li>Then return {@link DexDebugVisitor#visitor} {@link DexDebugVisitor#visitor} is {@code
-   *       null}.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link DexDebugVisitor#DexDebugVisitor(DexDebugVisitor)}
-   *   <li>{@link DexDebugVisitor#DexDebugVisitor()}
-   * </ul>
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void DexDebugVisitor.<init>()",
-    "void DexDebugVisitor.<init>(DexDebugVisitor)"
-  })
-  public void testNewDexDebugVisitor_whenDexDebugVisitor_thenReturnVisitorVisitorIsNull() {
-    // Arrange, Act and Assert
-    assertNull((new DexDebugVisitor(new DexDebugVisitor())).visitor.visitor);
-  }
-
-  /**
-   * Test {@link DexDebugVisitor#visitParameterName(int, String)}.
-   *
-   * <p>Method under test: {@link DexDebugVisitor#visitParameterName(int, String)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexDebugVisitor.visitParameterName(int, String)"})
   public void testVisitParameterName() {
     // Arrange
     DexDebugNode visitor = new DexDebugNode();
@@ -87,14 +29,10 @@ public class DexDebugVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexDebugVisitor#visitStartLocal(int, DexLabel, String, String, String)}.
-   *
-   * <p>Method under test: {@link DexDebugVisitor#visitStartLocal(int, DexLabel, String, String,
-   * String)}
+   * Method under test:
+   * {@link DexDebugVisitor#visitStartLocal(int, DexLabel, String, String, String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexDebugVisitor.visitStartLocal(int, DexLabel, String, String, String)"})
   public void testVisitStartLocal() {
     // Arrange
     DexDebugNode visitor = new DexDebugNode();
@@ -110,13 +48,9 @@ public class DexDebugVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexDebugVisitor#visitLineNumber(int, DexLabel)}.
-   *
-   * <p>Method under test: {@link DexDebugVisitor#visitLineNumber(int, DexLabel)}
+   * Method under test: {@link DexDebugVisitor#visitLineNumber(int, DexLabel)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexDebugVisitor.visitLineNumber(int, DexLabel)"})
   public void testVisitLineNumber() {
     // Arrange
     DexDebugNode visitor = new DexDebugNode();
@@ -132,13 +66,19 @@ public class DexDebugVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexDebugVisitor#visitEndLocal(int, DexLabel)}.
-   *
-   * <p>Method under test: {@link DexDebugVisitor#visitEndLocal(int, DexLabel)}
+   * Method under test: {@link DexDebugVisitor#DexDebugVisitor()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexDebugVisitor.visitEndLocal(int, DexLabel)"})
+  public void testNewDexDebugVisitor() {
+    // Arrange, Act and Assert
+    assertNull((new DexDebugVisitor()).visitor);
+    assertNull((new DexDebugVisitor(new DexDebugVisitor())).visitor.visitor);
+  }
+
+  /**
+   * Method under test: {@link DexDebugVisitor#visitEndLocal(int, DexLabel)}
+   */
+  @Test
   public void testVisitEndLocal() {
     // Arrange
     DexDebugNode visitor = new DexDebugNode();
@@ -154,19 +94,10 @@ public class DexDebugVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexDebugVisitor#visitSetFile(String)}.
-   *
-   * <ul>
-   *   <li>Then {@link DexDebugVisitor#DexDebugVisitor(DexDebugVisitor)} with visitor is {@link
-   *       DexDebugNode} (default constructor) {@link DexDebugVisitor#visitor} {@link DexDebugNode}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexDebugVisitor#visitSetFile(String)}
+   * Method under test: {@link DexDebugVisitor#visitSetFile(String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexDebugVisitor.visitSetFile(String)"})
-  public void testVisitSetFile_thenDexDebugVisitorWithVisitorIsDexDebugNodeVisitorDexDebugNode() {
+  public void testVisitSetFile() {
     // Arrange
     DexDebugVisitor dexDebugVisitor = new DexDebugVisitor(new DexDebugNode());
 
@@ -180,13 +111,9 @@ public class DexDebugVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link DexDebugVisitor#visitPrologue(DexLabel)}.
-   *
-   * <p>Method under test: {@link DexDebugVisitor#visitPrologue(DexLabel)}
+   * Method under test: {@link DexDebugVisitor#visitPrologue(DexLabel)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexDebugVisitor.visitPrologue(DexLabel)"})
   public void testVisitPrologue() {
     // Arrange
     DexDebugNode visitor = new DexDebugNode();
@@ -199,28 +126,19 @@ public class DexDebugVisitorDiffblueTest {
     // Assert
     DexDebugVisitor dexDebugVisitor2 = dexDebugVisitor.visitor;
     assertTrue(dexDebugVisitor2 instanceof DexDebugNode);
-    List<DexDebugOpNode> dexDebugOpNodeList = ((DexDebugNode) dexDebugVisitor2).debugNodes;
+    List<DexDebugNode.DexDebugOpNode> dexDebugOpNodeList = ((DexDebugNode) dexDebugVisitor2).debugNodes;
     assertEquals(1, dexDebugOpNodeList.size());
-    DexDebugOpNode getResult = dexDebugOpNodeList.get(0);
-    assertTrue(getResult instanceof Prologue);
-    assertSame(dexLabel, ((Prologue) getResult).label);
+    DexDebugNode.DexDebugOpNode getResult = dexDebugOpNodeList.get(0);
+    assertTrue(getResult instanceof DexDebugNode.DexDebugOpNode.Prologue);
+    assertSame(dexLabel, ((DexDebugNode.DexDebugOpNode.Prologue) getResult).label);
     assertSame(visitor.debugNodes, dexDebugOpNodeList);
   }
 
   /**
-   * Test {@link DexDebugVisitor#visitEpiogue(DexLabel)}.
-   *
-   * <ul>
-   *   <li>Then {@link DexDebugVisitor#DexDebugVisitor(DexDebugVisitor)} with visitor is {@link
-   *       DexDebugNode} (default constructor) {@link DexDebugVisitor#visitor} {@link DexDebugNode}.
-   * </ul>
-   *
-   * <p>Method under test: {@link DexDebugVisitor#visitEpiogue(DexLabel)}
+   * Method under test: {@link DexDebugVisitor#visitEpiogue(DexLabel)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexDebugVisitor.visitEpiogue(DexLabel)"})
-  public void testVisitEpiogue_thenDexDebugVisitorWithVisitorIsDexDebugNodeVisitorDexDebugNode() {
+  public void testVisitEpiogue() {
     // Arrange
     DexDebugNode visitor = new DexDebugNode();
     DexDebugVisitor dexDebugVisitor = new DexDebugVisitor(visitor);
@@ -232,22 +150,18 @@ public class DexDebugVisitorDiffblueTest {
     // Assert
     DexDebugVisitor dexDebugVisitor2 = dexDebugVisitor.visitor;
     assertTrue(dexDebugVisitor2 instanceof DexDebugNode);
-    List<DexDebugOpNode> dexDebugOpNodeList = ((DexDebugNode) dexDebugVisitor2).debugNodes;
+    List<DexDebugNode.DexDebugOpNode> dexDebugOpNodeList = ((DexDebugNode) dexDebugVisitor2).debugNodes;
     assertEquals(1, dexDebugOpNodeList.size());
-    DexDebugOpNode getResult = dexDebugOpNodeList.get(0);
-    assertTrue(getResult instanceof Epiogue);
-    assertSame(dexLabel, ((Epiogue) getResult).label);
+    DexDebugNode.DexDebugOpNode getResult = dexDebugOpNodeList.get(0);
+    assertTrue(getResult instanceof DexDebugNode.DexDebugOpNode.Epiogue);
+    assertSame(dexLabel, ((DexDebugNode.DexDebugOpNode.Epiogue) getResult).label);
     assertSame(visitor.debugNodes, dexDebugOpNodeList);
   }
 
   /**
-   * Test {@link DexDebugVisitor#visitRestartLocal(int, DexLabel)}.
-   *
-   * <p>Method under test: {@link DexDebugVisitor#visitRestartLocal(int, DexLabel)}
+   * Method under test: {@link DexDebugVisitor#visitRestartLocal(int, DexLabel)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DexDebugVisitor.visitRestartLocal(int, DexLabel)"})
   public void testVisitRestartLocal() {
     // Arrange
     DexDebugNode visitor = new DexDebugNode();

@@ -2,29 +2,18 @@ package proguard.evaluation.exception;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 public class EmptyCodeAttributeExceptionDiffblueTest {
   /**
-   * Test {@link EmptyCodeAttributeException#EmptyCodeAttributeException(String)}.
-   *
-   * <ul>
-   *   <li>Then return LocalizedMessage is {@code An error occurred}.
-   * </ul>
-   *
-   * <p>Method under test: {@link EmptyCodeAttributeException#EmptyCodeAttributeException(String)}
+   * Method under test:
+   * {@link EmptyCodeAttributeException#EmptyCodeAttributeException(String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void EmptyCodeAttributeException.<init>(String)"})
-  public void testNewEmptyCodeAttributeException_thenReturnLocalizedMessageIsAnErrorOccurred() {
+  public void testNewEmptyCodeAttributeException() {
     // Arrange and Act
-    EmptyCodeAttributeException actualEmptyCodeAttributeException =
-        new EmptyCodeAttributeException("An error occurred");
+    EmptyCodeAttributeException actualEmptyCodeAttributeException = new EmptyCodeAttributeException(
+        "An error occurred");
 
     // Assert
     assertEquals("An error occurred", actualEmptyCodeAttributeException.getLocalizedMessage());
@@ -36,22 +25,13 @@ public class EmptyCodeAttributeExceptionDiffblueTest {
   }
 
   /**
-   * Test {@link EmptyCodeAttributeException#EmptyCodeAttributeException(String)}.
-   *
-   * <ul>
-   *   <li>When {@code null}.
-   *   <li>Then return LocalizedMessage is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link EmptyCodeAttributeException#EmptyCodeAttributeException(String)}
+   * Method under test:
+   * {@link EmptyCodeAttributeException#EmptyCodeAttributeException(String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void EmptyCodeAttributeException.<init>(String)"})
-  public void testNewEmptyCodeAttributeException_whenNull_thenReturnLocalizedMessageIsNull() {
+  public void testNewEmptyCodeAttributeException2() {
     // Arrange and Act
-    EmptyCodeAttributeException actualEmptyCodeAttributeException =
-        new EmptyCodeAttributeException(null);
+    EmptyCodeAttributeException actualEmptyCodeAttributeException = new EmptyCodeAttributeException(null);
 
     // Assert
     assertNull(actualEmptyCodeAttributeException.getLocalizedMessage());

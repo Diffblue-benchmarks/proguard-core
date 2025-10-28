@@ -5,11 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.constant.DoubleConstant;
@@ -40,57 +36,25 @@ import proguard.evaluation.value.object.model.Model;
 
 public class ConstantValueFactoryDiffblueTest {
   /**
-   * Test {@link ConstantValueFactory#ConstantValueFactory(ValueFactory)}.
-   *
-   * <p>Method under test: {@link ConstantValueFactory#ConstantValueFactory(ValueFactory)}
+   * Method under test: {@link ConstantValueFactory#constantValue(Clazz, int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantValueFactory.<init>(ValueFactory)"})
-  public void testNewConstantValueFactory() {
-    // Arrange and Act
-    ConstantValueFactory actualConstantValueFactory =
-        new ConstantValueFactory(new ParticularReferenceValueFactory());
-
-    // Assert
-    assertTrue(actualConstantValueFactory.valueFactory instanceof ParticularReferenceValueFactory);
-    assertNull(actualConstantValueFactory.value);
-  }
-
-  /**
-   * Test {@link ConstantValueFactory#constantValue(Clazz, int)}.
-   *
-   * <ul>
-   *   <li>When {@link LibraryClass#LibraryClass()}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantValueFactory#constantValue(Clazz, int)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Value ConstantValueFactory.constantValue(Clazz, int)"})
-  public void testConstantValue_whenLibraryClass_thenReturnNull() {
+  public void testConstantValue() {
     // Arrange
-    ConstantValueFactory constantValueFactory =
-        new ConstantValueFactory(new ParticularReferenceValueFactory());
+    ConstantValueFactory constantValueFactory = new ConstantValueFactory(new ParticularReferenceValueFactory());
 
     // Act and Assert
     assertNull(constantValueFactory.constantValue(new LibraryClass(), 1));
   }
 
   /**
-   * Test {@link ConstantValueFactory#visitIntegerConstant(Clazz, IntegerConstant)}.
-   *
-   * <p>Method under test: {@link ConstantValueFactory#visitIntegerConstant(Clazz, IntegerConstant)}
+   * Method under test:
+   * {@link ConstantValueFactory#visitIntegerConstant(Clazz, IntegerConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantValueFactory.visitIntegerConstant(Clazz, IntegerConstant)"})
   public void testVisitIntegerConstant() {
     // Arrange
-    ConstantValueFactory constantValueFactory =
-        new ConstantValueFactory(new ParticularReferenceValueFactory());
+    ConstantValueFactory constantValueFactory = new ConstantValueFactory(new ParticularReferenceValueFactory());
     LibraryClass clazz = new LibraryClass();
 
     // Act
@@ -105,17 +69,13 @@ public class ConstantValueFactoryDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantValueFactory#visitLongConstant(Clazz, LongConstant)}.
-   *
-   * <p>Method under test: {@link ConstantValueFactory#visitLongConstant(Clazz, LongConstant)}
+   * Method under test:
+   * {@link ConstantValueFactory#visitLongConstant(Clazz, LongConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantValueFactory.visitLongConstant(Clazz, LongConstant)"})
   public void testVisitLongConstant() {
     // Arrange
-    ConstantValueFactory constantValueFactory =
-        new ConstantValueFactory(new ParticularReferenceValueFactory());
+    ConstantValueFactory constantValueFactory = new ConstantValueFactory(new ParticularReferenceValueFactory());
     LibraryClass clazz = new LibraryClass();
 
     // Act
@@ -130,17 +90,13 @@ public class ConstantValueFactoryDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantValueFactory#visitFloatConstant(Clazz, FloatConstant)}.
-   *
-   * <p>Method under test: {@link ConstantValueFactory#visitFloatConstant(Clazz, FloatConstant)}
+   * Method under test:
+   * {@link ConstantValueFactory#visitFloatConstant(Clazz, FloatConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantValueFactory.visitFloatConstant(Clazz, FloatConstant)"})
   public void testVisitFloatConstant() {
     // Arrange
-    ConstantValueFactory constantValueFactory =
-        new ConstantValueFactory(new ParticularReferenceValueFactory());
+    ConstantValueFactory constantValueFactory = new ConstantValueFactory(new ParticularReferenceValueFactory());
     LibraryClass clazz = new LibraryClass();
 
     // Act
@@ -155,17 +111,13 @@ public class ConstantValueFactoryDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantValueFactory#visitDoubleConstant(Clazz, DoubleConstant)}.
-   *
-   * <p>Method under test: {@link ConstantValueFactory#visitDoubleConstant(Clazz, DoubleConstant)}
+   * Method under test:
+   * {@link ConstantValueFactory#visitDoubleConstant(Clazz, DoubleConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantValueFactory.visitDoubleConstant(Clazz, DoubleConstant)"})
   public void testVisitDoubleConstant() {
     // Arrange
-    ConstantValueFactory constantValueFactory =
-        new ConstantValueFactory(new ParticularReferenceValueFactory());
+    ConstantValueFactory constantValueFactory = new ConstantValueFactory(new ParticularReferenceValueFactory());
     LibraryClass clazz = new LibraryClass();
 
     // Act
@@ -180,20 +132,13 @@ public class ConstantValueFactoryDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantValueFactory#visitPrimitiveArrayConstant(Clazz, PrimitiveArrayConstant)}.
-   *
-   * <p>Method under test: {@link ConstantValueFactory#visitPrimitiveArrayConstant(Clazz,
-   * PrimitiveArrayConstant)}
+   * Method under test:
+   * {@link ConstantValueFactory#visitPrimitiveArrayConstant(Clazz, PrimitiveArrayConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantValueFactory.visitPrimitiveArrayConstant(Clazz, PrimitiveArrayConstant)"
-  })
   public void testVisitPrimitiveArrayConstant() {
     // Arrange
-    ConstantValueFactory constantValueFactory =
-        new ConstantValueFactory(new ParticularReferenceValueFactory());
+    ConstantValueFactory constantValueFactory = new ConstantValueFactory(new ParticularReferenceValueFactory());
     LibraryClass clazz = new LibraryClass();
 
     // Act
@@ -207,27 +152,22 @@ public class ConstantValueFactoryDiffblueTest {
     assertNull(value2.getPreciseValue());
     assertNull(((IdentifiedReferenceValue) value).getReferencedClass());
     assertNull(value2.getModeledOrNullValue());
+    assertEquals(1, ((IdentifiedReferenceValue) value).isNotNull());
     assertFalse(((IdentifiedReferenceValue) value).mayBeExtension());
+    assertFalse(value.isCategory2());
     assertFalse(value.isParticular());
     assertTrue(value.isSpecific());
     assertEquals(InitializationFinder.NONE, ((IdentifiedReferenceValue) value).isNull());
   }
 
   /**
-   * Test {@link ConstantValueFactory#visitPrimitiveArrayConstant(Clazz, PrimitiveArrayConstant)}.
-   *
-   * <p>Method under test: {@link ConstantValueFactory#visitPrimitiveArrayConstant(Clazz,
-   * PrimitiveArrayConstant)}
+   * Method under test:
+   * {@link ConstantValueFactory#visitPrimitiveArrayConstant(Clazz, PrimitiveArrayConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantValueFactory.visitPrimitiveArrayConstant(Clazz, PrimitiveArrayConstant)"
-  })
   public void testVisitPrimitiveArrayConstant2() {
     // Arrange
-    ConstantValueFactory constantValueFactory =
-        new ConstantValueFactory(new DetailedArrayValueFactory());
+    ConstantValueFactory constantValueFactory = new ConstantValueFactory(new DetailedArrayValueFactory());
     LibraryClass clazz = new LibraryClass();
 
     // Act
@@ -239,30 +179,28 @@ public class ConstantValueFactoryDiffblueTest {
     AnalyzedObject value2 = ((DetailedArrayReferenceValue) value).getValue();
     Model modeledOrNullValue = value2.getModeledOrNullValue();
     assertTrue(modeledOrNullValue instanceof ArrayModel);
+    assertEquals("[\u0000", ((DetailedArrayReferenceValue) value).getType());
     assertEquals("[\u0000", modeledOrNullValue.getType());
+    assertNull(((DetailedArrayReferenceValue) value).getReferencedClass());
     assertEquals(0, ((ArrayModel) modeledOrNullValue).getValues().length);
+    assertEquals(1, ((DetailedArrayReferenceValue) value).isNotNull());
+    assertFalse(((DetailedArrayReferenceValue) value).mayBeExtension());
+    assertFalse(value.isCategory2());
     assertTrue(value.isParticular());
     assertTrue(value.isSpecific());
+    assertEquals(InitializationFinder.NONE, ((DetailedArrayReferenceValue) value).isNull());
     assertSame(modeledOrNullValue, value2.getModeledValue());
   }
 
   /**
-   * Test {@link ConstantValueFactory#visitPrimitiveArrayConstant(Clazz, PrimitiveArrayConstant)}.
-   *
-   * <p>Method under test: {@link ConstantValueFactory#visitPrimitiveArrayConstant(Clazz,
-   * PrimitiveArrayConstant)}
+   * Method under test:
+   * {@link ConstantValueFactory#visitPrimitiveArrayConstant(Clazz, PrimitiveArrayConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantValueFactory.visitPrimitiveArrayConstant(Clazz, PrimitiveArrayConstant)"
-  })
   public void testVisitPrimitiveArrayConstant3() {
     // Arrange
-    ConstantValueFactory constantValueFactory =
-        new ConstantValueFactory(
-            new MultiTypedReferenceValueFactory(
-                true, KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool));
+    ConstantValueFactory constantValueFactory = new ConstantValueFactory(
+        new MultiTypedReferenceValueFactory(true, KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool));
     LibraryClass clazz = new LibraryClass();
 
     // Act
@@ -274,35 +212,34 @@ public class ConstantValueFactoryDiffblueTest {
     assertEquals("[\u0000", ((MultiTypedReferenceValue) value).getType());
     TypedReferenceValue generalizedType = ((MultiTypedReferenceValue) value).getGeneralizedType();
     assertEquals("[\u0000", generalizedType.getType());
+    AnalyzedObject value2 = ((MultiTypedReferenceValue) value).getValue();
+    assertNull(value2.getPreciseValue());
     assertNull(((MultiTypedReferenceValue) value).getReferencedClass());
     assertNull(generalizedType.getReferencedClass());
+    assertNull(value2.getModeledOrNullValue());
     assertEquals(1, ((MultiTypedReferenceValue) value).getPotentialTypes().size());
     assertEquals(1, generalizedType.isNotNull());
+    assertEquals(1, ((MultiTypedReferenceValue) value).isNotNull());
     assertFalse(generalizedType.isCategory2());
     assertFalse(generalizedType.isParticular());
     assertFalse(generalizedType.mayBeExtension());
+    assertFalse(value.isCategory2());
     assertFalse(value.isParticular());
     assertFalse(generalizedType.isSpecific());
     assertFalse(value.isSpecific());
     assertFalse(((MultiTypedReferenceValue) value).mayBeUnknown);
     assertEquals(InitializationFinder.NONE, generalizedType.isNull());
+    assertSame(value2, generalizedType.getValue());
   }
 
   /**
-   * Test {@link ConstantValueFactory#visitMethodHandleConstant(Clazz, MethodHandleConstant)}.
-   *
-   * <p>Method under test: {@link ConstantValueFactory#visitMethodHandleConstant(Clazz,
-   * MethodHandleConstant)}
+   * Method under test:
+   * {@link ConstantValueFactory#visitMethodHandleConstant(Clazz, MethodHandleConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantValueFactory.visitMethodHandleConstant(Clazz, MethodHandleConstant)"
-  })
   public void testVisitMethodHandleConstant() {
     // Arrange
-    ConstantValueFactory constantValueFactory =
-        new ConstantValueFactory(new ParticularReferenceValueFactory());
+    ConstantValueFactory constantValueFactory = new ConstantValueFactory(new ParticularReferenceValueFactory());
     LibraryClass clazz = new LibraryClass();
 
     // Act
@@ -312,29 +249,26 @@ public class ConstantValueFactoryDiffblueTest {
     Value value = constantValueFactory.value;
     assertTrue(value instanceof IdentifiedReferenceValue);
     assertEquals("Ljava/lang/invoke/MethodHandle;", ((IdentifiedReferenceValue) value).getType());
+    AnalyzedObject value2 = ((IdentifiedReferenceValue) value).getValue();
+    assertNull(value2.getPreciseValue());
     assertNull(((IdentifiedReferenceValue) value).getReferencedClass());
+    assertNull(value2.getModeledOrNullValue());
     assertEquals(1, ((IdentifiedReferenceValue) value).isNotNull());
     assertFalse(((IdentifiedReferenceValue) value).mayBeExtension());
+    assertFalse(value.isCategory2());
     assertFalse(value.isParticular());
     assertTrue(value.isSpecific());
     assertEquals(InitializationFinder.NONE, ((IdentifiedReferenceValue) value).isNull());
   }
 
   /**
-   * Test {@link ConstantValueFactory#visitMethodHandleConstant(Clazz, MethodHandleConstant)}.
-   *
-   * <p>Method under test: {@link ConstantValueFactory#visitMethodHandleConstant(Clazz,
-   * MethodHandleConstant)}
+   * Method under test:
+   * {@link ConstantValueFactory#visitMethodHandleConstant(Clazz, MethodHandleConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantValueFactory.visitMethodHandleConstant(Clazz, MethodHandleConstant)"
-  })
   public void testVisitMethodHandleConstant2() {
     // Arrange
-    ConstantValueFactory constantValueFactory =
-        new ConstantValueFactory(new PrimitiveTypedReferenceValueFactory());
+    ConstantValueFactory constantValueFactory = new ConstantValueFactory(new PrimitiveTypedReferenceValueFactory());
     LibraryClass clazz = new LibraryClass();
 
     // Act
@@ -344,28 +278,25 @@ public class ConstantValueFactoryDiffblueTest {
     Value value = constantValueFactory.value;
     assertTrue(value instanceof UnknownReferenceValue);
     assertEquals("Ljava/lang/Object;", ((UnknownReferenceValue) value).getType());
+    AnalyzedObject value2 = ((UnknownReferenceValue) value).getValue();
+    assertNull(value2.getPreciseValue());
     assertNull(((UnknownReferenceValue) value).getReferencedClass());
+    assertNull(value2.getModeledOrNullValue());
     assertEquals(0, ((UnknownReferenceValue) value).isNotNull());
     assertEquals(0, ((UnknownReferenceValue) value).isNull());
+    assertFalse(value.isCategory2());
     assertFalse(value.isParticular());
     assertFalse(value.isSpecific());
   }
 
   /**
-   * Test {@link ConstantValueFactory#visitMethodTypeConstant(Clazz, MethodTypeConstant)}.
-   *
-   * <p>Method under test: {@link ConstantValueFactory#visitMethodTypeConstant(Clazz,
-   * MethodTypeConstant)}
+   * Method under test:
+   * {@link ConstantValueFactory#visitMethodTypeConstant(Clazz, MethodTypeConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantValueFactory.visitMethodTypeConstant(Clazz, MethodTypeConstant)"
-  })
   public void testVisitMethodTypeConstant() {
     // Arrange
-    ConstantValueFactory constantValueFactory =
-        new ConstantValueFactory(new ParticularReferenceValueFactory());
+    ConstantValueFactory constantValueFactory = new ConstantValueFactory(new ParticularReferenceValueFactory());
     LibraryClass clazz = new LibraryClass();
 
     // Act
@@ -375,29 +306,26 @@ public class ConstantValueFactoryDiffblueTest {
     Value value = constantValueFactory.value;
     assertTrue(value instanceof IdentifiedReferenceValue);
     assertEquals("Ljava/lang/invoke/MethodType;", ((IdentifiedReferenceValue) value).getType());
+    AnalyzedObject value2 = ((IdentifiedReferenceValue) value).getValue();
+    assertNull(value2.getPreciseValue());
     assertNull(((IdentifiedReferenceValue) value).getReferencedClass());
+    assertNull(value2.getModeledOrNullValue());
     assertEquals(1, ((IdentifiedReferenceValue) value).isNotNull());
     assertFalse(((IdentifiedReferenceValue) value).mayBeExtension());
+    assertFalse(value.isCategory2());
     assertFalse(value.isParticular());
     assertTrue(value.isSpecific());
     assertEquals(InitializationFinder.NONE, ((IdentifiedReferenceValue) value).isNull());
   }
 
   /**
-   * Test {@link ConstantValueFactory#visitMethodTypeConstant(Clazz, MethodTypeConstant)}.
-   *
-   * <p>Method under test: {@link ConstantValueFactory#visitMethodTypeConstant(Clazz,
-   * MethodTypeConstant)}
+   * Method under test:
+   * {@link ConstantValueFactory#visitMethodTypeConstant(Clazz, MethodTypeConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantValueFactory.visitMethodTypeConstant(Clazz, MethodTypeConstant)"
-  })
   public void testVisitMethodTypeConstant2() {
     // Arrange
-    ConstantValueFactory constantValueFactory =
-        new ConstantValueFactory(new PrimitiveTypedReferenceValueFactory());
+    ConstantValueFactory constantValueFactory = new ConstantValueFactory(new PrimitiveTypedReferenceValueFactory());
     LibraryClass clazz = new LibraryClass();
 
     // Act
@@ -407,10 +335,28 @@ public class ConstantValueFactoryDiffblueTest {
     Value value = constantValueFactory.value;
     assertTrue(value instanceof UnknownReferenceValue);
     assertEquals("Ljava/lang/Object;", ((UnknownReferenceValue) value).getType());
+    AnalyzedObject value2 = ((UnknownReferenceValue) value).getValue();
+    assertNull(value2.getPreciseValue());
     assertNull(((UnknownReferenceValue) value).getReferencedClass());
+    assertNull(value2.getModeledOrNullValue());
     assertEquals(0, ((UnknownReferenceValue) value).isNotNull());
     assertEquals(0, ((UnknownReferenceValue) value).isNull());
+    assertFalse(value.isCategory2());
     assertFalse(value.isParticular());
     assertFalse(value.isSpecific());
+  }
+
+  /**
+   * Method under test:
+   * {@link ConstantValueFactory#ConstantValueFactory(ValueFactory)}
+   */
+  @Test
+  public void testNewConstantValueFactory() {
+    // Arrange and Act
+    ConstantValueFactory actualConstantValueFactory = new ConstantValueFactory(new ParticularReferenceValueFactory());
+
+    // Assert
+    assertTrue(actualConstantValueFactory.valueFactory instanceof ParticularReferenceValueFactory);
+    assertNull(actualConstantValueFactory.value);
   }
 }

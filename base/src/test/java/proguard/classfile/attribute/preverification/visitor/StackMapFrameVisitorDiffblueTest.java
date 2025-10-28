@@ -2,11 +2,7 @@ package proguard.classfile.attribute.preverification.visitor;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryMethod;
@@ -21,23 +17,11 @@ import proguard.classfile.visitor.ProcessingInfoSetter;
 
 public class StackMapFrameVisitorDiffblueTest {
   /**
-   * Test {@link StackMapFrameVisitor#visitAnyStackMapFrame(Clazz, Method, CodeAttribute, int,
-   * StackMapFrame)}.
-   *
-   * <ul>
-   *   <li>When {@link FullFrame#FullFrame()}.
-   *   <li>Then throw {@link UnsupportedOperationException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link StackMapFrameVisitor#visitAnyStackMapFrame(Clazz, Method,
-   * CodeAttribute, int, StackMapFrame)}
+   * Method under test:
+   * {@link StackMapFrameVisitor#visitAnyStackMapFrame(Clazz, Method, CodeAttribute, int, StackMapFrame)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void StackMapFrameVisitor.visitAnyStackMapFrame(Clazz, Method, CodeAttribute, int, StackMapFrame)"
-  })
-  public void testVisitAnyStackMapFrame_whenFullFrame_thenThrowUnsupportedOperationException() {
+  public void testVisitAnyStackMapFrame() {
     // Arrange
     ClassCleaner classCleaner = new ClassCleaner();
     LibraryClass clazz = new LibraryClass();
@@ -46,29 +30,16 @@ public class StackMapFrameVisitorDiffblueTest {
     CodeAttribute codeAttribute = new CodeAttribute(1);
 
     // Act and Assert
-    assertThrows(
-        UnsupportedOperationException.class,
+    assertThrows(UnsupportedOperationException.class,
         () -> classCleaner.visitAnyStackMapFrame(clazz, method, codeAttribute, 2, new FullFrame()));
   }
 
   /**
-   * Test {@link StackMapFrameVisitor#visitSameOneFrame(Clazz, Method, CodeAttribute, int,
-   * SameOneFrame)}.
-   *
-   * <ul>
-   *   <li>Then {@link SameOneFrame#SameOneFrame(int)} with tag is one ProcessingInfo is {@code
-   *       Processing Info}.
-   * </ul>
-   *
-   * <p>Method under test: {@link StackMapFrameVisitor#visitSameOneFrame(Clazz, Method,
-   * CodeAttribute, int, SameOneFrame)}
+   * Method under test:
+   * {@link StackMapFrameVisitor#visitSameOneFrame(Clazz, Method, CodeAttribute, int, SameOneFrame)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void StackMapFrameVisitor.visitSameOneFrame(Clazz, Method, CodeAttribute, int, SameOneFrame)"
-  })
-  public void testVisitSameOneFrame_thenSameOneFrameWithTagIsOneProcessingInfoIsProcessingInfo() {
+  public void testVisitSameOneFrame() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
     LibraryClass clazz = new LibraryClass();
@@ -85,17 +56,10 @@ public class StackMapFrameVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link StackMapFrameVisitor#visitMoreZeroFrame(Clazz, Method, CodeAttribute, int,
-   * MoreZeroFrame)}.
-   *
-   * <p>Method under test: {@link StackMapFrameVisitor#visitMoreZeroFrame(Clazz, Method,
-   * CodeAttribute, int, MoreZeroFrame)}
+   * Method under test:
+   * {@link StackMapFrameVisitor#visitMoreZeroFrame(Clazz, Method, CodeAttribute, int, MoreZeroFrame)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void StackMapFrameVisitor.visitMoreZeroFrame(Clazz, Method, CodeAttribute, int, MoreZeroFrame)"
-  })
   public void testVisitMoreZeroFrame() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
@@ -113,22 +77,11 @@ public class StackMapFrameVisitorDiffblueTest {
   }
 
   /**
-   * Test {@link StackMapFrameVisitor#visitFullFrame(Clazz, Method, CodeAttribute, int, FullFrame)}.
-   *
-   * <ul>
-   *   <li>When {@link FullFrame#FullFrame()}.
-   *   <li>Then {@link FullFrame#FullFrame()} ProcessingInfo is {@code Processing Info}.
-   * </ul>
-   *
-   * <p>Method under test: {@link StackMapFrameVisitor#visitFullFrame(Clazz, Method, CodeAttribute,
-   * int, FullFrame)}
+   * Method under test:
+   * {@link StackMapFrameVisitor#visitFullFrame(Clazz, Method, CodeAttribute, int, FullFrame)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void StackMapFrameVisitor.visitFullFrame(Clazz, Method, CodeAttribute, int, FullFrame)"
-  })
-  public void testVisitFullFrame_whenFullFrame_thenFullFrameProcessingInfoIsProcessingInfo() {
+  public void testVisitFullFrame() {
     // Arrange
     ProcessingInfoSetter processingInfoSetter = new ProcessingInfoSetter("Processing Info");
     LibraryClass clazz = new LibraryClass();

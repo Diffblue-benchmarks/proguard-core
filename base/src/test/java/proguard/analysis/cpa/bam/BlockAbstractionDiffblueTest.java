@@ -2,12 +2,8 @@ package proguard.analysis.cpa.bam;
 
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.Set;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.analysis.cpa.defaults.BreadthFirstWaitlist;
 import proguard.analysis.cpa.defaults.DefaultReachedSet;
 import proguard.analysis.cpa.interfaces.ReachedSet;
@@ -15,10 +11,7 @@ import proguard.analysis.cpa.interfaces.Waitlist;
 
 public class BlockAbstractionDiffblueTest {
   /**
-   * Test getters and setters.
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
    *   <li>{@link BlockAbstraction#BlockAbstraction(ReachedSet, Waitlist)}
    *   <li>{@link BlockAbstraction#getReachedSet()}
@@ -26,12 +19,6 @@ public class BlockAbstractionDiffblueTest {
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void BlockAbstraction.<init>(ReachedSet, Waitlist)",
-    "ReachedSet BlockAbstraction.getReachedSet()",
-    "Waitlist BlockAbstraction.getWaitlist()"
-  })
   public void testGettersAndSetters() {
     // Arrange
     DefaultReachedSet reachedSet = new DefaultReachedSet();

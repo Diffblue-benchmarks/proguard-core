@@ -2,24 +2,16 @@ package proguard.classfile.kotlin;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.classfile.kotlin.flags.KotlinConstructorFlags;
 import proguard.classfile.kotlin.flags.KotlinVisibilityFlags;
 
 public class KotlinConstructorMetadataDiffblueTest {
   /**
-   * Test {@link KotlinConstructorMetadata#KotlinConstructorMetadata(KotlinConstructorFlags)}.
-   *
-   * <p>Method under test: {@link
-   * KotlinConstructorMetadata#KotlinConstructorMetadata(KotlinConstructorFlags)}
+   * Method under test:
+   * {@link KotlinConstructorMetadata#KotlinConstructorMetadata(KotlinConstructorFlags)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void KotlinConstructorMetadata.<init>(KotlinConstructorFlags)"})
   public void testNewKotlinConstructorMetadata() {
     // Arrange
     KotlinVisibilityFlags visibility = new KotlinVisibilityFlags();
@@ -31,8 +23,8 @@ public class KotlinConstructorMetadataDiffblueTest {
     visibility.isPublic = true;
 
     // Act
-    KotlinConstructorMetadata actualKotlinConstructorMetadata =
-        new KotlinConstructorMetadata(new KotlinConstructorFlags(visibility));
+    KotlinConstructorMetadata actualKotlinConstructorMetadata = new KotlinConstructorMetadata(
+        new KotlinConstructorFlags(visibility));
 
     // Assert
     assertNull(actualKotlinConstructorMetadata.getProcessingInfo());
@@ -40,18 +32,10 @@ public class KotlinConstructorMetadataDiffblueTest {
   }
 
   /**
-   * Test {@link KotlinConstructorMetadata#toString()}.
-   *
-   * <ul>
-   *   <li>Then return {@code Kotlin constructor}.
-   * </ul>
-   *
-   * <p>Method under test: {@link KotlinConstructorMetadata#toString()}
+   * Method under test: {@link KotlinConstructorMetadata#toString()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"java.lang.String KotlinConstructorMetadata.toString()"})
-  public void testToString_thenReturnKotlinConstructor() {
+  public void testToString() {
     // Arrange
     KotlinVisibilityFlags visibility = new KotlinVisibilityFlags();
     visibility.isInternal = true;
@@ -62,24 +46,15 @@ public class KotlinConstructorMetadataDiffblueTest {
     visibility.isPublic = true;
 
     // Act and Assert
-    assertEquals(
-        "Kotlin constructor",
+    assertEquals("Kotlin constructor",
         (new KotlinConstructorMetadata(new KotlinConstructorFlags(visibility))).toString());
   }
 
   /**
-   * Test {@link KotlinConstructorMetadata#toString()}.
-   *
-   * <ul>
-   *   <li>Then return {@code Kotlin secondary constructor}.
-   * </ul>
-   *
-   * <p>Method under test: {@link KotlinConstructorMetadata#toString()}
+   * Method under test: {@link KotlinConstructorMetadata#toString()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"java.lang.String KotlinConstructorMetadata.toString()"})
-  public void testToString_thenReturnKotlinSecondaryConstructor() {
+  public void testToString2() {
     // Arrange
     KotlinVisibilityFlags visibility = new KotlinVisibilityFlags();
     visibility.isInternal = true;

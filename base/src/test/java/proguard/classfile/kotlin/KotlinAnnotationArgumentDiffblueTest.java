@@ -5,57 +5,25 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
-import proguard.classfile.kotlin.KotlinAnnotationArgument.AnnotationValue;
-import proguard.classfile.kotlin.KotlinAnnotationArgument.ArrayValue;
-import proguard.classfile.kotlin.KotlinAnnotationArgument.BooleanValue;
-import proguard.classfile.kotlin.KotlinAnnotationArgument.ByteValue;
-import proguard.classfile.kotlin.KotlinAnnotationArgument.CharValue;
-import proguard.classfile.kotlin.KotlinAnnotationArgument.ClassValue;
-import proguard.classfile.kotlin.KotlinAnnotationArgument.DoubleValue;
-import proguard.classfile.kotlin.KotlinAnnotationArgument.EnumValue;
-import proguard.classfile.kotlin.KotlinAnnotationArgument.FloatValue;
-import proguard.classfile.kotlin.KotlinAnnotationArgument.IntValue;
-import proguard.classfile.kotlin.KotlinAnnotationArgument.LiteralValue;
-import proguard.classfile.kotlin.KotlinAnnotationArgument.LongValue;
-import proguard.classfile.kotlin.KotlinAnnotationArgument.ShortValue;
-import proguard.classfile.kotlin.KotlinAnnotationArgument.StringValue;
-import proguard.classfile.kotlin.KotlinAnnotationArgument.UByteValue;
-import proguard.classfile.kotlin.KotlinAnnotationArgument.UIntValue;
-import proguard.classfile.kotlin.KotlinAnnotationArgument.ULongValue;
-import proguard.classfile.kotlin.KotlinAnnotationArgument.UShortValue;
-import proguard.classfile.kotlin.KotlinAnnotationArgument.Value;
 
 public class KotlinAnnotationArgumentDiffblueTest {
   /**
-   * Test AnnotationValue {@link AnnotationValue#equals(Object)}, and {@link
-   * AnnotationValue#hashCode()}.
-   *
+   * Methods under test:
    * <ul>
-   *   <li>When other is equal.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link AnnotationValue#equals(Object)}
-   *   <li>{@link AnnotationValue#hashCode()}
+   *   <li>{@link KotlinAnnotationArgument.AnnotationValue#equals(Object)}
+   *   <li>{@link KotlinAnnotationArgument.AnnotationValue#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean AnnotationValue.equals(Object)", "int AnnotationValue.hashCode()"})
   public void testAnnotationValueEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
-    AnnotationValue annotationValue = new AnnotationValue(new KotlinAnnotation("Class Name"));
-    AnnotationValue annotationValue2 = new AnnotationValue(new KotlinAnnotation("Class Name"));
+    KotlinAnnotationArgument.AnnotationValue annotationValue = new KotlinAnnotationArgument.AnnotationValue(
+        new KotlinAnnotation("Class Name"));
+    KotlinAnnotationArgument.AnnotationValue annotationValue2 = new KotlinAnnotationArgument.AnnotationValue(
+        new KotlinAnnotation("Class Name"));
 
     // Act and Assert
     assertEquals(annotationValue, annotationValue2);
@@ -64,27 +32,17 @@ public class KotlinAnnotationArgumentDiffblueTest {
   }
 
   /**
-   * Test AnnotationValue {@link AnnotationValue#equals(Object)}, and {@link
-   * AnnotationValue#hashCode()}.
-   *
+   * Methods under test:
    * <ul>
-   *   <li>When other is same.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link AnnotationValue#equals(Object)}
-   *   <li>{@link AnnotationValue#hashCode()}
+   *   <li>{@link KotlinAnnotationArgument.AnnotationValue#equals(Object)}
+   *   <li>{@link KotlinAnnotationArgument.AnnotationValue#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean AnnotationValue.equals(Object)", "int AnnotationValue.hashCode()"})
   public void testAnnotationValueEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
-    AnnotationValue annotationValue = new AnnotationValue(new KotlinAnnotation("Class Name"));
+    KotlinAnnotationArgument.AnnotationValue annotationValue = new KotlinAnnotationArgument.AnnotationValue(
+        new KotlinAnnotation("Class Name"));
 
     // Act and Assert
     assertEquals(annotationValue, annotationValue);
@@ -93,84 +51,53 @@ public class KotlinAnnotationArgumentDiffblueTest {
   }
 
   /**
-   * Test AnnotationValue {@link AnnotationValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link AnnotationValue#equals(Object)}
+   * Method under test:
+   * {@link KotlinAnnotationArgument.AnnotationValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean AnnotationValue.equals(Object)", "int AnnotationValue.hashCode()"})
   public void testAnnotationValueEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
-    AnnotationValue annotationValue =
-        new AnnotationValue(new KotlinAnnotation("proguard.classfile.kotlin.KotlinAnnotation"));
+    KotlinAnnotationArgument.AnnotationValue annotationValue = new KotlinAnnotationArgument.AnnotationValue(
+        new KotlinAnnotation("proguard.classfile.kotlin.KotlinAnnotation"));
 
     // Act and Assert
-    assertNotEquals(annotationValue, new AnnotationValue(new KotlinAnnotation("Class Name")));
+    assertNotEquals(annotationValue, new KotlinAnnotationArgument.AnnotationValue(new KotlinAnnotation("Class Name")));
   }
 
   /**
-   * Test AnnotationValue {@link AnnotationValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is {@code null}.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link AnnotationValue#equals(Object)}
+   * Method under test:
+   * {@link KotlinAnnotationArgument.AnnotationValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean AnnotationValue.equals(Object)", "int AnnotationValue.hashCode()"})
   public void testAnnotationValueEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
-    assertNotEquals(new AnnotationValue(new KotlinAnnotation("Class Name")), null);
+    assertNotEquals(new KotlinAnnotationArgument.AnnotationValue(new KotlinAnnotation("Class Name")), null);
   }
 
   /**
-   * Test AnnotationValue {@link AnnotationValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is wrong type.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link AnnotationValue#equals(Object)}
+   * Method under test:
+   * {@link KotlinAnnotationArgument.AnnotationValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean AnnotationValue.equals(Object)", "int AnnotationValue.hashCode()"})
   public void testAnnotationValueEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
-    assertNotEquals(
-        new AnnotationValue(new KotlinAnnotation("Class Name")),
+    assertNotEquals(new KotlinAnnotationArgument.AnnotationValue(new KotlinAnnotation("Class Name")),
         "Different type to AnnotationValue");
   }
 
   /**
-   * Test AnnotationValue getters and setters.
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
-   *   <li>{@link AnnotationValue#AnnotationValue(KotlinAnnotation)}
-   *   <li>{@link AnnotationValue#toString()}
+   *   <li>
+   * {@link KotlinAnnotationArgument.AnnotationValue#AnnotationValue(KotlinAnnotation)}
+   *   <li>{@link KotlinAnnotationArgument.AnnotationValue#toString()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void AnnotationValue.<init>(KotlinAnnotation)",
-    "String AnnotationValue.toString()"
-  })
   public void testAnnotationValueGettersAndSetters() {
     // Arrange and Act
-    AnnotationValue actualAnnotationValue = new AnnotationValue(new KotlinAnnotation("Class Name"));
+    KotlinAnnotationArgument.AnnotationValue actualAnnotationValue = new KotlinAnnotationArgument.AnnotationValue(
+        new KotlinAnnotation("Class Name"));
 
     // Assert
     assertEquals("Class Name()", actualAnnotationValue.toString());
@@ -181,27 +108,17 @@ public class KotlinAnnotationArgumentDiffblueTest {
   }
 
   /**
-   * Test ArrayValue {@link ArrayValue#equals(Object)}, and {@link ArrayValue#hashCode()}.
-   *
+   * Methods under test:
    * <ul>
-   *   <li>When other is equal.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link ArrayValue#equals(Object)}
-   *   <li>{@link ArrayValue#hashCode()}
+   *   <li>{@link KotlinAnnotationArgument.ArrayValue#equals(Object)}
+   *   <li>{@link KotlinAnnotationArgument.ArrayValue#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean ArrayValue.equals(Object)", "int ArrayValue.hashCode()"})
   public void testArrayValueEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
-    ArrayValue arrayValue = new ArrayValue(new ArrayList<>());
-    ArrayValue arrayValue2 = new ArrayValue(new ArrayList<>());
+    KotlinAnnotationArgument.ArrayValue arrayValue = new KotlinAnnotationArgument.ArrayValue(new ArrayList<>());
+    KotlinAnnotationArgument.ArrayValue arrayValue2 = new KotlinAnnotationArgument.ArrayValue(new ArrayList<>());
 
     // Act and Assert
     assertEquals(arrayValue, arrayValue2);
@@ -210,26 +127,16 @@ public class KotlinAnnotationArgumentDiffblueTest {
   }
 
   /**
-   * Test ArrayValue {@link ArrayValue#equals(Object)}, and {@link ArrayValue#hashCode()}.
-   *
+   * Methods under test:
    * <ul>
-   *   <li>When other is same.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link ArrayValue#equals(Object)}
-   *   <li>{@link ArrayValue#hashCode()}
+   *   <li>{@link KotlinAnnotationArgument.ArrayValue#equals(Object)}
+   *   <li>{@link KotlinAnnotationArgument.ArrayValue#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean ArrayValue.equals(Object)", "int ArrayValue.hashCode()"})
   public void testArrayValueEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
-    ArrayValue arrayValue = new ArrayValue(new ArrayList<>());
+    KotlinAnnotationArgument.ArrayValue arrayValue = new KotlinAnnotationArgument.ArrayValue(new ArrayList<>());
 
     // Act and Assert
     assertEquals(arrayValue, arrayValue);
@@ -238,106 +145,65 @@ public class KotlinAnnotationArgumentDiffblueTest {
   }
 
   /**
-   * Test ArrayValue {@link ArrayValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link ArrayValue#equals(Object)}
+   * Method under test: {@link KotlinAnnotationArgument.ArrayValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean ArrayValue.equals(Object)", "int ArrayValue.hashCode()"})
   public void testArrayValueEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
-    ArrayList<Value> elements = new ArrayList<>();
-    elements.add(new BooleanValue(true));
-    ArrayValue arrayValue = new ArrayValue(elements);
+    ArrayList<KotlinAnnotationArgument.Value> elements = new ArrayList<>();
+    elements.add(new KotlinAnnotationArgument.BooleanValue(true));
+    KotlinAnnotationArgument.ArrayValue arrayValue = new KotlinAnnotationArgument.ArrayValue(elements);
 
     // Act and Assert
-    assertNotEquals(arrayValue, new ArrayValue(new ArrayList<>()));
+    assertNotEquals(arrayValue, new KotlinAnnotationArgument.ArrayValue(new ArrayList<>()));
   }
 
   /**
-   * Test ArrayValue {@link ArrayValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link ArrayValue#equals(Object)}
+   * Method under test: {@link KotlinAnnotationArgument.ArrayValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean ArrayValue.equals(Object)", "int ArrayValue.hashCode()"})
   public void testArrayValueEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
-    ArrayList<Value> elements = new ArrayList<>();
-    elements.add(new ArrayValue(new ArrayList<>()));
-    ArrayValue arrayValue = new ArrayValue(elements);
+    ArrayList<KotlinAnnotationArgument.Value> elements = new ArrayList<>();
+    elements.add(new KotlinAnnotationArgument.ArrayValue(new ArrayList<>()));
+    KotlinAnnotationArgument.ArrayValue arrayValue = new KotlinAnnotationArgument.ArrayValue(elements);
 
-    ArrayList<Value> elements2 = new ArrayList<>();
-    elements2.add(new BooleanValue(true));
+    ArrayList<KotlinAnnotationArgument.Value> elements2 = new ArrayList<>();
+    elements2.add(new KotlinAnnotationArgument.BooleanValue(true));
 
     // Act and Assert
-    assertNotEquals(arrayValue, new ArrayValue(elements2));
+    assertNotEquals(arrayValue, new KotlinAnnotationArgument.ArrayValue(elements2));
   }
 
   /**
-   * Test ArrayValue {@link ArrayValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is {@code null}.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link ArrayValue#equals(Object)}
+   * Method under test: {@link KotlinAnnotationArgument.ArrayValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean ArrayValue.equals(Object)", "int ArrayValue.hashCode()"})
   public void testArrayValueEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
-    assertNotEquals(new ArrayValue(new ArrayList<>()), null);
+    assertNotEquals(new KotlinAnnotationArgument.ArrayValue(new ArrayList<>()), null);
   }
 
   /**
-   * Test ArrayValue {@link ArrayValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is wrong type.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link ArrayValue#equals(Object)}
+   * Method under test: {@link KotlinAnnotationArgument.ArrayValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean ArrayValue.equals(Object)", "int ArrayValue.hashCode()"})
   public void testArrayValueEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
-    assertNotEquals(new ArrayValue(new ArrayList<>()), "Different type to ArrayValue");
+    assertNotEquals(new KotlinAnnotationArgument.ArrayValue(new ArrayList<>()), "Different type to ArrayValue");
   }
 
   /**
-   * Test ArrayValue getters and setters.
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
-   *   <li>{@link ArrayValue#ArrayValue(List)}
-   *   <li>{@link ArrayValue#toString()}
+   *   <li>{@link KotlinAnnotationArgument.ArrayValue#ArrayValue(List)}
+   *   <li>{@link KotlinAnnotationArgument.ArrayValue#toString()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ArrayValue.<init>(List)", "String ArrayValue.toString()"})
   public void testArrayValueGettersAndSetters() {
     // Arrange and Act
-    ArrayValue actualArrayValue = new ArrayValue(new ArrayList<>());
+    KotlinAnnotationArgument.ArrayValue actualArrayValue = new KotlinAnnotationArgument.ArrayValue(new ArrayList<>());
 
     // Assert
     assertEquals("[]", actualArrayValue.toString());
@@ -345,66 +211,45 @@ public class KotlinAnnotationArgumentDiffblueTest {
   }
 
   /**
-   * Test BooleanValue {@link BooleanValue#BooleanValue(boolean)}.
-   *
-   * <p>Method under test: {@link BooleanValue#BooleanValue(boolean)}
+   * Method under test:
+   * {@link KotlinAnnotationArgument.BooleanValue#BooleanValue(boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void BooleanValue.<init>(boolean)"})
   public void testBooleanValueNewBooleanValue() {
     // Arrange, Act and Assert
-    assertTrue((new BooleanValue(true)).value);
+    assertTrue((new KotlinAnnotationArgument.BooleanValue(true)).value);
   }
 
   /**
-   * Test ByteValue {@link ByteValue#ByteValue(byte)}.
-   *
-   * <p>Method under test: {@link ByteValue#ByteValue(byte)}
+   * Method under test: {@link KotlinAnnotationArgument.ByteValue#ByteValue(byte)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ByteValue.<init>(byte)"})
   public void testByteValueNewByteValue() {
     // Arrange, Act and Assert
-    assertEquals('A', (new ByteValue((byte) 'A')).value.byteValue());
+    assertEquals('A', (new KotlinAnnotationArgument.ByteValue((byte) 'A')).value.byteValue());
   }
 
   /**
-   * Test CharValue {@link CharValue#CharValue(char)}.
-   *
-   * <p>Method under test: {@link CharValue#CharValue(char)}
+   * Method under test: {@link KotlinAnnotationArgument.CharValue#CharValue(char)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void CharValue.<init>(char)"})
   public void testCharValueNewCharValue() {
     // Arrange, Act and Assert
-    assertEquals('A', (new CharValue('A')).value.charValue());
+    assertEquals('A', (new KotlinAnnotationArgument.CharValue('A')).value.charValue());
   }
 
   /**
-   * Test ClassValue {@link ClassValue#equals(Object)}, and {@link ClassValue#hashCode()}.
-   *
+   * Methods under test:
    * <ul>
-   *   <li>When other is equal.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link ClassValue#equals(Object)}
-   *   <li>{@link ClassValue#hashCode()}
+   *   <li>{@link KotlinAnnotationArgument.ClassValue#equals(Object)}
+   *   <li>{@link KotlinAnnotationArgument.ClassValue#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean ClassValue.equals(Object)", "int ClassValue.hashCode()"})
   public void testClassValueEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
-    ClassValue classValue = new ClassValue("Class Name");
-    ClassValue classValue2 = new ClassValue("Class Name");
+    KotlinAnnotationArgument.ClassValue classValue = new KotlinAnnotationArgument.ClassValue("Class Name");
+    KotlinAnnotationArgument.ClassValue classValue2 = new KotlinAnnotationArgument.ClassValue("Class Name");
 
     // Act and Assert
     assertEquals(classValue, classValue2);
@@ -413,26 +258,16 @@ public class KotlinAnnotationArgumentDiffblueTest {
   }
 
   /**
-   * Test ClassValue {@link ClassValue#equals(Object)}, and {@link ClassValue#hashCode()}.
-   *
+   * Methods under test:
    * <ul>
-   *   <li>When other is same.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link ClassValue#equals(Object)}
-   *   <li>{@link ClassValue#hashCode()}
+   *   <li>{@link KotlinAnnotationArgument.ClassValue#equals(Object)}
+   *   <li>{@link KotlinAnnotationArgument.ClassValue#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean ClassValue.equals(Object)", "int ClassValue.hashCode()"})
   public void testClassValueEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
-    ClassValue classValue = new ClassValue("Class Name");
+    KotlinAnnotationArgument.ClassValue classValue = new KotlinAnnotationArgument.ClassValue("Class Name");
 
     // Act and Assert
     assertEquals(classValue, classValue);
@@ -441,173 +276,86 @@ public class KotlinAnnotationArgumentDiffblueTest {
   }
 
   /**
-   * Test ClassValue {@link ClassValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassValue#equals(Object)}
+   * Method under test: {@link KotlinAnnotationArgument.ClassValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean ClassValue.equals(Object)", "int ClassValue.hashCode()"})
   public void testClassValueEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
-    ClassValue classValue =
-        new ClassValue("proguard.classfile.kotlin.KotlinAnnotationArgument$ClassValue");
+    KotlinAnnotationArgument.ClassValue classValue = new KotlinAnnotationArgument.ClassValue(
+        "proguard.classfile.kotlin.KotlinAnnotationArgument$ClassValue");
 
     // Act and Assert
-    assertNotEquals(classValue, new ClassValue("Class Name"));
+    assertNotEquals(classValue, new KotlinAnnotationArgument.ClassValue("Class Name"));
   }
 
   /**
-   * Test ClassValue {@link ClassValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassValue#equals(Object)}
+   * Method under test: {@link KotlinAnnotationArgument.ClassValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean ClassValue.equals(Object)", "int ClassValue.hashCode()"})
   public void testClassValueEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
-    ClassValue classValue = new ClassValue("Class Name", 3);
+    KotlinAnnotationArgument.ClassValue classValue = new KotlinAnnotationArgument.ClassValue("Class Name", 3);
 
     // Act and Assert
-    assertNotEquals(classValue, new ClassValue("Class Name"));
+    assertNotEquals(classValue, new KotlinAnnotationArgument.ClassValue("Class Name"));
   }
 
   /**
-   * Test ClassValue {@link ClassValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is {@code null}.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassValue#equals(Object)}
+   * Method under test: {@link KotlinAnnotationArgument.ClassValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean ClassValue.equals(Object)", "int ClassValue.hashCode()"})
   public void testClassValueEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
-    assertNotEquals(new ClassValue("Class Name"), null);
+    assertNotEquals(new KotlinAnnotationArgument.ClassValue("Class Name"), null);
   }
 
   /**
-   * Test ClassValue {@link ClassValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is wrong type.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassValue#equals(Object)}
+   * Method under test: {@link KotlinAnnotationArgument.ClassValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean ClassValue.equals(Object)", "int ClassValue.hashCode()"})
   public void testClassValueEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
-    assertNotEquals(new ClassValue("Class Name"), "Different type to ClassValue");
+    assertNotEquals(new KotlinAnnotationArgument.ClassValue("Class Name"), "Different type to ClassValue");
   }
 
   /**
-   * Test ClassValue getters and setters.
-   *
+   * Methods under test:
    * <ul>
-   *   <li>When {@code Class Name}.
-   *   <li>Then return toString is {@code Class Name}.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link ClassValue#ClassValue(String)}
-   *   <li>{@link ClassValue#toString()}
+   *   <li>{@link KotlinAnnotationArgument.ClassValue#ClassValue(String)}
+   *   <li>{@link KotlinAnnotationArgument.ClassValue#toString()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ClassValue.<init>(String)",
-    "void ClassValue.<init>(String, int)",
-    "String ClassValue.toString()"
-  })
-  public void testClassValueGettersAndSetters_whenClassName_thenReturnToStringIsClassName() {
+  public void testClassValueGettersAndSetters() {
     // Arrange, Act and Assert
-    assertEquals("Class Name", (new ClassValue("Class Name")).toString());
+    assertEquals("Class Name", (new KotlinAnnotationArgument.ClassValue("Class Name")).toString());
+    assertEquals("[[[Class Name", (new KotlinAnnotationArgument.ClassValue("Class Name", 3)).toString());
   }
 
   /**
-   * Test ClassValue getters and setters.
-   *
-   * <ul>
-   *   <li>When three.
-   *   <li>Then return toString is {@code [[[Class Name}.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link ClassValue#ClassValue(String, int)}
-   *   <li>{@link ClassValue#toString()}
-   * </ul>
+   * Method under test:
+   * {@link KotlinAnnotationArgument.DoubleValue#DoubleValue(double)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ClassValue.<init>(String)",
-    "void ClassValue.<init>(String, int)",
-    "String ClassValue.toString()"
-  })
-  public void testClassValueGettersAndSetters_whenThree_thenReturnToStringIsClassName() {
-    // Arrange, Act and Assert
-    assertEquals("[[[Class Name", (new ClassValue("Class Name", 3)).toString());
-  }
-
-  /**
-   * Test DoubleValue {@link DoubleValue#DoubleValue(double)}.
-   *
-   * <p>Method under test: {@link DoubleValue#DoubleValue(double)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DoubleValue.<init>(double)"})
   public void testDoubleValueNewDoubleValue() {
     // Arrange, Act and Assert
-    assertEquals(10.0d, (new DoubleValue(10.0d)).value.doubleValue(), 0.0);
+    assertEquals(10.0d, (new KotlinAnnotationArgument.DoubleValue(10.0d)).value.doubleValue(), 0.0);
   }
 
   /**
-   * Test EnumValue {@link EnumValue#equals(Object)}, and {@link EnumValue#hashCode()}.
-   *
+   * Methods under test:
    * <ul>
-   *   <li>When other is equal.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link EnumValue#equals(Object)}
-   *   <li>{@link EnumValue#hashCode()}
+   *   <li>{@link KotlinAnnotationArgument.EnumValue#equals(Object)}
+   *   <li>{@link KotlinAnnotationArgument.EnumValue#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean EnumValue.equals(Object)", "int EnumValue.hashCode()"})
   public void testEnumValueEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
-    EnumValue enumValue = new EnumValue("Class Name", "Enum Entry Name");
-    EnumValue enumValue2 = new EnumValue("Class Name", "Enum Entry Name");
+    KotlinAnnotationArgument.EnumValue enumValue = new KotlinAnnotationArgument.EnumValue("Class Name",
+        "Enum Entry Name");
+    KotlinAnnotationArgument.EnumValue enumValue2 = new KotlinAnnotationArgument.EnumValue("Class Name",
+        "Enum Entry Name");
 
     // Act and Assert
     assertEquals(enumValue, enumValue2);
@@ -616,26 +364,17 @@ public class KotlinAnnotationArgumentDiffblueTest {
   }
 
   /**
-   * Test EnumValue {@link EnumValue#equals(Object)}, and {@link EnumValue#hashCode()}.
-   *
+   * Methods under test:
    * <ul>
-   *   <li>When other is same.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link EnumValue#equals(Object)}
-   *   <li>{@link EnumValue#hashCode()}
+   *   <li>{@link KotlinAnnotationArgument.EnumValue#equals(Object)}
+   *   <li>{@link KotlinAnnotationArgument.EnumValue#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean EnumValue.equals(Object)", "int EnumValue.hashCode()"})
   public void testEnumValueEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
-    EnumValue enumValue = new EnumValue("Class Name", "Enum Entry Name");
+    KotlinAnnotationArgument.EnumValue enumValue = new KotlinAnnotationArgument.EnumValue("Class Name",
+        "Enum Entry Name");
 
     // Act and Assert
     assertEquals(enumValue, enumValue);
@@ -644,170 +383,77 @@ public class KotlinAnnotationArgumentDiffblueTest {
   }
 
   /**
-   * Test EnumValue {@link EnumValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link EnumValue#equals(Object)}
+   * Method under test: {@link KotlinAnnotationArgument.EnumValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean EnumValue.equals(Object)", "int EnumValue.hashCode()"})
   public void testEnumValueEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
-    EnumValue enumValue = new EnumValue("Enum Entry Name", "Enum Entry Name");
+    KotlinAnnotationArgument.EnumValue enumValue = new KotlinAnnotationArgument.EnumValue("Enum Entry Name",
+        "Enum Entry Name");
 
     // Act and Assert
-    assertNotEquals(enumValue, new EnumValue("Class Name", "Enum Entry Name"));
+    assertNotEquals(enumValue, new KotlinAnnotationArgument.EnumValue("Class Name", "Enum Entry Name"));
   }
 
   /**
-   * Test EnumValue {@link EnumValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link EnumValue#equals(Object)}
+   * Method under test: {@link KotlinAnnotationArgument.EnumValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean EnumValue.equals(Object)", "int EnumValue.hashCode()"})
   public void testEnumValueEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
-    EnumValue enumValue = new EnumValue("Class Name", "Class Name");
+    KotlinAnnotationArgument.EnumValue enumValue = new KotlinAnnotationArgument.EnumValue("Class Name", "Class Name");
 
     // Act and Assert
-    assertNotEquals(enumValue, new EnumValue("Class Name", "Enum Entry Name"));
+    assertNotEquals(enumValue, new KotlinAnnotationArgument.EnumValue("Class Name", "Enum Entry Name"));
   }
 
   /**
-   * Test EnumValue {@link EnumValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is {@code null}.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link EnumValue#equals(Object)}
+   * Method under test: {@link KotlinAnnotationArgument.EnumValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean EnumValue.equals(Object)", "int EnumValue.hashCode()"})
   public void testEnumValueEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
-    assertNotEquals(new EnumValue("Class Name", "Enum Entry Name"), null);
+    assertNotEquals(new KotlinAnnotationArgument.EnumValue("Class Name", "Enum Entry Name"), null);
   }
 
   /**
-   * Test EnumValue {@link EnumValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is wrong type.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link EnumValue#equals(Object)}
+   * Method under test: {@link KotlinAnnotationArgument.EnumValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean EnumValue.equals(Object)", "int EnumValue.hashCode()"})
   public void testEnumValueEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
-    assertNotEquals(new EnumValue("Class Name", "Enum Entry Name"), "Different type to EnumValue");
+    assertNotEquals(new KotlinAnnotationArgument.EnumValue("Class Name", "Enum Entry Name"),
+        "Different type to EnumValue");
   }
 
   /**
-   * Test EnumValue getters and setters.
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
-   *   <li>{@link EnumValue#EnumValue(String, String)}
-   *   <li>{@link EnumValue#toString()}
+   *   <li>{@link KotlinAnnotationArgument.EnumValue#EnumValue(String, String)}
+   *   <li>{@link KotlinAnnotationArgument.EnumValue#toString()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void EnumValue.<init>(String, String)", "String EnumValue.toString()"})
   public void testEnumValueGettersAndSetters() {
     // Arrange, Act and Assert
-    assertEquals(
-        "Class Name.Enum Entry Name", (new EnumValue("Class Name", "Enum Entry Name")).toString());
+    assertEquals("Class Name.Enum Entry Name",
+        (new KotlinAnnotationArgument.EnumValue("Class Name", "Enum Entry Name")).toString());
   }
 
   /**
-   * Test FloatValue {@link FloatValue#FloatValue(float)}.
-   *
-   * <p>Method under test: {@link FloatValue#FloatValue(float)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void FloatValue.<init>(float)"})
-  public void testFloatValueNewFloatValue() {
-    // Arrange, Act and Assert
-    assertEquals(10.0f, (new FloatValue(10.0f)).value.floatValue(), 0.0f);
-  }
-
-  /**
-   * Test getters and setters.
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link KotlinAnnotationArgument#KotlinAnnotationArgument(String, Value)}
-   *   <li>{@link KotlinAnnotationArgument#toString()}
-   * </ul>
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void KotlinAnnotationArgument.<init>(String, Value)",
-    "String KotlinAnnotationArgument.toString()"
-  })
-  public void testGettersAndSetters() {
-    // Arrange and Act
-    KotlinAnnotationArgument actualKotlinAnnotationArgument =
-        new KotlinAnnotationArgument("Name", new BooleanValue(true));
-
-    // Assert
-    assertEquals("Name = true", actualKotlinAnnotationArgument.toString());
-    assertNull(actualKotlinAnnotationArgument.getProcessingInfo());
-    assertEquals(0, actualKotlinAnnotationArgument.getProcessingFlags());
-  }
-
-  /**
-   * Test {@link KotlinAnnotationArgument#equals(Object)}, and {@link
-   * KotlinAnnotationArgument#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is equal.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
    *   <li>{@link KotlinAnnotationArgument#equals(Object)}
    *   <li>{@link KotlinAnnotationArgument#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean KotlinAnnotationArgument.equals(Object)",
-    "int KotlinAnnotationArgument.hashCode()"
-  })
   public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
-    KotlinAnnotationArgument kotlinAnnotationArgument =
-        new KotlinAnnotationArgument("Name", new BooleanValue(true));
-    KotlinAnnotationArgument kotlinAnnotationArgument2 =
-        new KotlinAnnotationArgument("Name", new BooleanValue(true));
+    KotlinAnnotationArgument kotlinAnnotationArgument = new KotlinAnnotationArgument("Name",
+        new KotlinAnnotationArgument.BooleanValue(true));
+    KotlinAnnotationArgument kotlinAnnotationArgument2 = new KotlinAnnotationArgument("Name",
+        new KotlinAnnotationArgument.BooleanValue(true));
 
     // Act and Assert
     assertEquals(kotlinAnnotationArgument, kotlinAnnotationArgument2);
@@ -816,31 +462,17 @@ public class KotlinAnnotationArgumentDiffblueTest {
   }
 
   /**
-   * Test {@link KotlinAnnotationArgument#equals(Object)}, and {@link
-   * KotlinAnnotationArgument#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is same.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
    *   <li>{@link KotlinAnnotationArgument#equals(Object)}
    *   <li>{@link KotlinAnnotationArgument#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean KotlinAnnotationArgument.equals(Object)",
-    "int KotlinAnnotationArgument.hashCode()"
-  })
   public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
-    KotlinAnnotationArgument kotlinAnnotationArgument =
-        new KotlinAnnotationArgument("Name", new BooleanValue(true));
+    KotlinAnnotationArgument kotlinAnnotationArgument = new KotlinAnnotationArgument("Name",
+        new KotlinAnnotationArgument.BooleanValue(true));
 
     // Act and Assert
     assertEquals(kotlinAnnotationArgument, kotlinAnnotationArgument);
@@ -849,137 +481,103 @@ public class KotlinAnnotationArgumentDiffblueTest {
   }
 
   /**
-   * Test {@link KotlinAnnotationArgument#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link KotlinAnnotationArgument#equals(Object)}
+   * Method under test: {@link KotlinAnnotationArgument#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean KotlinAnnotationArgument.equals(Object)",
-    "int KotlinAnnotationArgument.hashCode()"
-  })
   public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
-    KotlinAnnotationArgument kotlinAnnotationArgument =
-        new KotlinAnnotationArgument(
-            "proguard.classfile.kotlin.KotlinAnnotationArgument", new BooleanValue(true));
+    KotlinAnnotationArgument kotlinAnnotationArgument = new KotlinAnnotationArgument(
+        "proguard.classfile.kotlin.KotlinAnnotationArgument", new KotlinAnnotationArgument.BooleanValue(true));
 
     // Act and Assert
-    assertNotEquals(
-        kotlinAnnotationArgument, new KotlinAnnotationArgument("Name", new BooleanValue(true)));
+    assertNotEquals(kotlinAnnotationArgument,
+        new KotlinAnnotationArgument("Name", new KotlinAnnotationArgument.BooleanValue(true)));
   }
 
   /**
-   * Test {@link KotlinAnnotationArgument#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link KotlinAnnotationArgument#equals(Object)}
+   * Method under test: {@link KotlinAnnotationArgument#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean KotlinAnnotationArgument.equals(Object)",
-    "int KotlinAnnotationArgument.hashCode()"
-  })
   public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
-    KotlinAnnotationArgument kotlinAnnotationArgument =
-        new KotlinAnnotationArgument("Name", new BooleanValue(false));
+    KotlinAnnotationArgument kotlinAnnotationArgument = new KotlinAnnotationArgument("Name",
+        new KotlinAnnotationArgument.BooleanValue(false));
 
     // Act and Assert
-    assertNotEquals(
-        kotlinAnnotationArgument, new KotlinAnnotationArgument("Name", new BooleanValue(true)));
+    assertNotEquals(kotlinAnnotationArgument,
+        new KotlinAnnotationArgument("Name", new KotlinAnnotationArgument.BooleanValue(true)));
   }
 
   /**
-   * Test {@link KotlinAnnotationArgument#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is {@code null}.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link KotlinAnnotationArgument#equals(Object)}
+   * Method under test: {@link KotlinAnnotationArgument#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean KotlinAnnotationArgument.equals(Object)",
-    "int KotlinAnnotationArgument.hashCode()"
-  })
   public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
-    assertNotEquals(new KotlinAnnotationArgument("Name", new BooleanValue(true)), null);
+    assertNotEquals(new KotlinAnnotationArgument("Name", new KotlinAnnotationArgument.BooleanValue(true)), null);
   }
 
   /**
-   * Test {@link KotlinAnnotationArgument#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is wrong type.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link KotlinAnnotationArgument#equals(Object)}
+   * Method under test: {@link KotlinAnnotationArgument#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean KotlinAnnotationArgument.equals(Object)",
-    "int KotlinAnnotationArgument.hashCode()"
-  })
   public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
-    assertNotEquals(
-        new KotlinAnnotationArgument("Name", new BooleanValue(true)),
+    assertNotEquals(new KotlinAnnotationArgument("Name", new KotlinAnnotationArgument.BooleanValue(true)),
         "Different type to KotlinAnnotationArgument");
   }
 
   /**
-   * Test IntValue {@link IntValue#IntValue(int)}.
-   *
-   * <p>Method under test: {@link IntValue#IntValue(int)}
+   * Method under test:
+   * {@link KotlinAnnotationArgument.FloatValue#FloatValue(float)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void IntValue.<init>(int)"})
-  public void testIntValueNewIntValue() {
+  public void testFloatValueNewFloatValue() {
     // Arrange, Act and Assert
-    assertEquals(42, (new IntValue(42)).value.intValue());
+    assertEquals(10.0f, (new KotlinAnnotationArgument.FloatValue(10.0f)).value.floatValue(), 0.0f);
   }
 
   /**
-   * Test LiteralValue {@link LiteralValue#equals(Object)}, and {@link LiteralValue#hashCode()}.
-   *
+   * Methods under test:
    * <ul>
-   *   <li>When other is equal.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link LiteralValue#equals(Object)}
-   *   <li>{@link LiteralValue#hashCode()}
+   *   <li>
+   * {@link KotlinAnnotationArgument#KotlinAnnotationArgument(String, KotlinAnnotationArgument.Value)}
+   *   <li>{@link KotlinAnnotationArgument#toString()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean LiteralValue.equals(Object)", "int LiteralValue.hashCode()"})
+  public void testGettersAndSetters() {
+    // Arrange and Act
+    KotlinAnnotationArgument actualKotlinAnnotationArgument = new KotlinAnnotationArgument("Name",
+        new KotlinAnnotationArgument.BooleanValue(true));
+
+    // Assert
+    assertEquals("Name = true", actualKotlinAnnotationArgument.toString());
+    assertNull(actualKotlinAnnotationArgument.getProcessingInfo());
+    assertEquals(0, actualKotlinAnnotationArgument.getProcessingFlags());
+  }
+
+  /**
+   * Method under test: {@link KotlinAnnotationArgument.IntValue#IntValue(int)}
+   */
+  @Test
+  public void testIntValueNewIntValue() {
+    // Arrange, Act and Assert
+    assertEquals(42, (new KotlinAnnotationArgument.IntValue(42)).value.intValue());
+  }
+
+  /**
+   * Methods under test:
+   * <ul>
+   *   <li>{@link KotlinAnnotationArgument.LiteralValue#equals(Object)}
+   *   <li>{@link KotlinAnnotationArgument.LiteralValue#hashCode()}
+   * </ul>
+   */
+  @Test
   public void testLiteralValueEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
-    LiteralValue<Object> literalValue = new LiteralValue<>("Value");
-    LiteralValue<Object> literalValue2 = new LiteralValue<>("Value");
+    KotlinAnnotationArgument.LiteralValue<Object> literalValue = new KotlinAnnotationArgument.LiteralValue<>("Value");
+    KotlinAnnotationArgument.LiteralValue<Object> literalValue2 = new KotlinAnnotationArgument.LiteralValue<>("Value");
 
     // Act and Assert
     assertEquals(literalValue, literalValue2);
@@ -988,26 +586,16 @@ public class KotlinAnnotationArgumentDiffblueTest {
   }
 
   /**
-   * Test LiteralValue {@link LiteralValue#equals(Object)}, and {@link LiteralValue#hashCode()}.
-   *
+   * Methods under test:
    * <ul>
-   *   <li>When other is same.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link LiteralValue#equals(Object)}
-   *   <li>{@link LiteralValue#hashCode()}
+   *   <li>{@link KotlinAnnotationArgument.LiteralValue#equals(Object)}
+   *   <li>{@link KotlinAnnotationArgument.LiteralValue#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean LiteralValue.equals(Object)", "int LiteralValue.hashCode()"})
   public void testLiteralValueEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
-    LiteralValue<Object> literalValue = new LiteralValue<>("Value");
+    KotlinAnnotationArgument.LiteralValue<Object> literalValue = new KotlinAnnotationArgument.LiteralValue<>("Value");
 
     // Act and Assert
     assertEquals(literalValue, literalValue);
@@ -1016,198 +604,140 @@ public class KotlinAnnotationArgumentDiffblueTest {
   }
 
   /**
-   * Test LiteralValue {@link LiteralValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link LiteralValue#equals(Object)}
+   * Method under test:
+   * {@link KotlinAnnotationArgument.LiteralValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean LiteralValue.equals(Object)", "int LiteralValue.hashCode()"})
   public void testLiteralValueEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
-    LiteralValue<Object> literalValue = new LiteralValue<>(42);
+    KotlinAnnotationArgument.LiteralValue<Object> literalValue = new KotlinAnnotationArgument.LiteralValue<>(42);
 
     // Act and Assert
-    assertNotEquals(literalValue, new LiteralValue<>("Value"));
+    assertNotEquals(literalValue, new KotlinAnnotationArgument.LiteralValue<>("Value"));
   }
 
   /**
-   * Test LiteralValue {@link LiteralValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link LiteralValue#equals(Object)}
+   * Method under test:
+   * {@link KotlinAnnotationArgument.LiteralValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean LiteralValue.equals(Object)", "int LiteralValue.hashCode()"})
   public void testLiteralValueEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
-    LiteralValue<Object> literalValue = new LiteralValue<>(new BooleanValue(true));
+    KotlinAnnotationArgument.LiteralValue<Object> literalValue = new KotlinAnnotationArgument.LiteralValue<>(
+        new KotlinAnnotationArgument.BooleanValue(true));
 
     // Act and Assert
-    assertNotEquals(literalValue, new LiteralValue<>("Value"));
+    assertNotEquals(literalValue, new KotlinAnnotationArgument.LiteralValue<>("Value"));
   }
 
   /**
-   * Test LiteralValue {@link LiteralValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is {@code null}.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link LiteralValue#equals(Object)}
+   * Method under test:
+   * {@link KotlinAnnotationArgument.LiteralValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean LiteralValue.equals(Object)", "int LiteralValue.hashCode()"})
   public void testLiteralValueEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange
-    LiteralValue<Object> literalValue = new LiteralValue<>("Value");
+    KotlinAnnotationArgument.LiteralValue<Object> literalValue = new KotlinAnnotationArgument.LiteralValue<>("Value");
 
     // Act and Assert
     assertNotEquals(literalValue, null);
   }
 
   /**
-   * Test LiteralValue {@link LiteralValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is wrong type.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link LiteralValue#equals(Object)}
+   * Method under test:
+   * {@link KotlinAnnotationArgument.LiteralValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean LiteralValue.equals(Object)", "int LiteralValue.hashCode()"})
   public void testLiteralValueEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange
-    LiteralValue<Object> literalValue = new LiteralValue<>("Value");
+    KotlinAnnotationArgument.LiteralValue<Object> literalValue = new KotlinAnnotationArgument.LiteralValue<>("Value");
 
     // Act and Assert
     assertNotEquals(literalValue, "Different type to LiteralValue");
   }
 
   /**
-   * Test LiteralValue getters and setters.
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
-   *   <li>{@link LiteralValue#LiteralValue(Object)}
-   *   <li>{@link LiteralValue#toString()}
+   *   <li>{@link KotlinAnnotationArgument.LiteralValue#LiteralValue(Object)}
+   *   <li>{@link KotlinAnnotationArgument.LiteralValue#toString()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void LiteralValue.<init>(Object)", "String LiteralValue.toString()"})
   public void testLiteralValueGettersAndSetters() {
     // Arrange and Act
-    LiteralValue<Object> actualLiteralValue = new LiteralValue<>("Value");
+    KotlinAnnotationArgument.LiteralValue<Object> actualLiteralValue = new KotlinAnnotationArgument.LiteralValue<>(
+        "Value");
 
     // Assert
     assertSame(actualLiteralValue.value, actualLiteralValue.toString());
   }
 
   /**
-   * Test LongValue {@link LongValue#LongValue(long)}.
-   *
-   * <p>Method under test: {@link LongValue#LongValue(long)}
+   * Method under test: {@link KotlinAnnotationArgument.LongValue#LongValue(long)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void LongValue.<init>(long)"})
   public void testLongValueNewLongValue() {
     // Arrange, Act and Assert
-    assertEquals(42L, (new LongValue(42L)).value.longValue());
+    assertEquals(42L, (new KotlinAnnotationArgument.LongValue(42L)).value.longValue());
   }
 
   /**
-   * Test ShortValue {@link ShortValue#ShortValue(short)}.
-   *
-   * <p>Method under test: {@link ShortValue#ShortValue(short)}
+   * Method under test:
+   * {@link KotlinAnnotationArgument.ShortValue#ShortValue(short)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ShortValue.<init>(short)"})
   public void testShortValueNewShortValue() {
     // Arrange, Act and Assert
-    assertEquals((short) 1, (new ShortValue((short) 1)).value.shortValue());
+    assertEquals((short) 1, (new KotlinAnnotationArgument.ShortValue((short) 1)).value.shortValue());
   }
 
   /**
-   * Test StringValue {@link StringValue#StringValue(String)}.
-   *
-   * <p>Method under test: {@link StringValue#StringValue(String)}
+   * Method under test:
+   * {@link KotlinAnnotationArgument.StringValue#StringValue(String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void StringValue.<init>(String)"})
   public void testStringValueNewStringValue() {
     // Arrange, Act and Assert
-    assertEquals("42", (new StringValue("42")).value);
+    assertEquals("42", (new KotlinAnnotationArgument.StringValue("42")).value);
   }
 
   /**
-   * Test UByteValue {@link UByteValue#UByteValue(byte)}.
-   *
-   * <p>Method under test: {@link UByteValue#UByteValue(byte)}
+   * Method under test:
+   * {@link KotlinAnnotationArgument.UByteValue#UByteValue(byte)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void UByteValue.<init>(byte)"})
   public void testUByteValueNewUByteValue() {
     // Arrange, Act and Assert
-    assertEquals('A', (new UByteValue((byte) 'A')).value.byteValue());
+    assertEquals('A', (new KotlinAnnotationArgument.UByteValue((byte) 'A')).value.byteValue());
   }
 
   /**
-   * Test UIntValue {@link UIntValue#UIntValue(int)}.
-   *
-   * <p>Method under test: {@link UIntValue#UIntValue(int)}
+   * Method under test: {@link KotlinAnnotationArgument.UIntValue#UIntValue(int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void UIntValue.<init>(int)"})
   public void testUIntValueNewUIntValue() {
     // Arrange, Act and Assert
-    assertEquals(42, (new UIntValue(42)).value.intValue());
+    assertEquals(42, (new KotlinAnnotationArgument.UIntValue(42)).value.intValue());
   }
 
   /**
-   * Test ULongValue {@link ULongValue#ULongValue(long)}.
-   *
-   * <p>Method under test: {@link ULongValue#ULongValue(long)}
+   * Method under test:
+   * {@link KotlinAnnotationArgument.ULongValue#ULongValue(long)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ULongValue.<init>(long)"})
   public void testULongValueNewULongValue() {
     // Arrange, Act and Assert
-    assertEquals(42L, (new ULongValue(42L)).value.longValue());
+    assertEquals(42L, (new KotlinAnnotationArgument.ULongValue(42L)).value.longValue());
   }
 
   /**
-   * Test UShortValue {@link UShortValue#UShortValue(short)}.
-   *
-   * <p>Method under test: {@link UShortValue#UShortValue(short)}
+   * Method under test:
+   * {@link KotlinAnnotationArgument.UShortValue#UShortValue(short)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void UShortValue.<init>(short)"})
   public void testUShortValueNewUShortValue() {
     // Arrange, Act and Assert
-    assertEquals((short) 1, (new UShortValue((short) 1)).value.shortValue());
+    assertEquals((short) 1, (new KotlinAnnotationArgument.UShortValue((short) 1)).value.shortValue());
   }
 }

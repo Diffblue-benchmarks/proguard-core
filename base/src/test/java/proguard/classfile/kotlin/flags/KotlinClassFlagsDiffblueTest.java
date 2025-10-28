@@ -2,22 +2,14 @@ package proguard.classfile.kotlin.flags;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 public class KotlinClassFlagsDiffblueTest {
   /**
-   * Test {@link KotlinClassFlags#KotlinClassFlags(KotlinVisibilityFlags, KotlinModalityFlags)}.
-   *
-   * <p>Method under test: {@link KotlinClassFlags#KotlinClassFlags(KotlinVisibilityFlags,
-   * KotlinModalityFlags)}
+   * Method under test:
+   * {@link KotlinClassFlags#KotlinClassFlags(KotlinVisibilityFlags, KotlinModalityFlags)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void KotlinClassFlags.<init>(KotlinVisibilityFlags, KotlinModalityFlags)"})
   public void testNewKotlinClassFlags() {
     // Arrange
     KotlinVisibilityFlags visibility = new KotlinVisibilityFlags();

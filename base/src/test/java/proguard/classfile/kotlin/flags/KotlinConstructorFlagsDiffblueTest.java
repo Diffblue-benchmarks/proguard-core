@@ -2,22 +2,14 @@ package proguard.classfile.kotlin.flags;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 public class KotlinConstructorFlagsDiffblueTest {
   /**
-   * Test {@link KotlinConstructorFlags#KotlinConstructorFlags(KotlinVisibilityFlags)}.
-   *
-   * <p>Method under test: {@link
-   * KotlinConstructorFlags#KotlinConstructorFlags(KotlinVisibilityFlags)}
+   * Method under test:
+   * {@link KotlinConstructorFlags#KotlinConstructorFlags(KotlinVisibilityFlags)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void KotlinConstructorFlags.<init>(KotlinVisibilityFlags)"})
   public void testNewKotlinConstructorFlags() {
     // Arrange
     KotlinVisibilityFlags visibility = new KotlinVisibilityFlags();

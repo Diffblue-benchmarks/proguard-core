@@ -5,26 +5,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
-import proguard.analysis.cpa.defaults.HashMapAbstractState;
-import proguard.analysis.cpa.jvm.cfa.nodes.JvmUnknownCfaNode;
-import proguard.analysis.cpa.jvm.state.JvmAbstractState;
-import proguard.analysis.cpa.jvm.state.JvmFrameAbstractState;
-import proguard.analysis.cpa.jvm.state.heap.JvmForgetfulHeapAbstractState;
-import proguard.analysis.datastructure.CodeLocation;
-import proguard.analysis.datastructure.callgraph.Call;
-import proguard.analysis.datastructure.callgraph.SymbolicCall;
-import proguard.classfile.ClassConstants;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
-import proguard.classfile.LibraryField;
-import proguard.classfile.instruction.BranchInstruction;
 import proguard.evaluation.ExecutingInvocationUnit;
 import proguard.evaluation.ParticularReferenceValueFactory;
 import proguard.evaluation.value.BasicRangeValueFactory;
@@ -44,79 +28,41 @@ import proguard.evaluation.value.PrimitiveTypedReferenceValueFactory;
 import proguard.evaluation.value.RangeIntegerValue;
 import proguard.evaluation.value.RangeValueFactory;
 import proguard.evaluation.value.ReferenceValue;
+import proguard.evaluation.value.TopValue;
 import proguard.evaluation.value.TypedReferenceValue;
-import proguard.evaluation.value.UnknownIntegerValue;
 import proguard.evaluation.value.Value;
 import proguard.evaluation.value.ValueFactory;
+import proguard.evaluation.value.object.AnalyzedObject;
 
 public class JvmValueTransferRelationDiffblueTest {
   /**
-   * Test getters and setters.
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link JvmValueTransferRelation#JvmValueTransferRelation(ValueFactory,
-   *       ExecutingInvocationUnit)}
-   *   <li>{@link JvmValueTransferRelation#getValueFactory()}
-   * </ul>
+   * Method under test: {@link JvmValueTransferRelation#getAbstractDefault()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void JvmValueTransferRelation.<init>(ValueFactory, ExecutingInvocationUnit)",
-    "ValueFactory JvmValueTransferRelation.getValueFactory()"
-  })
-  public void testGettersAndSetters() {
-    // Arrange
-    ParticularReferenceValueFactory valueFactory = new ParticularReferenceValueFactory();
-
-    // Act
-    ValueFactory actualValueFactory =
-        (new JvmValueTransferRelation(valueFactory, null)).getValueFactory();
-
-    // Assert
-    assertTrue(actualValueFactory instanceof ParticularReferenceValueFactory);
-    assertSame(valueFactory, actualValueFactory);
-  }
-
-  /**
-   * Test {@link JvmValueTransferRelation#getAbstractDefault()}.
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractDefault()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ValueAbstractState JvmValueTransferRelation.getAbstractDefault()"})
   public void testGetAbstractDefault() {
     // Arrange and Act
-    ValueAbstractState actualAbstractDefault =
-        (new JvmValueTransferRelation(new ParticularReferenceValueFactory(), null))
-            .getAbstractDefault();
+    ValueAbstractState actualAbstractDefault = (new JvmValueTransferRelation(new ParticularReferenceValueFactory(),
+        null)).getAbstractDefault();
 
     // Assert
     assertSame(actualAbstractDefault.UNKNOWN, actualAbstractDefault);
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractByteConstant(byte)}.
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractByteConstant(byte)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractByteConstant(byte)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ValueAbstractState JvmValueTransferRelation.getAbstractByteConstant(byte)"})
   public void testGetAbstractByteConstant() {
     // Arrange
     ParticularReferenceValueFactory valueFactory = new ParticularReferenceValueFactory();
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(valueFactory, null);
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(valueFactory, null);
 
     // Act
-    ValueAbstractState actualAbstractByteConstant =
-        jvmValueTransferRelation.getAbstractByteConstant((byte) 'A');
+    ValueAbstractState actualAbstractByteConstant = jvmValueTransferRelation.getAbstractByteConstant((byte) 'A');
 
     // Assert
+    assertNull(actualAbstractByteConstant.getPrecision());
     ValueAbstractState expectedAbstractDefault = actualAbstractByteConstant.UNKNOWN;
     assertSame(expectedAbstractDefault, jvmValueTransferRelation.getAbstractDefault());
     IntegerValue expectedValue = valueFactory.INTEGER_VALUE;
@@ -124,30 +70,24 @@ public class JvmValueTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractByteConstant(byte)}.
-   *
-   * <ul>
-   *   <li>Then Value return {@link ParticularIntegerValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractByteConstant(byte)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractByteConstant(byte)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ValueAbstractState JvmValueTransferRelation.getAbstractByteConstant(byte)"})
-  public void testGetAbstractByteConstant_thenValueReturnParticularIntegerValue() {
+  public void testGetAbstractByteConstant2() {
     // Arrange
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(new BasicRangeValueFactory(), null);
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(new BasicRangeValueFactory(),
+        null);
 
     // Act
-    ValueAbstractState actualAbstractByteConstant =
-        jvmValueTransferRelation.getAbstractByteConstant((byte) 'A');
+    ValueAbstractState actualAbstractByteConstant = jvmValueTransferRelation.getAbstractByteConstant((byte) 'A');
 
     // Assert
     Value value = actualAbstractByteConstant.getValue();
     assertTrue(value instanceof ParticularIntegerValue);
+    assertNull(actualAbstractByteConstant.getPrecision());
     assertEquals(65, ((ParticularIntegerValue) value).value());
+    assertFalse(value.isCategory2());
     assertTrue(value.isParticular());
     assertTrue(value.isSpecific());
     ValueAbstractState expectedAbstractDefault = actualAbstractByteConstant.UNKNOWN;
@@ -155,73 +95,77 @@ public class JvmValueTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractDoubleConstant(double)}.
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractDoubleConstant(double)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractDoubleConstant(double)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"List JvmValueTransferRelation.getAbstractDoubleConstant(double)"})
   public void testGetAbstractDoubleConstant() {
     // Arrange
     ParticularReferenceValueFactory valueFactory = new ParticularReferenceValueFactory();
 
     // Act
-    List<ValueAbstractState> actualAbstractDoubleConstant =
-        (new JvmValueTransferRelation(valueFactory, null)).getAbstractDoubleConstant(10.0d);
+    List<ValueAbstractState> actualAbstractDoubleConstant = (new JvmValueTransferRelation(valueFactory, null))
+        .getAbstractDoubleConstant(10.0d);
 
     // Assert
     assertEquals(2, actualAbstractDoubleConstant.size());
+    ValueAbstractState getResult = actualAbstractDoubleConstant.get(0);
+    Value value = getResult.getValue();
+    assertTrue(value instanceof TopValue);
+    assertNull(getResult.getPrecision());
+    ValueAbstractState getResult2 = actualAbstractDoubleConstant.get(1);
+    assertNull(getResult2.getPrecision());
+    assertFalse(value.isCategory2());
+    assertTrue(value.isParticular());
+    assertTrue(value.isSpecific());
     DoubleValue expectedValue = valueFactory.DOUBLE_VALUE;
-    assertSame(expectedValue, actualAbstractDoubleConstant.get(1).getValue());
+    assertSame(expectedValue, getResult2.getValue());
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractDoubleConstant(double)}.
-   *
-   * <ul>
-   *   <li>Then second Value return {@link ParticularDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractDoubleConstant(double)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractDoubleConstant(double)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"List JvmValueTransferRelation.getAbstractDoubleConstant(double)"})
-  public void testGetAbstractDoubleConstant_thenSecondValueReturnParticularDoubleValue() {
+  public void testGetAbstractDoubleConstant2() {
     // Arrange and Act
-    List<ValueAbstractState> actualAbstractDoubleConstant =
-        (new JvmValueTransferRelation(new BasicRangeValueFactory(), null))
-            .getAbstractDoubleConstant(10.0d);
+    List<ValueAbstractState> actualAbstractDoubleConstant = (new JvmValueTransferRelation(new BasicRangeValueFactory(),
+        null)).getAbstractDoubleConstant(10.0d);
 
     // Assert
     assertEquals(2, actualAbstractDoubleConstant.size());
-    Value value = actualAbstractDoubleConstant.get(1).getValue();
+    ValueAbstractState getResult = actualAbstractDoubleConstant.get(1);
+    Value value = getResult.getValue();
     assertTrue(value instanceof ParticularDoubleValue);
+    ValueAbstractState getResult2 = actualAbstractDoubleConstant.get(0);
+    Value value2 = getResult2.getValue();
+    assertTrue(value2 instanceof TopValue);
+    assertNull(getResult2.getPrecision());
+    assertNull(getResult.getPrecision());
     assertEquals(10.0d, ((ParticularDoubleValue) value).value(), 0.0);
+    assertFalse(value2.isCategory2());
+    assertTrue(value.isCategory2());
+    assertTrue(value2.isParticular());
     assertTrue(value.isParticular());
+    assertTrue(value2.isSpecific());
     assertTrue(value.isSpecific());
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractFloatConstant(float)}.
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractFloatConstant(float)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractFloatConstant(float)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ValueAbstractState JvmValueTransferRelation.getAbstractFloatConstant(float)"})
   public void testGetAbstractFloatConstant() {
     // Arrange
     ParticularReferenceValueFactory valueFactory = new ParticularReferenceValueFactory();
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(valueFactory, null);
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(valueFactory, null);
 
     // Act
-    ValueAbstractState actualAbstractFloatConstant =
-        jvmValueTransferRelation.getAbstractFloatConstant(10.0f);
+    ValueAbstractState actualAbstractFloatConstant = jvmValueTransferRelation.getAbstractFloatConstant(10.0f);
 
     // Assert
+    assertNull(actualAbstractFloatConstant.getPrecision());
     ValueAbstractState expectedAbstractDefault = actualAbstractFloatConstant.UNKNOWN;
     assertSame(expectedAbstractDefault, jvmValueTransferRelation.getAbstractDefault());
     FloatValue expectedValue = valueFactory.FLOAT_VALUE;
@@ -229,30 +173,24 @@ public class JvmValueTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractFloatConstant(float)}.
-   *
-   * <ul>
-   *   <li>Then Value return {@link ParticularFloatValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractFloatConstant(float)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractFloatConstant(float)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ValueAbstractState JvmValueTransferRelation.getAbstractFloatConstant(float)"})
-  public void testGetAbstractFloatConstant_thenValueReturnParticularFloatValue() {
+  public void testGetAbstractFloatConstant2() {
     // Arrange
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(new BasicRangeValueFactory(), null);
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(new BasicRangeValueFactory(),
+        null);
 
     // Act
-    ValueAbstractState actualAbstractFloatConstant =
-        jvmValueTransferRelation.getAbstractFloatConstant(10.0f);
+    ValueAbstractState actualAbstractFloatConstant = jvmValueTransferRelation.getAbstractFloatConstant(10.0f);
 
     // Assert
     Value value = actualAbstractFloatConstant.getValue();
     assertTrue(value instanceof ParticularFloatValue);
+    assertNull(actualAbstractFloatConstant.getPrecision());
     assertEquals(10.0f, ((ParticularFloatValue) value).value(), 0.0f);
+    assertFalse(value.isCategory2());
     assertTrue(value.isParticular());
     assertTrue(value.isSpecific());
     ValueAbstractState expectedAbstractDefault = actualAbstractFloatConstant.UNKNOWN;
@@ -260,25 +198,37 @@ public class JvmValueTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractIntegerConstant(int)}.
-   *
-   * <ul>
-   *   <li>Then Value return {@link RangeIntegerValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractIntegerConstant(int)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractIntegerConstant(int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ValueAbstractState JvmValueTransferRelation.getAbstractIntegerConstant(int)"})
-  public void testGetAbstractIntegerConstant_thenValueReturnRangeIntegerValue() {
+  public void testGetAbstractIntegerConstant() {
     // Arrange
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(new RangeValueFactory(), null);
+    ParticularReferenceValueFactory valueFactory = new ParticularReferenceValueFactory();
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(valueFactory, null);
 
     // Act
-    ValueAbstractState actualAbstractIntegerConstant =
-        jvmValueTransferRelation.getAbstractIntegerConstant(1);
+    ValueAbstractState actualAbstractIntegerConstant = jvmValueTransferRelation.getAbstractIntegerConstant(1);
+
+    // Assert
+    assertNull(actualAbstractIntegerConstant.getPrecision());
+    ValueAbstractState expectedAbstractDefault = actualAbstractIntegerConstant.UNKNOWN;
+    assertSame(expectedAbstractDefault, jvmValueTransferRelation.getAbstractDefault());
+    IntegerValue expectedValue = valueFactory.INTEGER_VALUE;
+    assertSame(expectedValue, actualAbstractIntegerConstant.getValue());
+  }
+
+  /**
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractIntegerConstant(int)}
+   */
+  @Test
+  public void testGetAbstractIntegerConstant2() {
+    // Arrange
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(new RangeValueFactory(), null);
+
+    // Act
+    ValueAbstractState actualAbstractIntegerConstant = jvmValueTransferRelation.getAbstractIntegerConstant(1);
 
     // Assert
     Value value = actualAbstractIntegerConstant.getValue();
@@ -292,142 +242,70 @@ public class JvmValueTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractIntegerConstant(int)}.
-   *
-   * <ul>
-   *   <li>Then Value return {@link UnknownIntegerValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractIntegerConstant(int)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractLongConstant(long)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ValueAbstractState JvmValueTransferRelation.getAbstractIntegerConstant(int)"})
-  public void testGetAbstractIntegerConstant_thenValueReturnUnknownIntegerValue() {
-    // Arrange
-    ParticularReferenceValueFactory valueFactory = new ParticularReferenceValueFactory();
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(valueFactory, null);
-
-    // Act
-    ValueAbstractState actualAbstractIntegerConstant =
-        jvmValueTransferRelation.getAbstractIntegerConstant(1);
-
-    // Assert
-    Value value = actualAbstractIntegerConstant.getValue();
-    assertTrue(value instanceof UnknownIntegerValue);
-    assertFalse(value.isParticular());
-    ValueAbstractState expectedAbstractDefault = actualAbstractIntegerConstant.UNKNOWN;
-    assertSame(expectedAbstractDefault, jvmValueTransferRelation.getAbstractDefault());
-    assertSame(valueFactory.INTEGER_VALUE, value);
-  }
-
-  /**
-   * Test {@link JvmValueTransferRelation#getAbstractLongConstant(long)}.
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractLongConstant(long)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"List JvmValueTransferRelation.getAbstractLongConstant(long)"})
   public void testGetAbstractLongConstant() {
     // Arrange
     ParticularReferenceValueFactory valueFactory = new ParticularReferenceValueFactory();
 
     // Act
-    List<ValueAbstractState> actualAbstractLongConstant =
-        (new JvmValueTransferRelation(valueFactory, null)).getAbstractLongConstant(1L);
+    List<ValueAbstractState> actualAbstractLongConstant = (new JvmValueTransferRelation(valueFactory, null))
+        .getAbstractLongConstant(1L);
 
     // Assert
     assertEquals(2, actualAbstractLongConstant.size());
+    ValueAbstractState getResult = actualAbstractLongConstant.get(0);
+    Value value = getResult.getValue();
+    assertTrue(value instanceof TopValue);
+    assertNull(getResult.getPrecision());
+    ValueAbstractState getResult2 = actualAbstractLongConstant.get(1);
+    assertNull(getResult2.getPrecision());
+    assertFalse(value.isCategory2());
+    assertTrue(value.isParticular());
+    assertTrue(value.isSpecific());
     LongValue expectedValue = valueFactory.LONG_VALUE;
-    assertSame(expectedValue, actualAbstractLongConstant.get(1).getValue());
+    assertSame(expectedValue, getResult2.getValue());
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractLongConstant(long)}.
-   *
-   * <ul>
-   *   <li>Then second Value return {@link ParticularLongValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractLongConstant(long)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractLongConstant(long)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"List JvmValueTransferRelation.getAbstractLongConstant(long)"})
-  public void testGetAbstractLongConstant_thenSecondValueReturnParticularLongValue() {
+  public void testGetAbstractLongConstant2() {
     // Arrange and Act
-    List<ValueAbstractState> actualAbstractLongConstant =
-        (new JvmValueTransferRelation(new BasicRangeValueFactory(), null))
-            .getAbstractLongConstant(-1L);
+    List<ValueAbstractState> actualAbstractLongConstant = (new JvmValueTransferRelation(new BasicRangeValueFactory(),
+        null)).getAbstractLongConstant(-1L);
 
     // Assert
     assertEquals(2, actualAbstractLongConstant.size());
-    Value value = actualAbstractLongConstant.get(1).getValue();
+    ValueAbstractState getResult = actualAbstractLongConstant.get(1);
+    Value value = getResult.getValue();
     assertTrue(value instanceof ParticularLongValue);
+    ValueAbstractState getResult2 = actualAbstractLongConstant.get(0);
+    Value value2 = getResult2.getValue();
+    assertTrue(value2 instanceof TopValue);
+    assertNull(getResult2.getPrecision());
+    assertNull(getResult.getPrecision());
     assertEquals(-1L, ((ParticularLongValue) value).value());
+    assertFalse(value2.isCategory2());
+    assertTrue(value.isCategory2());
+    assertTrue(value2.isParticular());
     assertTrue(value.isParticular());
+    assertTrue(value2.isSpecific());
     assertTrue(value.isSpecific());
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractNull()}.
-   *
-   * <ul>
-   *   <li>Then Value return {@link MultiTypedReferenceValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractNull()}
+   * Method under test: {@link JvmValueTransferRelation#getAbstractNull()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ValueAbstractState JvmValueTransferRelation.getAbstractNull()"})
-  public void testGetAbstractNull_thenValueReturnMultiTypedReferenceValue() {
+  public void testGetAbstractNull() {
     // Arrange
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(new MultiTypedReferenceValueFactory(), null);
-
-    // Act
-    ValueAbstractState actualAbstractNull = jvmValueTransferRelation.getAbstractNull();
-
-    // Assert
-    Value value = actualAbstractNull.getValue();
-    assertTrue(value instanceof MultiTypedReferenceValue);
-    assertNull(((MultiTypedReferenceValue) value).getType());
-    TypedReferenceValue generalizedType = ((MultiTypedReferenceValue) value).getGeneralizedType();
-    assertNull(generalizedType.getType());
-    assertNull(((MultiTypedReferenceValue) value).getReferencedClass());
-    assertNull(generalizedType.getReferencedClass());
-    assertEquals(-1, generalizedType.isNotNull());
-    assertEquals(1, ((MultiTypedReferenceValue) value).getPotentialTypes().size());
-    assertEquals(1, generalizedType.isNull());
-    assertFalse(generalizedType.isCategory2());
-    assertFalse(generalizedType.mayBeExtension());
-    assertFalse(value.isParticular());
-    assertFalse(generalizedType.isSpecific());
-    assertFalse(((MultiTypedReferenceValue) value).mayBeUnknown);
-    assertTrue(generalizedType.isParticular());
-    ValueAbstractState expectedAbstractDefault = actualAbstractNull.UNKNOWN;
-    assertSame(expectedAbstractDefault, jvmValueTransferRelation.getAbstractDefault());
-  }
-
-  /**
-   * Test {@link JvmValueTransferRelation#getAbstractNull()}.
-   *
-   * <ul>
-   *   <li>Then Value return {@link TypedReferenceValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractNull()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ValueAbstractState JvmValueTransferRelation.getAbstractNull()"})
-  public void testGetAbstractNull_thenValueReturnTypedReferenceValue() {
-    // Arrange
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(new ParticularReferenceValueFactory(), null);
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(
+        new ParticularReferenceValueFactory(), null);
 
     // Act
     ValueAbstractState actualAbstractNull = jvmValueTransferRelation.getAbstractNull();
@@ -435,35 +313,95 @@ public class JvmValueTransferRelationDiffblueTest {
     // Assert
     Value value = actualAbstractNull.getValue();
     assertTrue(value instanceof TypedReferenceValue);
+    AnalyzedObject value2 = ((TypedReferenceValue) value).getValue();
+    assertNull(value2.getPreciseValue());
     assertNull(((TypedReferenceValue) value).getType());
+    assertNull(actualAbstractNull.getPrecision());
     assertNull(((TypedReferenceValue) value).getReferencedClass());
+    assertNull(value2.getModeledOrNullValue());
+    assertEquals(-1, ((TypedReferenceValue) value).isNotNull());
     assertEquals(1, ((TypedReferenceValue) value).isNull());
     assertFalse(((TypedReferenceValue) value).mayBeExtension());
+    assertFalse(value.isCategory2());
+    assertFalse(value.isSpecific());
     assertTrue(value.isParticular());
     ValueAbstractState expectedAbstractDefault = actualAbstractNull.UNKNOWN;
     assertSame(expectedAbstractDefault, jvmValueTransferRelation.getAbstractDefault());
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractShortConstant(short)}.
-   *
-   * <ul>
-   *   <li>Then Value return {@link RangeIntegerValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractShortConstant(short)}
+   * Method under test: {@link JvmValueTransferRelation#getAbstractNull()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ValueAbstractState JvmValueTransferRelation.getAbstractShortConstant(short)"})
-  public void testGetAbstractShortConstant_thenValueReturnRangeIntegerValue() {
+  public void testGetAbstractNull2() {
     // Arrange
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(new RangeValueFactory(), null);
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(
+        new MultiTypedReferenceValueFactory(), null);
 
     // Act
-    ValueAbstractState actualAbstractShortConstant =
-        jvmValueTransferRelation.getAbstractShortConstant((short) 1);
+    ValueAbstractState actualAbstractNull = jvmValueTransferRelation.getAbstractNull();
+
+    // Assert
+    Value value = actualAbstractNull.getValue();
+    assertTrue(value instanceof MultiTypedReferenceValue);
+    AnalyzedObject value2 = ((MultiTypedReferenceValue) value).getValue();
+    assertNull(value2.getPreciseValue());
+    assertNull(((MultiTypedReferenceValue) value).getType());
+    TypedReferenceValue generalizedType = ((MultiTypedReferenceValue) value).getGeneralizedType();
+    assertNull(generalizedType.getType());
+    assertNull(actualAbstractNull.getPrecision());
+    assertNull(((MultiTypedReferenceValue) value).getReferencedClass());
+    assertNull(generalizedType.getReferencedClass());
+    assertNull(value2.getModeledOrNullValue());
+    assertEquals(-1, generalizedType.isNotNull());
+    assertEquals(-1, ((MultiTypedReferenceValue) value).isNotNull());
+    assertEquals(1, ((MultiTypedReferenceValue) value).getPotentialTypes().size());
+    assertEquals(1, generalizedType.isNull());
+    assertFalse(generalizedType.isCategory2());
+    assertFalse(generalizedType.mayBeExtension());
+    assertFalse(value.isCategory2());
+    assertFalse(value.isParticular());
+    assertFalse(value.isSpecific());
+    assertFalse(generalizedType.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) value).mayBeUnknown);
+    assertTrue(generalizedType.isParticular());
+    assertSame(value2, generalizedType.getValue());
+    ValueAbstractState expectedAbstractDefault = actualAbstractNull.UNKNOWN;
+    assertSame(expectedAbstractDefault, jvmValueTransferRelation.getAbstractDefault());
+  }
+
+  /**
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractShortConstant(short)}
+   */
+  @Test
+  public void testGetAbstractShortConstant() {
+    // Arrange
+    ParticularReferenceValueFactory valueFactory = new ParticularReferenceValueFactory();
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(valueFactory, null);
+
+    // Act
+    ValueAbstractState actualAbstractShortConstant = jvmValueTransferRelation.getAbstractShortConstant((short) 1);
+
+    // Assert
+    assertNull(actualAbstractShortConstant.getPrecision());
+    ValueAbstractState expectedAbstractDefault = actualAbstractShortConstant.UNKNOWN;
+    assertSame(expectedAbstractDefault, jvmValueTransferRelation.getAbstractDefault());
+    IntegerValue expectedValue = valueFactory.INTEGER_VALUE;
+    assertSame(expectedValue, actualAbstractShortConstant.getValue());
+  }
+
+  /**
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractShortConstant(short)}
+   */
+  @Test
+  public void testGetAbstractShortConstant2() {
+    // Arrange
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(new RangeValueFactory(), null);
+
+    // Act
+    ValueAbstractState actualAbstractShortConstant = jvmValueTransferRelation.getAbstractShortConstant((short) 1);
 
     // Assert
     Value value = actualAbstractShortConstant.getValue();
@@ -477,61 +415,30 @@ public class JvmValueTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractShortConstant(short)}.
-   *
-   * <ul>
-   *   <li>Then Value return {@link UnknownIntegerValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractShortConstant(short)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractReferenceValue(String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ValueAbstractState JvmValueTransferRelation.getAbstractShortConstant(short)"})
-  public void testGetAbstractShortConstant_thenValueReturnUnknownIntegerValue() {
+  public void testGetAbstractReferenceValue() {
     // Arrange
-    ParticularReferenceValueFactory valueFactory = new ParticularReferenceValueFactory();
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(valueFactory, null);
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(
+        new ParticularReferenceValueFactory(), null);
 
     // Act
-    ValueAbstractState actualAbstractShortConstant =
-        jvmValueTransferRelation.getAbstractShortConstant((short) 1);
-
-    // Assert
-    Value value = actualAbstractShortConstant.getValue();
-    assertTrue(value instanceof UnknownIntegerValue);
-    assertFalse(value.isParticular());
-    ValueAbstractState expectedAbstractDefault = actualAbstractShortConstant.UNKNOWN;
-    assertSame(expectedAbstractDefault, jvmValueTransferRelation.getAbstractDefault());
-    assertSame(valueFactory.INTEGER_VALUE, value);
-  }
-
-  /**
-   * Test {@link JvmValueTransferRelation#getAbstractReferenceValue(String)} with {@code className}.
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractReferenceValue(String)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ValueAbstractState JvmValueTransferRelation.getAbstractReferenceValue(String)"
-  })
-  public void testGetAbstractReferenceValueWithClassName() {
-    // Arrange
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(new ParticularReferenceValueFactory(), null);
-
-    // Act
-    ValueAbstractState actualAbstractReferenceValue =
-        jvmValueTransferRelation.getAbstractReferenceValue("Class Name");
+    ValueAbstractState actualAbstractReferenceValue = jvmValueTransferRelation.getAbstractReferenceValue("Class Name");
 
     // Assert
     Value value = actualAbstractReferenceValue.getValue();
     assertTrue(value instanceof IdentifiedReferenceValue);
     assertEquals("Class Name", ((IdentifiedReferenceValue) value).getType());
+    AnalyzedObject value2 = ((IdentifiedReferenceValue) value).getValue();
+    assertNull(value2.getPreciseValue());
+    assertNull(actualAbstractReferenceValue.getPrecision());
     assertNull(((IdentifiedReferenceValue) value).getReferencedClass());
+    assertNull(value2.getModeledOrNullValue());
+    assertEquals(0, ((IdentifiedReferenceValue) value).isNotNull());
     assertEquals(0, ((IdentifiedReferenceValue) value).isNull());
+    assertFalse(value.isCategory2());
     assertFalse(value.isParticular());
     assertTrue(((IdentifiedReferenceValue) value).mayBeExtension());
     assertTrue(value.isSpecific());
@@ -540,26 +447,20 @@ public class JvmValueTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractReferenceValue(String)} with {@code className}.
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractReferenceValue(String)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractReferenceValue(String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ValueAbstractState JvmValueTransferRelation.getAbstractReferenceValue(String)"
-  })
-  public void testGetAbstractReferenceValueWithClassName2() {
+  public void testGetAbstractReferenceValue2() {
     // Arrange
     BasicValueFactory valueFactory = new BasicValueFactory();
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(valueFactory, null);
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(valueFactory, null);
 
     // Act
-    ValueAbstractState actualAbstractReferenceValue =
-        jvmValueTransferRelation.getAbstractReferenceValue("Class Name");
+    ValueAbstractState actualAbstractReferenceValue = jvmValueTransferRelation.getAbstractReferenceValue("Class Name");
 
     // Assert
+    assertNull(actualAbstractReferenceValue.getPrecision());
     ValueAbstractState expectedAbstractDefault = actualAbstractReferenceValue.UNKNOWN;
     assertSame(expectedAbstractDefault, jvmValueTransferRelation.getAbstractDefault());
     ReferenceValue expectedValue = valueFactory.REFERENCE_VALUE;
@@ -567,23 +468,17 @@ public class JvmValueTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractReferenceValue(String)} with {@code className}.
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractReferenceValue(String)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractReferenceValue(String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ValueAbstractState JvmValueTransferRelation.getAbstractReferenceValue(String)"
-  })
-  public void testGetAbstractReferenceValueWithClassName3() {
+  public void testGetAbstractReferenceValue3() {
     // Arrange
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(new MultiTypedReferenceValueFactory(), null);
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(
+        new MultiTypedReferenceValueFactory(), null);
 
     // Act
-    ValueAbstractState actualAbstractReferenceValue =
-        jvmValueTransferRelation.getAbstractReferenceValue("Class Name");
+    ValueAbstractState actualAbstractReferenceValue = jvmValueTransferRelation.getAbstractReferenceValue("Class Name");
 
     // Assert
     Value value = actualAbstractReferenceValue.getValue();
@@ -591,42 +486,44 @@ public class JvmValueTransferRelationDiffblueTest {
     assertEquals("Class Name", ((MultiTypedReferenceValue) value).getType());
     TypedReferenceValue generalizedType = ((MultiTypedReferenceValue) value).getGeneralizedType();
     assertEquals("Class Name", generalizedType.getType());
+    AnalyzedObject value2 = ((MultiTypedReferenceValue) value).getValue();
+    assertNull(value2.getPreciseValue());
+    assertNull(actualAbstractReferenceValue.getPrecision());
     assertNull(((MultiTypedReferenceValue) value).getReferencedClass());
     assertNull(generalizedType.getReferencedClass());
+    assertNull(value2.getModeledOrNullValue());
     assertEquals(0, generalizedType.isNotNull());
+    assertEquals(0, ((MultiTypedReferenceValue) value).isNotNull());
     assertEquals(0, generalizedType.isNull());
     assertEquals(1, ((MultiTypedReferenceValue) value).getPotentialTypes().size());
     assertFalse(generalizedType.isCategory2());
     assertFalse(generalizedType.isParticular());
+    assertFalse(value.isCategory2());
     assertFalse(value.isParticular());
+    assertFalse(value.isSpecific());
     assertFalse(generalizedType.isSpecific());
     assertFalse(((MultiTypedReferenceValue) value).mayBeUnknown);
     assertTrue(generalizedType.mayBeExtension());
+    assertSame(value2, generalizedType.getValue());
     ValueAbstractState expectedAbstractDefault = actualAbstractReferenceValue.UNKNOWN;
     assertSame(expectedAbstractDefault, jvmValueTransferRelation.getAbstractDefault());
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractReferenceValue(String)} with {@code className}.
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractReferenceValue(String)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractReferenceValue(String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ValueAbstractState JvmValueTransferRelation.getAbstractReferenceValue(String)"
-  })
-  public void testGetAbstractReferenceValueWithClassName4() {
+  public void testGetAbstractReferenceValue4() {
     // Arrange
     PrimitiveTypedReferenceValueFactory valueFactory = new PrimitiveTypedReferenceValueFactory();
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(valueFactory, null);
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(valueFactory, null);
 
     // Act
-    ValueAbstractState actualAbstractReferenceValue =
-        jvmValueTransferRelation.getAbstractReferenceValue("Class Name");
+    ValueAbstractState actualAbstractReferenceValue = jvmValueTransferRelation.getAbstractReferenceValue("Class Name");
 
     // Assert
+    assertNull(actualAbstractReferenceValue.getPrecision());
     ValueAbstractState expectedAbstractDefault = actualAbstractReferenceValue.UNKNOWN;
     assertSame(expectedAbstractDefault, jvmValueTransferRelation.getAbstractDefault());
     ReferenceValue expectedValue = valueFactory.REFERENCE_VALUE;
@@ -634,30 +531,20 @@ public class JvmValueTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractReferenceValue(String)} with {@code className}.
-   *
-   * <ul>
-   *   <li>When empty string.
-   * </ul>
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractReferenceValue(String)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractReferenceValue(String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ValueAbstractState JvmValueTransferRelation.getAbstractReferenceValue(String)"
-  })
-  public void testGetAbstractReferenceValueWithClassName_whenEmptyString() {
+  public void testGetAbstractReferenceValue5() {
     // Arrange
     PrimitiveTypedReferenceValueFactory valueFactory = new PrimitiveTypedReferenceValueFactory();
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(valueFactory, null);
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(valueFactory, null);
 
     // Act
-    ValueAbstractState actualAbstractReferenceValue =
-        jvmValueTransferRelation.getAbstractReferenceValue("");
+    ValueAbstractState actualAbstractReferenceValue = jvmValueTransferRelation.getAbstractReferenceValue("");
 
     // Assert
+    assertNull(actualAbstractReferenceValue.getPrecision());
     ValueAbstractState expectedAbstractDefault = actualAbstractReferenceValue.UNKNOWN;
     assertSame(expectedAbstractDefault, jvmValueTransferRelation.getAbstractDefault());
     ReferenceValue expectedValue = valueFactory.REFERENCE_VALUE;
@@ -665,71 +552,55 @@ public class JvmValueTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractReferenceValue(String, Clazz, boolean,
-   * boolean)} with {@code internalType}, {@code referencedClazz}, {@code mayBeExtension}, {@code
-   * mayBeNull}.
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractReferenceValue(String, Clazz,
-   * boolean, boolean)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractReferenceValue(String, Clazz, boolean, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ValueAbstractState JvmValueTransferRelation.getAbstractReferenceValue(String, Clazz, boolean, boolean)"
-  })
-  public void
-      testGetAbstractReferenceValueWithInternalTypeReferencedClazzMayBeExtensionMayBeNull() {
+  public void testGetAbstractReferenceValue6() {
     // Arrange
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(new ParticularReferenceValueFactory(), null);
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(
+        new ParticularReferenceValueFactory(), null);
     LibraryClass referencedClazz = new LibraryClass();
 
     // Act
-    ValueAbstractState actualAbstractReferenceValue =
-        jvmValueTransferRelation.getAbstractReferenceValue(
-            "Internal Type", referencedClazz, true, true);
+    ValueAbstractState actualAbstractReferenceValue = jvmValueTransferRelation
+        .getAbstractReferenceValue("Internal Type", referencedClazz, true, true);
 
     // Assert
     Value value = actualAbstractReferenceValue.getValue();
-    Clazz referencedClass = ((IdentifiedReferenceValue) value).getReferencedClass();
-    assertTrue(referencedClass instanceof LibraryClass);
     assertTrue(value instanceof IdentifiedReferenceValue);
     assertEquals("Internal Type", ((IdentifiedReferenceValue) value).getType());
+    AnalyzedObject value2 = ((IdentifiedReferenceValue) value).getValue();
+    assertNull(value2.getPreciseValue());
+    assertNull(actualAbstractReferenceValue.getPrecision());
+    assertNull(value2.getModeledOrNullValue());
+    assertEquals(0, ((IdentifiedReferenceValue) value).isNotNull());
     assertEquals(0, ((IdentifiedReferenceValue) value).isNull());
+    assertFalse(value.isCategory2());
     assertFalse(value.isParticular());
     assertTrue(((IdentifiedReferenceValue) value).mayBeExtension());
     assertTrue(value.isSpecific());
-    assertSame(referencedClazz, referencedClass);
+    assertSame(referencedClazz, ((IdentifiedReferenceValue) value).getReferencedClass());
     ValueAbstractState expectedAbstractDefault = actualAbstractReferenceValue.UNKNOWN;
     assertSame(expectedAbstractDefault, jvmValueTransferRelation.getAbstractDefault());
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractReferenceValue(String, Clazz, boolean,
-   * boolean)} with {@code internalType}, {@code referencedClazz}, {@code mayBeExtension}, {@code
-   * mayBeNull}.
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractReferenceValue(String, Clazz,
-   * boolean, boolean)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractReferenceValue(String, Clazz, boolean, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ValueAbstractState JvmValueTransferRelation.getAbstractReferenceValue(String, Clazz, boolean, boolean)"
-  })
-  public void
-      testGetAbstractReferenceValueWithInternalTypeReferencedClazzMayBeExtensionMayBeNull2() {
+  public void testGetAbstractReferenceValue7() {
     // Arrange
     BasicValueFactory valueFactory = new BasicValueFactory();
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(valueFactory, null);
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(valueFactory, null);
 
     // Act
-    ValueAbstractState actualAbstractReferenceValue =
-        jvmValueTransferRelation.getAbstractReferenceValue(
-            "Internal Type", new LibraryClass(), true, true);
+    ValueAbstractState actualAbstractReferenceValue = jvmValueTransferRelation
+        .getAbstractReferenceValue("Internal Type", new LibraryClass(), true, true);
 
     // Assert
+    assertNull(actualAbstractReferenceValue.getPrecision());
     ValueAbstractState expectedAbstractDefault = actualAbstractReferenceValue.UNKNOWN;
     assertSame(expectedAbstractDefault, jvmValueTransferRelation.getAbstractDefault());
     ReferenceValue expectedValue = valueFactory.REFERENCE_VALUE;
@@ -737,70 +608,65 @@ public class JvmValueTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractReferenceValue(String, Clazz, boolean,
-   * boolean)} with {@code internalType}, {@code referencedClazz}, {@code mayBeExtension}, {@code
-   * mayBeNull}.
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractReferenceValue(String, Clazz,
-   * boolean, boolean)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractReferenceValue(String, Clazz, boolean, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ValueAbstractState JvmValueTransferRelation.getAbstractReferenceValue(String, Clazz, boolean, boolean)"
-  })
-  public void
-      testGetAbstractReferenceValueWithInternalTypeReferencedClazzMayBeExtensionMayBeNull3() {
+  public void testGetAbstractReferenceValue8() {
     // Arrange
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(new MultiTypedReferenceValueFactory(), null);
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(
+        new MultiTypedReferenceValueFactory(), null);
     LibraryClass referencedClazz = new LibraryClass();
 
     // Act
-    ValueAbstractState actualAbstractReferenceValue =
-        jvmValueTransferRelation.getAbstractReferenceValue(
-            "Internal Type", referencedClazz, true, true);
+    ValueAbstractState actualAbstractReferenceValue = jvmValueTransferRelation
+        .getAbstractReferenceValue("Internal Type", referencedClazz, true, true);
 
     // Assert
     Value value = actualAbstractReferenceValue.getValue();
-    Clazz referencedClass = ((MultiTypedReferenceValue) value).getReferencedClass();
-    assertTrue(referencedClass instanceof LibraryClass);
     assertTrue(value instanceof MultiTypedReferenceValue);
     assertEquals("Internal Type", ((MultiTypedReferenceValue) value).getType());
+    TypedReferenceValue generalizedType = ((MultiTypedReferenceValue) value).getGeneralizedType();
+    assertEquals("Internal Type", generalizedType.getType());
+    AnalyzedObject value2 = ((MultiTypedReferenceValue) value).getValue();
+    assertNull(value2.getPreciseValue());
+    assertNull(actualAbstractReferenceValue.getPrecision());
+    assertNull(value2.getModeledOrNullValue());
+    assertEquals(0, generalizedType.isNotNull());
+    assertEquals(0, ((MultiTypedReferenceValue) value).isNotNull());
+    assertEquals(0, generalizedType.isNull());
     assertEquals(1, ((MultiTypedReferenceValue) value).getPotentialTypes().size());
+    assertFalse(generalizedType.isCategory2());
+    assertFalse(generalizedType.isParticular());
+    assertFalse(value.isCategory2());
     assertFalse(value.isParticular());
+    assertFalse(value.isSpecific());
+    assertFalse(generalizedType.isSpecific());
     assertFalse(((MultiTypedReferenceValue) value).mayBeUnknown);
-    assertSame(referencedClazz, referencedClass);
+    assertTrue(generalizedType.mayBeExtension());
+    assertSame(referencedClazz, ((MultiTypedReferenceValue) value).getReferencedClass());
+    assertSame(referencedClazz, generalizedType.getReferencedClass());
+    assertSame(value2, generalizedType.getValue());
     ValueAbstractState expectedAbstractDefault = actualAbstractReferenceValue.UNKNOWN;
     assertSame(expectedAbstractDefault, jvmValueTransferRelation.getAbstractDefault());
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractReferenceValue(String, Clazz, boolean,
-   * boolean)} with {@code internalType}, {@code referencedClazz}, {@code mayBeExtension}, {@code
-   * mayBeNull}.
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractReferenceValue(String, Clazz,
-   * boolean, boolean)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractReferenceValue(String, Clazz, boolean, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ValueAbstractState JvmValueTransferRelation.getAbstractReferenceValue(String, Clazz, boolean, boolean)"
-  })
-  public void
-      testGetAbstractReferenceValueWithInternalTypeReferencedClazzMayBeExtensionMayBeNull4() {
+  public void testGetAbstractReferenceValue9() {
     // Arrange
     PrimitiveTypedReferenceValueFactory valueFactory = new PrimitiveTypedReferenceValueFactory();
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(valueFactory, null);
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(valueFactory, null);
 
     // Act
-    ValueAbstractState actualAbstractReferenceValue =
-        jvmValueTransferRelation.getAbstractReferenceValue(
-            "Internal Type", new LibraryClass(), true, true);
+    ValueAbstractState actualAbstractReferenceValue = jvmValueTransferRelation
+        .getAbstractReferenceValue("Internal Type", new LibraryClass(), true, true);
 
     // Assert
+    assertNull(actualAbstractReferenceValue.getPrecision());
     ValueAbstractState expectedAbstractDefault = actualAbstractReferenceValue.UNKNOWN;
     assertSame(expectedAbstractDefault, jvmValueTransferRelation.getAbstractDefault());
     ReferenceValue expectedValue = valueFactory.REFERENCE_VALUE;
@@ -808,30 +674,21 @@ public class JvmValueTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#getAbstractReferenceValue(String, Clazz, boolean,
-   * boolean)} with {@code internalType}, {@code referencedClazz}, {@code mayBeExtension}, {@code
-   * mayBeNull}.
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#getAbstractReferenceValue(String, Clazz,
-   * boolean, boolean)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#getAbstractReferenceValue(String, Clazz, boolean, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ValueAbstractState JvmValueTransferRelation.getAbstractReferenceValue(String, Clazz, boolean, boolean)"
-  })
-  public void
-      testGetAbstractReferenceValueWithInternalTypeReferencedClazzMayBeExtensionMayBeNull5() {
+  public void testGetAbstractReferenceValue10() {
     // Arrange
     PrimitiveTypedReferenceValueFactory valueFactory = new PrimitiveTypedReferenceValueFactory();
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(valueFactory, null);
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(valueFactory, null);
 
     // Act
-    ValueAbstractState actualAbstractReferenceValue =
-        jvmValueTransferRelation.getAbstractReferenceValue("", new LibraryClass(), true, true);
+    ValueAbstractState actualAbstractReferenceValue = jvmValueTransferRelation.getAbstractReferenceValue("",
+        new LibraryClass(), true, true);
 
     // Assert
+    assertNull(actualAbstractReferenceValue.getPrecision());
     ValueAbstractState expectedAbstractDefault = actualAbstractReferenceValue.UNKNOWN;
     assertSame(expectedAbstractDefault, jvmValueTransferRelation.getAbstractDefault());
     ReferenceValue expectedValue = valueFactory.REFERENCE_VALUE;
@@ -839,177 +696,43 @@ public class JvmValueTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmValueTransferRelation#invokeMethod(JvmAbstractState, Call, List)}.
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#invokeMethod(JvmAbstractState, Call,
-   * List)}
+   * Method under test:
+   * {@link JvmValueTransferRelation#handleCheckCast(ValueAbstractState, String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void JvmValueTransferRelation.invokeMethod(JvmAbstractState, Call, List)"})
-  public void testInvokeMethod() {
+  public void testHandleCheckCast() {
     // Arrange
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(new ParticularReferenceValueFactory(), null);
-    JvmFrameAbstractState<ValueAbstractState> frame = new JvmFrameAbstractState<>();
-    JvmForgetfulHeapAbstractState<ValueAbstractState> heap =
-        new JvmForgetfulHeapAbstractState<>(ValueAbstractState.UNKNOWN);
-    JvmAbstractState<ValueAbstractState> state =
-        new JvmAbstractState<>(
-            JvmUnknownCfaNode.INSTANCE, frame, heap, new HashMapAbstractState<>());
-
-    LibraryClass clazz = new LibraryClass();
-    CodeLocation caller = new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
-
-    SymbolicCall call =
-        new SymbolicCall(
-            caller,
-            ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE,
-            1,
-            new BranchInstruction((byte) 'A', 1),
-            true,
-            true);
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(
+        new ParticularReferenceValueFactory(), null);
 
     // Act
-    jvmValueTransferRelation.invokeMethod(state, call, new ArrayList<>());
-
-    // Assert
-    ValueAbstractState peekResult = state.peek();
-    assertTrue(peekResult.getValue() instanceof IdentifiedReferenceValue);
-    assertNull(peekResult.getPrecision());
-    assertEquals(1, state.getFrame().getOperandStack().size());
-    assertSame(peekResult, jvmValueTransferRelation.getAbstractDefault());
-  }
-
-  /**
-   * Test {@link JvmValueTransferRelation#invokeMethod(JvmAbstractState, Call, List)}.
-   *
-   * <ul>
-   *   <li>Given {@link ValueAbstractState#UNKNOWN}.
-   *   <li>When {@link ArrayList#ArrayList()} add {@link ValueAbstractState#UNKNOWN}.
-   *   <li>Then {@link ArrayList#ArrayList()} size is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#invokeMethod(JvmAbstractState, Call,
-   * List)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void JvmValueTransferRelation.invokeMethod(JvmAbstractState, Call, List)"})
-  public void testInvokeMethod_givenUnknown_whenArrayListAddUnknown_thenArrayListSizeIsOne() {
-    // Arrange
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(new ParticularReferenceValueFactory(), null);
-    JvmFrameAbstractState<ValueAbstractState> frame = new JvmFrameAbstractState<>();
-    JvmForgetfulHeapAbstractState<ValueAbstractState> heap =
-        new JvmForgetfulHeapAbstractState<>(ValueAbstractState.UNKNOWN);
-    JvmAbstractState<ValueAbstractState> state =
-        new JvmAbstractState<>(
-            JvmUnknownCfaNode.INSTANCE, frame, heap, new HashMapAbstractState<>());
-
-    LibraryClass clazz = new LibraryClass();
-    CodeLocation caller = new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
-
-    SymbolicCall call =
-        new SymbolicCall(
-            caller,
-            ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE,
-            1,
-            new BranchInstruction((byte) 'A', 1),
-            true,
-            true);
-
-    ArrayList<ValueAbstractState> operands = new ArrayList<>();
-    operands.add(ValueAbstractState.UNKNOWN);
-
-    // Act
-    jvmValueTransferRelation.invokeMethod(state, call, operands);
-
-    // Assert
-    ValueAbstractState peekResult = state.peek();
-    assertTrue(peekResult.getValue() instanceof IdentifiedReferenceValue);
-    assertNull(peekResult.getPrecision());
-    assertEquals(1, operands.size());
-    assertEquals(operands, state.getFrame().getOperandStack());
-    assertSame(peekResult, operands.get(0));
-    assertSame(peekResult, jvmValueTransferRelation.getAbstractDefault());
-  }
-
-  /**
-   * Test {@link JvmValueTransferRelation#invokeMethod(JvmAbstractState, Call, List)}.
-   *
-   * <ul>
-   *   <li>Given {@link ValueAbstractState#UNKNOWN}.
-   *   <li>When {@link ArrayList#ArrayList()} add {@link ValueAbstractState#UNKNOWN}.
-   *   <li>Then {@link ArrayList#ArrayList()} size is two.
-   * </ul>
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#invokeMethod(JvmAbstractState, Call,
-   * List)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void JvmValueTransferRelation.invokeMethod(JvmAbstractState, Call, List)"})
-  public void testInvokeMethod_givenUnknown_whenArrayListAddUnknown_thenArrayListSizeIsTwo() {
-    // Arrange
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(new ParticularReferenceValueFactory(), null);
-    JvmFrameAbstractState<ValueAbstractState> frame = new JvmFrameAbstractState<>();
-    JvmForgetfulHeapAbstractState<ValueAbstractState> heap =
-        new JvmForgetfulHeapAbstractState<>(ValueAbstractState.UNKNOWN);
-    JvmAbstractState<ValueAbstractState> state =
-        new JvmAbstractState<>(
-            JvmUnknownCfaNode.INSTANCE, frame, heap, new HashMapAbstractState<>());
-
-    LibraryClass clazz = new LibraryClass();
-    CodeLocation caller = new CodeLocation(clazz, new LibraryField(1, "Name", "Descriptor"), 2);
-
-    SymbolicCall call =
-        new SymbolicCall(
-            caller,
-            ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE,
-            1,
-            new BranchInstruction((byte) 'A', 1),
-            true,
-            true);
-
-    ArrayList<ValueAbstractState> operands = new ArrayList<>();
-    operands.add(ValueAbstractState.UNKNOWN);
-    operands.add(ValueAbstractState.UNKNOWN);
-
-    // Act
-    jvmValueTransferRelation.invokeMethod(state, call, operands);
-
-    // Assert
-    assertEquals(1, state.getFrame().getOperandStack().size());
-    assertEquals(2, operands.size());
-  }
-
-  /**
-   * Test {@link JvmValueTransferRelation#handleCheckCast(ValueAbstractState, String)} with {@code
-   * ValueAbstractState}, {@code String}.
-   *
-   * <p>Method under test: {@link JvmValueTransferRelation#handleCheckCast(ValueAbstractState,
-   * String)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ValueAbstractState JvmValueTransferRelation.handleCheckCast(ValueAbstractState, String)"
-  })
-  public void testHandleCheckCastWithValueAbstractStateString() {
-    // Arrange
-    JvmValueTransferRelation jvmValueTransferRelation =
-        new JvmValueTransferRelation(new ParticularReferenceValueFactory(), null);
-
-    // Act
-    ValueAbstractState actualHandleCheckCastResult =
-        jvmValueTransferRelation.handleCheckCast(
-            new ValueAbstractState(BasicValueFactory.DOUBLE_VALUE), "Internal Name");
+    ValueAbstractState actualHandleCheckCastResult = jvmValueTransferRelation
+        .handleCheckCast(new ValueAbstractState(BasicValueFactory.DOUBLE_VALUE), "Internal Name");
 
     // Assert
     ValueAbstractState valueAbstractState = actualHandleCheckCastResult.UNKNOWN;
     assertSame(valueAbstractState, jvmValueTransferRelation.getAbstractDefault());
     assertSame(valueAbstractState, actualHandleCheckCastResult);
+  }
+
+  /**
+   * Methods under test:
+   * <ul>
+   *   <li>
+   * {@link JvmValueTransferRelation#JvmValueTransferRelation(ValueFactory, ExecutingInvocationUnit)}
+   *   <li>{@link JvmValueTransferRelation#getValueFactory()}
+   * </ul>
+   */
+  @Test
+  public void testGettersAndSetters() {
+    // Arrange
+    ParticularReferenceValueFactory valueFactory = new ParticularReferenceValueFactory();
+
+    // Act
+    ValueFactory actualValueFactory = (new JvmValueTransferRelation(valueFactory, null)).getValueFactory();
+
+    // Assert
+    assertTrue(actualValueFactory instanceof ParticularReferenceValueFactory);
+    assertSame(valueFactory, actualValueFactory);
   }
 }

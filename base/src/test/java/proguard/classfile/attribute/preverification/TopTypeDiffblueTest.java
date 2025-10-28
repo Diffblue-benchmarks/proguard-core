@@ -2,18 +2,11 @@ package proguard.classfile.attribute.preverification;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 public class TopTypeDiffblueTest {
   /**
-   * Test getters and setters.
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
    *   <li>default or parameterless constructor of {@link TopType}
    *   <li>{@link TopType#toString()}
@@ -21,8 +14,6 @@ public class TopTypeDiffblueTest {
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void TopType.<init>()", "int TopType.getTag()", "String TopType.toString()"})
   public void testGettersAndSetters() {
     // Arrange and Act
     TopType actualTopType = new TopType();

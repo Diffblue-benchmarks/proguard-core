@@ -3,21 +3,14 @@ package proguard.analysis.cpa.defaults;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 public class DepthFirstWaitlistDiffblueTest {
   /**
-   * Test new {@link DepthFirstWaitlist} (default constructor).
-   *
-   * <p>Method under test: default or parameterless constructor of {@link DepthFirstWaitlist}
+   * Method under test: default or parameterless constructor of
+   * {@link DepthFirstWaitlist}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void DepthFirstWaitlist.<init>()"})
   public void testNewDepthFirstWaitlist() {
     // Arrange and Act
     DepthFirstWaitlist actualDepthFirstWaitlist = new DepthFirstWaitlist();

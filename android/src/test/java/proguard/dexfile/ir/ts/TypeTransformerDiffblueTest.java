@@ -3,15 +3,13 @@ package proguard.dexfile.ir.ts;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.HashSet;
 import java.util.Set;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.IrMethod;
 import proguard.dexfile.ir.TypeClass;
 import proguard.dexfile.ir.expr.ArrayExpr;
@@ -22,57 +20,39 @@ import proguard.dexfile.ir.expr.Value;
 import proguard.dexfile.ir.stmt.IfStmt;
 import proguard.dexfile.ir.stmt.LabelStmt;
 import proguard.dexfile.ir.stmt.LookupSwitchStmt;
+import proguard.dexfile.ir.stmt.NopStmt;
 import proguard.dexfile.ir.stmt.Stmt;
-import proguard.dexfile.ir.stmt.Stmt.ST;
 import proguard.dexfile.ir.stmt.StmtList;
 import proguard.dexfile.ir.stmt.Stmts;
-import proguard.dexfile.ir.ts.TypeTransformer.TypeRef;
 
 public class TypeTransformerDiffblueTest {
   /**
-   * Test {@link TypeTransformer#transform(IrMethod)}.
-   *
-   * <p>Method under test: {@link TypeTransformer#transform(IrMethod)}
+   * Method under test: {@link TypeTransformer#transform(IrMethod)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void TypeTransformer.transform(IrMethod)"})
   public void testTransform() {
     // Arrange
     TypeTransformer typeTransformer = new TypeTransformer();
-
-    StmtList stmtList = new StmtList();
-    Local condition = new Local();
-    stmtList.add(new IfStmt(ST.LOCAL_START, condition, Stmts.nLabel()));
     IrMethod irMethod = new IrMethod();
-    irMethod.stmts = stmtList;
 
     // Act
     typeTransformer.transform(irMethod);
 
-    // Assert that nothing has changed
-    Stmt first = irMethod.stmts.getFirst();
-    assertTrue(first.getOp() instanceof Local);
-    assertTrue(first instanceof IfStmt);
+    // Assert
+    assertNull(irMethod.stmts.getFirst());
   }
 
   /**
-   * Test {@link TypeTransformer#transform(IrMethod)}.
-   *
-   * <p>Method under test: {@link TypeTransformer#transform(IrMethod)}
+   * Method under test: {@link TypeTransformer#transform(IrMethod)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void TypeTransformer.transform(IrMethod)"})
   public void testTransform2() {
     // Arrange
     TypeTransformer typeTransformer = new TypeTransformer();
 
     StmtList stmtList = new StmtList();
-    Local key = new Local();
-    stmtList.add(
-        new LookupSwitchStmt(
-            key, new int[] {42, 1, 42, 1}, new LabelStmt[] {Stmts.nLabel()}, Stmts.nLabel()));
+    LabelStmt stmt = Stmts.nLabel();
+    stmtList.add(stmt);
     IrMethod irMethod = new IrMethod();
     irMethod.stmts = stmtList;
 
@@ -81,27 +61,22 @@ public class TypeTransformerDiffblueTest {
 
     // Assert
     Stmt first = irMethod.stmts.getFirst();
-    Value op = first.getOp();
-    assertTrue(op instanceof Local);
-    assertTrue(first instanceof LookupSwitchStmt);
-    assertEquals("I", ((Local) op).valueType);
+    assertTrue(first instanceof LabelStmt);
+    assertSame(stmt, first);
   }
 
   /**
-   * Test {@link TypeTransformer#transform(IrMethod)}.
-   *
-   * <p>Method under test: {@link TypeTransformer#transform(IrMethod)}
+   * Method under test: {@link TypeTransformer#transform(IrMethod)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void TypeTransformer.transform(IrMethod)"})
   public void testTransform3() {
     // Arrange
     TypeTransformer typeTransformer = new TypeTransformer();
 
     StmtList stmtList = new StmtList();
-    Constant condition = Exprs.nByte((byte) 'A');
-    stmtList.add(new IfStmt(ST.LOCAL_START, condition, Stmts.nLabel()));
+    LabelStmt stmt = Stmts.nLabel();
+    stmtList.add(stmt);
+    stmtList.add(Stmts.nLabel());
     IrMethod irMethod = new IrMethod();
     irMethod.stmts = stmtList;
 
@@ -110,27 +85,21 @@ public class TypeTransformerDiffblueTest {
 
     // Assert
     Stmt first = irMethod.stmts.getFirst();
-    Value op = first.getOp();
-    assertTrue(op instanceof Constant);
-    assertTrue(first instanceof IfStmt);
-    assertEquals("I", ((Constant) op).valueType);
+    assertTrue(first instanceof LabelStmt);
+    assertSame(stmt, first);
   }
 
   /**
-   * Test {@link TypeTransformer#transform(IrMethod)}.
-   *
-   * <p>Method under test: {@link TypeTransformer#transform(IrMethod)}
+   * Method under test: {@link TypeTransformer#transform(IrMethod)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void TypeTransformer.transform(IrMethod)"})
   public void testTransform4() {
     // Arrange
     TypeTransformer typeTransformer = new TypeTransformer();
 
     StmtList stmtList = new StmtList();
-    Constant condition = Exprs.nChar('\u0001');
-    stmtList.add(new IfStmt(ST.LOCAL_START, condition, Stmts.nLabel()));
+    NopStmt stmt = Stmts.nNop();
+    stmtList.add(stmt);
     IrMethod irMethod = new IrMethod();
     irMethod.stmts = stmtList;
 
@@ -139,29 +108,23 @@ public class TypeTransformerDiffblueTest {
 
     // Assert
     Stmt first = irMethod.stmts.getFirst();
-    Value op = first.getOp();
-    assertTrue(op instanceof Constant);
-    assertTrue(first instanceof IfStmt);
-    assertEquals("I", ((Constant) op).valueType);
+    assertTrue(first instanceof NopStmt);
+    assertSame(stmt, first);
   }
 
   /**
-   * Test {@link TypeTransformer#transform(IrMethod)}.
-   *
-   * <p>Method under test: {@link TypeTransformer#transform(IrMethod)}
+   * Method under test: {@link TypeTransformer#transform(IrMethod)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void TypeTransformer.transform(IrMethod)"})
   public void testTransform5() {
     // Arrange
     TypeTransformer typeTransformer = new TypeTransformer();
 
     StmtList stmtList = new StmtList();
-    Constant key = Exprs.nByte((byte) 'A');
-    stmtList.add(
-        new LookupSwitchStmt(
-            key, new int[] {42, 1, 42, 1}, new LabelStmt[] {Stmts.nLabel()}, Stmts.nLabel()));
+    Local condition = new Local();
+    IfStmt stmt = new IfStmt(Stmt.ST.LOCAL_START, condition, Stmts.nLabel());
+
+    stmtList.add(stmt);
     IrMethod irMethod = new IrMethod();
     irMethod.stmts = stmtList;
 
@@ -169,33 +132,22 @@ public class TypeTransformerDiffblueTest {
     typeTransformer.transform(irMethod);
 
     // Assert
-    Stmt first = irMethod.stmts.getFirst();
-    Value op = first.getOp();
-    assertTrue(op instanceof Constant);
-    assertTrue(first instanceof LookupSwitchStmt);
-    assertEquals("I", ((Constant) op).valueType);
+    assertSame(stmt, irMethod.stmts.getFirst());
   }
 
   /**
-   * Test {@link TypeTransformer#transform(IrMethod)}.
-   *
-   * <ul>
-   *   <li>Then {@link IrMethod} (default constructor) {@link IrMethod#stmts} First Op {@link
-   *       Value#valueType} is {@code Ljava/lang/Object;}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeTransformer#transform(IrMethod)}
+   * Method under test: {@link TypeTransformer#transform(IrMethod)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void TypeTransformer.transform(IrMethod)"})
-  public void testTransform_thenIrMethodStmtsFirstOpValueTypeIsLjavaLangObject() {
+  public void testTransform6() {
     // Arrange
     TypeTransformer typeTransformer = new TypeTransformer();
 
     StmtList stmtList = new StmtList();
     Constant condition = Exprs.nNull();
-    stmtList.add(new IfStmt(ST.LOCAL_START, condition, Stmts.nLabel()));
+    IfStmt stmt = new IfStmt(Stmt.ST.LOCAL_START, condition, Stmts.nLabel());
+
+    stmtList.add(stmt);
     IrMethod irMethod = new IrMethod();
     irMethod.stmts = stmtList;
 
@@ -203,63 +155,143 @@ public class TypeTransformerDiffblueTest {
     typeTransformer.transform(irMethod);
 
     // Assert
-    Stmt first = irMethod.stmts.getFirst();
-    Value op = first.getOp();
-    assertTrue(op instanceof Constant);
-    assertTrue(first instanceof IfStmt);
-    assertEquals("Ljava/lang/Object;", ((Constant) op).valueType);
+    assertSame(stmt, irMethod.stmts.getFirst());
   }
 
   /**
-   * Test TypeRef {@link TypeRef#addAllUses(Set)}.
-   *
-   * <ul>
-   *   <li>Given {@code 42}.
-   *   <li>Then {@link TypeRef#TypeRef(Value)} with value is {@link ArrayExpr#ArrayExpr()} {@link
-   *       TypeRef#uses} size is two.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#addAllUses(Set)}
+   * Method under test: {@link TypeTransformer#transform(IrMethod)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TypeRef.addAllUses(Set)"})
-  public void testTypeRefAddAllUses_given42_thenTypeRefWithValueIsArrayExprUsesSizeIsTwo() {
+  public void testTransform7() {
     // Arrange
-    TypeRef typeRef = new TypeRef(new ArrayExpr());
+    TypeTransformer typeTransformer = new TypeTransformer();
 
-    HashSet<String> resultUses = new HashSet<>();
-    resultUses.add("42");
-    resultUses.add("foo");
+    StmtList stmtList = new StmtList();
+    Local key = new Local();
+    LookupSwitchStmt stmt = new LookupSwitchStmt(key, new int[]{42, 1, 42, 1}, new LabelStmt[]{Stmts.nLabel()},
+        Stmts.nLabel());
+
+    stmtList.add(stmt);
+    IrMethod irMethod = new IrMethod();
+    irMethod.stmts = stmtList;
 
     // Act
-    boolean actualAddAllUsesResult = typeRef.addAllUses(resultUses);
+    typeTransformer.transform(irMethod);
 
     // Assert
-    Set<String> stringSet = typeRef.uses;
-    assertEquals(2, stringSet.size());
-    assertTrue(stringSet.contains("42"));
-    assertTrue(stringSet.contains("foo"));
-    assertTrue(actualAddAllUsesResult);
+    assertSame(stmt, irMethod.stmts.getFirst());
   }
 
   /**
-   * Test TypeRef {@link TypeRef#addAllUses(Set)}.
-   *
-   * <ul>
-   *   <li>Given {@code foo}.
-   *   <li>When {@link HashSet#HashSet()} add {@code foo}.
-   *   <li>Then {@link HashSet#HashSet()} size is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#addAllUses(Set)}
+   * Method under test: {@link TypeTransformer#transform(IrMethod)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TypeRef.addAllUses(Set)"})
-  public void testTypeRefAddAllUses_givenFoo_whenHashSetAddFoo_thenHashSetSizeIsOne() {
+  public void testTransform8() {
     // Arrange
-    TypeRef typeRef = new TypeRef(new ArrayExpr());
+    TypeTransformer typeTransformer = new TypeTransformer();
+
+    StmtList stmtList = new StmtList();
+    Constant condition = Exprs.nByte((byte) 'A');
+    IfStmt stmt = new IfStmt(Stmt.ST.LOCAL_START, condition, Stmts.nLabel());
+
+    stmtList.add(stmt);
+    IrMethod irMethod = new IrMethod();
+    irMethod.stmts = stmtList;
+
+    // Act
+    typeTransformer.transform(irMethod);
+
+    // Assert
+    assertSame(stmt, irMethod.stmts.getFirst());
+  }
+
+  /**
+   * Method under test: {@link TypeTransformer#transform(IrMethod)}
+   */
+  @Test
+  public void testTransform9() {
+    // Arrange
+    TypeTransformer typeTransformer = new TypeTransformer();
+
+    StmtList stmtList = new StmtList();
+    Constant condition = Exprs.nChar('\u0001');
+    IfStmt stmt = new IfStmt(Stmt.ST.LOCAL_START, condition, Stmts.nLabel());
+
+    stmtList.add(stmt);
+    IrMethod irMethod = new IrMethod();
+    irMethod.stmts = stmtList;
+
+    // Act
+    typeTransformer.transform(irMethod);
+
+    // Assert
+    assertSame(stmt, irMethod.stmts.getFirst());
+  }
+
+  /**
+   * Method under test: {@link TypeTransformer#transform(IrMethod)}
+   */
+  @Test
+  public void testTransform10() {
+    // Arrange
+    TypeTransformer typeTransformer = new TypeTransformer();
+
+    StmtList stmtList = new StmtList();
+    Constant key = Exprs.nByte((byte) 'A');
+    LookupSwitchStmt stmt = new LookupSwitchStmt(key, new int[]{42, 1, 42, 1}, new LabelStmt[]{Stmts.nLabel()},
+        Stmts.nLabel());
+
+    stmtList.add(stmt);
+    IrMethod irMethod = new IrMethod();
+    irMethod.stmts = stmtList;
+
+    // Act
+    typeTransformer.transform(irMethod);
+
+    // Assert
+    assertSame(stmt, irMethod.stmts.getFirst());
+  }
+
+  /**
+   * Method under test: {@link TypeTransformer.TypeRef#addAllUses(Set)}
+   */
+  @Test
+  public void testTypeRefAddAllUses() {
+    // Arrange
+    TypeTransformer.TypeRef typeRef = new TypeTransformer.TypeRef(new ArrayExpr());
+    HashSet<String> resultUses = new HashSet<>();
+
+    // Act and Assert
+    assertFalse(typeRef.addAllUses(resultUses));
+    assertTrue(resultUses.isEmpty());
+    assertTrue(typeRef.uses.isEmpty());
+  }
+
+  /**
+   * Method under test: {@link TypeTransformer.TypeRef#addAllUses(Set)}
+   */
+  @Test
+  public void testTypeRefAddAllUses2() {
+    // Arrange
+    TypeTransformer.TypeRef typeRef = new TypeTransformer.TypeRef(new ArrayExpr());
+    typeRef.addUses("Ele");
+    HashSet<String> resultUses = new HashSet<>();
+
+    // Act and Assert
+    Set<String> stringSet = typeRef.uses;
+    assertEquals(1, stringSet.size());
+    assertFalse(typeRef.addAllUses(resultUses));
+    assertTrue(resultUses.isEmpty());
+    assertTrue(stringSet.contains("Ele"));
+  }
+
+  /**
+   * Method under test: {@link TypeTransformer.TypeRef#addAllUses(Set)}
+   */
+  @Test
+  public void testTypeRefAddAllUses3() {
+    // Arrange
+    TypeTransformer.TypeRef typeRef = new TypeTransformer.TypeRef(new ArrayExpr());
 
     HashSet<String> resultUses = new HashSet<>();
     resultUses.add("foo");
@@ -276,102 +308,36 @@ public class TypeTransformerDiffblueTest {
   }
 
   /**
-   * Test TypeRef {@link TypeRef#addAllUses(Set)}.
-   *
-   * <ul>
-   *   <li>Given {@link TypeRef#TypeRef(Value)} with value is {@link ArrayExpr#ArrayExpr()} addUses
-   *       {@code Ele}.
-   *   <li>Then return {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#addAllUses(Set)}
+   * Method under test: {@link TypeTransformer.TypeRef#addAllUses(Set)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TypeRef.addAllUses(Set)"})
-  public void testTypeRefAddAllUses_givenTypeRefWithValueIsArrayExprAddUsesEle_thenReturnFalse() {
+  public void testTypeRefAddAllUses4() {
     // Arrange
-    TypeRef typeRef = new TypeRef(new ArrayExpr());
-    typeRef.addUses("Ele");
-    HashSet<String> resultUses = new HashSet<>();
+    TypeTransformer.TypeRef typeRef = new TypeTransformer.TypeRef(new ArrayExpr());
 
-    // Act and Assert
-    Set<String> stringSet = typeRef.uses;
-    assertEquals(1, stringSet.size());
-    assertFalse(typeRef.addAllUses(resultUses));
-    assertTrue(resultUses.isEmpty());
-    assertTrue(stringSet.contains("Ele"));
-  }
-
-  /**
-   * Test TypeRef {@link TypeRef#addAllUses(Set)}.
-   *
-   * <ul>
-   *   <li>When {@link HashSet#HashSet()}.
-   *   <li>Then {@link TypeRef#TypeRef(Value)} with value is {@link ArrayExpr#ArrayExpr()} {@link
-   *       TypeRef#uses} Empty.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#addAllUses(Set)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TypeRef.addAllUses(Set)"})
-  public void testTypeRefAddAllUses_whenHashSet_thenTypeRefWithValueIsArrayExprUsesEmpty() {
-    // Arrange
-    TypeRef typeRef = new TypeRef(new ArrayExpr());
     HashSet<String> resultUses = new HashSet<>();
+    resultUses.add("42");
+    resultUses.add("foo");
 
     // Act
-    typeRef.addAllUses(resultUses);
+    boolean actualAddAllUsesResult = typeRef.addAllUses(resultUses);
 
     // Assert
-    assertTrue(resultUses.isEmpty());
-    assertTrue(typeRef.uses.isEmpty());
-  }
-
-  /**
-   * Test TypeRef {@link TypeRef#addUses(String)}.
-   *
-   * <ul>
-   *   <li>Given {@link TypeRef#TypeRef(Value)} with value is {@link ArrayExpr#ArrayExpr()} addUses
-   *       {@code Ele}.
-   *   <li>Then return {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#addUses(String)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TypeRef.addUses(String)"})
-  public void testTypeRefAddUses_givenTypeRefWithValueIsArrayExprAddUsesEle_thenReturnFalse() {
-    // Arrange
-    TypeRef typeRef = new TypeRef(new ArrayExpr());
-    typeRef.addUses("Ele");
-
-    // Act and Assert
     Set<String> stringSet = typeRef.uses;
-    assertEquals(1, stringSet.size());
-    assertFalse(typeRef.addUses("Ele"));
-    assertTrue(stringSet.contains("Ele"));
+    assertEquals(2, stringSet.size());
+    assertTrue(stringSet.contains("42"));
+    assertTrue(stringSet.contains("foo"));
+    assertTrue(actualAddAllUsesResult);
+    assertEquals(typeRef.uses, resultUses);
   }
 
   /**
-   * Test TypeRef {@link TypeRef#addUses(String)}.
-   *
-   * <ul>
-   *   <li>Given {@link TypeRef#TypeRef(Value)} with value is {@link ArrayExpr#ArrayExpr()}.
-   *   <li>Then return {@code true}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#addUses(String)}
+   * Method under test: {@link TypeTransformer.TypeRef#addUses(String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TypeRef.addUses(String)"})
-  public void testTypeRefAddUses_givenTypeRefWithValueIsArrayExpr_thenReturnTrue() {
+  public void testTypeRefAddUses() {
     // Arrange
-    TypeRef typeRef = new TypeRef(new ArrayExpr());
+    TypeTransformer.TypeRef typeRef = new TypeTransformer.TypeRef(new ArrayExpr());
 
     // Act
     boolean actualAddUsesResult = typeRef.addUses("Ele");
@@ -384,35 +350,87 @@ public class TypeTransformerDiffblueTest {
   }
 
   /**
-   * Test TypeRef {@link TypeRef#getProvideDesc()}.
-   *
-   * <p>Method under test: {@link TypeRef#getProvideDesc()}
+   * Method under test: {@link TypeTransformer.TypeRef#addUses(String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypeRef.getProvideDesc()"})
-  public void testTypeRefGetProvideDesc() {
-    // Arrange, Act and Assert
-    assertNull((new TypeRef(new ArrayExpr())).getProvideDesc());
+  public void testTypeRefAddUses2() {
+    // Arrange
+    TypeTransformer.TypeRef typeRef = new TypeTransformer.TypeRef(new ArrayExpr());
+    typeRef.addUses("Ele");
+
+    // Act and Assert
+    Set<String> stringSet = typeRef.uses;
+    assertEquals(1, stringSet.size());
+    assertFalse(typeRef.addUses("Ele"));
+    assertTrue(stringSet.contains("Ele"));
   }
 
   /**
-   * Test TypeRef {@link TypeRef#getType()}.
-   *
-   * <ul>
-   *   <li>Given {@link TypeRef#TypeRef(Value)} with value is {@link ArrayExpr#ArrayExpr()} addUses
-   *       {@code I}.
-   *   <li>Then return {@code I}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#getType()}
+   * Method under test: {@link TypeTransformer.TypeRef#getProvideDesc()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypeRef.getType()"})
-  public void testTypeRefGetType_givenTypeRefWithValueIsArrayExprAddUsesI_thenReturnI() {
+  public void testTypeRefGetProvideDesc() {
+    // Arrange, Act and Assert
+    assertNull((new TypeTransformer.TypeRef(new ArrayExpr())).getProvideDesc());
+  }
+
+  /**
+   * Method under test: {@link TypeTransformer.TypeRef#getType()}
+   */
+  @Test
+  public void testTypeRefGetType() {
+    // Arrange, Act and Assert
+    assertThrows(RuntimeException.class, () -> (new TypeTransformer.TypeRef(new ArrayExpr())).getType());
+  }
+
+  /**
+   * Method under test: {@link TypeTransformer.TypeRef#getType()}
+   */
+  @Test
+  public void testTypeRefGetType2() {
     // Arrange
-    TypeRef typeRef = new TypeRef(new ArrayExpr());
+    TypeTransformer.TypeRef typeRef = new TypeTransformer.TypeRef(new ArrayExpr());
+    typeRef.addUses("Ele");
+
+    // Act and Assert
+    assertThrows(RuntimeException.class, () -> typeRef.getType());
+  }
+
+  /**
+   * Method under test: {@link TypeTransformer.TypeRef#getType()}
+   */
+  @Test
+  public void testTypeRefGetType3() {
+    // Arrange
+    TypeTransformer.TypeRef typeRef = new TypeTransformer.TypeRef(new ArrayExpr());
+    typeRef.updateTypeClass(TypeClass.BOOLEAN);
+    typeRef.addUses("Ele");
+
+    // Act and Assert
+    assertThrows(RuntimeException.class, () -> typeRef.getType());
+  }
+
+  /**
+   * Method under test: {@link TypeTransformer.TypeRef#getType()}
+   */
+  @Test
+  public void testTypeRefGetType4() {
+    // Arrange
+    TypeTransformer.TypeRef typeRef = new TypeTransformer.TypeRef(new ArrayExpr());
+    typeRef.updateTypeClass(TypeClass.INT);
+    typeRef.addUses("Ele");
+
+    // Act and Assert
+    assertEquals("I", typeRef.getType());
+  }
+
+  /**
+   * Method under test: {@link TypeTransformer.TypeRef#getType()}
+   */
+  @Test
+  public void testTypeRefGetType5() {
+    // Arrange
+    TypeTransformer.TypeRef typeRef = new TypeTransformer.TypeRef(new ArrayExpr());
     typeRef.addUses("I");
     typeRef.updateTypeClass(TypeClass.INT);
     typeRef.addUses("Ele");
@@ -422,107 +440,12 @@ public class TypeTransformerDiffblueTest {
   }
 
   /**
-   * Test TypeRef {@link TypeRef#getType()}.
-   *
-   * <ul>
-   *   <li>Given {@link TypeRef#TypeRef(Value)} with value is {@link ArrayExpr#ArrayExpr()}
-   *       updateTypeClass {@code BOOLEAN}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#getType()}
+   * Method under test: {@link TypeTransformer.TypeRef#getType()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypeRef.getType()"})
-  public void testTypeRefGetType_givenTypeRefWithValueIsArrayExprUpdateTypeClassBoolean() {
+  public void testTypeRefGetType6() {
     // Arrange
-    TypeRef typeRef = new TypeRef(new ArrayExpr());
-    typeRef.updateTypeClass(TypeClass.BOOLEAN);
-    typeRef.addUses("Ele");
-
-    // Act and Assert
-    assertThrows(RuntimeException.class, () -> typeRef.getType());
-  }
-
-  /**
-   * Test TypeRef {@link TypeRef#getType()}.
-   *
-   * <ul>
-   *   <li>Given {@link TypeRef#TypeRef(Value)} with value is {@link ArrayExpr#ArrayExpr()}
-   *       updateTypeClass {@code JD}.
-   *   <li>Then return {@code J}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#getType()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypeRef.getType()"})
-  public void testTypeRefGetType_givenTypeRefWithValueIsArrayExprUpdateTypeClassJd_thenReturnJ() {
-    // Arrange
-    TypeRef typeRef = new TypeRef(new ArrayExpr());
-    typeRef.updateTypeClass(TypeClass.JD);
-    typeRef.addUses("Ele");
-
-    // Act and Assert
-    assertEquals("J", typeRef.getType());
-  }
-
-  /**
-   * Test TypeRef {@link TypeRef#getType()}.
-   *
-   * <ul>
-   *   <li>Given {@link TypeRef#TypeRef(Value)} with value is {@link ArrayExpr#ArrayExpr()}.
-   *   <li>Then throw {@link RuntimeException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#getType()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypeRef.getType()"})
-  public void testTypeRefGetType_givenTypeRefWithValueIsArrayExpr_thenThrowRuntimeException() {
-    // Arrange, Act and Assert
-    assertThrows(RuntimeException.class, () -> (new TypeRef(new ArrayExpr())).getType());
-  }
-
-  /**
-   * Test TypeRef {@link TypeRef#getType()}.
-   *
-   * <ul>
-   *   <li>Then return {@code I}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#getType()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypeRef.getType()"})
-  public void testTypeRefGetType_thenReturnI() {
-    // Arrange
-    TypeRef typeRef = new TypeRef(new ArrayExpr());
-    typeRef.updateTypeClass(TypeClass.INT);
-    typeRef.addUses("Ele");
-
-    // Act and Assert
-    assertEquals("I", typeRef.getType());
-  }
-
-  /**
-   * Test TypeRef {@link TypeRef#getType()}.
-   *
-   * <ul>
-   *   <li>Then return {@code Z}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#getType()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypeRef.getType()"})
-  public void testTypeRefGetType_thenReturnZ() {
-    // Arrange
-    TypeRef typeRef = new TypeRef(new ArrayExpr());
+    TypeTransformer.TypeRef typeRef = new TypeTransformer.TypeRef(new ArrayExpr());
     typeRef.updateTypeClass(TypeClass.ZIL);
     typeRef.addUses("Ele");
 
@@ -531,45 +454,46 @@ public class TypeTransformerDiffblueTest {
   }
 
   /**
-   * Test TypeRef {@link TypeRef#getType()}.
-   *
-   * <ul>
-   *   <li>Then throw {@link RuntimeException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#getType()}
+   * Method under test: {@link TypeTransformer.TypeRef#getType()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypeRef.getType()"})
-  public void testTypeRefGetType_thenThrowRuntimeException() {
+  public void testTypeRefGetType7() {
     // Arrange
-    TypeRef typeRef = new TypeRef(new ArrayExpr());
+    TypeTransformer.TypeRef typeRef = new TypeTransformer.TypeRef(new ArrayExpr());
+    typeRef.updateTypeClass(TypeClass.JD);
     typeRef.addUses("Ele");
 
     // Act and Assert
-    assertThrows(RuntimeException.class, () -> typeRef.getType());
+    assertEquals("J", typeRef.getType());
   }
 
   /**
-   * Test TypeRef {@link TypeRef#merge(TypeRef)}.
-   *
-   * <ul>
-   *   <li>Given {@code Ele}.
-   *   <li>When {@link TypeRef#TypeRef(Value)} with value is {@link ArrayExpr#ArrayExpr()} addUses
-   *       {@code Ele}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#merge(TypeRef)}
+   * Method under test:
+   * {@link TypeTransformer.TypeRef#merge(TypeTransformer.TypeRef)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void TypeRef.merge(TypeRef)"})
-  public void testTypeRefMerge_givenEle_whenTypeRefWithValueIsArrayExprAddUsesEle() {
+  public void testTypeRefMerge() {
     // Arrange
-    TypeRef typeRef = new TypeRef(new ArrayExpr());
+    TypeTransformer.TypeRef typeRef = new TypeTransformer.TypeRef(new ArrayExpr());
+    TypeTransformer.TypeRef other = new TypeTransformer.TypeRef(new ArrayExpr());
 
-    TypeRef other = new TypeRef(new ArrayExpr());
+    // Act
+    typeRef.merge(other);
+
+    // Assert
+    assertNull(other.uses);
+  }
+
+  /**
+   * Method under test:
+   * {@link TypeTransformer.TypeRef#merge(TypeTransformer.TypeRef)}
+   */
+  @Test
+  public void testTypeRefMerge2() {
+    // Arrange
+    TypeTransformer.TypeRef typeRef = new TypeTransformer.TypeRef(new ArrayExpr());
+
+    TypeTransformer.TypeRef other = new TypeTransformer.TypeRef(new ArrayExpr());
     other.addUses("Ele");
 
     // Act
@@ -580,24 +504,16 @@ public class TypeTransformerDiffblueTest {
   }
 
   /**
-   * Test TypeRef {@link TypeRef#merge(TypeRef)}.
-   *
-   * <ul>
-   *   <li>Given {@link TypeRef#TypeRef(Value)} with value is {@link ArrayExpr#ArrayExpr()} addUses
-   *       {@code 42}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#merge(TypeRef)}
+   * Method under test:
+   * {@link TypeTransformer.TypeRef#merge(TypeTransformer.TypeRef)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void TypeRef.merge(TypeRef)"})
-  public void testTypeRefMerge_givenTypeRefWithValueIsArrayExprAddUses42() {
+  public void testTypeRefMerge3() {
     // Arrange
-    TypeRef typeRef = new TypeRef(new ArrayExpr());
+    TypeTransformer.TypeRef typeRef = new TypeTransformer.TypeRef(new ArrayExpr());
     typeRef.addUses("42");
 
-    TypeRef other = new TypeRef(new ArrayExpr());
+    TypeTransformer.TypeRef other = new TypeTransformer.TypeRef(new ArrayExpr());
     other.addUses("Ele");
 
     // Act
@@ -608,44 +524,22 @@ public class TypeTransformerDiffblueTest {
   }
 
   /**
-   * Test TypeRef {@link TypeRef#merge(TypeRef)}.
-   *
-   * <ul>
-   *   <li>When {@link TypeRef#TypeRef(Value)} with value is {@link ArrayExpr#ArrayExpr()}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#merge(TypeRef)}
+   * Method under test: {@link TypeTransformer.TypeRef#TypeRef(Value)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void TypeRef.merge(TypeRef)"})
-  public void testTypeRefMerge_whenTypeRefWithValueIsArrayExpr() {
-    // Arrange
-    TypeRef typeRef = new TypeRef(new ArrayExpr());
-    TypeRef other = new TypeRef(new ArrayExpr());
-
-    // Act
-    typeRef.merge(other);
-
-    // Assert that nothing has changed
-    assertNull(other.uses);
-  }
-
-  /**
-   * Test TypeRef {@link TypeRef#TypeRef(Value)}.
-   *
-   * <p>Method under test: {@link TypeRef#TypeRef(Value)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void TypeRef.<init>(Value)"})
   public void testTypeRefNewTypeRef() {
     // Arrange and Act
-    TypeRef actualTypeRef = new TypeRef(new ArrayExpr());
+    TypeTransformer.TypeRef actualTypeRef = new TypeTransformer.TypeRef(new ArrayExpr());
 
     // Assert
-    assertTrue(actualTypeRef.value instanceof ArrayExpr);
+    Value value = actualTypeRef.value;
+    assertTrue(value instanceof ArrayExpr);
+    assertEquals("null[null]", ((ArrayExpr) value).toString0());
+    assertNull(value.getOps());
+    assertNull(((ArrayExpr) value).tag);
     assertNull(actualTypeRef.getProvideDesc());
+    assertNull(((ArrayExpr) value).elementType);
+    assertNull(((ArrayExpr) value).valueType);
     assertNull(actualTypeRef.provideDesc);
     assertNull(actualTypeRef.uses);
     assertNull(actualTypeRef.arrayRoots);
@@ -654,82 +548,57 @@ public class TypeTransformerDiffblueTest {
     assertNull(actualTypeRef.parents);
     assertNull(actualTypeRef.sArrayValues);
     assertNull(actualTypeRef.sameValues);
+    assertNull(value.getOp());
+    assertNull(value.getOp1());
+    assertNull(value.getOp2());
+    assertEquals(ET.E2, ((ArrayExpr) value).et);
     assertEquals(TypeClass.UNKNOWN, actualTypeRef.clz);
+    assertEquals(Value.VT.ARRAY, ((ArrayExpr) value).vt);
   }
 
   /**
-   * Test TypeRef {@link TypeRef#toString()}.
-   *
-   * <ul>
-   *   <li>Given {@link ArrayExpr#ArrayExpr()} Op1 is {@link ArrayExpr#ArrayExpr()}.
-   *   <li>Then return {@code ?::null[null][null]: null > {}}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#toString()}
+   * Method under test: {@link TypeTransformer.TypeRef#toString()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypeRef.toString()"})
-  public void testTypeRefToString_givenArrayExprOp1IsArrayExpr_thenReturnNullNullNullNull() {
+  public void testTypeRefToString() {
+    // Arrange, Act and Assert
+    assertEquals("?::null[null]: null > {}", (new TypeTransformer.TypeRef(new ArrayExpr())).toString());
+    assertEquals("?::null: null > {}", (new TypeTransformer.TypeRef(null)).toString());
+  }
+
+  /**
+   * Method under test: {@link TypeTransformer.TypeRef#toString()}
+   */
+  @Test
+  public void testTypeRefToString2() {
     // Arrange
     ArrayExpr value = new ArrayExpr();
     value.setOp1(new ArrayExpr());
 
     // Act and Assert
-    assertEquals("?::null[null][null]: null > {}", (new TypeRef(value)).toString());
+    assertEquals("?::null[null][null]: null > {}", (new TypeTransformer.TypeRef(value)).toString());
   }
 
   /**
-   * Test TypeRef {@link TypeRef#toString()}.
-   *
-   * <ul>
-   *   <li>Given {@link TypeRef#TypeRef(Value)} with value is {@link ArrayExpr#ArrayExpr()}.
-   *   <li>Then return {@code ?::null[null]: null > {}}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#toString()}
+   * Method under test: {@link TypeTransformer.TypeRef#toString()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypeRef.toString()"})
-  public void testTypeRefToString_givenTypeRefWithValueIsArrayExpr_thenReturnNullNullNull() {
-    // Arrange, Act and Assert
-    assertEquals("?::null[null]: null > {}", (new TypeRef(new ArrayExpr())).toString());
-  }
-
-  /**
-   * Test TypeRef {@link TypeRef#toString()}.
-   *
-   * <ul>
-   *   <li>Given {@link TypeRef#TypeRef(Value)} with value is {@code null}.
-   *   <li>Then return {@code ?::null: null > {}}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#toString()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypeRef.toString()"})
-  public void testTypeRefToString_givenTypeRefWithValueIsNull_thenReturnNullNull() {
-    // Arrange, Act and Assert
-    assertEquals("?::null: null > {}", (new TypeRef(null)).toString());
-  }
-
-  /**
-   * Test TypeRef {@link TypeRef#toString()}.
-   *
-   * <ul>
-   *   <li>Then return {@code ?::null[null]: null > {[]}}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#toString()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypeRef.toString()"})
-  public void testTypeRefToString_thenReturnNullNullNull() {
+  public void testTypeRefToString3() {
     // Arrange
-    TypeRef typeRef = new TypeRef(new ArrayExpr());
+    ArrayExpr base = new ArrayExpr();
+
+    // Act and Assert
+    assertEquals("?::null[null][null[null]]: null > {}",
+        (new TypeTransformer.TypeRef(new ArrayExpr(base, new ArrayExpr(), "[]"))).toString());
+  }
+
+  /**
+   * Method under test: {@link TypeTransformer.TypeRef#toString()}
+   */
+  @Test
+  public void testTypeRefToString4() {
+    // Arrange
+    TypeTransformer.TypeRef typeRef = new TypeTransformer.TypeRef(new ArrayExpr());
     typeRef.addUses("[]");
 
     // Act and Assert
@@ -737,43 +606,12 @@ public class TypeTransformerDiffblueTest {
   }
 
   /**
-   * Test TypeRef {@link TypeRef#toString()}.
-   *
-   * <ul>
-   *   <li>Then return {@code ?::null[null][null[null]]: null > {}}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#toString()}
+   * Method under test: {@link TypeTransformer.TypeRef#updateTypeClass(TypeClass)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypeRef.toString()"})
-  public void testTypeRefToString_thenReturnNullNullNullNullNull() {
+  public void testTypeRefUpdateTypeClass() {
     // Arrange
-    ArrayExpr base = new ArrayExpr();
-
-    // Act and Assert
-    assertEquals(
-        "?::null[null][null[null]]: null > {}",
-        (new TypeRef(new ArrayExpr(base, new ArrayExpr(), "[]"))).toString());
-  }
-
-  /**
-   * Test TypeRef {@link TypeRef#updateTypeClass(TypeClass)}.
-   *
-   * <ul>
-   *   <li>Then {@link TypeRef#TypeRef(Value)} with value is {@link ArrayExpr#ArrayExpr()} {@link
-   *       TypeRef#clz} is {@code UNKNOWN}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypeRef#updateTypeClass(TypeClass)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TypeRef.updateTypeClass(TypeClass)"})
-  public void testTypeRefUpdateTypeClass_thenTypeRefWithValueIsArrayExprClzIsUnknown() {
-    // Arrange
-    TypeRef typeRef = new TypeRef(new ArrayExpr());
+    TypeTransformer.TypeRef typeRef = new TypeTransformer.TypeRef(new ArrayExpr());
 
     // Act and Assert
     assertEquals(TypeClass.UNKNOWN, typeRef.clz);

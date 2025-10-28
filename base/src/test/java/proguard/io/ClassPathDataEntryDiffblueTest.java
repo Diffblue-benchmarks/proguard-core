@@ -1,21 +1,24 @@
 package proguard.io;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.IOException;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 public class ClassPathDataEntryDiffblueTest {
   /**
-   * Test getters and setters.
-   *
-   * <p>Methods under test:
-   *
+   * Method under test: {@link ClassPathDataEntry#getInputStream()}
+   */
+  @Test
+  public void testGetInputStream() throws IOException {
+    // Arrange, Act and Assert
+    assertNull((new ClassPathDataEntry("Name")).getInputStream());
+  }
+
+  /**
+   * Methods under test:
    * <ul>
    *   <li>{@link ClassPathDataEntry#ClassPathDataEntry(String)}
    *   <li>{@link ClassPathDataEntry#toString()}
@@ -27,16 +30,6 @@ public class ClassPathDataEntryDiffblueTest {
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ClassPathDataEntry.<init>(String)",
-    "String ClassPathDataEntry.getName()",
-    "String ClassPathDataEntry.getOriginalName()",
-    "DataEntry ClassPathDataEntry.getParent()",
-    "long ClassPathDataEntry.getSize()",
-    "boolean ClassPathDataEntry.isDirectory()",
-    "String ClassPathDataEntry.toString()"
-  })
   public void testGettersAndSetters() {
     // Arrange and Act
     ClassPathDataEntry actualClassPathDataEntry = new ClassPathDataEntry("Name");
@@ -56,21 +49,26 @@ public class ClassPathDataEntryDiffblueTest {
   }
 
   /**
-   * Test {@link ClassPathDataEntry#getInputStream()}.
-   *
-   * <ul>
-   *   <li>Given {@link ClassPathDataEntry#ClassPathDataEntry(String)} with {@code Name}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassPathDataEntry#getInputStream()}
+   * Method under test: {@link ClassPathDataEntry#ClassPathDataEntry(Class)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"java.io.InputStream ClassPathDataEntry.getInputStream()"})
-  public void testGetInputStream_givenClassPathDataEntryWithName_thenReturnNull()
-      throws IOException {
-    // Arrange, Act and Assert
-    assertNull((new ClassPathDataEntry("Name")).getInputStream());
+  public void testNewClassPathDataEntry() throws IOException {
+    // Arrange
+    Class<Object> clazz = Object.class;
+
+    // Act
+    ClassPathDataEntry actualClassPathDataEntry = new ClassPathDataEntry(clazz);
+
+    // Assert
+    assertEquals("java/lang/Object.class", actualClassPathDataEntry.getName());
+    assertEquals("java/lang/Object.class", actualClassPathDataEntry.getOriginalName());
+    assertNull(actualClassPathDataEntry.getParent());
+    assertEquals(-1L, actualClassPathDataEntry.getSize());
+    byte[] byteArray = new byte[51];
+    assertEquals(51, actualClassPathDataEntry.getInputStream().read(byteArray));
+    assertFalse(actualClassPathDataEntry.isDirectory());
+    assertArrayEquals(new byte[]{-54, -2, -70, -66, 0, 0, 0, '7', 0, '\\', 7, 0, '?', '\n', 0, 1, 0, '@', '\n', 0, 17,
+        0, 'A', '\n', 0, 'B', 0, 'C', '\n', 0, 1, 0, 'D', '\b', 0, 'E', '\n', 0, 17, 0, 'F', '\n', 0, 'G', 0, 'H', '\n',
+        0, 1, 0, 'I'}, byteArray);
   }
 }

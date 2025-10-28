@@ -5,30 +5,21 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.dexfile.ir.ET;
 import proguard.dexfile.ir.LabelAndLocalMapper;
-import proguard.dexfile.ir.expr.Value.VT;
 import proguard.dexfile.reader.Method;
 import proguard.dexfile.reader.Proto;
 
 public class InvokeExprDiffblueTest {
   /**
-   * Test {@link InvokeExpr#releaseMemory()}.
-   *
-   * <p>Method under test: {@link InvokeExpr#releaseMemory()}
+   * Method under test: {@link InvokeExpr#releaseMemory()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void InvokeExpr.releaseMemory()"})
   public void testReleaseMemory() {
     // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner");
+    InvokeExpr nInvokeNewResult = Exprs.nInvokeNew(new Value[]{new ArrayExpr()}, new String[]{"Argment Types"},
+        "Owner");
 
     // Act
     nInvokeNewResult.releaseMemory();
@@ -45,45 +36,28 @@ public class InvokeExprDiffblueTest {
   }
 
   /**
-   * Test {@link InvokeExpr#getProto()}.
-   *
-   * <ul>
-   *   <li>Then return Desc is {@code (Argment Types)Owner}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#getProto()}
+   * Method under test: {@link InvokeExpr#getProto()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Proto InvokeExpr.getProto()"})
-  public void testGetProto_thenReturnDescIsArgmentTypesOwner() {
+  public void testGetProto() {
     // Arrange and Act
-    Proto actualProto =
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner")
-            .getProto();
+    Proto actualProto = Exprs.nInvokeNew(new Value[]{new ArrayExpr()}, new String[]{"Argment Types"}, "Owner")
+        .getProto();
 
     // Assert
     assertEquals("(Argment Types)Owner", actualProto.getDesc());
     assertEquals("Owner", actualProto.getReturnType());
-    assertArrayEquals(new String[] {"Argment Types"}, actualProto.getParameterTypes());
+    assertArrayEquals(new String[]{"Argment Types"}, actualProto.getParameterTypes());
   }
 
   /**
-   * Test {@link InvokeExpr#getProto()}.
-   *
-   * <ul>
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#getProto()}
+   * Method under test: {@link InvokeExpr#getProto()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Proto InvokeExpr.getProto()"})
-  public void testGetProto_thenReturnNull() {
+  public void testGetProto2() {
     // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner");
+    InvokeExpr nInvokeNewResult = Exprs.nInvokeNew(new Value[]{new ArrayExpr()}, new String[]{"Argment Types"},
+        "Owner");
     nInvokeNewResult.method = null;
 
     // Act and Assert
@@ -91,640 +65,603 @@ public class InvokeExprDiffblueTest {
   }
 
   /**
-   * Test {@link InvokeExpr#InvokeExpr(VT, Value[], String, String, String[], String)}.
-   *
-   * <p>Method under test: {@link InvokeExpr#InvokeExpr(VT, Value[], String, String, String[],
-   * String)}
+   * Method under test: {@link InvokeExpr#clone()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void InvokeExpr.<init>(VT, Value[], String, String, String[], String)"})
-  public void testNewInvokeExpr() {
-    // Arrange
-    Value[] args = new Value[] {new ArrayExpr()};
-    String[] argmentTypes = new String[] {"Argment Types"};
-
-    // Act
-    InvokeExpr actualInvokeExpr =
-        new InvokeExpr(VT.ADD, args, "Owner Type", "Method Name", argmentTypes, "Return Type");
-
-    // Assert
-    assertEquals("Method Name", actualInvokeExpr.getName());
-    assertEquals("Owner Type", actualInvokeExpr.getOwner());
-    assertEquals("Return Type", actualInvokeExpr.getRet());
-    assertEquals("null[null].Method Name()", actualInvokeExpr.toString0());
-    assertNull(actualInvokeExpr.tag);
-    assertNull(actualInvokeExpr.valueType);
-    assertNull(actualInvokeExpr.getOp());
-    assertNull(actualInvokeExpr.getOp1());
-    assertNull(actualInvokeExpr.getOp2());
-    Value[] ops = actualInvokeExpr.getOps();
-    assertEquals(1, ops.length);
-    assertEquals(ET.En, actualInvokeExpr.et);
-    assertEquals(VT.ADD, actualInvokeExpr.vt);
-    assertSame(argmentTypes, actualInvokeExpr.getArgs());
-    assertSame(args, ops);
-  }
-
-  /**
-   * Test {@link InvokeExpr#InvokeExpr(VT, Value[], Method)}.
-   *
-   * <p>Method under test: {@link InvokeExpr#InvokeExpr(VT, Value[], Method)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void InvokeExpr.<init>(VT, Value[], Method)"})
-  public void testNewInvokeExpr2() {
-    // Arrange
-    Value[] args = new Value[] {new ArrayExpr()};
-    Proto proto = new Proto(new String[] {"Parameter Types"}, "Return Type");
-
-    // Act
-    InvokeExpr actualInvokeExpr = new InvokeExpr(VT.ADD, args, new Method("Owner", "Name", proto));
-
-    // Assert
-    assertEquals("Name", actualInvokeExpr.getName());
-    assertEquals("Owner", actualInvokeExpr.getOwner());
-    assertEquals("Return Type", actualInvokeExpr.getRet());
-    assertEquals("null[null].Name()", actualInvokeExpr.toString0());
-    assertNull(actualInvokeExpr.tag);
-    assertNull(actualInvokeExpr.valueType);
-    assertNull(actualInvokeExpr.getOp());
-    assertNull(actualInvokeExpr.getOp1());
-    assertNull(actualInvokeExpr.getOp2());
-    assertEquals(1, actualInvokeExpr.getArgs().length);
-    Value[] ops = actualInvokeExpr.getOps();
-    assertEquals(1, ops.length);
-    assertEquals(ET.En, actualInvokeExpr.et);
-    assertEquals(VT.ADD, actualInvokeExpr.vt);
-    assertSame(proto, actualInvokeExpr.getProto());
-    assertSame(args, ops);
-  }
-
-  /**
-   * Test {@link InvokeExpr#clone(LabelAndLocalMapper)} with {@code LabelAndLocalMapper}.
-   *
-   * <p>Method under test: {@link InvokeExpr#clone(LabelAndLocalMapper)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"InvokeExpr InvokeExpr.clone(LabelAndLocalMapper)"})
-  public void testCloneWithLabelAndLocalMapper() {
-    // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {Exprs.nNull()}, new String[] {"Argment Types"}, "Owner");
-
-    // Act
-    InvokeExpr actualCloneResult = nInvokeNewResult.clone(new LabelAndLocalMapper());
-
-    // Assert
-    assertTrue(actualCloneResult instanceof InvokeNewExpr);
-    Proto expectedProto = actualCloneResult.getProto();
-    assertSame(expectedProto, ((InvokeNewExpr) actualCloneResult).method.getProto());
-  }
-
-  /**
-   * Test {@link InvokeExpr#clone(LabelAndLocalMapper)} with {@code LabelAndLocalMapper}.
-   *
-   * <ul>
-   *   <li>Then first element return {@link FilledArrayExpr}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#clone(LabelAndLocalMapper)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"InvokeExpr InvokeExpr.clone(LabelAndLocalMapper)"})
-  public void testCloneWithLabelAndLocalMapper_thenFirstElementReturnFilledArrayExpr() {
-    // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(
-            new Value[] {Exprs.nFilledArray("Element Type", new Value[] {Exprs.nNull()})},
-            new String[] {"Argment Types"},
-            "Owner");
-
-    // Act
-    InvokeExpr actualCloneResult = nInvokeNewResult.clone(new LabelAndLocalMapper());
-
-    // Assert
-    Value[] ops = actualCloneResult.getOps();
-    Value value = ops[0];
-    assertTrue(value instanceof FilledArrayExpr);
-    assertTrue(actualCloneResult instanceof InvokeNewExpr);
-    assertEquals("Element Type", ((FilledArrayExpr) value).type);
-    assertEquals(1, ops.length);
-    assertEquals(VT.FILLED_ARRAY, ((FilledArrayExpr) value).vt);
-    Proto expectedProto = actualCloneResult.getProto();
-    assertSame(expectedProto, ((InvokeNewExpr) actualCloneResult).method.getProto());
-  }
-
-  /**
-   * Test {@link InvokeExpr#clone(LabelAndLocalMapper)} with {@code LabelAndLocalMapper}.
-   *
-   * <ul>
-   *   <li>Then first element return {@link InvokeExpr}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#clone(LabelAndLocalMapper)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"InvokeExpr InvokeExpr.clone(LabelAndLocalMapper)"})
-  public void testCloneWithLabelAndLocalMapper_thenFirstElementReturnInvokeExpr() {
-    // Arrange
-    InvokeExpr nInvokeInterfaceResult =
-        Exprs.nInvokeInterface(
-            new Value[] {Exprs.nNull()},
-            "Owner",
-            "Name",
-            new String[] {"Argment Types"},
-            "Return Type");
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(
-            new Value[] {nInvokeInterfaceResult}, new String[] {"Argment Types"}, "Owner");
-
-    // Act
-    InvokeExpr actualCloneResult = nInvokeNewResult.clone(new LabelAndLocalMapper());
-
-    // Assert
-    Value[] ops = actualCloneResult.getOps();
-    Value value = ops[0];
-    assertTrue(value instanceof InvokeExpr);
-    assertTrue(actualCloneResult instanceof InvokeNewExpr);
-    assertEquals("Name", ((InvokeExpr) value).getName());
-    assertEquals("Owner", ((InvokeExpr) value).getOwner());
-    assertEquals("Return Type", ((InvokeExpr) value).getRet());
-    assertEquals("null.Name()", value.toString0());
-    assertEquals(1, ((InvokeExpr) value).getArgs().length);
-    assertEquals(1, ops.length);
-    assertEquals(VT.INVOKE_INTERFACE, ((InvokeExpr) value).vt);
-    Proto expectedProto = actualCloneResult.getProto();
-    assertSame(expectedProto, ((InvokeNewExpr) actualCloneResult).method.getProto());
-    assertSame(nInvokeInterfaceResult.method, ((InvokeExpr) value).method);
-  }
-
-  /**
-   * Test {@link InvokeExpr#clone(LabelAndLocalMapper)} with {@code LabelAndLocalMapper}.
-   *
-   * <ul>
-   *   <li>Then return {@link InvokeExpr#method} Desc is {@code (Argment Types)Return Type}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#clone(LabelAndLocalMapper)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"InvokeExpr InvokeExpr.clone(LabelAndLocalMapper)"})
-  public void testCloneWithLabelAndLocalMapper_thenReturnMethodDescIsArgmentTypesReturnType() {
-    // Arrange
-    InvokeExpr nInvokeInterfaceResult =
-        Exprs.nInvokeInterface(
-            new Value[] {Exprs.nNull()},
-            "Owner",
-            "Name",
-            new String[] {"Argment Types"},
-            "Return Type");
-
-    // Act
-    InvokeExpr actualCloneResult = nInvokeInterfaceResult.clone(new LabelAndLocalMapper());
-
-    // Assert
-    Method method = actualCloneResult.method;
-    assertEquals("(Argment Types)Return Type", method.getDesc());
-    Proto proto = actualCloneResult.getProto();
-    assertEquals("(Argment Types)Return Type", proto.getDesc());
-    assertEquals("Name", actualCloneResult.getName());
-    assertEquals("Name", method.getName());
-    assertEquals("Return Type", actualCloneResult.getRet());
-    assertEquals("Return Type", method.getReturnType());
-    assertEquals("Return Type", proto.getReturnType());
-    assertEquals("null.Name()", actualCloneResult.toString0());
-    assertEquals(VT.INVOKE_INTERFACE, actualCloneResult.vt);
-    assertSame(proto, method.getProto());
-  }
-
-  /**
-   * Test {@link InvokeExpr#clone()}.
-   *
-   * <ul>
-   *   <li>Then first element return {@link Constant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#clone()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"InvokeExpr InvokeExpr.clone()"})
-  public void testClone_thenFirstElementReturnConstant() {
+  public void testClone() {
     // Arrange
     Constant nNullResult = Exprs.nNull();
 
     // Act
-    InvokeExpr actualCloneResult =
-        Exprs.nInvokeNew(new Value[] {nNullResult}, new String[] {"Argment Types"}, "Owner")
-            .clone();
+    InvokeExpr actualCloneResult = Exprs.nInvokeNew(new Value[]{nNullResult}, new String[]{"Argment Types"}, "Owner")
+        .clone();
 
     // Assert
     Value[] ops = actualCloneResult.getOps();
     Value value = ops[0];
     assertTrue(value instanceof Constant);
     assertTrue(actualCloneResult instanceof InvokeNewExpr);
+    Method method = ((InvokeNewExpr) actualCloneResult).method;
+    assertEquals("(Argment Types)Owner", method.getDesc());
+    Proto proto = actualCloneResult.getProto();
+    assertEquals("(Argment Types)Owner", proto.getDesc());
+    assertEquals("<init>", actualCloneResult.getName());
+    assertEquals("<init>", method.getName());
+    assertEquals("Owner", actualCloneResult.getOwner());
+    assertEquals("Owner", actualCloneResult.getRet());
+    assertEquals("Owner", ((InvokeNewExpr) actualCloneResult).getClassName());
+    assertEquals("Owner", method.getOwner());
+    assertEquals("Owner", method.getReturnType());
+    assertEquals("Owner", proto.getReturnType());
     assertNull(value.getOps());
+    assertNull(((Constant) value).tag);
+    assertNull(((InvokeNewExpr) actualCloneResult).tag);
+    assertNull(((Constant) value).valueType);
+    assertNull(((InvokeNewExpr) actualCloneResult).valueType);
+    assertNull(actualCloneResult.getOp());
+    assertNull(value.getOp());
+    assertNull(actualCloneResult.getOp1());
+    assertNull(value.getOp1());
+    assertNull(actualCloneResult.getOp2());
+    assertNull(value.getOp2());
     assertEquals(1, ops.length);
     assertEquals(ET.E0, ((Constant) value).et);
-    assertEquals(VT.CONSTANT, ((Constant) value).vt);
-    Proto expectedProto = actualCloneResult.getProto();
-    assertSame(expectedProto, ((InvokeNewExpr) actualCloneResult).method.getProto());
+    assertEquals(ET.En, ((InvokeNewExpr) actualCloneResult).et);
+    assertEquals(Value.VT.CONSTANT, ((Constant) value).vt);
+    assertEquals(Value.VT.INVOKE_NEW, ((InvokeNewExpr) actualCloneResult).vt);
+    String[] args = actualCloneResult.getArgs();
+    assertSame(args, method.getParameterTypes());
+    assertSame(args, proto.getParameterTypes());
+    assertSame(proto, method.getProto());
     assertSame(nNullResult.value, ((Constant) value).value);
+    assertArrayEquals(new String[]{"Argment Types"}, args);
   }
 
   /**
-   * Test {@link InvokeExpr#clone()}.
-   *
-   * <ul>
-   *   <li>Then first element return {@link FilledArrayExpr}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#clone()}
+   * Method under test: {@link InvokeExpr#clone()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"InvokeExpr InvokeExpr.clone()"})
-  public void testClone_thenFirstElementReturnFilledArrayExpr() {
-    // Arrange and Act
-    InvokeExpr actualCloneResult =
-        Exprs.nInvokeNew(
-                new Value[] {Exprs.nFilledArray("Element Type", new Value[] {Exprs.nNull()})},
-                new String[] {"Argment Types"},
-                "Owner")
-            .clone();
-
-    // Assert
-    Value[] ops = actualCloneResult.getOps();
-    Value value = ops[0];
-    assertTrue(value instanceof FilledArrayExpr);
-    assertTrue(actualCloneResult instanceof InvokeNewExpr);
-    assertEquals("Element Type", ((FilledArrayExpr) value).type);
-    assertEquals(1, ops.length);
-    assertEquals(VT.FILLED_ARRAY, ((FilledArrayExpr) value).vt);
-    Proto expectedProto = actualCloneResult.getProto();
-    assertSame(expectedProto, ((InvokeNewExpr) actualCloneResult).method.getProto());
-  }
-
-  /**
-   * Test {@link InvokeExpr#clone()}.
-   *
-   * <ul>
-   *   <li>Then first element return {@link InvokeExpr}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#clone()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"InvokeExpr InvokeExpr.clone()"})
-  public void testClone_thenFirstElementReturnInvokeExpr() {
+  public void testClone2() {
     // Arrange
-    InvokeExpr nInvokeInterfaceResult =
-        Exprs.nInvokeInterface(
-            new Value[] {Exprs.nNull()},
-            "Owner",
-            "Name",
-            new String[] {"Argment Types"},
-            "Return Type");
+    Constant nNullResult = Exprs.nNull();
 
     // Act
-    InvokeExpr actualCloneResult =
-        Exprs.nInvokeNew(
-                new Value[] {nInvokeInterfaceResult}, new String[] {"Argment Types"}, "Owner")
-            .clone();
+    InvokeExpr actualCloneResult = Exprs
+        .nInvokeNew(new Value[]{Exprs.nFilledArray("Element Type", new Value[]{nNullResult})},
+            new String[]{"Argment Types"}, "Owner")
+        .clone();
 
     // Assert
     Value[] ops = actualCloneResult.getOps();
     Value value = ops[0];
-    assertTrue(value instanceof InvokeExpr);
+    Value[] ops2 = value.getOps();
+    Value value2 = ops2[0];
+    assertTrue(value2 instanceof Constant);
+    assertTrue(value instanceof FilledArrayExpr);
     assertTrue(actualCloneResult instanceof InvokeNewExpr);
-    assertEquals("Name", ((InvokeExpr) value).getName());
-    assertEquals("Owner", ((InvokeExpr) value).getOwner());
-    assertEquals("Return Type", ((InvokeExpr) value).getRet());
-    assertEquals("null.Name()", value.toString0());
-    assertEquals(1, ((InvokeExpr) value).getArgs().length);
+    Method method = ((InvokeNewExpr) actualCloneResult).method;
+    assertEquals("(Argment Types)Owner", method.getDesc());
+    Proto proto = actualCloneResult.getProto();
+    assertEquals("(Argment Types)Owner", proto.getDesc());
+    assertEquals("<init>", actualCloneResult.getName());
+    assertEquals("<init>", method.getName());
+    assertEquals("Element Type", ((FilledArrayExpr) value).type);
+    assertEquals("Owner", actualCloneResult.getOwner());
+    assertEquals("Owner", actualCloneResult.getRet());
+    assertEquals("Owner", ((InvokeNewExpr) actualCloneResult).getClassName());
+    assertEquals("Owner", method.getOwner());
+    assertEquals("Owner", method.getReturnType());
+    assertEquals("Owner", proto.getReturnType());
+    assertNull(value2.getOps());
+    assertNull(((Constant) value2).tag);
+    assertNull(((FilledArrayExpr) value).tag);
+    assertNull(((InvokeNewExpr) actualCloneResult).tag);
+    assertNull(((Constant) value2).valueType);
+    assertNull(((FilledArrayExpr) value).valueType);
+    assertNull(((InvokeNewExpr) actualCloneResult).valueType);
+    assertNull(actualCloneResult.getOp());
+    assertNull(value2.getOp());
+    assertNull(value.getOp());
+    assertNull(actualCloneResult.getOp1());
+    assertNull(value2.getOp1());
+    assertNull(value.getOp1());
+    assertNull(actualCloneResult.getOp2());
+    assertNull(value2.getOp2());
+    assertNull(value.getOp2());
+    assertEquals(1, ops2.length);
     assertEquals(1, ops.length);
-    assertEquals(VT.INVOKE_INTERFACE, ((InvokeExpr) value).vt);
-    Proto expectedProto = actualCloneResult.getProto();
-    assertSame(expectedProto, ((InvokeNewExpr) actualCloneResult).method.getProto());
-    assertSame(nInvokeInterfaceResult.method, ((InvokeExpr) value).method);
+    assertEquals(ET.E0, ((Constant) value2).et);
+    assertEquals(ET.En, ((FilledArrayExpr) value).et);
+    assertEquals(ET.En, ((InvokeNewExpr) actualCloneResult).et);
+    assertEquals(Value.VT.CONSTANT, ((Constant) value2).vt);
+    assertEquals(Value.VT.FILLED_ARRAY, ((FilledArrayExpr) value).vt);
+    assertEquals(Value.VT.INVOKE_NEW, ((InvokeNewExpr) actualCloneResult).vt);
+    String[] args = actualCloneResult.getArgs();
+    assertSame(args, method.getParameterTypes());
+    assertSame(args, proto.getParameterTypes());
+    assertSame(proto, method.getProto());
+    assertSame(nNullResult.value, ((Constant) value2).value);
+    assertArrayEquals(new String[]{"Argment Types"}, args);
   }
 
   /**
-   * Test {@link InvokeExpr#clone()}.
-   *
-   * <ul>
-   *   <li>Then return {@link InvokeExpr#method} Desc is {@code (Argment Types)Return Type}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#clone()}
+   * Method under test: {@link InvokeExpr#clone()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"InvokeExpr InvokeExpr.clone()"})
-  public void testClone_thenReturnMethodDescIsArgmentTypesReturnType() {
-    // Arrange and Act
-    InvokeExpr actualCloneResult =
-        Exprs.nInvokeInterface(
-                new Value[] {Exprs.nNull()},
-                "Owner",
-                "Name",
-                new String[] {"Argment Types"},
-                "Return Type")
-            .clone();
+  public void testClone3() {
+    // Arrange
+    Constant nNullResult = Exprs.nNull();
+
+    // Act
+    InvokeExpr actualCloneResult = Exprs
+        .nInvokeInterface(new Value[]{nNullResult}, "Owner", "Name", new String[]{"Argment Types"}, "Return Type")
+        .clone();
 
     // Assert
+    Value[] ops = actualCloneResult.getOps();
+    Value value = ops[0];
+    assertTrue(value instanceof Constant);
     Method method = actualCloneResult.method;
     assertEquals("(Argment Types)Return Type", method.getDesc());
     Proto proto = actualCloneResult.getProto();
     assertEquals("(Argment Types)Return Type", proto.getDesc());
     assertEquals("Name", actualCloneResult.getName());
     assertEquals("Name", method.getName());
+    assertEquals("Owner", actualCloneResult.getOwner());
+    assertEquals("Owner", method.getOwner());
     assertEquals("Return Type", actualCloneResult.getRet());
     assertEquals("Return Type", method.getReturnType());
     assertEquals("Return Type", proto.getReturnType());
     assertEquals("null.Name()", actualCloneResult.toString0());
-    assertEquals(VT.INVOKE_INTERFACE, actualCloneResult.vt);
+    assertNull(value.getOps());
+    assertNull(actualCloneResult.tag);
+    assertNull(((Constant) value).tag);
+    assertNull(actualCloneResult.valueType);
+    assertNull(((Constant) value).valueType);
+    assertNull(actualCloneResult.getOp());
+    assertNull(value.getOp());
+    assertNull(actualCloneResult.getOp1());
+    assertNull(value.getOp1());
+    assertNull(actualCloneResult.getOp2());
+    assertNull(value.getOp2());
+    assertEquals(1, ops.length);
+    assertEquals(ET.E0, ((Constant) value).et);
+    assertEquals(ET.En, actualCloneResult.et);
+    assertEquals(Value.VT.CONSTANT, ((Constant) value).vt);
+    assertEquals(Value.VT.INVOKE_INTERFACE, actualCloneResult.vt);
+    String[] args = actualCloneResult.getArgs();
+    assertSame(args, method.getParameterTypes());
+    assertSame(args, proto.getParameterTypes());
     assertSame(proto, method.getProto());
+    assertSame(nNullResult.value, ((Constant) value).value);
+    assertArrayEquals(new String[]{"Argment Types"}, args);
   }
 
   /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
+   * Method under test: {@link InvokeExpr#clone()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
+  public void testClone4() {
+    // Arrange
+    Constant nNullResult = Exprs.nNull();
+    InvokeExpr nInvokeInterfaceResult = Exprs.nInvokeInterface(new Value[]{nNullResult}, "Owner", "Name",
+        new String[]{"Argment Types"}, "Return Type");
+
+    // Act
+    InvokeExpr actualCloneResult = Exprs
+        .nInvokeNew(new Value[]{nInvokeInterfaceResult}, new String[]{"Argment Types"}, "Owner")
+        .clone();
+
+    // Assert
+    Value[] ops = actualCloneResult.getOps();
+    Value value = ops[0];
+    Value[] ops2 = value.getOps();
+    Value value2 = ops2[0];
+    assertTrue(value2 instanceof Constant);
+    assertTrue(value instanceof InvokeExpr);
+    assertTrue(actualCloneResult instanceof InvokeNewExpr);
+    Method method = ((InvokeNewExpr) actualCloneResult).method;
+    assertEquals("(Argment Types)Owner", method.getDesc());
+    Proto proto = actualCloneResult.getProto();
+    assertEquals("(Argment Types)Owner", proto.getDesc());
+    Proto proto2 = ((InvokeExpr) value).getProto();
+    assertEquals("(Argment Types)Return Type", proto2.getDesc());
+    assertEquals("<init>", actualCloneResult.getName());
+    assertEquals("<init>", method.getName());
+    assertEquals("Name", ((InvokeExpr) value).getName());
+    assertEquals("Owner", actualCloneResult.getOwner());
+    assertEquals("Owner", ((InvokeExpr) value).getOwner());
+    assertEquals("Owner", actualCloneResult.getRet());
+    assertEquals("Owner", ((InvokeNewExpr) actualCloneResult).getClassName());
+    assertEquals("Owner", method.getOwner());
+    assertEquals("Owner", method.getReturnType());
+    assertEquals("Owner", proto.getReturnType());
+    assertEquals("Return Type", ((InvokeExpr) value).getRet());
+    assertEquals("Return Type", proto2.getReturnType());
+    assertEquals("null.Name()", value.toString0());
+    assertNull(value2.getOps());
+    assertNull(((Constant) value2).tag);
+    assertNull(((InvokeExpr) value).tag);
+    assertNull(((InvokeNewExpr) actualCloneResult).tag);
+    assertNull(((Constant) value2).valueType);
+    assertNull(((InvokeExpr) value).valueType);
+    assertNull(((InvokeNewExpr) actualCloneResult).valueType);
+    assertNull(actualCloneResult.getOp());
+    assertNull(value2.getOp());
+    assertNull(value.getOp());
+    assertNull(actualCloneResult.getOp1());
+    assertNull(value2.getOp1());
+    assertNull(value.getOp1());
+    assertNull(actualCloneResult.getOp2());
+    assertNull(value2.getOp2());
+    assertNull(value.getOp2());
+    assertEquals(1, ops2.length);
+    assertEquals(1, ops.length);
+    assertEquals(ET.E0, ((Constant) value2).et);
+    assertEquals(ET.En, ((InvokeExpr) value).et);
+    assertEquals(ET.En, ((InvokeNewExpr) actualCloneResult).et);
+    assertEquals(Value.VT.CONSTANT, ((Constant) value2).vt);
+    assertEquals(Value.VT.INVOKE_INTERFACE, ((InvokeExpr) value).vt);
+    assertEquals(Value.VT.INVOKE_NEW, ((InvokeNewExpr) actualCloneResult).vt);
+    String[] args = actualCloneResult.getArgs();
+    assertSame(args, method.getParameterTypes());
+    assertSame(args, proto.getParameterTypes());
+    String[] args2 = ((InvokeExpr) value).getArgs();
+    assertSame(args2, proto2.getParameterTypes());
+    assertSame(proto, method.getProto());
+    assertSame(nNullResult.value, ((Constant) value2).value);
+    assertSame(nInvokeInterfaceResult.method, ((InvokeExpr) value).method);
+    assertArrayEquals(new String[]{"Argment Types"}, args);
+    assertArrayEquals(new String[]{"Argment Types"}, args2);
+  }
+
+  /**
+   * Method under test: {@link InvokeExpr#clone(LabelAndLocalMapper)}
+   */
+  @Test
+  public void testClone5() {
+    // Arrange
+    Constant nNullResult = Exprs.nNull();
+    InvokeExpr nInvokeNewResult = Exprs.nInvokeNew(new Value[]{nNullResult}, new String[]{"Argment Types"}, "Owner");
+
+    // Act
+    InvokeExpr actualCloneResult = nInvokeNewResult.clone(new LabelAndLocalMapper());
+
+    // Assert
+    Value[] ops = actualCloneResult.getOps();
+    Value value = ops[0];
+    assertTrue(value instanceof Constant);
+    assertTrue(actualCloneResult instanceof InvokeNewExpr);
+    Method method = ((InvokeNewExpr) actualCloneResult).method;
+    assertEquals("(Argment Types)Owner", method.getDesc());
+    Proto proto = actualCloneResult.getProto();
+    assertEquals("(Argment Types)Owner", proto.getDesc());
+    assertEquals("<init>", actualCloneResult.getName());
+    assertEquals("<init>", method.getName());
+    assertEquals("Owner", actualCloneResult.getOwner());
+    assertEquals("Owner", actualCloneResult.getRet());
+    assertEquals("Owner", ((InvokeNewExpr) actualCloneResult).getClassName());
+    assertEquals("Owner", method.getOwner());
+    assertEquals("Owner", method.getReturnType());
+    assertEquals("Owner", proto.getReturnType());
+    assertNull(value.getOps());
+    assertNull(((Constant) value).tag);
+    assertNull(((InvokeNewExpr) actualCloneResult).tag);
+    assertNull(((Constant) value).valueType);
+    assertNull(((InvokeNewExpr) actualCloneResult).valueType);
+    assertNull(actualCloneResult.getOp());
+    assertNull(value.getOp());
+    assertNull(actualCloneResult.getOp1());
+    assertNull(value.getOp1());
+    assertNull(actualCloneResult.getOp2());
+    assertNull(value.getOp2());
+    assertEquals(1, ops.length);
+    assertEquals(ET.E0, ((Constant) value).et);
+    assertEquals(ET.En, ((InvokeNewExpr) actualCloneResult).et);
+    assertEquals(Value.VT.CONSTANT, ((Constant) value).vt);
+    assertEquals(Value.VT.INVOKE_NEW, ((InvokeNewExpr) actualCloneResult).vt);
+    String[] args = actualCloneResult.getArgs();
+    assertSame(args, method.getParameterTypes());
+    assertSame(args, proto.getParameterTypes());
+    assertSame(proto, method.getProto());
+    assertSame(nNullResult.value, ((Constant) value).value);
+    assertArrayEquals(new String[]{"Argment Types"}, args);
+  }
+
+  /**
+   * Method under test: {@link InvokeExpr#clone(LabelAndLocalMapper)}
+   */
+  @Test
+  public void testClone6() {
+    // Arrange
+    Constant nNullResult = Exprs.nNull();
+    InvokeExpr nInvokeNewResult = Exprs.nInvokeNew(
+        new Value[]{Exprs.nFilledArray("Element Type", new Value[]{nNullResult})}, new String[]{"Argment Types"},
+        "Owner");
+
+    // Act
+    InvokeExpr actualCloneResult = nInvokeNewResult.clone(new LabelAndLocalMapper());
+
+    // Assert
+    Value[] ops = actualCloneResult.getOps();
+    Value value = ops[0];
+    Value[] ops2 = value.getOps();
+    Value value2 = ops2[0];
+    assertTrue(value2 instanceof Constant);
+    assertTrue(value instanceof FilledArrayExpr);
+    assertTrue(actualCloneResult instanceof InvokeNewExpr);
+    Method method = ((InvokeNewExpr) actualCloneResult).method;
+    assertEquals("(Argment Types)Owner", method.getDesc());
+    Proto proto = actualCloneResult.getProto();
+    assertEquals("(Argment Types)Owner", proto.getDesc());
+    assertEquals("<init>", actualCloneResult.getName());
+    assertEquals("<init>", method.getName());
+    assertEquals("Element Type", ((FilledArrayExpr) value).type);
+    assertEquals("Owner", actualCloneResult.getOwner());
+    assertEquals("Owner", actualCloneResult.getRet());
+    assertEquals("Owner", ((InvokeNewExpr) actualCloneResult).getClassName());
+    assertEquals("Owner", method.getOwner());
+    assertEquals("Owner", method.getReturnType());
+    assertEquals("Owner", proto.getReturnType());
+    assertNull(value2.getOps());
+    assertNull(((Constant) value2).tag);
+    assertNull(((FilledArrayExpr) value).tag);
+    assertNull(((InvokeNewExpr) actualCloneResult).tag);
+    assertNull(((Constant) value2).valueType);
+    assertNull(((FilledArrayExpr) value).valueType);
+    assertNull(((InvokeNewExpr) actualCloneResult).valueType);
+    assertNull(actualCloneResult.getOp());
+    assertNull(value2.getOp());
+    assertNull(value.getOp());
+    assertNull(actualCloneResult.getOp1());
+    assertNull(value2.getOp1());
+    assertNull(value.getOp1());
+    assertNull(actualCloneResult.getOp2());
+    assertNull(value2.getOp2());
+    assertNull(value.getOp2());
+    assertEquals(1, ops2.length);
+    assertEquals(1, ops.length);
+    assertEquals(ET.E0, ((Constant) value2).et);
+    assertEquals(ET.En, ((FilledArrayExpr) value).et);
+    assertEquals(ET.En, ((InvokeNewExpr) actualCloneResult).et);
+    assertEquals(Value.VT.CONSTANT, ((Constant) value2).vt);
+    assertEquals(Value.VT.FILLED_ARRAY, ((FilledArrayExpr) value).vt);
+    assertEquals(Value.VT.INVOKE_NEW, ((InvokeNewExpr) actualCloneResult).vt);
+    String[] args = actualCloneResult.getArgs();
+    assertSame(args, method.getParameterTypes());
+    assertSame(args, proto.getParameterTypes());
+    assertSame(proto, method.getProto());
+    assertSame(nNullResult.value, ((Constant) value2).value);
+    assertArrayEquals(new String[]{"Argment Types"}, args);
+  }
+
+  /**
+   * Method under test: {@link InvokeExpr#clone(LabelAndLocalMapper)}
+   */
+  @Test
+  public void testClone7() {
+    // Arrange
+    Constant nNullResult = Exprs.nNull();
+    InvokeExpr nInvokeInterfaceResult = Exprs.nInvokeInterface(new Value[]{nNullResult}, "Owner", "Name",
+        new String[]{"Argment Types"}, "Return Type");
+
+    // Act
+    InvokeExpr actualCloneResult = nInvokeInterfaceResult.clone(new LabelAndLocalMapper());
+
+    // Assert
+    Value[] ops = actualCloneResult.getOps();
+    Value value = ops[0];
+    assertTrue(value instanceof Constant);
+    Method method = actualCloneResult.method;
+    assertEquals("(Argment Types)Return Type", method.getDesc());
+    Proto proto = actualCloneResult.getProto();
+    assertEquals("(Argment Types)Return Type", proto.getDesc());
+    assertEquals("Name", actualCloneResult.getName());
+    assertEquals("Name", method.getName());
+    assertEquals("Owner", actualCloneResult.getOwner());
+    assertEquals("Owner", method.getOwner());
+    assertEquals("Return Type", actualCloneResult.getRet());
+    assertEquals("Return Type", method.getReturnType());
+    assertEquals("Return Type", proto.getReturnType());
+    assertEquals("null.Name()", actualCloneResult.toString0());
+    assertNull(value.getOps());
+    assertNull(actualCloneResult.tag);
+    assertNull(((Constant) value).tag);
+    assertNull(actualCloneResult.valueType);
+    assertNull(((Constant) value).valueType);
+    assertNull(actualCloneResult.getOp());
+    assertNull(value.getOp());
+    assertNull(actualCloneResult.getOp1());
+    assertNull(value.getOp1());
+    assertNull(actualCloneResult.getOp2());
+    assertNull(value.getOp2());
+    assertEquals(1, ops.length);
+    assertEquals(ET.E0, ((Constant) value).et);
+    assertEquals(ET.En, actualCloneResult.et);
+    assertEquals(Value.VT.CONSTANT, ((Constant) value).vt);
+    assertEquals(Value.VT.INVOKE_INTERFACE, actualCloneResult.vt);
+    String[] args = actualCloneResult.getArgs();
+    assertSame(args, method.getParameterTypes());
+    assertSame(args, proto.getParameterTypes());
+    assertSame(proto, method.getProto());
+    assertSame(nNullResult.value, ((Constant) value).value);
+    assertArrayEquals(new String[]{"Argment Types"}, args);
+  }
+
+  /**
+   * Method under test: {@link InvokeExpr#clone(LabelAndLocalMapper)}
+   */
+  @Test
+  public void testClone8() {
+    // Arrange
+    Constant nNullResult = Exprs.nNull();
+    InvokeExpr nInvokeInterfaceResult = Exprs.nInvokeInterface(new Value[]{nNullResult}, "Owner", "Name",
+        new String[]{"Argment Types"}, "Return Type");
+    InvokeExpr nInvokeNewResult = Exprs.nInvokeNew(new Value[]{nInvokeInterfaceResult}, new String[]{"Argment Types"},
+        "Owner");
+
+    // Act
+    InvokeExpr actualCloneResult = nInvokeNewResult.clone(new LabelAndLocalMapper());
+
+    // Assert
+    Value[] ops = actualCloneResult.getOps();
+    Value value = ops[0];
+    Value[] ops2 = value.getOps();
+    Value value2 = ops2[0];
+    assertTrue(value2 instanceof Constant);
+    assertTrue(value instanceof InvokeExpr);
+    assertTrue(actualCloneResult instanceof InvokeNewExpr);
+    Method method = ((InvokeNewExpr) actualCloneResult).method;
+    assertEquals("(Argment Types)Owner", method.getDesc());
+    Proto proto = actualCloneResult.getProto();
+    assertEquals("(Argment Types)Owner", proto.getDesc());
+    Proto proto2 = ((InvokeExpr) value).getProto();
+    assertEquals("(Argment Types)Return Type", proto2.getDesc());
+    assertEquals("<init>", actualCloneResult.getName());
+    assertEquals("<init>", method.getName());
+    assertEquals("Name", ((InvokeExpr) value).getName());
+    assertEquals("Owner", actualCloneResult.getOwner());
+    assertEquals("Owner", ((InvokeExpr) value).getOwner());
+    assertEquals("Owner", actualCloneResult.getRet());
+    assertEquals("Owner", ((InvokeNewExpr) actualCloneResult).getClassName());
+    assertEquals("Owner", method.getOwner());
+    assertEquals("Owner", method.getReturnType());
+    assertEquals("Owner", proto.getReturnType());
+    assertEquals("Return Type", ((InvokeExpr) value).getRet());
+    assertEquals("Return Type", proto2.getReturnType());
+    assertEquals("null.Name()", value.toString0());
+    assertNull(value2.getOps());
+    assertNull(((Constant) value2).tag);
+    assertNull(((InvokeExpr) value).tag);
+    assertNull(((InvokeNewExpr) actualCloneResult).tag);
+    assertNull(((Constant) value2).valueType);
+    assertNull(((InvokeExpr) value).valueType);
+    assertNull(((InvokeNewExpr) actualCloneResult).valueType);
+    assertNull(actualCloneResult.getOp());
+    assertNull(value2.getOp());
+    assertNull(value.getOp());
+    assertNull(actualCloneResult.getOp1());
+    assertNull(value2.getOp1());
+    assertNull(value.getOp1());
+    assertNull(actualCloneResult.getOp2());
+    assertNull(value2.getOp2());
+    assertNull(value.getOp2());
+    assertEquals(1, ops2.length);
+    assertEquals(1, ops.length);
+    assertEquals(ET.E0, ((Constant) value2).et);
+    assertEquals(ET.En, ((InvokeExpr) value).et);
+    assertEquals(ET.En, ((InvokeNewExpr) actualCloneResult).et);
+    assertEquals(Value.VT.CONSTANT, ((Constant) value2).vt);
+    assertEquals(Value.VT.INVOKE_INTERFACE, ((InvokeExpr) value).vt);
+    assertEquals(Value.VT.INVOKE_NEW, ((InvokeNewExpr) actualCloneResult).vt);
+    String[] args = actualCloneResult.getArgs();
+    assertSame(args, method.getParameterTypes());
+    assertSame(args, proto.getParameterTypes());
+    String[] args2 = ((InvokeExpr) value).getArgs();
+    assertSame(args2, proto2.getParameterTypes());
+    assertSame(proto, method.getProto());
+    assertSame(nNullResult.value, ((Constant) value2).value);
+    assertSame(nInvokeInterfaceResult.method, ((InvokeExpr) value).method);
+    assertArrayEquals(new String[]{"Argment Types"}, args);
+    assertArrayEquals(new String[]{"Argment Types"}, args2);
+  }
+
+  /**
+   * Method under test: {@link InvokeExpr#toString0()}
+   */
+  @Test
   public void testToString0() {
     // Arrange, Act and Assert
-    assertEquals(
-        "new (null[null])",
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, null)
+    assertEquals("new (null[null])",
+        Exprs.nInvokeNew(new Value[]{new ArrayExpr()}, new String[]{"Argment Types"}, null).toString0());
+    assertEquals("new double(null[null])",
+        Exprs.nInvokeNew(new Value[]{new ArrayExpr()}, new String[]{"Argment Types"}, "D").toString0());
+    assertEquals("new (null[null])",
+        Exprs.nInvokeNew(new Value[]{new ArrayExpr()}, new String[]{"Argment Types"}, "").toString0());
+    assertEquals("new float(null[null])",
+        Exprs.nInvokeNew(new Value[]{new ArrayExpr()}, new String[]{"Argment Types"}, "F").toString0());
+    assertEquals("null[null].new ()",
+        (new InvokeNewExpr(Value.VT.ADD, new Value[]{new ArrayExpr()}, "new ", "new ", new String[]{"new "}, "new "))
+            .toString0());
+    assertEquals("new int(null[null])",
+        Exprs.nInvokeNew(new Value[]{new ArrayExpr()}, new String[]{"Argment Types"}, "I").toString0());
+    assertEquals("new [][]{null[null]}.new ()",
+        (new InvokeNewExpr(Value.VT.ADD, new Value[]{Exprs.nFilledArray("[", new Value[]{new ArrayExpr()})}, "new ",
+            "new ", new String[]{"new "}, "new ")).toString0());
+    assertEquals("new ((()null[null]))",
+        Exprs
+            .nInvokeNew(new Value[]{Exprs.nCast(new ArrayExpr(), "jane.doe@example.org", "")},
+                new String[]{"Argment Types"}, null)
+            .toString0());
+    assertEquals("new [](null[null]).new ()",
+        (new InvokeNewExpr(Value.VT.ADD,
+            new Value[]{Exprs.nInvokeNew(new Value[]{new ArrayExpr()}, new String[]{"new "}, "[")}, "new ", "new ",
+            new String[]{"new "}, "new ")).toString0());
+  }
+
+  /**
+   * Method under test: {@link InvokeExpr#toString0()}
+   */
+  @Test
+  public void testToString02() {
+    // Arrange
+    Proto proto = new Proto(new String[]{"new "}, "new ");
+
+    // Act and Assert
+    assertEquals("null[null].new ()",
+        Exprs
+            .nInvokePolymorphic(new Value[]{new ArrayExpr()}, proto,
+                new Method("new ", "new ", new Proto(new String[]{"new "}, "new ")))
             .toString0());
   }
 
   /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <ul>
-   *   <li>Then return {@code new double(null[null])}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
+   * Method under test: {@link InvokeExpr#toString0()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  public void testToString0_thenReturnNewDoubleNullNull() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "new double(null[null])",
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "D")
-            .toString0());
-  }
-
-  /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <ul>
-   *   <li>Then return {@code new float(null[null])}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  public void testToString0_thenReturnNewFloatNullNull() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "new float(null[null])",
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "F")
-            .toString0());
-  }
-
-  /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <ul>
-   *   <li>Then return {@code new int(null[null])}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  public void testToString0_thenReturnNewIntNullNull() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "new int(null[null])",
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "I")
-            .toString0());
-  }
-
-  /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <ul>
-   *   <li>Then return {@code new ((()null[null]))}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  public void testToString0_thenReturnNewNullNull() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "new ((()null[null]))",
-        Exprs.nInvokeNew(
-                new Value[] {Exprs.nCast(new ArrayExpr(), "jane.doe@example.org", "")},
-                new String[] {"Argment Types"},
-                null)
-            .toString0());
-  }
-
-  /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <ul>
-   *   <li>Then return {@code new [](null[null]).new ()}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  public void testToString0_thenReturnNewNullNullNew() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "new [](null[null]).new ()",
-        (new InvokeNewExpr(
-                VT.ADD,
-                new Value[] {
-                  Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"new "}, "[")
-                },
-                "new ",
-                "new ",
-                new String[] {"new "},
-                "new "))
-            .toString0());
-  }
-
-  /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <ul>
-   *   <li>Then return {@code new (null[null],null[null])}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  public void testToString0_thenReturnNewNullNullNullNull() {
+  public void testToString03() {
     // Arrange
     ArrayExpr arrayExpr = new ArrayExpr();
 
     // Act and Assert
-    assertEquals(
-        "new (null[null],null[null])",
-        Exprs.nInvokeNew(
-                new Value[] {arrayExpr, new ArrayExpr()}, new String[] {"Argment Types"}, null)
-            .toString0());
+    assertEquals("new (null[null],null[null])",
+        Exprs.nInvokeNew(new Value[]{arrayExpr, new ArrayExpr()}, new String[]{"Argment Types"}, null).toString0());
   }
 
   /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
+   * Method under test: {@link InvokeExpr#toString0()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  public void testToString02() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "new (null[null])",
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "")
-            .toString0());
-  }
-
-  /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  public void testToString03() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "null[null].new ()",
-        (new InvokeNewExpr(
-                VT.ADD,
-                new Value[] {new ArrayExpr()},
-                "new ",
-                "new ",
-                new String[] {"new "},
-                "new "))
-            .toString0());
-  }
-
-  /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
   public void testToString04() {
     // Arrange
-    Proto proto = new Proto(new String[] {"new "}, "new ");
+    Proto proto = new Proto(new String[]{"new "}, "new ");
 
     // Act and Assert
-    assertEquals(
-        "null[null].new ()",
-        Exprs.nInvokePolymorphic(
-                new Value[] {new ArrayExpr()},
-                proto,
-                new Method("new ", "new ", new Proto(new String[] {"new "}, "new ")))
+    assertEquals("new [][]{null[null]}.new ()",
+        Exprs
+            .nInvokePolymorphic(new Value[]{Exprs.nFilledArray("[", new Value[]{new ArrayExpr()})}, proto,
+                new Method("new ", "new ", new Proto(new String[]{"new "}, "new ")))
             .toString0());
   }
 
   /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
+   * Method under test: {@link InvokeExpr#getOwner()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  public void testToString05() {
+  public void testGetOwner() {
     // Arrange, Act and Assert
-    assertEquals(
-        "new [][]{null[null]}.new ()",
-        (new InvokeNewExpr(
-                VT.ADD,
-                new Value[] {Exprs.nFilledArray("[", new Value[] {new ArrayExpr()})},
-                "new ",
-                "new ",
-                new String[] {"new "},
-                "new "))
-            .toString0());
+    assertEquals("Owner",
+        Exprs.nInvokeNew(new Value[]{new ArrayExpr()}, new String[]{"Argment Types"}, "Owner").getOwner());
   }
 
   /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
+   * Method under test: {@link InvokeExpr#getOwner()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  public void testToString06() {
+  public void testGetOwner2() {
     // Arrange
-    Proto proto = new Proto(new String[] {"new "}, "new ");
-
-    // Act and Assert
-    assertEquals(
-        "new [][]{null[null]}.new ()",
-        Exprs.nInvokePolymorphic(
-                new Value[] {Exprs.nFilledArray("[", new Value[] {new ArrayExpr()})},
-                proto,
-                new Method("new ", "new ", new Proto(new String[] {"new "}, "new ")))
-            .toString0());
-  }
-
-  /**
-   * Test {@link InvokeExpr#getOwner()}.
-   *
-   * <ul>
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#getOwner()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String InvokeExpr.getOwner()"})
-  public void testGetOwner_thenReturnNull() {
-    // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner");
+    InvokeExpr nInvokeNewResult = Exprs.nInvokeNew(new Value[]{new ArrayExpr()}, new String[]{"Argment Types"},
+        "Owner");
     nInvokeNewResult.method = null;
 
     // Act and Assert
@@ -732,41 +669,23 @@ public class InvokeExprDiffblueTest {
   }
 
   /**
-   * Test {@link InvokeExpr#getOwner()}.
-   *
-   * <ul>
-   *   <li>Then return {@code Owner}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#getOwner()}
+   * Method under test: {@link InvokeExpr#getRet()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String InvokeExpr.getOwner()"})
-  public void testGetOwner_thenReturnOwner() {
+  public void testGetRet() {
     // Arrange, Act and Assert
-    assertEquals(
-        "Owner",
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner")
-            .getOwner());
+    assertEquals("Owner",
+        Exprs.nInvokeNew(new Value[]{new ArrayExpr()}, new String[]{"Argment Types"}, "Owner").getRet());
   }
 
   /**
-   * Test {@link InvokeExpr#getRet()}.
-   *
-   * <ul>
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#getRet()}
+   * Method under test: {@link InvokeExpr#getRet()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String InvokeExpr.getRet()"})
-  public void testGetRet_thenReturnNull() {
+  public void testGetRet2() {
     // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner");
+    InvokeExpr nInvokeNewResult = Exprs.nInvokeNew(new Value[]{new ArrayExpr()}, new String[]{"Argment Types"},
+        "Owner");
     nInvokeNewResult.method = null;
 
     // Act and Assert
@@ -774,61 +693,23 @@ public class InvokeExprDiffblueTest {
   }
 
   /**
-   * Test {@link InvokeExpr#getRet()}.
-   *
-   * <ul>
-   *   <li>Then return {@code Owner}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#getRet()}
+   * Method under test: {@link InvokeExpr#getName()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String InvokeExpr.getRet()"})
-  public void testGetRet_thenReturnOwner() {
+  public void testGetName() {
     // Arrange, Act and Assert
-    assertEquals(
-        "Owner",
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner")
-            .getRet());
+    assertEquals("<init>",
+        Exprs.nInvokeNew(new Value[]{new ArrayExpr()}, new String[]{"Argment Types"}, "Owner").getName());
   }
 
   /**
-   * Test {@link InvokeExpr#getName()}.
-   *
-   * <ul>
-   *   <li>Then return {@code <init>}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#getName()}
+   * Method under test: {@link InvokeExpr#getName()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String InvokeExpr.getName()"})
-  public void testGetName_thenReturnInit() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "<init>",
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner")
-            .getName());
-  }
-
-  /**
-   * Test {@link InvokeExpr#getName()}.
-   *
-   * <ul>
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#getName()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String InvokeExpr.getName()"})
-  public void testGetName_thenReturnNull() {
+  public void testGetName2() {
     // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner");
+    InvokeExpr nInvokeNewResult = Exprs.nInvokeNew(new Value[]{new ArrayExpr()}, new String[]{"Argment Types"},
+        "Owner");
     nInvokeNewResult.method = null;
 
     // Act and Assert
@@ -836,44 +717,106 @@ public class InvokeExprDiffblueTest {
   }
 
   /**
-   * Test {@link InvokeExpr#getArgs()}.
-   *
-   * <ul>
-   *   <li>Then return array of {@link String} with {@code Argment Types}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#getArgs()}
+   * Method under test: {@link InvokeExpr#getArgs()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String[] InvokeExpr.getArgs()"})
-  public void testGetArgs_thenReturnArrayOfStringWithArgmentTypes() {
+  public void testGetArgs() {
     // Arrange, Act and Assert
-    assertArrayEquals(
-        new String[] {"Argment Types"},
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner")
-            .getArgs());
+    assertArrayEquals(new String[]{"Argment Types"},
+        Exprs.nInvokeNew(new Value[]{new ArrayExpr()}, new String[]{"Argment Types"}, "Owner").getArgs());
   }
 
   /**
-   * Test {@link InvokeExpr#getArgs()}.
-   *
-   * <ul>
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#getArgs()}
+   * Method under test: {@link InvokeExpr#getArgs()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String[] InvokeExpr.getArgs()"})
-  public void testGetArgs_thenReturnNull() {
+  public void testGetArgs2() {
     // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {new ArrayExpr()}, new String[] {"Argment Types"}, "Owner");
+    InvokeExpr nInvokeNewResult = Exprs.nInvokeNew(new Value[]{new ArrayExpr()}, new String[]{"Argment Types"},
+        "Owner");
     nInvokeNewResult.method = null;
 
     // Act and Assert
     assertNull(nInvokeNewResult.getArgs());
+  }
+
+  /**
+   * Method under test:
+   * {@link InvokeExpr#InvokeExpr(Value.VT, Value[], String, String, String[], String)}
+   */
+  @Test
+  public void testNewInvokeExpr() {
+    // Arrange
+    Value[] args = new Value[]{new ArrayExpr()};
+    String[] argmentTypes = new String[]{"Argment Types"};
+
+    // Act
+    InvokeExpr actualInvokeExpr = new InvokeExpr(Value.VT.ADD, args, "Owner Type", "Method Name", argmentTypes,
+        "Return Type");
+
+    // Assert
+    Method method = actualInvokeExpr.method;
+    assertEquals("(Argment Types)Return Type", method.getDesc());
+    Proto proto = actualInvokeExpr.getProto();
+    assertEquals("(Argment Types)Return Type", proto.getDesc());
+    assertEquals("Method Name", actualInvokeExpr.getName());
+    assertEquals("Method Name", method.getName());
+    assertEquals("Owner Type", actualInvokeExpr.getOwner());
+    assertEquals("Owner Type", method.getOwner());
+    assertEquals("Return Type", actualInvokeExpr.getRet());
+    assertEquals("Return Type", method.getReturnType());
+    assertEquals("Return Type", proto.getReturnType());
+    assertEquals("null[null].Method Name()", actualInvokeExpr.toString0());
+    assertNull(actualInvokeExpr.tag);
+    assertNull(actualInvokeExpr.valueType);
+    assertNull(actualInvokeExpr.getOp());
+    assertNull(actualInvokeExpr.getOp1());
+    assertNull(actualInvokeExpr.getOp2());
+    assertEquals(ET.En, actualInvokeExpr.et);
+    assertEquals(Value.VT.ADD, actualInvokeExpr.vt);
+    assertSame(proto, method.getProto());
+    String[] args2 = actualInvokeExpr.getArgs();
+    assertSame(argmentTypes, args2);
+    assertSame(argmentTypes, method.getParameterTypes());
+    assertSame(argmentTypes, proto.getParameterTypes());
+    assertSame(args, actualInvokeExpr.getOps());
+    assertArrayEquals(new String[]{"Argment Types"}, args2);
+  }
+
+  /**
+   * Method under test: {@link InvokeExpr#InvokeExpr(Value.VT, Value[], Method)}
+   */
+  @Test
+  public void testNewInvokeExpr2() {
+    // Arrange
+    Value[] args = new Value[]{new ArrayExpr()};
+    Proto proto = new Proto(new String[]{"Parameter Types"}, "Return Type");
+
+    // Act
+    InvokeExpr actualInvokeExpr = new InvokeExpr(Value.VT.ADD, args, new Method("Owner", "Name", proto));
+
+    // Assert
+    Method method = actualInvokeExpr.method;
+    assertEquals("(Parameter Types)Return Type", method.getDesc());
+    assertEquals("Name", actualInvokeExpr.getName());
+    assertEquals("Name", method.getName());
+    assertEquals("Owner", actualInvokeExpr.getOwner());
+    assertEquals("Owner", method.getOwner());
+    assertEquals("Return Type", actualInvokeExpr.getRet());
+    assertEquals("Return Type", method.getReturnType());
+    assertEquals("null[null].Name()", actualInvokeExpr.toString0());
+    assertNull(actualInvokeExpr.tag);
+    assertNull(actualInvokeExpr.valueType);
+    assertNull(actualInvokeExpr.getOp());
+    assertNull(actualInvokeExpr.getOp1());
+    assertNull(actualInvokeExpr.getOp2());
+    assertEquals(ET.En, actualInvokeExpr.et);
+    assertEquals(Value.VT.ADD, actualInvokeExpr.vt);
+    assertSame(proto, actualInvokeExpr.getProto());
+    assertSame(proto, method.getProto());
+    String[] args2 = actualInvokeExpr.getArgs();
+    assertSame(args2, method.getParameterTypes());
+    assertSame(args, actualInvokeExpr.getOps());
+    assertArrayEquals(new String[]{"Parameter Types"}, args2);
   }
 }

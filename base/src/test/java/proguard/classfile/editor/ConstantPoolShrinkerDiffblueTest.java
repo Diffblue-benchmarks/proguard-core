@@ -2,13 +2,13 @@ package proguard.classfile.editor;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
+import proguard.classfile.LibraryMethod;
+import proguard.classfile.Method;
 import proguard.classfile.ProgramClass;
 import proguard.classfile.attribute.EnclosingMethodAttribute;
 import proguard.classfile.attribute.InnerClassesInfo;
@@ -17,6 +17,7 @@ import proguard.classfile.attribute.SignatureAttribute;
 import proguard.classfile.attribute.SourceDirAttribute;
 import proguard.classfile.attribute.SourceFileAttribute;
 import proguard.classfile.attribute.annotation.Annotation;
+import proguard.classfile.attribute.annotation.AnnotationDefaultAttribute;
 import proguard.classfile.attribute.annotation.ClassElementValue;
 import proguard.classfile.attribute.annotation.EnumConstantElementValue;
 import proguard.classfile.attribute.module.ModuleMainClassAttribute;
@@ -29,6 +30,7 @@ import proguard.classfile.constant.FieldrefConstant;
 import proguard.classfile.constant.FloatConstant;
 import proguard.classfile.constant.IntegerConstant;
 import proguard.classfile.constant.InterfaceMethodrefConstant;
+import proguard.classfile.constant.InvokeDynamicConstant;
 import proguard.classfile.constant.MethodHandleConstant;
 import proguard.classfile.constant.ModuleConstant;
 import proguard.classfile.constant.NameAndTypeConstant;
@@ -36,49 +38,43 @@ import proguard.classfile.constant.PackageConstant;
 
 public class ConstantPoolShrinkerDiffblueTest {
   /**
-   * Test {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}.
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitProgramClass(ProgramClass)"})
   public void testVisitProgramClass() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
     ClassConstant classConstant = new ClassConstant();
-    ProgramClass programClass =
-        new ProgramClass(
-            1, 3, new Constant[] {doubleConstant, classConstant, new ClassConstant()}, 1, 1, 1);
+    ProgramClass programClass = new ProgramClass(1, 3,
+        new Constant[]{doubleConstant, classConstant, new ClassConstant()}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitProgramClass(programClass);
 
     // Assert
     Constant[] constantArray = programClass.constantPool;
-    assertTrue(constantArray[1] instanceof ClassConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof ClassConstant);
     assertNull(constantArray[2]);
     assertEquals(2, programClass.u2constantPoolCount);
     assertEquals(3, constantArray.length);
+    assertSame(classConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}.
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitProgramClass(ProgramClass)"})
   public void testVisitProgramClass2() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     ClassConstant classConstant = new ClassConstant();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass programClass =
-        new ProgramClass(
-            1, 3, new Constant[] {classConstant, doubleConstant, new ClassConstant()}, 1, 1, 1);
+    ProgramClass programClass = new ProgramClass(1, 3,
+        new Constant[]{classConstant, doubleConstant, new ClassConstant()}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitProgramClass(programClass);
@@ -91,21 +87,17 @@ public class ConstantPoolShrinkerDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}.
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitProgramClass(ProgramClass)"})
   public void testVisitProgramClass3() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     ClassConstant classConstant = new ClassConstant();
     FloatConstant floatConstant = new FloatConstant(10.0f);
-    ProgramClass programClass =
-        new ProgramClass(
-            1, 3, new Constant[] {classConstant, floatConstant, new ClassConstant()}, 1, 1, 1);
+    ProgramClass programClass = new ProgramClass(1, 3,
+        new Constant[]{classConstant, floatConstant, new ClassConstant()}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitProgramClass(programClass);
@@ -118,21 +110,17 @@ public class ConstantPoolShrinkerDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}.
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitProgramClass(ProgramClass)"})
   public void testVisitProgramClass4() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     ClassConstant classConstant = new ClassConstant();
     IntegerConstant integerConstant = new IntegerConstant(42);
-    ProgramClass programClass =
-        new ProgramClass(
-            1, 3, new Constant[] {classConstant, integerConstant, new ClassConstant()}, 1, 1, 1);
+    ProgramClass programClass = new ProgramClass(1, 3,
+        new Constant[]{classConstant, integerConstant, new ClassConstant()}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitProgramClass(programClass);
@@ -145,1357 +133,1037 @@ public class ConstantPoolShrinkerDiffblueTest {
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}.
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitProgramClass(ProgramClass)"})
   public void testVisitProgramClass5() {
-    // Arrange
-    ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
-    ClassConstant classConstant = new ClassConstant();
-    ProgramClass programClass =
-        new ProgramClass(1, 1, new Constant[] {classConstant, new DoubleConstant(10.0d)}, 1, 1, 1);
-
-    // Act
-    constantPoolShrinker.visitProgramClass(programClass);
-
-    // Assert that nothing has changed
-    assertEquals(1, programClass.u2constantPoolCount);
-  }
-
-  /**
-   * Test {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}.
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitProgramClass(ProgramClass)"})
-  public void testVisitProgramClass6() {
-    // Arrange
-    ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
-    DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass programClass =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new ClassConstant(), null}, 1, 1, 1);
-
-    // Act
-    constantPoolShrinker.visitProgramClass(programClass);
-
-    // Assert
-    Constant[] constantArray = programClass.constantPool;
-    assertTrue(constantArray[1] instanceof ClassConstant);
-    assertNull(constantArray[2]);
-    assertEquals(3, constantArray.length);
-    assertEquals(3, programClass.u2constantPoolCount);
-  }
-
-  /**
-   * Test {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link DynamicConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitProgramClass(ProgramClass)"})
-  public void testVisitProgramClass_thenSecondElementDynamicConstant() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
     DynamicConstant dynamicConstant = new DynamicConstant();
-    ProgramClass programClass =
-        new ProgramClass(
-            1, 3, new Constant[] {doubleConstant, dynamicConstant, new ClassConstant()}, 1, 1, 1);
+    ProgramClass programClass = new ProgramClass(1, 3,
+        new Constant[]{doubleConstant, dynamicConstant, new ClassConstant()}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitProgramClass(programClass);
 
     // Assert
     Constant[] constantArray = programClass.constantPool;
-    assertTrue(constantArray[1] instanceof DynamicConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof DynamicConstant);
     assertNull(constantArray[2]);
     assertEquals(2, programClass.u2constantPoolCount);
     assertEquals(3, constantArray.length);
+    assertSame(dynamicConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link FieldrefConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitProgramClass(ProgramClass)"})
-  public void testVisitProgramClass_thenSecondElementFieldrefConstant() {
+  public void testVisitProgramClass6() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
     FieldrefConstant fieldrefConstant = new FieldrefConstant();
-    ProgramClass programClass =
-        new ProgramClass(
-            1, 3, new Constant[] {doubleConstant, fieldrefConstant, new ClassConstant()}, 1, 1, 1);
+    ProgramClass programClass = new ProgramClass(1, 3,
+        new Constant[]{doubleConstant, fieldrefConstant, new ClassConstant()}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitProgramClass(programClass);
 
     // Assert
     Constant[] constantArray = programClass.constantPool;
-    assertTrue(constantArray[1] instanceof FieldrefConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof FieldrefConstant);
     assertNull(constantArray[2]);
     assertEquals(2, programClass.u2constantPoolCount);
     assertEquals(3, constantArray.length);
+    assertSame(fieldrefConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link InterfaceMethodrefConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitProgramClass(ProgramClass)"})
-  public void testVisitProgramClass_thenSecondElementInterfaceMethodrefConstant() {
+  public void testVisitProgramClass7() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
     InterfaceMethodrefConstant interfaceMethodrefConstant = new InterfaceMethodrefConstant();
-    ProgramClass programClass =
-        new ProgramClass(
-            1,
-            3,
-            new Constant[] {doubleConstant, interfaceMethodrefConstant, new ClassConstant()},
-            1,
-            1,
-            1);
+    ProgramClass programClass = new ProgramClass(1, 3,
+        new Constant[]{doubleConstant, interfaceMethodrefConstant, new ClassConstant()}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitProgramClass(programClass);
 
     // Assert
     Constant[] constantArray = programClass.constantPool;
-    assertTrue(constantArray[1] instanceof InterfaceMethodrefConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof InterfaceMethodrefConstant);
     assertNull(constantArray[2]);
     assertEquals(2, programClass.u2constantPoolCount);
     assertEquals(3, constantArray.length);
+    assertSame(interfaceMethodrefConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitMethodHandleConstant(Clazz, MethodHandleConstant)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitMethodHandleConstant(Clazz,
-   * MethodHandleConstant)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitProgramClass(ProgramClass)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitMethodHandleConstant(Clazz, MethodHandleConstant)"
-  })
-  public void testVisitMethodHandleConstant_thenSecondElementClassConstant() {
+  public void testVisitProgramClass8() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new ClassConstant()}, 1, 1, 1);
+    ClassConstant classConstant = new ClassConstant();
+    ProgramClass programClass = new ProgramClass(1, 3, new Constant[]{doubleConstant, classConstant, null}, 1, 1, 1);
+
+    // Act
+    constantPoolShrinker.visitProgramClass(programClass);
+
+    // Assert
+    Constant[] constantArray = programClass.constantPool;
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof ClassConstant);
+    assertEquals(3, constantArray.length);
+    assertSame(classConstant, constant);
+  }
+
+  /**
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitMethodHandleConstant(Clazz, MethodHandleConstant)}
+   */
+  @Test
+  public void testVisitMethodHandleConstant() {
+    // Arrange
+    ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
+    DoubleConstant doubleConstant = new DoubleConstant(10.0d);
+    ClassConstant classConstant = new ClassConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, classConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitMethodHandleConstant(clazz, new MethodHandleConstant(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof ClassConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof ClassConstant);
     assertEquals(2, constantArray.length);
+    assertSame(classConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitMethodHandleConstant(Clazz, MethodHandleConstant)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link DynamicConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitMethodHandleConstant(Clazz,
-   * MethodHandleConstant)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitMethodHandleConstant(Clazz, MethodHandleConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitMethodHandleConstant(Clazz, MethodHandleConstant)"
-  })
-  public void testVisitMethodHandleConstant_thenSecondElementDynamicConstant() {
+  public void testVisitMethodHandleConstant2() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new DynamicConstant()}, 1, 1, 1);
+    DynamicConstant dynamicConstant = new DynamicConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, dynamicConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitMethodHandleConstant(clazz, new MethodHandleConstant(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof DynamicConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof DynamicConstant);
     assertEquals(2, constantArray.length);
+    assertSame(dynamicConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitMethodHandleConstant(Clazz, MethodHandleConstant)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link FieldrefConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitMethodHandleConstant(Clazz,
-   * MethodHandleConstant)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitMethodHandleConstant(Clazz, MethodHandleConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitMethodHandleConstant(Clazz, MethodHandleConstant)"
-  })
-  public void testVisitMethodHandleConstant_thenSecondElementFieldrefConstant() {
+  public void testVisitMethodHandleConstant3() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new FieldrefConstant()}, 1, 1, 1);
+    FieldrefConstant fieldrefConstant = new FieldrefConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, fieldrefConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitMethodHandleConstant(clazz, new MethodHandleConstant(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof FieldrefConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof FieldrefConstant);
     assertEquals(2, constantArray.length);
+    assertSame(fieldrefConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitNameAndTypeConstant(Clazz, NameAndTypeConstant)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitNameAndTypeConstant(Clazz,
-   * NameAndTypeConstant)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitNameAndTypeConstant(Clazz, NameAndTypeConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitNameAndTypeConstant(Clazz, NameAndTypeConstant)"
-  })
-  public void testVisitNameAndTypeConstant_thenSecondElementClassConstant() {
+  public void testVisitNameAndTypeConstant() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new ClassConstant()}, 1, 1, 1);
+    ClassConstant classConstant = new ClassConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, classConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitNameAndTypeConstant(clazz, new NameAndTypeConstant(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof ClassConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof ClassConstant);
     assertEquals(2, constantArray.length);
+    assertSame(classConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitNameAndTypeConstant(Clazz, NameAndTypeConstant)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link DynamicConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitNameAndTypeConstant(Clazz,
-   * NameAndTypeConstant)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitNameAndTypeConstant(Clazz, NameAndTypeConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitNameAndTypeConstant(Clazz, NameAndTypeConstant)"
-  })
-  public void testVisitNameAndTypeConstant_thenSecondElementDynamicConstant() {
+  public void testVisitNameAndTypeConstant2() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new DynamicConstant()}, 1, 1, 1);
+    DynamicConstant dynamicConstant = new DynamicConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, dynamicConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitNameAndTypeConstant(clazz, new NameAndTypeConstant(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof DynamicConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof DynamicConstant);
     assertEquals(2, constantArray.length);
+    assertSame(dynamicConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitNameAndTypeConstant(Clazz, NameAndTypeConstant)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link FieldrefConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitNameAndTypeConstant(Clazz,
-   * NameAndTypeConstant)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitNameAndTypeConstant(Clazz, NameAndTypeConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitNameAndTypeConstant(Clazz, NameAndTypeConstant)"
-  })
-  public void testVisitNameAndTypeConstant_thenSecondElementFieldrefConstant() {
+  public void testVisitNameAndTypeConstant3() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new FieldrefConstant()}, 1, 1, 1);
+    FieldrefConstant fieldrefConstant = new FieldrefConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, fieldrefConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitNameAndTypeConstant(clazz, new NameAndTypeConstant(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof FieldrefConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof FieldrefConstant);
     assertEquals(2, constantArray.length);
+    assertSame(fieldrefConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitModuleConstant(Clazz, ModuleConstant)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitModuleConstant(Clazz, ModuleConstant)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitModuleConstant(Clazz, ModuleConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitModuleConstant(Clazz, ModuleConstant)"})
-  public void testVisitModuleConstant_thenSecondElementClassConstant() {
+  public void testVisitModuleConstant() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new ClassConstant()}, 1, 1, 1);
+    ClassConstant classConstant = new ClassConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, classConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitModuleConstant(clazz, new ModuleConstant(1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof ClassConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof ClassConstant);
     assertEquals(2, constantArray.length);
+    assertSame(classConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitModuleConstant(Clazz, ModuleConstant)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link DynamicConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitModuleConstant(Clazz, ModuleConstant)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitModuleConstant(Clazz, ModuleConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitModuleConstant(Clazz, ModuleConstant)"})
-  public void testVisitModuleConstant_thenSecondElementDynamicConstant() {
+  public void testVisitModuleConstant2() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new DynamicConstant()}, 1, 1, 1);
+    DynamicConstant dynamicConstant = new DynamicConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, dynamicConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitModuleConstant(clazz, new ModuleConstant(1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof DynamicConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof DynamicConstant);
     assertEquals(2, constantArray.length);
+    assertSame(dynamicConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitModuleConstant(Clazz, ModuleConstant)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link FieldrefConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitModuleConstant(Clazz, ModuleConstant)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitModuleConstant(Clazz, ModuleConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitModuleConstant(Clazz, ModuleConstant)"})
-  public void testVisitModuleConstant_thenSecondElementFieldrefConstant() {
+  public void testVisitModuleConstant3() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new FieldrefConstant()}, 1, 1, 1);
+    FieldrefConstant fieldrefConstant = new FieldrefConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, fieldrefConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitModuleConstant(clazz, new ModuleConstant(1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof FieldrefConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof FieldrefConstant);
     assertEquals(2, constantArray.length);
+    assertSame(fieldrefConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitPackageConstant(Clazz, PackageConstant)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitPackageConstant(Clazz, PackageConstant)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitPackageConstant(Clazz, PackageConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitPackageConstant(Clazz, PackageConstant)"})
-  public void testVisitPackageConstant_thenSecondElementClassConstant() {
+  public void testVisitPackageConstant() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new ClassConstant()}, 1, 1, 1);
+    ClassConstant classConstant = new ClassConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, classConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitPackageConstant(clazz, new PackageConstant(1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof ClassConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof ClassConstant);
     assertEquals(2, constantArray.length);
+    assertSame(classConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitPackageConstant(Clazz, PackageConstant)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link DynamicConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitPackageConstant(Clazz, PackageConstant)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitPackageConstant(Clazz, PackageConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitPackageConstant(Clazz, PackageConstant)"})
-  public void testVisitPackageConstant_thenSecondElementDynamicConstant() {
+  public void testVisitPackageConstant2() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new DynamicConstant()}, 1, 1, 1);
+    DynamicConstant dynamicConstant = new DynamicConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, dynamicConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitPackageConstant(clazz, new PackageConstant(1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof DynamicConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof DynamicConstant);
     assertEquals(2, constantArray.length);
+    assertSame(dynamicConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitPackageConstant(Clazz, PackageConstant)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link FieldrefConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitPackageConstant(Clazz, PackageConstant)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitPackageConstant(Clazz, PackageConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitPackageConstant(Clazz, PackageConstant)"})
-  public void testVisitPackageConstant_thenSecondElementFieldrefConstant() {
+  public void testVisitPackageConstant3() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new FieldrefConstant()}, 1, 1, 1);
+    FieldrefConstant fieldrefConstant = new FieldrefConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, fieldrefConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitPackageConstant(clazz, new PackageConstant(1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof FieldrefConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof FieldrefConstant);
     assertEquals(2, constantArray.length);
+    assertSame(fieldrefConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitSourceFileAttribute(Clazz, SourceFileAttribute)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitSourceFileAttribute(Clazz,
-   * SourceFileAttribute)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitSourceFileAttribute(Clazz, SourceFileAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitSourceFileAttribute(Clazz, SourceFileAttribute)"
-  })
-  public void testVisitSourceFileAttribute_thenSecondElementClassConstant() {
+  public void testVisitSourceFileAttribute() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new ClassConstant()}, 1, 1, 1);
+    ClassConstant classConstant = new ClassConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, classConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitSourceFileAttribute(clazz, new SourceFileAttribute(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof ClassConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof ClassConstant);
     assertEquals(2, constantArray.length);
+    assertSame(classConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitSourceFileAttribute(Clazz, SourceFileAttribute)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link DynamicConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitSourceFileAttribute(Clazz,
-   * SourceFileAttribute)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitSourceFileAttribute(Clazz, SourceFileAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitSourceFileAttribute(Clazz, SourceFileAttribute)"
-  })
-  public void testVisitSourceFileAttribute_thenSecondElementDynamicConstant() {
+  public void testVisitSourceFileAttribute2() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new DynamicConstant()}, 1, 1, 1);
+    DynamicConstant dynamicConstant = new DynamicConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, dynamicConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitSourceFileAttribute(clazz, new SourceFileAttribute(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof DynamicConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof DynamicConstant);
     assertEquals(2, constantArray.length);
+    assertSame(dynamicConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitSourceFileAttribute(Clazz, SourceFileAttribute)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link FieldrefConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitSourceFileAttribute(Clazz,
-   * SourceFileAttribute)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitSourceFileAttribute(Clazz, SourceFileAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitSourceFileAttribute(Clazz, SourceFileAttribute)"
-  })
-  public void testVisitSourceFileAttribute_thenSecondElementFieldrefConstant() {
+  public void testVisitSourceFileAttribute3() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new FieldrefConstant()}, 1, 1, 1);
+    FieldrefConstant fieldrefConstant = new FieldrefConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, fieldrefConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitSourceFileAttribute(clazz, new SourceFileAttribute(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof FieldrefConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof FieldrefConstant);
     assertEquals(2, constantArray.length);
+    assertSame(fieldrefConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitSourceDirAttribute(Clazz, SourceDirAttribute)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitSourceDirAttribute(Clazz,
-   * SourceDirAttribute)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitSourceDirAttribute(Clazz, SourceDirAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitSourceDirAttribute(Clazz, SourceDirAttribute)"
-  })
-  public void testVisitSourceDirAttribute_thenSecondElementClassConstant() {
+  public void testVisitSourceDirAttribute() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new ClassConstant()}, 1, 1, 1);
+    ClassConstant classConstant = new ClassConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, classConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitSourceDirAttribute(clazz, new SourceDirAttribute(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof ClassConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof ClassConstant);
     assertEquals(2, constantArray.length);
+    assertSame(classConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitSourceDirAttribute(Clazz, SourceDirAttribute)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link DynamicConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitSourceDirAttribute(Clazz,
-   * SourceDirAttribute)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitSourceDirAttribute(Clazz, SourceDirAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitSourceDirAttribute(Clazz, SourceDirAttribute)"
-  })
-  public void testVisitSourceDirAttribute_thenSecondElementDynamicConstant() {
+  public void testVisitSourceDirAttribute2() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new DynamicConstant()}, 1, 1, 1);
+    DynamicConstant dynamicConstant = new DynamicConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, dynamicConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitSourceDirAttribute(clazz, new SourceDirAttribute(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof DynamicConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof DynamicConstant);
     assertEquals(2, constantArray.length);
+    assertSame(dynamicConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitSourceDirAttribute(Clazz, SourceDirAttribute)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link FieldrefConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitSourceDirAttribute(Clazz,
-   * SourceDirAttribute)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitSourceDirAttribute(Clazz, SourceDirAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitSourceDirAttribute(Clazz, SourceDirAttribute)"
-  })
-  public void testVisitSourceDirAttribute_thenSecondElementFieldrefConstant() {
+  public void testVisitSourceDirAttribute3() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new FieldrefConstant()}, 1, 1, 1);
+    FieldrefConstant fieldrefConstant = new FieldrefConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, fieldrefConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitSourceDirAttribute(clazz, new SourceDirAttribute(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof FieldrefConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof FieldrefConstant);
     assertEquals(2, constantArray.length);
+    assertSame(fieldrefConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitEnclosingMethodAttribute(Clazz,
-   * EnclosingMethodAttribute)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitEnclosingMethodAttribute(Clazz,
-   * EnclosingMethodAttribute)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitEnclosingMethodAttribute(Clazz, EnclosingMethodAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitEnclosingMethodAttribute(Clazz, EnclosingMethodAttribute)"
-  })
-  public void testVisitEnclosingMethodAttribute_thenSecondElementClassConstant() {
+  public void testVisitEnclosingMethodAttribute() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new ClassConstant()}, 1, 1, 1);
+    ClassConstant classConstant = new ClassConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, classConstant}, 1, 1, 1);
 
     // Act
-    constantPoolShrinker.visitEnclosingMethodAttribute(
-        clazz, new EnclosingMethodAttribute(1, 1, 1));
+    constantPoolShrinker.visitEnclosingMethodAttribute(clazz, new EnclosingMethodAttribute(1, 1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof ClassConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof ClassConstant);
     assertEquals(2, constantArray.length);
+    assertSame(classConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitEnclosingMethodAttribute(Clazz,
-   * EnclosingMethodAttribute)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link DynamicConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitEnclosingMethodAttribute(Clazz,
-   * EnclosingMethodAttribute)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitEnclosingMethodAttribute(Clazz, EnclosingMethodAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitEnclosingMethodAttribute(Clazz, EnclosingMethodAttribute)"
-  })
-  public void testVisitEnclosingMethodAttribute_thenSecondElementDynamicConstant() {
+  public void testVisitEnclosingMethodAttribute2() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new DynamicConstant()}, 1, 1, 1);
+    DynamicConstant dynamicConstant = new DynamicConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, dynamicConstant}, 1, 1, 1);
 
     // Act
-    constantPoolShrinker.visitEnclosingMethodAttribute(
-        clazz, new EnclosingMethodAttribute(1, 1, 1));
+    constantPoolShrinker.visitEnclosingMethodAttribute(clazz, new EnclosingMethodAttribute(1, 1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof DynamicConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof DynamicConstant);
     assertEquals(2, constantArray.length);
+    assertSame(dynamicConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitEnclosingMethodAttribute(Clazz,
-   * EnclosingMethodAttribute)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link FieldrefConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitEnclosingMethodAttribute(Clazz,
-   * EnclosingMethodAttribute)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitEnclosingMethodAttribute(Clazz, EnclosingMethodAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitEnclosingMethodAttribute(Clazz, EnclosingMethodAttribute)"
-  })
-  public void testVisitEnclosingMethodAttribute_thenSecondElementFieldrefConstant() {
+  public void testVisitEnclosingMethodAttribute3() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new FieldrefConstant()}, 1, 1, 1);
+    FieldrefConstant fieldrefConstant = new FieldrefConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, fieldrefConstant}, 1, 1, 1);
 
     // Act
-    constantPoolShrinker.visitEnclosingMethodAttribute(
-        clazz, new EnclosingMethodAttribute(1, 1, 1));
+    constantPoolShrinker.visitEnclosingMethodAttribute(clazz, new EnclosingMethodAttribute(1, 1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof FieldrefConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof FieldrefConstant);
     assertEquals(2, constantArray.length);
+    assertSame(fieldrefConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitNestHostAttribute(Clazz, NestHostAttribute)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitNestHostAttribute(Clazz,
-   * NestHostAttribute)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitNestHostAttribute(Clazz, NestHostAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitNestHostAttribute(Clazz, NestHostAttribute)"})
-  public void testVisitNestHostAttribute_thenSecondElementClassConstant() {
+  public void testVisitNestHostAttribute() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new ClassConstant()}, 1, 1, 1);
+    ClassConstant classConstant = new ClassConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, classConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitNestHostAttribute(clazz, new NestHostAttribute(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof ClassConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof ClassConstant);
     assertEquals(2, constantArray.length);
+    assertSame(classConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitNestHostAttribute(Clazz, NestHostAttribute)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link DynamicConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitNestHostAttribute(Clazz,
-   * NestHostAttribute)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitNestHostAttribute(Clazz, NestHostAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitNestHostAttribute(Clazz, NestHostAttribute)"})
-  public void testVisitNestHostAttribute_thenSecondElementDynamicConstant() {
+  public void testVisitNestHostAttribute2() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new DynamicConstant()}, 1, 1, 1);
+    DynamicConstant dynamicConstant = new DynamicConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, dynamicConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitNestHostAttribute(clazz, new NestHostAttribute(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof DynamicConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof DynamicConstant);
     assertEquals(2, constantArray.length);
+    assertSame(dynamicConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitNestHostAttribute(Clazz, NestHostAttribute)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link FieldrefConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitNestHostAttribute(Clazz,
-   * NestHostAttribute)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitNestHostAttribute(Clazz, NestHostAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitNestHostAttribute(Clazz, NestHostAttribute)"})
-  public void testVisitNestHostAttribute_thenSecondElementFieldrefConstant() {
+  public void testVisitNestHostAttribute3() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new FieldrefConstant()}, 1, 1, 1);
+    FieldrefConstant fieldrefConstant = new FieldrefConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, fieldrefConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitNestHostAttribute(clazz, new NestHostAttribute(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof FieldrefConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof FieldrefConstant);
     assertEquals(2, constantArray.length);
+    assertSame(fieldrefConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitModuleMainClassAttribute(Clazz,
-   * ModuleMainClassAttribute)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitModuleMainClassAttribute(Clazz,
-   * ModuleMainClassAttribute)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitModuleMainClassAttribute(Clazz, ModuleMainClassAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitModuleMainClassAttribute(Clazz, ModuleMainClassAttribute)"
-  })
-  public void testVisitModuleMainClassAttribute_thenSecondElementClassConstant() {
+  public void testVisitModuleMainClassAttribute() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new ClassConstant()}, 1, 1, 1);
+    ClassConstant classConstant = new ClassConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, classConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitModuleMainClassAttribute(clazz, new ModuleMainClassAttribute(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof ClassConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof ClassConstant);
     assertEquals(2, constantArray.length);
+    assertSame(classConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitModuleMainClassAttribute(Clazz,
-   * ModuleMainClassAttribute)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link DynamicConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitModuleMainClassAttribute(Clazz,
-   * ModuleMainClassAttribute)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitModuleMainClassAttribute(Clazz, ModuleMainClassAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitModuleMainClassAttribute(Clazz, ModuleMainClassAttribute)"
-  })
-  public void testVisitModuleMainClassAttribute_thenSecondElementDynamicConstant() {
+  public void testVisitModuleMainClassAttribute2() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new DynamicConstant()}, 1, 1, 1);
+    DynamicConstant dynamicConstant = new DynamicConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, dynamicConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitModuleMainClassAttribute(clazz, new ModuleMainClassAttribute(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof DynamicConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof DynamicConstant);
     assertEquals(2, constantArray.length);
+    assertSame(dynamicConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitModuleMainClassAttribute(Clazz,
-   * ModuleMainClassAttribute)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link FieldrefConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitModuleMainClassAttribute(Clazz,
-   * ModuleMainClassAttribute)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitModuleMainClassAttribute(Clazz, ModuleMainClassAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitModuleMainClassAttribute(Clazz, ModuleMainClassAttribute)"
-  })
-  public void testVisitModuleMainClassAttribute_thenSecondElementFieldrefConstant() {
+  public void testVisitModuleMainClassAttribute3() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new FieldrefConstant()}, 1, 1, 1);
+    FieldrefConstant fieldrefConstant = new FieldrefConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, fieldrefConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitModuleMainClassAttribute(clazz, new ModuleMainClassAttribute(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof FieldrefConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof FieldrefConstant);
     assertEquals(2, constantArray.length);
+    assertSame(fieldrefConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitSignatureAttribute(Clazz, SignatureAttribute)} with
-   * {@code clazz}, {@code signatureAttribute}.
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitSignatureAttribute(Clazz,
-   * SignatureAttribute)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitSignatureAttribute(Clazz, SignatureAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitSignatureAttribute(Clazz, SignatureAttribute)"
-  })
-  public void testVisitSignatureAttributeWithClazzSignatureAttribute() {
+  public void testVisitSignatureAttribute() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new ClassConstant()}, 1, 1, 1);
+    ClassConstant classConstant = new ClassConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, classConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitSignatureAttribute(clazz, new SignatureAttribute(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof ClassConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof ClassConstant);
     assertEquals(2, constantArray.length);
+    assertSame(classConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitSignatureAttribute(Clazz, SignatureAttribute)} with
-   * {@code clazz}, {@code signatureAttribute}.
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitSignatureAttribute(Clazz,
-   * SignatureAttribute)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitSignatureAttribute(Clazz, SignatureAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitSignatureAttribute(Clazz, SignatureAttribute)"
-  })
-  public void testVisitSignatureAttributeWithClazzSignatureAttribute2() {
+  public void testVisitSignatureAttribute2() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new DynamicConstant()}, 1, 1, 1);
+    DynamicConstant dynamicConstant = new DynamicConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, dynamicConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitSignatureAttribute(clazz, new SignatureAttribute(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof DynamicConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof DynamicConstant);
     assertEquals(2, constantArray.length);
+    assertSame(dynamicConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitSignatureAttribute(Clazz, SignatureAttribute)} with
-   * {@code clazz}, {@code signatureAttribute}.
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitSignatureAttribute(Clazz,
-   * SignatureAttribute)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitSignatureAttribute(Clazz, SignatureAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitSignatureAttribute(Clazz, SignatureAttribute)"
-  })
-  public void testVisitSignatureAttributeWithClazzSignatureAttribute3() {
+  public void testVisitSignatureAttribute3() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new FieldrefConstant()}, 1, 1, 1);
+    FieldrefConstant fieldrefConstant = new FieldrefConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, fieldrefConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitSignatureAttribute(clazz, new SignatureAttribute(1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof FieldrefConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof FieldrefConstant);
     assertEquals(2, constantArray.length);
+    assertSame(fieldrefConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitInnerClassesInfo(Clazz, InnerClassesInfo)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitInnerClassesInfo(Clazz,
-   * InnerClassesInfo)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitAnnotationDefaultAttribute(Clazz, Method, AnnotationDefaultAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitInnerClassesInfo(Clazz, InnerClassesInfo)"})
-  public void testVisitInnerClassesInfo_thenSecondElementClassConstant() {
+  public void testVisitAnnotationDefaultAttribute() {
+    // Arrange
+    ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{new InvokeDynamicConstant()}, 1, 1, 1);
+
+    LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
+
+    // Act and Assert
+    assertThrows(StackOverflowError.class,
+        () -> constantPoolShrinker.visitAnnotationDefaultAttribute(clazz, method, new AnnotationDefaultAttribute()));
+  }
+
+  /**
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitInnerClassesInfo(Clazz, InnerClassesInfo)}
+   */
+  @Test
+  public void testVisitInnerClassesInfo() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new ClassConstant()}, 1, 1, 1);
+    ClassConstant classConstant = new ClassConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, classConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitInnerClassesInfo(clazz, new InnerClassesInfo(1, 1, 1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof ClassConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof ClassConstant);
     assertEquals(2, constantArray.length);
+    assertSame(classConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitInnerClassesInfo(Clazz, InnerClassesInfo)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link DynamicConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitInnerClassesInfo(Clazz,
-   * InnerClassesInfo)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitInnerClassesInfo(Clazz, InnerClassesInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitInnerClassesInfo(Clazz, InnerClassesInfo)"})
-  public void testVisitInnerClassesInfo_thenSecondElementDynamicConstant() {
+  public void testVisitInnerClassesInfo2() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new DynamicConstant()}, 1, 1, 1);
+    DynamicConstant dynamicConstant = new DynamicConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, dynamicConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitInnerClassesInfo(clazz, new InnerClassesInfo(1, 1, 1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof DynamicConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof DynamicConstant);
     assertEquals(2, constantArray.length);
+    assertSame(dynamicConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitInnerClassesInfo(Clazz, InnerClassesInfo)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link FieldrefConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitInnerClassesInfo(Clazz,
-   * InnerClassesInfo)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitInnerClassesInfo(Clazz, InnerClassesInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitInnerClassesInfo(Clazz, InnerClassesInfo)"})
-  public void testVisitInnerClassesInfo_thenSecondElementFieldrefConstant() {
+  public void testVisitInnerClassesInfo3() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new FieldrefConstant()}, 1, 1, 1);
+    FieldrefConstant fieldrefConstant = new FieldrefConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, fieldrefConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitInnerClassesInfo(clazz, new InnerClassesInfo(1, 1, 1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof FieldrefConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof FieldrefConstant);
     assertEquals(2, constantArray.length);
+    assertSame(fieldrefConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitRequiresInfo(Clazz, RequiresInfo)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitRequiresInfo(Clazz, RequiresInfo)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitRequiresInfo(Clazz, RequiresInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitRequiresInfo(Clazz, RequiresInfo)"})
-  public void testVisitRequiresInfo_thenSecondElementClassConstant() {
+  public void testVisitRequiresInfo() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new ClassConstant()}, 1, 1, 1);
+    ClassConstant classConstant = new ClassConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, classConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitRequiresInfo(clazz, new RequiresInfo(1, 1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof ClassConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof ClassConstant);
     assertEquals(2, constantArray.length);
+    assertSame(classConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitRequiresInfo(Clazz, RequiresInfo)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link DynamicConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitRequiresInfo(Clazz, RequiresInfo)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitRequiresInfo(Clazz, RequiresInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitRequiresInfo(Clazz, RequiresInfo)"})
-  public void testVisitRequiresInfo_thenSecondElementDynamicConstant() {
+  public void testVisitRequiresInfo2() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new DynamicConstant()}, 1, 1, 1);
+    DynamicConstant dynamicConstant = new DynamicConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, dynamicConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitRequiresInfo(clazz, new RequiresInfo(1, 1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof DynamicConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof DynamicConstant);
     assertEquals(2, constantArray.length);
+    assertSame(dynamicConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitRequiresInfo(Clazz, RequiresInfo)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link FieldrefConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitRequiresInfo(Clazz, RequiresInfo)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitRequiresInfo(Clazz, RequiresInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ConstantPoolShrinker.visitRequiresInfo(Clazz, RequiresInfo)"})
-  public void testVisitRequiresInfo_thenSecondElementFieldrefConstant() {
+  public void testVisitRequiresInfo3() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new FieldrefConstant()}, 1, 1, 1);
+    FieldrefConstant fieldrefConstant = new FieldrefConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, fieldrefConstant}, 1, 1, 1);
 
     // Act
     constantPoolShrinker.visitRequiresInfo(clazz, new RequiresInfo(1, 1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof FieldrefConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof FieldrefConstant);
     assertEquals(2, constantArray.length);
+    assertSame(fieldrefConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitEnumConstantElementValue(Clazz, Annotation,
-   * EnumConstantElementValue)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitEnumConstantElementValue(Clazz,
-   * Annotation, EnumConstantElementValue)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitEnumConstantElementValue(Clazz, Annotation, EnumConstantElementValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitEnumConstantElementValue(Clazz, Annotation, EnumConstantElementValue)"
-  })
-  public void testVisitEnumConstantElementValue_thenSecondElementClassConstant() {
+  public void testVisitEnumConstantElementValue() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new ClassConstant()}, 1, 1, 1);
+    ClassConstant classConstant = new ClassConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, classConstant}, 1, 1, 1);
 
     Annotation annotation = new Annotation();
 
     // Act
-    constantPoolShrinker.visitEnumConstantElementValue(
-        clazz, annotation, new EnumConstantElementValue(1, 1, 1));
+    constantPoolShrinker.visitEnumConstantElementValue(clazz, annotation, new EnumConstantElementValue(1, 1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof ClassConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof ClassConstant);
     assertEquals(2, constantArray.length);
+    assertSame(classConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitEnumConstantElementValue(Clazz, Annotation,
-   * EnumConstantElementValue)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link DynamicConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitEnumConstantElementValue(Clazz,
-   * Annotation, EnumConstantElementValue)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitEnumConstantElementValue(Clazz, Annotation, EnumConstantElementValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitEnumConstantElementValue(Clazz, Annotation, EnumConstantElementValue)"
-  })
-  public void testVisitEnumConstantElementValue_thenSecondElementDynamicConstant() {
+  public void testVisitEnumConstantElementValue2() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new DynamicConstant()}, 1, 1, 1);
+    DynamicConstant dynamicConstant = new DynamicConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, dynamicConstant}, 1, 1, 1);
 
     Annotation annotation = new Annotation();
 
     // Act
-    constantPoolShrinker.visitEnumConstantElementValue(
-        clazz, annotation, new EnumConstantElementValue(1, 1, 1));
+    constantPoolShrinker.visitEnumConstantElementValue(clazz, annotation, new EnumConstantElementValue(1, 1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof DynamicConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof DynamicConstant);
     assertEquals(2, constantArray.length);
+    assertSame(dynamicConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitEnumConstantElementValue(Clazz, Annotation,
-   * EnumConstantElementValue)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link FieldrefConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitEnumConstantElementValue(Clazz,
-   * Annotation, EnumConstantElementValue)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitEnumConstantElementValue(Clazz, Annotation, EnumConstantElementValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitEnumConstantElementValue(Clazz, Annotation, EnumConstantElementValue)"
-  })
-  public void testVisitEnumConstantElementValue_thenSecondElementFieldrefConstant() {
+  public void testVisitEnumConstantElementValue3() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new FieldrefConstant()}, 1, 1, 1);
+    FieldrefConstant fieldrefConstant = new FieldrefConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, fieldrefConstant}, 1, 1, 1);
 
     Annotation annotation = new Annotation();
 
     // Act
-    constantPoolShrinker.visitEnumConstantElementValue(
-        clazz, annotation, new EnumConstantElementValue(1, 1, 1));
+    constantPoolShrinker.visitEnumConstantElementValue(clazz, annotation, new EnumConstantElementValue(1, 1, 1));
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof FieldrefConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof FieldrefConstant);
     assertEquals(2, constantArray.length);
+    assertSame(fieldrefConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitClassElementValue(Clazz, Annotation, ClassElementValue)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link ClassConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitClassElementValue(Clazz, Annotation,
-   * ClassElementValue)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitClassElementValue(Clazz, Annotation, ClassElementValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitClassElementValue(Clazz, Annotation, ClassElementValue)"
-  })
-  public void testVisitClassElementValue_thenSecondElementClassConstant() {
+  public void testVisitClassElementValue() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new ClassConstant()}, 1, 1, 1);
+    ClassConstant classConstant = new ClassConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, classConstant}, 1, 1, 1);
 
     Annotation annotation = new Annotation();
 
@@ -1504,31 +1172,23 @@ public class ConstantPoolShrinkerDiffblueTest {
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof ClassConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof ClassConstant);
     assertEquals(2, constantArray.length);
+    assertSame(classConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitClassElementValue(Clazz, Annotation, ClassElementValue)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link DynamicConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitClassElementValue(Clazz, Annotation,
-   * ClassElementValue)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitClassElementValue(Clazz, Annotation, ClassElementValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitClassElementValue(Clazz, Annotation, ClassElementValue)"
-  })
-  public void testVisitClassElementValue_thenSecondElementDynamicConstant() {
+  public void testVisitClassElementValue2() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new DynamicConstant()}, 1, 1, 1);
+    DynamicConstant dynamicConstant = new DynamicConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, dynamicConstant}, 1, 1, 1);
 
     Annotation annotation = new Annotation();
 
@@ -1537,31 +1197,23 @@ public class ConstantPoolShrinkerDiffblueTest {
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof DynamicConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof DynamicConstant);
     assertEquals(2, constantArray.length);
+    assertSame(dynamicConstant, constant);
   }
 
   /**
-   * Test {@link ConstantPoolShrinker#visitClassElementValue(Clazz, Annotation, ClassElementValue)}.
-   *
-   * <ul>
-   *   <li>Then second element {@link FieldrefConstant}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConstantPoolShrinker#visitClassElementValue(Clazz, Annotation,
-   * ClassElementValue)}
+   * Method under test:
+   * {@link ConstantPoolShrinker#visitClassElementValue(Clazz, Annotation, ClassElementValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConstantPoolShrinker.visitClassElementValue(Clazz, Annotation, ClassElementValue)"
-  })
-  public void testVisitClassElementValue_thenSecondElementFieldrefConstant() {
+  public void testVisitClassElementValue3() {
     // Arrange
     ConstantPoolShrinker constantPoolShrinker = new ConstantPoolShrinker();
     DoubleConstant doubleConstant = new DoubleConstant(10.0d);
-    ProgramClass clazz =
-        new ProgramClass(1, 3, new Constant[] {doubleConstant, new FieldrefConstant()}, 1, 1, 1);
+    FieldrefConstant fieldrefConstant = new FieldrefConstant();
+    ProgramClass clazz = new ProgramClass(1, 3, new Constant[]{doubleConstant, fieldrefConstant}, 1, 1, 1);
 
     Annotation annotation = new Annotation();
 
@@ -1570,7 +1222,9 @@ public class ConstantPoolShrinkerDiffblueTest {
 
     // Assert
     Constant[] constantArray = clazz.constantPool;
-    assertTrue(constantArray[1] instanceof FieldrefConstant);
+    Constant constant = constantArray[1];
+    assertTrue(constant instanceof FieldrefConstant);
     assertEquals(2, constantArray.length);
+    assertSame(fieldrefConstant, constant);
   }
 }

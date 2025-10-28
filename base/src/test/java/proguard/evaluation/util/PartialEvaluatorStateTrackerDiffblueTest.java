@@ -1,11 +1,7 @@
 package proguard.evaluation.util;
 
 import static org.junit.Assert.assertEquals;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryMethod;
@@ -16,17 +12,10 @@ import proguard.evaluation.util.jsonprinter.JsonPrinter;
 
 public class PartialEvaluatorStateTrackerDiffblueTest {
   /**
-   * Test {@link PartialEvaluatorStateTracker#startCodeAttribute(Clazz, Method, CodeAttribute,
-   * Variables)}.
-   *
-   * <p>Method under test: {@link PartialEvaluatorStateTracker#startCodeAttribute(Clazz, Method,
-   * CodeAttribute, Variables)}
+   * Method under test:
+   * {@link PartialEvaluatorStateTracker#startCodeAttribute(Clazz, Method, CodeAttribute, Variables)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void PartialEvaluatorStateTracker.startCodeAttribute(Clazz, Method, CodeAttribute, Variables)"
-  })
   public void testStartCodeAttribute() {
     // Arrange
     JsonPrinter jsonPrinter = new JsonPrinter();

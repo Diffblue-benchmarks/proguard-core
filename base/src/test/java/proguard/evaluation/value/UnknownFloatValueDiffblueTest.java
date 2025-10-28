@@ -5,21 +5,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 public class UnknownFloatValueDiffblueTest {
   /**
-   * Test {@link UnknownFloatValue#negate()}.
-   *
-   * <p>Method under test: {@link UnknownFloatValue#negate()}
+   * Method under test: {@link UnknownFloatValue#negate()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"FloatValue UnknownFloatValue.negate()"})
   public void testNegate() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
@@ -29,13 +21,9 @@ public class UnknownFloatValueDiffblueTest {
   }
 
   /**
-   * Test {@link UnknownFloatValue#convertToInteger()}.
-   *
-   * <p>Method under test: {@link UnknownFloatValue#convertToInteger()}
+   * Method under test: {@link UnknownFloatValue#convertToInteger()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"IntegerValue UnknownFloatValue.convertToInteger()"})
   public void testConvertToInteger() {
     // Arrange and Act
     IntegerValue actualConvertToIntegerResult = (new UnknownFloatValue()).convertToInteger();
@@ -48,13 +36,9 @@ public class UnknownFloatValueDiffblueTest {
   }
 
   /**
-   * Test {@link UnknownFloatValue#convertToLong()}.
-   *
-   * <p>Method under test: {@link UnknownFloatValue#convertToLong()}
+   * Method under test: {@link UnknownFloatValue#convertToLong()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"LongValue UnknownFloatValue.convertToLong()"})
   public void testConvertToLong() {
     // Arrange and Act
     LongValue actualConvertToLongResult = (new UnknownFloatValue()).convertToLong();
@@ -67,13 +51,9 @@ public class UnknownFloatValueDiffblueTest {
   }
 
   /**
-   * Test {@link UnknownFloatValue#convertToDouble()}.
-   *
-   * <p>Method under test: {@link UnknownFloatValue#convertToDouble()}
+   * Method under test: {@link UnknownFloatValue#convertToDouble()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue UnknownFloatValue.convertToDouble()"})
   public void testConvertToDouble() {
     // Arrange and Act
     DoubleValue actualConvertToDoubleResult = (new UnknownFloatValue()).convertToDouble();
@@ -86,14 +66,10 @@ public class UnknownFloatValueDiffblueTest {
   }
 
   /**
-   * Test {@link UnknownFloatValue#generalize(FloatValue)} with {@code FloatValue}.
-   *
-   * <p>Method under test: {@link UnknownFloatValue#generalize(FloatValue)}
+   * Method under test: {@link UnknownFloatValue#generalize(FloatValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"FloatValue UnknownFloatValue.generalize(FloatValue)"})
-  public void testGeneralizeWithFloatValue() {
+  public void testGeneralize() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
@@ -102,14 +78,10 @@ public class UnknownFloatValueDiffblueTest {
   }
 
   /**
-   * Test {@link UnknownFloatValue#add(FloatValue)} with {@code FloatValue}.
-   *
-   * <p>Method under test: {@link UnknownFloatValue#add(FloatValue)}
+   * Method under test: {@link UnknownFloatValue#add(FloatValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"FloatValue UnknownFloatValue.add(FloatValue)"})
-  public void testAddWithFloatValue() {
+  public void testAdd() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
@@ -118,14 +90,10 @@ public class UnknownFloatValueDiffblueTest {
   }
 
   /**
-   * Test {@link UnknownFloatValue#subtract(FloatValue)} with {@code FloatValue}.
-   *
-   * <p>Method under test: {@link UnknownFloatValue#subtract(FloatValue)}
+   * Method under test: {@link UnknownFloatValue#subtract(FloatValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"FloatValue UnknownFloatValue.subtract(FloatValue)"})
-  public void testSubtractWithFloatValue() {
+  public void testSubtract() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
@@ -134,14 +102,10 @@ public class UnknownFloatValueDiffblueTest {
   }
 
   /**
-   * Test {@link UnknownFloatValue#subtractFrom(FloatValue)} with {@code FloatValue}.
-   *
-   * <p>Method under test: {@link UnknownFloatValue#subtractFrom(FloatValue)}
+   * Method under test: {@link UnknownFloatValue#subtractFrom(FloatValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"FloatValue UnknownFloatValue.subtractFrom(FloatValue)"})
-  public void testSubtractFromWithFloatValue() {
+  public void testSubtractFrom() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
@@ -150,14 +114,10 @@ public class UnknownFloatValueDiffblueTest {
   }
 
   /**
-   * Test {@link UnknownFloatValue#multiply(FloatValue)} with {@code FloatValue}.
-   *
-   * <p>Method under test: {@link UnknownFloatValue#multiply(FloatValue)}
+   * Method under test: {@link UnknownFloatValue#multiply(FloatValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"FloatValue UnknownFloatValue.multiply(FloatValue)"})
-  public void testMultiplyWithFloatValue() {
+  public void testMultiply() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
@@ -166,14 +126,10 @@ public class UnknownFloatValueDiffblueTest {
   }
 
   /**
-   * Test {@link UnknownFloatValue#divide(FloatValue)} with {@code FloatValue}.
-   *
-   * <p>Method under test: {@link UnknownFloatValue#divide(FloatValue)}
+   * Method under test: {@link UnknownFloatValue#divide(FloatValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"FloatValue UnknownFloatValue.divide(FloatValue)"})
-  public void testDivideWithFloatValue() {
+  public void testDivide() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
@@ -182,14 +138,10 @@ public class UnknownFloatValueDiffblueTest {
   }
 
   /**
-   * Test {@link UnknownFloatValue#divideOf(FloatValue)} with {@code FloatValue}.
-   *
-   * <p>Method under test: {@link UnknownFloatValue#divideOf(FloatValue)}
+   * Method under test: {@link UnknownFloatValue#divideOf(FloatValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"FloatValue UnknownFloatValue.divideOf(FloatValue)"})
-  public void testDivideOfWithFloatValue() {
+  public void testDivideOf() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
@@ -198,14 +150,10 @@ public class UnknownFloatValueDiffblueTest {
   }
 
   /**
-   * Test {@link UnknownFloatValue#remainder(FloatValue)} with {@code FloatValue}.
-   *
-   * <p>Method under test: {@link UnknownFloatValue#remainder(FloatValue)}
+   * Method under test: {@link UnknownFloatValue#remainder(FloatValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"FloatValue UnknownFloatValue.remainder(FloatValue)"})
-  public void testRemainderWithFloatValue() {
+  public void testRemainder() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
@@ -214,14 +162,10 @@ public class UnknownFloatValueDiffblueTest {
   }
 
   /**
-   * Test {@link UnknownFloatValue#remainderOf(FloatValue)} with {@code FloatValue}.
-   *
-   * <p>Method under test: {@link UnknownFloatValue#remainderOf(FloatValue)}
+   * Method under test: {@link UnknownFloatValue#remainderOf(FloatValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"FloatValue UnknownFloatValue.remainderOf(FloatValue)"})
-  public void testRemainderOfWithFloatValue() {
+  public void testRemainderOf() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
 
@@ -230,17 +174,12 @@ public class UnknownFloatValueDiffblueTest {
   }
 
   /**
-   * Test {@link UnknownFloatValue#compare(FloatValue)} with {@code FloatValue}.
-   *
-   * <p>Method under test: {@link UnknownFloatValue#compare(FloatValue)}
+   * Method under test: {@link UnknownFloatValue#compare(FloatValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"IntegerValue UnknownFloatValue.compare(FloatValue)"})
-  public void testCompareWithFloatValue() {
+  public void testCompare() {
     // Arrange and Act
-    IntegerValue actualCompareResult =
-        (new UnknownFloatValue()).compare(BasicValueFactory.FLOAT_VALUE);
+    IntegerValue actualCompareResult = (new UnknownFloatValue()).compare(BasicValueFactory.FLOAT_VALUE);
 
     // Assert
     assertTrue(actualCompareResult instanceof UnknownIntegerValue);
@@ -250,26 +189,13 @@ public class UnknownFloatValueDiffblueTest {
   }
 
   /**
-   * Test {@link UnknownFloatValue#equals(Object)}, and {@link UnknownFloatValue#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is equal.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
    *   <li>{@link UnknownFloatValue#equals(Object)}
    *   <li>{@link UnknownFloatValue#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean UnknownFloatValue.equals(Object)",
-    "int UnknownFloatValue.hashCode()"
-  })
   public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
@@ -282,26 +208,13 @@ public class UnknownFloatValueDiffblueTest {
   }
 
   /**
-   * Test {@link UnknownFloatValue#equals(Object)}, and {@link UnknownFloatValue#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is same.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
    *   <li>{@link UnknownFloatValue#equals(Object)}
    *   <li>{@link UnknownFloatValue#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean UnknownFloatValue.equals(Object)",
-    "int UnknownFloatValue.hashCode()"
-  })
   public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
     UnknownFloatValue unknownFloatValue = new UnknownFloatValue();
@@ -313,84 +226,40 @@ public class UnknownFloatValueDiffblueTest {
   }
 
   /**
-   * Test {@link UnknownFloatValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link UnknownFloatValue#equals(Object)}
+   * Method under test: {@link UnknownFloatValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean UnknownFloatValue.equals(Object)",
-    "int UnknownFloatValue.hashCode()"
-  })
   public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new UnknownFloatValue(), 1);
   }
 
   /**
-   * Test {@link UnknownFloatValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is {@code null}.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link UnknownFloatValue#equals(Object)}
+   * Method under test: {@link UnknownFloatValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean UnknownFloatValue.equals(Object)",
-    "int UnknownFloatValue.hashCode()"
-  })
   public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new UnknownFloatValue(), null);
   }
 
   /**
-   * Test {@link UnknownFloatValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is wrong type.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link UnknownFloatValue#equals(Object)}
+   * Method under test: {@link UnknownFloatValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean UnknownFloatValue.equals(Object)",
-    "int UnknownFloatValue.hashCode()"
-  })
   public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new UnknownFloatValue(), "Different type to UnknownFloatValue");
   }
 
   /**
-   * Test getters and setters.
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
    *   <li>default or parameterless constructor of {@link UnknownFloatValue}
    *   <li>{@link UnknownFloatValue#toString()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void UnknownFloatValue.<init>()",
-    "java.lang.String UnknownFloatValue.toString()"
-  })
   public void testGettersAndSetters() {
     // Arrange, Act and Assert
     assertEquals("f", (new UnknownFloatValue()).toString());

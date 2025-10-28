@@ -1,11 +1,7 @@
 package proguard.classfile.editor;
 
 import static org.junit.Assert.assertEquals;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryMethod;
@@ -20,22 +16,11 @@ import proguard.classfile.attribute.annotation.target.LocalVariableTargetInfo;
 
 public class VariableRemapperDiffblueTest {
   /**
-   * Test {@link VariableRemapper#visitMethodParametersAttribute(Clazz, Method,
-   * MethodParametersAttribute)}.
-   *
-   * <ul>
-   *   <li>Then array length is zero.
-   * </ul>
-   *
-   * <p>Method under test: {@link VariableRemapper#visitMethodParametersAttribute(Clazz, Method,
-   * MethodParametersAttribute)}
+   * Method under test:
+   * {@link VariableRemapper#visitMethodParametersAttribute(Clazz, Method, MethodParametersAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void VariableRemapper.visitMethodParametersAttribute(Clazz, Method, MethodParametersAttribute)"
-  })
-  public void testVisitMethodParametersAttribute_thenArrayLengthIsZero() {
+  public void testVisitMethodParametersAttribute() {
     // Arrange
     VariableRemapper variableRemapper = new VariableRemapper();
     LibraryClass clazz = new LibraryClass();
@@ -51,21 +36,14 @@ public class VariableRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link VariableRemapper#visitLocalVariableInfo(Clazz, Method, CodeAttribute,
-   * LocalVariableInfo)}.
-   *
-   * <p>Method under test: {@link VariableRemapper#visitLocalVariableInfo(Clazz, Method,
-   * CodeAttribute, LocalVariableInfo)}
+   * Method under test:
+   * {@link VariableRemapper#visitLocalVariableInfo(Clazz, Method, CodeAttribute, LocalVariableInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void VariableRemapper.visitLocalVariableInfo(Clazz, Method, CodeAttribute, LocalVariableInfo)"
-  })
   public void testVisitLocalVariableInfo() {
     // Arrange
     VariableRemapper variableRemapper = new VariableRemapper();
-    variableRemapper.setVariableMap(new int[] {1, 0, 1, 0});
+    variableRemapper.setVariableMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
@@ -80,21 +58,14 @@ public class VariableRemapperDiffblueTest {
   }
 
   /**
-   * Test {@link VariableRemapper#visitLocalVariableTypeInfo(Clazz, Method, CodeAttribute,
-   * LocalVariableTypeInfo)}.
-   *
-   * <p>Method under test: {@link VariableRemapper#visitLocalVariableTypeInfo(Clazz, Method,
-   * CodeAttribute, LocalVariableTypeInfo)}
+   * Method under test:
+   * {@link VariableRemapper#visitLocalVariableTypeInfo(Clazz, Method, CodeAttribute, LocalVariableTypeInfo)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void VariableRemapper.visitLocalVariableTypeInfo(Clazz, Method, CodeAttribute, LocalVariableTypeInfo)"
-  })
   public void testVisitLocalVariableTypeInfo() {
     // Arrange
     VariableRemapper variableRemapper = new VariableRemapper();
-    variableRemapper.setVariableMap(new int[] {1, 0, 1, 0});
+    variableRemapper.setVariableMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
@@ -102,29 +73,21 @@ public class VariableRemapperDiffblueTest {
     LocalVariableTypeInfo localVariableTypeInfo = new LocalVariableTypeInfo(1, 3, 1, 1, 1);
 
     // Act
-    variableRemapper.visitLocalVariableTypeInfo(
-        clazz, method, codeAttribute, localVariableTypeInfo);
+    variableRemapper.visitLocalVariableTypeInfo(clazz, method, codeAttribute, localVariableTypeInfo);
 
     // Assert
     assertEquals(0, localVariableTypeInfo.u2index);
   }
 
   /**
-   * Test {@link VariableRemapper#visitLocalVariableTargetElement(Clazz, Method, CodeAttribute,
-   * TypeAnnotation, LocalVariableTargetInfo, LocalVariableTargetElement)}.
-   *
-   * <p>Method under test: {@link VariableRemapper#visitLocalVariableTargetElement(Clazz, Method,
-   * CodeAttribute, TypeAnnotation, LocalVariableTargetInfo, LocalVariableTargetElement)}
+   * Method under test:
+   * {@link VariableRemapper#visitLocalVariableTargetElement(Clazz, Method, CodeAttribute, TypeAnnotation, LocalVariableTargetInfo, LocalVariableTargetElement)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void VariableRemapper.visitLocalVariableTargetElement(Clazz, Method, CodeAttribute, TypeAnnotation, LocalVariableTargetInfo, LocalVariableTargetElement)"
-  })
   public void testVisitLocalVariableTargetElement() {
     // Arrange
     VariableRemapper variableRemapper = new VariableRemapper();
-    variableRemapper.setVariableMap(new int[] {1, 0, 1, 0});
+    variableRemapper.setVariableMap(new int[]{1, 0, 1, 0});
     LibraryClass clazz = new LibraryClass();
     LibraryMethod method = new LibraryMethod(1, "Name", "Descriptor");
 
@@ -134,13 +97,8 @@ public class VariableRemapperDiffblueTest {
     LocalVariableTargetElement localVariableTargetElement = new LocalVariableTargetElement(1, 3, 1);
 
     // Act
-    variableRemapper.visitLocalVariableTargetElement(
-        clazz,
-        method,
-        codeAttribute,
-        typeAnnotation,
-        localVariableTargetInfo,
-        localVariableTargetElement);
+    variableRemapper.visitLocalVariableTargetElement(clazz, method, codeAttribute, typeAnnotation,
+        localVariableTargetInfo, localVariableTargetElement);
 
     // Assert
     assertEquals(0, localVariableTargetElement.u2index);

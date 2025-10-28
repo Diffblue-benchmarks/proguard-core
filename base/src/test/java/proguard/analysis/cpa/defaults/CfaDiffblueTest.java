@@ -5,9 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +12,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.analysis.cpa.interfaces.CfaNode;
 import proguard.analysis.cpa.jvm.cfa.JvmCfa;
 import proguard.analysis.cpa.jvm.cfa.nodes.JvmCfaNode;
@@ -30,123 +26,32 @@ import proguard.classfile.Signature;
 
 public class CfaDiffblueTest {
   /**
-   * Test {@link Cfa#isEmpty()}.
-   *
-   * <ul>
-   *   <li>Then return {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Cfa#isEmpty()}
+   * Method under test: {@link Cfa#isEmpty()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Cfa.isEmpty()"})
-  public void testIsEmpty_thenReturnFalse() {
+  public void testIsEmpty() {
+    // Arrange, Act and Assert
+    assertTrue((new JvmCfa()).isEmpty());
+  }
+
+  /**
+   * Method under test: {@link Cfa#isEmpty()}
+   */
+  @Test
+  public void testIsEmpty2() {
     // Arrange
     JvmCfa jvmCfa = new JvmCfa();
-    jvmCfa.addNodeIfAbsent(
-        ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, 2, new LibraryClass());
+    jvmCfa.addNodeIfAbsent(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, 2, new LibraryClass());
 
     // Act and Assert
     assertFalse(jvmCfa.isEmpty());
   }
 
   /**
-   * Test {@link Cfa#isEmpty()}.
-   *
-   * <ul>
-   *   <li>Then return {@code true}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Cfa#isEmpty()}
+   * Method under test: {@link Cfa#getFunctionEntryNodes()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Cfa.isEmpty()"})
-  public void testIsEmpty_thenReturnTrue() {
-    // Arrange, Act and Assert
-    assertTrue((new JvmCfa()).isEmpty());
-  }
-
-  /**
-   * Test {@link Cfa#getFunctionEntryNodes()}.
-   *
-   * <p>Method under test: {@link Cfa#getFunctionEntryNodes()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Collection Cfa.getFunctionEntryNodes()"})
   public void testGetFunctionEntryNodes() {
-    // Arrange
-    JvmCfa jvmCfa = new JvmCfa();
-    jvmCfa.addNodeIfAbsent(
-        ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, 2, new LibraryClass());
-
-    // Act
-    Collection<JvmCfaNode> actualFunctionEntryNodes = jvmCfa.getFunctionEntryNodes();
-
-    // Assert
-    assertTrue(actualFunctionEntryNodes instanceof Set);
-    assertTrue(actualFunctionEntryNodes.isEmpty());
-  }
-
-  /**
-   * Test {@link Cfa#getFunctionEntryNodes()}.
-   *
-   * <p>Method under test: {@link Cfa#getFunctionEntryNodes()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Collection Cfa.getFunctionEntryNodes()"})
-  public void testGetFunctionEntryNodes2() {
-    // Arrange
-    JvmCfa jvmCfa = new JvmCfa();
-    jvmCfa.addNodeIfAbsent(null, 2, new LibraryClass());
-
-    // Act
-    Collection<JvmCfaNode> actualFunctionEntryNodes = jvmCfa.getFunctionEntryNodes();
-
-    // Assert
-    assertTrue(actualFunctionEntryNodes instanceof Set);
-    assertTrue(actualFunctionEntryNodes.isEmpty());
-  }
-
-  /**
-   * Test {@link Cfa#getFunctionEntryNodes()}.
-   *
-   * <p>Method under test: {@link Cfa#getFunctionEntryNodes()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Collection Cfa.getFunctionEntryNodes()"})
-  public void testGetFunctionEntryNodes3() {
-    // Arrange
-    JvmCfa jvmCfa = new JvmCfa();
-    jvmCfa.addNodeIfAbsent(
-        ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, 2, new LibraryClass());
-    jvmCfa.addNodeIfAbsent(null, 2, new LibraryClass());
-
-    // Act
-    Collection<JvmCfaNode> actualFunctionEntryNodes = jvmCfa.getFunctionEntryNodes();
-
-    // Assert
-    assertTrue(actualFunctionEntryNodes instanceof Set);
-    assertTrue(actualFunctionEntryNodes.isEmpty());
-  }
-
-  /**
-   * Test {@link Cfa#getFunctionEntryNodes()}.
-   *
-   * <ul>
-   *   <li>Then return Empty.
-   * </ul>
-   *
-   * <p>Method under test: {@link Cfa#getFunctionEntryNodes()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Collection Cfa.getFunctionEntryNodes()"})
-  public void testGetFunctionEntryNodes_thenReturnEmpty() {
     // Arrange and Act
     Collection<JvmCfaNode> actualFunctionEntryNodes = (new JvmCfa()).getFunctionEntryNodes();
 
@@ -156,22 +61,30 @@ public class CfaDiffblueTest {
   }
 
   /**
-   * Test {@link Cfa#getFunctionEntryNodes()}.
-   *
-   * <ul>
-   *   <li>Then return size is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link Cfa#getFunctionEntryNodes()}
+   * Method under test: {@link Cfa#getFunctionEntryNodes()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Collection Cfa.getFunctionEntryNodes()"})
-  public void testGetFunctionEntryNodes_thenReturnSizeIsOne() {
+  public void testGetFunctionEntryNodes2() {
     // Arrange
     JvmCfa jvmCfa = new JvmCfa();
-    jvmCfa.addNodeIfAbsent(
-        ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, 0, new LibraryClass());
+    jvmCfa.addNodeIfAbsent(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, 2, new LibraryClass());
+
+    // Act
+    Collection<JvmCfaNode> actualFunctionEntryNodes = jvmCfa.getFunctionEntryNodes();
+
+    // Assert
+    assertTrue(actualFunctionEntryNodes instanceof Set);
+    assertTrue(actualFunctionEntryNodes.isEmpty());
+  }
+
+  /**
+   * Method under test: {@link Cfa#getFunctionEntryNodes()}
+   */
+  @Test
+  public void testGetFunctionEntryNodes3() {
+    // Arrange
+    JvmCfa jvmCfa = new JvmCfa();
+    jvmCfa.addNodeIfAbsent(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, 0, new LibraryClass());
 
     // Act
     Collection<JvmCfaNode> actualFunctionEntryNodes = jvmCfa.getFunctionEntryNodes();
@@ -182,57 +95,58 @@ public class CfaDiffblueTest {
   }
 
   /**
-   * Test {@link Cfa#getFunctionEntryNode(Signature)}.
-   *
-   * <ul>
-   *   <li>When {@link ClassConstants#CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Cfa#getFunctionEntryNode(Signature)}
+   * Method under test: {@link Cfa#getFunctionEntryNodes()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"CfaNode Cfa.getFunctionEntryNode(Signature)"})
-  public void testGetFunctionEntryNode_whenClassloader_find_loaded_class_signature() {
-    // Arrange, Act and Assert
-    assertNull(
-        (new JvmCfa())
-            .getFunctionEntryNode(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
+  public void testGetFunctionEntryNodes4() {
+    // Arrange
+    JvmCfa jvmCfa = new JvmCfa();
+    jvmCfa.addNodeIfAbsent(null, 2, new LibraryClass());
+
+    // Act
+    Collection<JvmCfaNode> actualFunctionEntryNodes = jvmCfa.getFunctionEntryNodes();
+
+    // Assert
+    assertTrue(actualFunctionEntryNodes instanceof Set);
+    assertTrue(actualFunctionEntryNodes.isEmpty());
   }
 
   /**
-   * Test {@link Cfa#getFunctionEntryNode(Signature)}.
-   *
-   * <ul>
-   *   <li>When {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Cfa#getFunctionEntryNode(Signature)}
+   * Method under test: {@link Cfa#getFunctionEntryNodes()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"CfaNode Cfa.getFunctionEntryNode(Signature)"})
-  public void testGetFunctionEntryNode_whenNull() {
+  public void testGetFunctionEntryNodes5() {
+    // Arrange
+    JvmCfa jvmCfa = new JvmCfa();
+    jvmCfa.addNodeIfAbsent(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, 2, new LibraryClass());
+    jvmCfa.addNodeIfAbsent(null, 2, new LibraryClass());
+
+    // Act
+    Collection<JvmCfaNode> actualFunctionEntryNodes = jvmCfa.getFunctionEntryNodes();
+
+    // Assert
+    assertTrue(actualFunctionEntryNodes instanceof Set);
+    assertTrue(actualFunctionEntryNodes.isEmpty());
+  }
+
+  /**
+   * Method under test: {@link Cfa#getFunctionEntryNode(Signature)}
+   */
+  @Test
+  public void testGetFunctionEntryNode() {
     // Arrange, Act and Assert
+    assertNull((new JvmCfa()).getFunctionEntryNode(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
     assertNull((new JvmCfa()).getFunctionEntryNode(null));
   }
 
   /**
-   * Test {@link Cfa#getFunctionNodes(Signature)}.
-   *
-   * <ul>
-   *   <li>When {@link ClassConstants#CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Cfa#getFunctionNodes(Signature)}
+   * Method under test: {@link Cfa#getFunctionNodes(Signature)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Collection Cfa.getFunctionNodes(Signature)"})
-  public void testGetFunctionNodes_whenClassloader_find_loaded_class_signature() {
+  public void testGetFunctionNodes() {
     // Arrange and Act
-    Collection<JvmCfaNode> actualFunctionNodes =
-        (new JvmCfa()).getFunctionNodes(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE);
+    Collection<JvmCfaNode> actualFunctionNodes = (new JvmCfa())
+        .getFunctionNodes(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE);
 
     // Assert
     assertTrue(actualFunctionNodes instanceof Set);
@@ -240,18 +154,10 @@ public class CfaDiffblueTest {
   }
 
   /**
-   * Test {@link Cfa#getFunctionNodes(Signature)}.
-   *
-   * <ul>
-   *   <li>When {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Cfa#getFunctionNodes(Signature)}
+   * Method under test: {@link Cfa#getFunctionNodes(Signature)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Collection Cfa.getFunctionNodes(Signature)"})
-  public void testGetFunctionNodes_whenNull() {
+  public void testGetFunctionNodes2() {
     // Arrange and Act
     Collection<JvmCfaNode> actualFunctionNodes = (new JvmCfa()).getFunctionNodes(null);
 
@@ -261,39 +167,10 @@ public class CfaDiffblueTest {
   }
 
   /**
-   * Test {@link Cfa#getFunctionNode(Clazz, Method, int)} with {@code clazz}, {@code method}, {@code
-   * offset}.
-   *
-   * <p>Method under test: {@link Cfa#getFunctionNode(Clazz, Method, int)}
+   * Method under test: {@link Cfa#getFunctionNode(Clazz, Method, int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"CfaNode Cfa.getFunctionNode(Clazz, Method, int)"})
-  public void testGetFunctionNodeWithClazzMethodOffset() {
-    // Arrange
-    JvmCfa jvmCfa = new JvmCfa();
-
-    // Act and Assert
-    assertNull(
-        jvmCfa.getFunctionNode(
-            new LibraryClass(1, "This Class Name", "Super Class Name"), null, 2));
-  }
-
-  /**
-   * Test {@link Cfa#getFunctionNode(Clazz, Method, int)} with {@code clazz}, {@code method}, {@code
-   * offset}.
-   *
-   * <ul>
-   *   <li>When {@link LibraryMethod#LibraryMethod()}.
-   *   <li>Then return {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Cfa#getFunctionNode(Clazz, Method, int)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"CfaNode Cfa.getFunctionNode(Clazz, Method, int)"})
-  public void testGetFunctionNodeWithClazzMethodOffset_whenLibraryMethod_thenReturnNull() {
+  public void testGetFunctionNode() {
     // Arrange
     JvmCfa jvmCfa = new JvmCfa();
     LibraryClass clazz = new LibraryClass();
@@ -303,56 +180,46 @@ public class CfaDiffblueTest {
   }
 
   /**
-   * Test {@link Cfa#getFunctionNode(Signature, int)} with {@code signature}, {@code offset}.
-   *
-   * <p>Method under test: {@link Cfa#getFunctionNode(Signature, int)}
+   * Method under test: {@link Cfa#getFunctionNode(Clazz, Method, int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"CfaNode Cfa.getFunctionNode(Signature, int)"})
-  public void testGetFunctionNodeWithSignatureOffset() {
-    // Arrange, Act and Assert
-    assertNull(
-        (new JvmCfa()).getFunctionNode(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, 2));
+  public void testGetFunctionNode2() {
+    // Arrange
+    JvmCfa jvmCfa = new JvmCfa();
+
+    // Act and Assert
+    assertNull(jvmCfa.getFunctionNode(new LibraryClass(1, "This Class Name", "Super Class Name"), null, 2));
   }
 
   /**
-   * Test {@link Cfa#getFunctionNode(Signature, int)} with {@code signature}, {@code offset}.
-   *
-   * <ul>
-   *   <li>When {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Cfa#getFunctionNode(Signature, int)}
+   * Method under test: {@link Cfa#getFunctionNode(Signature, int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"CfaNode Cfa.getFunctionNode(Signature, int)"})
-  public void testGetFunctionNodeWithSignatureOffset_whenNull() {
+  public void testGetFunctionNode3() {
+    // Arrange, Act and Assert
+    assertNull((new JvmCfa()).getFunctionNode(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, 2));
+  }
+
+  /**
+   * Method under test: {@link Cfa#getFunctionNode(Signature, int)}
+   */
+  @Test
+  public void testGetFunctionNode4() {
     // Arrange, Act and Assert
     assertNull((new JvmCfa()).getFunctionNode(null, 2));
   }
 
   /**
-   * Test {@link Cfa#addFunctionEntryNode(Signature, CfaNode)}.
-   *
-   * <ul>
-   *   <li>When {@link ClassConstants#CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Cfa#addFunctionEntryNode(Signature, CfaNode)}
+   * Method under test: {@link Cfa#addFunctionEntryNode(Signature, CfaNode)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void Cfa.addFunctionEntryNode(Signature, CfaNode)"})
-  public void testAddFunctionEntryNode_whenClassloader_find_loaded_class_signature() {
+  public void testAddFunctionEntryNode() {
     // Arrange
     JvmCfa jvmCfa = new JvmCfa();
     JvmUnknownCfaNode jvmUnknownCfaNode = JvmUnknownCfaNode.INSTANCE;
 
     // Act
-    jvmCfa.addFunctionEntryNode(
-        ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, jvmUnknownCfaNode);
+    jvmCfa.addFunctionEntryNode(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, jvmUnknownCfaNode);
 
     // Assert
     Collection<JvmCfaNode> functionEntryNodes = jvmCfa.getFunctionEntryNodes();
@@ -367,20 +234,10 @@ public class CfaDiffblueTest {
   }
 
   /**
-   * Test {@link Cfa#addFunctionEntryNode(Signature, CfaNode)}.
-   *
-   * <ul>
-   *   <li>When {@code null}.
-   *   <li>Then {@link JvmCfa} (default constructor) {@link Cfa#functionNodes} {@code null} size is
-   *       one.
-   * </ul>
-   *
-   * <p>Method under test: {@link Cfa#addFunctionEntryNode(Signature, CfaNode)}
+   * Method under test: {@link Cfa#addFunctionEntryNode(Signature, CfaNode)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void Cfa.addFunctionEntryNode(Signature, CfaNode)"})
-  public void testAddFunctionEntryNode_whenNull_thenJvmCfaFunctionNodesNullSizeIsOne() {
+  public void testAddFunctionEntryNode2() {
     // Arrange
     JvmCfa jvmCfa = new JvmCfa();
     JvmUnknownCfaNode jvmUnknownCfaNode = JvmUnknownCfaNode.INSTANCE;
@@ -406,25 +263,16 @@ public class CfaDiffblueTest {
   }
 
   /**
-   * Test {@link Cfa#addFunctionNode(Signature, CfaNode, int)}.
-   *
-   * <ul>
-   *   <li>When {@link ClassConstants#CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Cfa#addFunctionNode(Signature, CfaNode, int)}
+   * Method under test: {@link Cfa#addFunctionNode(Signature, CfaNode, int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void Cfa.addFunctionNode(Signature, CfaNode, int)"})
-  public void testAddFunctionNode_whenClassloader_find_loaded_class_signature() {
+  public void testAddFunctionNode() {
     // Arrange
     JvmCfa jvmCfa = new JvmCfa();
     JvmUnknownCfaNode jvmUnknownCfaNode = JvmUnknownCfaNode.INSTANCE;
 
     // Act
-    jvmCfa.addFunctionNode(
-        ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, jvmUnknownCfaNode, 2);
+    jvmCfa.addFunctionNode(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, jvmUnknownCfaNode, 2);
 
     // Assert
     Stream<JvmCfaNode> allNodes = jvmCfa.getAllNodes();
@@ -436,20 +284,10 @@ public class CfaDiffblueTest {
   }
 
   /**
-   * Test {@link Cfa#addFunctionNode(Signature, CfaNode, int)}.
-   *
-   * <ul>
-   *   <li>When {@code null}.
-   *   <li>Then {@link JvmCfa} (default constructor) {@link Cfa#functionNodes} {@code null} size is
-   *       one.
-   * </ul>
-   *
-   * <p>Method under test: {@link Cfa#addFunctionNode(Signature, CfaNode, int)}
+   * Method under test: {@link Cfa#addFunctionNode(Signature, CfaNode, int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void Cfa.addFunctionNode(Signature, CfaNode, int)"})
-  public void testAddFunctionNode_whenNull_thenJvmCfaFunctionNodesNullSizeIsOne() {
+  public void testAddFunctionNode2() {
     // Arrange
     JvmCfa jvmCfa = new JvmCfa();
     JvmUnknownCfaNode jvmUnknownCfaNode = JvmUnknownCfaNode.INSTANCE;

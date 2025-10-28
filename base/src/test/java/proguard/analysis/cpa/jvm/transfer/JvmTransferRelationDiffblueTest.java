@@ -4,46 +4,159 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import proguard.analysis.cpa.defaults.HashMapAbstractState;
 import proguard.analysis.cpa.defaults.LatticeAbstractState;
 import proguard.analysis.cpa.defaults.SetAbstractState;
+import proguard.analysis.cpa.interfaces.Precision;
+import proguard.analysis.cpa.jvm.cfa.nodes.JvmUnknownCfaNode;
 import proguard.analysis.cpa.jvm.domain.taint.JvmTaintSource;
 import proguard.analysis.cpa.jvm.domain.taint.JvmTaintTransferRelation;
+import proguard.analysis.cpa.jvm.domain.value.JvmValueTransferRelation;
+import proguard.analysis.cpa.jvm.domain.value.ValueAbstractState;
+import proguard.analysis.cpa.jvm.state.JvmAbstractState;
+import proguard.analysis.cpa.jvm.state.JvmFrameAbstractState;
+import proguard.analysis.cpa.jvm.state.heap.JvmForgetfulHeapAbstractState;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryMethod;
 import proguard.classfile.Method;
 import proguard.classfile.instruction.BranchInstruction;
+import proguard.classfile.instruction.ConstantInstruction;
 import proguard.classfile.instruction.Instruction;
+import proguard.classfile.instruction.LookUpSwitchInstruction;
+import proguard.classfile.instruction.SimpleInstruction;
+import proguard.classfile.instruction.VariableInstruction;
+import proguard.evaluation.ParticularReferenceValueFactory;
 
 public class JvmTransferRelationDiffblueTest {
   /**
-   * Test {@link JvmTransferRelation#calculateArithmeticInstruction(Instruction, List)}.
-   *
-   * <p>Method under test: {@link JvmTransferRelation#calculateArithmeticInstruction(Instruction,
-   * List)}
+   * Method under test:
+   * {@link JvmTransferRelation#getAbstractSuccessorForInstruction(JvmAbstractState, Instruction, Clazz, Precision)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "LatticeAbstractState JvmTransferRelation.calculateArithmeticInstruction(Instruction, List)"
-  })
+  public void testGetAbstractSuccessorForInstruction() {
+    // Arrange
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(
+        new ParticularReferenceValueFactory(), null);
+    JvmFrameAbstractState<ValueAbstractState> frame = new JvmFrameAbstractState<>();
+    JvmForgetfulHeapAbstractState<ValueAbstractState> heap = new JvmForgetfulHeapAbstractState<>(
+        ValueAbstractState.UNKNOWN);
+    JvmAbstractState<ValueAbstractState> abstractState = new JvmAbstractState<>(JvmUnknownCfaNode.INSTANCE, frame, heap,
+        new HashMapAbstractState<>());
+
+    BranchInstruction instruction = new BranchInstruction((byte) 2, 1);
+
+    // Act and Assert
+    assertSame(abstractState, jvmValueTransferRelation.getAbstractSuccessorForInstruction(abstractState, instruction,
+        new LibraryClass(), null));
+  }
+
+  /**
+   * Method under test:
+   * {@link JvmTransferRelation#getAbstractSuccessorForInstruction(JvmAbstractState, Instruction, Clazz, Precision)}
+   */
+  @Test
+  public void testGetAbstractSuccessorForInstruction2() {
+    // Arrange
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(
+        new ParticularReferenceValueFactory(), null);
+    JvmFrameAbstractState<ValueAbstractState> frame = new JvmFrameAbstractState<>();
+    JvmForgetfulHeapAbstractState<ValueAbstractState> heap = new JvmForgetfulHeapAbstractState<>(
+        ValueAbstractState.UNKNOWN);
+    JvmAbstractState<ValueAbstractState> abstractState = new JvmAbstractState<>(JvmUnknownCfaNode.INSTANCE, frame, heap,
+        new HashMapAbstractState<>());
+
+    LookUpSwitchInstruction instruction = new LookUpSwitchInstruction();
+
+    // Act and Assert
+    assertSame(abstractState, jvmValueTransferRelation.getAbstractSuccessorForInstruction(abstractState, instruction,
+        new LibraryClass(), null));
+  }
+
+  /**
+   * Method under test:
+   * {@link JvmTransferRelation#getAbstractSuccessorForInstruction(JvmAbstractState, Instruction, Clazz, Precision)}
+   */
+  @Test
+  public void testGetAbstractSuccessorForInstruction3() {
+    // Arrange
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(
+        new ParticularReferenceValueFactory(), null);
+    JvmFrameAbstractState<ValueAbstractState> frame = new JvmFrameAbstractState<>();
+    JvmForgetfulHeapAbstractState<ValueAbstractState> heap = new JvmForgetfulHeapAbstractState<>(
+        ValueAbstractState.UNKNOWN);
+    JvmAbstractState<ValueAbstractState> abstractState = new JvmAbstractState<>(JvmUnknownCfaNode.INSTANCE, frame, heap,
+        new HashMapAbstractState<>());
+
+    SimpleInstruction instruction = new SimpleInstruction();
+
+    // Act and Assert
+    assertSame(abstractState, jvmValueTransferRelation.getAbstractSuccessorForInstruction(abstractState, instruction,
+        new LibraryClass(), null));
+  }
+
+  /**
+   * Method under test:
+   * {@link JvmTransferRelation#getAbstractSuccessorForInstruction(JvmAbstractState, Instruction, Clazz, Precision)}
+   */
+  @Test
+  public void testGetAbstractSuccessorForInstruction4() {
+    // Arrange
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(
+        new ParticularReferenceValueFactory(), null);
+    JvmFrameAbstractState<ValueAbstractState> frame = new JvmFrameAbstractState<>();
+    JvmForgetfulHeapAbstractState<ValueAbstractState> heap = new JvmForgetfulHeapAbstractState<>(
+        ValueAbstractState.UNKNOWN);
+    JvmAbstractState<ValueAbstractState> abstractState = new JvmAbstractState<>(JvmUnknownCfaNode.INSTANCE, frame, heap,
+        new HashMapAbstractState<>());
+
+    VariableInstruction instruction = new VariableInstruction();
+
+    // Act and Assert
+    assertSame(abstractState, jvmValueTransferRelation.getAbstractSuccessorForInstruction(abstractState, instruction,
+        new LibraryClass(), null));
+  }
+
+  /**
+   * Method under test:
+   * {@link JvmTransferRelation#getAbstractSuccessorForInstruction(JvmAbstractState, Instruction, Clazz, Precision)}
+   */
+  @Test
+  public void testGetAbstractSuccessorForInstruction5() {
+    // Arrange
+    JvmValueTransferRelation jvmValueTransferRelation = new JvmValueTransferRelation(
+        new ParticularReferenceValueFactory(), null);
+    JvmFrameAbstractState<ValueAbstractState> frame = new JvmFrameAbstractState<>();
+    JvmForgetfulHeapAbstractState<ValueAbstractState> heap = new JvmForgetfulHeapAbstractState<>(
+        ValueAbstractState.UNKNOWN);
+    JvmAbstractState<ValueAbstractState> abstractState = new JvmAbstractState<>(JvmUnknownCfaNode.INSTANCE, frame, heap,
+        new HashMapAbstractState<>());
+
+    ConstantInstruction instruction = new ConstantInstruction((byte) -78, 1);
+
+    // Act and Assert
+    assertSame(abstractState, jvmValueTransferRelation.getAbstractSuccessorForInstruction(abstractState, instruction,
+        new LibraryClass(), null));
+  }
+
+  /**
+   * Method under test:
+   * {@link JvmTransferRelation#calculateArithmeticInstruction(Instruction, List)}
+   */
+  @Test
   public void testCalculateArithmeticInstruction() {
     // Arrange
-    JvmTaintTransferRelation jvmTaintTransferRelation =
-        new JvmTaintTransferRelation(new HashMap<>());
+    JvmTaintTransferRelation jvmTaintTransferRelation = new JvmTaintTransferRelation(new HashMap<>());
     BranchInstruction instruction = new BranchInstruction((byte) 'A', 1);
 
     // Act
-    SetAbstractState<JvmTaintSource> actualCalculateArithmeticInstructionResult =
-        jvmTaintTransferRelation.calculateArithmeticInstruction(instruction, new ArrayList<>());
+    SetAbstractState<JvmTaintSource> actualCalculateArithmeticInstructionResult = jvmTaintTransferRelation
+        .calculateArithmeticInstruction(instruction, new ArrayList<>());
 
     // Assert
     assertTrue(actualCalculateArithmeticInstructionResult.isEmpty());
@@ -54,21 +167,16 @@ public class JvmTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmTransferRelation#getAbstractByteConstant(byte)}.
-   *
-   * <p>Method under test: {@link JvmTransferRelation#getAbstractByteConstant(byte)}
+   * Method under test: {@link JvmTransferRelation#getAbstractByteConstant(byte)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"LatticeAbstractState JvmTransferRelation.getAbstractByteConstant(byte)"})
   public void testGetAbstractByteConstant() {
     // Arrange
-    JvmTaintTransferRelation jvmTaintTransferRelation =
-        new JvmTaintTransferRelation(new HashMap<>());
+    JvmTaintTransferRelation jvmTaintTransferRelation = new JvmTaintTransferRelation(new HashMap<>());
 
     // Act
-    SetAbstractState<JvmTaintSource> actualAbstractByteConstant =
-        jvmTaintTransferRelation.getAbstractByteConstant((byte) 'A');
+    SetAbstractState<JvmTaintSource> actualAbstractByteConstant = jvmTaintTransferRelation
+        .getAbstractByteConstant((byte) 'A');
 
     // Assert
     assertTrue(actualAbstractByteConstant.isEmpty());
@@ -79,17 +187,14 @@ public class JvmTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmTransferRelation#getAbstractDoubleConstant(double)}.
-   *
-   * <p>Method under test: {@link JvmTransferRelation#getAbstractDoubleConstant(double)}
+   * Method under test:
+   * {@link JvmTransferRelation#getAbstractDoubleConstant(double)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"List JvmTransferRelation.getAbstractDoubleConstant(double)"})
   public void testGetAbstractDoubleConstant() {
     // Arrange and Act
-    List<SetAbstractState<JvmTaintSource>> actualAbstractDoubleConstant =
-        (new JvmTaintTransferRelation(new HashMap<>())).getAbstractDoubleConstant(10.0d);
+    List<SetAbstractState<JvmTaintSource>> actualAbstractDoubleConstant = (new JvmTaintTransferRelation(
+        new HashMap<>())).getAbstractDoubleConstant(10.0d);
 
     // Assert
     assertEquals(2, actualAbstractDoubleConstant.size());
@@ -99,21 +204,17 @@ public class JvmTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmTransferRelation#getAbstractFloatConstant(float)}.
-   *
-   * <p>Method under test: {@link JvmTransferRelation#getAbstractFloatConstant(float)}
+   * Method under test:
+   * {@link JvmTransferRelation#getAbstractFloatConstant(float)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"LatticeAbstractState JvmTransferRelation.getAbstractFloatConstant(float)"})
   public void testGetAbstractFloatConstant() {
     // Arrange
-    JvmTaintTransferRelation jvmTaintTransferRelation =
-        new JvmTaintTransferRelation(new HashMap<>());
+    JvmTaintTransferRelation jvmTaintTransferRelation = new JvmTaintTransferRelation(new HashMap<>());
 
     // Act
-    SetAbstractState<JvmTaintSource> actualAbstractFloatConstant =
-        jvmTaintTransferRelation.getAbstractFloatConstant(10.0f);
+    SetAbstractState<JvmTaintSource> actualAbstractFloatConstant = jvmTaintTransferRelation
+        .getAbstractFloatConstant(10.0f);
 
     // Assert
     assertTrue(actualAbstractFloatConstant.isEmpty());
@@ -124,21 +225,17 @@ public class JvmTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmTransferRelation#getAbstractIntegerConstant(int)}.
-   *
-   * <p>Method under test: {@link JvmTransferRelation#getAbstractIntegerConstant(int)}
+   * Method under test:
+   * {@link JvmTransferRelation#getAbstractIntegerConstant(int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"LatticeAbstractState JvmTransferRelation.getAbstractIntegerConstant(int)"})
   public void testGetAbstractIntegerConstant() {
     // Arrange
-    JvmTaintTransferRelation jvmTaintTransferRelation =
-        new JvmTaintTransferRelation(new HashMap<>());
+    JvmTaintTransferRelation jvmTaintTransferRelation = new JvmTaintTransferRelation(new HashMap<>());
 
     // Act
-    SetAbstractState<JvmTaintSource> actualAbstractIntegerConstant =
-        jvmTaintTransferRelation.getAbstractIntegerConstant(1);
+    SetAbstractState<JvmTaintSource> actualAbstractIntegerConstant = jvmTaintTransferRelation
+        .getAbstractIntegerConstant(1);
 
     // Assert
     assertTrue(actualAbstractIntegerConstant.isEmpty());
@@ -149,17 +246,13 @@ public class JvmTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmTransferRelation#getAbstractLongConstant(long)}.
-   *
-   * <p>Method under test: {@link JvmTransferRelation#getAbstractLongConstant(long)}
+   * Method under test: {@link JvmTransferRelation#getAbstractLongConstant(long)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"List JvmTransferRelation.getAbstractLongConstant(long)"})
   public void testGetAbstractLongConstant() {
     // Arrange and Act
-    List<SetAbstractState<JvmTaintSource>> actualAbstractLongConstant =
-        (new JvmTaintTransferRelation(new HashMap<>())).getAbstractLongConstant(1L);
+    List<SetAbstractState<JvmTaintSource>> actualAbstractLongConstant = (new JvmTaintTransferRelation(new HashMap<>()))
+        .getAbstractLongConstant(1L);
 
     // Assert
     assertEquals(2, actualAbstractLongConstant.size());
@@ -169,21 +262,15 @@ public class JvmTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmTransferRelation#getAbstractNull()}.
-   *
-   * <p>Method under test: {@link JvmTransferRelation#getAbstractNull()}
+   * Method under test: {@link JvmTransferRelation#getAbstractNull()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"LatticeAbstractState JvmTransferRelation.getAbstractNull()"})
   public void testGetAbstractNull() {
     // Arrange
-    JvmTaintTransferRelation jvmTaintTransferRelation =
-        new JvmTaintTransferRelation(new HashMap<>());
+    JvmTaintTransferRelation jvmTaintTransferRelation = new JvmTaintTransferRelation(new HashMap<>());
 
     // Act
-    SetAbstractState<JvmTaintSource> actualAbstractNull =
-        jvmTaintTransferRelation.getAbstractNull();
+    SetAbstractState<JvmTaintSource> actualAbstractNull = jvmTaintTransferRelation.getAbstractNull();
 
     // Assert
     assertTrue(actualAbstractNull.isEmpty());
@@ -193,21 +280,17 @@ public class JvmTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmTransferRelation#getAbstractShortConstant(short)}.
-   *
-   * <p>Method under test: {@link JvmTransferRelation#getAbstractShortConstant(short)}
+   * Method under test:
+   * {@link JvmTransferRelation#getAbstractShortConstant(short)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"LatticeAbstractState JvmTransferRelation.getAbstractShortConstant(short)"})
   public void testGetAbstractShortConstant() {
     // Arrange
-    JvmTaintTransferRelation jvmTaintTransferRelation =
-        new JvmTaintTransferRelation(new HashMap<>());
+    JvmTaintTransferRelation jvmTaintTransferRelation = new JvmTaintTransferRelation(new HashMap<>());
 
     // Act
-    SetAbstractState<JvmTaintSource> actualAbstractShortConstant =
-        jvmTaintTransferRelation.getAbstractShortConstant((short) 1);
+    SetAbstractState<JvmTaintSource> actualAbstractShortConstant = jvmTaintTransferRelation
+        .getAbstractShortConstant((short) 1);
 
     // Assert
     assertTrue(actualAbstractShortConstant.isEmpty());
@@ -218,21 +301,17 @@ public class JvmTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmTransferRelation#getAbstractReferenceValue(String)} with {@code className}.
-   *
-   * <p>Method under test: {@link JvmTransferRelation#getAbstractReferenceValue(String)}
+   * Method under test:
+   * {@link JvmTransferRelation#getAbstractReferenceValue(String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"LatticeAbstractState JvmTransferRelation.getAbstractReferenceValue(String)"})
-  public void testGetAbstractReferenceValueWithClassName() {
+  public void testGetAbstractReferenceValue() {
     // Arrange
-    JvmTaintTransferRelation jvmTaintTransferRelation =
-        new JvmTaintTransferRelation(new HashMap<>());
+    JvmTaintTransferRelation jvmTaintTransferRelation = new JvmTaintTransferRelation(new HashMap<>());
 
     // Act
-    SetAbstractState<JvmTaintSource> actualAbstractReferenceValue =
-        jvmTaintTransferRelation.getAbstractReferenceValue("Class Name");
+    SetAbstractState<JvmTaintSource> actualAbstractReferenceValue = jvmTaintTransferRelation
+        .getAbstractReferenceValue("Class Name");
 
     // Assert
     assertTrue(actualAbstractReferenceValue.isEmpty());
@@ -243,29 +322,22 @@ public class JvmTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmTransferRelation#getAbstractReferenceValue(String, Clazz, boolean, boolean)}
-   * with {@code className}, {@code referencedClazz}, {@code mayBeExtension}, {@code mayBeNull}.
-   *
-   * <p>Method under test: {@link JvmTransferRelation#getAbstractReferenceValue(String, Clazz,
-   * boolean, boolean)}
+   * Method under test:
+   * {@link JvmTransferRelation#getAbstractReferenceValue(String, Clazz, boolean, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "LatticeAbstractState JvmTransferRelation.getAbstractReferenceValue(String, Clazz, boolean, boolean)"
-  })
-  public void testGetAbstractReferenceValueWithClassNameReferencedClazzMayBeExtensionMayBeNull() {
+  public void testGetAbstractReferenceValue2() {
     // Arrange
-    JvmTaintTransferRelation jvmTaintTransferRelation =
-        new JvmTaintTransferRelation(new HashMap<>());
+    JvmTaintTransferRelation jvmTaintTransferRelation = new JvmTaintTransferRelation(new HashMap<>());
+    LibraryClass referencedClazz = new LibraryClass();
 
     // Act
-    SetAbstractState<JvmTaintSource> actualAbstractReferenceValue =
-        jvmTaintTransferRelation.getAbstractReferenceValue(
-            "Class Name", new LibraryClass(), true, true);
+    SetAbstractState<JvmTaintSource> actualAbstractReferenceValue = jvmTaintTransferRelation
+        .getAbstractReferenceValue("Class Name", referencedClazz, true, true);
 
     // Assert
     assertTrue(actualAbstractReferenceValue.isEmpty());
+    assertTrue(referencedClazz.getExtraFeatureNames().isEmpty());
     SetAbstractState setAbstractState = actualAbstractReferenceValue.bottom;
     assertSame(setAbstractState, jvmTaintTransferRelation.getAbstractDefault());
     assertSame(setAbstractState, jvmTaintTransferRelation.getAbstractNull());
@@ -273,41 +345,24 @@ public class JvmTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmTransferRelation#getAbstractReferenceValue(String, Clazz, boolean, boolean,
-   * Clazz, Method, int, Object)} with {@code className}, {@code referencedClazz}, {@code
-   * mayBeExtension}, {@code mayBeNull}, {@code creationClass}, {@code creationMethod}, {@code
-   * creationOffset}, {@code value}.
-   *
-   * <p>Method under test: {@link JvmTransferRelation#getAbstractReferenceValue(String, Clazz,
-   * boolean, boolean, Clazz, Method, int, Object)}
+   * Method under test:
+   * {@link JvmTransferRelation#getAbstractReferenceValue(String, Clazz, boolean, boolean, Clazz, Method, int, Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "LatticeAbstractState JvmTransferRelation.getAbstractReferenceValue(String, Clazz, boolean, boolean, Clazz, Method, int, Object)"
-  })
-  public void
-      testGetAbstractReferenceValueWithClassNameReferencedClazzMayBeExtensionMayBeNullCreationClassCreationMethodCreationOffsetValue() {
+  public void testGetAbstractReferenceValue3() {
     // Arrange
-    JvmTaintTransferRelation jvmTaintTransferRelation =
-        new JvmTaintTransferRelation(new HashMap<>());
+    JvmTaintTransferRelation jvmTaintTransferRelation = new JvmTaintTransferRelation(new HashMap<>());
     LibraryClass referencedClazz = new LibraryClass();
     LibraryClass creationClass = new LibraryClass();
 
     // Act
-    SetAbstractState<JvmTaintSource> actualAbstractReferenceValue =
-        jvmTaintTransferRelation.getAbstractReferenceValue(
-            "Class Name",
-            referencedClazz,
-            true,
-            true,
-            creationClass,
-            new LibraryMethod(1, "Name", "Descriptor"),
-            1,
-            "Value");
+    SetAbstractState<JvmTaintSource> actualAbstractReferenceValue = jvmTaintTransferRelation.getAbstractReferenceValue(
+        "Class Name", referencedClazz, true, true, creationClass, new LibraryMethod(1, "Name", "Descriptor"), 1,
+        "Value");
 
     // Assert
     assertTrue(actualAbstractReferenceValue.isEmpty());
+    assertTrue(referencedClazz.getExtraFeatureNames().isEmpty());
     SetAbstractState setAbstractState = actualAbstractReferenceValue.bottom;
     assertSame(setAbstractState, jvmTaintTransferRelation.getAbstractDefault());
     assertSame(setAbstractState, jvmTaintTransferRelation.getAbstractNull());
@@ -315,23 +370,16 @@ public class JvmTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmTransferRelation#isInstanceOf(LatticeAbstractState, String)}.
-   *
-   * <p>Method under test: {@link JvmTransferRelation#isInstanceOf(LatticeAbstractState, String)}
+   * Method under test:
+   * {@link JvmTransferRelation#isInstanceOf(LatticeAbstractState, String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "LatticeAbstractState JvmTransferRelation.isInstanceOf(LatticeAbstractState, String)"
-  })
   public void testIsInstanceOf() {
     // Arrange
-    JvmTaintTransferRelation jvmTaintTransferRelation =
-        new JvmTaintTransferRelation(new HashMap<>());
+    JvmTaintTransferRelation jvmTaintTransferRelation = new JvmTaintTransferRelation(new HashMap<>());
 
     // Act
-    SetAbstractState<JvmTaintSource> actualIsInstanceOfResult =
-        jvmTaintTransferRelation.isInstanceOf(null, "Type");
+    SetAbstractState<JvmTaintSource> actualIsInstanceOfResult = jvmTaintTransferRelation.isInstanceOf(null, "Type");
 
     // Assert
     assertTrue(actualIsInstanceOfResult.isEmpty());
@@ -342,15 +390,10 @@ public class JvmTransferRelationDiffblueTest {
   }
 
   /**
-   * Test {@link JvmTransferRelation#handleCheckCast(LatticeAbstractState, String)}.
-   *
-   * <p>Method under test: {@link JvmTransferRelation#handleCheckCast(LatticeAbstractState, String)}
+   * Method under test:
+   * {@link JvmTransferRelation#handleCheckCast(LatticeAbstractState, String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "LatticeAbstractState JvmTransferRelation.handleCheckCast(LatticeAbstractState, String)"
-  })
   public void testHandleCheckCast() {
     // Arrange, Act and Assert
     assertNull((new JvmTaintTransferRelation(new HashMap<>())).handleCheckCast(null, "Type Name"));

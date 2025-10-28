@@ -2,63 +2,21 @@ package proguard.evaluation.value;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 public class ConvertedShortValueDiffblueTest {
   /**
-   * Test getters and setters.
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link ConvertedShortValue#ConvertedShortValue(IntegerValue)}
-   *   <li>{@link ConvertedShortValue#toString()}
-   * </ul>
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void ConvertedShortValue.<init>(IntegerValue)",
-    "java.lang.String ConvertedShortValue.toString()"
-  })
-  public void testGettersAndSetters() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "(short)(b)",
-        (new ConvertedShortValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).toString());
-  }
-
-  /**
-   * Test {@link ConvertedShortValue#equals(Object)}, and {@link ConvertedShortValue#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is equal.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
    *   <li>{@link ConvertedShortValue#equals(Object)}
    *   <li>{@link ConvertedShortValue#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean ConvertedShortValue.equals(Object)",
-    "int ConvertedShortValue.hashCode()"
-  })
   public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
-    ConvertedShortValue convertedShortValue =
-        new ConvertedShortValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
-    ConvertedShortValue convertedShortValue2 =
-        new ConvertedShortValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+    ConvertedShortValue convertedShortValue = new ConvertedShortValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+    ConvertedShortValue convertedShortValue2 = new ConvertedShortValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Act and Assert
     assertEquals(convertedShortValue, convertedShortValue2);
@@ -67,30 +25,16 @@ public class ConvertedShortValueDiffblueTest {
   }
 
   /**
-   * Test {@link ConvertedShortValue#equals(Object)}, and {@link ConvertedShortValue#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is same.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
    *   <li>{@link ConvertedShortValue#equals(Object)}
    *   <li>{@link ConvertedShortValue#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean ConvertedShortValue.equals(Object)",
-    "int ConvertedShortValue.hashCode()"
-  })
   public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
-    ConvertedShortValue convertedShortValue =
-        new ConvertedShortValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+    ConvertedShortValue convertedShortValue = new ConvertedShortValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Act and Assert
     assertEquals(convertedShortValue, convertedShortValue);
@@ -99,98 +43,59 @@ public class ConvertedShortValueDiffblueTest {
   }
 
   /**
-   * Test {@link ConvertedShortValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConvertedShortValue#equals(Object)}
+   * Method under test: {@link ConvertedShortValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean ConvertedShortValue.equals(Object)",
-    "int ConvertedShortValue.hashCode()"
-  })
   public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
-    ConvertedShortValue convertedShortValue =
-        new ConvertedShortValue(BasicRangeValueFactory.INTEGER_VALUE_CHAR);
+    ConvertedShortValue convertedShortValue = new ConvertedShortValue(BasicRangeValueFactory.INTEGER_VALUE_CHAR);
 
     // Act and Assert
-    assertNotEquals(
-        convertedShortValue, new ConvertedShortValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
+    assertNotEquals(convertedShortValue, new ConvertedShortValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
   }
 
   /**
-   * Test {@link ConvertedShortValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConvertedShortValue#equals(Object)}
+   * Method under test: {@link ConvertedShortValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean ConvertedShortValue.equals(Object)",
-    "int ConvertedShortValue.hashCode()"
-  })
   public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
-    ConvertedShortValue convertedShortValue =
-        new ConvertedShortValue(new ConvertedShortValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
+    ConvertedShortValue convertedShortValue = new ConvertedShortValue(
+        new ConvertedShortValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
 
     // Act and Assert
-    assertNotEquals(
-        convertedShortValue, new ConvertedShortValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
+    assertNotEquals(convertedShortValue, new ConvertedShortValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
   }
 
   /**
-   * Test {@link ConvertedShortValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is {@code null}.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConvertedShortValue#equals(Object)}
+   * Method under test: {@link ConvertedShortValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean ConvertedShortValue.equals(Object)",
-    "int ConvertedShortValue.hashCode()"
-  })
   public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new ConvertedShortValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE), null);
   }
 
   /**
-   * Test {@link ConvertedShortValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is wrong type.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link ConvertedShortValue#equals(Object)}
+   * Method under test: {@link ConvertedShortValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean ConvertedShortValue.equals(Object)",
-    "int ConvertedShortValue.hashCode()"
-  })
   public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
-    assertNotEquals(
-        new ConvertedShortValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE),
+    assertNotEquals(new ConvertedShortValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE),
         "Different type to ConvertedShortValue");
+  }
+
+  /**
+   * Methods under test:
+   * <ul>
+   *   <li>{@link ConvertedShortValue#ConvertedShortValue(IntegerValue)}
+   *   <li>{@link ConvertedShortValue#toString()}
+   * </ul>
+   */
+  @Test
+  public void testGettersAndSetters() {
+    // Arrange, Act and Assert
+    assertEquals("(short)(b)", (new ConvertedShortValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE)).toString());
   }
 }

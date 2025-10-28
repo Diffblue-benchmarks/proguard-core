@@ -2,29 +2,18 @@ package proguard.evaluation.exception;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 public class ExcessiveComplexityExceptionDiffblueTest {
   /**
-   * Test {@link ExcessiveComplexityException#ExcessiveComplexityException(String)}.
-   *
-   * <ul>
-   *   <li>Then return LocalizedMessage is {@code An error occurred}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ExcessiveComplexityException#ExcessiveComplexityException(String)}
+   * Method under test:
+   * {@link ExcessiveComplexityException#ExcessiveComplexityException(String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ExcessiveComplexityException.<init>(String)"})
-  public void testNewExcessiveComplexityException_thenReturnLocalizedMessageIsAnErrorOccurred() {
+  public void testNewExcessiveComplexityException() {
     // Arrange and Act
-    ExcessiveComplexityException actualExcessiveComplexityException =
-        new ExcessiveComplexityException("An error occurred");
+    ExcessiveComplexityException actualExcessiveComplexityException = new ExcessiveComplexityException(
+        "An error occurred");
 
     // Assert
     assertEquals("An error occurred", actualExcessiveComplexityException.getLocalizedMessage());
@@ -36,22 +25,13 @@ public class ExcessiveComplexityExceptionDiffblueTest {
   }
 
   /**
-   * Test {@link ExcessiveComplexityException#ExcessiveComplexityException(String)}.
-   *
-   * <ul>
-   *   <li>When {@code null}.
-   *   <li>Then return LocalizedMessage is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ExcessiveComplexityException#ExcessiveComplexityException(String)}
+   * Method under test:
+   * {@link ExcessiveComplexityException#ExcessiveComplexityException(String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ExcessiveComplexityException.<init>(String)"})
-  public void testNewExcessiveComplexityException_whenNull_thenReturnLocalizedMessageIsNull() {
+  public void testNewExcessiveComplexityException2() {
     // Arrange and Act
-    ExcessiveComplexityException actualExcessiveComplexityException =
-        new ExcessiveComplexityException(null);
+    ExcessiveComplexityException actualExcessiveComplexityException = new ExcessiveComplexityException(null);
 
     // Assert
     assertNull(actualExcessiveComplexityException.getLocalizedMessage());

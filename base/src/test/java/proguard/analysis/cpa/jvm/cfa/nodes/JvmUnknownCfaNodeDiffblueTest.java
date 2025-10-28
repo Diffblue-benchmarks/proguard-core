@@ -3,18 +3,11 @@ package proguard.analysis.cpa.jvm.cfa.nodes;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 public class JvmUnknownCfaNodeDiffblueTest {
   /**
-   * Test getters and setters.
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
    *   <li>{@link JvmUnknownCfaNode#toString()}
    *   <li>{@link JvmUnknownCfaNode#isReturnExitNode()}
@@ -22,12 +15,6 @@ public class JvmUnknownCfaNodeDiffblueTest {
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean JvmUnknownCfaNode.isReturnExitNode()",
-    "boolean JvmUnknownCfaNode.isUnknownNode()",
-    "String JvmUnknownCfaNode.toString()"
-  })
   public void testGettersAndSetters() {
     // Arrange
     JvmUnknownCfaNode jvmUnknownCfaNode = JvmUnknownCfaNode.INSTANCE;

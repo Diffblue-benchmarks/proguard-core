@@ -2,30 +2,21 @@ package proguard.evaluation;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 public class IncompleteClassHierarchyExceptionDiffblueTest {
   /**
-   * Test {@link IncompleteClassHierarchyException#IncompleteClassHierarchyException(String)}.
-   *
-   * <p>Method under test: {@link
-   * IncompleteClassHierarchyException#IncompleteClassHierarchyException(String)}
+   * Method under test:
+   * {@link IncompleteClassHierarchyException#IncompleteClassHierarchyException(String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void IncompleteClassHierarchyException.<init>(String)"})
   public void testNewIncompleteClassHierarchyException() {
     // Arrange and Act
-    IncompleteClassHierarchyException actualIncompleteClassHierarchyException =
-        new IncompleteClassHierarchyException("An error occurred");
+    IncompleteClassHierarchyException actualIncompleteClassHierarchyException = new IncompleteClassHierarchyException(
+        "An error occurred");
 
     // Assert
-    assertEquals(
-        "An error occurred", actualIncompleteClassHierarchyException.getLocalizedMessage());
+    assertEquals("An error occurred", actualIncompleteClassHierarchyException.getLocalizedMessage());
     assertEquals("An error occurred", actualIncompleteClassHierarchyException.getMessage());
     assertNull(actualIncompleteClassHierarchyException.getCause());
     assertEquals(0, actualIncompleteClassHierarchyException.getSuppressed().length);
@@ -34,22 +25,14 @@ public class IncompleteClassHierarchyExceptionDiffblueTest {
   }
 
   /**
-   * Test {@link IncompleteClassHierarchyException#IncompleteClassHierarchyException(String)}.
-   *
-   * <ul>
-   *   <li>Then return LocalizedMessage is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link
-   * IncompleteClassHierarchyException#IncompleteClassHierarchyException(String)}
+   * Method under test:
+   * {@link IncompleteClassHierarchyException#IncompleteClassHierarchyException(String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void IncompleteClassHierarchyException.<init>(String)"})
-  public void testNewIncompleteClassHierarchyException_thenReturnLocalizedMessageIsNull() {
+  public void testNewIncompleteClassHierarchyException2() {
     // Arrange and Act
-    IncompleteClassHierarchyException actualIncompleteClassHierarchyException =
-        new IncompleteClassHierarchyException(null);
+    IncompleteClassHierarchyException actualIncompleteClassHierarchyException = new IncompleteClassHierarchyException(
+        null);
 
     // Assert
     assertNull(actualIncompleteClassHierarchyException.getLocalizedMessage());

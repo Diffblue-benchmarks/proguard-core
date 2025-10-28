@@ -5,11 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.constant.ClassConstant;
@@ -24,37 +20,29 @@ import proguard.evaluation.value.object.model.Model;
 
 public class ClassConstantValueFactoryDiffblueTest {
   /**
-   * Test {@link ClassConstantValueFactory#ClassConstantValueFactory(ValueFactory)}.
-   *
-   * <p>Method under test: {@link ClassConstantValueFactory#ClassConstantValueFactory(ValueFactory)}
+   * Method under test:
+   * {@link ClassConstantValueFactory#ClassConstantValueFactory(ValueFactory)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ClassConstantValueFactory.<init>(ValueFactory)"})
   public void testNewClassConstantValueFactory() {
     // Arrange and Act
-    ClassConstantValueFactory actualClassConstantValueFactory =
-        new ClassConstantValueFactory(new ParticularReferenceValueFactory());
+    ClassConstantValueFactory actualClassConstantValueFactory = new ClassConstantValueFactory(
+        new ParticularReferenceValueFactory());
 
     // Assert
-    assertTrue(
-        actualClassConstantValueFactory.valueFactory instanceof ParticularReferenceValueFactory);
+    assertTrue(actualClassConstantValueFactory.valueFactory instanceof ParticularReferenceValueFactory);
     assertNull(actualClassConstantValueFactory.value);
   }
 
   /**
-   * Test {@link ClassConstantValueFactory#visitClassConstant(Clazz, ClassConstant)}.
-   *
-   * <p>Method under test: {@link ClassConstantValueFactory#visitClassConstant(Clazz,
-   * ClassConstant)}
+   * Method under test:
+   * {@link ClassConstantValueFactory#visitClassConstant(Clazz, ClassConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ClassConstantValueFactory.visitClassConstant(Clazz, ClassConstant)"})
   public void testVisitClassConstant() {
     // Arrange
-    ClassConstantValueFactory classConstantValueFactory =
-        new ClassConstantValueFactory(new ParticularReferenceValueFactory());
+    ClassConstantValueFactory classConstantValueFactory = new ClassConstantValueFactory(
+        new ParticularReferenceValueFactory());
     LibraryClass clazz = new LibraryClass();
 
     // Act
@@ -72,6 +60,7 @@ public class ClassConstantValueFactoryDiffblueTest {
     assertNull(((ClassModel) modeledOrNullValue).getClazz());
     assertEquals(1, ((ParticularReferenceValue) value).isNotNull());
     assertFalse(((ParticularReferenceValue) value).mayBeExtension());
+    assertFalse(value.isCategory2());
     assertTrue(value.isParticular());
     assertTrue(value.isSpecific());
     assertEquals(InitializationFinder.NONE, ((ParticularReferenceValue) value).isNull());
@@ -79,18 +68,14 @@ public class ClassConstantValueFactoryDiffblueTest {
   }
 
   /**
-   * Test {@link ClassConstantValueFactory#visitClassConstant(Clazz, ClassConstant)}.
-   *
-   * <p>Method under test: {@link ClassConstantValueFactory#visitClassConstant(Clazz,
-   * ClassConstant)}
+   * Method under test:
+   * {@link ClassConstantValueFactory#visitClassConstant(Clazz, ClassConstant)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void ClassConstantValueFactory.visitClassConstant(Clazz, ClassConstant)"})
   public void testVisitClassConstant2() {
     // Arrange
-    ClassConstantValueFactory classConstantValueFactory =
-        new ClassConstantValueFactory(new PrimitiveTypedReferenceValueFactory());
+    ClassConstantValueFactory classConstantValueFactory = new ClassConstantValueFactory(
+        new PrimitiveTypedReferenceValueFactory());
     LibraryClass clazz = new LibraryClass();
 
     // Act
@@ -106,6 +91,7 @@ public class ClassConstantValueFactoryDiffblueTest {
     assertNull(value2.getModeledOrNullValue());
     assertEquals(0, ((UnknownReferenceValue) value).isNotNull());
     assertEquals(0, ((UnknownReferenceValue) value).isNull());
+    assertFalse(value.isCategory2());
     assertFalse(value.isParticular());
     assertFalse(value.isSpecific());
   }

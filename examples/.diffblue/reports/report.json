@@ -3,19 +3,19 @@
     "reportVersion" : "2.6"
   },
   "run" : {
-    "version" : "2025.02.02-08b2a5a-licensed",
-    "creationTimestamp" : "2025-10-20T16:55:15.491848Z",
+    "version" : "2024.10.01-2ee2e3d-licensed",
+    "creationTimestamp" : "2025-10-27T14:27:28.903852Z",
     "command" : "dcover create --coverage-reports --upload http://localhost:8080 --project-name proguard-core --name with-diffblue-tests",
-    "totalTime" : 152.284,
-    "environmentDetectionTime" : 0.337,
-    "indexingTime" : 0.405,
-    "entryPointsTime" : 0.332,
-    "generationTime" : 1886.566,
-    "timeToFirstTest" : 249.34,
-    "timeToLastTest" : 2150.459,
-    "indexQueryTime" : 4.2,
-    "verificationTime" : 133.504,
-    "validationTime" : 28.57
+    "totalTime" : 2070.473,
+    "environmentDetectionTime" : 0.638,
+    "indexingTime" : 0.245,
+    "entryPointsTime" : 0.633,
+    "generationTime" : 1654.777,
+    "timeToFirstTest" : 106.666,
+    "timeToLastTest" : 1841.62,
+    "indexQueryTime" : 4.4430000000000005,
+    "verificationTime" : 142.657,
+    "validationTime" : 20.651
   },
   "codes" : {
     "R000" : "Success",
@@ -33,9 +33,9 @@
   "summary" : {
     "classesCount" : 31,
     "methodsCount" : 97,
-    "cumulativeDiffblueTestCount" : 19,
+    "cumulativeDiffblueTestCount" : 9,
     "cumulativeManualTestCount" : 0,
-    "completeTestCount" : 19,
+    "completeTestCount" : 17,
     "incompleteTestCount" : 0,
     "skeletonTestCount" : 0,
     "totalPhysicalLineCount" : 1448,
@@ -48,9 +48,9 @@
       "T021" : 2
     },
     "perMethodOutcome" : {
-      "R000" : 11,
+      "R000" : 10,
       "R002" : 2,
-      "R004" : 1,
+      "R004" : 2,
       "R013" : 4,
       "T003" : 34,
       "T005" : 24,
@@ -58,10 +58,10 @@
       "T012" : 4
     },
     "perTestOutcome" : {
-      "R000" : 19
+      "R000" : 17
     },
     "perTestValidation" : {
-      "V000" : 19
+      "V000" : 17
     }
   },
   "classes" : {
@@ -99,18 +99,15 @@
     },
     "com.example.SampleClassWithObjects" : {
       "methodsCount" : 2,
-      "completeTestCount" : 2,
+      "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : {
         "T000" : 1,
         "T005" : 1
       },
       "perMethodOutcome" : {
-        "R000" : 1,
+        "R004" : 1,
         "T005" : 1
-      },
-      "perTestOutcome" : {
-        "R000" : 2
       }
     },
     "com.example.SampleClassWithRangeComputation" : {
@@ -550,13 +547,10 @@
       ]
     },
     "com.example.SampleClassWithObjects.getAnswer:(Ljava/lang/Number;)Ljava/lang/Number;" : {
-      "completeTestCount" : 2,
+      "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
-      "perMethodOutcome" : "R000",
-      "perTestOutcome" : {
-        "R000" : 2
-      },
+      "perMethodOutcome" : "R004",
       "lineNumbers" : [
         6,
         7,

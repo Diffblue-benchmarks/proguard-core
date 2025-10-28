@@ -6,83 +6,36 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.evaluation.value.object.AnalyzedObject;
 
 public class TracingValueDiffblueTest {
   /**
-   * Test getters and setters.
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link TracingValue#TracingValue(Value, Value)}
-   *   <li>{@link TracingValue#toString()}
-   * </ul>
+   * Method under test: {@link TracingValue#generalize(TracingValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void TracingValue.<init>(Value, Value)",
-    "java.lang.String TracingValue.toString()"
-  })
-  public void testGettersAndSetters() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "Pbb",
-        (new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE))
-            .toString());
-  }
-
-  /**
-   * Test {@link TracingValue#generalize(TracingValue)} with {@code TracingValue}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  public void testGeneralizeWithTracingValue() {
+  public void testGeneralize() {
     // Arrange
-    TracingValue tracingValue =
-        new TracingValue(
-            BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+    TracingValue tracingValue = new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Act and Assert
-    assertSame(
-        tracingValue,
-        tracingValue.generalize(
-            new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
+    assertSame(tracingValue, tracingValue.generalize(
+        new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
   }
 
   /**
-   * Test {@link TracingValue#generalize(TracingValue)} with {@code TracingValue}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
+   * Method under test: {@link TracingValue#generalize(TracingValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  public void testGeneralizeWithTracingValue2() {
+  public void testGeneralize2() {
     // Arrange
-    TracingValue tracingValue =
-        new TracingValue(
-            BasicRangeValueFactory.INTEGER_VALUE_CHAR, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+    TracingValue tracingValue = new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_CHAR,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Act
-    TracingValue actualGeneralizeResult =
-        tracingValue.generalize(
-            new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE));
+    TracingValue actualGeneralizeResult = tracingValue.generalize(
+        new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE));
 
     // Assert
     assertFalse(actualGeneralizeResult.isCategory2());
@@ -91,48 +44,31 @@ public class TracingValueDiffblueTest {
   }
 
   /**
-   * Test {@link TracingValue#generalize(TracingValue)} with {@code TracingValue}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
+   * Method under test: {@link TracingValue#generalize(TracingValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  public void testGeneralizeWithTracingValue3() {
+  public void testGeneralize3() {
     // Arrange
-    TracingValue tracingValue =
-        new TracingValue(
-            BasicRangeValueFactory.INTEGER_VALUE_SHORT, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+    TracingValue tracingValue = new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_SHORT,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Act and Assert
-    assertEquals(
-        tracingValue,
-        tracingValue.generalize(
-            new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
+    assertEquals(tracingValue, tracingValue.generalize(
+        new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
   }
 
   /**
-   * Test {@link TracingValue#generalize(TracingValue)} with {@code TracingValue}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(TracingValue)}
+   * Method under test: {@link TracingValue#generalize(TracingValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"TracingValue TracingValue.generalize(TracingValue)"})
-  public void testGeneralizeWithTracingValue4() {
+  public void testGeneralize4() {
     // Arrange
-    TracingValue tracingValue =
-        new TracingValue(
-            BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_CHAR);
+    TracingValue tracingValue = new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE,
+        BasicRangeValueFactory.INTEGER_VALUE_CHAR);
 
     // Act
-    TracingValue actualGeneralizeResult =
-        tracingValue.generalize(
-            new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE));
+    TracingValue actualGeneralizeResult = tracingValue.generalize(
+        new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE));
 
     // Assert
     assertFalse(actualGeneralizeResult.isCategory2());
@@ -141,40 +77,45 @@ public class TracingValueDiffblueTest {
   }
 
   /**
-   * Test {@link TracingValue#generalize(Value)} with {@code Value}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(Value)}
+   * Method under test: {@link TracingValue#generalize(Value)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Value TracingValue.generalize(Value)"})
-  public void testGeneralizeWithValue() {
+  public void testGeneralize5() {
     // Arrange
-    TracingValue tracingValue =
-        new TracingValue(
-            BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+    TracingValue tracingValue = new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Act and Assert
     assertSame(tracingValue, tracingValue.generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE));
   }
 
   /**
-   * Test {@link TracingValue#generalize(Value)} with {@code Value}.
-   *
-   * <p>Method under test: {@link TracingValue#generalize(Value)}
+   * Method under test: {@link TracingValue#generalize(Value)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Value TracingValue.generalize(Value)"})
-  public void testGeneralizeWithValue2() {
+  public void testGeneralize6() {
+    // Arrange and Act
+    Value actualGeneralizeResult = (new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE,
+        BasicRangeValueFactory.INTEGER_VALUE_CHAR)).generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+
+    // Assert
+    assertTrue(actualGeneralizeResult instanceof TracingValue);
+    assertFalse(actualGeneralizeResult.isCategory2());
+    assertFalse(actualGeneralizeResult.isParticular());
+    assertFalse(actualGeneralizeResult.isSpecific());
+  }
+
+  /**
+   * Method under test: {@link TracingValue#generalize(Value)}
+   */
+  @Test
+  public void testGeneralize7() {
     // Arrange
-    TracingValue tracingValue =
-        new TracingValue(
-            BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_SHORT);
+    TracingValue tracingValue = new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE,
+        BasicRangeValueFactory.INTEGER_VALUE_SHORT);
 
     // Act
-    Value actualGeneralizeResult =
-        tracingValue.generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+    Value actualGeneralizeResult = tracingValue.generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Assert
     assertTrue(actualGeneralizeResult instanceof TracingValue);
@@ -182,92 +123,25 @@ public class TracingValueDiffblueTest {
   }
 
   /**
-   * Test {@link TracingValue#generalize(Value)} with {@code Value}.
-   *
-   * <ul>
-   *   <li>Then return not Category2.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#generalize(Value)}
+   * Method under test: {@link TracingValue#isCategory2()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Value TracingValue.generalize(Value)"})
-  public void testGeneralizeWithValue_thenReturnNotCategory2() {
-    // Arrange and Act
-    Value actualGeneralizeResult =
-        (new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_CHAR))
-            .generalize(BasicRangeValueFactory.INTEGER_VALUE_BYTE);
-
-    // Assert
-    assertTrue(actualGeneralizeResult instanceof TracingValue);
-    assertFalse(actualGeneralizeResult.isCategory2());
-    assertFalse(actualGeneralizeResult.isParticular());
-    assertFalse(actualGeneralizeResult.isSpecific());
-  }
-
-  /**
-   * Test {@link TracingValue#isCategory2()}.
-   *
-   * <ul>
-   *   <li>Then return {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#isCategory2()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TracingValue.isCategory2()"})
-  public void testIsCategory2_thenReturnFalse() {
+  public void testIsCategory2() {
     // Arrange, Act and Assert
-    assertFalse(
-        (new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE))
-            .isCategory2());
-  }
-
-  /**
-   * Test {@link TracingValue#isCategory2()}.
-   *
-   * <ul>
-   *   <li>Then return {@code true}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#isCategory2()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TracingValue.isCategory2()"})
-  public void testIsCategory2_thenReturnTrue() {
-    // Arrange, Act and Assert
+    assertFalse((new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE))
+        .isCategory2());
     assertTrue(
-        (new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.DOUBLE_VALUE))
-            .isCategory2());
+        (new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.DOUBLE_VALUE)).isCategory2());
   }
 
   /**
-   * Test {@link TracingValue#category1Value()}.
-   *
-   * <ul>
-   *   <li>Then return {@link RangeIntegerValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#category1Value()}
+   * Method under test: {@link TracingValue#category1Value()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Category1Value TracingValue.category1Value()"})
-  public void testCategory1Value_thenReturnRangeIntegerValue() {
+  public void testCategory1Value() {
     // Arrange and Act
-    Category1Value actualCategory1ValueResult =
-        (new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE))
-            .category1Value();
+    Category1Value actualCategory1ValueResult = (new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE)).category1Value();
 
     // Assert
     assertTrue(actualCategory1ValueResult instanceof RangeIntegerValue);
@@ -277,23 +151,13 @@ public class TracingValueDiffblueTest {
   }
 
   /**
-   * Test {@link TracingValue#category2Value()}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#category2Value()}
+   * Method under test: {@link TracingValue#category2Value()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Category2Value TracingValue.category2Value()"})
-  public void testCategory2Value_thenReturnUnknownDoubleValue() {
+  public void testCategory2Value() {
     // Arrange and Act
-    Category2Value actualCategory2ValueResult =
-        (new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.DOUBLE_VALUE))
-            .category2Value();
+    Category2Value actualCategory2ValueResult = (new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE,
+        BasicValueFactory.DOUBLE_VALUE)).category2Value();
 
     // Assert
     assertTrue(actualCategory2ValueResult instanceof UnknownDoubleValue);
@@ -303,24 +167,13 @@ public class TracingValueDiffblueTest {
   }
 
   /**
-   * Test {@link TracingValue#integerValue()}.
-   *
-   * <ul>
-   *   <li>Then return {@link RangeIntegerValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#integerValue()}
+   * Method under test: {@link TracingValue#integerValue()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"IntegerValue TracingValue.integerValue()"})
-  public void testIntegerValue_thenReturnRangeIntegerValue() {
+  public void testIntegerValue() {
     // Arrange and Act
-    IntegerValue actualIntegerValueResult =
-        (new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE))
-            .integerValue();
+    IntegerValue actualIntegerValueResult = (new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE)).integerValue();
 
     // Assert
     assertTrue(actualIntegerValueResult instanceof RangeIntegerValue);
@@ -330,22 +183,13 @@ public class TracingValueDiffblueTest {
   }
 
   /**
-   * Test {@link TracingValue#longValue()}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownLongValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#longValue()}
+   * Method under test: {@link TracingValue#longValue()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"LongValue TracingValue.longValue()"})
-  public void testLongValue_thenReturnUnknownLongValue() {
+  public void testLongValue() {
     // Arrange and Act
-    LongValue actualLongValueResult =
-        (new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.LONG_VALUE))
-            .longValue();
+    LongValue actualLongValueResult = (new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE,
+        BasicValueFactory.LONG_VALUE)).longValue();
 
     // Assert
     assertTrue(actualLongValueResult instanceof UnknownLongValue);
@@ -355,22 +199,13 @@ public class TracingValueDiffblueTest {
   }
 
   /**
-   * Test {@link TracingValue#floatValue()}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownFloatValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#floatValue()}
+   * Method under test: {@link TracingValue#floatValue()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"FloatValue TracingValue.floatValue()"})
-  public void testFloatValue_thenReturnUnknownFloatValue() {
+  public void testFloatValue() {
     // Arrange and Act
-    FloatValue actualFloatValueResult =
-        (new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.FLOAT_VALUE))
-            .floatValue();
+    FloatValue actualFloatValueResult = (new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE,
+        BasicValueFactory.FLOAT_VALUE)).floatValue();
 
     // Assert
     assertTrue(actualFloatValueResult instanceof UnknownFloatValue);
@@ -380,23 +215,13 @@ public class TracingValueDiffblueTest {
   }
 
   /**
-   * Test {@link TracingValue#doubleValue()}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#doubleValue()}
+   * Method under test: {@link TracingValue#doubleValue()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"DoubleValue TracingValue.doubleValue()"})
-  public void testDoubleValue_thenReturnUnknownDoubleValue() {
+  public void testDoubleValue() {
     // Arrange and Act
-    DoubleValue actualDoubleValueResult =
-        (new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.DOUBLE_VALUE))
-            .doubleValue();
+    DoubleValue actualDoubleValueResult = (new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE,
+        BasicValueFactory.DOUBLE_VALUE)).doubleValue();
 
     // Assert
     assertTrue(actualDoubleValueResult instanceof UnknownDoubleValue);
@@ -406,23 +231,13 @@ public class TracingValueDiffblueTest {
   }
 
   /**
-   * Test {@link TracingValue#referenceValue()}.
-   *
-   * <ul>
-   *   <li>Then return {@link UnknownReferenceValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#referenceValue()}
+   * Method under test: {@link TracingValue#referenceValue()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TracingValue.referenceValue()"})
-  public void testReferenceValue_thenReturnUnknownReferenceValue() {
+  public void testReferenceValue() {
     // Arrange and Act
-    ReferenceValue actualReferenceValueResult =
-        (new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.REFERENCE_VALUE))
-            .referenceValue();
+    ReferenceValue actualReferenceValueResult = (new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE,
+        BasicValueFactory.REFERENCE_VALUE)).referenceValue();
 
     // Assert
     assertTrue(actualReferenceValueResult instanceof UnknownReferenceValue);
@@ -439,192 +254,80 @@ public class TracingValueDiffblueTest {
   }
 
   /**
-   * Test {@link TracingValue#instructionOffsetValue()}.
-   *
-   * <ul>
-   *   <li>Then return {@link InstructionOffsetValue#EMPTY_VALUE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#instructionOffsetValue()}
+   * Method under test: {@link TracingValue#instructionOffsetValue()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"InstructionOffsetValue TracingValue.instructionOffsetValue()"})
-  public void testInstructionOffsetValue_thenReturnEmpty_value() {
+  public void testInstructionOffsetValue() {
     // Arrange and Act
-    InstructionOffsetValue actualInstructionOffsetValueResult =
-        (new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE, InstructionOffsetValue.EMPTY_VALUE))
-            .instructionOffsetValue();
+    InstructionOffsetValue actualInstructionOffsetValueResult = (new TracingValue(
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE, InstructionOffsetValue.EMPTY_VALUE)).instructionOffsetValue();
 
     // Assert
     assertSame(actualInstructionOffsetValueResult.EMPTY_VALUE, actualInstructionOffsetValueResult);
   }
 
   /**
-   * Test {@link TracingValue#isSpecific()}.
-   *
-   * <ul>
-   *   <li>Then return {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#isSpecific()}
+   * Method under test: {@link TracingValue#isSpecific()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TracingValue.isSpecific()"})
-  public void testIsSpecific_thenReturnFalse() {
+  public void testIsSpecific() {
     // Arrange, Act and Assert
-    assertFalse(
-        (new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE))
-            .isSpecific());
-  }
-
-  /**
-   * Test {@link TracingValue#isSpecific()}.
-   *
-   * <ul>
-   *   <li>Then return {@code true}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#isSpecific()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TracingValue.isSpecific()"})
-  public void testIsSpecific_thenReturnTrue() {
-    // Arrange, Act and Assert
+    assertFalse((new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE))
+        .isSpecific());
     assertTrue(
-        (new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE, InstructionOffsetValue.EMPTY_VALUE))
-            .isSpecific());
+        (new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, InstructionOffsetValue.EMPTY_VALUE)).isSpecific());
   }
 
   /**
-   * Test {@link TracingValue#isParticular()}.
-   *
-   * <p>Method under test: {@link TracingValue#isParticular()}
+   * Method under test: {@link TracingValue#isParticular()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TracingValue.isParticular()"})
   public void testIsParticular() {
     // Arrange, Act and Assert
+    assertFalse((new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE))
+        .isParticular());
     assertFalse(
-        (new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE))
-            .isParticular());
+        (new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.DOUBLE_VALUE)).isParticular());
+    assertTrue((new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, InstructionOffsetValue.EMPTY_VALUE))
+        .isParticular());
   }
 
   /**
-   * Test {@link TracingValue#isParticular()}.
-   *
-   * <p>Method under test: {@link TracingValue#isParticular()}
+   * Method under test: {@link TracingValue#computationalType()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TracingValue.isParticular()"})
-  public void testIsParticular2() {
+  public void testComputationalType() {
     // Arrange, Act and Assert
-    assertFalse(
-        (new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicValueFactory.DOUBLE_VALUE))
-            .isParticular());
-  }
-
-  /**
-   * Test {@link TracingValue#isParticular()}.
-   *
-   * <ul>
-   *   <li>Then return {@code true}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#isParticular()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TracingValue.isParticular()"})
-  public void testIsParticular_thenReturnTrue() {
-    // Arrange, Act and Assert
-    assertTrue(
-        (new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE, InstructionOffsetValue.EMPTY_VALUE))
-            .isParticular());
-  }
-
-  /**
-   * Test {@link TracingValue#computationalType()}.
-   *
-   * <ul>
-   *   <li>Then return one.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#computationalType()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TracingValue.computationalType()"})
-  public void testComputationalType_thenReturnOne() {
-    // Arrange, Act and Assert
-    assertEquals(
-        1,
-        (new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE))
+    assertEquals(1,
+        (new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .computationalType());
   }
 
   /**
-   * Test {@link TracingValue#internalType()}.
-   *
-   * <ul>
-   *   <li>Then return {@code I}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#internalType()}
+   * Method under test: {@link TracingValue#internalType()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"java.lang.String TracingValue.internalType()"})
-  public void testInternalType_thenReturnI() {
+  public void testInternalType() {
     // Arrange, Act and Assert
-    assertEquals(
-        "I",
-        (new TracingValue(
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE))
+    assertEquals("I",
+        (new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .internalType());
   }
 
   /**
-   * Test {@link TracingValue#equals(Object)}, and {@link TracingValue#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is equal.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
    *   <li>{@link TracingValue#equals(Object)}
    *   <li>{@link TracingValue#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TracingValue.equals(Object)", "int TracingValue.hashCode()"})
   public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
-    TracingValue tracingValue =
-        new TracingValue(
-            BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
-    TracingValue tracingValue2 =
-        new TracingValue(
-            BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+    TracingValue tracingValue = new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+    TracingValue tracingValue2 = new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Act and Assert
     assertEquals(tracingValue, tracingValue2);
@@ -633,28 +336,17 @@ public class TracingValueDiffblueTest {
   }
 
   /**
-   * Test {@link TracingValue#equals(Object)}, and {@link TracingValue#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is same.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
    *   <li>{@link TracingValue#equals(Object)}
    *   <li>{@link TracingValue#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TracingValue.equals(Object)", "int TracingValue.hashCode()"})
   public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
-    TracingValue tracingValue =
-        new TracingValue(
-            BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+    TracingValue tracingValue = new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Act and Assert
     assertEquals(tracingValue, tracingValue);
@@ -663,96 +355,66 @@ public class TracingValueDiffblueTest {
   }
 
   /**
-   * Test {@link TracingValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#equals(Object)}
+   * Method under test: {@link TracingValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TracingValue.equals(Object)", "int TracingValue.hashCode()"})
   public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
-    TracingValue tracingValue =
-        new TracingValue(
-            BasicRangeValueFactory.INTEGER_VALUE_CHAR, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+    TracingValue tracingValue = new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_CHAR,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Act and Assert
-    assertNotEquals(
-        tracingValue,
-        new TracingValue(
-            BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE));
+    assertNotEquals(tracingValue,
+        new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE));
   }
 
   /**
-   * Test {@link TracingValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#equals(Object)}
+   * Method under test: {@link TracingValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TracingValue.equals(Object)", "int TracingValue.hashCode()"})
   public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
-    TracingValue tracingValue =
-        new TracingValue(
-            BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_CHAR);
+    TracingValue tracingValue = new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE,
+        BasicRangeValueFactory.INTEGER_VALUE_CHAR);
 
     // Act and Assert
-    assertNotEquals(
-        tracingValue,
-        new TracingValue(
-            BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE));
+    assertNotEquals(tracingValue,
+        new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE));
   }
 
   /**
-   * Test {@link TracingValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is {@code null}.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#equals(Object)}
+   * Method under test: {@link TracingValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TracingValue.equals(Object)", "int TracingValue.hashCode()"})
   public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
-        new TracingValue(
-            BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE),
-        null);
+        new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE), null);
   }
 
   /**
-   * Test {@link TracingValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is wrong type.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link TracingValue#equals(Object)}
+   * Method under test: {@link TracingValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TracingValue.equals(Object)", "int TracingValue.hashCode()"})
   public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(
-        new TracingValue(
-            BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE),
+        new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE),
         "Different type to TracingValue");
+  }
+
+  /**
+   * Methods under test:
+   * <ul>
+   *   <li>{@link TracingValue#TracingValue(Value, Value)}
+   *   <li>{@link TracingValue#toString()}
+   * </ul>
+   */
+  @Test
+  public void testGettersAndSetters() {
+    // Arrange, Act and Assert
+    assertEquals("Pbb",
+        (new TracingValue(BasicRangeValueFactory.INTEGER_VALUE_BYTE, BasicRangeValueFactory.INTEGER_VALUE_BYTE))
+            .toString());
   }
 }

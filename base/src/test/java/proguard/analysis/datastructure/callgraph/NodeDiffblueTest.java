@@ -5,12 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.List;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.classfile.ClassConstants;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.MethodDescriptor;
@@ -18,13 +14,183 @@ import proguard.classfile.MethodSignature;
 
 public class NodeDiffblueTest {
   /**
-   * Test {@link Node#Node(MethodSignature)}.
-   *
-   * <p>Method under test: {@link Node#Node(MethodSignature)}
+   * Method under test: {@link Node#successorsContain(MethodSignature)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void Node.<init>(MethodSignature)"})
+  public void testSuccessorsContain() {
+    // Arrange, Act and Assert
+    assertTrue((new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE))
+        .successorsContain(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
+    assertFalse((new Node(ClassConstants.CLASSLOADER_LOAD_CLASS_SIGNATURE))
+        .successorsContain(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
+    assertFalse((new Node(ClassConstants.CLASS_FOR_NAME_SIGNATURE))
+        .successorsContain(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
+    assertFalse((new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE)).successorsContain(null));
+    assertFalse((new Node(ClassConstants.CLASSLOADER_LOAD_CLASS_SIGNATURE))
+        .successorsContain(ClassConstants.CLASSLOADER_LOAD_CLASS_SIGNATURE2));
+  }
+
+  /**
+   * Method under test: {@link Node#successorsContain(MethodSignature)}
+   */
+  @Test
+  public void testSuccessorsContain2() {
+    // Arrange
+    Node node = new Node(MethodSignature.UNKNOWN);
+
+    // Act and Assert
+    assertTrue(node.successorsContain(new MethodSignature(new LibraryClass())));
+  }
+
+  /**
+   * Method under test: {@link Node#predecessorsContain(MethodSignature)}
+   */
+  @Test
+  public void testPredecessorsContain() {
+    // Arrange, Act and Assert
+    assertTrue((new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE))
+        .predecessorsContain(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
+    assertFalse((new Node(ClassConstants.CLASSLOADER_LOAD_CLASS_SIGNATURE))
+        .predecessorsContain(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
+    assertFalse((new Node(ClassConstants.CLASS_FOR_NAME_SIGNATURE))
+        .predecessorsContain(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
+    assertFalse((new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE)).predecessorsContain(null));
+    assertFalse((new Node(ClassConstants.CLASSLOADER_LOAD_CLASS_SIGNATURE))
+        .predecessorsContain(ClassConstants.CLASSLOADER_LOAD_CLASS_SIGNATURE2));
+  }
+
+  /**
+   * Method under test: {@link Node#predecessorsContain(MethodSignature)}
+   */
+  @Test
+  public void testPredecessorsContain2() {
+    // Arrange
+    Node node = new Node(MethodSignature.UNKNOWN);
+
+    // Act and Assert
+    assertTrue(node.predecessorsContain(new MethodSignature(new LibraryClass())));
+  }
+
+  /**
+   * Method under test: {@link Node#getSuccessorDepth()}
+   */
+  @Test
+  public void testGetSuccessorDepth() {
+    // Arrange, Act and Assert
+    assertEquals(0, (new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE)).getSuccessorDepth());
+  }
+
+  /**
+   * Method under test: {@link Node#getPredecessorDepth()}
+   */
+  @Test
+  public void testGetPredecessorDepth() {
+    // Arrange, Act and Assert
+    assertEquals(0, (new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE)).getPredecessorDepth());
+  }
+
+  /**
+   * Method under test: {@link Node#getAllPredecessors()}
+   */
+  @Test
+  public void testGetAllPredecessors() {
+    // Arrange, Act and Assert
+    assertEquals(1, (new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE)).getAllPredecessors().size());
+    assertEquals(1, (new Node(null)).getAllPredecessors().size());
+  }
+
+  /**
+   * Method under test: {@link Node#getFurthestPredecessors()}
+   */
+  @Test
+  public void testGetFurthestPredecessors() {
+    // Arrange, Act and Assert
+    assertEquals(1,
+        (new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE)).getFurthestPredecessors().size());
+    assertEquals(1, (new Node(null)).getFurthestPredecessors().size());
+  }
+
+  /**
+   * Method under test: {@link Node#getFurthestSuccessors()}
+   */
+  @Test
+  public void testGetFurthestSuccessors() {
+    // Arrange, Act and Assert
+    assertEquals(1, (new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE)).getFurthestSuccessors().size());
+    assertEquals(1, (new Node(null)).getFurthestSuccessors().size());
+  }
+
+  /**
+   * Methods under test:
+   * <ul>
+   *   <li>{@link Node#equals(Object)}
+   *   <li>{@link Node#hashCode()}
+   * </ul>
+   */
+  @Test
+  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
+    // Arrange
+    Node node = new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE);
+    Node node2 = new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE);
+
+    // Act and Assert
+    assertEquals(node, node2);
+    int expectedHashCodeResult = node.hashCode();
+    assertEquals(expectedHashCodeResult, node2.hashCode());
+  }
+
+  /**
+   * Methods under test:
+   * <ul>
+   *   <li>{@link Node#equals(Object)}
+   *   <li>{@link Node#hashCode()}
+   * </ul>
+   */
+  @Test
+  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
+    // Arrange
+    Node node = new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE);
+
+    // Act and Assert
+    assertEquals(node, node);
+    int expectedHashCodeResult = node.hashCode();
+    assertEquals(expectedHashCodeResult, node.hashCode());
+  }
+
+  /**
+   * Method under test: {@link Node#equals(Object)}
+   */
+  @Test
+  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
+    // Arrange
+    Node node = new Node(ClassConstants.CLASSLOADER_LOAD_CLASS_SIGNATURE);
+
+    // Act and Assert
+    assertNotEquals(node, new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
+  }
+
+  /**
+   * Method under test: {@link Node#equals(Object)}
+   */
+  @Test
+  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
+    // Arrange, Act and Assert
+    assertNotEquals(new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE), null);
+  }
+
+  /**
+   * Method under test: {@link Node#equals(Object)}
+   */
+  @Test
+  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
+    // Arrange, Act and Assert
+    assertNotEquals(new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE), "Different type to Node");
+  }
+
+  /**
+   * Method under test: {@link Node#Node(MethodSignature)}
+   */
+  @Test
   public void testNewNode() {
     // Arrange and Act
     Node actualNode = new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE);
@@ -35,8 +201,7 @@ public class NodeDiffblueTest {
     MethodDescriptor descriptor = methodSignature.getDescriptor();
     assertEquals("Class", descriptor.getPrettyReturnType());
     assertEquals("Ljava/lang/Class;", descriptor.getReturnType());
-    assertEquals(
-        "Ljava/lang/ClassLoader;findLoadedClass(Ljava/lang/String;)Ljava/lang/Class;",
+    assertEquals("Ljava/lang/ClassLoader;findLoadedClass(Ljava/lang/String;)Ljava/lang/Class;",
         methodSignature.getFqn());
     List<String> argumentTypes = descriptor.getArgumentTypes();
     assertEquals(1, argumentTypes.size());
@@ -54,486 +219,5 @@ public class NodeDiffblueTest {
     assertTrue(actualNode.outgoingCallLocations.isEmpty());
     assertTrue(actualNode.predecessors.isEmpty());
     assertTrue(actualNode.successors.isEmpty());
-  }
-
-  /**
-   * Test {@link Node#successorsContain(MethodSignature)}.
-   *
-   * <ul>
-   *   <li>Given {@link Node#Node(MethodSignature)} with signature is {@link
-   *       ClassConstants#CLASS_FOR_NAME_SIGNATURE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Node#successorsContain(MethodSignature)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Node.successorsContain(MethodSignature)"})
-  public void testSuccessorsContain_givenNodeWithSignatureIsClass_for_name_signature() {
-    // Arrange, Act and Assert
-    assertFalse(
-        (new Node(ClassConstants.CLASS_FOR_NAME_SIGNATURE))
-            .successorsContain(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
-  }
-
-  /**
-   * Test {@link Node#successorsContain(MethodSignature)}.
-   *
-   * <ul>
-   *   <li>Given {@link Node#Node(MethodSignature)} with signature is {@link
-   *       ClassConstants#CLASSLOADER_LOAD_CLASS_SIGNATURE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Node#successorsContain(MethodSignature)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Node.successorsContain(MethodSignature)"})
-  public void testSuccessorsContain_givenNodeWithSignatureIsClassloader_load_class_signature() {
-    // Arrange, Act and Assert
-    assertFalse(
-        (new Node(ClassConstants.CLASSLOADER_LOAD_CLASS_SIGNATURE))
-            .successorsContain(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
-  }
-
-  /**
-   * Test {@link Node#successorsContain(MethodSignature)}.
-   *
-   * <ul>
-   *   <li>Given {@link Node#Node(MethodSignature)} with signature is {@link
-   *       MethodSignature#UNKNOWN}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Node#successorsContain(MethodSignature)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Node.successorsContain(MethodSignature)"})
-  public void testSuccessorsContain_givenNodeWithSignatureIsUnknown() {
-    // Arrange
-    Node node = new Node(MethodSignature.UNKNOWN);
-
-    // Act and Assert
-    assertTrue(node.successorsContain(new MethodSignature(new LibraryClass())));
-  }
-
-  /**
-   * Test {@link Node#successorsContain(MethodSignature)}.
-   *
-   * <ul>
-   *   <li>Then return {@code true}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Node#successorsContain(MethodSignature)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Node.successorsContain(MethodSignature)"})
-  public void testSuccessorsContain_thenReturnTrue() {
-    // Arrange, Act and Assert
-    assertTrue(
-        (new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE))
-            .successorsContain(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
-  }
-
-  /**
-   * Test {@link Node#successorsContain(MethodSignature)}.
-   *
-   * <ul>
-   *   <li>When {@link ClassConstants#CLASSLOADER_LOAD_CLASS_SIGNATURE2}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Node#successorsContain(MethodSignature)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Node.successorsContain(MethodSignature)"})
-  public void testSuccessorsContain_whenClassloader_load_class_signature2() {
-    // Arrange, Act and Assert
-    assertFalse(
-        (new Node(ClassConstants.CLASSLOADER_LOAD_CLASS_SIGNATURE))
-            .successorsContain(ClassConstants.CLASSLOADER_LOAD_CLASS_SIGNATURE2));
-  }
-
-  /**
-   * Test {@link Node#successorsContain(MethodSignature)}.
-   *
-   * <ul>
-   *   <li>When {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Node#successorsContain(MethodSignature)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Node.successorsContain(MethodSignature)"})
-  public void testSuccessorsContain_whenNull() {
-    // Arrange, Act and Assert
-    assertFalse(
-        (new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE)).successorsContain(null));
-  }
-
-  /**
-   * Test {@link Node#predecessorsContain(MethodSignature)}.
-   *
-   * <ul>
-   *   <li>Given {@link Node#Node(MethodSignature)} with signature is {@link
-   *       ClassConstants#CLASS_FOR_NAME_SIGNATURE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Node#predecessorsContain(MethodSignature)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Node.predecessorsContain(MethodSignature)"})
-  public void testPredecessorsContain_givenNodeWithSignatureIsClass_for_name_signature() {
-    // Arrange, Act and Assert
-    assertFalse(
-        (new Node(ClassConstants.CLASS_FOR_NAME_SIGNATURE))
-            .predecessorsContain(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
-  }
-
-  /**
-   * Test {@link Node#predecessorsContain(MethodSignature)}.
-   *
-   * <ul>
-   *   <li>Given {@link Node#Node(MethodSignature)} with signature is {@link
-   *       ClassConstants#CLASSLOADER_LOAD_CLASS_SIGNATURE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Node#predecessorsContain(MethodSignature)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Node.predecessorsContain(MethodSignature)"})
-  public void testPredecessorsContain_givenNodeWithSignatureIsClassloader_load_class_signature() {
-    // Arrange, Act and Assert
-    assertFalse(
-        (new Node(ClassConstants.CLASSLOADER_LOAD_CLASS_SIGNATURE))
-            .predecessorsContain(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
-  }
-
-  /**
-   * Test {@link Node#predecessorsContain(MethodSignature)}.
-   *
-   * <ul>
-   *   <li>Given {@link Node#Node(MethodSignature)} with signature is {@link
-   *       MethodSignature#UNKNOWN}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Node#predecessorsContain(MethodSignature)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Node.predecessorsContain(MethodSignature)"})
-  public void testPredecessorsContain_givenNodeWithSignatureIsUnknown() {
-    // Arrange
-    Node node = new Node(MethodSignature.UNKNOWN);
-
-    // Act and Assert
-    assertTrue(node.predecessorsContain(new MethodSignature(new LibraryClass())));
-  }
-
-  /**
-   * Test {@link Node#predecessorsContain(MethodSignature)}.
-   *
-   * <ul>
-   *   <li>Then return {@code true}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Node#predecessorsContain(MethodSignature)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Node.predecessorsContain(MethodSignature)"})
-  public void testPredecessorsContain_thenReturnTrue() {
-    // Arrange, Act and Assert
-    assertTrue(
-        (new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE))
-            .predecessorsContain(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
-  }
-
-  /**
-   * Test {@link Node#predecessorsContain(MethodSignature)}.
-   *
-   * <ul>
-   *   <li>When {@link ClassConstants#CLASSLOADER_LOAD_CLASS_SIGNATURE2}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Node#predecessorsContain(MethodSignature)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Node.predecessorsContain(MethodSignature)"})
-  public void testPredecessorsContain_whenClassloader_load_class_signature2() {
-    // Arrange, Act and Assert
-    assertFalse(
-        (new Node(ClassConstants.CLASSLOADER_LOAD_CLASS_SIGNATURE))
-            .predecessorsContain(ClassConstants.CLASSLOADER_LOAD_CLASS_SIGNATURE2));
-  }
-
-  /**
-   * Test {@link Node#predecessorsContain(MethodSignature)}.
-   *
-   * <ul>
-   *   <li>When {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Node#predecessorsContain(MethodSignature)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Node.predecessorsContain(MethodSignature)"})
-  public void testPredecessorsContain_whenNull() {
-    // Arrange, Act and Assert
-    assertFalse(
-        (new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE))
-            .predecessorsContain(null));
-  }
-
-  /**
-   * Test {@link Node#getSuccessorDepth()}.
-   *
-   * <p>Method under test: {@link Node#getSuccessorDepth()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int Node.getSuccessorDepth()"})
-  public void testGetSuccessorDepth() {
-    // Arrange, Act and Assert
-    assertEquals(
-        0, (new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE)).getSuccessorDepth());
-  }
-
-  /**
-   * Test {@link Node#getPredecessorDepth()}.
-   *
-   * <p>Method under test: {@link Node#getPredecessorDepth()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int Node.getPredecessorDepth()"})
-  public void testGetPredecessorDepth() {
-    // Arrange, Act and Assert
-    assertEquals(
-        0,
-        (new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE)).getPredecessorDepth());
-  }
-
-  /**
-   * Test {@link Node#getAllPredecessors()}.
-   *
-   * <p>Method under test: {@link Node#getAllPredecessors()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"java.util.Set Node.getAllPredecessors()"})
-  public void testGetAllPredecessors() {
-    // Arrange, Act and Assert
-    assertEquals(
-        1,
-        (new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE))
-            .getAllPredecessors()
-            .size());
-  }
-
-  /**
-   * Test {@link Node#getAllPredecessors()}.
-   *
-   * <ul>
-   *   <li>Given {@link Node#Node(MethodSignature)} with signature is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Node#getAllPredecessors()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"java.util.Set Node.getAllPredecessors()"})
-  public void testGetAllPredecessors_givenNodeWithSignatureIsNull() {
-    // Arrange, Act and Assert
-    assertEquals(1, (new Node(null)).getAllPredecessors().size());
-  }
-
-  /**
-   * Test {@link Node#getFurthestPredecessors()}.
-   *
-   * <p>Method under test: {@link Node#getFurthestPredecessors()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"java.util.Set Node.getFurthestPredecessors()"})
-  public void testGetFurthestPredecessors() {
-    // Arrange, Act and Assert
-    assertEquals(
-        1,
-        (new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE))
-            .getFurthestPredecessors()
-            .size());
-  }
-
-  /**
-   * Test {@link Node#getFurthestPredecessors()}.
-   *
-   * <ul>
-   *   <li>Given {@link Node#Node(MethodSignature)} with signature is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Node#getFurthestPredecessors()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"java.util.Set Node.getFurthestPredecessors()"})
-  public void testGetFurthestPredecessors_givenNodeWithSignatureIsNull() {
-    // Arrange, Act and Assert
-    assertEquals(1, (new Node(null)).getFurthestPredecessors().size());
-  }
-
-  /**
-   * Test {@link Node#getFurthestSuccessors()}.
-   *
-   * <p>Method under test: {@link Node#getFurthestSuccessors()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"java.util.Set Node.getFurthestSuccessors()"})
-  public void testGetFurthestSuccessors() {
-    // Arrange, Act and Assert
-    assertEquals(
-        1,
-        (new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE))
-            .getFurthestSuccessors()
-            .size());
-  }
-
-  /**
-   * Test {@link Node#getFurthestSuccessors()}.
-   *
-   * <ul>
-   *   <li>Given {@link Node#Node(MethodSignature)} with signature is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Node#getFurthestSuccessors()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"java.util.Set Node.getFurthestSuccessors()"})
-  public void testGetFurthestSuccessors_givenNodeWithSignatureIsNull() {
-    // Arrange, Act and Assert
-    assertEquals(1, (new Node(null)).getFurthestSuccessors().size());
-  }
-
-  /**
-   * Test {@link Node#equals(Object)}, and {@link Node#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is equal.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link Node#equals(Object)}
-   *   <li>{@link Node#hashCode()}
-   * </ul>
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Node.equals(Object)", "int Node.hashCode()"})
-  public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
-    // Arrange
-    Node node = new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE);
-    Node node2 = new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE);
-
-    // Act and Assert
-    assertEquals(node, node2);
-    int expectedHashCodeResult = node.hashCode();
-    assertEquals(expectedHashCodeResult, node2.hashCode());
-  }
-
-  /**
-   * Test {@link Node#equals(Object)}, and {@link Node#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is same.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link Node#equals(Object)}
-   *   <li>{@link Node#hashCode()}
-   * </ul>
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Node.equals(Object)", "int Node.hashCode()"})
-  public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
-    // Arrange
-    Node node = new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE);
-
-    // Act and Assert
-    assertEquals(node, node);
-    int expectedHashCodeResult = node.hashCode();
-    assertEquals(expectedHashCodeResult, node.hashCode());
-  }
-
-  /**
-   * Test {@link Node#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link Node#equals(Object)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Node.equals(Object)", "int Node.hashCode()"})
-  public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
-    // Arrange
-    Node node = new Node(ClassConstants.CLASSLOADER_LOAD_CLASS_SIGNATURE);
-
-    // Act and Assert
-    assertNotEquals(node, new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE));
-  }
-
-  /**
-   * Test {@link Node#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is {@code null}.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link Node#equals(Object)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Node.equals(Object)", "int Node.hashCode()"})
-  public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
-    // Arrange, Act and Assert
-    assertNotEquals(new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE), null);
-  }
-
-  /**
-   * Test {@link Node#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is wrong type.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link Node#equals(Object)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean Node.equals(Object)", "int Node.hashCode()"})
-  public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
-    // Arrange, Act and Assert
-    assertNotEquals(
-        new Node(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE), "Different type to Node");
   }
 }

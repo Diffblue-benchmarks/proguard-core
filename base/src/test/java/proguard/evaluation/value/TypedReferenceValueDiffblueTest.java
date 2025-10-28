@@ -6,11 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.evaluation.ParticularReferenceValueFactory;
@@ -18,153 +14,69 @@ import proguard.evaluation.value.object.AnalyzedObject;
 
 public class TypedReferenceValueDiffblueTest {
   /**
-   * Test getters and setters.
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link TypedReferenceValue#TypedReferenceValue(String, Clazz, boolean, boolean)}
-   *   <li>{@link TypedReferenceValue#getReferencedClass()}
-   *   <li>{@link TypedReferenceValue#getType()}
-   *   <li>{@link TypedReferenceValue#mayBeExtension()}
-   * </ul>
+   * Method under test: {@link TypedReferenceValue#isNull()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "void TypedReferenceValue.<init>(String, Clazz, boolean, boolean)",
-    "Clazz TypedReferenceValue.getReferencedClass()",
-    "String TypedReferenceValue.getType()",
-    "boolean TypedReferenceValue.mayBeExtension()"
-  })
-  public void testGettersAndSetters() {
-    // Arrange
-    LibraryClass referencedClass = new LibraryClass();
-
-    // Act
-    TypedReferenceValue actualTypedReferenceValue =
-        new TypedReferenceValue("Type", referencedClass, true, true);
-    Clazz actualReferencedClass = actualTypedReferenceValue.getReferencedClass();
-    String actualType = actualTypedReferenceValue.getType();
-
-    // Assert
-    assertEquals("Type", actualType);
-    assertTrue(actualTypedReferenceValue.mayBeExtension());
-    assertSame(referencedClass, actualReferencedClass);
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#isNull()}.
-   *
-   * <ul>
-   *   <li>Then return {@link Value#NEVER}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#isNull()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.isNull()"})
-  public void testIsNull_thenReturnNever() {
-    // Arrange, Act and Assert
-    assertEquals(
-        Value.NEVER, (new TypedReferenceValue("Type", new LibraryClass(), true, false)).isNull());
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#isNull()}.
-   *
-   * <ul>
-   *   <li>Then return one.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#isNull()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.isNull()"})
-  public void testIsNull_thenReturnOne() {
-    // Arrange, Act and Assert
-    assertEquals(1, (new TypedReferenceValue(null, new LibraryClass(), true, true)).isNull());
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#isNull()}.
-   *
-   * <ul>
-   *   <li>Then return zero.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#isNull()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.isNull()"})
-  public void testIsNull_thenReturnZero() {
+  public void testIsNull() {
     // Arrange, Act and Assert
     assertEquals(0, (new TypedReferenceValue("Type", new LibraryClass(), true, true)).isNull());
+    assertEquals(1, (new TypedReferenceValue(null, new LibraryClass(), true, true)).isNull());
+    assertEquals(Value.NEVER, (new TypedReferenceValue("Type", new LibraryClass(), true, false)).isNull());
   }
 
   /**
-   * Test {@link TypedReferenceValue#instanceOf(String, Clazz)}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#instanceOf(String, Clazz)}
+   * Method under test: {@link TypedReferenceValue#instanceOf(String, Clazz)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.instanceOf(String, Clazz)"})
   public void testInstanceOf() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Other Type", new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
+
+    // Act and Assert
+    assertEquals(Value.NEVER, typedReferenceValue.instanceOf("Other Type", new LibraryClass()));
+  }
+
+  /**
+   * Method under test: {@link TypedReferenceValue#instanceOf(String, Clazz)}
+   */
+  @Test
+  public void testInstanceOf2() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Other Type", new LibraryClass(), true, true);
 
     // Act and Assert
     assertEquals(0, typedReferenceValue.instanceOf("Other Type", new LibraryClass()));
   }
 
   /**
-   * Test {@link TypedReferenceValue#instanceOf(String, Clazz)}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#instanceOf(String, Clazz)}
+   * Method under test: {@link TypedReferenceValue#instanceOf(String, Clazz)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.instanceOf(String, Clazz)"})
-  public void testInstanceOf2() {
-    // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue(null, new LibraryClass(), true, true);
-
-    // Act and Assert
-    assertEquals(Value.NEVER, typedReferenceValue.instanceOf("Other Type", new LibraryClass()));
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#instanceOf(String, Clazz)}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#instanceOf(String, Clazz)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.instanceOf(String, Clazz)"})
   public void testInstanceOf3() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("", new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue(null, new LibraryClass(), true, true);
 
     // Act and Assert
     assertEquals(Value.NEVER, typedReferenceValue.instanceOf("Other Type", new LibraryClass()));
   }
 
   /**
-   * Test {@link TypedReferenceValue#instanceOf(String, Clazz)}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#instanceOf(String, Clazz)}
+   * Method under test: {@link TypedReferenceValue#instanceOf(String, Clazz)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.instanceOf(String, Clazz)"})
   public void testInstanceOf4() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("", new LibraryClass(), true, true);
+
+    // Act and Assert
+    assertEquals(Value.NEVER, typedReferenceValue.instanceOf("Other Type", new LibraryClass()));
+  }
+
+  /**
+   * Method under test: {@link TypedReferenceValue#instanceOf(String, Clazz)}
+   */
+  @Test
+  public void testInstanceOf5() {
     // Arrange
     TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", null, true, true);
 
@@ -173,458 +85,338 @@ public class TypedReferenceValueDiffblueTest {
   }
 
   /**
-   * Test {@link TypedReferenceValue#instanceOf(String, Clazz)}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#instanceOf(String, Clazz)}
+   * Method under test: {@link TypedReferenceValue#instanceOf(String, Clazz)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.instanceOf(String, Clazz)"})
-  public void testInstanceOf5() {
+  public void testInstanceOf6() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(Short.SIZE, "Type", "Type"), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type",
+        new LibraryClass(Short.SIZE, "Type", "Type"), true, true);
 
     // Act and Assert
     assertEquals(Value.NEVER, typedReferenceValue.instanceOf("Other Type", new LibraryClass()));
   }
 
   /**
-   * Test {@link TypedReferenceValue#instanceOf(String, Clazz)}.
-   *
-   * <ul>
-   *   <li>Then return {@link Value#NEVER}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#instanceOf(String, Clazz)}
+   * Method under test: {@link TypedReferenceValue#instanceOf(String, Clazz)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.instanceOf(String, Clazz)"})
-  public void testInstanceOf_thenReturnNever() {
+  public void testInstanceOf7() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, true);
-
-    // Act and Assert
-    assertEquals(Value.NEVER, typedReferenceValue.instanceOf("Other Type", new LibraryClass()));
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#instanceOf(String, Clazz)}.
-   *
-   * <ul>
-   *   <li>Then return one.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#instanceOf(String, Clazz)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.instanceOf(String, Clazz)"})
-  public void testInstanceOf_thenReturnOne() {
-    // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Other Type", new LibraryClass(), true, false);
-
-    // Act and Assert
-    assertEquals(1, typedReferenceValue.instanceOf("Other Type", new LibraryClass()));
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#instanceOf(String, Clazz)}.
-   *
-   * <ul>
-   *   <li>When {@code Ljava/lang/Object;}.
-   *   <li>Then return zero.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#instanceOf(String, Clazz)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.instanceOf(String, Clazz)"})
-  public void testInstanceOf_whenLjavaLangObject_thenReturnZero() {
-    // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
 
     // Act and Assert
     assertEquals(0, typedReferenceValue.instanceOf("Ljava/lang/Object;", new LibraryClass()));
   }
 
   /**
-   * Test {@link TypedReferenceValue#instanceOf(String, Clazz)}.
-   *
-   * <ul>
-   *   <li>When {@code null}.
-   *   <li>Then return zero.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#instanceOf(String, Clazz)}
+   * Method under test: {@link TypedReferenceValue#instanceOf(String, Clazz)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.instanceOf(String, Clazz)"})
-  public void testInstanceOf_whenNull_thenReturnZero() {
+  public void testInstanceOf8() {
     // Arrange, Act and Assert
-    assertEquals(
-        0,
-        (new TypedReferenceValue("Type", new LibraryClass(), true, true))
-            .instanceOf("Other Type", null));
+    assertEquals(0, (new TypedReferenceValue("Type", new LibraryClass(), true, true)).instanceOf("Other Type", null));
   }
 
   /**
-   * Test {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
+   * Method under test: {@link TypedReferenceValue#instanceOf(String, Clazz)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue TypedReferenceValue.cast(String, Clazz, ValueFactory, boolean)"
-  })
+  public void testInstanceOf9() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Other Type", new LibraryClass(), true, false);
+
+    // Act and Assert
+    assertEquals(1, typedReferenceValue.instanceOf("Other Type", new LibraryClass()));
+  }
+
+  /**
+   * Method under test:
+   * {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
+   */
+  @Test
   public void testCast() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
     LibraryClass referencedClass = new LibraryClass();
 
     // Act and Assert
-    assertSame(
-        typedReferenceValue,
-        typedReferenceValue.cast(
-            "Type", referencedClass, new ParticularReferenceValueFactory(), true));
+    assertSame(typedReferenceValue,
+        typedReferenceValue.cast("Type", referencedClass, new ParticularReferenceValueFactory(), true));
   }
 
   /**
-   * Test {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
+   * Method under test:
+   * {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue TypedReferenceValue.cast(String, Clazz, ValueFactory, boolean)"
-  })
   public void testCast2() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue(null, new LibraryClass(), true, true);
-    LibraryClass referencedClass = new LibraryClass();
-
-    // Act and Assert
-    assertSame(
-        typedReferenceValue,
-        typedReferenceValue.cast(
-            "Type", referencedClass, new ParticularReferenceValueFactory(), false));
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}.
-   *
-   * <ul>
-   *   <li>Then return {@link IdentifiedReferenceValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue TypedReferenceValue.cast(String, Clazz, ValueFactory, boolean)"
-  })
-  public void testCast_thenReturnIdentifiedReferenceValue() {
-    // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("", new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue(null, new LibraryClass(), true, true);
     LibraryClass referencedClass = new LibraryClass();
 
     // Act
-    ReferenceValue actualCastResult =
-        typedReferenceValue.cast(
-            "Type", referencedClass, new ParticularReferenceValueFactory(), true);
+    ReferenceValue actualCastResult = typedReferenceValue.cast("Type", referencedClass,
+        new ParticularReferenceValueFactory(), true);
 
     // Assert
-    assertTrue(actualCastResult.getReferencedClass() instanceof LibraryClass);
-    assertTrue(actualCastResult instanceof IdentifiedReferenceValue);
-    assertEquals(0, actualCastResult.isNull());
-    assertFalse(actualCastResult.isParticular());
-    assertTrue(actualCastResult.isSpecific());
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}.
-   *
-   * <ul>
-   *   <li>Then return {@link IdentifiedReferenceValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue TypedReferenceValue.cast(String, Clazz, ValueFactory, boolean)"
-  })
-  public void testCast_thenReturnIdentifiedReferenceValue2() {
-    // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("", new LibraryClass(), true, true);
-    LibraryClass referencedClass = new LibraryClass();
-
-    // Act
-    ReferenceValue actualCastResult =
-        typedReferenceValue.cast(
-            "Type", referencedClass, new ParticularReferenceValueFactory(), false);
-
-    // Assert
-    assertTrue(actualCastResult.getReferencedClass() instanceof LibraryClass);
-    assertTrue(actualCastResult instanceof IdentifiedReferenceValue);
-    assertEquals(0, actualCastResult.isNull());
-    assertFalse(actualCastResult.isParticular());
-    assertTrue(actualCastResult.isSpecific());
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}.
-   *
-   * <ul>
-   *   <li>Then return {@link ParticularReferenceValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue TypedReferenceValue.cast(String, Clazz, ValueFactory, boolean)"
-  })
-  public void testCast_thenReturnParticularReferenceValue() {
-    // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue(null, new LibraryClass(), true, true);
-    LibraryClass referencedClass = new LibraryClass();
-
-    // Act
-    ReferenceValue actualCastResult =
-        typedReferenceValue.cast(
-            "Type", referencedClass, new ParticularReferenceValueFactory(), true);
-
-    // Assert
-    assertTrue(actualCastResult.getReferencedClass() instanceof LibraryClass);
     assertTrue(actualCastResult instanceof ParticularReferenceValue);
+    assertEquals("Type", actualCastResult.getType());
     AnalyzedObject value = actualCastResult.getValue();
     assertNull(value.getPreciseValue());
     assertNull(value.getModeledOrNullValue());
     assertEquals(1, actualCastResult.isNull());
+    assertFalse(actualCastResult.isCategory2());
+    assertFalse(actualCastResult.mayBeExtension());
+    assertFalse(((ParticularReferenceValue) actualCastResult).mayBeExtension);
     assertTrue(actualCastResult.isParticular());
+    assertTrue(actualCastResult.isSpecific());
+    assertTrue(((ParticularReferenceValue) actualCastResult).mayBeNull);
+    assertEquals(Value.NEVER, actualCastResult.isNotNull());
+    assertSame(referencedClass, actualCastResult.getReferencedClass());
   }
 
   /**
-   * Test {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}.
-   *
-   * <ul>
-   *   <li>Then return {@link PrimitiveTypedReferenceValueFactory} (default constructor) {@link
-   *       BasicValueFactory#REFERENCE_VALUE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
+   * Method under test:
+   * {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue TypedReferenceValue.cast(String, Clazz, ValueFactory, boolean)"
-  })
-  public void testCast_thenReturnPrimitiveTypedReferenceValueFactoryReference_value() {
+  public void testCast3() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue(null, new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("", new LibraryClass(), true, true);
     LibraryClass referencedClass = new LibraryClass();
-    PrimitiveTypedReferenceValueFactory valueFactory = new PrimitiveTypedReferenceValueFactory();
 
-    // Act and Assert
-    assertSame(
-        valueFactory.REFERENCE_VALUE,
-        typedReferenceValue.cast("Type", referencedClass, valueFactory, true));
+    // Act
+    ReferenceValue actualCastResult = typedReferenceValue.cast("Type", referencedClass,
+        new ParticularReferenceValueFactory(), true);
+
+    // Assert
+    assertTrue(actualCastResult instanceof IdentifiedReferenceValue);
+    assertEquals("Type", actualCastResult.getType());
+    AnalyzedObject value = actualCastResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(0, actualCastResult.isNotNull());
+    assertEquals(0, actualCastResult.isNull());
+    assertFalse(actualCastResult.isCategory2());
+    assertFalse(actualCastResult.isParticular());
+    assertTrue(actualCastResult.mayBeExtension());
+    assertTrue(actualCastResult.isSpecific());
+    assertTrue(((IdentifiedReferenceValue) actualCastResult).mayBeExtension);
+    assertTrue(((IdentifiedReferenceValue) actualCastResult).mayBeNull);
+    assertSame(referencedClass, actualCastResult.getReferencedClass());
   }
 
   /**
-   * Test {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}.
-   *
-   * <ul>
-   *   <li>When {@link BasicValueFactory} (default constructor).
-   *   <li>Then return {@link BasicValueFactory} (default constructor) {@link
-   *       BasicValueFactory#REFERENCE_VALUE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
+   * Method under test:
+   * {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue TypedReferenceValue.cast(String, Clazz, ValueFactory, boolean)"
-  })
-  public void testCast_whenBasicValueFactory_thenReturnBasicValueFactoryReference_value() {
+  public void testCast4() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue(null, new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue(null, new LibraryClass(), true, true);
     LibraryClass referencedClass = new LibraryClass();
     BasicValueFactory valueFactory = new BasicValueFactory();
 
     // Act and Assert
-    assertSame(
-        valueFactory.REFERENCE_VALUE,
-        typedReferenceValue.cast("Type", referencedClass, valueFactory, true));
+    assertSame(valueFactory.REFERENCE_VALUE, typedReferenceValue.cast("Type", referencedClass, valueFactory, true));
   }
 
   /**
-   * Test {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}.
-   *
-   * <ul>
-   *   <li>When {@code Ljava/lang/Object;}.
-   *   <li>Then return Type is {@code Ljava/lang/Object;}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
+   * Method under test:
+   * {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue TypedReferenceValue.cast(String, Clazz, ValueFactory, boolean)"
-  })
-  public void testCast_whenLjavaLangObject_thenReturnTypeIsLjavaLangObject() {
+  public void testCast5() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue(null, new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue(null, new LibraryClass(), true, true);
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    ReferenceValue actualCastResult = typedReferenceValue.cast("Type", referencedClass,
+        new MultiTypedReferenceValueFactory(), true);
+
+    // Assert
+    assertTrue(actualCastResult instanceof MultiTypedReferenceValue);
+    assertEquals("Type", actualCastResult.getType());
+    TypedReferenceValue generalizedType = ((MultiTypedReferenceValue) actualCastResult).getGeneralizedType();
+    assertEquals("Type", generalizedType.getType());
+    AnalyzedObject value = actualCastResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(0, generalizedType.isNotNull());
+    assertEquals(0, actualCastResult.isNotNull());
+    assertEquals(0, generalizedType.isNull());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCastResult).getPotentialTypes().size());
+    assertFalse(generalizedType.isCategory2());
+    assertFalse(actualCastResult.isCategory2());
+    assertFalse(generalizedType.isParticular());
+    assertFalse(actualCastResult.isParticular());
+    assertFalse(generalizedType.isSpecific());
+    assertFalse(actualCastResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCastResult).mayBeUnknown);
+    assertTrue(generalizedType.mayBeExtension());
+    assertTrue(generalizedType.mayBeExtension);
+    assertTrue(generalizedType.mayBeNull);
+    assertSame(referencedClass, actualCastResult.getReferencedClass());
+    assertSame(referencedClass, generalizedType.getReferencedClass());
+    assertSame(value, generalizedType.getValue());
+  }
+
+  /**
+   * Method under test:
+   * {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
+   */
+  @Test
+  public void testCast6() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue(null, new LibraryClass(), true, true);
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act and Assert
+    assertSame(typedReferenceValue,
+        typedReferenceValue.cast("Type", referencedClass, new ParticularReferenceValueFactory(), false));
+  }
+
+  /**
+   * Method under test:
+   * {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
+   */
+  @Test
+  public void testCast7() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("", new LibraryClass(), true, true);
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    ReferenceValue actualCastResult = typedReferenceValue.cast("Type", referencedClass,
+        new ParticularReferenceValueFactory(), false);
+
+    // Assert
+    assertTrue(actualCastResult instanceof IdentifiedReferenceValue);
+    assertEquals("Type", actualCastResult.getType());
+    AnalyzedObject value = actualCastResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(0, actualCastResult.isNotNull());
+    assertEquals(0, actualCastResult.isNull());
+    assertFalse(actualCastResult.isCategory2());
+    assertFalse(actualCastResult.isParticular());
+    assertTrue(actualCastResult.mayBeExtension());
+    assertTrue(actualCastResult.isSpecific());
+    assertTrue(((IdentifiedReferenceValue) actualCastResult).mayBeExtension);
+    assertTrue(((IdentifiedReferenceValue) actualCastResult).mayBeNull);
+    assertSame(referencedClass, actualCastResult.getReferencedClass());
+  }
+
+  /**
+   * Method under test:
+   * {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
+   */
+  @Test
+  public void testCast8() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
     LibraryClass referencedClass = new LibraryClass();
     MultiTypedReferenceValueFactory valueFactory = new MultiTypedReferenceValueFactory();
 
     // Act
-    ReferenceValue actualCastResult =
-        typedReferenceValue.cast("Ljava/lang/Object;", referencedClass, valueFactory, true);
+    ReferenceValue actualCastResult = typedReferenceValue.cast(null, referencedClass, valueFactory, true);
+
+    // Assert
+    assertTrue(actualCastResult instanceof MultiTypedReferenceValue);
+    AnalyzedObject value = actualCastResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(actualCastResult.getType());
+    assertNull(actualCastResult.getReferencedClass());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCastResult).getPotentialTypes().size());
+    assertFalse(actualCastResult.isCategory2());
+    assertFalse(actualCastResult.isParticular());
+    assertFalse(actualCastResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCastResult).mayBeUnknown);
+    assertEquals(Value.NEVER, actualCastResult.isNotNull());
+    ReferenceValue expectedGeneralizedType = valueFactory.REFERENCE_VALUE_NULL;
+    assertSame(expectedGeneralizedType, ((MultiTypedReferenceValue) actualCastResult).getGeneralizedType());
+  }
+
+  /**
+   * Method under test:
+   * {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
+   */
+  @Test
+  public void testCast9() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue(null, new LibraryClass(), true, true);
+    LibraryClass referencedClass = new LibraryClass();
+    PrimitiveTypedReferenceValueFactory valueFactory = new PrimitiveTypedReferenceValueFactory();
+
+    // Act and Assert
+    assertSame(valueFactory.REFERENCE_VALUE, typedReferenceValue.cast("Type", referencedClass, valueFactory, true));
+  }
+
+  /**
+   * Method under test:
+   * {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
+   */
+  @Test
+  public void testCast10() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue(null, new LibraryClass(), true, true);
+    LibraryClass referencedClass = new LibraryClass();
+    MultiTypedReferenceValueFactory valueFactory = new MultiTypedReferenceValueFactory();
+
+    // Act
+    ReferenceValue actualCastResult = typedReferenceValue.cast("Ljava/lang/Object;", referencedClass, valueFactory,
+        true);
 
     // Assert
     assertTrue(actualCastResult instanceof MultiTypedReferenceValue);
     assertEquals("Ljava/lang/Object;", actualCastResult.getType());
-    ReferenceValue expectedGeneralizedType =
-        valueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL;
-    assertSame(
-        expectedGeneralizedType,
-        ((MultiTypedReferenceValue) actualCastResult).getGeneralizedType());
+    AnalyzedObject value = actualCastResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(actualCastResult.getReferencedClass());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(0, actualCastResult.isNotNull());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCastResult).getPotentialTypes().size());
+    assertFalse(actualCastResult.isCategory2());
+    assertFalse(actualCastResult.isParticular());
+    assertFalse(actualCastResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCastResult).mayBeUnknown);
+    ReferenceValue expectedGeneralizedType = valueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL;
+    assertSame(expectedGeneralizedType, ((MultiTypedReferenceValue) actualCastResult).getGeneralizedType());
   }
 
   /**
-   * Test {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}.
-   *
-   * <ul>
-   *   <li>When {@link MultiTypedReferenceValueFactory#MultiTypedReferenceValueFactory()}.
-   *   <li>Then return {@code Type}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
+   * Method under test: {@link TypedReferenceValue#generalizeMayBeNull(boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue TypedReferenceValue.cast(String, Clazz, ValueFactory, boolean)"
-  })
-  public void testCast_whenMultiTypedReferenceValueFactory_thenReturnType() {
-    // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue(null, new LibraryClass(), true, true);
-    LibraryClass referencedClass = new LibraryClass();
-
-    // Act
-    ReferenceValue actualCastResult =
-        typedReferenceValue.cast(
-            "Type", referencedClass, new MultiTypedReferenceValueFactory(), true);
-
-    // Assert
-    Clazz referencedClass2 = actualCastResult.getReferencedClass();
-    assertTrue(referencedClass2 instanceof LibraryClass);
-    assertTrue(actualCastResult instanceof MultiTypedReferenceValue);
-    assertEquals("Type", actualCastResult.getType());
-    assertSame(referencedClass, referencedClass2);
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}.
-   *
-   * <ul>
-   *   <li>When {@link MultiTypedReferenceValueFactory#MultiTypedReferenceValueFactory()}.
-   *   <li>Then return Type is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#cast(String, Clazz, ValueFactory, boolean)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue TypedReferenceValue.cast(String, Clazz, ValueFactory, boolean)"
-  })
-  public void testCast_whenMultiTypedReferenceValueFactory_thenReturnTypeIsNull() {
-    // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, true);
-    LibraryClass referencedClass = new LibraryClass();
-    MultiTypedReferenceValueFactory valueFactory = new MultiTypedReferenceValueFactory();
-
-    // Act
-    ReferenceValue actualCastResult =
-        typedReferenceValue.cast(null, referencedClass, valueFactory, true);
-
-    // Assert
-    assertTrue(actualCastResult instanceof MultiTypedReferenceValue);
-    assertNull(actualCastResult.getType());
-    ReferenceValue expectedGeneralizedType = valueFactory.REFERENCE_VALUE_NULL;
-    assertSame(
-        expectedGeneralizedType,
-        ((MultiTypedReferenceValue) actualCastResult).getGeneralizedType());
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#generalizeMayBeNull(boolean)}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalizeMayBeNull(boolean)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalizeMayBeNull(boolean)"})
   public void testGeneralizeMayBeNull() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
 
     // Act and Assert
     assertSame(typedReferenceValue, typedReferenceValue.generalizeMayBeNull(true));
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalizeMayBeNull(boolean)}.
-   *
-   * <ul>
-   *   <li>Then ReferencedClass return {@link LibraryClass}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalizeMayBeNull(boolean)}
+   * Method under test: {@link TypedReferenceValue#generalizeMayBeNull(boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalizeMayBeNull(boolean)"})
-  public void testGeneralizeMayBeNull_thenReferencedClassReturnLibraryClass() {
+  public void testGeneralizeMayBeNull2() {
     // Arrange
     LibraryClass referencedClass = new LibraryClass();
 
     // Act
-    ReferenceValue actualGeneralizeMayBeNullResult =
-        (new TypedReferenceValue("Type", referencedClass, true, false)).generalizeMayBeNull(true);
+    ReferenceValue actualGeneralizeMayBeNullResult = (new TypedReferenceValue("Type", referencedClass, true, false))
+        .generalizeMayBeNull(true);
 
     // Assert
-    Clazz referencedClass2 = actualGeneralizeMayBeNullResult.getReferencedClass();
-    assertTrue(referencedClass2 instanceof LibraryClass);
     assertTrue(actualGeneralizeMayBeNullResult instanceof TypedReferenceValue);
     assertEquals("Type", actualGeneralizeMayBeNullResult.getType());
+    AnalyzedObject value = actualGeneralizeMayBeNullResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(value.getModeledOrNullValue());
     assertEquals(0, actualGeneralizeMayBeNullResult.isNotNull());
     assertEquals(0, actualGeneralizeMayBeNullResult.isNull());
     assertFalse(actualGeneralizeMayBeNullResult.isCategory2());
@@ -633,92 +425,127 @@ public class TypedReferenceValueDiffblueTest {
     assertTrue(actualGeneralizeMayBeNullResult.mayBeExtension());
     assertTrue(((TypedReferenceValue) actualGeneralizeMayBeNullResult).mayBeExtension);
     assertTrue(((TypedReferenceValue) actualGeneralizeMayBeNullResult).mayBeNull);
-    assertSame(referencedClass, referencedClass2);
+    assertSame(referencedClass, actualGeneralizeMayBeNullResult.getReferencedClass());
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue() {
+  public void testGeneralize() {
+    // Arrange
+    ReferenceValue other = BasicValueFactory.REFERENCE_VALUE;
+
+    // Act and Assert
+    assertSame(other, (new TypedReferenceValue("Type", new LibraryClass(), true, true)).generalize(other));
+  }
+
+  /**
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   */
+  @Test
+  public void testGeneralize2() {
+    // Arrange
+    ReferenceValue other = BasicValueFactory.REFERENCE_VALUE;
+
+    // Act and Assert
+    assertSame(other,
+        (new ArrayReferenceValue("Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE))
+            .generalize(other));
+  }
+
+  /**
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   */
+  @Test
+  public void testGeneralize3() {
     // Arrange
     LibraryClass referencedClass = new LibraryClass();
     ReferenceValue other = BasicValueFactory.REFERENCE_VALUE;
 
     // Act and Assert
-    assertSame(
-        other,
-        (new IdentifiedArrayReferenceValue(
-                "Type",
-                referencedClass,
-                true,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                new ParticularReferenceValueFactory(),
-                1))
-            .generalize(other));
+    assertSame(other, (new IdentifiedArrayReferenceValue("Type", referencedClass, true,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE, new ParticularReferenceValueFactory(), 1)).generalize(other));
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue2() {
+  public void testGeneralize4() {
     // Arrange
     LibraryClass referencedClass = new LibraryClass();
     ReferenceValue other = BasicValueFactory.REFERENCE_VALUE;
 
     // Act and Assert
-    assertSame(
-        other,
-        (new IdentifiedReferenceValue(
-                "Type", referencedClass, true, true, new ParticularReferenceValueFactory(), "Id"))
+    assertSame(other,
+        (new IdentifiedReferenceValue("Type", referencedClass, true, true, new ParticularReferenceValueFactory(), "Id"))
             .generalize(other));
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue3() {
+  public void testGeneralize5() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
+
+    // Act and Assert
+    assertSame(typedReferenceValue,
+        typedReferenceValue.generalize(PrimitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL));
+  }
+
+  /**
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   */
+  @Test
+  public void testGeneralize6() {
     // Arrange
     ReferenceValue other = TypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL;
 
     // Act and Assert
-    assertSame(
-        other, (new TypedReferenceValue("Type", new LibraryClass(), true, true)).generalize(other));
+    assertSame(other, (new TypedReferenceValue("Type", new LibraryClass(), true, true)).generalize(other));
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue4() {
+  public void testGeneralize7() {
+    // Arrange and Act
+    ReferenceValue actualGeneralizeResult = (new TypedReferenceValue("Type", new LibraryClass(), true, true))
+        .generalize(TypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_NOT_NULL);
+
+    // Assert
+    assertTrue(actualGeneralizeResult instanceof TypedReferenceValue);
+    assertEquals("Ljava/lang/Object;", actualGeneralizeResult.getType());
+    AnalyzedObject value = actualGeneralizeResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(actualGeneralizeResult.getReferencedClass());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(0, actualGeneralizeResult.isNotNull());
+    assertEquals(0, actualGeneralizeResult.isNull());
+    assertFalse(actualGeneralizeResult.isCategory2());
+    assertFalse(actualGeneralizeResult.isParticular());
+    assertFalse(actualGeneralizeResult.isSpecific());
+    assertTrue(actualGeneralizeResult.mayBeExtension());
+    assertTrue(((TypedReferenceValue) actualGeneralizeResult).mayBeExtension);
+    assertTrue(((TypedReferenceValue) actualGeneralizeResult).mayBeNull);
+  }
+
+  /**
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   */
+  @Test
+  public void testGeneralize8() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
 
     // Act
-    ReferenceValue actualGeneralizeResult =
-        typedReferenceValue.generalize(
-            (ReferenceValue)
-                new ArrayReferenceValue(
-                    "Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE));
+    ReferenceValue actualGeneralizeResult = typedReferenceValue
+        .generalize((ReferenceValue) new ArrayReferenceValue("Type", new LibraryClass(), true,
+            BasicRangeValueFactory.INTEGER_VALUE_BYTE));
 
     // Assert
     assertTrue(actualGeneralizeResult instanceof TypedReferenceValue);
@@ -726,17 +553,30 @@ public class TypedReferenceValueDiffblueTest {
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue5() {
+  public void testGeneralize9() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
+    MultiTypedReferenceValue other = new MultiTypedReferenceValue(
+        new TypedReferenceValue("Type", new LibraryClass(), true, true), true);
+
+    // Act
+    ReferenceValue actualGeneralizeResult = typedReferenceValue.generalize((ReferenceValue) other);
+
+    // Assert
+    assertTrue(actualGeneralizeResult instanceof MultiTypedReferenceValue);
+    assertEquals(other, actualGeneralizeResult);
+  }
+
+  /**
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   */
+  @Test
+  public void testGeneralize10() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
     TypedReferenceValue other = new TypedReferenceValue("Type", new LibraryClass(), true, true);
 
     // Act and Assert
@@ -744,361 +584,106 @@ public class TypedReferenceValueDiffblueTest {
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue6() {
+  public void testGeneralize11() {
+    // Arrange
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    ReferenceValue actualGeneralizeResult = (new ArrayReferenceValue("Type", referencedClass, true,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE))
+            .generalize(PrimitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL);
+
+    // Assert
+    assertTrue(actualGeneralizeResult instanceof TypedReferenceValue);
+    assertEquals("Type", actualGeneralizeResult.getType());
+    AnalyzedObject value = actualGeneralizeResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(0, actualGeneralizeResult.isNotNull());
+    assertEquals(0, actualGeneralizeResult.isNull());
+    assertFalse(actualGeneralizeResult.isCategory2());
+    assertFalse(actualGeneralizeResult.isParticular());
+    assertFalse(actualGeneralizeResult.isSpecific());
+    assertTrue(actualGeneralizeResult.mayBeExtension());
+    assertTrue(((TypedReferenceValue) actualGeneralizeResult).mayBeExtension);
+    assertTrue(((TypedReferenceValue) actualGeneralizeResult).mayBeNull);
+    assertSame(referencedClass, actualGeneralizeResult.getReferencedClass());
+  }
+
+  /**
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   */
+  @Test
+  public void testGeneralize12() {
     // Arrange
     ReferenceValue other = TypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_NOT_NULL;
 
     // Act and Assert
-    assertSame(
-        other,
-        (new ArrayReferenceValue(
-                "Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE))
+    assertSame(other,
+        (new ArrayReferenceValue("Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE))
             .generalize(other));
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue7() {
+  public void testGeneralize13() {
     // Arrange
-    ArrayReferenceValue arrayReferenceValue =
-        new ArrayReferenceValue(
-            "Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
-    ArrayReferenceValue other =
-        new ArrayReferenceValue(
-            "Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+    ArrayReferenceValue arrayReferenceValue = new ArrayReferenceValue("Type", new LibraryClass(), true,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+    ArrayReferenceValue other = new ArrayReferenceValue("Type", new LibraryClass(), true,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Act and Assert
     assertSame(other, arrayReferenceValue.generalize((ReferenceValue) other));
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue8() {
+  public void testGeneralize14() {
     // Arrange
-    ArrayReferenceValue arrayReferenceValue =
-        new ArrayReferenceValue(
-            "Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+    ArrayReferenceValue arrayReferenceValue = new ArrayReferenceValue("Type", new LibraryClass(), true,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE);
     LibraryClass referencedClass = new LibraryClass();
 
     // Act
-    ReferenceValue actualGeneralizeResult =
-        arrayReferenceValue.generalize(
-            (ReferenceValue)
-                new IdentifiedArrayReferenceValue(
-                    "Type",
-                    referencedClass,
-                    true,
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                    new ParticularReferenceValueFactory(),
-                    1));
+    ReferenceValue actualGeneralizeResult = arrayReferenceValue
+        .generalize((ReferenceValue) new IdentifiedArrayReferenceValue("Type", referencedClass, true,
+            BasicRangeValueFactory.INTEGER_VALUE_BYTE, new ParticularReferenceValueFactory(), 1));
 
     // Assert
-    assertTrue(actualGeneralizeResult.getReferencedClass() instanceof LibraryClass);
     assertTrue(actualGeneralizeResult instanceof TypedReferenceValue);
+    assertEquals("Type", actualGeneralizeResult.getType());
+    AnalyzedObject value = actualGeneralizeResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(value.getModeledOrNullValue());
     assertEquals(1, actualGeneralizeResult.isNotNull());
+    assertFalse(actualGeneralizeResult.isCategory2());
+    assertFalse(actualGeneralizeResult.isParticular());
+    assertFalse(actualGeneralizeResult.isSpecific());
     assertFalse(((TypedReferenceValue) actualGeneralizeResult).mayBeNull);
+    assertTrue(actualGeneralizeResult.mayBeExtension());
+    assertTrue(((TypedReferenceValue) actualGeneralizeResult).mayBeExtension);
     assertEquals(Value.NEVER, actualGeneralizeResult.isNull());
+    assertSame(referencedClass, actualGeneralizeResult.getReferencedClass());
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue9() {
+  public void testGeneralize15() {
     // Arrange
-    ArrayReferenceValue arrayReferenceValue =
-        new ArrayReferenceValue(
-            "Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
-    TypedReferenceValue other = new TypedReferenceValue("Type", new LibraryClass(), true, true);
-
-    // Act and Assert
-    assertSame(other, arrayReferenceValue.generalize((ReferenceValue) other));
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue10() {
-    // Arrange
-    LibraryClass referencedClass = new LibraryClass();
-    IdentifiedReferenceValue identifiedReferenceValue =
-        new IdentifiedReferenceValue(
-            "Type", referencedClass, true, true, new ParticularReferenceValueFactory(), "Id");
-
-    // Act and Assert
-    assertSame(
-        identifiedReferenceValue,
-        identifiedReferenceValue.generalize(
-            PrimitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL));
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue11() {
-    // Arrange
-    LibraryClass referencedClass = new LibraryClass();
-    IdentifiedReferenceValue identifiedReferenceValue =
-        new IdentifiedReferenceValue(
-            "Type", referencedClass, true, true, new ParticularReferenceValueFactory(), "Id");
-    MultiTypedReferenceValue other =
-        new MultiTypedReferenceValue(
-            new TypedReferenceValue("Type", new LibraryClass(), true, true), true);
-
-    // Act
-    ReferenceValue actualGeneralizeResult =
-        identifiedReferenceValue.generalize((ReferenceValue) other);
-
-    // Assert
-    assertTrue(actualGeneralizeResult instanceof MultiTypedReferenceValue);
-    assertEquals(other, actualGeneralizeResult);
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue12() {
-    // Arrange
-    ReferenceValue other = TypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL;
-
-    // Act and Assert
-    assertSame(
-        other, (new TypedReferenceValue(null, new LibraryClass(), true, true)).generalize(other));
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue13() {
-    // Arrange
-    ReferenceValue other = TypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL;
-
-    // Act and Assert
-    assertSame(
-        other, (new TypedReferenceValue("", new LibraryClass(), true, true)).generalize(other));
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue14() {
-    // Arrange
-    ReferenceValue other = TypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL;
-
-    // Act and Assert
-    assertSame(
-        other,
-        (new TypedReferenceValue("Type", new LibraryClass(), false, true)).generalize(other));
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue15() {
-    // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, true);
-
-    // Act
-    ReferenceValue actualGeneralizeResult =
-        typedReferenceValue.generalize(
-            (ReferenceValue)
-                new ArrayReferenceValue(
-                    "Type", new LibraryClass(), false, BasicRangeValueFactory.INTEGER_VALUE_BYTE));
-
-    // Assert
-    assertTrue(actualGeneralizeResult instanceof TypedReferenceValue);
-    assertEquals(typedReferenceValue, actualGeneralizeResult);
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue16() {
-    // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue(null, new LibraryClass(), true, true);
-    MultiTypedReferenceValue other =
-        new MultiTypedReferenceValue(
-            new TypedReferenceValue("Type", new LibraryClass(), true, true), true);
-
-    // Act
-    ReferenceValue actualGeneralizeResult = typedReferenceValue.generalize((ReferenceValue) other);
-
-    // Assert
-    assertTrue(actualGeneralizeResult instanceof MultiTypedReferenceValue);
-    assertEquals(other, actualGeneralizeResult);
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue17() {
-    // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), false, true);
-    MultiTypedReferenceValue other =
-        new MultiTypedReferenceValue(
-            new TypedReferenceValue("Type", new LibraryClass(), true, true), true);
-
-    // Act
-    ReferenceValue actualGeneralizeResult = typedReferenceValue.generalize((ReferenceValue) other);
-
-    // Assert
-    assertTrue(actualGeneralizeResult instanceof MultiTypedReferenceValue);
-    assertEquals(other, actualGeneralizeResult);
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <ul>
-   *   <li>Then ReferencedClass return {@link LibraryClass}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue_thenReferencedClassReturnLibraryClass() {
-    // Arrange
-    LibraryClass referencedClass = new LibraryClass();
-    IdentifiedArrayReferenceValue identifiedArrayReferenceValue =
-        new IdentifiedArrayReferenceValue(
-            "Type",
-            referencedClass,
-            true,
-            BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-            new ParticularReferenceValueFactory(),
-            1);
-
-    // Act
-    ReferenceValue actualGeneralizeResult =
-        identifiedArrayReferenceValue.generalize(
-            (ReferenceValue)
-                new ArrayReferenceValue(
-                    "Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE));
-
-    // Assert
-    assertTrue(actualGeneralizeResult.getReferencedClass() instanceof LibraryClass);
-    assertTrue(actualGeneralizeResult instanceof TypedReferenceValue);
-    assertEquals(1, actualGeneralizeResult.isNotNull());
-    assertFalse(((TypedReferenceValue) actualGeneralizeResult).mayBeNull);
-    assertEquals(Value.NEVER, actualGeneralizeResult.isNull());
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link MultiTypedReferenceValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue_thenReturnMultiTypedReferenceValue() {
-    // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, true);
-    MultiTypedReferenceValue other =
-        new MultiTypedReferenceValue(
-            new TypedReferenceValue("Type", new LibraryClass(), true, true), true);
-
-    // Act
-    ReferenceValue actualGeneralizeResult = typedReferenceValue.generalize((ReferenceValue) other);
-
-    // Assert
-    assertTrue(actualGeneralizeResult instanceof MultiTypedReferenceValue);
-    assertEquals(other, actualGeneralizeResult);
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link MultiTypedReferenceValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue_thenReturnMultiTypedReferenceValue2() {
-    // Arrange
-    ArrayReferenceValue arrayReferenceValue =
-        new ArrayReferenceValue(
-            "Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
-    MultiTypedReferenceValue other =
-        new MultiTypedReferenceValue(
-            new TypedReferenceValue("Type", new LibraryClass(), true, true), true);
+    ArrayReferenceValue arrayReferenceValue = new ArrayReferenceValue("Type", new LibraryClass(), true,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+    MultiTypedReferenceValue other = new MultiTypedReferenceValue(
+        new TypedReferenceValue("Type", new LibraryClass(), true, true), true);
 
     // Act
     ReferenceValue actualGeneralizeResult = arrayReferenceValue.generalize((ReferenceValue) other);
@@ -1109,185 +694,211 @@ public class TypedReferenceValueDiffblueTest {
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link PrimitiveTypedReferenceValueFactory#REFERENCE_VALUE_NULL}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue_thenReturnReference_value_null() {
+  public void testGeneralize16() {
     // Arrange
-    ReferenceValue other = PrimitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL;
+    ArrayReferenceValue arrayReferenceValue = new ArrayReferenceValue("Type", new LibraryClass(), true,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+    TypedReferenceValue other = new TypedReferenceValue("Type", new LibraryClass(), true, true);
 
     // Act and Assert
-    assertSame(
-        other, (new TypedReferenceValue(null, new LibraryClass(), true, true)).generalize(other));
+    assertSame(other, arrayReferenceValue.generalize((ReferenceValue) other));
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <ul>
-   *   <li>Then return Type is {@code Ljava/lang/Object;}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue_thenReturnTypeIsLjavaLangObject() {
-    // Arrange and Act
-    ReferenceValue actualGeneralizeResult =
-        (new TypedReferenceValue("Type", new LibraryClass(), true, true))
-            .generalize(TypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_NOT_NULL);
-
-    // Assert
-    assertTrue(actualGeneralizeResult instanceof TypedReferenceValue);
-    assertEquals("Ljava/lang/Object;", actualGeneralizeResult.getType());
-    assertNull(actualGeneralizeResult.getReferencedClass());
-    assertEquals(0, actualGeneralizeResult.isNull());
-    assertTrue(((TypedReferenceValue) actualGeneralizeResult).mayBeNull);
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <ul>
-   *   <li>When {@link PrimitiveTypedReferenceValueFactory#REFERENCE_VALUE_NULL}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue_whenReference_value_null() {
-    // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, true);
-
-    // Act and Assert
-    assertSame(
-        typedReferenceValue,
-        typedReferenceValue.generalize(PrimitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL));
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <ul>
-   *   <li>When {@link PrimitiveTypedReferenceValueFactory#REFERENCE_VALUE_NULL}.
-   *   <li>Then return {@code Type}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue_whenReference_value_null_thenReturnType() {
+  public void testGeneralize17() {
     // Arrange
     LibraryClass referencedClass = new LibraryClass();
+    IdentifiedArrayReferenceValue identifiedArrayReferenceValue = new IdentifiedArrayReferenceValue("Type",
+        referencedClass, true, BasicRangeValueFactory.INTEGER_VALUE_BYTE, new ParticularReferenceValueFactory(), 1);
+    LibraryClass referencedClass2 = new LibraryClass();
 
     // Act
-    ReferenceValue actualGeneralizeResult =
-        (new ArrayReferenceValue(
-                "Type", referencedClass, true, BasicRangeValueFactory.INTEGER_VALUE_BYTE))
-            .generalize(PrimitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL);
+    ReferenceValue actualGeneralizeResult = identifiedArrayReferenceValue
+        .generalize((ReferenceValue) new ArrayReferenceValue("Type", referencedClass2, true,
+            BasicRangeValueFactory.INTEGER_VALUE_BYTE));
 
     // Assert
     assertTrue(actualGeneralizeResult instanceof TypedReferenceValue);
     assertEquals("Type", actualGeneralizeResult.getType());
-    assertSame(referencedClass, actualGeneralizeResult.getReferencedClass());
+    AnalyzedObject value = actualGeneralizeResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(1, actualGeneralizeResult.isNotNull());
+    assertFalse(actualGeneralizeResult.isCategory2());
+    assertFalse(actualGeneralizeResult.isParticular());
+    assertFalse(actualGeneralizeResult.isSpecific());
+    assertFalse(((TypedReferenceValue) actualGeneralizeResult).mayBeNull);
+    assertTrue(actualGeneralizeResult.mayBeExtension());
+    assertTrue(((TypedReferenceValue) actualGeneralizeResult).mayBeExtension);
+    assertEquals(Value.NEVER, actualGeneralizeResult.isNull());
+    assertSame(referencedClass2, actualGeneralizeResult.getReferencedClass());
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <ul>
-   *   <li>When {@link BasicValueFactory#REFERENCE_VALUE}.
-   *   <li>Then return {@link BasicValueFactory#REFERENCE_VALUE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue_whenReference_value_thenReturnReference_value() {
+  public void testGeneralize18() {
     // Arrange
-    ReferenceValue other = BasicValueFactory.REFERENCE_VALUE;
+    LibraryClass referencedClass = new LibraryClass();
+    IdentifiedReferenceValue identifiedReferenceValue = new IdentifiedReferenceValue("Type", referencedClass, true,
+        true, new ParticularReferenceValueFactory(), "Id");
 
     // Act and Assert
-    assertSame(
-        other, (new TypedReferenceValue("Type", new LibraryClass(), true, true)).generalize(other));
+    assertSame(identifiedReferenceValue,
+        identifiedReferenceValue.generalize(PrimitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL));
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <ul>
-   *   <li>When {@link BasicValueFactory#REFERENCE_VALUE}.
-   *   <li>Then return {@link BasicValueFactory#REFERENCE_VALUE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(ReferenceValue)"})
-  public void testGeneralizeWithReferenceValue_whenReference_value_thenReturnReference_value2() {
+  public void testGeneralize19() {
     // Arrange
-    ReferenceValue other = BasicValueFactory.REFERENCE_VALUE;
+    LibraryClass referencedClass = new LibraryClass();
+    IdentifiedReferenceValue identifiedReferenceValue = new IdentifiedReferenceValue("Type", referencedClass, true,
+        true, new ParticularReferenceValueFactory(), "Id");
+    MultiTypedReferenceValue other = new MultiTypedReferenceValue(
+        new TypedReferenceValue("Type", new LibraryClass(), true, true), true);
+
+    // Act
+    ReferenceValue actualGeneralizeResult = identifiedReferenceValue.generalize((ReferenceValue) other);
+
+    // Assert
+    assertTrue(actualGeneralizeResult instanceof MultiTypedReferenceValue);
+    assertEquals(other, actualGeneralizeResult);
+  }
+
+  /**
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   */
+  @Test
+  public void testGeneralize20() {
+    // Arrange
+    ReferenceValue other = PrimitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL;
 
     // Act and Assert
-    assertSame(
-        other,
-        (new ArrayReferenceValue(
-                "Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE))
-            .generalize(other));
+    assertSame(other, (new TypedReferenceValue(null, new LibraryClass(), true, true)).generalize(other));
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(TypedReferenceValue)} with {@code
-   * TypedReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(TypedReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(TypedReferenceValue)"})
-  public void testGeneralizeWithTypedReferenceValue() {
+  public void testGeneralize21() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, true);
+    ReferenceValue other = TypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL;
 
     // Act and Assert
-    assertSame(
-        typedReferenceValue,
-        typedReferenceValue.generalize(
-            new TypedReferenceValue("Type", new LibraryClass(), true, true)));
+    assertSame(other, (new TypedReferenceValue(null, new LibraryClass(), true, true)).generalize(other));
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(TypedReferenceValue)} with {@code
-   * TypedReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(TypedReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(TypedReferenceValue)"})
-  public void testGeneralizeWithTypedReferenceValue2() {
+  public void testGeneralize22() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue(null, new LibraryClass(), true, true);
+    ReferenceValue other = TypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL;
+
+    // Act and Assert
+    assertSame(other, (new TypedReferenceValue("", new LibraryClass(), true, true)).generalize(other));
+  }
+
+  /**
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   */
+  @Test
+  public void testGeneralize23() {
+    // Arrange
+    ReferenceValue other = TypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL;
+
+    // Act and Assert
+    assertSame(other, (new TypedReferenceValue("Type", new LibraryClass(), false, true)).generalize(other));
+  }
+
+  /**
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   */
+  @Test
+  public void testGeneralize24() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
+
+    // Act
+    ReferenceValue actualGeneralizeResult = typedReferenceValue
+        .generalize((ReferenceValue) new ArrayReferenceValue("Type", new LibraryClass(), false,
+            BasicRangeValueFactory.INTEGER_VALUE_BYTE));
+
+    // Assert
+    assertTrue(actualGeneralizeResult instanceof TypedReferenceValue);
+    assertEquals(typedReferenceValue, actualGeneralizeResult);
+  }
+
+  /**
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   */
+  @Test
+  public void testGeneralize25() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue(null, new LibraryClass(), true, true);
+    MultiTypedReferenceValue other = new MultiTypedReferenceValue(
+        new TypedReferenceValue("Type", new LibraryClass(), true, true), true);
+
+    // Act
+    ReferenceValue actualGeneralizeResult = typedReferenceValue.generalize((ReferenceValue) other);
+
+    // Assert
+    assertTrue(actualGeneralizeResult instanceof MultiTypedReferenceValue);
+    assertEquals(other, actualGeneralizeResult);
+  }
+
+  /**
+   * Method under test: {@link TypedReferenceValue#generalize(ReferenceValue)}
+   */
+  @Test
+  public void testGeneralize26() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), false, true);
+    MultiTypedReferenceValue other = new MultiTypedReferenceValue(
+        new TypedReferenceValue("Type", new LibraryClass(), true, true), true);
+
+    // Act
+    ReferenceValue actualGeneralizeResult = typedReferenceValue.generalize((ReferenceValue) other);
+
+    // Assert
+    assertTrue(actualGeneralizeResult instanceof MultiTypedReferenceValue);
+    assertEquals(other, actualGeneralizeResult);
+  }
+
+  /**
+   * Method under test:
+   * {@link TypedReferenceValue#generalize(TypedReferenceValue)}
+   */
+  @Test
+  public void testGeneralize27() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
+
+    // Act and Assert
+    assertSame(typedReferenceValue,
+        typedReferenceValue.generalize(new TypedReferenceValue("Type", new LibraryClass(), true, true)));
+  }
+
+  /**
+   * Method under test:
+   * {@link TypedReferenceValue#generalize(TypedReferenceValue)}
+   */
+  @Test
+  public void testGeneralize28() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue(null, new LibraryClass(), true, true);
     TypedReferenceValue other = new TypedReferenceValue("Type", new LibraryClass(), true, true);
 
     // Act and Assert
@@ -1295,18 +906,13 @@ public class TypedReferenceValueDiffblueTest {
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(TypedReferenceValue)} with {@code
-   * TypedReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(TypedReferenceValue)}
+   * Method under test:
+   * {@link TypedReferenceValue#generalize(TypedReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(TypedReferenceValue)"})
-  public void testGeneralizeWithTypedReferenceValue3() {
+  public void testGeneralize29() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), false, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), false, true);
     TypedReferenceValue other = new TypedReferenceValue("Type", new LibraryClass(), true, true);
 
     // Act
@@ -1318,18 +924,13 @@ public class TypedReferenceValueDiffblueTest {
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(TypedReferenceValue)} with {@code
-   * TypedReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(TypedReferenceValue)}
+   * Method under test:
+   * {@link TypedReferenceValue#generalize(TypedReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(TypedReferenceValue)"})
-  public void testGeneralizeWithTypedReferenceValue4() {
+  public void testGeneralize30() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, false);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, false);
     TypedReferenceValue other = new TypedReferenceValue("Type", new LibraryClass(), true, true);
 
     // Act
@@ -1341,19 +942,14 @@ public class TypedReferenceValueDiffblueTest {
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(TypedReferenceValue)} with {@code
-   * TypedReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(TypedReferenceValue)}
+   * Method under test:
+   * {@link TypedReferenceValue#generalize(TypedReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(TypedReferenceValue)"})
-  public void testGeneralizeWithTypedReferenceValue5() {
+  public void testGeneralize31() {
     // Arrange
-    ArrayReferenceValue arrayReferenceValue =
-        new ArrayReferenceValue(
-            "Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+    ArrayReferenceValue arrayReferenceValue = new ArrayReferenceValue("Type", new LibraryClass(), true,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE);
     TypedReferenceValue other = new TypedReferenceValue("Type", new LibraryClass(), true, true);
 
     // Act
@@ -1365,720 +961,524 @@ public class TypedReferenceValueDiffblueTest {
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(TypedReferenceValue)} with {@code
-   * TypedReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(TypedReferenceValue)}
+   * Method under test:
+   * {@link TypedReferenceValue#generalize(TypedReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(TypedReferenceValue)"})
-  public void testGeneralizeWithTypedReferenceValue6() {
+  public void testGeneralize32() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
 
     // Act and Assert
-    assertSame(
-        typedReferenceValue,
-        typedReferenceValue.generalize(
-            new TypedReferenceValue(null, new LibraryClass(), true, true)));
+    assertSame(typedReferenceValue,
+        typedReferenceValue.generalize(new TypedReferenceValue(null, new LibraryClass(), true, true)));
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(TypedReferenceValue)} with {@code
-   * TypedReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(TypedReferenceValue)}
+   * Method under test:
+   * {@link TypedReferenceValue#generalize(TypedReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(TypedReferenceValue)"})
-  public void testGeneralizeWithTypedReferenceValue7() {
+  public void testGeneralize33() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue(null, new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue(null, new LibraryClass(), true, true);
 
     // Act and Assert
-    assertSame(
-        typedReferenceValue,
-        typedReferenceValue.generalize(
-            new TypedReferenceValue(null, new LibraryClass(), true, true)));
+    assertSame(typedReferenceValue,
+        typedReferenceValue.generalize(new TypedReferenceValue(null, new LibraryClass(), true, true)));
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(TypedReferenceValue)} with {@code
-   * TypedReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(TypedReferenceValue)}
+   * Method under test:
+   * {@link TypedReferenceValue#generalize(TypedReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(TypedReferenceValue)"})
-  public void testGeneralizeWithTypedReferenceValue8() {
+  public void testGeneralize34() {
     // Arrange
     TypedReferenceValue typedReferenceValue = new TypedReferenceValue("", null, true, true);
 
     // Act
-    ReferenceValue actualGeneralizeResult =
-        typedReferenceValue.generalize(
-            new TypedReferenceValue("Type", new LibraryClass(), true, true));
+    ReferenceValue actualGeneralizeResult = typedReferenceValue
+        .generalize(new TypedReferenceValue("Type", new LibraryClass(), true, true));
 
     // Assert
     assertTrue(actualGeneralizeResult instanceof TypedReferenceValue);
     assertEquals("Ljava/lang/Object;", actualGeneralizeResult.getType());
+    AnalyzedObject value = actualGeneralizeResult.getValue();
+    assertNull(value.getPreciseValue());
     assertNull(actualGeneralizeResult.getReferencedClass());
+    assertNull(value.getModeledOrNullValue());
     assertEquals(0, actualGeneralizeResult.isNotNull());
     assertEquals(0, actualGeneralizeResult.isNull());
+    assertFalse(actualGeneralizeResult.isCategory2());
+    assertFalse(actualGeneralizeResult.isParticular());
+    assertFalse(actualGeneralizeResult.isSpecific());
+    assertTrue(actualGeneralizeResult.mayBeExtension());
+    assertTrue(((TypedReferenceValue) actualGeneralizeResult).mayBeExtension);
+    assertTrue(((TypedReferenceValue) actualGeneralizeResult).mayBeNull);
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(TypedReferenceValue)} with {@code
-   * TypedReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(TypedReferenceValue)}
+   * Method under test:
+   * {@link TypedReferenceValue#generalize(TypedReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(TypedReferenceValue)"})
-  public void testGeneralizeWithTypedReferenceValue9() {
+  public void testGeneralize35() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("", new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("", new LibraryClass(), true, true);
 
     // Act
-    ReferenceValue actualGeneralizeResult =
-        typedReferenceValue.generalize(new TypedReferenceValue("Type", null, true, true));
+    ReferenceValue actualGeneralizeResult = typedReferenceValue
+        .generalize(new TypedReferenceValue("Type", null, true, true));
 
     // Assert
     assertTrue(actualGeneralizeResult instanceof TypedReferenceValue);
     assertEquals("Ljava/lang/Object;", actualGeneralizeResult.getType());
+    AnalyzedObject value = actualGeneralizeResult.getValue();
+    assertNull(value.getPreciseValue());
     assertNull(actualGeneralizeResult.getReferencedClass());
+    assertNull(value.getModeledOrNullValue());
     assertEquals(0, actualGeneralizeResult.isNotNull());
     assertEquals(0, actualGeneralizeResult.isNull());
+    assertFalse(actualGeneralizeResult.isCategory2());
+    assertFalse(actualGeneralizeResult.isParticular());
+    assertFalse(actualGeneralizeResult.isSpecific());
+    assertTrue(actualGeneralizeResult.mayBeExtension());
+    assertTrue(((TypedReferenceValue) actualGeneralizeResult).mayBeExtension);
+    assertTrue(((TypedReferenceValue) actualGeneralizeResult).mayBeNull);
   }
 
   /**
-   * Test {@link TypedReferenceValue#generalize(TypedReferenceValue)} with {@code
-   * TypedReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#generalize(TypedReferenceValue)}
+   * Method under test:
+   * {@link TypedReferenceValue#generalize(TypedReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue TypedReferenceValue.generalize(TypedReferenceValue)"})
-  public void testGeneralizeWithTypedReferenceValue10() {
+  public void testGeneralize36() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, false);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, false);
 
     // Act and Assert
-    assertSame(
-        typedReferenceValue,
-        typedReferenceValue.generalize(
-            (TypedReferenceValue)
-                new ArrayReferenceValue(
-                    "Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
+    assertSame(typedReferenceValue, typedReferenceValue.generalize((TypedReferenceValue) new ArrayReferenceValue("Type",
+        new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
   }
 
   /**
-   * Test {@link TypedReferenceValue#equal(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(ReferenceValue)"})
-  public void testEqualWithReferenceValue() {
+  public void testEqual() {
     // Arrange, Act and Assert
-    assertEquals(
-        0,
-        (new ArrayReferenceValue(
-                "Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE))
+    assertEquals(0,
+        (new TypedReferenceValue("Type", new LibraryClass(), true, true)).equal(BasicValueFactory.REFERENCE_VALUE));
+    assertEquals(0,
+        (new ArrayReferenceValue("Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE))
+            .equal(BasicValueFactory.REFERENCE_VALUE));
+    assertEquals(0, (new TypedReferenceValue("Type", new LibraryClass(), true, true))
+        .equal(PrimitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL));
+    assertEquals(0, (new TypedReferenceValue("Type", new LibraryClass(), true, true))
+        .equal(TypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL));
+    assertEquals(Value.NEVER,
+        (new ArrayReferenceValue("Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE))
+            .equal(PrimitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL));
+    assertEquals(1, (new TypedReferenceValue(null, new LibraryClass(), true, true))
+        .equal(PrimitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL));
+    assertEquals(0, (new TypedReferenceValue(null, new LibraryClass(), true, true))
+        .equal(TypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL));
+  }
+
+  /**
+   * Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
+   */
+  @Test
+  public void testEqual2() {
+    // Arrange
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act and Assert
+    assertEquals(0,
+        (new IdentifiedArrayReferenceValue("Type", referencedClass, true, BasicRangeValueFactory.INTEGER_VALUE_BYTE,
+            new ParticularReferenceValueFactory(), 1)).equal(BasicValueFactory.REFERENCE_VALUE));
+  }
+
+  /**
+   * Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
+   */
+  @Test
+  public void testEqual3() {
+    // Arrange
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act and Assert
+    assertEquals(0,
+        (new IdentifiedReferenceValue("Type", referencedClass, true, true, new ParticularReferenceValueFactory(), "Id"))
             .equal(BasicValueFactory.REFERENCE_VALUE));
   }
 
   /**
-   * Test {@link TypedReferenceValue#equal(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(ReferenceValue)"})
-  public void testEqualWithReferenceValue2() {
+  public void testEqual4() {
     // Arrange
-    LibraryClass referencedClass = new LibraryClass();
+    ArrayReferenceValue arrayReferenceValue = new ArrayReferenceValue("Type", new LibraryClass(), true,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Act and Assert
-    assertEquals(
-        0,
-        (new IdentifiedArrayReferenceValue(
-                "Type",
-                referencedClass,
-                true,
-                BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                new ParticularReferenceValueFactory(),
-                1))
-            .equal(BasicValueFactory.REFERENCE_VALUE));
+    assertEquals(0, arrayReferenceValue.equal((ReferenceValue) new ArrayReferenceValue("Type", new LibraryClass(), true,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
   }
 
   /**
-   * Test {@link TypedReferenceValue#equal(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(ReferenceValue)"})
-  public void testEqualWithReferenceValue3() {
+  public void testEqual5() {
     // Arrange
     LibraryClass referencedClass = new LibraryClass();
+    IdentifiedArrayReferenceValue identifiedArrayReferenceValue = new IdentifiedArrayReferenceValue("Type",
+        referencedClass, true, BasicRangeValueFactory.INTEGER_VALUE_BYTE, new ParticularReferenceValueFactory(), 1);
 
     // Act and Assert
-    assertEquals(
-        0,
-        (new IdentifiedReferenceValue(
-                "Type", referencedClass, true, true, new ParticularReferenceValueFactory(), "Id"))
-            .equal(BasicValueFactory.REFERENCE_VALUE));
+    assertEquals(0, identifiedArrayReferenceValue.equal((ReferenceValue) new ArrayReferenceValue("Type",
+        new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
   }
 
   /**
-   * Test {@link TypedReferenceValue#equal(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(ReferenceValue)"})
-  public void testEqualWithReferenceValue4() {
-    // Arrange
-    ArrayReferenceValue arrayReferenceValue =
-        new ArrayReferenceValue(
-            "Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
-
-    // Act and Assert
-    assertEquals(
-        0,
-        arrayReferenceValue.equal(
-            (ReferenceValue)
-                new ArrayReferenceValue(
-                    "Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#equal(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(ReferenceValue)"})
-  public void testEqualWithReferenceValue5() {
+  public void testEqual6() {
     // Arrange
     LibraryClass referencedClass = new LibraryClass();
-    IdentifiedArrayReferenceValue identifiedArrayReferenceValue =
-        new IdentifiedArrayReferenceValue(
-            "Type",
-            referencedClass,
-            true,
-            BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-            new ParticularReferenceValueFactory(),
-            1);
-
-    // Act and Assert
-    assertEquals(
-        0,
-        identifiedArrayReferenceValue.equal(
-            (ReferenceValue)
-                new ArrayReferenceValue(
-                    "Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#equal(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(ReferenceValue)"})
-  public void testEqualWithReferenceValue6() {
-    // Arrange
-    LibraryClass referencedClass = new LibraryClass();
-    IdentifiedArrayReferenceValue identifiedArrayReferenceValue =
-        new IdentifiedArrayReferenceValue(
-            "Type",
-            referencedClass,
-            true,
-            BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-            new ParticularReferenceValueFactory(),
-            1);
+    IdentifiedArrayReferenceValue identifiedArrayReferenceValue = new IdentifiedArrayReferenceValue("Type",
+        referencedClass, true, BasicRangeValueFactory.INTEGER_VALUE_BYTE, new ParticularReferenceValueFactory(), 1);
     LibraryClass referencedClass2 = new LibraryClass();
 
     // Act and Assert
-    assertEquals(
-        0,
-        identifiedArrayReferenceValue.equal(
-            (ReferenceValue)
-                new IdentifiedArrayReferenceValue(
-                    "Type",
-                    referencedClass2,
-                    true,
-                    BasicRangeValueFactory.INTEGER_VALUE_BYTE,
-                    new ParticularReferenceValueFactory(),
-                    1)));
+    assertEquals(0, identifiedArrayReferenceValue.equal((ReferenceValue) new IdentifiedArrayReferenceValue("Type",
+        referencedClass2, true, BasicRangeValueFactory.INTEGER_VALUE_BYTE, new ParticularReferenceValueFactory(), 1)));
   }
 
   /**
-   * Test {@link TypedReferenceValue#equal(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(ReferenceValue)"})
-  public void testEqualWithReferenceValue7() {
+  public void testEqual7() {
     // Arrange
     LibraryClass referencedClass = new LibraryClass();
 
     // Act and Assert
-    assertEquals(
-        0,
-        (new IdentifiedReferenceValue(
-                "Type", referencedClass, true, true, new ParticularReferenceValueFactory(), "Id"))
+    assertEquals(0,
+        (new IdentifiedReferenceValue("Type", referencedClass, true, true, new ParticularReferenceValueFactory(), "Id"))
             .equal(PrimitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL));
   }
 
   /**
-   * Test {@link TypedReferenceValue#equal(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(ReferenceValue)"})
-  public void testEqualWithReferenceValue8() {
-    // Arrange, Act and Assert
-    assertEquals(
-        0,
-        (new TypedReferenceValue(null, new LibraryClass(), true, true))
-            .equal(TypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL));
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#equal(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(ReferenceValue)"})
-  public void testEqualWithReferenceValue9() {
+  public void testEqual8() {
     // Arrange
-    ArrayReferenceValue arrayReferenceValue =
-        new ArrayReferenceValue(
-            null, new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE);
+    ArrayReferenceValue arrayReferenceValue = new ArrayReferenceValue(null, new LibraryClass(), true,
+        BasicRangeValueFactory.INTEGER_VALUE_BYTE);
 
     // Act and Assert
-    assertEquals(
-        Value.NEVER,
-        arrayReferenceValue.equal(
-            (ReferenceValue)
-                new ArrayReferenceValue(
-                    "Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
+    assertEquals(Value.NEVER, arrayReferenceValue.equal((ReferenceValue) new ArrayReferenceValue("Type",
+        new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE)));
   }
 
   /**
-   * Test {@link TypedReferenceValue#equal(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <ul>
-   *   <li>Then return {@link Value#NEVER}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#equal(TypedReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(ReferenceValue)"})
-  public void testEqualWithReferenceValue_thenReturnNever() {
-    // Arrange, Act and Assert
-    assertEquals(
-        Value.NEVER,
-        (new ArrayReferenceValue(
-                "Type", new LibraryClass(), true, BasicRangeValueFactory.INTEGER_VALUE_BYTE))
-            .equal(PrimitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL));
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#equal(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <ul>
-   *   <li>Then return one.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(ReferenceValue)"})
-  public void testEqualWithReferenceValue_thenReturnOne() {
-    // Arrange, Act and Assert
-    assertEquals(
-        1,
-        (new TypedReferenceValue(null, new LibraryClass(), true, true))
-            .equal(PrimitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL));
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#equal(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <ul>
-   *   <li>When {@link BasicValueFactory#REFERENCE_VALUE}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(ReferenceValue)"})
-  public void testEqualWithReferenceValue_whenReference_value() {
-    // Arrange, Act and Assert
-    assertEquals(
-        0,
-        (new TypedReferenceValue("Type", new LibraryClass(), true, true))
-            .equal(BasicValueFactory.REFERENCE_VALUE));
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#equal(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <ul>
-   *   <li>When {@link TypedReferenceValueFactory#REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(ReferenceValue)"})
-  public void testEqualWithReferenceValue_whenReference_value_java_lang_object_maybe_null() {
-    // Arrange, Act and Assert
-    assertEquals(
-        0,
-        (new TypedReferenceValue("Type", new LibraryClass(), true, true))
-            .equal(TypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL));
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#equal(ReferenceValue)} with {@code ReferenceValue}.
-   *
-   * <ul>
-   *   <li>When {@link PrimitiveTypedReferenceValueFactory#REFERENCE_VALUE_NULL}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(ReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(ReferenceValue)"})
-  public void testEqualWithReferenceValue_whenReference_value_null() {
-    // Arrange, Act and Assert
-    assertEquals(
-        0,
-        (new TypedReferenceValue("Type", new LibraryClass(), true, true))
-            .equal(PrimitiveTypedReferenceValueFactory.REFERENCE_VALUE_NULL));
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#equal(TypedReferenceValue)} with {@code TypedReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(TypedReferenceValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(TypedReferenceValue)"})
-  public void testEqualWithTypedReferenceValue() {
+  public void testEqual9() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
 
     // Act and Assert
-    assertEquals(
-        0,
-        typedReferenceValue.equal(new TypedReferenceValue("Type", new LibraryClass(), true, true)));
+    assertEquals(0, typedReferenceValue.equal(new TypedReferenceValue("Type", new LibraryClass(), true, true)));
   }
 
   /**
-   * Test {@link TypedReferenceValue#equal(TypedReferenceValue)} with {@code TypedReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(TypedReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#equal(TypedReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(TypedReferenceValue)"})
-  public void testEqualWithTypedReferenceValue2() {
+  public void testEqual10() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue(null, new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue(null, new LibraryClass(), true, true);
 
     // Act and Assert
-    assertEquals(
-        0,
-        typedReferenceValue.equal(new TypedReferenceValue("Type", new LibraryClass(), true, true)));
+    assertEquals(0, typedReferenceValue.equal(new TypedReferenceValue("Type", new LibraryClass(), true, true)));
   }
 
   /**
-   * Test {@link TypedReferenceValue#equal(TypedReferenceValue)} with {@code TypedReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(TypedReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#equal(TypedReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(TypedReferenceValue)"})
-  public void testEqualWithTypedReferenceValue3() {
+  public void testEqual11() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), false, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), false, true);
 
     // Act and Assert
-    assertEquals(
-        0,
-        typedReferenceValue.equal(new TypedReferenceValue("Type", new LibraryClass(), true, true)));
+    assertEquals(0, typedReferenceValue.equal(new TypedReferenceValue("Type", new LibraryClass(), true, true)));
   }
 
   /**
-   * Test {@link TypedReferenceValue#equal(TypedReferenceValue)} with {@code TypedReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(TypedReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#equal(TypedReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(TypedReferenceValue)"})
-  public void testEqualWithTypedReferenceValue4() {
+  public void testEqual12() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
 
     // Act and Assert
-    assertEquals(
-        0,
-        typedReferenceValue.equal(new TypedReferenceValue(null, new LibraryClass(), true, true)));
+    assertEquals(0, typedReferenceValue.equal(new TypedReferenceValue(null, new LibraryClass(), true, true)));
   }
 
   /**
-   * Test {@link TypedReferenceValue#equal(TypedReferenceValue)} with {@code TypedReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(TypedReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#equal(TypedReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(TypedReferenceValue)"})
-  public void testEqualWithTypedReferenceValue5() {
+  public void testEqual13() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue(null, new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue(null, new LibraryClass(), true, true);
 
     // Act and Assert
-    assertEquals(
-        Value.NEVER,
-        typedReferenceValue.equal(
-            new TypedReferenceValue("Type", new LibraryClass(), true, false)));
+    assertEquals(1, typedReferenceValue.equal(new TypedReferenceValue(null, new LibraryClass(), true, true)));
   }
 
   /**
-   * Test {@link TypedReferenceValue#equal(TypedReferenceValue)} with {@code TypedReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(TypedReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#equal(TypedReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(TypedReferenceValue)"})
-  public void testEqualWithTypedReferenceValue6() {
+  public void testEqual14() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), false, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue(null, new LibraryClass(), true, true);
 
     // Act and Assert
-    assertEquals(
-        0,
-        typedReferenceValue.equal(
-            new TypedReferenceValue("Type", new LibraryClass(), false, true)));
+    assertEquals(Value.NEVER,
+        typedReferenceValue.equal(new TypedReferenceValue("Type", new LibraryClass(), true, false)));
   }
 
   /**
-   * Test {@link TypedReferenceValue#equal(TypedReferenceValue)} with {@code TypedReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(TypedReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#equal(TypedReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(TypedReferenceValue)"})
-  public void testEqualWithTypedReferenceValue7() {
+  public void testEqual15() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, false);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), false, true);
 
     // Act and Assert
-    assertEquals(
-        Value.NEVER,
-        typedReferenceValue.equal(new TypedReferenceValue(null, new LibraryClass(), true, true)));
+    assertEquals(0, typedReferenceValue.equal(new TypedReferenceValue("Type", new LibraryClass(), false, true)));
   }
 
   /**
-   * Test {@link TypedReferenceValue#equal(TypedReferenceValue)} with {@code TypedReferenceValue}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(TypedReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#equal(TypedReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(TypedReferenceValue)"})
-  public void testEqualWithTypedReferenceValue8() {
+  public void testEqual16() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("", new LibraryClass(), false, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, false);
 
     // Act and Assert
-    assertEquals(
-        Value.NEVER,
-        typedReferenceValue.equal(
-            new TypedReferenceValue("Type", new LibraryClass(), false, true)));
+    assertEquals(Value.NEVER, typedReferenceValue.equal(new TypedReferenceValue(null, new LibraryClass(), true, true)));
   }
 
   /**
-   * Test {@link TypedReferenceValue#equal(TypedReferenceValue)} with {@code TypedReferenceValue}.
-   *
-   * <ul>
-   *   <li>Then return one.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equal(TypedReferenceValue)}
+   * Method under test: {@link TypedReferenceValue#equal(TypedReferenceValue)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"int TypedReferenceValue.equal(TypedReferenceValue)"})
-  public void testEqualWithTypedReferenceValue_thenReturnOne() {
+  public void testEqual17() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue(null, new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("", new LibraryClass(), false, true);
 
     // Act and Assert
-    assertEquals(
-        1,
-        typedReferenceValue.equal(new TypedReferenceValue(null, new LibraryClass(), true, true)));
+    assertEquals(Value.NEVER,
+        typedReferenceValue.equal(new TypedReferenceValue("Type", new LibraryClass(), false, true)));
   }
 
   /**
-   * Test {@link TypedReferenceValue#isParticular()}.
-   *
-   * <ul>
-   *   <li>Then return {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#isParticular()}
+   * Method under test: {@link TypedReferenceValue#isParticular()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TypedReferenceValue.isParticular()"})
-  public void testIsParticular_thenReturnFalse() {
+  public void testIsParticular() {
     // Arrange, Act and Assert
     assertFalse((new TypedReferenceValue("Type", new LibraryClass(), true, true)).isParticular());
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#isParticular()}.
-   *
-   * <ul>
-   *   <li>Then return {@code true}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#isParticular()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TypedReferenceValue.isParticular()"})
-  public void testIsParticular_thenReturnTrue() {
-    // Arrange, Act and Assert
     assertTrue((new TypedReferenceValue(null, new LibraryClass(), true, true)).isParticular());
   }
 
   /**
-   * Test {@link TypedReferenceValue#internalType()}.
-   *
-   * <ul>
-   *   <li>Then return {@code Ljava/lang/Object;}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#internalType()}
+   * Method under test: {@link TypedReferenceValue#internalType()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypedReferenceValue.internalType()"})
-  public void testInternalType_thenReturnLjavaLangObject() {
+  public void testInternalType() {
     // Arrange, Act and Assert
-    assertEquals(
-        "Ljava/lang/Object;",
-        (new TypedReferenceValue(null, new LibraryClass(), true, true)).internalType());
+    assertEquals("Type", (new TypedReferenceValue("Type", new LibraryClass(), true, true)).internalType());
+    assertEquals("Ljava/lang/Object;", (new TypedReferenceValue(null, new LibraryClass(), true, true)).internalType());
   }
 
   /**
-   * Test {@link TypedReferenceValue#internalType()}.
-   *
-   * <ul>
-   *   <li>Then return {@code Type}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#internalType()}
+   * Method under test:
+   * {@link TypedReferenceValue#allowsIncompleteClassHierarchy()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypedReferenceValue.internalType()"})
-  public void testInternalType_thenReturnType() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "Type", (new TypedReferenceValue("Type", new LibraryClass(), true, true)).internalType());
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#allowsIncompleteClassHierarchy()}.
-   *
-   * <p>Method under test: {@link TypedReferenceValue#allowsIncompleteClassHierarchy()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"boolean TypedReferenceValue.allowsIncompleteClassHierarchy()"})
   public void testAllowsIncompleteClassHierarchy() {
     // Arrange, Act and Assert
     assertFalse(TypedReferenceValue.allowsIncompleteClassHierarchy());
   }
 
   /**
-   * Test {@link TypedReferenceValue#equals(Object)}, and {@link TypedReferenceValue#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is equal.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
+   * Method under test:
+   * {@link TypedReferenceValue#doubleArrayLoad(IntegerValue, ValueFactory)}
+   */
+  @Test
+  public void testDoubleArrayLoad() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
+    ParticularReferenceValueFactory valueFactory = new ParticularReferenceValueFactory();
+
+    // Act and Assert
+    assertSame(valueFactory.DOUBLE_VALUE,
+        typedReferenceValue.doubleArrayLoad(BasicRangeValueFactory.INTEGER_VALUE_BYTE, valueFactory));
+  }
+
+  /**
+   * Method under test:
+   * {@link TypedReferenceValue#doubleArrayLoad(IntegerValue, ValueFactory)}
+   */
+  @Test
+  public void testDoubleArrayLoad2() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
+
+    // Act
+    DoubleValue actualDoubleArrayLoadResult = typedReferenceValue
+        .doubleArrayLoad(BasicRangeValueFactory.INTEGER_VALUE_BYTE, new DetailedArrayValueFactory());
+
+    // Assert
+    assertTrue(actualDoubleArrayLoadResult instanceof IdentifiedDoubleValue);
+    assertFalse(actualDoubleArrayLoadResult.isParticular());
+    assertTrue(actualDoubleArrayLoadResult.isCategory2());
+    assertTrue(actualDoubleArrayLoadResult.isSpecific());
+  }
+
+  /**
+   * Method under test:
+   * {@link TypedReferenceValue#integerArrayLoad(IntegerValue, ValueFactory)}
+   */
+  @Test
+  public void testIntegerArrayLoad() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
+    ParticularReferenceValueFactory valueFactory = new ParticularReferenceValueFactory();
+
+    // Act and Assert
+    assertSame(valueFactory.INTEGER_VALUE,
+        typedReferenceValue.integerArrayLoad(BasicRangeValueFactory.INTEGER_VALUE_BYTE, valueFactory));
+  }
+
+  /**
+   * Method under test:
+   * {@link TypedReferenceValue#integerArrayLoad(IntegerValue, ValueFactory)}
+   */
+  @Test
+  public void testIntegerArrayLoad2() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
+
+    // Act
+    IntegerValue actualIntegerArrayLoadResult = typedReferenceValue
+        .integerArrayLoad(BasicRangeValueFactory.INTEGER_VALUE_BYTE, new DetailedArrayValueFactory());
+
+    // Assert
+    assertTrue(actualIntegerArrayLoadResult instanceof IdentifiedIntegerValue);
+    assertFalse(actualIntegerArrayLoadResult.isCategory2());
+    assertFalse(actualIntegerArrayLoadResult.isParticular());
+    assertTrue(actualIntegerArrayLoadResult.isSpecific());
+  }
+
+  /**
+   * Method under test:
+   * {@link TypedReferenceValue#longArrayLoad(IntegerValue, ValueFactory)}
+   */
+  @Test
+  public void testLongArrayLoad() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
+    ParticularReferenceValueFactory valueFactory = new ParticularReferenceValueFactory();
+
+    // Act and Assert
+    assertSame(valueFactory.LONG_VALUE,
+        typedReferenceValue.longArrayLoad(BasicRangeValueFactory.INTEGER_VALUE_BYTE, valueFactory));
+  }
+
+  /**
+   * Method under test:
+   * {@link TypedReferenceValue#longArrayLoad(IntegerValue, ValueFactory)}
+   */
+  @Test
+  public void testLongArrayLoad2() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
+
+    // Act
+    LongValue actualLongArrayLoadResult = typedReferenceValue.longArrayLoad(BasicRangeValueFactory.INTEGER_VALUE_BYTE,
+        new DetailedArrayValueFactory());
+
+    // Assert
+    assertTrue(actualLongArrayLoadResult instanceof IdentifiedLongValue);
+    assertFalse(actualLongArrayLoadResult.isParticular());
+    assertTrue(actualLongArrayLoadResult.isCategory2());
+    assertTrue(actualLongArrayLoadResult.isSpecific());
+  }
+
+  /**
+   * Method under test:
+   * {@link TypedReferenceValue#floatArrayLoad(IntegerValue, ValueFactory)}
+   */
+  @Test
+  public void testFloatArrayLoad() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
+    ParticularReferenceValueFactory valueFactory = new ParticularReferenceValueFactory();
+
+    // Act and Assert
+    assertSame(valueFactory.FLOAT_VALUE,
+        typedReferenceValue.floatArrayLoad(BasicRangeValueFactory.INTEGER_VALUE_BYTE, valueFactory));
+  }
+
+  /**
+   * Method under test:
+   * {@link TypedReferenceValue#floatArrayLoad(IntegerValue, ValueFactory)}
+   */
+  @Test
+  public void testFloatArrayLoad2() {
+    // Arrange
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
+
+    // Act
+    FloatValue actualFloatArrayLoadResult = typedReferenceValue
+        .floatArrayLoad(BasicRangeValueFactory.INTEGER_VALUE_BYTE, new DetailedArrayValueFactory());
+
+    // Assert
+    assertTrue(actualFloatArrayLoadResult instanceof IdentifiedFloatValue);
+    assertFalse(actualFloatArrayLoadResult.isCategory2());
+    assertFalse(actualFloatArrayLoadResult.isParticular());
+    assertTrue(actualFloatArrayLoadResult.isSpecific());
+  }
+
+  /**
+   * Methods under test:
    * <ul>
    *   <li>{@link TypedReferenceValue#equals(Object)}
    *   <li>{@link TypedReferenceValue#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean TypedReferenceValue.equals(Object)",
-    "int TypedReferenceValue.hashCode()"
-  })
   public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, true);
-    TypedReferenceValue typedReferenceValue2 =
-        new TypedReferenceValue("Type", new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue2 = new TypedReferenceValue("Type", new LibraryClass(), true, true);
 
     // Act and Assert
     assertEquals(typedReferenceValue, typedReferenceValue2);
@@ -2087,32 +1487,17 @@ public class TypedReferenceValueDiffblueTest {
   }
 
   /**
-   * Test {@link TypedReferenceValue#equals(Object)}, and {@link TypedReferenceValue#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is equal.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
    *   <li>{@link TypedReferenceValue#equals(Object)}
    *   <li>{@link TypedReferenceValue#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean TypedReferenceValue.equals(Object)",
-    "int TypedReferenceValue.hashCode()"
-  })
   public void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual2() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue(null, new LibraryClass(), true, true);
-    TypedReferenceValue typedReferenceValue2 =
-        new TypedReferenceValue(null, new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue(null, new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue2 = new TypedReferenceValue(null, new LibraryClass(), true, true);
 
     // Act and Assert
     assertEquals(typedReferenceValue, typedReferenceValue2);
@@ -2121,30 +1506,16 @@ public class TypedReferenceValueDiffblueTest {
   }
 
   /**
-   * Test {@link TypedReferenceValue#equals(Object)}, and {@link TypedReferenceValue#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is same.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
+   * Methods under test:
    * <ul>
    *   <li>{@link TypedReferenceValue#equals(Object)}
    *   <li>{@link TypedReferenceValue#hashCode()}
    * </ul>
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean TypedReferenceValue.equals(Object)",
-    "int TypedReferenceValue.hashCode()"
-  })
   public void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, true);
 
     // Act and Assert
     assertEquals(typedReferenceValue, typedReferenceValue);
@@ -2153,238 +1524,108 @@ public class TypedReferenceValueDiffblueTest {
   }
 
   /**
-   * Test {@link TypedReferenceValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equals(Object)}
+   * Method under test: {@link TypedReferenceValue#toString()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean TypedReferenceValue.equals(Object)",
-    "int TypedReferenceValue.hashCode()"
-  })
+  public void testToString() {
+    // Arrange, Act and Assert
+    assertEquals("Type", (new TypedReferenceValue("Type", new LibraryClass(), true, true)).toString());
+    assertEquals("n", (new TypedReferenceValue(null, new LibraryClass(), true, true)).toString());
+    assertEquals("Type?", (new TypedReferenceValue("Type", null, true, true)).toString());
+    assertEquals("Type=", (new TypedReferenceValue("Type", new LibraryClass(), false, true)).toString());
+    assertEquals("Type!", (new TypedReferenceValue("Type", new LibraryClass(), true, false)).toString());
+  }
+
+  /**
+   * Method under test: {@link TypedReferenceValue#equals(Object)}
+   */
+  @Test
   public void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue(null, new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue(null, new LibraryClass(), true, true);
 
     // Act and Assert
-    assertNotEquals(
-        typedReferenceValue, new TypedReferenceValue("Type", new LibraryClass(), true, true));
+    assertNotEquals(typedReferenceValue, new TypedReferenceValue("Type", new LibraryClass(), true, true));
   }
 
   /**
-   * Test {@link TypedReferenceValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equals(Object)}
+   * Method under test: {@link TypedReferenceValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean TypedReferenceValue.equals(Object)",
-    "int TypedReferenceValue.hashCode()"
-  })
   public void testEquals_whenOtherIsDifferent_thenReturnNotEqual2() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("", new LibraryClass(), true, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("", new LibraryClass(), true, true);
 
     // Act and Assert
-    assertNotEquals(
-        typedReferenceValue, new TypedReferenceValue("Type", new LibraryClass(), true, true));
+    assertNotEquals(typedReferenceValue, new TypedReferenceValue("Type", new LibraryClass(), true, true));
   }
 
   /**
-   * Test {@link TypedReferenceValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equals(Object)}
+   * Method under test: {@link TypedReferenceValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean TypedReferenceValue.equals(Object)",
-    "int TypedReferenceValue.hashCode()"
-  })
   public void testEquals_whenOtherIsDifferent_thenReturnNotEqual3() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), false, true);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), false, true);
 
     // Act and Assert
-    assertNotEquals(
-        typedReferenceValue, new TypedReferenceValue("Type", new LibraryClass(), true, true));
+    assertNotEquals(typedReferenceValue, new TypedReferenceValue("Type", new LibraryClass(), true, true));
   }
 
   /**
-   * Test {@link TypedReferenceValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equals(Object)}
+   * Method under test: {@link TypedReferenceValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean TypedReferenceValue.equals(Object)",
-    "int TypedReferenceValue.hashCode()"
-  })
   public void testEquals_whenOtherIsDifferent_thenReturnNotEqual4() {
     // Arrange
-    TypedReferenceValue typedReferenceValue =
-        new TypedReferenceValue("Type", new LibraryClass(), true, false);
+    TypedReferenceValue typedReferenceValue = new TypedReferenceValue("Type", new LibraryClass(), true, false);
 
     // Act and Assert
-    assertNotEquals(
-        typedReferenceValue, new TypedReferenceValue("Type", new LibraryClass(), true, true));
+    assertNotEquals(typedReferenceValue, new TypedReferenceValue("Type", new LibraryClass(), true, true));
   }
 
   /**
-   * Test {@link TypedReferenceValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is {@code null}.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equals(Object)}
+   * Method under test: {@link TypedReferenceValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean TypedReferenceValue.equals(Object)",
-    "int TypedReferenceValue.hashCode()"
-  })
   public void testEquals_whenOtherIsNull_thenReturnNotEqual() {
     // Arrange, Act and Assert
     assertNotEquals(new TypedReferenceValue("Type", new LibraryClass(), true, true), null);
   }
 
   /**
-   * Test {@link TypedReferenceValue#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is wrong type.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#equals(Object)}
+   * Method under test: {@link TypedReferenceValue#equals(Object)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "boolean TypedReferenceValue.equals(Object)",
-    "int TypedReferenceValue.hashCode()"
-  })
   public void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
     // Arrange, Act and Assert
-    assertNotEquals(
-        new TypedReferenceValue("Type", new LibraryClass(), true, true),
+    assertNotEquals(new TypedReferenceValue("Type", new LibraryClass(), true, true),
         "Different type to TypedReferenceValue");
   }
 
   /**
-   * Test {@link TypedReferenceValue#toString()}.
-   *
+   * Methods under test:
    * <ul>
-   *   <li>Then return {@code n}.
+   *   <li>
+   * {@link TypedReferenceValue#TypedReferenceValue(String, Clazz, boolean, boolean)}
+   *   <li>{@link TypedReferenceValue#getReferencedClass()}
+   *   <li>{@link TypedReferenceValue#getType()}
+   *   <li>{@link TypedReferenceValue#mayBeExtension()}
    * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#toString()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypedReferenceValue.toString()"})
-  public void testToString_thenReturnN() {
-    // Arrange, Act and Assert
-    assertEquals("n", (new TypedReferenceValue(null, new LibraryClass(), true, true)).toString());
-  }
+  public void testGettersAndSetters() {
+    // Arrange
+    LibraryClass referencedClass = new LibraryClass();
 
-  /**
-   * Test {@link TypedReferenceValue#toString()}.
-   *
-   * <ul>
-   *   <li>Then return {@code Type}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#toString()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypedReferenceValue.toString()"})
-  public void testToString_thenReturnType() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "Type", (new TypedReferenceValue("Type", new LibraryClass(), true, true)).toString());
-  }
+    // Act
+    TypedReferenceValue actualTypedReferenceValue = new TypedReferenceValue("Type", referencedClass, true, true);
+    Clazz actualReferencedClass = actualTypedReferenceValue.getReferencedClass();
+    String actualType = actualTypedReferenceValue.getType();
 
-  /**
-   * Test {@link TypedReferenceValue#toString()}.
-   *
-   * <ul>
-   *   <li>Then return {@code Type?}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#toString()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypedReferenceValue.toString()"})
-  public void testToString_thenReturnType2() {
-    // Arrange, Act and Assert
-    assertEquals("Type?", (new TypedReferenceValue("Type", null, true, true)).toString());
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#toString()}.
-   *
-   * <ul>
-   *   <li>Then return {@code Type=}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#toString()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypedReferenceValue.toString()"})
-  public void testToString_thenReturnType3() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "Type=", (new TypedReferenceValue("Type", new LibraryClass(), false, true)).toString());
-  }
-
-  /**
-   * Test {@link TypedReferenceValue#toString()}.
-   *
-   * <ul>
-   *   <li>Then return {@code Type!}.
-   * </ul>
-   *
-   * <p>Method under test: {@link TypedReferenceValue#toString()}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"String TypedReferenceValue.toString()"})
-  public void testToString_thenReturnType4() {
-    // Arrange, Act and Assert
-    assertEquals(
-        "Type!", (new TypedReferenceValue("Type", new LibraryClass(), true, false)).toString());
+    // Assert
+    assertEquals("Type", actualType);
+    assertTrue(actualTypedReferenceValue.mayBeExtension());
+    assertSame(referencedClass, actualReferencedClass);
   }
 }

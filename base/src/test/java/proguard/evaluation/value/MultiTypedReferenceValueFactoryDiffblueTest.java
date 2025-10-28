@@ -5,693 +5,722 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.kotlin.KotlinConstants;
+import proguard.evaluation.value.object.AnalyzedObject;
 
 public class MultiTypedReferenceValueFactoryDiffblueTest {
   /**
-   * Test {@link MultiTypedReferenceValueFactory#createReferenceValueNull()}.
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createReferenceValueNull()}
+   * Method under test:
+   * {@link MultiTypedReferenceValueFactory#createReferenceValueNull()}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"ReferenceValue MultiTypedReferenceValueFactory.createReferenceValueNull()"})
   public void testCreateReferenceValueNull() {
     // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory();
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory = new MultiTypedReferenceValueFactory();
 
     // Act
-    ReferenceValue actualCreateReferenceValueNullResult =
-        multiTypedReferenceValueFactory.createReferenceValueNull();
+    ReferenceValue actualCreateReferenceValueNullResult = multiTypedReferenceValueFactory.createReferenceValueNull();
 
     // Assert
     assertTrue(actualCreateReferenceValueNullResult instanceof MultiTypedReferenceValue);
+    AnalyzedObject value = actualCreateReferenceValueNullResult.getValue();
+    assertNull(value.getPreciseValue());
     assertNull(actualCreateReferenceValueNullResult.getType());
     assertNull(actualCreateReferenceValueNullResult.getReferencedClass());
-    assertEquals(
-        1,
-        ((MultiTypedReferenceValue) actualCreateReferenceValueNullResult)
-            .getPotentialTypes()
-            .size());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateReferenceValueNullResult).getPotentialTypes().size());
     assertFalse(actualCreateReferenceValueNullResult.isCategory2());
     assertFalse(actualCreateReferenceValueNullResult.isParticular());
     assertFalse(actualCreateReferenceValueNullResult.isSpecific());
     assertFalse(((MultiTypedReferenceValue) actualCreateReferenceValueNullResult).mayBeUnknown);
     assertEquals(Value.NEVER, actualCreateReferenceValueNullResult.isNotNull());
     ReferenceValue expectedGeneralizedType = multiTypedReferenceValueFactory.REFERENCE_VALUE_NULL;
-    assertSame(
-        expectedGeneralizedType,
+    assertSame(expectedGeneralizedType,
         ((MultiTypedReferenceValue) actualCreateReferenceValueNullResult).getGeneralizedType());
   }
 
   /**
-   * Test {@link MultiTypedReferenceValueFactory#createReferenceValue(String, Clazz, boolean,
-   * boolean)} with {@code String}, {@code Clazz}, {@code boolean}, {@code boolean}.
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createReferenceValue(String,
-   * Clazz, boolean, boolean)}
+   * Method under test:
+   * {@link MultiTypedReferenceValueFactory#createReferenceValue(String, Clazz, boolean, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue MultiTypedReferenceValueFactory.createReferenceValue(String, Clazz, boolean, boolean)"
-  })
-  public void testCreateReferenceValueWithStringClazzBooleanBoolean() {
+  public void testCreateReferenceValue() {
     // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory();
-
-    // Act
-    ReferenceValue actualCreateReferenceValueResult =
-        multiTypedReferenceValueFactory.createReferenceValue(
-            "Ljava/lang/Object;", new LibraryClass(), true, false);
-
-    // Assert
-    assertTrue(actualCreateReferenceValueResult instanceof MultiTypedReferenceValue);
-    ReferenceValue expectedGeneralizedType =
-        multiTypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_NOT_NULL;
-    assertSame(
-        expectedGeneralizedType,
-        ((MultiTypedReferenceValue) actualCreateReferenceValueResult).getGeneralizedType());
-  }
-
-  /**
-   * Test {@link MultiTypedReferenceValueFactory#createReferenceValue(String, Clazz, boolean,
-   * boolean)} with {@code String}, {@code Clazz}, {@code boolean}, {@code boolean}.
-   *
-   * <ul>
-   *   <li>Then return NotNull is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createReferenceValue(String,
-   * Clazz, boolean, boolean)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue MultiTypedReferenceValueFactory.createReferenceValue(String, Clazz, boolean, boolean)"
-  })
-  public void testCreateReferenceValueWithStringClazzBooleanBoolean_thenReturnNotNullIsOne() {
-    // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory();
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory = new MultiTypedReferenceValueFactory();
     LibraryClass referencedClass = new LibraryClass();
 
     // Act
-    ReferenceValue actualCreateReferenceValueResult =
-        multiTypedReferenceValueFactory.createReferenceValue(
-            "Ljava/lang/Object;", referencedClass, false, false);
+    ReferenceValue actualCreateReferenceValueResult = multiTypedReferenceValueFactory.createReferenceValue("Type",
+        referencedClass, true, true);
 
     // Assert
-    Clazz referencedClass2 = actualCreateReferenceValueResult.getReferencedClass();
-    assertTrue(referencedClass2 instanceof LibraryClass);
-    assertTrue(actualCreateReferenceValueResult instanceof MultiTypedReferenceValue);
-    assertEquals(1, actualCreateReferenceValueResult.isNotNull());
-    assertSame(referencedClass, referencedClass2);
-  }
-
-  /**
-   * Test {@link MultiTypedReferenceValueFactory#createReferenceValue(String, Clazz, boolean,
-   * boolean)} with {@code String}, {@code Clazz}, {@code boolean}, {@code boolean}.
-   *
-   * <ul>
-   *   <li>Then return NotNull is zero.
-   * </ul>
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createReferenceValue(String,
-   * Clazz, boolean, boolean)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue MultiTypedReferenceValueFactory.createReferenceValue(String, Clazz, boolean, boolean)"
-  })
-  public void testCreateReferenceValueWithStringClazzBooleanBoolean_thenReturnNotNullIsZero() {
-    // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory();
-
-    // Act
-    ReferenceValue actualCreateReferenceValueResult =
-        multiTypedReferenceValueFactory.createReferenceValue(
-            "Ljava/lang/Object;", new LibraryClass(), true, true);
-
-    // Assert
-    assertTrue(actualCreateReferenceValueResult instanceof MultiTypedReferenceValue);
-    assertEquals(0, actualCreateReferenceValueResult.isNotNull());
-    ReferenceValue expectedGeneralizedType =
-        multiTypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL;
-    assertSame(
-        expectedGeneralizedType,
-        ((MultiTypedReferenceValue) actualCreateReferenceValueResult).getGeneralizedType());
-  }
-
-  /**
-   * Test {@link MultiTypedReferenceValueFactory#createReferenceValue(String, Clazz, boolean,
-   * boolean)} with {@code String}, {@code Clazz}, {@code boolean}, {@code boolean}.
-   *
-   * <ul>
-   *   <li>Then return Type is {@code null}.
-   * </ul>
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createReferenceValue(String,
-   * Clazz, boolean, boolean)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue MultiTypedReferenceValueFactory.createReferenceValue(String, Clazz, boolean, boolean)"
-  })
-  public void testCreateReferenceValueWithStringClazzBooleanBoolean_thenReturnTypeIsNull() {
-    // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory();
-
-    // Act
-    ReferenceValue actualCreateReferenceValueResult =
-        multiTypedReferenceValueFactory.createReferenceValue(
-            null, new LibraryClass(), false, false);
-
-    // Assert
-    assertTrue(actualCreateReferenceValueResult instanceof MultiTypedReferenceValue);
-    assertNull(actualCreateReferenceValueResult.getType());
-    assertEquals(Value.NEVER, actualCreateReferenceValueResult.isNotNull());
-    ReferenceValue expectedGeneralizedType = multiTypedReferenceValueFactory.REFERENCE_VALUE_NULL;
-    assertSame(
-        expectedGeneralizedType,
-        ((MultiTypedReferenceValue) actualCreateReferenceValueResult).getGeneralizedType());
-  }
-
-  /**
-   * Test {@link MultiTypedReferenceValueFactory#createReferenceValue(String, Clazz, boolean,
-   * boolean)} with {@code String}, {@code Clazz}, {@code boolean}, {@code boolean}.
-   *
-   * <ul>
-   *   <li>When {@code Type}.
-   *   <li>Then return {@code Type}.
-   * </ul>
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createReferenceValue(String,
-   * Clazz, boolean, boolean)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue MultiTypedReferenceValueFactory.createReferenceValue(String, Clazz, boolean, boolean)"
-  })
-  public void testCreateReferenceValueWithStringClazzBooleanBoolean_whenType_thenReturnType() {
-    // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory();
-
-    // Act
-    ReferenceValue actualCreateReferenceValueResult =
-        multiTypedReferenceValueFactory.createReferenceValue(
-            "Type", new LibraryClass(), true, true);
-
-    // Assert
-    Clazz referencedClass = actualCreateReferenceValueResult.getReferencedClass();
-    assertTrue(referencedClass instanceof LibraryClass);
     assertTrue(actualCreateReferenceValueResult instanceof MultiTypedReferenceValue);
     assertEquals("Type", actualCreateReferenceValueResult.getType());
-    TypedReferenceValue generalizedType =
-        ((MultiTypedReferenceValue) actualCreateReferenceValueResult).getGeneralizedType();
+    TypedReferenceValue generalizedType = ((MultiTypedReferenceValue) actualCreateReferenceValueResult)
+        .getGeneralizedType();
     assertEquals("Type", generalizedType.getType());
+    AnalyzedObject value = actualCreateReferenceValueResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(0, generalizedType.isNotNull());
+    assertEquals(0, actualCreateReferenceValueResult.isNotNull());
+    assertEquals(0, generalizedType.isNull());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateReferenceValueResult).getPotentialTypes().size());
+    assertFalse(generalizedType.isCategory2());
+    assertFalse(actualCreateReferenceValueResult.isCategory2());
+    assertFalse(generalizedType.isParticular());
+    assertFalse(actualCreateReferenceValueResult.isParticular());
+    assertFalse(generalizedType.isSpecific());
+    assertFalse(actualCreateReferenceValueResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCreateReferenceValueResult).mayBeUnknown);
+    assertTrue(generalizedType.mayBeExtension());
+    assertTrue(generalizedType.mayBeExtension);
+    assertTrue(generalizedType.mayBeNull);
+    assertSame(referencedClass, actualCreateReferenceValueResult.getReferencedClass());
     assertSame(referencedClass, generalizedType.getReferencedClass());
+    assertSame(value, generalizedType.getValue());
   }
 
   /**
-   * Test {@link MultiTypedReferenceValueFactory#createArrayReferenceValue(String, Clazz,
-   * IntegerValue)} with {@code type}, {@code referencedClass}, {@code arrayLength}.
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createArrayReferenceValue(String,
-   * Clazz, IntegerValue)}
+   * Method under test:
+   * {@link MultiTypedReferenceValueFactory#createReferenceValue(String, Clazz, boolean, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue MultiTypedReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue)"
-  })
-  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength() {
+  public void testCreateReferenceValue2() {
     // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory();
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory = new MultiTypedReferenceValueFactory();
 
     // Act
-    ReferenceValue actualCreateArrayReferenceValueResult =
-        multiTypedReferenceValueFactory.createArrayReferenceValue(
-            "Ljava/lang/Object;", new LibraryClass(), BasicValueFactory.INTEGER_VALUE);
+    ReferenceValue actualCreateReferenceValueResult = multiTypedReferenceValueFactory.createReferenceValue(null,
+        new LibraryClass(), false, false);
 
     // Assert
-    Clazz referencedClass = actualCreateArrayReferenceValueResult.getReferencedClass();
-    assertTrue(referencedClass instanceof LibraryClass);
-    assertTrue(actualCreateArrayReferenceValueResult instanceof MultiTypedReferenceValue);
-    assertEquals("[Ljava/lang/Object;", actualCreateArrayReferenceValueResult.getType());
-    TypedReferenceValue generalizedType =
-        ((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult).getGeneralizedType();
-    assertEquals("[Ljava/lang/Object;", generalizedType.getType());
-    assertSame(referencedClass, generalizedType.getReferencedClass());
+    assertTrue(actualCreateReferenceValueResult instanceof MultiTypedReferenceValue);
+    AnalyzedObject value = actualCreateReferenceValueResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(actualCreateReferenceValueResult.getType());
+    assertNull(actualCreateReferenceValueResult.getReferencedClass());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateReferenceValueResult).getPotentialTypes().size());
+    assertFalse(actualCreateReferenceValueResult.isCategory2());
+    assertFalse(actualCreateReferenceValueResult.isParticular());
+    assertFalse(actualCreateReferenceValueResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCreateReferenceValueResult).mayBeUnknown);
+    assertEquals(Value.NEVER, actualCreateReferenceValueResult.isNotNull());
+    ReferenceValue expectedGeneralizedType = multiTypedReferenceValueFactory.REFERENCE_VALUE_NULL;
+    assertSame(expectedGeneralizedType,
+        ((MultiTypedReferenceValue) actualCreateReferenceValueResult).getGeneralizedType());
   }
 
   /**
-   * Test {@link MultiTypedReferenceValueFactory#createArrayReferenceValue(String, Clazz,
-   * IntegerValue)} with {@code type}, {@code referencedClass}, {@code arrayLength}.
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createArrayReferenceValue(String,
-   * Clazz, IntegerValue)}
+   * Method under test:
+   * {@link MultiTypedReferenceValueFactory#createReferenceValue(String, Clazz, boolean, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue MultiTypedReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue)"
-  })
-  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength2() {
+  public void testCreateReferenceValue3() {
     // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory(
-            true, KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool);
-
-    // Act
-    ReferenceValue actualCreateArrayReferenceValueResult =
-        multiTypedReferenceValueFactory.createArrayReferenceValue(
-            "Ljava/lang/Object;", new LibraryClass(), BasicValueFactory.INTEGER_VALUE);
-
-    // Assert
-    Clazz referencedClass = actualCreateArrayReferenceValueResult.getReferencedClass();
-    assertTrue(referencedClass instanceof LibraryClass);
-    assertTrue(actualCreateArrayReferenceValueResult instanceof MultiTypedReferenceValue);
-    assertEquals("[Ljava/lang/Object;", actualCreateArrayReferenceValueResult.getType());
-    TypedReferenceValue generalizedType =
-        ((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult).getGeneralizedType();
-    assertEquals("[Ljava/lang/Object;", generalizedType.getType());
-    assertSame(referencedClass, generalizedType.getReferencedClass());
-  }
-
-  /**
-   * Test {@link MultiTypedReferenceValueFactory#createArrayReferenceValue(String, Clazz,
-   * IntegerValue, Object)} with {@code type}, {@code referencedClass}, {@code arrayLength}, {@code
-   * elementValues}.
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createArrayReferenceValue(String,
-   * Clazz, IntegerValue, Object)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue MultiTypedReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue, Object)"
-  })
-  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLengthElementValues() {
-    // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory();
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory = new MultiTypedReferenceValueFactory();
     LibraryClass referencedClass = new LibraryClass();
 
     // Act
-    ReferenceValue actualCreateArrayReferenceValueResult =
-        multiTypedReferenceValueFactory.createArrayReferenceValue(
-            "Type", referencedClass, BasicValueFactory.INTEGER_VALUE, "Element Values");
+    ReferenceValue actualCreateReferenceValueResult = multiTypedReferenceValueFactory
+        .createReferenceValue("Ljava/lang/Object;", referencedClass, false, false);
 
     // Assert
-    Clazz referencedClass2 = actualCreateArrayReferenceValueResult.getReferencedClass();
-    assertTrue(referencedClass2 instanceof LibraryClass);
-    assertTrue(actualCreateArrayReferenceValueResult instanceof MultiTypedReferenceValue);
-    assertEquals("[Type", actualCreateArrayReferenceValueResult.getType());
-    assertEquals(
-        1,
-        ((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult)
-            .getPotentialTypes()
-            .size());
-    assertEquals(1, actualCreateArrayReferenceValueResult.isNotNull());
-    assertFalse(actualCreateArrayReferenceValueResult.isCategory2());
-    assertFalse(actualCreateArrayReferenceValueResult.isParticular());
-    assertFalse(actualCreateArrayReferenceValueResult.isSpecific());
-    assertFalse(((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult).mayBeUnknown);
-    assertSame(referencedClass, referencedClass2);
-  }
-
-  /**
-   * Test {@link MultiTypedReferenceValueFactory#createArrayReferenceValue(String, Clazz,
-   * IntegerValue)} with {@code type}, {@code referencedClass}, {@code arrayLength}.
-   *
-   * <ul>
-   *   <li>Then return {@code [Type}.
-   * </ul>
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createArrayReferenceValue(String,
-   * Clazz, IntegerValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue MultiTypedReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue)"
-  })
-  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength_thenReturnType() {
-    // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory();
-
-    // Act
-    ReferenceValue actualCreateArrayReferenceValueResult =
-        multiTypedReferenceValueFactory.createArrayReferenceValue(
-            "Type", new LibraryClass(), BasicValueFactory.INTEGER_VALUE);
-
-    // Assert
-    Clazz referencedClass = actualCreateArrayReferenceValueResult.getReferencedClass();
-    assertTrue(referencedClass instanceof LibraryClass);
-    assertTrue(actualCreateArrayReferenceValueResult instanceof MultiTypedReferenceValue);
-    assertEquals("[Type", actualCreateArrayReferenceValueResult.getType());
-    TypedReferenceValue generalizedType =
-        ((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult).getGeneralizedType();
-    assertEquals("[Type", generalizedType.getType());
-    assertSame(referencedClass, generalizedType.getReferencedClass());
-  }
-
-  /**
-   * Test {@link MultiTypedReferenceValueFactory#createArrayReferenceValue(String, Clazz,
-   * IntegerValue)} with {@code type}, {@code referencedClass}, {@code arrayLength}.
-   *
-   * <ul>
-   *   <li>Then return {@code [Type}.
-   * </ul>
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createArrayReferenceValue(String,
-   * Clazz, IntegerValue)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "ReferenceValue MultiTypedReferenceValueFactory.createArrayReferenceValue(String, Clazz, IntegerValue)"
-  })
-  public void testCreateArrayReferenceValueWithTypeReferencedClassArrayLength_thenReturnType2() {
-    // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory(
-            true, KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool);
-
-    // Act
-    ReferenceValue actualCreateArrayReferenceValueResult =
-        multiTypedReferenceValueFactory.createArrayReferenceValue(
-            "Type", new LibraryClass(), BasicValueFactory.INTEGER_VALUE);
-
-    // Assert
-    Clazz referencedClass = actualCreateArrayReferenceValueResult.getReferencedClass();
-    assertTrue(referencedClass instanceof LibraryClass);
-    assertTrue(actualCreateArrayReferenceValueResult instanceof MultiTypedReferenceValue);
-    assertEquals("[Type", actualCreateArrayReferenceValueResult.getType());
-    TypedReferenceValue generalizedType =
-        ((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult).getGeneralizedType();
-    assertEquals("[Type", generalizedType.getType());
-    assertSame(referencedClass, generalizedType.getReferencedClass());
-  }
-
-  /**
-   * Test {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}.
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createValue(String, Clazz,
-   * boolean, boolean)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "Value MultiTypedReferenceValueFactory.createValue(String, Clazz, boolean, boolean)"
-  })
-  public void testCreateValue() {
-    // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory();
-
-    // Act
-    Value actualCreateValueResult =
-        multiTypedReferenceValueFactory.createValue(
-            "Ljava/lang/Object;", new LibraryClass(), true, true);
-
-    // Assert
-    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
-    assertNull(((MultiTypedReferenceValue) actualCreateValueResult).getReferencedClass());
-    ReferenceValue expectedGeneralizedType =
-        multiTypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL;
-    assertSame(
-        expectedGeneralizedType,
-        ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType());
-  }
-
-  /**
-   * Test {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}.
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createValue(String, Clazz,
-   * boolean, boolean)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "Value MultiTypedReferenceValueFactory.createValue(String, Clazz, boolean, boolean)"
-  })
-  public void testCreateValue2() {
-    // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory(
-            true, KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool);
-
-    // Act
-    Value actualCreateValueResult =
-        multiTypedReferenceValueFactory.createValue(
-            "Ljava/lang/Object;", new LibraryClass(), true, true);
-
-    // Assert
-    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
-    assertNull(((MultiTypedReferenceValue) actualCreateValueResult).getReferencedClass());
-    ReferenceValue expectedGeneralizedType =
-        multiTypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL;
-    assertSame(
-        expectedGeneralizedType,
-        ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType());
-  }
-
-  /**
-   * Test {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}.
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createValue(String, Clazz,
-   * boolean, boolean)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "Value MultiTypedReferenceValueFactory.createValue(String, Clazz, boolean, boolean)"
-  })
-  public void testCreateValue3() {
-    // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory();
-
-    // Act
-    Value actualCreateValueResult =
-        multiTypedReferenceValueFactory.createValue(
-            "Ljava/lang/Object;", new LibraryClass(), true, false);
-
-    // Assert
-    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
-    assertEquals(1, ((MultiTypedReferenceValue) actualCreateValueResult).isNotNull());
-    ReferenceValue expectedGeneralizedType =
-        multiTypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_NOT_NULL;
-    assertSame(
-        expectedGeneralizedType,
-        ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType());
-  }
-
-  /**
-   * Test {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}.
-   *
-   * <ul>
-   *   <li>Given {@link MultiTypedReferenceValueFactory#MultiTypedReferenceValueFactory()}.
-   *   <li>When {@code Type}.
-   *   <li>Then return {@code Type}.
-   * </ul>
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createValue(String, Clazz,
-   * boolean, boolean)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "Value MultiTypedReferenceValueFactory.createValue(String, Clazz, boolean, boolean)"
-  })
-  public void testCreateValue_givenMultiTypedReferenceValueFactory_whenType_thenReturnType() {
-    // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory();
-
-    // Act
-    Value actualCreateValueResult =
-        multiTypedReferenceValueFactory.createValue("Type", new LibraryClass(), true, true);
-
-    // Assert
-    Clazz referencedClass =
-        ((MultiTypedReferenceValue) actualCreateValueResult).getReferencedClass();
-    assertTrue(referencedClass instanceof LibraryClass);
-    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
-    assertEquals("Type", ((MultiTypedReferenceValue) actualCreateValueResult).getType());
-    TypedReferenceValue generalizedType =
-        ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType();
-    assertEquals("Type", generalizedType.getType());
-    assertSame(referencedClass, generalizedType.getReferencedClass());
-  }
-
-  /**
-   * Test {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}.
-   *
-   * <ul>
-   *   <li>Then return {@code Type}.
-   * </ul>
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createValue(String, Clazz,
-   * boolean, boolean)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "Value MultiTypedReferenceValueFactory.createValue(String, Clazz, boolean, boolean)"
-  })
-  public void testCreateValue_thenReturnType() {
-    // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory(
-            true, KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool);
-
-    // Act
-    Value actualCreateValueResult =
-        multiTypedReferenceValueFactory.createValue("Type", new LibraryClass(), true, true);
-
-    // Assert
-    Clazz referencedClass =
-        ((MultiTypedReferenceValue) actualCreateValueResult).getReferencedClass();
-    assertTrue(referencedClass instanceof LibraryClass);
-    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
-    assertEquals("Type", ((MultiTypedReferenceValue) actualCreateValueResult).getType());
-    TypedReferenceValue generalizedType =
-        ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType();
-    assertEquals("Type", generalizedType.getType());
-    assertSame(referencedClass, generalizedType.getReferencedClass());
-  }
-
-  /**
-   * Test {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}.
-   *
-   * <ul>
-   *   <li>When {@code false}.
-   *   <li>Then return GeneralizedType NotNull is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createValue(String, Clazz,
-   * boolean, boolean)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "Value MultiTypedReferenceValueFactory.createValue(String, Clazz, boolean, boolean)"
-  })
-  public void testCreateValue_whenFalse_thenReturnGeneralizedTypeNotNullIsOne() {
-    // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory();
-
-    // Act
-    Value actualCreateValueResult =
-        multiTypedReferenceValueFactory.createValue("Type", new LibraryClass(), true, false);
-
-    // Assert
-    Clazz referencedClass =
-        ((MultiTypedReferenceValue) actualCreateValueResult).getReferencedClass();
-    assertTrue(referencedClass instanceof LibraryClass);
-    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
-    TypedReferenceValue generalizedType =
-        ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType();
+    assertTrue(actualCreateReferenceValueResult instanceof MultiTypedReferenceValue);
+    assertEquals("Ljava/lang/Object;", actualCreateReferenceValueResult.getType());
+    TypedReferenceValue generalizedType = ((MultiTypedReferenceValue) actualCreateReferenceValueResult)
+        .getGeneralizedType();
+    assertEquals("Ljava/lang/Object;", generalizedType.getType());
+    AnalyzedObject value = actualCreateReferenceValueResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateReferenceValueResult).getPotentialTypes().size());
     assertEquals(1, generalizedType.isNotNull());
-    assertEquals(1, ((MultiTypedReferenceValue) actualCreateValueResult).isNotNull());
+    assertEquals(1, actualCreateReferenceValueResult.isNotNull());
+    assertFalse(generalizedType.isCategory2());
+    assertFalse(actualCreateReferenceValueResult.isCategory2());
+    assertFalse(generalizedType.isParticular());
+    assertFalse(generalizedType.mayBeExtension());
+    assertFalse(actualCreateReferenceValueResult.isParticular());
+    assertFalse(generalizedType.isSpecific());
+    assertFalse(actualCreateReferenceValueResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCreateReferenceValueResult).mayBeUnknown);
+    assertFalse(generalizedType.mayBeExtension);
     assertFalse(generalizedType.mayBeNull);
     assertEquals(Value.NEVER, generalizedType.isNull());
+    assertSame(referencedClass, actualCreateReferenceValueResult.getReferencedClass());
     assertSame(referencedClass, generalizedType.getReferencedClass());
+    assertSame(value, generalizedType.getValue());
   }
 
   /**
-   * Test {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}.
-   *
-   * <ul>
-   *   <li>When {@code false}.
-   *   <li>Then return not GeneralizedType mayBeExtension.
-   * </ul>
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createValue(String, Clazz,
-   * boolean, boolean)}
+   * Method under test:
+   * {@link MultiTypedReferenceValueFactory#createReferenceValue(String, Clazz, boolean, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "Value MultiTypedReferenceValueFactory.createValue(String, Clazz, boolean, boolean)"
-  })
-  public void testCreateValue_whenFalse_thenReturnNotGeneralizedTypeMayBeExtension() {
+  public void testCreateReferenceValue4() {
     // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory();
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory = new MultiTypedReferenceValueFactory();
 
     // Act
-    Value actualCreateValueResult =
-        multiTypedReferenceValueFactory.createValue("Type", new LibraryClass(), false, true);
+    ReferenceValue actualCreateReferenceValueResult = multiTypedReferenceValueFactory
+        .createReferenceValue("Ljava/lang/Object;", new LibraryClass(), true, true);
 
     // Assert
-    Clazz referencedClass =
-        ((MultiTypedReferenceValue) actualCreateValueResult).getReferencedClass();
-    assertTrue(referencedClass instanceof LibraryClass);
-    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
-    TypedReferenceValue generalizedType =
-        ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType();
-    assertFalse(generalizedType.mayBeExtension());
-    assertFalse(generalizedType.mayBeExtension);
-    assertSame(referencedClass, generalizedType.getReferencedClass());
+    assertTrue(actualCreateReferenceValueResult instanceof MultiTypedReferenceValue);
+    assertEquals("Ljava/lang/Object;", actualCreateReferenceValueResult.getType());
+    AnalyzedObject value = actualCreateReferenceValueResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(actualCreateReferenceValueResult.getReferencedClass());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(0, actualCreateReferenceValueResult.isNotNull());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateReferenceValueResult).getPotentialTypes().size());
+    assertFalse(actualCreateReferenceValueResult.isCategory2());
+    assertFalse(actualCreateReferenceValueResult.isParticular());
+    assertFalse(actualCreateReferenceValueResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCreateReferenceValueResult).mayBeUnknown);
+    ReferenceValue expectedGeneralizedType = multiTypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL;
+    assertSame(expectedGeneralizedType,
+        ((MultiTypedReferenceValue) actualCreateReferenceValueResult).getGeneralizedType());
   }
 
   /**
-   * Test {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}.
-   *
-   * <ul>
-   *   <li>When {@code Ljava/lang/Object;}.
-   *   <li>Then return not GeneralizedType mayBeExtension.
-   * </ul>
-   *
-   * <p>Method under test: {@link MultiTypedReferenceValueFactory#createValue(String, Clazz,
-   * boolean, boolean)}
+   * Method under test:
+   * {@link MultiTypedReferenceValueFactory#createReferenceValue(String, Clazz, boolean, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({
-    "Value MultiTypedReferenceValueFactory.createValue(String, Clazz, boolean, boolean)"
-  })
-  public void testCreateValue_whenLjavaLangObject_thenReturnNotGeneralizedTypeMayBeExtension() {
+  public void testCreateReferenceValue5() {
     // Arrange
-    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory =
-        new MultiTypedReferenceValueFactory();
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory = new MultiTypedReferenceValueFactory();
 
     // Act
-    Value actualCreateValueResult =
-        multiTypedReferenceValueFactory.createValue(
-            "Ljava/lang/Object;", new LibraryClass(), false, true);
+    ReferenceValue actualCreateReferenceValueResult = multiTypedReferenceValueFactory
+        .createReferenceValue("Ljava/lang/Object;", new LibraryClass(), true, false);
 
     // Assert
-    Clazz referencedClass =
-        ((MultiTypedReferenceValue) actualCreateValueResult).getReferencedClass();
-    assertTrue(referencedClass instanceof LibraryClass);
-    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
-    TypedReferenceValue generalizedType =
-        ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType();
+    assertTrue(actualCreateReferenceValueResult instanceof MultiTypedReferenceValue);
+    assertEquals("Ljava/lang/Object;", actualCreateReferenceValueResult.getType());
+    AnalyzedObject value = actualCreateReferenceValueResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(actualCreateReferenceValueResult.getReferencedClass());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateReferenceValueResult).getPotentialTypes().size());
+    assertEquals(1, actualCreateReferenceValueResult.isNotNull());
+    assertFalse(actualCreateReferenceValueResult.isCategory2());
+    assertFalse(actualCreateReferenceValueResult.isParticular());
+    assertFalse(actualCreateReferenceValueResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCreateReferenceValueResult).mayBeUnknown);
+    ReferenceValue expectedGeneralizedType = multiTypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_NOT_NULL;
+    assertSame(expectedGeneralizedType,
+        ((MultiTypedReferenceValue) actualCreateReferenceValueResult).getGeneralizedType());
+  }
+
+  /**
+   * Method under test:
+   * {@link MultiTypedReferenceValueFactory#createArrayReferenceValue(String, Clazz, IntegerValue)}
+   */
+  @Test
+  public void testCreateArrayReferenceValue() {
+    // Arrange
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory = new MultiTypedReferenceValueFactory();
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    ReferenceValue actualCreateArrayReferenceValueResult = multiTypedReferenceValueFactory
+        .createArrayReferenceValue("Type", referencedClass, BasicValueFactory.INTEGER_VALUE);
+
+    // Assert
+    assertTrue(actualCreateArrayReferenceValueResult instanceof MultiTypedReferenceValue);
+    assertEquals("[Type", actualCreateArrayReferenceValueResult.getType());
+    TypedReferenceValue generalizedType = ((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult)
+        .getGeneralizedType();
+    assertEquals("[Type", generalizedType.getType());
+    AnalyzedObject value = actualCreateArrayReferenceValueResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult).getPotentialTypes().size());
+    assertEquals(1, generalizedType.isNotNull());
+    assertEquals(1, actualCreateArrayReferenceValueResult.isNotNull());
+    assertFalse(generalizedType.isCategory2());
+    assertFalse(actualCreateArrayReferenceValueResult.isCategory2());
+    assertFalse(generalizedType.isParticular());
     assertFalse(generalizedType.mayBeExtension());
+    assertFalse(actualCreateArrayReferenceValueResult.isParticular());
+    assertFalse(generalizedType.isSpecific());
+    assertFalse(actualCreateArrayReferenceValueResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult).mayBeUnknown);
     assertFalse(generalizedType.mayBeExtension);
+    assertFalse(generalizedType.mayBeNull);
+    assertEquals(Value.NEVER, generalizedType.isNull());
+    assertSame(referencedClass, actualCreateArrayReferenceValueResult.getReferencedClass());
     assertSame(referencedClass, generalizedType.getReferencedClass());
+    assertSame(value, generalizedType.getValue());
+  }
+
+  /**
+   * Method under test:
+   * {@link MultiTypedReferenceValueFactory#createArrayReferenceValue(String, Clazz, IntegerValue)}
+   */
+  @Test
+  public void testCreateArrayReferenceValue2() {
+    // Arrange
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory = new MultiTypedReferenceValueFactory(true,
+        KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool);
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    ReferenceValue actualCreateArrayReferenceValueResult = multiTypedReferenceValueFactory
+        .createArrayReferenceValue("Type", referencedClass, BasicValueFactory.INTEGER_VALUE);
+
+    // Assert
+    assertTrue(actualCreateArrayReferenceValueResult instanceof MultiTypedReferenceValue);
+    assertEquals("[Type", actualCreateArrayReferenceValueResult.getType());
+    TypedReferenceValue generalizedType = ((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult)
+        .getGeneralizedType();
+    assertEquals("[Type", generalizedType.getType());
+    AnalyzedObject value = actualCreateArrayReferenceValueResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult).getPotentialTypes().size());
+    assertEquals(1, generalizedType.isNotNull());
+    assertEquals(1, actualCreateArrayReferenceValueResult.isNotNull());
+    assertFalse(generalizedType.isCategory2());
+    assertFalse(actualCreateArrayReferenceValueResult.isCategory2());
+    assertFalse(generalizedType.isParticular());
+    assertFalse(generalizedType.mayBeExtension());
+    assertFalse(actualCreateArrayReferenceValueResult.isParticular());
+    assertFalse(generalizedType.isSpecific());
+    assertFalse(actualCreateArrayReferenceValueResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult).mayBeUnknown);
+    assertFalse(generalizedType.mayBeExtension);
+    assertFalse(generalizedType.mayBeNull);
+    assertEquals(Value.NEVER, generalizedType.isNull());
+    assertSame(referencedClass, actualCreateArrayReferenceValueResult.getReferencedClass());
+    assertSame(referencedClass, generalizedType.getReferencedClass());
+    assertSame(value, generalizedType.getValue());
+  }
+
+  /**
+   * Method under test:
+   * {@link MultiTypedReferenceValueFactory#createArrayReferenceValue(String, Clazz, IntegerValue)}
+   */
+  @Test
+  public void testCreateArrayReferenceValue3() {
+    // Arrange
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory = new MultiTypedReferenceValueFactory();
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    ReferenceValue actualCreateArrayReferenceValueResult = multiTypedReferenceValueFactory
+        .createArrayReferenceValue("Ljava/lang/Object;", referencedClass, BasicValueFactory.INTEGER_VALUE);
+
+    // Assert
+    assertTrue(actualCreateArrayReferenceValueResult instanceof MultiTypedReferenceValue);
+    assertEquals("[Ljava/lang/Object;", actualCreateArrayReferenceValueResult.getType());
+    TypedReferenceValue generalizedType = ((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult)
+        .getGeneralizedType();
+    assertEquals("[Ljava/lang/Object;", generalizedType.getType());
+    AnalyzedObject value = actualCreateArrayReferenceValueResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult).getPotentialTypes().size());
+    assertEquals(1, generalizedType.isNotNull());
+    assertEquals(1, actualCreateArrayReferenceValueResult.isNotNull());
+    assertFalse(generalizedType.isCategory2());
+    assertFalse(actualCreateArrayReferenceValueResult.isCategory2());
+    assertFalse(generalizedType.isParticular());
+    assertFalse(generalizedType.mayBeExtension());
+    assertFalse(actualCreateArrayReferenceValueResult.isParticular());
+    assertFalse(generalizedType.isSpecific());
+    assertFalse(actualCreateArrayReferenceValueResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult).mayBeUnknown);
+    assertFalse(generalizedType.mayBeExtension);
+    assertFalse(generalizedType.mayBeNull);
+    assertEquals(Value.NEVER, generalizedType.isNull());
+    assertSame(referencedClass, actualCreateArrayReferenceValueResult.getReferencedClass());
+    assertSame(referencedClass, generalizedType.getReferencedClass());
+    assertSame(value, generalizedType.getValue());
+  }
+
+  /**
+   * Method under test:
+   * {@link MultiTypedReferenceValueFactory#createArrayReferenceValue(String, Clazz, IntegerValue)}
+   */
+  @Test
+  public void testCreateArrayReferenceValue4() {
+    // Arrange
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory = new MultiTypedReferenceValueFactory(true,
+        KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool);
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    ReferenceValue actualCreateArrayReferenceValueResult = multiTypedReferenceValueFactory
+        .createArrayReferenceValue("Ljava/lang/Object;", referencedClass, BasicValueFactory.INTEGER_VALUE);
+
+    // Assert
+    assertTrue(actualCreateArrayReferenceValueResult instanceof MultiTypedReferenceValue);
+    assertEquals("[Ljava/lang/Object;", actualCreateArrayReferenceValueResult.getType());
+    TypedReferenceValue generalizedType = ((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult)
+        .getGeneralizedType();
+    assertEquals("[Ljava/lang/Object;", generalizedType.getType());
+    AnalyzedObject value = actualCreateArrayReferenceValueResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult).getPotentialTypes().size());
+    assertEquals(1, generalizedType.isNotNull());
+    assertEquals(1, actualCreateArrayReferenceValueResult.isNotNull());
+    assertFalse(generalizedType.isCategory2());
+    assertFalse(actualCreateArrayReferenceValueResult.isCategory2());
+    assertFalse(generalizedType.isParticular());
+    assertFalse(generalizedType.mayBeExtension());
+    assertFalse(actualCreateArrayReferenceValueResult.isParticular());
+    assertFalse(generalizedType.isSpecific());
+    assertFalse(actualCreateArrayReferenceValueResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult).mayBeUnknown);
+    assertFalse(generalizedType.mayBeExtension);
+    assertFalse(generalizedType.mayBeNull);
+    assertEquals(Value.NEVER, generalizedType.isNull());
+    assertSame(referencedClass, actualCreateArrayReferenceValueResult.getReferencedClass());
+    assertSame(referencedClass, generalizedType.getReferencedClass());
+    assertSame(value, generalizedType.getValue());
+  }
+
+  /**
+   * Method under test:
+   * {@link MultiTypedReferenceValueFactory#createArrayReferenceValue(String, Clazz, IntegerValue, Object)}
+   */
+  @Test
+  public void testCreateArrayReferenceValue5() {
+    // Arrange
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory = new MultiTypedReferenceValueFactory();
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    ReferenceValue actualCreateArrayReferenceValueResult = multiTypedReferenceValueFactory
+        .createArrayReferenceValue("Type", referencedClass, BasicValueFactory.INTEGER_VALUE, "Element Values");
+
+    // Assert
+    assertTrue(actualCreateArrayReferenceValueResult instanceof MultiTypedReferenceValue);
+    assertEquals("[Type", actualCreateArrayReferenceValueResult.getType());
+    TypedReferenceValue generalizedType = ((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult)
+        .getGeneralizedType();
+    assertEquals("[Type", generalizedType.getType());
+    AnalyzedObject value = actualCreateArrayReferenceValueResult.getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult).getPotentialTypes().size());
+    assertEquals(1, generalizedType.isNotNull());
+    assertEquals(1, actualCreateArrayReferenceValueResult.isNotNull());
+    assertFalse(generalizedType.isCategory2());
+    assertFalse(actualCreateArrayReferenceValueResult.isCategory2());
+    assertFalse(generalizedType.isParticular());
+    assertFalse(generalizedType.mayBeExtension());
+    assertFalse(actualCreateArrayReferenceValueResult.isParticular());
+    assertFalse(generalizedType.isSpecific());
+    assertFalse(actualCreateArrayReferenceValueResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCreateArrayReferenceValueResult).mayBeUnknown);
+    assertFalse(generalizedType.mayBeExtension);
+    assertFalse(generalizedType.mayBeNull);
+    assertEquals(Value.NEVER, generalizedType.isNull());
+    assertSame(referencedClass, actualCreateArrayReferenceValueResult.getReferencedClass());
+    assertSame(referencedClass, generalizedType.getReferencedClass());
+    assertSame(value, generalizedType.getValue());
+  }
+
+  /**
+   * Method under test:
+   * {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}
+   */
+  @Test
+  public void testCreateValue() {
+    // Arrange
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory = new MultiTypedReferenceValueFactory();
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    Value actualCreateValueResult = multiTypedReferenceValueFactory.createValue("Type", referencedClass, true, true);
+
+    // Assert
+    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
+    assertEquals("Type", ((MultiTypedReferenceValue) actualCreateValueResult).getType());
+    TypedReferenceValue generalizedType = ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType();
+    assertEquals("Type", generalizedType.getType());
+    AnalyzedObject value = ((MultiTypedReferenceValue) actualCreateValueResult).getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(0, generalizedType.isNotNull());
+    assertEquals(0, ((MultiTypedReferenceValue) actualCreateValueResult).isNotNull());
+    assertEquals(0, generalizedType.isNull());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateValueResult).getPotentialTypes().size());
+    assertFalse(generalizedType.isCategory2());
+    assertFalse(generalizedType.isParticular());
+    assertFalse(actualCreateValueResult.isCategory2());
+    assertFalse(actualCreateValueResult.isParticular());
+    assertFalse(generalizedType.isSpecific());
+    assertFalse(actualCreateValueResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCreateValueResult).mayBeUnknown);
+    assertTrue(generalizedType.mayBeExtension());
+    assertTrue(generalizedType.mayBeExtension);
+    assertTrue(generalizedType.mayBeNull);
+    assertSame(referencedClass, ((MultiTypedReferenceValue) actualCreateValueResult).getReferencedClass());
+    assertSame(referencedClass, generalizedType.getReferencedClass());
+    assertSame(value, generalizedType.getValue());
+  }
+
+  /**
+   * Method under test:
+   * {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}
+   */
+  @Test
+  public void testCreateValue2() {
+    // Arrange
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory = new MultiTypedReferenceValueFactory(true,
+        KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool);
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    Value actualCreateValueResult = multiTypedReferenceValueFactory.createValue("Type", referencedClass, true, true);
+
+    // Assert
+    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
+    assertEquals("Type", ((MultiTypedReferenceValue) actualCreateValueResult).getType());
+    TypedReferenceValue generalizedType = ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType();
+    assertEquals("Type", generalizedType.getType());
+    AnalyzedObject value = ((MultiTypedReferenceValue) actualCreateValueResult).getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(0, generalizedType.isNotNull());
+    assertEquals(0, ((MultiTypedReferenceValue) actualCreateValueResult).isNotNull());
+    assertEquals(0, generalizedType.isNull());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateValueResult).getPotentialTypes().size());
+    assertFalse(generalizedType.isCategory2());
+    assertFalse(generalizedType.isParticular());
+    assertFalse(actualCreateValueResult.isCategory2());
+    assertFalse(actualCreateValueResult.isParticular());
+    assertFalse(generalizedType.isSpecific());
+    assertFalse(actualCreateValueResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCreateValueResult).mayBeUnknown);
+    assertTrue(generalizedType.mayBeExtension());
+    assertTrue(generalizedType.mayBeExtension);
+    assertTrue(generalizedType.mayBeNull);
+    assertSame(referencedClass, ((MultiTypedReferenceValue) actualCreateValueResult).getReferencedClass());
+    assertSame(referencedClass, generalizedType.getReferencedClass());
+    assertSame(value, generalizedType.getValue());
+  }
+
+  /**
+   * Method under test:
+   * {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}
+   */
+  @Test
+  public void testCreateValue3() {
+    // Arrange
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory = new MultiTypedReferenceValueFactory();
+
+    // Act
+    Value actualCreateValueResult = multiTypedReferenceValueFactory.createValue("Ljava/lang/Object;",
+        new LibraryClass(), true, true);
+
+    // Assert
+    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
+    assertEquals("Ljava/lang/Object;", ((MultiTypedReferenceValue) actualCreateValueResult).getType());
+    AnalyzedObject value = ((MultiTypedReferenceValue) actualCreateValueResult).getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(((MultiTypedReferenceValue) actualCreateValueResult).getReferencedClass());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(0, ((MultiTypedReferenceValue) actualCreateValueResult).isNotNull());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateValueResult).getPotentialTypes().size());
+    assertFalse(actualCreateValueResult.isCategory2());
+    assertFalse(actualCreateValueResult.isParticular());
+    assertFalse(actualCreateValueResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCreateValueResult).mayBeUnknown);
+    ReferenceValue expectedGeneralizedType = multiTypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL;
+    assertSame(expectedGeneralizedType, ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType());
+  }
+
+  /**
+   * Method under test:
+   * {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}
+   */
+  @Test
+  public void testCreateValue4() {
+    // Arrange
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory = new MultiTypedReferenceValueFactory();
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    Value actualCreateValueResult = multiTypedReferenceValueFactory.createValue("Type", referencedClass, false, true);
+
+    // Assert
+    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
+    assertEquals("Type", ((MultiTypedReferenceValue) actualCreateValueResult).getType());
+    TypedReferenceValue generalizedType = ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType();
+    assertEquals("Type", generalizedType.getType());
+    AnalyzedObject value = ((MultiTypedReferenceValue) actualCreateValueResult).getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(0, generalizedType.isNotNull());
+    assertEquals(0, ((MultiTypedReferenceValue) actualCreateValueResult).isNotNull());
+    assertEquals(0, generalizedType.isNull());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateValueResult).getPotentialTypes().size());
+    assertFalse(generalizedType.isCategory2());
+    assertFalse(generalizedType.isParticular());
+    assertFalse(generalizedType.mayBeExtension());
+    assertFalse(actualCreateValueResult.isCategory2());
+    assertFalse(actualCreateValueResult.isParticular());
+    assertFalse(generalizedType.isSpecific());
+    assertFalse(actualCreateValueResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCreateValueResult).mayBeUnknown);
+    assertFalse(generalizedType.mayBeExtension);
+    assertTrue(generalizedType.mayBeNull);
+    assertSame(referencedClass, ((MultiTypedReferenceValue) actualCreateValueResult).getReferencedClass());
+    assertSame(referencedClass, generalizedType.getReferencedClass());
+    assertSame(value, generalizedType.getValue());
+  }
+
+  /**
+   * Method under test:
+   * {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}
+   */
+  @Test
+  public void testCreateValue5() {
+    // Arrange
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory = new MultiTypedReferenceValueFactory();
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    Value actualCreateValueResult = multiTypedReferenceValueFactory.createValue("Type", referencedClass, true, false);
+
+    // Assert
+    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
+    assertEquals("Type", ((MultiTypedReferenceValue) actualCreateValueResult).getType());
+    TypedReferenceValue generalizedType = ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType();
+    assertEquals("Type", generalizedType.getType());
+    AnalyzedObject value = ((MultiTypedReferenceValue) actualCreateValueResult).getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateValueResult).getPotentialTypes().size());
+    assertEquals(1, generalizedType.isNotNull());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateValueResult).isNotNull());
+    assertFalse(generalizedType.isCategory2());
+    assertFalse(generalizedType.isParticular());
+    assertFalse(actualCreateValueResult.isCategory2());
+    assertFalse(actualCreateValueResult.isParticular());
+    assertFalse(generalizedType.isSpecific());
+    assertFalse(actualCreateValueResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCreateValueResult).mayBeUnknown);
+    assertFalse(generalizedType.mayBeNull);
+    assertTrue(generalizedType.mayBeExtension());
+    assertTrue(generalizedType.mayBeExtension);
+    assertEquals(Value.NEVER, generalizedType.isNull());
+    assertSame(referencedClass, ((MultiTypedReferenceValue) actualCreateValueResult).getReferencedClass());
+    assertSame(referencedClass, generalizedType.getReferencedClass());
+    assertSame(value, generalizedType.getValue());
+  }
+
+  /**
+   * Method under test:
+   * {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}
+   */
+  @Test
+  public void testCreateValue6() {
+    // Arrange
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory = new MultiTypedReferenceValueFactory(true,
+        KotlinConstants.dummyClassPool, KotlinConstants.dummyClassPool);
+
+    // Act
+    Value actualCreateValueResult = multiTypedReferenceValueFactory.createValue("Ljava/lang/Object;",
+        new LibraryClass(), true, true);
+
+    // Assert
+    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
+    assertEquals("Ljava/lang/Object;", ((MultiTypedReferenceValue) actualCreateValueResult).getType());
+    AnalyzedObject value = ((MultiTypedReferenceValue) actualCreateValueResult).getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(((MultiTypedReferenceValue) actualCreateValueResult).getReferencedClass());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(0, ((MultiTypedReferenceValue) actualCreateValueResult).isNotNull());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateValueResult).getPotentialTypes().size());
+    assertFalse(actualCreateValueResult.isCategory2());
+    assertFalse(actualCreateValueResult.isParticular());
+    assertFalse(actualCreateValueResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCreateValueResult).mayBeUnknown);
+    ReferenceValue expectedGeneralizedType = multiTypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_MAYBE_NULL;
+    assertSame(expectedGeneralizedType, ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType());
+  }
+
+  /**
+   * Method under test:
+   * {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}
+   */
+  @Test
+  public void testCreateValue7() {
+    // Arrange
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory = new MultiTypedReferenceValueFactory();
+    LibraryClass referencedClass = new LibraryClass();
+
+    // Act
+    Value actualCreateValueResult = multiTypedReferenceValueFactory.createValue("Ljava/lang/Object;", referencedClass,
+        false, true);
+
+    // Assert
+    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
+    assertEquals("Ljava/lang/Object;", ((MultiTypedReferenceValue) actualCreateValueResult).getType());
+    TypedReferenceValue generalizedType = ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType();
+    assertEquals("Ljava/lang/Object;", generalizedType.getType());
+    AnalyzedObject value = ((MultiTypedReferenceValue) actualCreateValueResult).getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(0, generalizedType.isNotNull());
+    assertEquals(0, ((MultiTypedReferenceValue) actualCreateValueResult).isNotNull());
+    assertEquals(0, generalizedType.isNull());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateValueResult).getPotentialTypes().size());
+    assertFalse(generalizedType.isCategory2());
+    assertFalse(generalizedType.isParticular());
+    assertFalse(generalizedType.mayBeExtension());
+    assertFalse(actualCreateValueResult.isCategory2());
+    assertFalse(actualCreateValueResult.isParticular());
+    assertFalse(generalizedType.isSpecific());
+    assertFalse(actualCreateValueResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCreateValueResult).mayBeUnknown);
+    assertFalse(generalizedType.mayBeExtension);
+    assertTrue(generalizedType.mayBeNull);
+    assertSame(referencedClass, ((MultiTypedReferenceValue) actualCreateValueResult).getReferencedClass());
+    assertSame(referencedClass, generalizedType.getReferencedClass());
+    assertSame(value, generalizedType.getValue());
+  }
+
+  /**
+   * Method under test:
+   * {@link MultiTypedReferenceValueFactory#createValue(String, Clazz, boolean, boolean)}
+   */
+  @Test
+  public void testCreateValue8() {
+    // Arrange
+    MultiTypedReferenceValueFactory multiTypedReferenceValueFactory = new MultiTypedReferenceValueFactory();
+
+    // Act
+    Value actualCreateValueResult = multiTypedReferenceValueFactory.createValue("Ljava/lang/Object;",
+        new LibraryClass(), true, false);
+
+    // Assert
+    assertTrue(actualCreateValueResult instanceof MultiTypedReferenceValue);
+    assertEquals("Ljava/lang/Object;", ((MultiTypedReferenceValue) actualCreateValueResult).getType());
+    AnalyzedObject value = ((MultiTypedReferenceValue) actualCreateValueResult).getValue();
+    assertNull(value.getPreciseValue());
+    assertNull(((MultiTypedReferenceValue) actualCreateValueResult).getReferencedClass());
+    assertNull(value.getModeledOrNullValue());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateValueResult).getPotentialTypes().size());
+    assertEquals(1, ((MultiTypedReferenceValue) actualCreateValueResult).isNotNull());
+    assertFalse(actualCreateValueResult.isCategory2());
+    assertFalse(actualCreateValueResult.isParticular());
+    assertFalse(actualCreateValueResult.isSpecific());
+    assertFalse(((MultiTypedReferenceValue) actualCreateValueResult).mayBeUnknown);
+    ReferenceValue expectedGeneralizedType = multiTypedReferenceValueFactory.REFERENCE_VALUE_JAVA_LANG_OBJECT_NOT_NULL;
+    assertSame(expectedGeneralizedType, ((MultiTypedReferenceValue) actualCreateValueResult).getGeneralizedType());
   }
 }

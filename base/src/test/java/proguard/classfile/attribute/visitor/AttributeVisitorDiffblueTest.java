@@ -2,11 +2,7 @@ package proguard.classfile.attribute.visitor;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import proguard.classfile.Clazz;
 import proguard.classfile.LibraryClass;
 import proguard.classfile.LibraryMethod;
@@ -17,36 +13,25 @@ import proguard.classfile.attribute.CodeAttribute;
 
 public class AttributeVisitorDiffblueTest {
   /**
-   * Test {@link AttributeVisitor#visitAnyAttribute(Clazz, Attribute)}.
-   *
-   * <ul>
-   *   <li>Then throw {@link UnsupportedOperationException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link AttributeVisitor#visitAnyAttribute(Clazz, Attribute)}
+   * Method under test:
+   * {@link AttributeVisitor#visitAnyAttribute(Clazz, Attribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void AttributeVisitor.visitAnyAttribute(Clazz, Attribute)"})
-  public void testVisitAnyAttribute_thenThrowUnsupportedOperationException() {
+  public void testVisitAnyAttribute() {
     // Arrange
     MultiAttributeVisitor multiAttributeVisitor = new MultiAttributeVisitor();
     LibraryClass clazz = new LibraryClass();
 
     // Act and Assert
-    assertThrows(
-        UnsupportedOperationException.class,
+    assertThrows(UnsupportedOperationException.class,
         () -> multiAttributeVisitor.visitAnyAttribute(clazz, new BootstrapMethodsAttribute()));
   }
 
   /**
-   * Test {@link AttributeVisitor#visitCodeAttribute(Clazz, Method, CodeAttribute)}.
-   *
-   * <p>Method under test: {@link AttributeVisitor#visitCodeAttribute(Clazz, Method, CodeAttribute)}
+   * Method under test:
+   * {@link AttributeVisitor#visitCodeAttribute(Clazz, Method, CodeAttribute)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"void AttributeVisitor.visitCodeAttribute(Clazz, Method, CodeAttribute)"})
   public void testVisitCodeAttribute() {
     // Arrange
     AttributeCounter attributeCounter = new AttributeCounter();

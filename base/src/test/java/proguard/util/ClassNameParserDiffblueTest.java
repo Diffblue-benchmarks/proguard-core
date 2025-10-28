@@ -2,185 +2,14 @@ package proguard.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 public class ClassNameParserDiffblueTest {
   /**
-   * Test {@link ClassNameParser#parse(String)}.
-   *
-   * <ul>
-   *   <li>Given {@link ClassNameParser#ClassNameParser(WildcardManager)} with wildcardManager is
-   *       {@link WildcardManager#WildcardManager()}.
-   *   <li>When {@code L///;}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassNameParser#parse(String)}
+   * Method under test: {@link ClassNameParser#parse(String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"StringMatcher ClassNameParser.parse(String)"})
-  public void testParse_givenClassNameParserWithWildcardManagerIsWildcardManager_whenL() {
-    // Arrange and Act
-    StringMatcher actualParseResult = (new ClassNameParser(new WildcardManager())).parse("L///;");
-
-    // Assert
-    assertTrue(actualParseResult instanceof VariableStringMatcher);
-    assertEquals("", actualParseResult.prefix());
-  }
-
-  /**
-   * Test {@link ClassNameParser#parse(String)}.
-   *
-   * <ul>
-   *   <li>Given {@link ClassNameParser#ClassNameParser(WildcardManager)} with wildcardManager is
-   *       {@link WildcardManager#WildcardManager()}.
-   *   <li>When {@code L***;}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassNameParser#parse(String)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"StringMatcher ClassNameParser.parse(String)"})
-  public void testParse_givenClassNameParserWithWildcardManagerIsWildcardManager_whenL2() {
-    // Arrange and Act
-    StringMatcher actualParseResult = (new ClassNameParser(new WildcardManager())).parse("L***;");
-
-    // Assert
-    assertTrue(actualParseResult instanceof VariableStringMatcher);
-    assertEquals("", actualParseResult.prefix());
-  }
-
-  /**
-   * Test {@link ClassNameParser#parse(String)}.
-   *
-   * <ul>
-   *   <li>Given {@link ClassNameParser#ClassNameParser()}.
-   *   <li>When {@code **}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassNameParser#parse(String)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"StringMatcher ClassNameParser.parse(String)"})
-  public void testParse_givenClassNameParser_whenAsteriskAsterisk() {
-    // Arrange and Act
-    StringMatcher actualParseResult = (new ClassNameParser()).parse("**");
-
-    // Assert
-    assertTrue(actualParseResult instanceof VariableStringMatcher);
-    assertEquals("", actualParseResult.prefix());
-  }
-
-  /**
-   * Test {@link ClassNameParser#parse(String)}.
-   *
-   * <ul>
-   *   <li>Given {@link ClassNameParser#ClassNameParser()}.
-   *   <li>When {@code L///;}.
-   *   <li>Then return {@link VariableStringMatcher}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassNameParser#parse(String)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"StringMatcher ClassNameParser.parse(String)"})
-  public void testParse_givenClassNameParser_whenL_thenReturnVariableStringMatcher() {
-    // Arrange and Act
-    StringMatcher actualParseResult = (new ClassNameParser()).parse("L///;");
-
-    // Assert
-    assertTrue(actualParseResult instanceof VariableStringMatcher);
-    assertEquals("", actualParseResult.prefix());
-  }
-
-  /**
-   * Test {@link ClassNameParser#parse(String)}.
-   *
-   * <ul>
-   *   <li>Given {@link ClassNameParser#ClassNameParser()}.
-   *   <li>When {@code L***;}.
-   *   <li>Then return {@link VariableStringMatcher}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassNameParser#parse(String)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"StringMatcher ClassNameParser.parse(String)"})
-  public void testParse_givenClassNameParser_whenL_thenReturnVariableStringMatcher2() {
-    // Arrange and Act
-    StringMatcher actualParseResult = (new ClassNameParser()).parse("L***;");
-
-    // Assert
-    assertTrue(actualParseResult instanceof VariableStringMatcher);
-    assertEquals("", actualParseResult.prefix());
-  }
-
-  /**
-   * Test {@link ClassNameParser#parse(String)}.
-   *
-   * <ul>
-   *   <li>Given {@link ClassNameParser#ClassNameParser()}.
-   *   <li>When {@code **L///;}.
-   *   <li>Then return {@link VariableStringMatcher}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassNameParser#parse(String)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"StringMatcher ClassNameParser.parse(String)"})
-  public void testParse_givenClassNameParser_whenL_thenReturnVariableStringMatcher3() {
-    // Arrange and Act
-    StringMatcher actualParseResult = (new ClassNameParser()).parse("**L///;");
-
-    // Assert
-    assertTrue(actualParseResult instanceof VariableStringMatcher);
-    assertEquals("", actualParseResult.prefix());
-  }
-
-  /**
-   * Test {@link ClassNameParser#parse(String)}.
-   *
-   * <ul>
-   *   <li>When {@code **}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassNameParser#parse(String)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"StringMatcher ClassNameParser.parse(String)"})
-  public void testParse_whenAsteriskAsterisk() {
-    // Arrange and Act
-    StringMatcher actualParseResult = (new ClassNameParser(new WildcardManager())).parse("**");
-
-    // Assert
-    assertTrue(actualParseResult instanceof VariableStringMatcher);
-    assertEquals("", actualParseResult.prefix());
-  }
-
-  /**
-   * Test {@link ClassNameParser#parse(String)}.
-   *
-   * <ul>
-   *   <li>When {@code Regular Expression}.
-   *   <li>Then return {@link FixedStringMatcher}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassNameParser#parse(String)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"StringMatcher ClassNameParser.parse(String)"})
-  public void testParse_whenRegularExpression_thenReturnFixedStringMatcher() {
+  public void testParse() {
     // Arrange and Act
     StringMatcher actualParseResult = (new ClassNameParser()).parse("Regular Expression");
 
@@ -190,25 +19,107 @@ public class ClassNameParserDiffblueTest {
   }
 
   /**
-   * Test {@link ClassNameParser#parse(String)}.
-   *
-   * <ul>
-   *   <li>When {@code Regular Expression}.
-   *   <li>Then return {@link FixedStringMatcher}.
-   * </ul>
-   *
-   * <p>Method under test: {@link ClassNameParser#parse(String)}
+   * Method under test: {@link ClassNameParser#parse(String)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"StringMatcher ClassNameParser.parse(String)"})
-  public void testParse_whenRegularExpression_thenReturnFixedStringMatcher2() {
+  public void testParse2() {
     // Arrange and Act
-    StringMatcher actualParseResult =
-        (new ClassNameParser(new WildcardManager())).parse("Regular Expression");
+    StringMatcher actualParseResult = (new ClassNameParser(new WildcardManager())).parse("Regular Expression");
 
     // Assert
     assertTrue(actualParseResult instanceof FixedStringMatcher);
     assertEquals("Regular Expression", actualParseResult.prefix());
+  }
+
+  /**
+   * Method under test: {@link ClassNameParser#parse(String)}
+   */
+  @Test
+  public void testParse3() {
+    // Arrange and Act
+    StringMatcher actualParseResult = (new ClassNameParser()).parse("L///;");
+
+    // Assert
+    assertTrue(actualParseResult instanceof VariableStringMatcher);
+    assertEquals("", actualParseResult.prefix());
+  }
+
+  /**
+   * Method under test: {@link ClassNameParser#parse(String)}
+   */
+  @Test
+  public void testParse4() {
+    // Arrange and Act
+    StringMatcher actualParseResult = (new ClassNameParser()).parse("L***;");
+
+    // Assert
+    assertTrue(actualParseResult instanceof VariableStringMatcher);
+    assertEquals("", actualParseResult.prefix());
+  }
+
+  /**
+   * Method under test: {@link ClassNameParser#parse(String)}
+   */
+  @Test
+  public void testParse5() {
+    // Arrange and Act
+    StringMatcher actualParseResult = (new ClassNameParser()).parse("**");
+
+    // Assert
+    assertTrue(actualParseResult instanceof VariableStringMatcher);
+    assertEquals("", actualParseResult.prefix());
+  }
+
+  /**
+   * Method under test: {@link ClassNameParser#parse(String)}
+   */
+  @Test
+  public void testParse6() {
+    // Arrange and Act
+    StringMatcher actualParseResult = (new ClassNameParser(new WildcardManager())).parse("L///;");
+
+    // Assert
+    assertTrue(actualParseResult instanceof VariableStringMatcher);
+    assertEquals("", actualParseResult.prefix());
+  }
+
+  /**
+   * Method under test: {@link ClassNameParser#parse(String)}
+   */
+  @Test
+  public void testParse7() {
+    // Arrange and Act
+    StringMatcher actualParseResult = (new ClassNameParser(new WildcardManager())).parse("L***;");
+
+    // Assert
+    assertTrue(actualParseResult instanceof VariableStringMatcher);
+    assertEquals("", actualParseResult.prefix());
+  }
+
+  /**
+   * Method under test: {@link ClassNameParser#parse(String)}
+   */
+  @Test
+  public void testParse8() {
+    // Arrange and Act
+    StringMatcher actualParseResult = (new ClassNameParser(new WildcardManager())).parse("**");
+
+    // Assert
+    assertTrue(actualParseResult instanceof VariableStringMatcher);
+    assertEquals("", actualParseResult.prefix());
+  }
+
+  /**
+   * Method under test: {@link ClassNameParser#parse(String)}
+   */
+  @Test
+  public void testParse9() {
+    // Arrange and Act
+    StringMatcher actualParseResult = (new ClassNameParser(new WildcardManager(new WildcardManager())))
+        .parse("**Regular Expression");
+
+    // Assert
+    assertTrue(actualParseResult instanceof VariableStringMatcher);
+    assertEquals("", actualParseResult.prefix());
   }
 }

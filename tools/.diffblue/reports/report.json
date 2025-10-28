@@ -3,25 +3,24 @@
     "reportVersion" : "2.6"
   },
   "run" : {
-    "version" : "2025.02.02-08b2a5a-licensed",
-    "creationTimestamp" : "2025-10-20T16:55:15.491848Z",
+    "version" : "2024.10.01-2ee2e3d-licensed",
+    "creationTimestamp" : "2025-10-27T14:27:28.903852Z",
     "command" : "dcover create --coverage-reports --upload http://localhost:8080 --project-name proguard-core --name with-diffblue-tests",
-    "totalTime" : 237.941,
-    "environmentDetectionTime" : 0.418,
-    "indexingTime" : 0.412,
-    "entryPointsTime" : 0.414,
-    "generationTime" : 36824.394,
-    "timeToFirstTest" : 36946.863,
-    "timeToLastTest" : 38010.324,
-    "indexQueryTime" : 5.279,
-    "verificationTime" : 901.584,
-    "validationTime" : 27.607
+    "totalTime" : 35662.903,
+    "environmentDetectionTime" : 0.258,
+    "indexingTime" : 0.251,
+    "entryPointsTime" : 0.255,
+    "generationTime" : 33775.418,
+    "timeToFirstTest" : 106.666,
+    "timeToLastTest" : 1841.62,
+    "indexQueryTime" : 4.508,
+    "verificationTime" : 1139.013,
+    "validationTime" : 21.978
   },
   "codes" : {
     "R000" : "Success",
     "R002" : "Missing observers",
     "R013" : "No inputs found that don't throw a trivial exception",
-    "R020" : "Temporary files were created but not deleted",
     "T000" : "Method eligible for test creation",
     "T003" : "Private method",
     "T004" : "In anonymous inner class",
@@ -29,7 +28,7 @@
     "T006" : "Main method",
     "T012" : "Synthetic method",
     "V000" : "Validated successfully",
-    "V003" : "Tests discarded during validation"
+    "W001" : "Test did not compile"
   },
   "summary" : {
     "classesCount" : 27,
@@ -50,20 +49,22 @@
     },
     "perMethodOutcome" : {
       "R000" : 11,
-      "R002" : 12,
-      "R013" : 17,
-      "R020" : 2,
+      "R002" : 3,
+      "R013" : 22,
       "T003" : 6,
       "T004" : 48,
       "T006" : 1,
-      "T012" : 16
+      "T012" : 16,
+      "W001" : 6
     },
     "perTestOutcome" : {
       "R000" : 13
     },
     "perTestValidation" : {
-      "V000" : 13,
-      "V003" : 15
+      "V000" : 13
+    },
+    "warnings" : {
+      "W001" : 6
     }
   },
   "classes" : {
@@ -129,8 +130,11 @@
         "T000" : 2
       },
       "perMethodOutcome" : {
-        "R002" : 1,
-        "R013" : 1
+        "R013" : 1,
+        "W001" : 1
+      },
+      "warnings" : {
+        "W001" : 1
       }
     },
     "com.guardsquare.proguard.tools.MainKt$main$ListCmd$ClassNamePrinterCmd$ClassNamePrinter" : {
@@ -154,8 +158,11 @@
         "T000" : 2
       },
       "perMethodOutcome" : {
-        "R002" : 1,
-        "R013" : 1
+        "R013" : 1,
+        "W001" : 1
+      },
+      "warnings" : {
+        "W001" : 1
       }
     },
     "com.guardsquare.proguard.tools.MainKt$main$ListCmd$MemberPrinter" : {
@@ -179,8 +186,11 @@
         "T000" : 2
       },
       "perMethodOutcome" : {
-        "R002" : 1,
-        "R013" : 1
+        "R013" : 1,
+        "W001" : 1
+      },
+      "warnings" : {
+        "W001" : 1
       }
     },
     "com.guardsquare.proguard.tools.MainKt$main$ListCmd$MethodNamePrinterCmd" : {
@@ -191,8 +201,11 @@
         "T000" : 2
       },
       "perMethodOutcome" : {
-        "R002" : 1,
-        "R013" : 1
+        "R013" : 1,
+        "W001" : 1
+      },
+      "warnings" : {
+        "W001" : 1
       }
     },
     "com.guardsquare.proguard.tools.MainKt$main$ListCmd$StringPrinterCmd" : {
@@ -203,8 +216,11 @@
         "T000" : 2
       },
       "perMethodOutcome" : {
-        "R002" : 1,
-        "R013" : 1
+        "R013" : 1,
+        "W001" : 1
+      },
+      "warnings" : {
+        "W001" : 1
       }
     },
     "com.guardsquare.proguard.tools.MainKt$main$ListCmd$programClassPool$2" : {
@@ -239,8 +255,11 @@
         "T000" : 2
       },
       "perMethodOutcome" : {
-        "R002" : 1,
-        "R013" : 1
+        "R013" : 1,
+        "W001" : 1
+      },
+      "warnings" : {
+        "W001" : 1
       }
     },
     "com.guardsquare.proguard.tools.MainKt$main$PrintCmd$programClassPool$2" : {
@@ -262,7 +281,7 @@
         "T000" : 2
       },
       "perMethodOutcome" : {
-        "R020" : 2
+        "R013" : 2
       }
     },
     "com.guardsquare.proguard.tools.StringPrinter" : {
@@ -273,8 +292,8 @@
         "T000" : 8
       },
       "perMethodOutcome" : {
-        "R002" : 4,
-        "R013" : 4
+        "R002" : 1,
+        "R013" : 7
       }
     },
     "com.guardsquare.proguard.tools.TransformCmd" : {
@@ -681,7 +700,10 @@
       "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
-      "perMethodOutcome" : "R002",
+      "perMethodOutcome" : "W001",
+      "warnings" : {
+        "W001" : 1
+      },
       "lineNumbers" : [
         58
       ]
@@ -700,7 +722,10 @@
       "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
-      "perMethodOutcome" : "R002",
+      "perMethodOutcome" : "W001",
+      "warnings" : {
+        "W001" : 1
+      },
       "lineNumbers" : [
         77
       ]
@@ -768,7 +793,10 @@
       "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
-      "perMethodOutcome" : "R002",
+      "perMethodOutcome" : "W001",
+      "warnings" : {
+        "W001" : 1
+      },
       "lineNumbers" : [
         83
       ]
@@ -787,7 +815,10 @@
       "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
-      "perMethodOutcome" : "R002",
+      "perMethodOutcome" : "W001",
+      "warnings" : {
+        "W001" : 1
+      },
       "lineNumbers" : [
         71
       ]
@@ -806,7 +837,10 @@
       "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
-      "perMethodOutcome" : "R002",
+      "perMethodOutcome" : "W001",
+      "warnings" : {
+        "W001" : 1
+      },
       "lineNumbers" : [
         89
       ]
@@ -932,7 +966,10 @@
       "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
-      "perMethodOutcome" : "R002",
+      "perMethodOutcome" : "W001",
+      "warnings" : {
+        "W001" : 1
+      },
       "lineNumbers" : [
         140
       ]
@@ -1112,7 +1149,7 @@
       "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
-      "perMethodOutcome" : "R020",
+      "perMethodOutcome" : "R013",
       "lineNumbers" : [
         223
       ]
@@ -1121,7 +1158,7 @@
       "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
-      "perMethodOutcome" : "R020",
+      "perMethodOutcome" : "R013",
       "lineNumbers" : [
         225,
         226,
@@ -1148,7 +1185,7 @@
       "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
-      "perMethodOutcome" : "R002",
+      "perMethodOutcome" : "R013",
       "lineNumbers" : [
         24
       ]
@@ -1157,7 +1194,7 @@
       "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
-      "perMethodOutcome" : "R002",
+      "perMethodOutcome" : "R013",
       "lineNumbers" : [
         66
       ]
@@ -1166,7 +1203,7 @@
       "completeTestCount" : 0,
       "incompleteTestCount" : 0,
       "perMethodTestability" : "T000",
-      "perMethodOutcome" : "R002",
+      "perMethodOutcome" : "R013",
       "lineNumbers" : [
         29
       ]

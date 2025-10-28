@@ -5,211 +5,137 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
-
-import com.diffblue.cover.annotations.MaintainedByDiffblue;
-import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.io.UnsupportedEncodingException;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 public class InstructionFactoryDiffblueTest {
   /**
-   * Test {@link InstructionFactory#create(byte[], int)} with {@code code}, {@code offset}.
-   *
-   * <ul>
-   *   <li>When {@code A}.
-   *   <li>Then return {@link VariableInstruction#constant} is {@code 16728}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionFactory#create(byte[], int)}
+   * Method under test: {@link InstructionFactory#create(byte)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Instruction InstructionFactory.create(byte[], int)"})
-  public void testCreateWithCodeOffset_whenA_thenReturnConstantIs16728() {
+  public void testCreate() {
     // Arrange and Act
-    Instruction actualCreateResult =
-        InstructionFactory.create(
-            new byte[] {'A', 'X', Instruction.OP_WIDE, Instruction.OP_IINC, 'A', 'X', 'A', 'X'}, 2);
-
-    // Assert
-    assertTrue(actualCreateResult instanceof VariableInstruction);
-    assertEquals("iinc", actualCreateResult.getName());
-    assertEquals(16728, ((VariableInstruction) actualCreateResult).constant);
-    assertEquals(16728, ((VariableInstruction) actualCreateResult).variableIndex);
-    assertFalse(actualCreateResult.isCategory2());
-    assertTrue(actualCreateResult.isWide());
-    assertTrue(((VariableInstruction) actualCreateResult).isLoad());
-    assertEquals(Instruction.OP_IINC, ((VariableInstruction) actualCreateResult).opcode);
-  }
-
-  /**
-   * Test {@link InstructionFactory#create(byte[], int)} with {@code code}, {@code offset}.
-   *
-   * <ul>
-   *   <li>When {@code AXAXAXAX} Bytes is {@code UTF-8}.
-   *   <li>Then return Name is {@code lstore_2}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionFactory#create(byte[], int)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Instruction InstructionFactory.create(byte[], int)"})
-  public void testCreateWithCodeOffset_whenAxaxaxaxBytesIsUtf8_thenReturnNameIsLstore2()
-      throws UnsupportedEncodingException {
-    // Arrange and Act
-    Instruction actualCreateResult = InstructionFactory.create("AXAXAXAX".getBytes("UTF-8"), 2);
+    Instruction actualCreateResult = InstructionFactory.create((byte) 'A');
 
     // Assert
     assertTrue(actualCreateResult instanceof VariableInstruction);
     assertEquals("lstore_2", actualCreateResult.getName());
-    assertEquals(2, ((VariableInstruction) actualCreateResult).variableIndex);
+    assertEquals(0, ((VariableInstruction) actualCreateResult).constant);
+    assertEquals(0, ((VariableInstruction) actualCreateResult).variableIndex);
+    assertFalse(actualCreateResult.isWide());
     assertFalse(((VariableInstruction) actualCreateResult).isLoad());
+    assertTrue(actualCreateResult.isCategory2());
+    assertTrue(((VariableInstruction) actualCreateResult).isStore());
     assertEquals('A', ((VariableInstruction) actualCreateResult).opcode);
   }
 
   /**
-   * Test {@link InstructionFactory#create(byte[], int)} with {@code code}, {@code offset}.
-   *
-   * <ul>
-   *   <li>When {@code X}.
-   *   <li>Then return {@link VariableInstruction#constant} is sixty-five.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionFactory#create(byte[], int)}
+   * Method under test: {@link InstructionFactory#create(byte)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Instruction InstructionFactory.create(byte[], int)"})
-  public void testCreateWithCodeOffset_whenX_thenReturnConstantIsSixtyFive() {
+  public void testCreate2() {
     // Arrange and Act
-    Instruction actualCreateResult =
-        InstructionFactory.create(
-            new byte[] {'A', 'X', Instruction.OP_IINC, 'X', 'A', 'X', 'A', 'X'}, 2);
-
-    // Assert
-    assertTrue(actualCreateResult instanceof VariableInstruction);
-    assertEquals("iinc", actualCreateResult.getName());
-    assertEquals(65, ((VariableInstruction) actualCreateResult).constant);
-    assertEquals(88, ((VariableInstruction) actualCreateResult).variableIndex);
-    assertFalse(actualCreateResult.isCategory2());
-    assertFalse(actualCreateResult.isWide());
-    assertTrue(((VariableInstruction) actualCreateResult).isLoad());
-    assertEquals(Instruction.OP_IINC, ((VariableInstruction) actualCreateResult).opcode);
-  }
-
-  /**
-   * Test {@link InstructionFactory#create(byte[], int)} with {@code code}, {@code offset}.
-   *
-   * <ul>
-   *   <li>When {@code X}.
-   *   <li>Then return {@link SimpleInstruction}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionFactory#create(byte[], int)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Instruction InstructionFactory.create(byte[], int)"})
-  public void testCreateWithCodeOffset_whenX_thenReturnSimpleInstruction() {
-    // Arrange and Act
-    Instruction actualCreateResult =
-        InstructionFactory.create(
-            new byte[] {'A', 'X', Instruction.OP_WIDE, 'X', 'A', 'X', 'A', 'X'}, 2);
+    Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_IOR);
 
     // Assert
     assertTrue(actualCreateResult instanceof SimpleInstruction);
-    assertEquals("pop2", actualCreateResult.getName());
+    assertEquals("ior", actualCreateResult.getName());
+    assertEquals(0, ((SimpleInstruction) actualCreateResult).constant);
+    assertFalse(actualCreateResult.isCategory2());
     assertFalse(actualCreateResult.isWide());
-    assertEquals('X', ((SimpleInstruction) actualCreateResult).opcode);
+    assertEquals(Instruction.OP_IOR, ((SimpleInstruction) actualCreateResult).opcode);
   }
 
   /**
-   * Test {@link InstructionFactory#create(byte[], int)} with {@code code}, {@code offset}.
-   *
-   * <ul>
-   *   <li>When {@code X}.
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionFactory#create(byte[], int)}
+   * Method under test: {@link InstructionFactory#create(byte)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Instruction InstructionFactory.create(byte[], int)"})
-  public void testCreateWithCodeOffset_whenX_thenThrowIllegalArgumentException() {
+  public void testCreate3() {
+    // Arrange and Act
+    Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_IFEQ);
+
+    // Assert
+    assertTrue(actualCreateResult instanceof BranchInstruction);
+    assertEquals("ifeq", actualCreateResult.getName());
+    assertEquals(0, ((BranchInstruction) actualCreateResult).branchOffset);
+    assertFalse(actualCreateResult.isCategory2());
+    assertFalse(actualCreateResult.isWide());
+    assertEquals(Instruction.OP_IFEQ, ((BranchInstruction) actualCreateResult).opcode);
+  }
+
+  /**
+   * Method under test: {@link InstructionFactory#create(byte)}
+   */
+  @Test
+  public void testCreate4() {
+    // Arrange and Act
+    Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_TABLESWITCH);
+
+    // Assert
+    assertTrue(actualCreateResult instanceof TableSwitchInstruction);
+    assertEquals("tableswitch", actualCreateResult.getName());
+    assertNull(((TableSwitchInstruction) actualCreateResult).jumpOffsets);
+    assertEquals(0, ((TableSwitchInstruction) actualCreateResult).defaultOffset);
+    assertEquals(0, ((TableSwitchInstruction) actualCreateResult).highCase);
+    assertEquals(0, ((TableSwitchInstruction) actualCreateResult).lowCase);
+    assertFalse(actualCreateResult.isCategory2());
+    assertFalse(actualCreateResult.isWide());
+    assertEquals(Instruction.OP_TABLESWITCH, ((TableSwitchInstruction) actualCreateResult).opcode);
+  }
+
+  /**
+   * Method under test: {@link InstructionFactory#create(byte)}
+   */
+  @Test
+  public void testCreate5() {
+    // Arrange and Act
+    Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_LOOKUPSWITCH);
+
+    // Assert
+    assertTrue(actualCreateResult instanceof LookUpSwitchInstruction);
+    assertEquals("lookupswitch", actualCreateResult.getName());
+    assertNull(((LookUpSwitchInstruction) actualCreateResult).cases);
+    assertNull(((LookUpSwitchInstruction) actualCreateResult).jumpOffsets);
+    assertEquals(0, ((LookUpSwitchInstruction) actualCreateResult).defaultOffset);
+    assertFalse(actualCreateResult.isCategory2());
+    assertFalse(actualCreateResult.isWide());
+    assertEquals(Instruction.OP_LOOKUPSWITCH, ((LookUpSwitchInstruction) actualCreateResult).opcode);
+  }
+
+  /**
+   * Method under test: {@link InstructionFactory#create(byte)}
+   */
+  @Test
+  public void testCreate6() {
     // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> InstructionFactory.create(new byte[] {'A', 'X', -1, 'X', 'A', 'X', 'A', 'X'}, 2));
+    assertThrows(IllegalArgumentException.class, () -> InstructionFactory.create(Instruction.OP_WIDE));
   }
 
   /**
-   * Test {@link InstructionFactory#create(byte, boolean)} with {@code opcode}, {@code wide}.
-   *
-   * <ul>
-   *   <li>When {@code A}.
-   *   <li>Then return {@link VariableInstruction}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionFactory#create(byte, boolean)}
+   * Method under test: {@link InstructionFactory#create(byte, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Instruction InstructionFactory.create(byte, boolean)"})
-  public void testCreateWithOpcodeWide_whenA_thenReturnVariableInstruction() {
+  public void testCreate7() {
     // Arrange and Act
     Instruction actualCreateResult = InstructionFactory.create((byte) 'A', true);
 
     // Assert
     assertTrue(actualCreateResult instanceof VariableInstruction);
+    assertEquals("nop", actualCreateResult.getName());
+    assertEquals(0, ((VariableInstruction) actualCreateResult).constant);
     assertEquals(0, ((VariableInstruction) actualCreateResult).variableIndex);
+    assertFalse(actualCreateResult.isCategory2());
     assertFalse(((VariableInstruction) actualCreateResult).isStore());
     assertTrue(actualCreateResult.isWide());
     assertTrue(((VariableInstruction) actualCreateResult).isLoad());
+    assertEquals(Instruction.OP_NOP, ((VariableInstruction) actualCreateResult).opcode);
   }
 
   /**
-   * Test {@link InstructionFactory#create(byte, boolean)} with {@code opcode}, {@code wide}.
-   *
-   * <ul>
-   *   <li>When {@link Instruction#OP_IFEQ}.
-   *   <li>Then return {@link BranchInstruction}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionFactory#create(byte, boolean)}
+   * Method under test: {@link InstructionFactory#create(byte, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Instruction InstructionFactory.create(byte, boolean)"})
-  public void testCreateWithOpcodeWide_whenOp_ifeq_thenReturnBranchInstruction() {
-    // Arrange and Act
-    Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_IFEQ, true);
-
-    // Assert
-    assertTrue(actualCreateResult instanceof BranchInstruction);
-    assertEquals("nop", actualCreateResult.getName());
-    assertEquals(0, ((BranchInstruction) actualCreateResult).branchOffset);
-    assertFalse(actualCreateResult.isCategory2());
-    assertFalse(actualCreateResult.isWide());
-    assertEquals(Instruction.OP_NOP, ((BranchInstruction) actualCreateResult).opcode);
-  }
-
-  /**
-   * Test {@link InstructionFactory#create(byte, boolean)} with {@code opcode}, {@code wide}.
-   *
-   * <ul>
-   *   <li>When {@link Instruction#OP_IOR}.
-   *   <li>Then return {@link SimpleInstruction}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionFactory#create(byte, boolean)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Instruction InstructionFactory.create(byte, boolean)"})
-  public void testCreateWithOpcodeWide_whenOp_ior_thenReturnSimpleInstruction() {
+  public void testCreate8() {
     // Arrange and Act
     Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_IOR, true);
 
@@ -223,94 +149,83 @@ public class InstructionFactoryDiffblueTest {
   }
 
   /**
-   * Test {@link InstructionFactory#create(byte, boolean)} with {@code opcode}, {@code wide}.
-   *
-   * <ul>
-   *   <li>When {@link Instruction#OP_LOOKUPSWITCH}.
-   *   <li>Then return {@link LookUpSwitchInstruction}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionFactory#create(byte, boolean)}
+   * Method under test: {@link InstructionFactory#create(byte, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Instruction InstructionFactory.create(byte, boolean)"})
-  public void testCreateWithOpcodeWide_whenOp_lookupswitch_thenReturnLookUpSwitchInstruction() {
+  public void testCreate9() {
     // Arrange and Act
-    Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_LOOKUPSWITCH, true);
+    Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_IFEQ, true);
 
     // Assert
-    assertTrue(actualCreateResult instanceof LookUpSwitchInstruction);
-    assertNull(((LookUpSwitchInstruction) actualCreateResult).cases);
-    assertNull(((LookUpSwitchInstruction) actualCreateResult).jumpOffsets);
-    assertEquals(0, ((LookUpSwitchInstruction) actualCreateResult).defaultOffset);
+    assertTrue(actualCreateResult instanceof BranchInstruction);
+    assertEquals("nop", actualCreateResult.getName());
+    assertEquals(0, ((BranchInstruction) actualCreateResult).branchOffset);
+    assertFalse(actualCreateResult.isCategory2());
+    assertFalse(actualCreateResult.isWide());
+    assertEquals(Instruction.OP_NOP, ((BranchInstruction) actualCreateResult).opcode);
   }
 
   /**
-   * Test {@link InstructionFactory#create(byte, boolean)} with {@code opcode}, {@code wide}.
-   *
-   * <ul>
-   *   <li>When {@link Instruction#OP_TABLESWITCH}.
-   *   <li>Then return {@link TableSwitchInstruction}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionFactory#create(byte, boolean)}
+   * Method under test: {@link InstructionFactory#create(byte, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Instruction InstructionFactory.create(byte, boolean)"})
-  public void testCreateWithOpcodeWide_whenOp_tableswitch_thenReturnTableSwitchInstruction() {
+  public void testCreate10() {
     // Arrange and Act
     Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_TABLESWITCH, true);
 
     // Assert
     assertTrue(actualCreateResult instanceof TableSwitchInstruction);
+    assertEquals("nop", actualCreateResult.getName());
     assertNull(((TableSwitchInstruction) actualCreateResult).jumpOffsets);
     assertEquals(0, ((TableSwitchInstruction) actualCreateResult).defaultOffset);
     assertEquals(0, ((TableSwitchInstruction) actualCreateResult).highCase);
     assertEquals(0, ((TableSwitchInstruction) actualCreateResult).lowCase);
+    assertFalse(actualCreateResult.isCategory2());
+    assertFalse(actualCreateResult.isWide());
+    assertEquals(Instruction.OP_NOP, ((TableSwitchInstruction) actualCreateResult).opcode);
   }
 
   /**
-   * Test {@link InstructionFactory#create(byte, boolean)} with {@code opcode}, {@code wide}.
-   *
-   * <ul>
-   *   <li>When {@link Instruction#OP_WIDE}.
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionFactory#create(byte, boolean)}
+   * Method under test: {@link InstructionFactory#create(byte, boolean)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Instruction InstructionFactory.create(byte, boolean)"})
-  public void testCreateWithOpcodeWide_whenOp_wide_thenThrowIllegalArgumentException() {
-    // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class, () -> InstructionFactory.create(Instruction.OP_WIDE, true));
-  }
-
-  /**
-   * Test {@link InstructionFactory#create(byte)} with {@code opcode}.
-   *
-   * <ul>
-   *   <li>When {@code A}.
-   *   <li>Then return {@link VariableInstruction}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionFactory#create(byte)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Instruction InstructionFactory.create(byte)"})
-  public void testCreateWithOpcode_whenA_thenReturnVariableInstruction() {
+  public void testCreate11() {
     // Arrange and Act
-    Instruction actualCreateResult = InstructionFactory.create((byte) 'A');
+    Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_LOOKUPSWITCH, true);
+
+    // Assert
+    assertTrue(actualCreateResult instanceof LookUpSwitchInstruction);
+    assertEquals("nop", actualCreateResult.getName());
+    assertNull(((LookUpSwitchInstruction) actualCreateResult).cases);
+    assertNull(((LookUpSwitchInstruction) actualCreateResult).jumpOffsets);
+    assertEquals(0, ((LookUpSwitchInstruction) actualCreateResult).defaultOffset);
+    assertFalse(actualCreateResult.isCategory2());
+    assertFalse(actualCreateResult.isWide());
+    assertEquals(Instruction.OP_NOP, ((LookUpSwitchInstruction) actualCreateResult).opcode);
+  }
+
+  /**
+   * Method under test: {@link InstructionFactory#create(byte, boolean)}
+   */
+  @Test
+  public void testCreate12() {
+    // Arrange, Act and Assert
+    assertThrows(IllegalArgumentException.class, () -> InstructionFactory.create(Instruction.OP_WIDE, true));
+  }
+
+  /**
+   * Method under test: {@link InstructionFactory#create(byte[], int)}
+   */
+  @Test
+  public void testCreate13() throws UnsupportedEncodingException {
+    // Arrange and Act
+    Instruction actualCreateResult = InstructionFactory.create("AXAXAXAX".getBytes("UTF-8"), 2);
 
     // Assert
     assertTrue(actualCreateResult instanceof VariableInstruction);
     assertEquals("lstore_2", actualCreateResult.getName());
-    assertEquals(0, ((VariableInstruction) actualCreateResult).variableIndex);
+    assertEquals(0, ((VariableInstruction) actualCreateResult).constant);
+    assertEquals(2, ((VariableInstruction) actualCreateResult).variableIndex);
     assertFalse(actualCreateResult.isWide());
     assertFalse(((VariableInstruction) actualCreateResult).isLoad());
     assertTrue(actualCreateResult.isCategory2());
@@ -319,119 +234,72 @@ public class InstructionFactoryDiffblueTest {
   }
 
   /**
-   * Test {@link InstructionFactory#create(byte)} with {@code opcode}.
-   *
-   * <ul>
-   *   <li>When {@link Instruction#OP_IFEQ}.
-   *   <li>Then return {@link BranchInstruction}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionFactory#create(byte)}
+   * Method under test: {@link InstructionFactory#create(byte[], int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Instruction InstructionFactory.create(byte)"})
-  public void testCreateWithOpcode_whenOp_ifeq_thenReturnBranchInstruction() {
+  public void testCreate14() {
     // Arrange and Act
-    Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_IFEQ);
-
-    // Assert
-    assertTrue(actualCreateResult instanceof BranchInstruction);
-    assertEquals("ifeq", actualCreateResult.getName());
-    assertEquals(0, ((BranchInstruction) actualCreateResult).branchOffset);
-    assertEquals(Instruction.OP_IFEQ, ((BranchInstruction) actualCreateResult).opcode);
-  }
-
-  /**
-   * Test {@link InstructionFactory#create(byte)} with {@code opcode}.
-   *
-   * <ul>
-   *   <li>When {@link Instruction#OP_IOR}.
-   *   <li>Then return {@link SimpleInstruction}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionFactory#create(byte)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Instruction InstructionFactory.create(byte)"})
-  public void testCreateWithOpcode_whenOp_ior_thenReturnSimpleInstruction() {
-    // Arrange and Act
-    Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_IOR);
+    Instruction actualCreateResult = InstructionFactory
+        .create(new byte[]{'A', 'X', Instruction.OP_WIDE, 'X', 'A', 'X', 'A', 'X'}, 2);
 
     // Assert
     assertTrue(actualCreateResult instanceof SimpleInstruction);
-    assertEquals("ior", actualCreateResult.getName());
+    assertEquals("pop2", actualCreateResult.getName());
     assertEquals(0, ((SimpleInstruction) actualCreateResult).constant);
-    assertEquals(Instruction.OP_IOR, ((SimpleInstruction) actualCreateResult).opcode);
+    assertFalse(actualCreateResult.isWide());
+    assertTrue(actualCreateResult.isCategory2());
+    assertEquals('X', ((SimpleInstruction) actualCreateResult).opcode);
   }
 
   /**
-   * Test {@link InstructionFactory#create(byte)} with {@code opcode}.
-   *
-   * <ul>
-   *   <li>When {@link Instruction#OP_LOOKUPSWITCH}.
-   *   <li>Then return {@link LookUpSwitchInstruction}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionFactory#create(byte)}
+   * Method under test: {@link InstructionFactory#create(byte[], int)}
    */
   @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Instruction InstructionFactory.create(byte)"})
-  public void testCreateWithOpcode_whenOp_lookupswitch_thenReturnLookUpSwitchInstruction() {
-    // Arrange and Act
-    Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_LOOKUPSWITCH);
-
-    // Assert
-    assertTrue(actualCreateResult instanceof LookUpSwitchInstruction);
-    assertEquals("lookupswitch", actualCreateResult.getName());
-    assertNull(((LookUpSwitchInstruction) actualCreateResult).cases);
-    assertEquals(
-        Instruction.OP_LOOKUPSWITCH, ((LookUpSwitchInstruction) actualCreateResult).opcode);
-  }
-
-  /**
-   * Test {@link InstructionFactory#create(byte)} with {@code opcode}.
-   *
-   * <ul>
-   *   <li>When {@link Instruction#OP_TABLESWITCH}.
-   *   <li>Then return {@link TableSwitchInstruction}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionFactory#create(byte)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Instruction InstructionFactory.create(byte)"})
-  public void testCreateWithOpcode_whenOp_tableswitch_thenReturnTableSwitchInstruction() {
-    // Arrange and Act
-    Instruction actualCreateResult = InstructionFactory.create(Instruction.OP_TABLESWITCH);
-
-    // Assert
-    assertTrue(actualCreateResult instanceof TableSwitchInstruction);
-    assertEquals("tableswitch", actualCreateResult.getName());
-    assertEquals(0, ((TableSwitchInstruction) actualCreateResult).highCase);
-    assertEquals(0, ((TableSwitchInstruction) actualCreateResult).lowCase);
-    assertEquals(Instruction.OP_TABLESWITCH, ((TableSwitchInstruction) actualCreateResult).opcode);
-  }
-
-  /**
-   * Test {@link InstructionFactory#create(byte)} with {@code opcode}.
-   *
-   * <ul>
-   *   <li>When {@link Instruction#OP_WIDE}.
-   *   <li>Then throw {@link IllegalArgumentException}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InstructionFactory#create(byte)}
-   */
-  @Test
-  @Category(MaintainedByDiffblue.class)
-  @MethodsUnderTest({"Instruction InstructionFactory.create(byte)"})
-  public void testCreateWithOpcode_whenOp_wide_thenThrowIllegalArgumentException() {
+  public void testCreate15() {
     // Arrange, Act and Assert
-    assertThrows(
-        IllegalArgumentException.class, () -> InstructionFactory.create(Instruction.OP_WIDE));
+    assertThrows(IllegalArgumentException.class,
+        () -> InstructionFactory.create(new byte[]{'A', 'X', -1, 'X', 'A', 'X', 'A', 'X'}, 2));
+  }
+
+  /**
+   * Method under test: {@link InstructionFactory#create(byte[], int)}
+   */
+  @Test
+  public void testCreate16() {
+    // Arrange and Act
+    Instruction actualCreateResult = InstructionFactory
+        .create(new byte[]{'A', 'X', Instruction.OP_IINC, 'X', 'A', 'X', 'A', 'X'}, 2);
+
+    // Assert
+    assertTrue(actualCreateResult instanceof VariableInstruction);
+    assertEquals("iinc", actualCreateResult.getName());
+    assertEquals(65, ((VariableInstruction) actualCreateResult).constant);
+    assertEquals(88, ((VariableInstruction) actualCreateResult).variableIndex);
+    assertFalse(actualCreateResult.isCategory2());
+    assertFalse(actualCreateResult.isWide());
+    assertTrue(((VariableInstruction) actualCreateResult).isLoad());
+    assertTrue(((VariableInstruction) actualCreateResult).isStore());
+    assertEquals(Instruction.OP_IINC, ((VariableInstruction) actualCreateResult).opcode);
+  }
+
+  /**
+   * Method under test: {@link InstructionFactory#create(byte[], int)}
+   */
+  @Test
+  public void testCreate17() {
+    // Arrange and Act
+    Instruction actualCreateResult = InstructionFactory
+        .create(new byte[]{'A', 'X', Instruction.OP_WIDE, Instruction.OP_IINC, 'A', 'X', 'A', 'X'}, 2);
+
+    // Assert
+    assertTrue(actualCreateResult instanceof VariableInstruction);
+    assertEquals("iinc", actualCreateResult.getName());
+    assertEquals(16728, ((VariableInstruction) actualCreateResult).constant);
+    assertEquals(16728, ((VariableInstruction) actualCreateResult).variableIndex);
+    assertFalse(actualCreateResult.isCategory2());
+    assertTrue(actualCreateResult.isWide());
+    assertTrue(((VariableInstruction) actualCreateResult).isLoad());
+    assertTrue(((VariableInstruction) actualCreateResult).isStore());
+    assertEquals(Instruction.OP_IINC, ((VariableInstruction) actualCreateResult).opcode);
   }
 }
