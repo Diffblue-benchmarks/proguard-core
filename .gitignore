@@ -6,3 +6,9 @@ build
 /docs/html/
 /venv/
 .kotlin/sessions/
+
+.diffblue/cache
+**.diffblue/cache
+**/.diffblue/cache
+**/**.diffblue/cache
+**/**/.diffblue/cache

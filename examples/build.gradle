@@ -8,12 +8,12 @@ repositories {
 }
 
 dependencies {
-    compileOnly "com.diffblue.cover:cover-annotations:1.7.0"
+    compileOnly "com.diffblue.cover:cover-annotations:1.9.0"
 
 	implementation project(':proguard-core')
 	implementation project(':proguard-core-android')
 
-    testImplementation "com.diffblue.cover:cover-annotations:1.7.0"
+    testImplementation "com.diffblue.cover:cover-annotations:1.9.0"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:5.13.4"
     testImplementation "org.junit.vintage:junit-vintage-engine:5.11.3"
     testImplementation "org.mockito:mockito-core:5.20.0"
