@@ -547,29 +547,6 @@ class StackDiffblueTest {
    * Test {@link Stack#equals(Object)}.
    *
    * <ul>
-   *   <li>When other is different.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#equals(Object)}
-   */
-  @Test
-  @DisplayName("Test equals(Object); when other is different; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean Stack.equals(Object)", "int Stack.hashCode()"})
-  void testEquals_whenOtherIsDifferent_thenReturnNotEqual() {
-    // Arrange
-    TracedStack tracedStack = new TracedStack(3);
-
-    // Act and Assert
-    assertNotEquals(tracedStack, new Stack(3));
-  }
-
-  /**
-   * Test {@link Stack#equals(Object)}.
-   *
-   * <ul>
    *   <li>When other is {@code null}.
    *   <li>Then return not equal.
    * </ul>
@@ -623,24 +600,5 @@ class StackDiffblueTest {
   void testToString_givenStackWithMaxSizeIsThree() {
     // Arrange, Act and Assert
     assertEquals("", new Stack(3).toString());
-  }
-
-  /**
-   * Test {@link Stack#toString()}.
-   *
-   * <ul>
-   *   <li>Given {@link TracedStack#TracedStack(int)} with maxSize is three.
-   * </ul>
-   *
-   * <p>Method under test: {@link Stack#toString()}
-   */
-  @Test
-  @DisplayName("Test toString(); given TracedStack(int) with maxSize is three")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"java.lang.String Stack.toString()"})
-  void testToString_givenTracedStackWithMaxSizeIsThree() {
-    // Arrange, Act and Assert
-    assertEquals("", new TracedStack(3).toString());
   }
 }

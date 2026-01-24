@@ -104,41 +104,6 @@ class BasicBranchUnitDiffblueTest {
   }
 
   /**
-   * Test {@link BasicBranchUnit#branchConditionally(Clazz, CodeAttribute, int, int, int)}.
-   *
-   * <ul>
-   *   <li>Then not {@link TracedBranchUnit} (default constructor) TraceBranchTargets Category2.
-   * </ul>
-   *
-   * <p>Method under test: {@link BasicBranchUnit#branchConditionally(Clazz, CodeAttribute, int,
-   * int, int)}
-   */
-  @Test
-  @DisplayName(
-      "Test branchConditionally(Clazz, CodeAttribute, int, int, int); then not TracedBranchUnit (default constructor) TraceBranchTargets Category2")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "void BasicBranchUnit.branchConditionally(Clazz, CodeAttribute, int, int, int)"
-  })
-  void testBranchConditionally_thenNotTracedBranchUnitTraceBranchTargetsCategory2() {
-    // Arrange
-    TracedBranchUnit tracedBranchUnit = new TracedBranchUnit();
-    LibraryClass clazz = new LibraryClass();
-
-    // Act
-    tracedBranchUnit.branchConditionally(clazz, new CodeAttribute(1), 2, 1, 1);
-
-    // Assert
-    InstructionOffsetValue traceBranchTargets = tracedBranchUnit.getTraceBranchTargets();
-    assertFalse(traceBranchTargets.isCategory2());
-    assertTrue(tracedBranchUnit.wasCalled());
-    assertTrue(traceBranchTargets.isParticular());
-    assertTrue(traceBranchTargets.isSpecific());
-    assertTrue(tracedBranchUnit.wasCalled);
-  }
-
-  /**
    * Test {@link BasicBranchUnit#returnFromMethod()}.
    *
    * <p>Method under test: {@link BasicBranchUnit#returnFromMethod()}

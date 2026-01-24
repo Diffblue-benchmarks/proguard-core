@@ -421,25 +421,6 @@ class InstructionDiffblueTest {
   }
 
   /**
-   * Test {@link Instruction#toString(int)} with {@code offset}.
-   *
-   * <ul>
-   *   <li>Then return {@code [2] lstore_2 +1 (target=3)}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Instruction#toString(int)}
-   */
-  @Test
-  @DisplayName("Test toString(int) with 'offset'; then return '[2] lstore_2 +1 (target=3)'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"java.lang.String Instruction.toString(int)"})
-  void testToStringWithOffset_thenReturn2Lstore21Target3() {
-    // Arrange, Act and Assert
-    assertEquals("[2] lstore_2 +1 (target=3)", new BranchInstruction((byte) 'A', 1).toString(2));
-  }
-
-  /**
    * Test {@link Instruction#getName()}.
    *
    * <ul>

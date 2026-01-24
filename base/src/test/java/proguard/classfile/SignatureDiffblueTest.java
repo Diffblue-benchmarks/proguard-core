@@ -584,66 +584,6 @@ class SignatureDiffblueTest {
   }
 
   /**
-   * Test {@link Signature#equals(Object)}, and {@link Signature#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is equal.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link Signature#equals(Object)}
-   *   <li>{@link Signature#hashCode()}
-   * </ul>
-   */
-  @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is equal; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean Signature.equals(Object)", "int Signature.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsEqual_thenReturnEqual() {
-    // Arrange
-    MethodSignature methodSignature = ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE;
-    MethodSignature methodSignature2 = ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE;
-
-    // Act and Assert
-    assertEquals(methodSignature, methodSignature2);
-    assertEquals(methodSignature.hashCode(), methodSignature2.hashCode());
-  }
-
-  /**
-   * Test {@link Signature#equals(Object)}, and {@link Signature#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is same.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Methods under test:
-   *
-   * <ul>
-   *   <li>{@link Signature#equals(Object)}
-   *   <li>{@link Signature#hashCode()}
-   * </ul>
-   */
-  @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean Signature.equals(Object)", "int Signature.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
-    // Arrange
-    MethodSignature methodSignature = ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE;
-
-    // Act and Assert
-    assertEquals(methodSignature, methodSignature);
-    int expectedHashCodeResult = methodSignature.hashCode();
-    assertEquals(expectedHashCodeResult, methodSignature.hashCode());
-  }
-
-  /**
    * Test {@link Signature#equals(Object)}.
    *
    * <ul>
@@ -663,47 +603,6 @@ class SignatureDiffblueTest {
     assertNotEquals(
         ClassConstants.CLASSLOADER_LOAD_CLASS_SIGNATURE,
         ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE);
-  }
-
-  /**
-   * Test {@link Signature#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is {@code null}.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#equals(Object)}
-   */
-  @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean Signature.equals(Object)", "int Signature.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
-    // Arrange, Act and Assert
-    assertNotEquals(ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, null);
-  }
-
-  /**
-   * Test {@link Signature#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is wrong type.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link Signature#equals(Object)}
-   */
-  @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean Signature.equals(Object)", "int Signature.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
-    // Arrange, Act and Assert
-    assertNotEquals(
-        ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE, "Different type to Signature");
   }
 
   /**

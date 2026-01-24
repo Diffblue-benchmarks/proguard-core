@@ -1,11 +1,14 @@
 package proguard.classfile.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
 import java.util.ArrayList;
+import java.util.List;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.LoggerContext;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -30,6 +33,40 @@ class WarningLoggerDiffblueTest {
   void testGettersAndSetters() {
     // Arrange, Act and Assert
     assertEquals(0, new WarningLogger(ReflectiveModel.log).getWarningCount());
+  }
+
+  /**
+   * Test {@link WarningLogger#WarningLogger(Logger, List)}.
+   *
+   * <ul>
+   *   <li>Given {@code 42}.
+   *   <li>Then {@link ReflectiveModel#log} Context LoggerRegistry Loggers {@link List}.
+   * </ul>
+   *
+   * <p>Method under test: {@link WarningLogger#WarningLogger(Logger, List)}
+   */
+  @Test
+  @DisplayName(
+      "Test new WarningLogger(Logger, List); given '42'; then log Context LoggerRegistry Loggers List")
+  @Tag("ContributionFromDiffblue")
+  @ManagedByDiffblue
+  @MethodsUnderTest({"void WarningLogger.<init>(Logger, List)"})
+  void testNewWarningLogger_given42_thenLogContextLoggerRegistryLoggersList() {
+    // Arrange
+    Logger logger = ReflectiveModel.log;
+
+    ArrayList<String> classFilter = new ArrayList<>();
+    classFilter.add("42");
+    classFilter.add("foo");
+
+    // Act
+    new WarningLogger(logger, classFilter);
+
+    // Assert
+    LoggerContext context = ((org.apache.logging.log4j.core.Logger) logger).getContext();
+    assertTrue(context.getLoggers() instanceof List);
+    assertTrue(context.getLoggerRegistry().getLoggers() instanceof List);
+    assertTrue(logger instanceof org.apache.logging.log4j.core.Logger);
   }
 
   /**

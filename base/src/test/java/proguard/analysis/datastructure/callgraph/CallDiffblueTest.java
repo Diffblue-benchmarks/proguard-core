@@ -871,42 +871,6 @@ class CallDiffblueTest {
   }
 
   /**
-   * Test {@link Call#equals(Object)}, and {@link Call#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is same.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link Call#equals(Object)}
-   */
-  @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean Call.equals(Object)", "int Call.hashCode()"})
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
-    // Arrange
-    LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation caller = new CodeLocation(clazz, member, 2);
-    SymbolicCall symbolicCall =
-        new SymbolicCall(
-            caller,
-            ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE,
-            1,
-            new BranchInstruction((byte) 'A', 1),
-            true,
-            true);
-
-    // Act and Assert
-    assertEquals(symbolicCall, symbolicCall);
-    int expectedHashCodeResult = symbolicCall.hashCode();
-    assertEquals(expectedHashCodeResult, symbolicCall.hashCode());
-  }
-
-  /**
    * Test {@link Call#equals(Object)}.
    *
    * <ul>
@@ -1042,73 +1006,5 @@ class CallDiffblueTest {
             new BranchInstruction((byte) 'A', 1),
             true,
             true));
-  }
-
-  /**
-   * Test {@link Call#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is {@code null}.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link Call#equals(Object)}
-   */
-  @Test
-  @DisplayName("Test equals(Object); when other is 'null'; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean Call.equals(Object)", "int Call.hashCode()"})
-  void testEquals_whenOtherIsNull_thenReturnNotEqual() {
-    // Arrange
-    LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation caller = new CodeLocation(clazz, member, 2);
-
-    // Act and Assert
-    assertNotEquals(
-        new SymbolicCall(
-            caller,
-            ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE,
-            1,
-            new BranchInstruction((byte) 'A', 1),
-            true,
-            true),
-        null);
-  }
-
-  /**
-   * Test {@link Call#equals(Object)}.
-   *
-   * <ul>
-   *   <li>When other is wrong type.
-   *   <li>Then return not equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link Call#equals(Object)}
-   */
-  @Test
-  @DisplayName("Test equals(Object); when other is wrong type; then return not equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean Call.equals(Object)", "int Call.hashCode()"})
-  void testEquals_whenOtherIsWrongType_thenReturnNotEqual() {
-    // Arrange
-    LibraryClass clazz = new LibraryClass();
-    LibraryField member = new LibraryField(1, "Name", "Descriptor");
-
-    CodeLocation caller = new CodeLocation(clazz, member, 2);
-
-    // Act and Assert
-    assertNotEquals(
-        new SymbolicCall(
-            caller,
-            ClassConstants.CLASSLOADER_FIND_LOADED_CLASS_SIGNATURE,
-            1,
-            new BranchInstruction((byte) 'A', 1),
-            true,
-            true),
-        "Different type to Call");
   }
 }

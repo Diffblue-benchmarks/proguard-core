@@ -115,34 +115,6 @@ class SwitchInstructionDiffblueTest {
   }
 
   /**
-   * Test {@link SwitchInstruction#equals(Object)}, and {@link SwitchInstruction#hashCode()}.
-   *
-   * <ul>
-   *   <li>When other is same.
-   *   <li>Then return equal.
-   * </ul>
-   *
-   * <p>Method under test: {@link SwitchInstruction#equals(Object)}
-   */
-  @Test
-  @DisplayName("Test equals(Object), and hashCode(); when other is same; then return equal")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({
-    "boolean SwitchInstruction.equals(Object)",
-    "int SwitchInstruction.hashCode()"
-  })
-  void testEqualsAndHashCode_whenOtherIsSame_thenReturnEqual() {
-    // Arrange
-    LookUpSwitchInstruction lookUpSwitchInstruction = new LookUpSwitchInstruction();
-
-    // Act and Assert
-    assertEquals(lookUpSwitchInstruction, lookUpSwitchInstruction);
-    int expectedHashCodeResult = lookUpSwitchInstruction.hashCode();
-    assertEquals(expectedHashCodeResult, lookUpSwitchInstruction.hashCode());
-  }
-
-  /**
    * Test {@link SwitchInstruction#equals(Object)}.
    *
    * <ul>

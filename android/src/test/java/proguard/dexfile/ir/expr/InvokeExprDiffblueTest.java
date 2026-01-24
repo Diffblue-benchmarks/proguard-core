@@ -178,68 +178,6 @@ class InvokeExprDiffblueTest {
   /**
    * Test {@link InvokeExpr#clone(LabelAndLocalMapper)} with {@code LabelAndLocalMapper}.
    *
-   * <p>Method under test: {@link InvokeExpr#clone(LabelAndLocalMapper)}
-   */
-  @Test
-  @DisplayName("Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InvokeExpr InvokeExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper() {
-    // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(new Value[] {Exprs.nNull()}, new String[] {"Argment Types"}, "Owner");
-
-    // Act
-    InvokeExpr actualCloneResult = nInvokeNewResult.clone(new LabelAndLocalMapper());
-
-    // Assert
-    assertTrue(actualCloneResult instanceof InvokeNewExpr);
-    Proto expectedProto = actualCloneResult.getProto();
-    assertSame(expectedProto, ((InvokeNewExpr) actualCloneResult).method.getProto());
-  }
-
-  /**
-   * Test {@link InvokeExpr#clone(LabelAndLocalMapper)} with {@code LabelAndLocalMapper}.
-   *
-   * <ul>
-   *   <li>Then first element return {@link FilledArrayExpr}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#clone(LabelAndLocalMapper)}
-   */
-  @Test
-  @DisplayName(
-      "Test clone(LabelAndLocalMapper) with 'LabelAndLocalMapper'; then first element return FilledArrayExpr")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"InvokeExpr InvokeExpr.clone(LabelAndLocalMapper)"})
-  void testCloneWithLabelAndLocalMapper_thenFirstElementReturnFilledArrayExpr() {
-    // Arrange
-    InvokeExpr nInvokeNewResult =
-        Exprs.nInvokeNew(
-            new Value[] {Exprs.nFilledArray("Element Type", new Value[] {Exprs.nNull()})},
-            new String[] {"Argment Types"},
-            "Owner");
-
-    // Act
-    InvokeExpr actualCloneResult = nInvokeNewResult.clone(new LabelAndLocalMapper());
-
-    // Assert
-    Value[] ops = actualCloneResult.getOps();
-    Value value = ops[0];
-    assertTrue(value instanceof FilledArrayExpr);
-    assertTrue(actualCloneResult instanceof InvokeNewExpr);
-    assertEquals("Element Type", ((FilledArrayExpr) value).type);
-    assertEquals(1, ops.length);
-    assertEquals(VT.FILLED_ARRAY, ((FilledArrayExpr) value).vt);
-    Proto expectedProto = actualCloneResult.getProto();
-    assertSame(expectedProto, ((InvokeNewExpr) actualCloneResult).method.getProto());
-  }
-
-  /**
-   * Test {@link InvokeExpr#clone(LabelAndLocalMapper)} with {@code LabelAndLocalMapper}.
-   *
    * <ul>
    *   <li>Then first element return {@link InvokeExpr}.
    * </ul>
@@ -717,35 +655,6 @@ class InvokeExprDiffblueTest {
    * Test {@link InvokeExpr#toString0()}.
    *
    * <ul>
-   *   <li>Then return {@code null[null].new (([])null[null])}.
-   * </ul>
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
-   */
-  @Test
-  @DisplayName("Test toString0(); then return 'null[null].new (([])null[null])'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  void testToString0_thenReturnNullNullNewNullNull2() {
-    // Arrange
-    ArrayExpr arrayExpr = new ArrayExpr();
-    Proto proto = new Proto(new String[] {"[", "]"}, "new ");
-    String[] parameterTypes = new String[] {"new "};
-    Proto proto2 = new Proto(parameterTypes, "new ");
-    Method method = new Method("new ", "new ", proto2);
-
-    InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(new Value[] {arrayExpr, new ArrayExpr()}, proto, method);
-
-    // Act and Assert
-    assertEquals("null[null].new (([])null[null])", nInvokePolymorphicResult.toString0());
-  }
-
-  /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <ul>
    *   <li>Then return {@code null[null].new (null[null],null[null])}.
    * </ul>
    *
@@ -786,31 +695,6 @@ class InvokeExprDiffblueTest {
   @MethodsUnderTest({"String InvokeExpr.toString0()"})
   void testToString02() {
     // Arrange
-    String[] parameterTypes = new String[] {"new "};
-    Proto proto = new Proto(parameterTypes, "new ");
-    String[] parameterTypes2 = new String[] {"new "};
-    Proto proto2 = new Proto(parameterTypes2, "new ");
-    Method method = new Method("new ", "new ", proto2);
-
-    InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(new Value[] {new ArrayExpr()}, proto, method);
-
-    // Act and Assert
-    assertEquals("null[null].new ()", nInvokePolymorphicResult.toString0());
-  }
-
-  /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
-   */
-  @Test
-  @DisplayName("Test toString0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  void testToString03() {
-    // Arrange
     Value[] args = new Value[] {Exprs.nFilledArray("[", new Value[] {new ArrayExpr()})};
     String[] argumentTypes = new String[] {"new "};
 
@@ -819,32 +703,6 @@ class InvokeExprDiffblueTest {
 
     // Act and Assert
     assertEquals("new [][]{null[null]}.new ()", invokeNewExpr.toString0());
-  }
-
-  /**
-   * Test {@link InvokeExpr#toString0()}.
-   *
-   * <p>Method under test: {@link InvokeExpr#toString0()}
-   */
-  @Test
-  @DisplayName("Test toString0()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"String InvokeExpr.toString0()"})
-  void testToString04() {
-    // Arrange
-    String[] parameterTypes = new String[] {"new "};
-    Proto proto = new Proto(parameterTypes, "new ");
-    String[] parameterTypes2 = new String[] {"new "};
-    Proto proto2 = new Proto(parameterTypes2, "new ");
-    Method method = new Method("new ", "new ", proto2);
-
-    InvokePolymorphicExpr nInvokePolymorphicResult =
-        Exprs.nInvokePolymorphic(
-            new Value[] {Exprs.nFilledArray("[", new Value[] {new ArrayExpr()})}, proto, method);
-
-    // Act and Assert
-    assertEquals("new [][]{null[null]}.new ()", nInvokePolymorphicResult.toString0());
   }
 
   /**

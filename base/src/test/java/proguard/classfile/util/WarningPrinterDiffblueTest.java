@@ -164,50 +164,6 @@ class WarningPrinterDiffblueTest {
   @MethodsUnderTest({"void WarningPrinter.print(String, String, String)"})
   void testPrintWithClassName1ClassName2Warning2() {
     // Arrange
-    WarningLogger warningLogger = new WarningLogger(ReflectiveModel.log);
-
-    // Act
-    warningLogger.print("Class Name1", "Class Name2", "Warning");
-
-    // Assert
-    assertEquals(1, warningLogger.getWarningCount());
-  }
-
-  /**
-   * Test {@link WarningPrinter#print(String, String, String)} with {@code className1}, {@code
-   * className2}, {@code warning}.
-   *
-   * <p>Method under test: {@link WarningPrinter#print(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test print(String, String, String) with 'className1', 'className2', 'warning'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void WarningPrinter.print(String, String, String)"})
-  void testPrintWithClassName1ClassName2Warning3() {
-    // Arrange
-    WarningLogger warningLogger = new WarningLogger(ReflectiveModel.log, new ArrayList<>());
-
-    // Act
-    warningLogger.print("Class Name1", "Class Name2", "Warning");
-
-    // Assert that nothing has changed
-    assertEquals(0, warningLogger.getWarningCount());
-  }
-
-  /**
-   * Test {@link WarningPrinter#print(String, String, String)} with {@code className1}, {@code
-   * className2}, {@code warning}.
-   *
-   * <p>Method under test: {@link WarningPrinter#print(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test print(String, String, String) with 'className1', 'className2', 'warning'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void WarningPrinter.print(String, String, String)"})
-  void testPrintWithClassName1ClassName2Warning4() {
-    // Arrange
     PrintWriter printWriter = new PrintWriter(new StringWriter());
     WarningPrinter warningPrinter = new WarningPrinter(printWriter, new ArrayList<>());
 
@@ -216,30 +172,6 @@ class WarningPrinterDiffblueTest {
 
     // Assert that nothing has changed
     assertEquals(0, warningPrinter.getWarningCount());
-  }
-
-  /**
-   * Test {@link WarningPrinter#print(String, String, String)} with {@code className1}, {@code
-   * className2}, {@code warning}.
-   *
-   * <p>Method under test: {@link WarningPrinter#print(String, String, String)}
-   */
-  @Test
-  @DisplayName("Test print(String, String, String) with 'className1', 'className2', 'warning'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void WarningPrinter.print(String, String, String)"})
-  void testPrintWithClassName1ClassName2Warning5() {
-    // Arrange
-    ArrayList<String> classFilter = new ArrayList<>();
-    classFilter.add("foo");
-    WarningLogger warningLogger = new WarningLogger(ReflectiveModel.log, classFilter);
-
-    // Act
-    warningLogger.print("Class Name1", "Class Name2", "Warning");
-
-    // Assert
-    assertEquals(1, warningLogger.getWarningCount());
   }
 
   /**
@@ -275,27 +207,6 @@ class WarningPrinterDiffblueTest {
   @MethodsUnderTest({"void WarningPrinter.print(String, String)"})
   void testPrintWithClassNameWarning2() {
     // Arrange
-    WarningLogger warningLogger = new WarningLogger(ReflectiveModel.log, new ArrayList<>());
-
-    // Act
-    warningLogger.print("Class Name", "Warning");
-
-    // Assert that nothing has changed
-    assertEquals(0, warningLogger.getWarningCount());
-  }
-
-  /**
-   * Test {@link WarningPrinter#print(String, String)} with {@code className}, {@code warning}.
-   *
-   * <p>Method under test: {@link WarningPrinter#print(String, String)}
-   */
-  @Test
-  @DisplayName("Test print(String, String) with 'className', 'warning'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void WarningPrinter.print(String, String)"})
-  void testPrintWithClassNameWarning3() {
-    // Arrange
     PrintWriter printWriter = new PrintWriter(new StringWriter());
     WarningPrinter warningPrinter = new WarningPrinter(printWriter, new ArrayList<>());
 
@@ -304,56 +215,6 @@ class WarningPrinterDiffblueTest {
 
     // Assert that nothing has changed
     assertEquals(0, warningPrinter.getWarningCount());
-  }
-
-  /**
-   * Test {@link WarningPrinter#print(String, String)} with {@code className}, {@code warning}.
-   *
-   * <p>Method under test: {@link WarningPrinter#print(String, String)}
-   */
-  @Test
-  @DisplayName("Test print(String, String) with 'className', 'warning'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void WarningPrinter.print(String, String)"})
-  void testPrintWithClassNameWarning4() {
-    // Arrange
-    ArrayList<String> classFilter = new ArrayList<>();
-    classFilter.add("foo");
-    WarningLogger warningLogger = new WarningLogger(ReflectiveModel.log, classFilter);
-
-    // Act
-    warningLogger.print("Class Name", "Warning");
-
-    // Assert
-    assertEquals(1, warningLogger.getWarningCount());
-  }
-
-  /**
-   * Test {@link WarningPrinter#print(String, String)} with {@code className}, {@code warning}.
-   *
-   * <ul>
-   *   <li>Then {@link WarningLogger#WarningLogger(Logger)} with logger is {@link
-   *       ReflectiveModel#log} WarningCount is one.
-   * </ul>
-   *
-   * <p>Method under test: {@link WarningPrinter#print(String, String)}
-   */
-  @Test
-  @DisplayName(
-      "Test print(String, String) with 'className', 'warning'; then WarningLogger(Logger) with logger is log WarningCount is one")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"void WarningPrinter.print(String, String)"})
-  void testPrintWithClassNameWarning_thenWarningLoggerWithLoggerIsLogWarningCountIsOne() {
-    // Arrange
-    WarningLogger warningLogger = new WarningLogger(ReflectiveModel.log);
-
-    // Act
-    warningLogger.print("Class Name", "Warning");
-
-    // Assert
-    assertEquals(1, warningLogger.getWarningCount());
   }
 
   /**

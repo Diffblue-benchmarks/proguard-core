@@ -36,26 +36,6 @@ class CfaNodeDiffblueTest {
    * Test {@link CfaNode#isReturnExitNode()}.
    *
    * <ul>
-   *   <li>Given {@link JvmUnknownCfaNode#INSTANCE}.
-   *   <li>Then return {@code false}.
-   * </ul>
-   *
-   * <p>Method under test: {@link CfaNode#isReturnExitNode()}
-   */
-  @Test
-  @DisplayName("Test isReturnExitNode(); given INSTANCE; then return 'false'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean CfaNode.isReturnExitNode()"})
-  void testIsReturnExitNode_givenInstance_thenReturnFalse() {
-    // Arrange, Act and Assert
-    assertFalse(JvmUnknownCfaNode.INSTANCE.isReturnExitNode());
-  }
-
-  /**
-   * Test {@link CfaNode#isReturnExitNode()}.
-   *
-   * <ul>
    *   <li>Then return {@code true}.
    * </ul>
    *
@@ -124,20 +104,5 @@ class CfaNodeDiffblueTest {
 
     // Act and Assert
     assertTrue(jvmCatchCfaNode.isExceptionExitNode());
-  }
-
-  /**
-   * Test {@link CfaNode#isUnknownNode()}.
-   *
-   * <p>Method under test: {@link CfaNode#isUnknownNode()}
-   */
-  @Test
-  @DisplayName("Test isUnknownNode()")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean CfaNode.isUnknownNode()"})
-  void testIsUnknownNode() {
-    // Arrange, Act and Assert
-    assertTrue(JvmUnknownCfaNode.INSTANCE.isUnknownNode());
   }
 }

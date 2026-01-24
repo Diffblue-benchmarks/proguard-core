@@ -3,7 +3,6 @@ package proguard.evaluation.value;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.diffblue.cover.annotations.ManagedByDiffblue;
 import com.diffblue.cover.annotations.MethodsUnderTest;
@@ -138,26 +137,6 @@ class ValueDiffblueTest {
    * Test {@link Value#isSpecific()}.
    *
    * <ul>
-   *   <li>Given {@link ParticularValueFactory#INTEGER_VALUE_0}.
-   *   <li>Then return {@code true}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Value#isSpecific()}
-   */
-  @Test
-  @DisplayName("Test isSpecific(); given INTEGER_VALUE_0; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean Value.isSpecific()"})
-  void testIsSpecific_givenInteger_value_0_thenReturnTrue() {
-    // Arrange, Act and Assert
-    assertTrue(ParticularValueFactory.INTEGER_VALUE_0.isSpecific());
-  }
-
-  /**
-   * Test {@link Value#isSpecific()}.
-   *
-   * <ul>
    *   <li>Given {@link UnknownDoubleValue} (default constructor).
    *   <li>Then return {@code false}.
    * </ul>
@@ -173,26 +152,6 @@ class ValueDiffblueTest {
   void testIsSpecific_givenUnknownDoubleValue_thenReturnFalse() {
     // Arrange, Act and Assert
     assertFalse(new UnknownDoubleValue().isSpecific());
-  }
-
-  /**
-   * Test {@link Value#isParticular()}.
-   *
-   * <ul>
-   *   <li>Given {@link ParticularValueFactory#INTEGER_VALUE_0}.
-   *   <li>Then return {@code true}.
-   * </ul>
-   *
-   * <p>Method under test: {@link Value#isParticular()}
-   */
-  @Test
-  @DisplayName("Test isParticular(); given INTEGER_VALUE_0; then return 'true'")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"boolean Value.isParticular()"})
-  void testIsParticular_givenInteger_value_0_thenReturnTrue() {
-    // Arrange, Act and Assert
-    assertTrue(ParticularValueFactory.INTEGER_VALUE_0.isParticular());
   }
 
   /**

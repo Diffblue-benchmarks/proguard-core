@@ -92,32 +92,6 @@ class SpecificFloatValueDiffblueTest {
   }
 
   /**
-   * Test {@link SpecificFloatValue#convertToInteger()}.
-   *
-   * <ul>
-   *   <li>Then return {@link ParticularIntegerValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificFloatValue#convertToInteger()}
-   */
-  @Test
-  @DisplayName("Test convertToInteger(); then return ParticularIntegerValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"IntegerValue SpecificFloatValue.convertToInteger()"})
-  void testConvertToInteger_thenReturnParticularIntegerValue() {
-    // Arrange and Act
-    IntegerValue actualConvertToIntegerResult = new ParticularFloatValue(10.0f).convertToInteger();
-
-    // Assert
-    assertTrue(actualConvertToIntegerResult instanceof ParticularIntegerValue);
-    assertEquals(10, actualConvertToIntegerResult.value());
-    assertFalse(actualConvertToIntegerResult.isCategory2());
-    assertTrue(actualConvertToIntegerResult.isParticular());
-    assertTrue(actualConvertToIntegerResult.isSpecific());
-  }
-
-  /**
    * Test {@link SpecificFloatValue#convertToLong()}.
    *
    * <ul>
@@ -144,32 +118,6 @@ class SpecificFloatValueDiffblueTest {
   }
 
   /**
-   * Test {@link SpecificFloatValue#convertToLong()}.
-   *
-   * <ul>
-   *   <li>Then return {@link ParticularLongValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificFloatValue#convertToLong()}
-   */
-  @Test
-  @DisplayName("Test convertToLong(); then return ParticularLongValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"LongValue SpecificFloatValue.convertToLong()"})
-  void testConvertToLong_thenReturnParticularLongValue() {
-    // Arrange and Act
-    LongValue actualConvertToLongResult = new ParticularFloatValue(10.0f).convertToLong();
-
-    // Assert
-    assertTrue(actualConvertToLongResult instanceof ParticularLongValue);
-    assertEquals(10L, actualConvertToLongResult.value());
-    assertTrue(actualConvertToLongResult.isCategory2());
-    assertTrue(actualConvertToLongResult.isParticular());
-    assertTrue(actualConvertToLongResult.isSpecific());
-  }
-
-  /**
    * Test {@link SpecificFloatValue#convertToDouble()}.
    *
    * <ul>
@@ -192,32 +140,6 @@ class SpecificFloatValueDiffblueTest {
     assertTrue(actualConvertToDoubleResult instanceof ConvertedDoubleValue);
     assertFalse(actualConvertToDoubleResult.isParticular());
     assertTrue(actualConvertToDoubleResult.isCategory2());
-    assertTrue(actualConvertToDoubleResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificFloatValue#convertToDouble()}.
-   *
-   * <ul>
-   *   <li>Then return {@link ParticularDoubleValue}.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificFloatValue#convertToDouble()}
-   */
-  @Test
-  @DisplayName("Test convertToDouble(); then return ParticularDoubleValue")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"DoubleValue SpecificFloatValue.convertToDouble()"})
-  void testConvertToDouble_thenReturnParticularDoubleValue() {
-    // Arrange and Act
-    DoubleValue actualConvertToDoubleResult = new ParticularFloatValue(10.0f).convertToDouble();
-
-    // Assert
-    assertTrue(actualConvertToDoubleResult instanceof ParticularDoubleValue);
-    assertEquals(10.0d, actualConvertToDoubleResult.value());
-    assertTrue(actualConvertToDoubleResult.isCategory2());
-    assertTrue(actualConvertToDoubleResult.isParticular());
     assertTrue(actualConvertToDoubleResult.isSpecific());
   }
 
@@ -281,32 +203,6 @@ class SpecificFloatValueDiffblueTest {
     assertFalse(actualGeneralizeResult.isCategory2());
     assertFalse(actualGeneralizeResult.isParticular());
     assertFalse(actualGeneralizeResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificFloatValue#generalize(FloatValue)} with {@code FloatValue}.
-   *
-   * <ul>
-   *   <li>Given {@link ParticularFloatValue#ParticularFloatValue(float)} with value is ten.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificFloatValue#generalize(FloatValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test generalize(FloatValue) with 'FloatValue'; given ParticularFloatValue(float) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"FloatValue SpecificFloatValue.generalize(FloatValue)"})
-  void testGeneralizeWithFloatValue_givenParticularFloatValueWithValueIsTen() {
-    // Arrange
-    FloatValue other = BasicValueFactory.FLOAT_VALUE;
-
-    // Act
-    FloatValue actualGeneralizeResult = new ParticularFloatValue(10.0f).generalize(other);
-
-    // Assert
-    assertSame(other, actualGeneralizeResult);
   }
 
   /**
@@ -475,32 +371,6 @@ class SpecificFloatValueDiffblueTest {
    * Test {@link SpecificFloatValue#add(FloatValue)} with {@code FloatValue}.
    *
    * <ul>
-   *   <li>Given {@link ParticularFloatValue#ParticularFloatValue(float)} with value is ten.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificFloatValue#add(FloatValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test add(FloatValue) with 'FloatValue'; given ParticularFloatValue(float) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"FloatValue SpecificFloatValue.add(FloatValue)"})
-  void testAddWithFloatValue_givenParticularFloatValueWithValueIsTen() {
-    // Arrange
-    FloatValue other = BasicValueFactory.FLOAT_VALUE;
-
-    // Act
-    FloatValue actualAddResult = new ParticularFloatValue(10.0f).add(other);
-
-    // Assert
-    assertSame(other, actualAddResult);
-  }
-
-  /**
-   * Test {@link SpecificFloatValue#add(FloatValue)} with {@code FloatValue}.
-   *
-   * <ul>
    *   <li>When {@link ParticularValueFactory#FLOAT_VALUE_0}.
    *   <li>Then return {@link CompositeFloatValue}.
    * </ul>
@@ -576,32 +446,6 @@ class SpecificFloatValueDiffblueTest {
     assertFalse(actualAddResult.isCategory2());
     assertFalse(actualAddResult.isParticular());
     assertTrue(actualAddResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificFloatValue#subtract(FloatValue)} with {@code FloatValue}.
-   *
-   * <ul>
-   *   <li>Given {@link ParticularFloatValue#ParticularFloatValue(float)} with value is ten.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificFloatValue#subtract(FloatValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test subtract(FloatValue) with 'FloatValue'; given ParticularFloatValue(float) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"FloatValue SpecificFloatValue.subtract(FloatValue)"})
-  void testSubtractWithFloatValue_givenParticularFloatValueWithValueIsTen() {
-    // Arrange
-    FloatValue other = BasicValueFactory.FLOAT_VALUE;
-
-    // Act
-    FloatValue actualSubtractResult = new ParticularFloatValue(10.0f).subtract(other);
-
-    // Assert
-    assertSame(other, actualSubtractResult);
   }
 
   /**
@@ -684,32 +528,6 @@ class SpecificFloatValueDiffblueTest {
     assertFalse(actualSubtractResult.isCategory2());
     assertFalse(actualSubtractResult.isParticular());
     assertTrue(actualSubtractResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificFloatValue#subtractFrom(FloatValue)} with {@code FloatValue}.
-   *
-   * <ul>
-   *   <li>Given {@link ParticularFloatValue#ParticularFloatValue(float)} with value is ten.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificFloatValue#subtractFrom(FloatValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test subtractFrom(FloatValue) with 'FloatValue'; given ParticularFloatValue(float) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"FloatValue SpecificFloatValue.subtractFrom(FloatValue)"})
-  void testSubtractFromWithFloatValue_givenParticularFloatValueWithValueIsTen() {
-    // Arrange
-    FloatValue other = BasicValueFactory.FLOAT_VALUE;
-
-    // Act
-    FloatValue actualSubtractFromResult = new ParticularFloatValue(10.0f).subtractFrom(other);
-
-    // Assert
-    assertSame(other, actualSubtractFromResult);
   }
 
   /**
@@ -799,32 +617,6 @@ class SpecificFloatValueDiffblueTest {
    * Test {@link SpecificFloatValue#multiply(FloatValue)} with {@code FloatValue}.
    *
    * <ul>
-   *   <li>Given {@link ParticularFloatValue#ParticularFloatValue(float)} with value is ten.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificFloatValue#multiply(FloatValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test multiply(FloatValue) with 'FloatValue'; given ParticularFloatValue(float) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"FloatValue SpecificFloatValue.multiply(FloatValue)"})
-  void testMultiplyWithFloatValue_givenParticularFloatValueWithValueIsTen() {
-    // Arrange
-    FloatValue other = BasicValueFactory.FLOAT_VALUE;
-
-    // Act
-    FloatValue actualMultiplyResult = new ParticularFloatValue(10.0f).multiply(other);
-
-    // Assert
-    assertSame(other, actualMultiplyResult);
-  }
-
-  /**
-   * Test {@link SpecificFloatValue#multiply(FloatValue)} with {@code FloatValue}.
-   *
-   * <ul>
    *   <li>When {@link ParticularValueFactory#FLOAT_VALUE_0}.
    *   <li>Then return {@link CompositeFloatValue}.
    * </ul>
@@ -901,32 +693,6 @@ class SpecificFloatValueDiffblueTest {
     assertFalse(actualMultiplyResult.isCategory2());
     assertFalse(actualMultiplyResult.isParticular());
     assertTrue(actualMultiplyResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificFloatValue#divide(FloatValue)} with {@code FloatValue}.
-   *
-   * <ul>
-   *   <li>Given {@link ParticularFloatValue#ParticularFloatValue(float)} with value is ten.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificFloatValue#divide(FloatValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test divide(FloatValue) with 'FloatValue'; given ParticularFloatValue(float) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"FloatValue SpecificFloatValue.divide(FloatValue)"})
-  void testDivideWithFloatValue_givenParticularFloatValueWithValueIsTen() {
-    // Arrange
-    FloatValue other = BasicValueFactory.FLOAT_VALUE;
-
-    // Act
-    FloatValue actualDivideResult = new ParticularFloatValue(10.0f).divide(other);
-
-    // Assert
-    assertSame(other, actualDivideResult);
   }
 
   /**
@@ -1015,32 +781,6 @@ class SpecificFloatValueDiffblueTest {
    * Test {@link SpecificFloatValue#divideOf(FloatValue)} with {@code FloatValue}.
    *
    * <ul>
-   *   <li>Given {@link ParticularFloatValue#ParticularFloatValue(float)} with value is ten.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificFloatValue#divideOf(FloatValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test divideOf(FloatValue) with 'FloatValue'; given ParticularFloatValue(float) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"FloatValue SpecificFloatValue.divideOf(FloatValue)"})
-  void testDivideOfWithFloatValue_givenParticularFloatValueWithValueIsTen() {
-    // Arrange
-    FloatValue other = BasicValueFactory.FLOAT_VALUE;
-
-    // Act
-    FloatValue actualDivideOfResult = new ParticularFloatValue(10.0f).divideOf(other);
-
-    // Assert
-    assertSame(other, actualDivideOfResult);
-  }
-
-  /**
-   * Test {@link SpecificFloatValue#divideOf(FloatValue)} with {@code FloatValue}.
-   *
-   * <ul>
    *   <li>When {@link ParticularValueFactory#FLOAT_VALUE_0}.
    *   <li>Then return {@link CompositeFloatValue}.
    * </ul>
@@ -1117,32 +857,6 @@ class SpecificFloatValueDiffblueTest {
     assertFalse(actualDivideOfResult.isCategory2());
     assertFalse(actualDivideOfResult.isParticular());
     assertTrue(actualDivideOfResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificFloatValue#remainder(FloatValue)} with {@code FloatValue}.
-   *
-   * <ul>
-   *   <li>Given {@link ParticularFloatValue#ParticularFloatValue(float)} with value is ten.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificFloatValue#remainder(FloatValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test remainder(FloatValue) with 'FloatValue'; given ParticularFloatValue(float) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"FloatValue SpecificFloatValue.remainder(FloatValue)"})
-  void testRemainderWithFloatValue_givenParticularFloatValueWithValueIsTen() {
-    // Arrange
-    FloatValue other = BasicValueFactory.FLOAT_VALUE;
-
-    // Act
-    FloatValue actualRemainderResult = new ParticularFloatValue(10.0f).remainder(other);
-
-    // Assert
-    assertSame(other, actualRemainderResult);
   }
 
   /**
@@ -1231,32 +945,6 @@ class SpecificFloatValueDiffblueTest {
    * Test {@link SpecificFloatValue#remainderOf(FloatValue)} with {@code FloatValue}.
    *
    * <ul>
-   *   <li>Given {@link ParticularFloatValue#ParticularFloatValue(float)} with value is ten.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificFloatValue#remainderOf(FloatValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test remainderOf(FloatValue) with 'FloatValue'; given ParticularFloatValue(float) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"FloatValue SpecificFloatValue.remainderOf(FloatValue)"})
-  void testRemainderOfWithFloatValue_givenParticularFloatValueWithValueIsTen() {
-    // Arrange
-    FloatValue other = BasicValueFactory.FLOAT_VALUE;
-
-    // Act
-    FloatValue actualRemainderOfResult = new ParticularFloatValue(10.0f).remainderOf(other);
-
-    // Assert
-    assertSame(other, actualRemainderOfResult);
-  }
-
-  /**
-   * Test {@link SpecificFloatValue#remainderOf(FloatValue)} with {@code FloatValue}.
-   *
-   * <ul>
    *   <li>When {@link ParticularValueFactory#FLOAT_VALUE_0}.
    *   <li>Then return {@link CompositeFloatValue}.
    * </ul>
@@ -1334,33 +1022,6 @@ class SpecificFloatValueDiffblueTest {
     assertFalse(actualRemainderOfResult.isCategory2());
     assertFalse(actualRemainderOfResult.isParticular());
     assertTrue(actualRemainderOfResult.isSpecific());
-  }
-
-  /**
-   * Test {@link SpecificFloatValue#compare(FloatValue)} with {@code FloatValue}.
-   *
-   * <ul>
-   *   <li>Given {@link ParticularFloatValue#ParticularFloatValue(float)} with value is ten.
-   * </ul>
-   *
-   * <p>Method under test: {@link SpecificFloatValue#compare(FloatValue)}
-   */
-  @Test
-  @DisplayName(
-      "Test compare(FloatValue) with 'FloatValue'; given ParticularFloatValue(float) with value is ten")
-  @Tag("ContributionFromDiffblue")
-  @ManagedByDiffblue
-  @MethodsUnderTest({"IntegerValue SpecificFloatValue.compare(FloatValue)"})
-  void testCompareWithFloatValue_givenParticularFloatValueWithValueIsTen() {
-    // Arrange and Act
-    IntegerValue actualCompareResult =
-        new ParticularFloatValue(10.0f).compare(BasicValueFactory.FLOAT_VALUE);
-
-    // Assert
-    assertTrue(actualCompareResult instanceof UnknownIntegerValue);
-    assertFalse(actualCompareResult.isCategory2());
-    assertFalse(actualCompareResult.isParticular());
-    assertFalse(actualCompareResult.isSpecific());
   }
 
   /**
